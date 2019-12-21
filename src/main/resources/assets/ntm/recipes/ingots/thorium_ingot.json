@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "ntm:thorium_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:thorium_ingot"
+  }
+}

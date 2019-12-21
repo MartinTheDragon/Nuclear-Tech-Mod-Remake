@@ -1,0 +1,17 @@
+{
+  "group": "plutonium_ingot",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "ntm:pu238_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:pu238_ingot"
+  }
+}
