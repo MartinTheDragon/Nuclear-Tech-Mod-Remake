@@ -28,7 +28,7 @@ run/
 gradle/
 .idea/
 
-gradlew
-gradlew.bat
-gradle.properties
-build.gradle
+/gradlew
+/gradlew.bat
+/gradle.properties
+/build.gradle
