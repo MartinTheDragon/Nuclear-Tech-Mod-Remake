@@ -25,6 +25,10 @@ hs_err_pid*
 build/
 run/
 .gradle/
+gradle/
 .idea/
 
-!gradle/
+gradlew
+gradlew.bat
+gradle.properties
+build.gradle
