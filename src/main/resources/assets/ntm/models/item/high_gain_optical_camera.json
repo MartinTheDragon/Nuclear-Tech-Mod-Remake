@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ntm:items/satelliteparts/high_gain_optical_camera"
+  }
+}
