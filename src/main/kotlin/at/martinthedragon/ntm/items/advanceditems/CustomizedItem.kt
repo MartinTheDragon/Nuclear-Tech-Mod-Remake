@@ -9,6 +9,7 @@ import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Rarity
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.StringTextComponent
 import net.minecraft.util.text.Style
@@ -26,6 +27,7 @@ class CustomizedItem(val registryName: String, val customProperties: CustomizedP
 
     override fun getTranslationKey(): String = "item.ntm.$registryName"
     override fun getBurnTime(itemStack: ItemStack?): Int = customProperties.burnTime * 20
+    override fun hasEffect(itemStack: ItemStack): Boolean = customProperties.glint || itemStack.isEnchanted
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
         if (worldIn != null && worldIn.isRemote) {
@@ -47,11 +49,16 @@ class CustomizedItem(val registryName: String, val customProperties: CustomizedP
     class CustomizedProperties(
             val burnTime: Int = 0,
             val radiation: Int = 0,
-            val group: CreativeTabs? = null
+            val group: CreativeTabs? = null,
+            val glint: Boolean = false,
+            val rarity: Rarity = Rarity.COMMON
     ) : Item.Properties() {
         init {
             if (group != null) {
                 super.group(group.itemGroup)
+            }
+            if (rarity != Rarity.COMMON) {
+                super.rarity(rarity)
             }
         }
     }

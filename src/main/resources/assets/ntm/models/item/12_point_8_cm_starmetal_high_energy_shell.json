@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ntm:items/bulletparts/12_point_8_cm_starmetal_high_energy_shell"
+  }
+}
