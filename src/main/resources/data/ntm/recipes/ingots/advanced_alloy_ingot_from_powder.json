@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:advanced_alloy_powder"
+  },
+  "result": "ntm:advanced_alloy_ingot",
+  "experience": 0.5
+}

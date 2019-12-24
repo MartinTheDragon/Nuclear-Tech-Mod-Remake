@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:polymer_powder"
+  },
+  "result": "ntm:polymer_ingot",
+  "experience": 0.5
+}

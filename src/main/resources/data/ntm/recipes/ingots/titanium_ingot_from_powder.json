@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:titanium_powder"
+  },
+  "result": "ntm:titanium_ingot",
+  "experience": 0.5
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:magnetized_tungsten_powder"
+  },
+  "result": "ntm:magnetized_tungsten_ingot",
+  "experience": 0.5
+}

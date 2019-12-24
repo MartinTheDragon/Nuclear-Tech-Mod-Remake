@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:plutonium_powder"
+  },
+  "result": "ntm:plutonium_ingot",
+  "experience": 1.0
+}

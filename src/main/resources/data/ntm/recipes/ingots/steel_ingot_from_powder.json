@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:steel_powder"
+  },
+  "result": "ntm:steel_ingot",
+  "experience": 0.5
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "ntm:lead_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:lead_ingot"
+  }
+}

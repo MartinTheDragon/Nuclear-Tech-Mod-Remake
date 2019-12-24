@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:beryllium_powder"
+  },
+  "result": "ntm:beryllium_ingot",
+  "experience": 0.5
+}
