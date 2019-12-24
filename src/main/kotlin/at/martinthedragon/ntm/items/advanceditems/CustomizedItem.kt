@@ -51,7 +51,8 @@ class CustomizedItem(val registryName: String, val customProperties: CustomizedP
             val radiation: Int = 0,
             val group: CreativeTabs? = null,
             val glint: Boolean = false,
-            val rarity: Rarity = Rarity.COMMON
+            val rarity: Rarity = Rarity.COMMON,
+            val maxStackSize: Int = 64
     ) : Item.Properties() {
         init {
             if (group != null) {
@@ -59,6 +60,9 @@ class CustomizedItem(val registryName: String, val customProperties: CustomizedP
             }
             if (rarity != Rarity.COMMON) {
                 super.rarity(rarity)
+            }
+            if (maxStackSize != 64) {
+                super.maxStackSize(maxStackSize)
             }
         }
     }
