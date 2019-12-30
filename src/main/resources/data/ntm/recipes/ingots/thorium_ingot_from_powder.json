@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:thorium_powder"
-  },
-  "result": "ntm:thorium_ingot",
-  "experience": 1.0
-}

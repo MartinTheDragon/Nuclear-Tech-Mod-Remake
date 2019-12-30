@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "plutonium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:pu238_nugget"
+    },
+    {
+      "item": "ntm:pu239_nugget"
+    },
+    {
+      "item": "ntm:pu240_nugget"
+    },
+    {
+      "item": "ntm:pu239_nugget"
+    },
+    {
+      "item": "ntm:pu239_nugget"
+    },
+    {
+      "item": "ntm:pu240_nugget"
+    },
+    {
+      "item": "ntm:pu239_nugget"
+    },
+    {
+      "item": "ntm:pu239_nugget"
+    },
+    {
+      "item": "ntm:pu240_nugget"
+    }
+  ],
+  "result": {
+    "item": "ntm:plutonium_fuel_ingot"
+  }
+}

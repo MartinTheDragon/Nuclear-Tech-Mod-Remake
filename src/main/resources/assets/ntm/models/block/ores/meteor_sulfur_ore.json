@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ntm:blocks/ores/meteor_sulfur_ore"
+  }
+}

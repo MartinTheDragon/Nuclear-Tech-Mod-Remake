@@ -3,11 +3,9 @@ package at.martinthedragon.ntm.items.advanceditems
 import at.martinthedragon.ntm.items.ModItems
 import at.martinthedragon.ntm.lib.MODID
 import at.martinthedragon.ntm.main.CreativeTabs
-import at.martinthedragon.ntm.main.Main
 import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Rarity
 import net.minecraft.util.text.ITextComponent
@@ -15,14 +13,12 @@ import net.minecraft.util.text.StringTextComponent
 import net.minecraft.util.text.Style
 import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
-import net.minecraftforge.api.distmarker.Dist
-import net.minecraftforge.fml.DistExecutor
-import java.util.concurrent.Callable
 
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class CustomizedItem(val registryName: String, val customProperties: CustomizedProperties = CustomizedProperties()): Item(customProperties) {
     init {
         setRegistryName(MODID, registryName)
-        ModItems.itemBuffer.add(this)
+        ModItems.itemList.add(this)
     }
 
     override fun getTranslationKey(): String = "item.ntm.$registryName"

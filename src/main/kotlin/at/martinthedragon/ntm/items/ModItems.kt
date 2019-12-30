@@ -1,5 +1,6 @@
 package at.martinthedragon.ntm.items
 
+import at.martinthedragon.ntm.blocks.ModBlocks
 import at.martinthedragon.ntm.items.advanceditems.CustomizedItem
 import at.martinthedragon.ntm.items.advanceditems.CustomizedItem.CustomizedProperties
 import at.martinthedragon.ntm.lib.MODID
@@ -20,9 +21,11 @@ typealias NTMProp = CustomizedProperties
 @Suppress("unused")
 @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
 object ModItems {
-    val itemBuffer = emptyList<Item>().toMutableList()
+    val itemList = emptyList<Item>().toMutableList()
     
     private val parts = CreativeTabs.PARTS_TAB
+
+    // TODO add recipes for ingots after low enriched schrabidium ingot
 
     // NTM Resources and Parts
     // Ingots
@@ -437,7 +440,7 @@ object ModItems {
     @JvmStatic
     fun registerItems(event: Register<Item>) {
         Main.LOGGER.debug("Registering items...")
-        event.registry.registerAll(*itemBuffer.toTypedArray())
+        event.registry.registerAll(*itemList.toTypedArray(), *ModBlocks.itemBlockList.toTypedArray())
         Main.LOGGER.debug("Items registered")
     }
 }
