@@ -110,7 +110,7 @@ object Config {
                     "Needs restart to take effect.")
                     .define("topOffset", block.customProperties.defaultOreGenerationSettings.topOffset)
             val maximum: ForgeConfigSpec.ConfigValue<Int> = commonBuilder.comment(
-                    "The y-axis' value at which the ore stops to generate. Must be higher than 'bottomOffset'",
+                    "This value plus the 'bottomOffset' is the y-axis' value at which the ore stops to generate.",
                     "Default: ${block.customProperties.defaultOreGenerationSettings.maximum}",
                     "Needs restart to take effect.")
                     .define("maximum", block.customProperties.defaultOreGenerationSettings.maximum)

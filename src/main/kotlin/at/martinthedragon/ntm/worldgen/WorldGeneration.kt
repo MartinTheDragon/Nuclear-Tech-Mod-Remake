@@ -107,4 +107,6 @@ object WorldGeneration {
     }
 }
 
-data class OreGenerationSettings(val biomeBlacklist: List<String>, val size: Int, val count: Int, val bottomOffset: Int, val topOffset: Int, val maximum: Int)
+data class OreGenerationSettings(val biomeBlacklist: List<String>, val size: Int, val count: Int, val bottomOffset: Int, val topOffset: Int, val maximum: Int) {
+    constructor(biomeBlacklist: List<String>, size: Int, count: Int, spawnRange: IntRange) : this(biomeBlacklist, size, count, spawnRange.first, 0, spawnRange.last - spawnRange.first)
+}
