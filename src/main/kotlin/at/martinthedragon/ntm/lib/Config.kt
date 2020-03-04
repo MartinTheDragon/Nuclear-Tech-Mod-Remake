@@ -1,16 +1,13 @@
 package at.martinthedragon.ntm.lib
 
-// import net.minecraftforge.fml.common.Mod
 import at.martinthedragon.ntm.blocks.ModBlocks
 import at.martinthedragon.ntm.blocks.advancedblocks.CustomizedBlock
-import at.martinthedragon.ntm.main.Main
+import at.martinthedragon.ntm.blocks.advancedblocks.OreBlock
+import at.martinthedragon.ntm.main.NTM
 import at.martinthedragon.ntm.worldgen.OreGenerationSettings
 import com.electronwill.nightconfig.core.file.CommentedFileConfig
 import com.electronwill.nightconfig.core.io.WritingMode
-import net.minecraft.block.Block
 import net.minecraft.util.ResourceLocation
-import net.minecraft.world.biome.Biome
-import net.minecraft.world.gen.feature.OreFeatureConfig
 import net.minecraftforge.common.ForgeConfigSpec
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.config.ModConfig
@@ -18,36 +15,36 @@ import net.minecraftforge.fml.loading.FMLPaths
 import net.minecraftforge.registries.ForgeRegistries
 import java.nio.file.Path
 
-// @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+// IMPORTANT: Do not access Config before all ForgeRegistries have been registered!
 object Config {
-    val categoryWorldGeneration = "worldgen"
-    val categoryOreGeneration = "oregen"
+    private const val categoryWorldGeneration = "worldgen"
+    private const val categoryOreGeneration = "oregen"
 
     private val commonBuilder = ForgeConfigSpec.Builder()
     private val clientBuilder = ForgeConfigSpec.Builder()
 
-    val commonConfig: ForgeConfigSpec
+    lateinit var commonConfig: ForgeConfigSpec
 
-    val generateOres: ForgeConfigSpec.BooleanValue
-    val oreGenerationBlacklist: ForgeConfigSpec.ConfigValue<List<String>>
+    lateinit var generateOres: ForgeConfigSpec.BooleanValue
+    lateinit var oreGenerationBlacklist: ForgeConfigSpec.ConfigValue<List<String>>
     private val oreGenerationConfigs = emptyMap<CustomizedBlock, OreGenSettingsWrapper>().toMutableMap()
 
-    init {
-        Main.LOGGER.debug("Creating configs...")
+    fun generateWorldGenerationConfigs() {
+        NTM.logger.debug("Creating world generation configs...")
         commonBuilder.comment("World generation settings.", "All of these will only be used when a new world gets generated.").push(categoryWorldGeneration)
         commonBuilder.comment("Ore generation settings.").push(categoryOreGeneration)
         generateOres = commonBuilder.comment(
-                "If ores of this mod should be generated at all.",
-                "Needs restart to take effect.")
+                        "If ores of this mod should be generated at all.",
+                        "Needs restart to take effect.")
                 .define("generateOres", true)
         oreGenerationBlacklist = commonBuilder.comment(
-                "A list of blocks that should be excluded from world generation.",
-                "Use the registry name of an ore without the modid.",
-                "A valid value for this setting would be [\"uranium_ore\"]",
-                "Needs restart to take effect.")
+                        "A list of blocks that should be excluded from world generation.",
+                        "Use the registry name of an ore without the modid.",
+                        "A valid value for this setting would be [\"uranium_ore\"]",
+                        "Needs restart to take effect.")
                 .defineList("oreGenerationBlacklist", listOf("nether_plutonium_ore")) {
                     var matchFound = false
-                    for (block in ModBlocks.oreList) if(block.registryName == it as String) { matchFound = true; break }
+                    for (blockName in ModBlocks.ores) if(blockName == it as String) { matchFound = true; break }
                     matchFound
                 }
 
@@ -58,7 +55,7 @@ object Config {
         commonConfig = commonBuilder.build()
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, commonConfig)
         loadConfig(commonConfig, FMLPaths.CONFIGDIR.get().resolve("ntm-common.toml"))
-        Main.LOGGER.debug("Configs created.")
+        NTM.logger.debug("Configs created.")
     }
 
     fun loadConfig(spec: ForgeConfigSpec, path: Path) {
@@ -72,7 +69,13 @@ object Config {
     }
 
     private fun makeForEachOreConfig() {
-        for (block in ModBlocks.oreList) {
+        for (blockName in ModBlocks.ores) {
+            val block = ForgeRegistries.BLOCKS.getValue(ResourceLocation(MODID, blockName)) as OreBlock?
+            if (block == null) {
+                NTM.logger.fatal("Could not get block $blockName for ore config initialization. Config object class might have been accessed before blocks were registered.")
+                continue
+            }
+
             commonBuilder.comment("The generation settings for ${block.registryName}").push(block.registryName)
             val biomeBlacklist: ForgeConfigSpec.ConfigValue<List<String>> = commonBuilder.comment(
                     "In which biomes this ore should not generate.",
@@ -80,7 +83,7 @@ object Config {
                     "Append a value with an exclamation mark and the ore will generate only in the specified biome.",
                     "If one value is appended by an exclamation mark all the other values must too.",
                     "Needs restart to take effect.")
-                    .defineList("biomeBlacklist", block.customProperties.defaultOreGenerationSettings!!.biomeBlacklist) {
+                    .defineList("biomeBlacklist", block.oreGenerationSettings.biomeBlacklist) {
                         if (it == "THEEND" || it == "!THEEND")
                             true
                         else if ((it as String).first() == '!')
@@ -90,37 +93,37 @@ object Config {
                     }
             val size: ForgeConfigSpec.ConfigValue<Int> = commonBuilder.comment(
                     "The average amount of ore in a vein.",
-                    "Default: ${block.customProperties.defaultOreGenerationSettings.size}",
+                    "Default: ${block.oreGenerationSettings.size}",
                     "Needs restart to take effect.")
-                    .define("size", block.customProperties.defaultOreGenerationSettings.size)
+                    .define("size", block.oreGenerationSettings.size)
             val count: ForgeConfigSpec.ConfigValue<Int> = commonBuilder.comment(
                     "How many veins spawn in a chunk.",
-                    "Default: ${block.customProperties.defaultOreGenerationSettings.count}",
+                    "Default: ${block.oreGenerationSettings.count}",
                     "Needs restart to take effect.")
-                    .define("count", block.customProperties.defaultOreGenerationSettings.count)
+                    .define("count", block.oreGenerationSettings.count)
             val bottomOffset: ForgeConfigSpec.ConfigValue<Int> = commonBuilder.comment(
                     "The y-axis' value at which the ore starts to generate.",
-                    "Default: ${block.customProperties.defaultOreGenerationSettings.bottomOffset}",
+                    "Default: ${block.oreGenerationSettings.bottomOffset}",
                     "Needs restart to take effect.")
-                    .define("bottomOffset", block.customProperties.defaultOreGenerationSettings.bottomOffset)
+                    .define("bottomOffset", block.oreGenerationSettings.bottomOffset)
             val topOffset: ForgeConfigSpec.ConfigValue<Int> = commonBuilder.comment(
                     "The offset of the 'maximum' value.",
                     "This is actually completely useless, so why should you use it?",
-                    "Default: ${block.customProperties.defaultOreGenerationSettings.topOffset}",
+                    "Default: ${block.oreGenerationSettings.topOffset}",
                     "Needs restart to take effect.")
-                    .define("topOffset", block.customProperties.defaultOreGenerationSettings.topOffset)
+                    .define("topOffset", block.oreGenerationSettings.topOffset)
             val maximum: ForgeConfigSpec.ConfigValue<Int> = commonBuilder.comment(
                     "This value plus the 'bottomOffset' is the y-axis' value at which the ore stops to generate.",
-                    "Default: ${block.customProperties.defaultOreGenerationSettings.maximum}",
+                    "Default: ${block.oreGenerationSettings.maximum}",
                     "Needs restart to take effect.")
-                    .define("maximum", block.customProperties.defaultOreGenerationSettings.maximum)
+                    .define("maximum", block.oreGenerationSettings.maximum)
             commonBuilder.pop()
 
             oreGenerationConfigs[block] = OreGenSettingsWrapper(biomeBlacklist, size, count, bottomOffset, topOffset, maximum)
         }
     }
 
-    fun getOreGenerationConfigs(block: CustomizedBlock): OreGenerationSettings?  {
+    fun getOreGenerationConfigs(block: OreBlock): OreGenerationSettings?  {
         val blacklist = oreGenerationConfigs[block]?.biomeBlacklist
         val size = oreGenerationConfigs[block]?.size
         val count = oreGenerationConfigs[block]?.count
@@ -128,7 +131,7 @@ object Config {
         val topOffset = oreGenerationConfigs[block]?.topOffset
         val maximum = oreGenerationConfigs[block]?.maximum
         if (blacklist != null && size != null && count != null && bottomOffset != null && topOffset != null && maximum != null)
-            return OreGenerationSettings(blacklist.get(), size.get(), count.get(), bottomOffset.get(), topOffset.get(), maximum.get())
+            return OreGenerationSettings(size.get(), count.get(), bottomOffset.get(), topOffset.get(), maximum.get(), blacklist.get())
         return null
     }
 }

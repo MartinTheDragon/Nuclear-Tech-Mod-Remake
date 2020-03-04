@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ntm:blocks/reinforced_blocks/reinforced_sandstone"
+  }
+}

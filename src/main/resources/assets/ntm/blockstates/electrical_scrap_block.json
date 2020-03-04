@@ -1,0 +1,8 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "ntm:block/full_blocks/electrical_scrap_block"
+    }
+  }
+}

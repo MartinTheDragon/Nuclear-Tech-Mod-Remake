@@ -1,0 +1,17 @@
+{
+  "parent": "ntm:block/reinforced_blocks/reinforced_glass",
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        45,
+        0
+      ],
+      "scale": [
+        0.625,
+        0.625,
+        0.625
+      ]
+    }
+  }
+}

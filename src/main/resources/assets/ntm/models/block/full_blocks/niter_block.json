@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ntm:blocks/full_blocks/niter_block"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ntm:blocks/deco_blocks/beryllium_deco_block"
+  }
+}

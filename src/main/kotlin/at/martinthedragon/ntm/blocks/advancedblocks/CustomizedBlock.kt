@@ -5,24 +5,20 @@ import at.martinthedragon.ntm.items.advanceditems.CustomizedBlockItem
 import at.martinthedragon.ntm.items.advanceditems.CustomizedItem
 import at.martinthedragon.ntm.lib.MODID
 import at.martinthedragon.ntm.main.CreativeTabs
-import at.martinthedragon.ntm.worldgen.OreGenerationSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.material.MaterialColor
-import net.minecraft.entity.Entity
 import net.minecraft.item.DyeColor
 import net.minecraft.item.Rarity
-import net.minecraft.tags.BlockTags
+import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.math.BlockPos
-import net.minecraft.world.IBlockReader
 import net.minecraft.world.IWorldReader
 import net.minecraftforge.common.ToolType
-import kotlin.random.Random
 
 @Suppress("CanBeParameter", "MemberVisibilityCanBePrivate", "unused")
-class CustomizedBlock(val registryName: String, val customProperties: CustomizedProperties, autoGenerateBlockItem: Boolean = true, blockItem: CustomizedBlockItem? = null, itemTab: CreativeTabs = CreativeTabs.BLOCKS_TAB) : Block(customProperties.property) {
+open class CustomizedBlock(val registryName: String, val customProperties: CustomizedProperties, autoGenerateBlockItem: Boolean = true, blockItem: CustomizedBlockItem? = null, itemTab: CreativeTabs = CreativeTabs.BLOCKS_TAB) : Block(customProperties.property) {
     val blockItem: CustomizedBlockItem? = when {
         blockItem != null -> blockItem
         autoGenerateBlockItem -> CustomizedBlockItem(this, CustomizedItem.CustomizedProperties(group = itemTab, rarity = customProperties.rarity))
@@ -31,16 +27,14 @@ class CustomizedBlock(val registryName: String, val customProperties: Customized
 
     init {
         setRegistryName(MODID, registryName)
-        ModBlocks.blockList.add(this)
-        if (customProperties.defaultOreGenerationSettings != null) {
-            ModBlocks.oreList.add(this)
-        }
-        if (this.blockItem != null) ModBlocks.itemBlockList.add(this.blockItem)
+        ModBlocks.blocks += registryName
     }
 
-    override fun getTranslationKey(): String = "tile.ntm.$registryName"
+    override fun getTranslationKey(): String = "tile.$MODID.$registryName"
     override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int): Int =
             if (silktouch == 0 && customProperties.xpDrop != null) customProperties.xpDrop.random() else 0
+
+    override fun getRenderLayer(): BlockRenderLayer = customProperties.blockRenderLayer
 
     class CustomizedProperties(
             val material: Material,
@@ -57,9 +51,9 @@ class CustomizedBlock(val registryName: String, val customProperties: Customized
             val variableOpacity: Boolean = false,
             val harvestLevel: Int = -1,
             val harvestTool: ToolType? = null,
-            val defaultOreGenerationSettings: OreGenerationSettings? = null,
             val xpDrop: IntRange? = null,
-            val rarity: Rarity = Rarity.COMMON
+            val rarity: Rarity = Rarity.COMMON,
+            val blockRenderLayer: BlockRenderLayer = BlockRenderLayer.SOLID
     ) {
         val property: Properties = when {
             mapColor != null -> Properties.create(material, mapColor)

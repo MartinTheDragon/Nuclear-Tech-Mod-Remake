@@ -1,0 +1,8 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "ntm:block/deco_blocks/aluminium_deco_block"
+    }
+  }
+}

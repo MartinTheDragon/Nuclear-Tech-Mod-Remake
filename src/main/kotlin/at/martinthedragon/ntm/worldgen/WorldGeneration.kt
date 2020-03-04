@@ -1,35 +1,34 @@
 package at.martinthedragon.ntm.worldgen
 
 import at.martinthedragon.ntm.blocks.ModBlocks
-import at.martinthedragon.ntm.blocks.advancedblocks.CustomizedBlock
+import at.martinthedragon.ntm.blocks.advancedblocks.OreBlock
 import at.martinthedragon.ntm.lib.Config
 import at.martinthedragon.ntm.lib.MODID
+import at.martinthedragon.ntm.main.NTM
 import net.minecraft.block.Blocks
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.biome.Biome
-import net.minecraft.world.biome.Biomes
 import net.minecraft.world.gen.GenerationStage
 import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.OreFeatureConfig
 import net.minecraft.world.gen.feature.ReplaceBlockConfig
 import net.minecraft.world.gen.placement.CountRangeConfig
 import net.minecraft.world.gen.placement.Placement
-import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.registries.ForgeRegistries
 
-
 @Suppress("unused", "UNUSED_PARAMETER")
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object WorldGeneration {
-    @JvmStatic
-    @SubscribeEvent
-    fun generateOres(event: FMLCommonSetupEvent) {
+    fun generateOres() {
         if (!Config.generateOres.get()) return
 
         for (biome in ForgeRegistries.BIOMES.values) {
-            for (block in ModBlocks.oreList) {
+            for (blockName in ModBlocks.ores) {
+                val block = ForgeRegistries.BLOCKS.getValue(ResourceLocation(MODID, blockName)) as OreBlock?
+                if (block == null) {
+                    NTM.logger.fatal("Could not get block $blockName for world generation.")
+                    continue
+                }
+
                 if (block.registryName in Config.oreGenerationBlacklist.get()) continue
 
                 val biomeBlacklist = emptyList<Biome>().toMutableList()
@@ -107,6 +106,6 @@ object WorldGeneration {
     }
 }
 
-data class OreGenerationSettings(val biomeBlacklist: List<String>, val size: Int, val count: Int, val bottomOffset: Int, val topOffset: Int, val maximum: Int) {
-    constructor(biomeBlacklist: List<String>, size: Int, count: Int, spawnRange: IntRange) : this(biomeBlacklist, size, count, spawnRange.first, 0, spawnRange.last - spawnRange.first)
+data class OreGenerationSettings(val size: Int, val count: Int, val bottomOffset: Int, val topOffset: Int, val maximum: Int, val biomeBlacklist: List<String> = listOf("minecraft:nether", "THEEND")) {
+    constructor(size: Int, count: Int, spawnRange: IntRange, biomeBlacklist: List<String> = listOf("minecraft:nether", "THEEND")) : this(size, count, spawnRange.first, 0, spawnRange.last - spawnRange.first, biomeBlacklist)
 }

@@ -1,0 +1,8 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "ntm:block/deco_blocks/red_copper_deco_block"
+    }
+  }
+}

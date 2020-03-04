@@ -15,10 +15,10 @@ import net.minecraft.util.text.TextFormatting
 import net.minecraft.world.World
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
-class CustomizedItem(val registryName: String, val customProperties: CustomizedProperties = CustomizedProperties()): Item(customProperties) {
+open class CustomizedItem(val registryName: String, val customProperties: CustomizedProperties = CustomizedProperties()): Item(customProperties) {
     init {
         setRegistryName(MODID, registryName)
-        ModItems.itemList.add(this)
+        ModItems.items += registryName
     }
 
     override fun getTranslationKey(): String = "item.ntm.$registryName"

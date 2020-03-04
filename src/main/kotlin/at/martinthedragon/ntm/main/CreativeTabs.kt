@@ -2,7 +2,6 @@ package at.martinthedragon.ntm.main
 
 import at.martinthedragon.ntm.blocks.ModBlocks
 import at.martinthedragon.ntm.items.ModItems
-import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 
