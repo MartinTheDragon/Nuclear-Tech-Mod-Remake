@@ -28,3 +28,4 @@ run/
 .gradle/
 gradle/
 .idea/
+docs/build
