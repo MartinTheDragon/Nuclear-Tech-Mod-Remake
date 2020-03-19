@@ -14,8 +14,8 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'kotlin'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+// apply plugin: 'eclipse'
+// apply plugin: 'maven-publish'
 
 version = '1.14.4-0.0.3.0'
 group = 'at.martinthedragon' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -47,7 +47,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                ntm {
                     source sourceSets.main
                 }
             }
@@ -63,7 +63,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                ntm {
                     source sourceSets.main
                 }
             }
@@ -81,7 +81,7 @@ minecraft {
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                examplemod {
+                ntm {
                     source sourceSets.main
                 }
             }
@@ -143,7 +143,7 @@ jar {
 // we define a custom artifact that is sourced from the reobfJar output task
 // and then declare that to be published
 // Note you'll need to add a repository here
-def reobfFile = file("$buildDir/reobfJar/output.jar")
+/*def reobfFile = file("$buildDir/reobfJar/output.jar")
 def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
@@ -159,7 +159,7 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
-}
+}*/
 repositories {
     mavenCentral()
 }

@@ -1,0 +1,3 @@
+rootProject.name = "Nuclear Tech Mod Remake"
+
+include(":docs")

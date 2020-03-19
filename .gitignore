@@ -26,6 +26,7 @@ build/
 out/
 run/
 .gradle/
-gradle/
 .idea/
 docs/build
+
+!gradle/wrapper/gradle-wrapper.jar
