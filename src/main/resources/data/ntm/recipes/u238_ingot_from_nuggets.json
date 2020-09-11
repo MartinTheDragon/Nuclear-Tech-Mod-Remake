@@ -1,0 +1,17 @@
+{
+  "group": "u238_ingot",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "ntm:u238_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:u238_ingot"
+  }
+}

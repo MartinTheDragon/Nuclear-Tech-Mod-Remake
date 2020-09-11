@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:uranium_powder"
-  },
-  "result": "ntm:uranium_ingot",
-  "experience": 1.0
-}

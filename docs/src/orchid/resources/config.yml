@@ -2,23 +2,25 @@ site:
   about:
     siteName: Nuclear Tech Mod Remake
     siteDescription: Documentation website of the Nuclear Tech Mod Remake.
-Editorial:
-  primaryColor: "#FFE000"
+theme:
   legacySearch: false
   metaComponents:
     - type: "orchidSearch"
+  extraCss:
+    - "assets/css/styles.scss"
   social:
     github: "MartinTheDragon/Nuclear-Tech-Mod-Remake"
-  menu:
-    - type: "submenu"
-      title: "Wiki"
-      menu:
-        - type: "wiki"
-    - type: "page"
-      itemId: "Changelog"
+#  menu:
+#    - type: "submenu"
+#      title: "Wiki"
+#      menu:
+#        - type: "wiki"
+#    - type: "page"
+#      itemId: "Changelog"
 wiki:
   sections:
-    - "userManual"
+    - "englishWiki"
+    - "germanWiki"
     - "developerGuide"
 services:
   publications:

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<!-- NTM Theme by MartinTheDragon -->
+<html>
+    <head>
+    {% head %}
+    </head>
+    <body>
+        {% body %}
+        <div id="wrapper">
+        {% include "includes/search" %}
+            <div id="main">
+                <div class="inner">
+                    {% block innerHeader %}
+                        {% include "includes/header" %}
+                    {% endblock %}
+                    {% block pageContent %}
+                        <section id="pageContent">
+                            <header class="major"><h2>{{ page.title }}</h2></header>
+                            <article>
+                                {% page %}
+                            </article>
+                        </section>
+                    {% endblock %}
+                </div>
+                <hr>
+                {% include "includes/footer" %}
+            </div>
+            {% include "includes/sidebar" %}
+        </div>
+        {% endbody %}
+    </body>
+</html>

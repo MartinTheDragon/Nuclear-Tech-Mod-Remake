@@ -1,0 +1,8 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "": {
+      "model": "ntm:block/machines/steam_press_base"
+    }
+  }
+}

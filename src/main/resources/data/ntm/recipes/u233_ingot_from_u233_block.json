@@ -1,0 +1,13 @@
+{
+  "group": "u233_ingot",
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ntm:u233_block"
+    }
+  ],
+  "result": {
+    "item": "ntm:u233_ingot",
+    "count": 9
+  }
+}

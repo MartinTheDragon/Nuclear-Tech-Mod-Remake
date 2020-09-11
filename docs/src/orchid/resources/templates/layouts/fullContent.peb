@@ -1,0 +1,10 @@
+{% extends "layouts/index" %}
+
+{% block innerHeader %}
+
+{% endblock %}
+
+{% block pageContent%}
+    {% page %}
+{% endblock %}
+©

@@ -1,0 +1,19 @@
+@import "base";
+
+a {
+    color: $primary-color;
+    text-decoration: none;
+
+    &:visited {
+        color: scale-color($primary-color, $lightness: -25%);
+    }
+
+    &:hover {
+        color: $primary-color;
+        border-bottom: 2px dotted $primary-color
+    }
+    &:active {
+        color: scale-color($primary-color, $lightness: 25%);
+        border-bottom: 2px solid scale-color($primary-color, $lightness: 25%);
+    }
+}

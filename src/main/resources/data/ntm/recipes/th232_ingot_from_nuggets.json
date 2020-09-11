@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "th232_ingot",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "ntm:th232_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:th232_ingot"
+  }
+}

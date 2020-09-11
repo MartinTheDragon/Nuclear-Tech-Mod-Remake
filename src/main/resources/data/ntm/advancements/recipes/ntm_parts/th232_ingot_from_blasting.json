@@ -1,0 +1,32 @@
+{
+  "parent": "ntm:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:th232_ingot_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_thorium_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:thorium_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:th232_ingot_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

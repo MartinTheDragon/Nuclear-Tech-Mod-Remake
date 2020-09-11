@@ -8,5 +8,8 @@ Maybe I will some time later create a documentation for my code.
 
 ***
 
+#### In this guide:
+
 - [Requirements](requirements.md)
    - [IntelliJ IDEA](settingUp/intellij.md)
+- [Building the project](building.md)

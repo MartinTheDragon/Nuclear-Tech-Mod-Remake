@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    "trigger_event": ["-", 0.5]
+  },
+  "clips": {
+    "move_down": ["trigger_positive", "ntm:block/machines/steam_press_top@move_down", "#trigger_event", "!transition:down"],
+    "move_up": ["trigger_positive", "ntm:block/machines/steam_press_top@move_up", ["-", 2], "!transition:up"],
+    "press": ["trigger_positive", "#identity", "#trigger_event", "press_item"]
+  },
+  "states": ["up", "moving_down", "down", "moving_up"],
+  "transitions": {
+    "up": "moving_down",
+    "moving_down": "down",
+    "down": "moving_up",
+    "moving_up": "up"
+  },
+  "start_state": "up"
+}

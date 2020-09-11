@@ -1,0 +1,9 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "facing=north": { "model": "ntm:block/machines/safe" },
+    "facing=south": { "model": "ntm:block/machines/safe", "y": 180 },
+    "facing=west": { "model": "ntm:block/machines/safe", "y": 270 },
+    "facing=east": { "model": "ntm:block/machines/safe", "y": 90 }
+  }
+}

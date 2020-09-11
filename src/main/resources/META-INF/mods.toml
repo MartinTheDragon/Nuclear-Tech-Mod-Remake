@@ -1,5 +1,6 @@
 modLoader="javafml"
-loaderVersion="[28,)"
+loaderVersion="[33,)"
+license="GPL v3.0"
 [[mods]]
 modId="ntm"
 version="0.0.1.0"

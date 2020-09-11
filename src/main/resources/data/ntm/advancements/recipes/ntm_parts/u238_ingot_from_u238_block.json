@@ -1,0 +1,46 @@
+{
+  "parent": "ntm:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:u238_ingot_from_u238_block"
+    ]
+  },
+  "criteria": {
+    "has_at_least_9_u238_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:u238_ingot",
+            "count": {
+              "min": 9
+            }
+          }
+        ]
+      }
+    },
+    "has_u238_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:u238_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:u238_ingot_from_u238_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_at_least_9_u238_ingot",
+      "has_u238_block",
+      "has_the_recipe"
+    ]
+  ]
+}

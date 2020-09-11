@@ -1,0 +1,14 @@
+<header id="header">
+    <a href="{{ homepageUrl() }}" class="logo">{{ site.about.siteName }}</a>
+    <ul class="icons">
+    {% if site.about.social is not empty %}
+    {% for item in site.about.social.items %}
+        <li>
+            <a href="{{ item.link }}" class="icon {{ item.icon }}">
+                <span class="label">{{ item.label }}</span>
+            </a>
+        </li>
+    {% endfor %}
+    {% endif %}
+    </ul>
+</header>

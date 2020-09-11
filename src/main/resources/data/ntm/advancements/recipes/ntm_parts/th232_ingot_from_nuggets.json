@@ -1,0 +1,35 @@
+{
+  "parent": "ntm:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:th232_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_at_least_9_th232_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:th232_nugget",
+            "count": {
+              "min": 9
+            }
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:th232_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_at_least_9_th232_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

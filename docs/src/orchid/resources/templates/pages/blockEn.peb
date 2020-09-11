@@ -1,0 +1,25 @@
+{% filter compileAs("md") %}
+
+## Data
+
+TODO
+
+Category: Blocks<br>
+Stackable: {% if stackable is not null %}{{ stackable }}{% else %}Yes (64){% endif %}<br>
+Tool: {% if tool is not null %} {{ tool }}{% else %}Any Tool{% endif %}<br>
+Blast Resistance: {% if resistance is not null %}{{ resistance }}{% else %}0{% endif %}<br>
+Hardness: {% if hardness is not null %}{{ hardness }}{% else %}0{% endif %}<br>
+Gravity: {% if gravity is not null %}{{ gravity }}{% else %}No{% endif %}<br>
+Luminant: {% if luminant is not null %}{{ luminant }}{% else %}No{% endif %}<br>
+Transparent: {% if transparent is not null %}{{ transparent }}{% else %}No{% endif %}<br>
+Flammable: {% if flammable is not null %}{{ flammable }}{% else %}No{% endif %}<br>
+Renewable: {% if renewable is not null %}{{ renewable }}{% else %}No{% endif %}<br>
+Can be moved by piston: {% if movable is not null %}{{ movable }}{% else %}Yes{% endif %}<br>
+Drops: {% if drops is not null %}{{ drops }}{% else %}Itself{% endif %}<br>
+Experience: {% if xp is not null %}{{ xp }}{% else %}0{% endif %}<br>
+{% if id is not null %}ID: {{ id }}<br>{% endif %}
+
+---
+{% endfilter %}
+
+{{ page.content | raw }}

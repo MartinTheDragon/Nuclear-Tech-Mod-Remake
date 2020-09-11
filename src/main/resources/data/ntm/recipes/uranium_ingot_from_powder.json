@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "group": "uranium_ingot",
+  "ingredient": {
+    "item": "ntm:uranium_powder"
+  },
+  "result": "ntm:uranium_ingot",
+  "cookingtime": 200
+}
