@@ -1,6 +1,6 @@
 {
-  "group": "uranium_ingot",
   "type": "minecraft:crafting_shapeless",
+  "group": "uranium_ingot",
   "ingredients": [
     {
       "item": "ntm:uranium_block"

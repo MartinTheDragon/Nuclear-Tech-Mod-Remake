@@ -22,26 +22,38 @@ object Config {
     private lateinit var configData: CommentedFileConfig
 
     var defaultOreGenSettings = mutableMapOf(
-            "uranium_ore" to OreGenerationSettings(0, 25, 6, 5, netherBiomes),
-            "thorium_ore" to OreGenerationSettings(0, 30, 7, 5, netherBiomes),
-            "titanium_ore" to OreGenerationSettings(0, 35, 8, 6, netherBiomes),
-            "sulfur_ore" to OreGenerationSettings(0, 35, 5, 8, netherBiomes),
-            "niter_ore" to OreGenerationSettings(0, 35, 6, 6, netherBiomes),
-            "copper_ore" to OreGenerationSettings(0, 50, 12, 6, netherBiomes),
-            "tungsten_ore" to OreGenerationSettings(0, 35, 10, 8, netherBiomes),
-            "aluminium_ore" to OreGenerationSettings(0, 45, 7, 6, netherBiomes),
-            "fluorite_ore" to OreGenerationSettings(0, 40, 6, 4, netherBiomes),
-            "beryllium_ore" to OreGenerationSettings(0, 35, 6, 4, netherBiomes),
-            "lead_ore" to OreGenerationSettings(0, 35, 6, 9, netherBiomes),
-            "lignite_ore" to OreGenerationSettings(35, 60, 2, 24, netherBiomes),
-            "australian_ore" to OreGenerationSettings(15, 30, 2, 4, netherBiomes),
-            "weidite" to OreGenerationSettings(0, 25, 2, 4, netherBiomes),
-            "reiite" to OreGenerationSettings(0, 35, 2, 4, netherBiomes),
-            "brightblende_ore" to OreGenerationSettings(0, 128, 2, 4, netherBiomes),
-            "dellite" to OreGenerationSettings(0, 10, 2, 4, netherBiomes),
-            "dollar_green_mineral" to OreGenerationSettings(25, 50, 2, 4, netherBiomes),
-            "rare_earth_ore" to OreGenerationSettings(0, 25, 6, 5, netherBiomes)
-    ).withDefault { OreGenerationSettings(0, 50, 5, 5, emptyList()) }
+        "uranium_ore" to OreGenerationSettings(0, 25, 6, 5, netherBiomes),
+        "thorium_ore" to OreGenerationSettings(0, 30, 7, 5, netherBiomes),
+        "titanium_ore" to OreGenerationSettings(0, 35, 8, 6, netherBiomes),
+        "sulfur_ore" to OreGenerationSettings(0, 35, 5, 8, netherBiomes),
+        "niter_ore" to OreGenerationSettings(0, 35, 6, 6, netherBiomes),
+        "copper_ore" to OreGenerationSettings(0, 50, 12, 6, netherBiomes),
+        "tungsten_ore" to OreGenerationSettings(0, 35, 10, 8, netherBiomes),
+        "aluminium_ore" to OreGenerationSettings(0, 45, 7, 6, netherBiomes),
+        "fluorite_ore" to OreGenerationSettings(0, 40, 6, 4, netherBiomes),
+        "beryllium_ore" to OreGenerationSettings(0, 35, 6, 4, netherBiomes),
+        "lead_ore" to OreGenerationSettings(0, 35, 6, 9, netherBiomes),
+        "lignite_ore" to OreGenerationSettings(35, 60, 2, 24, netherBiomes),
+        "australian_ore" to OreGenerationSettings(15, 30, 2, 4, netherBiomes),
+        "weidite" to OreGenerationSettings(0, 25, 2, 4, netherBiomes),
+        "reiite" to OreGenerationSettings(0, 35, 2, 4, netherBiomes),
+        "brightblende_ore" to OreGenerationSettings(0, 128, 2, 4, netherBiomes),
+        "dellite" to OreGenerationSettings(0, 10, 2, 4, netherBiomes),
+        "dollar_green_mineral" to OreGenerationSettings(25, 50, 2, 4, netherBiomes),
+        "rare_earth_ore" to OreGenerationSettings(0, 25, 6, 5, netherBiomes)
+    ).withDefault { OreGenerationSettings(0, 50, 5, 5) }
+
+    var defaultNetherOreGenSettings = mutableMapOf(
+        "nether_uranium_ore" to OreGenerationSettings(0, 127, 8, 6),
+        "nether_plutonium_ore" to OreGenerationSettings(0, 127, 6, 4),
+        "nether_tungsten_ore" to OreGenerationSettings(0, 127, 10, 10),
+        "nether_sulfur_ore" to OreGenerationSettings(0, 127, 26, 12),
+        "nether_phosphorus_ore" to OreGenerationSettings(0, 127, 24, 3)
+    ).withDefault { OreGenerationSettings(0, 127, 5, 5) }
+
+    var defaultEndOreGenSettings = mutableMapOf(
+        "trixite" to OreGenerationSettings(0, 127, 8, 6)
+    )
 
     fun createConfig() {
         commonBuilder.comment("World generation settings.", "All of these will only be used when a new world gets generated").push(catWorldGen)

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "group": "copper_ingot",
+  "ingredient": {
+    "item": "ntm:meteor_copper_ore"
+  },
+  "result": {
+    "item": "ntm:copper_ingot",
+    "count": 3
+  },
+  "experience": 2.5,
+  "cookingtime": 100
+}

@@ -166,7 +166,7 @@
   },
   "siren.air_raid": {
     "category": "block",
-    "subtitle": "ntm.subtitle.siren.playing_air_raid",
+    "subtitle": "subtitle.ntm.siren.playing_air_raid",
     "sounds": [
       {
         "name": "ntm:blocks/siren/air_raid",

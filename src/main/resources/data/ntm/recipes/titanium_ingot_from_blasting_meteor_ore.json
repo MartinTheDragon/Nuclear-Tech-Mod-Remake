@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "group": "titanium_ingot",
+  "ingredient": {
+    "item": "ntm:meteor_titanium_ore"
+  },
+  "result": {
+    "item": "ntm:titanium_ingot",
+    "count": 3
+  },
+  "experience": 2.5,
+  "cookingtime": 100
+}

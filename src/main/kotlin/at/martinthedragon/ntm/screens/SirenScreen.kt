@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.StringTextComponent
 import net.minecraftforge.items.CapabilityItemHandler
 
 class SirenScreen(
@@ -18,9 +17,6 @@ class SirenScreen(
         playerInventory: PlayerInventory,
         title: ITextComponent
 ) : ContainerScreen<SirenContainer>(container, playerInventory, title) {
-    private var trackName: ITextComponent = StringTextComponent("")
-    private var trackType: ITextComponent = StringTextComponent("")
-    private var trackRange: ITextComponent = StringTextComponent("")
     private val texture = ResourceLocation(Main.MODID, "textures/gui/siren.png")
 
     init {
@@ -28,32 +24,44 @@ class SirenScreen(
         ySize = 165
     }
 
-    override fun func_230450_a_(matrixStack: MatrixStack, param1: Float, param2: Int, param3: Int) {
+    override fun drawGuiContainerBackgroundLayer(matrixStack: MatrixStack, partialTicks: Float, x: Int, y: Int) {
         @Suppress("DEPRECATION")
         RenderSystem.color4f(1f, 1f, 1f, 1f)
         Minecraft.getInstance().textureManager.bindTexture(texture)
-        func_238474_b_(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize)
+        blit(matrixStack, (width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
     }
 
-    override fun func_230430_a_(p_230430_1_: MatrixStack, p_230430_2_: Int, p_230430_3_: Int, p_230430_4_: Float) {
-        super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_)
-        func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_)
+    override fun drawGuiContainerForegroundLayer(matrix: MatrixStack, mouseX: Int, mouseY: Int) {
+        super.drawGuiContainerForegroundLayer(matrix, mouseX, mouseY)
 
         val inv = container.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
         val sirenTrack = inv.getStackInSlot(0).item
+        val trackName: ITextComponent
+        val trackType: ITextComponent
+        val trackRange: ITextComponent
+        val color: Int
+
         if (sirenTrack is SirenTrack) {
             trackName = sirenTrack.trackName
             trackType = sirenTrack.trackType
             trackRange = sirenTrack.trackRange
-        } else {
-            trackName = StringTextComponent("")
-            trackType = StringTextComponent("")
-            trackRange = StringTextComponent("")
-        }
+            color = sirenTrack.color
+        } else return
+
+//        val fontRenderer = minecraft!!.fontRenderer
 
         // display track info
-        func_238472_a_(p_230430_1_, field_230712_o_, trackName, field_230708_k_ / 2 + 17, field_230709_l_ / 2 - 54, 0xFFCCCC)
-        func_238472_a_(p_230430_1_, field_230712_o_, trackType, field_230708_k_ / 2 + 17, field_230709_l_ / 2 - 44, 0xFFCCCC)
-        func_238472_a_(p_230430_1_, field_230712_o_, trackRange, field_230708_k_ / 2 + 17, field_230709_l_ / 2 - 34, 0xFFCCCC)
+//        fontRenderer.drawStringWithShadow(matrix, trackName, width / 2f + 17, height / 2f - 54, color)
+//        fontRenderer.drawStringWithShadow(matrix, trackType, width / 2f + 17, height / 2f - 44, color)
+//        fontRenderer.drawStringWithShadow(matrix, trackRange, width / 2f + 17, height / 2f - 34, color)
+
+        font.func_243246_a(matrix, trackName, 123f / 2 - 12, 51f / 2 + 2, color)
+        font.func_243246_a(matrix, trackType, 123f / 2 - 12, 51f / 2 + 12, color)
+        font.func_243246_a(matrix, trackRange, 123f / 2 - 12, 51f / 2 + 22, color)
+    }
+
+    override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        renderBackground(matrix)
+        super.render(matrix, mouseX, mouseY, partialTicks)
     }
 }

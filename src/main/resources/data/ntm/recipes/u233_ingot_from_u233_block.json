@@ -1,6 +1,6 @@
 {
-  "group": "u233_ingot",
   "type": "minecraft:crafting_shapeless",
+  "group": "u233_ingot",
   "ingredients": [
     {
       "item": "ntm:u233_block"

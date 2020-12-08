@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:polonium_powder"
+  },
+  "result": "ntm:polonium_ingot",
+  "cookingtime": 200
+}

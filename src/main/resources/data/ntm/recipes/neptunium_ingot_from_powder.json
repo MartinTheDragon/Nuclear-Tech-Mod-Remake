@@ -4,5 +4,5 @@
     "item": "ntm:neptunium_powder"
   },
   "result": "ntm:neptunium_ingot",
-  "experience": 1.0
+  "cookingtime": 200
 }

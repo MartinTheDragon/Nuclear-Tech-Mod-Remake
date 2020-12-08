@@ -47,10 +47,10 @@ class SafeTileEntity : TileEntity(TileEntityTypes.safeTileEntityType), INamedCon
         return nbt2
     }
 
-    override fun func_230337_a_(state: BlockState, nbt: CompoundNBT) {
-        super.func_230337_a_(state, nbt)
+    override fun read(state: BlockState, nbt: CompoundNBT) {
+        super.read(state, nbt)
         if (nbt.contains("CustomName", 8)) {
-            customName = ITextComponent.Serializer.func_240643_a_(nbt.getString("CustomName"))
+            customName = ITextComponent.Serializer.getComponentFromJson(nbt.getString("CustomName"))
         }
         inventory.deserializeNBT(nbt)
     }

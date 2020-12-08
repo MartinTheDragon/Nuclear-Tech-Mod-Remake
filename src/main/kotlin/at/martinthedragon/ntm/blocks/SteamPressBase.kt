@@ -40,7 +40,7 @@ class SteamPressBase(properties: Properties) : Block(properties) {
             worldIn.setBlockState(blockPos1, ModBlocks.steamPressFrame.defaultState, 0b11)
             worldIn.setBlockState(blockPos2, ModBlocks.steamPressTop.defaultState, 0b11)
             worldIn.func_230547_a_(pos, Blocks.AIR)
-            state.func_235734_a_(worldIn, pos, 0b11)
+            state.updateNeighbours(worldIn, pos, 0b11)
         }
     }
 

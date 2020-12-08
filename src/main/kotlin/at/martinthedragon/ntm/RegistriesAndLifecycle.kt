@@ -61,10 +61,9 @@ object RegistriesAndLifecycle {
 
     @SubscribeEvent
     @JvmStatic
-    fun commonSetup(@Suppress("UNUSED_PARAMETER") event: FMLCommonSetupEvent) {
+    fun commonSetup(event: FMLCommonSetupEvent) {
         Main.logger.info("Hello World!")
         Config.createConfig()
-        WorldGeneration.registerOreGeneration()
     }
 
     fun Block.register(): Block = apply { blocksToRegister += this }.also { Main.logger.debug("Registering Block ${it.registryName}") }

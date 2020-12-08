@@ -144,7 +144,8 @@ object ModBlockItems {
 
             do {
                 i++
-                tooltip.add(TranslationTextComponent(translationKey + i).func_230530_a_(Style.field_240709_b_.func_240712_a_(TextFormatting.GRAY)))
+                //tooltip.add(TranslationTextComponent(translationKey + i).func_230530_a_(Style.field_240709_b_.func_240712_a_(TextFormatting.GRAY)))
+                tooltip.add(TranslationTextComponent(translationKey + i).mergeStyle(Style.EMPTY.applyFormatting(TextFormatting.GRAY)))
             } while (tooltip.last().string != translationKey + i)
             tooltip.removeAt(tooltip.lastIndex)
         }

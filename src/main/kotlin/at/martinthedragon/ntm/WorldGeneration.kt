@@ -1,72 +1,78 @@
 package at.martinthedragon.ntm
 
-import net.minecraft.util.registry.Registry
-import net.minecraft.util.registry.WorldGenRegistries
+import net.minecraft.block.Blocks
 import net.minecraft.world.biome.Biome
-import net.minecraft.world.biome.BiomeGenerationSettings
 import net.minecraft.world.gen.GenerationStage
 import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.OreFeatureConfig
-import net.minecraft.world.gen.placement.DepthAverageConfig
+import net.minecraft.world.gen.feature.template.BlockMatchRuleTest
 import net.minecraft.world.gen.placement.Placement
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper
-import java.util.function.Supplier
+import net.minecraft.world.gen.placement.TopSolidRangeConfig
+import net.minecraftforge.event.world.BiomeLoadingEvent
 
 
 object WorldGeneration {
     val netherBiomes = listOf("minecraft:nether_wastes", "minecraft:soul_sand_valley", "minecraft:crimson_forest", "minecraft:warped_forest", "minecraft:basalt_deltas")
     val ores = listOf(
-            B.uraniumOre, B.thoriumOre, B.titaniumOre,
-            B.sulfurOre, B.niterOre, B.copperOre,
-            B.tungstenOre, B.aluminiumOre, B.fluoriteOre,
-            B.berylliumOre, B.leadOre, B.ligniteOre,
-            B.asbestosOre, B.australianOre, B.weidite,
-            B.reiite, B.brightblendeOre, B.dellite,
-            B.dollarGreenMineral, B.rareEarthOre
+        B.uraniumOre, B.thoriumOre, B.titaniumOre,
+        B.sulfurOre, B.niterOre, B.copperOre,
+        B.tungstenOre, B.aluminiumOre, B.fluoriteOre,
+        B.berylliumOre, B.leadOre, B.ligniteOre,
+        B.asbestosOre, B.australianOre, B.weidite,
+        B.reiite, B.brightblendeOre, B.dellite,
+        B.dollarGreenMineral, B.rareEarthOre
+    )
+    val netherOres = listOf(
+        B.netherUraniumOre, B.netherPlutoniumOre,
+        B.netherTungstenOre, B.netherSulfurOre,
+        B.netherPhosphorusOre
+    )
+    val endOres = listOf(
+        B.trixite
     )
 
-    // they changed world generation. i will not try anything because everything is weird. TODO make proper ore generation once it's not weird anymore, maybe something with lambda expressions
-    fun registerOreGeneration() { // thanks: https://forums.minecraftforge.net/topic/90560-1162-how-to-add-custom-ore-to-world-generation
-        // Do not generate ores if they have been turned off in the config
-        if (Config.getConfigValue(listOf(Config.catWorldGen, Config.catOreGen, "generateOres")))
-            for (ore in ores) {
-                Registry.register(
-                        WorldGenRegistries.field_243653_e /* Feature Registering */,
-                        ore.registryName!! /* Resource Location */,
-                        Feature.field_236289_V_ /* no_surface_ore */.withConfiguration(
-                                OreFeatureConfig(
-                                        OreFeatureConfig.FillerBlockType.field_241882_a /* base_stone_overworld */,
-                                        ore.defaultState,
-                                        64
-                                )
-                        ).withPlacement(Placement.field_242910_o /* depth */.configure(
-                                DepthAverageConfig(12, 12)
-                        )).func_242728_a() /* spreadHorizontally */.func_242731_b(1) /* repeat */
+    private val END_STONE = BlockMatchRuleTest(Blocks.END_STONE)
+
+    fun generateOres(event: BiomeLoadingEvent) {
+        when(event.category) {
+            Biome.Category.NETHER -> for (ore in netherOres) {
+                val oreGenConfig = Config.defaultNetherOreGenSettings.getValue(ore.registryName!!.path)
+                event.generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                    Feature.ORE.withConfiguration(OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NETHERRACK,
+                        ore.defaultState,
+                        oreGenConfig.sizeVein
+                    )).withPlacement(Placement.RANGE.configure(
+                        TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
+                    )).square().func_242731_b(oreGenConfig.countVeins) // func_242731_b: set FeatureSpread vein count in one chunk
                 )
-
-
-                @Suppress("DEPRECATION")
-                for ((_, biome) in WorldGenRegistries.field_243657_i.func_239659_c_() /* Collection of Biome Entries */) {
-                    if (biome.category != Biome.Category.NETHER && biome.category != Biome.Category.THEEND) {
-                        val decoration = GenerationStage.Decoration.UNDERGROUND_ORES
-                        val biomeFeatures = ArrayList(biome.func_242440_e().func_242498_c()) /* List of Configured Features */
-
-                        while (biomeFeatures.size <= decoration.ordinal)
-                            biomeFeatures.add(ArrayList())
-
-
-                        // have to do this cause the list is immutable
-                        val features = ArrayList(biomeFeatures[decoration.ordinal])
-                        features += Supplier { WorldGenRegistries.field_243653_e.getOrDefault(ore.registryName) }
-                        biomeFeatures[decoration.ordinal] = features
-
-                        // i can't believe how stupid that is
-                        /* Change field_242484_f that contains the Configured Features of the Biome*/
-                        ObfuscationReflectionHelper.setPrivateValue(BiomeGenerationSettings::class.java, biome.func_242440_e(), biomeFeatures, "field_242484_f")
-                    }
-                }
             }
+            Biome.Category.THEEND -> for (ore in endOres) {
+                val oreGenConfig = Config.defaultEndOreGenSettings.getValue(ore.registryName!!.path)
+                event.generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                    Feature.ORE.withConfiguration(OreFeatureConfig(
+                        END_STONE,
+                        ore.defaultState,
+                        oreGenConfig.sizeVein
+                    )).withPlacement(Placement.RANGE.configure(
+                        TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
+                    )).square().func_242731_b(oreGenConfig.countVeins)
+                )
+            }
+            else -> for (ore in ores) {
+                val oreGenConfig = Config.defaultOreGenSettings.getValue(ore.registryName!!.path)
+                event.generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                    Feature.ORE.withConfiguration(OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                        ore.defaultState,
+                        oreGenConfig.sizeVein
+                    )).withPlacement(Placement.RANGE.configure(
+                        TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
+                    )).square().func_242731_b(oreGenConfig.countVeins)
+                )
+            }
+        }
     }
 
-    data class OreGenerationSettings(val yStart: Int, val yEnd: Int, val countVeins: Int, val sizeVein: Int, val biomeBlackList: List<String>)
+    data class OreGenerationSettings(val yStart: Int, val yEnd: Int, val countVeins: Int, val sizeVein: Int, val biomeBlackList: List<String> = emptyList())
 }

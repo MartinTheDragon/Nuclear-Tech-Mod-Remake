@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "copper_ingot",
+  "ingredient": {
+    "item": "ntm:meteor_copper_ore"
+  },
+  "result": {
+    "item": "ntm:copper_ingot",
+    "count": 3
+  },
+  "experience": 5.0,
+  "cookingtime": 200
+}

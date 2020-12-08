@@ -1,0 +1,32 @@
+{
+  "parent": "ntm:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:titanium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_titanium_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:titanium_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:titanium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_titanium_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

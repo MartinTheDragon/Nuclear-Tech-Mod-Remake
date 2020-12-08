@@ -1,6 +1,6 @@
 {
-  "group": "u235_ingot",
   "type": "minecraft:crafting_shaped",
+  "group": "u235_ingot",
   "pattern": [
     "xxx",
     "xxx",

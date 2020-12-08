@@ -1,0 +1,32 @@
+{
+  "parent": "ntm:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:polonium_ingot_from_polonium_block"
+    ]
+  },
+  "criteria": {
+    "has_polonium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:polonium_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:polonium_ingot_from_polonium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polonium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

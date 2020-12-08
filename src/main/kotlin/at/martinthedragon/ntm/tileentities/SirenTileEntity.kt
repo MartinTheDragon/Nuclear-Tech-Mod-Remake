@@ -94,8 +94,8 @@ class SirenTileEntity : TileEntity(TileEntityTypes.sirenTileEntityType), INamedC
         return nbt
     }
 
-    override fun func_230337_a_(blockState: BlockState, compound: CompoundNBT) {
-        super.func_230337_a_(blockState, compound)
+    override fun read(blockState: BlockState, compound: CompoundNBT) {
+        super.read(blockState, compound)
 
         inventory.deserializeNBT(compound)
     }

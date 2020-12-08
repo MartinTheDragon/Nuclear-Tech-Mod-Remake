@@ -71,7 +71,7 @@ object ModItems {
     val actiniumIngot: Item = Item(Item.Properties().group(CT.Parts.itemGroup)).setRegistryName("actinium_ingot").register()
     val deshIngot: Item = Item(Item.Properties().group(CT.Parts.itemGroup)).setRegistryName("desh_ingot").register()
     val starmetalIngot: Item = object : Item(Properties().group(CT.Parts.itemGroup)) {
-        override fun getDisplayName(stack: ItemStack) = TranslationTextComponent(getTranslationKey(stack)).func_240701_a_(TextFormatting.BLUE)
+        override fun getDisplayName(stack: ItemStack) = TranslationTextComponent(getTranslationKey(stack)).mergeStyle(TextFormatting.BLUE)
     }.setRegistryName("starmetal_ingot").register()
     val saturniteIngot: Item = Item(Item.Properties().group(CT.Parts.itemGroup).rarity(Rarity.RARE)).setRegistryName("saturnite_ingot").register()
     val euphemiumIngot: Item = object : Item(Properties().group(CT.Parts.itemGroup).rarity(Rarity.EPIC)) {
@@ -502,26 +502,26 @@ object ModItems {
     }.setRegistryName("charred_crystal").register()
 
     // Siren Tracks
-    val sirenTrackHatchSiren: Item = SirenTrack(SoundEvents.sirenTrackHatchSiren, 1f, true, "siren_track_hatch_siren", Color.func_240743_a_(0x334077)).register()
-    val sirenTrackAutopilotDisconnected: Item = SirenTrack(SoundEvents.sirenTrackAutopilotDisconnected, 1f, true, "siren_track_autopilot_disconnected", Color.func_240743_a_(0xB5B5B5)).register()
-    val sirenTrackAMSSiren: Item = SirenTrack(SoundEvents.sirenTrackAMSSiren, 1f, true, "siren_track_ams_siren", Color.func_240743_a_(0xE5BB52)).register()
-    val sirenTrackBlastDoorAlarm: Item = SirenTrack(SoundEvents.sirenTrackBlastDoorAlarm, 1f, true, "siren_track_blast_door_alarm", Color.func_240743_a_(0xB20000)).register()
-    val sirenTrackAPCSiren: Item = SirenTrack(SoundEvents.sirenTrackAPCSiren, 1f, true, "siren_track_apc_siren", Color.func_240743_a_(0x3666A0)).register()
-    val sirenTrackKlaxon: Item = SirenTrack(SoundEvents.sirenTrackKlaxon, 1f, true, "siren_track_klaxon", Color.func_240743_a_(0x808080)).register()
-    val sirenTrackVaultDoorAlarm: Item = SirenTrack(SoundEvents.sirenTrackVaultDoorAlarm, 1f, true, "siren_track_vault_door_alarm", Color.func_240743_a_(0x8C810B)).register()
-    val sirenTrackSecurityAlert: Item = SirenTrack(SoundEvents.sirenTrackSecurityAlert, 1f, true, "siren_track_security_alert", Color.func_240743_a_(0x76818E)).register()
-    val sirenTrackStandardSiren: Item = SirenTrack(SoundEvents.sirenTrackStandardSiren, 1f, true, "siren_track_standard_siren", Color.func_240743_a_(0x660000)).register()
-    val sirenTrackClassicSiren: Item = SirenTrack(SoundEvents.sirenTrackClassicSiren, 1f, true, "siren_track_classic_siren", Color.func_240743_a_(0xC0CFE8)).register()
-    val sirenTrackBankAlarm: Item = SirenTrack(SoundEvents.sirenTrackBankAlarm, 1f, true, "siren_track_bank_alarm", Color.func_240743_a_(0x3684E2)).register()
-    val sirenTrackBeepSiren: Item = SirenTrack(SoundEvents.sirenTrackBeepSiren, 1f, true, "siren_track_beep_siren", Color.func_240743_a_(0xD3D3D3)).register()
-    val sirenTrackContainerAlarm: Item = SirenTrack(SoundEvents.sirenTrackContainerAlarm, 1f, true, "siren_track_container_alarm", Color.func_240743_a_(0xE0BA9F)).register()
-    val sirenTrackSweepSiren: Item = SirenTrack(SoundEvents.sirenTrackSweepSiren, 1f, true, "siren_track_sweep_siren", Color.func_240743_a_(0xEDEA5A)).register()
-    val sirenTrackMissileSiloSiren: Item = SirenTrack(SoundEvents.sirenTrackMissileSiloSiren, 1f, true, "siren_track_missile_silo_siren", Color.func_240743_a_(0xABAB9A)).register()
-    val sirenTrackAirRaidSiren: Item = SirenTrack(SoundEvents.sirenTrackAirRaidSiren, 1f, false, "siren_track_air_raid_siren", Color.func_240743_a_(0xDF3795)).register()
-    val sirenTrackNostromoSelfDestruct: Item = SirenTrack(SoundEvents.sirenTrackNostromoSelfDestruct, 1f, true, "siren_track_nostromo_self_destruct", Color.func_240743_a_(0x5DD800)).register()
-    val sirenTrackEASAlarmScreech: Item = SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 1f, true, "siren_track_eas_alarm_screech", Color.func_240743_a_(0xB3A8C1)).register()
-    val sirenTrackAPCPass: Item = SirenTrack(SoundEvents.sirenTrackAPCPass, 1f, false, "siren_track_apc_pass", Color.func_240743_a_(0x3437D3)).register()
-    val sirenTrackRazortrainHorn: Item = SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 1f, false, "siren_track_razortrain_horn", Color.func_240743_a_(0x7750ED)).register()
+    val sirenTrackHatchSiren: Item = SirenTrack(SoundEvents.sirenTrackHatchSiren, 1f, true, "siren_track_hatch_siren", 0x334077).register()
+    val sirenTrackAutopilotDisconnected: Item = SirenTrack(SoundEvents.sirenTrackAutopilotDisconnected, 1f, true, "siren_track_autopilot_disconnected", 0xB5B5B5).register()
+    val sirenTrackAMSSiren: Item = SirenTrack(SoundEvents.sirenTrackAMSSiren, 1f, true, "siren_track_ams_siren", 0xE5BB52).register()
+    val sirenTrackBlastDoorAlarm: Item = SirenTrack(SoundEvents.sirenTrackBlastDoorAlarm, 1f, true, "siren_track_blast_door_alarm", 0xB20000).register()
+    val sirenTrackAPCSiren: Item = SirenTrack(SoundEvents.sirenTrackAPCSiren, 1f, true, "siren_track_apc_siren", 0x3666A0).register()
+    val sirenTrackKlaxon: Item = SirenTrack(SoundEvents.sirenTrackKlaxon, 1f, true, "siren_track_klaxon", 0x808080).register()
+    val sirenTrackVaultDoorAlarm: Item = SirenTrack(SoundEvents.sirenTrackVaultDoorAlarm, 1f, true, "siren_track_vault_door_alarm", 0x8C810B).register()
+    val sirenTrackSecurityAlert: Item = SirenTrack(SoundEvents.sirenTrackSecurityAlert, 1f, true, "siren_track_security_alert", 0x76818E).register()
+    val sirenTrackStandardSiren: Item = SirenTrack(SoundEvents.sirenTrackStandardSiren, 1f, true, "siren_track_standard_siren", 0x660000).register()
+    val sirenTrackClassicSiren: Item = SirenTrack(SoundEvents.sirenTrackClassicSiren, 1f, true, "siren_track_classic_siren", 0xC0CFE8).register()
+    val sirenTrackBankAlarm: Item = SirenTrack(SoundEvents.sirenTrackBankAlarm, 1f, true, "siren_track_bank_alarm", 0x3684E2).register()
+    val sirenTrackBeepSiren: Item = SirenTrack(SoundEvents.sirenTrackBeepSiren, 1f, true, "siren_track_beep_siren", 0xD3D3D3).register()
+    val sirenTrackContainerAlarm: Item = SirenTrack(SoundEvents.sirenTrackContainerAlarm, 1f, true, "siren_track_container_alarm", 0xE0BA9F).register()
+    val sirenTrackSweepSiren: Item = SirenTrack(SoundEvents.sirenTrackSweepSiren, 1f, true, "siren_track_sweep_siren", 0xEDEA5A).register()
+    val sirenTrackMissileSiloSiren: Item = SirenTrack(SoundEvents.sirenTrackMissileSiloSiren, 1f, true, "siren_track_missile_silo_siren", 0xABAB9A).register()
+    val sirenTrackAirRaidSiren: Item = SirenTrack(SoundEvents.sirenTrackAirRaidSiren, 1f, false, "siren_track_air_raid_siren", 0xDF3795).register()
+    val sirenTrackNostromoSelfDestruct: Item = SirenTrack(SoundEvents.sirenTrackNostromoSelfDestruct, 1f, true, "siren_track_nostromo_self_destruct", 0x5DD800).register()
+    val sirenTrackEASAlarmScreech: Item = SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 1f, true, "siren_track_eas_alarm_screech", 0xB3A8C1).register()
+    val sirenTrackAPCPass: Item = SirenTrack(SoundEvents.sirenTrackAPCPass, 1f, false, "siren_track_apc_pass", 0x3437D3).register()
+    val sirenTrackRazortrainHorn: Item = SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 1f, false, "siren_track_razortrain_horn", 0x7750ED).register()
 
     private fun autoTooltip(stack: ItemStack, tooltip: MutableList<ITextComponent>) {
         if (Thread.currentThread().threadGroup != SidedThreadGroups.SERVER) {
@@ -530,7 +530,7 @@ object ModItems {
 
             do {
                 i++
-                tooltip.add(TranslationTextComponent(translationKey + i).func_230530_a_(Style.field_240709_b_.func_240712_a_(TextFormatting.GRAY)))
+                tooltip.add(TranslationTextComponent(translationKey + i).mergeStyle(Style.EMPTY.applyFormatting(TextFormatting.GRAY)))
             } while (tooltip.last().string != translationKey + i)
             tooltip.removeAt(tooltip.lastIndex)
         }

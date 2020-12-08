@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "polonium_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:polonium_block"
+    }
+  ],
+  "result": {
+    "item": "ntm:polonium_ingot",
+    "count": 9
+  }
+}

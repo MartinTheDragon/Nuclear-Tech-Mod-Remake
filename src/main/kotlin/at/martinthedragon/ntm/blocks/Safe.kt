@@ -19,6 +19,7 @@ import net.minecraft.world.IBlockReader
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
 
+// TODO when adding keys and locks make them work with safes
 class Safe(properties: Properties) : Block(properties) {
     init {
         defaultState = stateContainer.baseState.with(facing, Direction.NORTH)

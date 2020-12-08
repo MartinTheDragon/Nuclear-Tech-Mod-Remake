@@ -1,0 +1,32 @@
+{
+  "parent": "ntm:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:plutonium_ingot_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_plutonium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:plutonium_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:plutonium_ingot_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plutonium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

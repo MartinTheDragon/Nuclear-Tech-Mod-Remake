@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "titanium_ingot",
+  "ingredient": {
+    "item": "ntm:titanium_ore"
+  },
+  "result": "ntm:titanium_ingot",
+  "experience": 0.4,
+  "cookingtime": 100
+}

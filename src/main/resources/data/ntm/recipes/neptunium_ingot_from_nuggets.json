@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "neptunium_ingot",
   "pattern": [
     "xxx",
     "xxx",

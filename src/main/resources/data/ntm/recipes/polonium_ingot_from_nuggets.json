@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "polonium_ingot",
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "ntm:polonium_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:polonium_ingot"
+  }
+}

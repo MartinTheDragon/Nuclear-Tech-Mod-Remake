@@ -2,6 +2,7 @@ package at.martinthedragon.ntm.screens
 
 import at.martinthedragon.ntm.Main
 import at.martinthedragon.ntm.containers.SafeContainer
+import at.martinthedragon.ntm.items.SirenTrack
 import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.Minecraft
@@ -9,6 +10,7 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
+import net.minecraftforge.items.CapabilityItemHandler
 
 class SafeScreen(
         container: SafeContainer,
@@ -22,15 +24,15 @@ class SafeScreen(
         ySize = 167
     }
 
-    override fun func_230450_a_(matrixStack: MatrixStack, param1: Float, param2: Int, param3: Int) {
+    override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+        renderBackground(matrix)
+        super.render(matrix, mouseX, mouseY, partialTicks)
+    }
+
+    override fun drawGuiContainerBackgroundLayer(matrixStack: MatrixStack, partialTicks: Float, x: Int, y: Int) {
         @Suppress("DEPRECATION")
         RenderSystem.color4f(1f, 1f, 1f, 1f)
         Minecraft.getInstance().textureManager.bindTexture(texture)
-        func_238474_b_(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize)
-    }
-
-    override fun func_230430_a_(p_230430_1_: MatrixStack, p_230430_2_: Int, p_230430_3_: Int, p_230430_4_: Float) {
-        super.func_230430_a_(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_)
-        func_230459_a_(p_230430_1_, p_230430_2_, p_230430_3_)
+        blit(matrixStack, (width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
     }
 }

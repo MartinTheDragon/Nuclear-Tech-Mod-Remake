@@ -11,9 +11,9 @@ import net.minecraft.world.World
 
 open class EffectItem(val effectTypes: List<EffectTypes>, properties: Properties, val radPerSecond: Float = 0f) : Item(properties) {
     enum class EffectTypes(val effectInfo: ITextComponent) {
-        Radioactive(TranslationTextComponent("item.ntm.any.tooltip.radiation.radioactive").func_240701_a_(TextFormatting.GREEN)),
-        Blinding(TranslationTextComponent("item.ntm.any.tooltip.radiation.blinding").func_240701_a_(TextFormatting.DARK_AQUA)),
-        Hot(TranslationTextComponent("item.ntm.any.tooltip.radiation.hot").func_240701_a_(TextFormatting.GOLD))
+        Radioactive(TranslationTextComponent("item.ntm.any.tooltip.radiation.radioactive").mergeStyle(TextFormatting.GREEN)),
+        Blinding(TranslationTextComponent("item.ntm.any.tooltip.radiation.blinding").mergeStyle(TextFormatting.DARK_AQUA)),
+        Hot(TranslationTextComponent("item.ntm.any.tooltip.radiation.hot").mergeStyle(TextFormatting.GOLD))
     }
 
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
@@ -21,6 +21,6 @@ open class EffectItem(val effectTypes: List<EffectTypes>, properties: Properties
             tooltip.add(effectType.effectInfo)
         }
         if (radPerSecond > 0f)
-            tooltip.add(StringTextComponent("$radPerSecond RAD/s").func_240701_a_(TextFormatting.YELLOW))
+            tooltip.add(StringTextComponent("$radPerSecond RAD/s").mergeStyle(TextFormatting.YELLOW))
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "neptunium_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:neptunium_block"
+    }
+  ],
+  "result": {
+    "item": "ntm:neptunium_ingot",
+    "count": 9
+  }
+}
