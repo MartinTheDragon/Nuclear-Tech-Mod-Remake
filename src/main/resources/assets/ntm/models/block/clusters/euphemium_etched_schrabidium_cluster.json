@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "ntm:blocks/clusters/euphemium_etched_schrabidium_cluster_topbottom",
+    "side": "ntm:blocks/clusters/euphemium_etched_schrabidium_cluster_side"
+  }
+}

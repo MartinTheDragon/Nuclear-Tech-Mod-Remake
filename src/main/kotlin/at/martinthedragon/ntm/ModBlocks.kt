@@ -5,6 +5,7 @@ import at.martinthedragon.ntm.blocks.*
 import net.minecraft.block.AbstractBlock.Properties
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.RotatedPillarBlock
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material.*
 import net.minecraft.util.math.BlockPos
@@ -14,7 +15,6 @@ import net.minecraftforge.common.ToolType
 import kotlin.random.Random
 
 object ModBlocks { // anyone from the forge team will not like this
-    // func_235861_h_() = setRequiresTool()
     val uraniumOre: Block = Block(Properties.create(ROCK).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()).setRegistryName("uranium_ore").register()
     val thoriumOre: Block = Block(Properties.create(ROCK).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()).setRegistryName("thorium_ore").register()
     val titaniumOre: Block = Block(Properties.create(ROCK).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).setRequiresTool()).setRegistryName("titanium_ore").register()
@@ -110,8 +110,8 @@ object ModBlocks { // anyone from the forge team will not like this
     val yellowcakeBlock: Block = Block(Properties.create(CLAY).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)).setRegistryName("yellowcake_block").register()
     val scrapBlock: Block = Block(Properties.create(CLAY).hardnessAndResistance(1f).harvestLevel(-1).harvestTool(ToolType.SHOVEL).sound(SoundType.GROUND)).setRegistryName("scrap_block").register()
     val electricalScrapBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("electrical_scrap_block").register()
-    val insulatorRoll: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)).setRegistryName("insulator_roll").register()
-    val fiberglassRoll: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)).setRegistryName("fiberglass_roll").register()
+    val insulatorRoll: Block = RotatedPillarBlock(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)).setRegistryName("insulator_roll").register()
+    val fiberglassRoll: Block = RotatedPillarBlock(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)).setRegistryName("fiberglass_roll").register()
     val asbestosBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("asbestos_block").register()
     val trinititeBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("trinitite_block").register()
     val nuclearWasteBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("nuclear_waste_block").register()
@@ -125,7 +125,7 @@ object ModBlocks { // anyone from the forge team will not like this
     val combineSteelBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("combine_steel_block").register()
     val deshReinforcedBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("desh_reinforced_block").register()
     val starmetalBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("starmetal_block").register()
-    val australiumBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("australiumblock").register()
+    val australiumBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("australium_block").register()
     val weidaniumBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("weidanium_block").register()
     val reiiumBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("reiium_block").register()
     val unobtainiumBlock: Block = Block(Properties.create(IRON).hardnessAndResistance(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().sound(SoundType.METAL)).setRegistryName("unobtainium_block").register()
