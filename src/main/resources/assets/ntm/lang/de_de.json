@@ -627,7 +627,19 @@
   "block.ntm.trixite": "Trixit",
 
   "block.ntm.uranium_block": "Uranblock",
+  "block.ntm.u233_block": "U233-Block",
+  "block.ntm.u235_block": "U235-Block",
+  "block.ntm.u238_block": "U238-Block",
+  "block.ntm.uranium_fuel_block": "Urankernbrennstoffblock",
+  "block.ntm.neptunium_block": "Neptuniumblock",
+  "block.ntm.mox_fuel_block": "MOX-Kernbrennstoffblock",
+  "block.ntm.plutonium_block": "Plutoniumblock",
+  "block.ntm.pu238_block": "Pu238-Block",
+  "block.ntm.pu239_block": "Pu239-Block",
+  "block.ntm.pu240_block": "Pu240-Block",
+  "block.ntm.plutonium_fuel_block": "Plutoniumkernbrennstoffblock",
   "block.ntm.thorium_block": "Thoriumblock",
+  "block.ntm.thorium_fuel_block": "Thoriumkernbrennstoffblock",
   "block.ntm.titanium_block": "Titanblock",
   "block.ntm.sulfur_block": "Schwefelblock",
   "block.ntm.niter_block": "Salpeterblock",
@@ -638,14 +650,26 @@
   "block.ntm.aluminium_block": "Aluminiumblock",
   "block.ntm.fluorite_block": "Fluoritblock",
   "block.ntm.beryllium_block": "Berylliumblock",
+  "block.ntm.cobalt_block": "Kobaltblock",
   "block.ntm.steel_block": "Stahlblock",
   "block.ntm.lead_block": "Bleiblock",
+  "block.ntm.lithium_block": "Lithiumblock",
+  "block.ntm.white_phosphorus_block": "Weißer Phosphorblock",
+  "block.ntm.red_phosphorus_block": "Roter Phosphorblock",
   "block.ntm.yellowcake_block": "Yellowcakeblock",
   "block.ntm.scrap_block": "Schrottblock",
   "block.ntm.electrical_scrap_block": "Elektroschrottblock",
+  "block.ntm.insulator_roll": "Isolatorrolle",
+  "block.ntm.fiberglass_roll": "Fiberglasrolle",
+  "block.ntm.asbestos_block": "Asbestblock",
   "block.ntm.trinitite_block": "Trinititblock",
   "block.ntm.nuclear_waste_block": "Atommüllblock",
   "block.ntm.schrabidium_block": "Schrabidiumblock",
+  "block.ntm.solinium_block": "Soliniumblock",
+  "block.ntm.schrabidium_fuel_block": "Schrabidiumkernbrennstoffblock",
+  "block.ntm.euphemium_block": "Euphemiumblock",
+  "block.ntm.schrabidium_cluster": "Schrabidium-Cluster",
+  "block.ntm.euphemium_etched_schrabidium_cluster": "Euphemiumgeätzter Schrabidium-Cluster",
   "block.ntm.magnetized_tungsten_block": "Magnetisierter Wolframblock",
   "block.ntm.combine_steel_block": "Combine Stahlblock",
   "block.ntm.reinforced_desh_block": "Verstärkter Deshblock",
@@ -664,7 +688,8 @@
   "block.ntm.steel_deco_block": "Stahl-Dekoblock",
   "block.ntm.lead_deco_block": "Blei-Dekoblock",
   "block.ntm.beryllium_deco_block": "Beryllium-Dekoblock",
-  "block.ntm.hazmat_cloth_block": "Strahlenschutzstoff-Block",
+  "block.ntm.asbestos_roof": "Asbestdach",
+  "block.ntm.hazmat_block": "Strahlenschutzstoff-Block",
   "block.ntm.crushed_obsidian": "Gebrochener Obsidian",
   "block.ntm.asphalt": "Asphalt",
 
@@ -676,7 +701,6 @@
 
   "block.ntm.siren": "Sirene",
   "block.ntm.safe": "Panzerschrank",
-
 
   "subtitle.ntm.siren.playing_hatch": "Sirene läuft - Hatch Siren",
   "subtitle.ntm.siren.playing_autopilot_disconnected": "Sirene läuft - Autopilot Disconnected",
@@ -697,5 +721,7 @@
   "subtitle.ntm.siren.playing_nostromo_self_destruct": "Sirene läuft - Nostromo Selbstzerstörung",
   "subtitle.ntm.siren.playing_eas": "Sirene läuft - EAS Alarm Screech",
   "subtitle.ntm.siren.playing_apc_pass": "Sirene läuft - APC Pass",
-  "subtitle.ntm.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn"
+  "subtitle.ntm.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn",
+
+  "death.attack.radiation": "%1$s starb an Strahlenvergiftung."
 }

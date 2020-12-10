@@ -1,8 +1,13 @@
 package at.martinthedragon.ntm.items
 
+import at.martinthedragon.ntm.Radiation
 import net.minecraft.client.util.ITooltipFlag
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.potion.EffectInstance
+import net.minecraft.potion.Effects
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.StringTextComponent
 import net.minecraft.util.text.TextFormatting
@@ -22,5 +27,18 @@ open class EffectItem(val effectTypes: List<EffectTypes>, properties: Properties
         }
         if (radPerSecond > 0f)
             tooltip.add(StringTextComponent("$radPerSecond RAD/s").mergeStyle(TextFormatting.YELLOW))
+    }
+
+    override fun inventoryTick(
+        stack: ItemStack,
+        world: World,
+        entity: Entity,
+        itemSlot: Int,
+        isSelected: Boolean
+    ) {
+        if (entity !is LivingEntity) return
+        if (EffectTypes.Radioactive in effectTypes) Radiation.addEntityIrradiation(entity, radPerSecond * stack.count / 20f)
+        if (EffectTypes.Blinding in effectTypes) entity.addPotionEffect(EffectInstance(Effects.BLINDNESS, 100))
+        if (EffectTypes.Hot in effectTypes) entity.setFire(5)
     }
 }

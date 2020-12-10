@@ -2,6 +2,7 @@
 
 package at.martinthedragon.ntm
 
+import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.ntm.containers.ContainerTypes
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
 import net.minecraft.block.Block
@@ -64,6 +65,7 @@ object RegistriesAndLifecycle {
     fun commonSetup(event: FMLCommonSetupEvent) {
         Main.logger.info("Hello World!")
         Config.createConfig()
+        CapabilityIrradiationHandler.register()
     }
 
     fun Block.register(): Block = apply { blocksToRegister += this }.also { Main.logger.debug("Registering Block ${it.registryName}") }

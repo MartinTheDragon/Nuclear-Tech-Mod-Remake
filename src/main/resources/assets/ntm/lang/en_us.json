@@ -721,5 +721,7 @@
   "subtitle.ntm.siren.playing_nostromo_self_destruct": "Siren is running - Nostromo Self Destruct",
   "subtitle.ntm.siren.playing_eas": "Siren is running - EAS Alarm Screech",
   "subtitle.ntm.siren.playing_apc_pass": "Siren is running - APC Pass",
-  "subtitle.ntm.siren.playing_razortrain_horn": "Siren is running - Razortrain Horn"
+  "subtitle.ntm.siren.playing_razortrain_horn": "Siren is running - Razortrain Horn",
+
+  "death.attack.radiation": "%1$s died from radiation poisoning."
 }
