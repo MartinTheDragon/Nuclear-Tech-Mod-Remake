@@ -6,13 +6,11 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.TickEvent
-import net.minecraftforge.event.entity.EntityEvent
-import net.minecraftforge.event.entity.living.LivingDeathEvent
 import net.minecraftforge.event.world.BiomeLoadingEvent
-import net.minecraftforge.event.world.ChunkEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.event.server.FMLServerStoppedEvent
 
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object EventSubscribers {
@@ -27,6 +25,12 @@ object EventSubscribers {
     fun onWorldTick(event: TickEvent.WorldTickEvent) {
         if (event.phase == TickEvent.Phase.START)
             Radiation.applyRadiationEffects(event.world)
+    }
+
+    @SubscribeEvent
+    @JvmStatic
+    fun onServerStopped(event: FMLServerStoppedEvent) {
+        Radiation.irradiatedEntityList = emptyList()
     }
 
     @SubscribeEvent

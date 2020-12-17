@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[33,)"
+loaderVersion="[35,)"
 license="GPL v3.0"
 [[mods]]
 modId="ntm"
@@ -9,5 +9,5 @@ credits="HbM: Did well..."
 authors="MartinTheDragon"
 description='''All the high quality nuclear bombs and machinery you can only find in this mod or in the older 1.7.10 version!
 The mod with both quantity and quality ;D
-Inspired by HbMinecraft's Nuclear Tech Mod and recreated by MartinTheDragon.
+A recreation by MartinTheDragon of HbMinecraft's Nuclear Tech Mod.
 '''

@@ -16,6 +16,7 @@ import net.minecraft.potion.EffectInstance
 import net.minecraft.potion.Effects
 import net.minecraft.world.World
 import net.minecraft.world.server.ChunkHolder
+import net.minecraft.world.server.ChunkManager
 import net.minecraft.world.server.ServerWorld
 import java.util.*
 
@@ -53,7 +54,7 @@ object Radiation {
             // 3000 IQ strategy to get irradiated entities without causing ConcurrentModificationException follows:
             if (world.gameTime % 20 == 0L) { // polling rate
                 val chunkManager = (world as ServerWorld).chunkProvider.chunkManager
-                val getLoadedChunksIterableMethod = chunkManager.javaClass.getDeclaredMethod("getLoadedChunksIterable")
+                val getLoadedChunksIterableMethod = chunkManager.javaClass.getDeclaredMethod("func_223491_f")
                 getLoadedChunksIterableMethod.isAccessible = true
                 @Suppress("UNCHECKED_CAST")
                 irradiatedEntityList = (getLoadedChunksIterableMethod(chunkManager) as Iterable<ChunkHolder>)
