@@ -37,38 +37,38 @@ object WorldGeneration {
         when(event.category) {
             Biome.Category.NETHER -> for (ore in netherOres) {
                 val oreGenConfig = Config.defaultNetherOreGenSettings.getValue(ore.registryName!!.path)
-                event.generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                    Feature.ORE.withConfiguration(OreFeatureConfig(
+                event.generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                    Feature.ORE.configured(OreFeatureConfig(
                         OreFeatureConfig.FillerBlockType.NETHERRACK,
-                        ore.defaultState,
+                        ore.defaultBlockState(),
                         oreGenConfig.sizeVein
-                    )).withPlacement(Placement.RANGE.configure(
+                    )).decorated(Placement.RANGE.configured(
                         TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
-                    )).square().func_242731_b(oreGenConfig.countVeins) // func_242731_b: set FeatureSpread vein count in one chunk
+                    )).squared().count(oreGenConfig.countVeins) // func_242731_b: set FeatureSpread vein count in one chunk
                 )
             }
             Biome.Category.THEEND -> for (ore in endOres) {
                 val oreGenConfig = Config.defaultEndOreGenSettings.getValue(ore.registryName!!.path)
-                event.generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                    Feature.ORE.withConfiguration(OreFeatureConfig(
+                event.generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                    Feature.ORE.configured(OreFeatureConfig(
                         END_STONE,
-                        ore.defaultState,
+                        ore.defaultBlockState(),
                         oreGenConfig.sizeVein
-                    )).withPlacement(Placement.RANGE.configure(
+                    )).decorated(Placement.RANGE.configured(
                         TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
-                    )).square().func_242731_b(oreGenConfig.countVeins)
+                    )).squared().count(oreGenConfig.countVeins)
                 )
             }
             else -> for (ore in ores) {
                 val oreGenConfig = Config.defaultOreGenSettings.getValue(ore.registryName!!.path)
-                event.generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                    Feature.ORE.withConfiguration(OreFeatureConfig(
-                        OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-                        ore.defaultState,
+                event.generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                    Feature.ORE.configured(OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                        ore.defaultBlockState(),
                         oreGenConfig.sizeVein
-                    )).withPlacement(Placement.RANGE.configure(
+                    )).decorated(Placement.RANGE.configured(
                         TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
-                    )).square().func_242731_b(oreGenConfig.countVeins)
+                    )).squared().count(oreGenConfig.countVeins)
                 )
             }
         }

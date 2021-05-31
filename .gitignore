@@ -28,5 +28,8 @@ run/
 .gradle/
 .idea/
 docs/build
+mcmodsrepo/
 
 !gradle/wrapper/gradle-wrapper.jar
+
+local.properties

@@ -1,6 +1,5 @@
 package at.martinthedragon.ntm.tileentities
 
-import at.martinthedragon.ntm.ModBlocks
 import at.martinthedragon.ntm.blocks.Siren
 import at.martinthedragon.ntm.containers.SirenContainer
 import at.martinthedragon.ntm.items.SirenTrack
@@ -11,11 +10,15 @@ import net.minecraft.client.audio.SimpleSound
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.InventoryHelper
+import net.minecraft.inventory.container.Container
 import net.minecraft.inventory.container.INamedContainerProvider
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundNBT
+import net.minecraft.tileentity.LockableLootTileEntity
+import net.minecraft.tileentity.LockableTileEntity
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.Direction
+import net.minecraft.util.NonNullList
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.ITextComponent
@@ -23,96 +26,117 @@ import net.minecraft.util.text.TranslationTextComponent
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.IItemHandler
+import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.ItemStackHandler
 
-class SirenTileEntity : TileEntity(TileEntityTypes.sirenTileEntityType), INamedContainerProvider {
-    private val inventory = object : ItemStackHandler(1) {
+class SirenTileEntity : LockableLootTileEntity(TileEntityTypes.sirenTileEntityType) {
+    private var items = NonNullList.withSize(1, ItemStack.EMPTY)
+    private val inventory = object : ItemStackHandler(items) {
         override fun isItemValid(slot: Int, stack: ItemStack) = stack.item is SirenTrack
 
         override fun onContentsChanged(slot: Int) {
-            if (blockState == ModBlocks.siren.defaultState.with(Siren.powered, true)) {
+            if (blockState.getValue(Siren.POWERED)) {
                 startPlaying()
             } else
                 stopPlaying()
-            markDirty()
+            setChanged()
         }
     }
 
-    private val inventoryCapability: LazyOptional<IItemHandler> = LazyOptional.of { inventory }
+    private var inventoryCapability: LazyOptional<IItemHandlerModifiable>? = null
 
     fun startPlaying() {
-        if (!world!!.isRemote) {
+        if (!level!!.isClientSide) {
             stopPlaying()
 
             val item = inventory.getStackInSlot(0).item
 
             if (item is SirenTrack) {
                 val sound = SimpleSound(
-                        item.sound.name,
+                        item.sound.location,
                         SoundCategory.BLOCKS,
                         item.volume,
                         1f,
                         item.loop,
                         0,
                         ISound.AttenuationType.LINEAR,
-                        pos.x + .5,
-                        pos.y + .5,
-                        pos.z + .5,
+                        blockPos.x + .5,
+                        blockPos.y + .5,
+                        blockPos.z + .5,
                         false
                 )
-                mapSoundPositions[pos] = sound
-                Minecraft.getInstance().soundHandler.play(sound)
+                mapSoundPositions[blockPos] = sound
+                Minecraft.getInstance().soundManager.play(sound)
             }
         }
     }
 
     fun stopPlaying() {
-        if (!world!!.isRemote) {
-            val sound = mapSoundPositions[pos]
+        if (!level!!.isClientSide) {
+            val sound = mapSoundPositions[blockPos]
             if (sound != null) {
-                Minecraft.getInstance().soundHandler.stop(sound)
-                mapSoundPositions.remove(pos)
+                Minecraft.getInstance().soundManager.stop(sound)
+                mapSoundPositions.remove(blockPos)
             }
         }
     }
 
     fun dropSirenTrack() {
-        InventoryHelper.spawnItemStack(world!!, pos.x + .5, pos.y + .5, pos.z +.5, inventory.extractItem(0, 1, true))
+        InventoryHelper.dropItemStack(
+            level!!,
+            blockPos.x + .5,
+            blockPos.y + .5,
+            blockPos.z +.5,
+            inventory.extractItem(0, 1, true))
     }
 
-    override fun remove() {
-        super.remove()
-        inventoryCapability.invalidate()
+    override fun clearCache() {
+        super.clearCache()
+        inventoryCapability?.invalidate()
+        inventoryCapability = null
     }
 
-    override fun getUpdateTag(): CompoundNBT = write(CompoundNBT())
+    override fun getContainerSize(): Int = 1
 
-    override fun write(compound: CompoundNBT): CompoundNBT {
-        val nbt = super.write(compound)
+    override fun getUpdateTag(): CompoundNBT = save(CompoundNBT())
+
+    override fun save(nbt: CompoundNBT): CompoundNBT {
+        super.save(nbt)
         nbt.merge(inventory.serializeNBT())
         return nbt
     }
 
-    override fun read(blockState: BlockState, compound: CompoundNBT) {
-        super.read(blockState, compound)
-
+    override fun load(blockState: BlockState, compound: CompoundNBT) {
+        super.load(blockState, compound)
         inventory.deserializeNBT(compound)
     }
 
     override fun <T> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-        if (!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return LazyOptional.of(this::createHandler).cast()
+        if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (inventoryCapability == null)
+                inventoryCapability = LazyOptional.of(this::createHandler)
+            return inventoryCapability!!.cast()
         }
         return super.getCapability(cap, side)
     }
 
     private fun createHandler() = inventory
 
-    override fun createMenu(windowId: Int, playerInventory: PlayerInventory, player: PlayerEntity) =
+    override fun invalidateCaps() {
+        super.invalidateCaps()
+        inventoryCapability?.invalidate()
+    }
+
+    override fun createMenu(windowId: Int, playerInventory: PlayerInventory) =
             SirenContainer(windowId, playerInventory, this)
 
-    override fun getDisplayName(): ITextComponent = TranslationTextComponent(ModBlocks.siren.block.translationKey)
+    override fun getDefaultName(): ITextComponent = TranslationTextComponent("container.ntm.siren")
+
+    override fun getItems(): NonNullList<ItemStack> = items
+
+    override fun setItems(newItems: NonNullList<ItemStack>) {
+        items = newItems
+    }
 
     companion object {
         private val mapSoundPositions = mutableMapOf<BlockPos, ISound>()

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:copper_coil",
+    "ntm:ring_coil"
+  ]
+}

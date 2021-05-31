@@ -702,6 +702,9 @@
   "block.ntm.siren": "Sirene",
   "block.ntm.safe": "Panzerschrank",
 
+  "container.ntm.siren": "Sirene",
+  "container.ntm.safe": "Panzerschrank",
+
   "subtitle.ntm.siren.playing_hatch": "Sirene läuft - Hatch Siren",
   "subtitle.ntm.siren.playing_autopilot_disconnected": "Sirene läuft - Autopilot Disconnected",
   "subtitle.ntm.siren.playing_ams": "Sirene läuft - AMS Sirene",
@@ -723,5 +726,5 @@
   "subtitle.ntm.siren.playing_apc_pass": "Sirene läuft - APC Pass",
   "subtitle.ntm.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn",
 
-  "death.attack.radiation": "%1$s starb an Strahlenvergiftung."
+  "death.attack.radiation": "%1$s starb an Strahlenvergiftung"
 }

@@ -702,6 +702,9 @@
   "block.ntm.siren": "Siren",
   "block.ntm.safe": "Safe",
 
+  "container.ntm.siren": "Siren",
+  "container.ntm.safe": "Safe",
+
   "subtitle.ntm.siren.playing_hatch": "Siren is running - Hatch Siren",
   "subtitle.ntm.siren.playing_autopilot_disconnected": "Siren is running - Autopilot Disconnected",
   "subtitle.ntm.siren.playing_ams": "Siren is running - AMS Siren",
@@ -723,5 +726,5 @@
   "subtitle.ntm.siren.playing_apc_pass": "Siren is running - APC Pass",
   "subtitle.ntm.siren.playing_razortrain_horn": "Siren is running - Razortrain Horn",
 
-  "death.attack.radiation": "%1$s died from radiation poisoning."
+  "death.attack.radiation": "%1$s died from radiation poisoning"
 }

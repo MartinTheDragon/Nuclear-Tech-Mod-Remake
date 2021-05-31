@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:uranium_ingot",
+    "ntm:u233_ingot",
+    "ntm:u235_ingot",
+    "ntm:u238_ingot",
+    "ntm:uranium_fuel_ingot"
+  ]
+}

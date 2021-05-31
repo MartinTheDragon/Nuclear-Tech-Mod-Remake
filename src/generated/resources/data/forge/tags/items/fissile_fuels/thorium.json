@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:thorium_fuel_ingot",
+    "ntm:thorium_fuel_nugget"
+  ]
+}

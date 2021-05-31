@@ -48,36 +48,39 @@ class SafeContainer(windowId: Int, playerInventory: PlayerInventory, val tileEnt
         }
     }
 
-    override fun canInteractWith(playerIn: PlayerEntity): Boolean =
-            playerIn.world.getBlockState(tileEntity.pos).block == ModBlocks.safe.block // && playerIn.getDistanceSq(tileEntity.pos.x + .5, tileEntity.pos.y + .5, tileEntity.pos.z + .5) <= 64
+    override fun stillValid(player: PlayerEntity): Boolean =
+        player.level.getBlockState(tileEntity.blockPos).block == ModBlocks.safe.block
 
-    override fun transferStackInSlot(playerIn: PlayerEntity, index: Int): ItemStack {
-        var itemstack = ItemStack.EMPTY
-        val slot = inventorySlots[index]
-        if (slot != null && slot.hasStack) {
-            val itemstack1 = slot.stack
-            itemstack = itemstack1.copy()
-            if (index < 15) {
-                if (!mergeItemStack(itemstack1, 15, inventorySlots.size, true)) {
+    override fun quickMoveStack(player: PlayerEntity, index: Int): ItemStack {
+        var returnStack = ItemStack.EMPTY
+        val slot = slots[index]
+        if (slot != null && slot.hasItem()) {
+            val itemStack = slot.item
+            returnStack = itemStack.copy()
+            if (index < SLOT_COUNT) {
+                if (!moveItemStackTo(itemStack, SLOT_COUNT, slots.size, true))
                     return ItemStack.EMPTY
-                }
-            } else if (!mergeItemStack(itemstack1, 0, 15, false)) {
+            } else if (!moveItemStackTo(itemStack, 0, SLOT_COUNT, false))
                 return ItemStack.EMPTY
-            }
-            if (itemstack1.isEmpty) {
-                slot.putStack(ItemStack.EMPTY)
-            } else {
-                slot.onSlotChanged()
-            }
-        }
 
-        return itemstack!!
+            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
+            else slot.setChanged()
+        }
+        
+        return returnStack
+    }
+
+    override fun removed(player: PlayerEntity) {
+        super.removed(player)
+        tileEntity.stopOpen(player)
     }
 
     companion object {
+        const val SLOT_COUNT = 15
+        
         fun fromNetwork(windowId: Int, playerInventory: PlayerInventory, buffer: PacketBuffer) =
                 SafeContainer(windowId, playerInventory, DistExecutor.safeRunForDist({
-                    DistExecutor.SafeSupplier { Minecraft.getInstance().world?.getTileEntity(buffer.readBlockPos()) }
+                    DistExecutor.SafeSupplier { Minecraft.getInstance().level?.getBlockEntity(buffer.readBlockPos()) }
                 }) {
                     throw IllegalAccessException("Cannot call function on server")
                 } as SafeTileEntity)

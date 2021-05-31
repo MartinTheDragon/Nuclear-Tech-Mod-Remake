@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:dusts/gold",
+    "#forge:gems/gold",
+    "#forge:plates/gold",
+    "#forge:wires/gold",
+    "#forge:coils/gold",
+    "ntm:gold_bullet_assembly"
+  ]
+}

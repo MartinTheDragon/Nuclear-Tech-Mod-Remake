@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:plutonium_nugget",
+    "ntm:pu238_nugget",
+    "ntm:pu239_nugget",
+    "ntm:pu240_nugget",
+    "ntm:plutonium_fuel_nugget"
+  ]
+}

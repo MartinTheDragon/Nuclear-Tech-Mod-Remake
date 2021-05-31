@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:scrap_block",
+    "ntm:electrical_scrap_block"
+  ]
+}

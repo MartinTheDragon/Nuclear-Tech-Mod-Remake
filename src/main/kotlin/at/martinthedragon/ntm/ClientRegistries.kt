@@ -17,8 +17,8 @@ object ClientRegistries {
     @SubscribeEvent
     @JvmStatic
     fun registerScreens(event: RegistryEvent.Register<ContainerType<*>>) {
-        ScreenManager.registerFactory(ContainerTypes.safeContainer, ::SafeScreen)
-        ScreenManager.registerFactory(ContainerTypes.sirenContainer, ::SirenScreen)
+        ScreenManager.register(ContainerTypes.safeContainer, ::SafeScreen)
+        ScreenManager.register(ContainerTypes.sirenContainer, ::SirenScreen)
     }
 
     @SubscribeEvent

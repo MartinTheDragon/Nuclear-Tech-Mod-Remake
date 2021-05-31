@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:coils/copper",
+    "#forge:coils/super_conductor",
+    "#forge:coils/gold"
+  ]
+}
