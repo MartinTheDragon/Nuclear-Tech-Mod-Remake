@@ -1,71 +1,78 @@
 package at.martinthedragon.ntm.tileentities
 
-import at.martinthedragon.ntm.ModBlocks
 import at.martinthedragon.ntm.containers.SafeContainer
 import net.minecraft.block.BlockState
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.container.Container
-import net.minecraft.inventory.container.INamedContainerProvider
+import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundNBT
-import net.minecraft.tileentity.TileEntity
-import net.minecraft.tileentity.TileEntityType
+import net.minecraft.tileentity.LockableLootTileEntity
 import net.minecraft.util.Direction
+import net.minecraft.util.NonNullList
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.IItemHandler
+import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.ItemStackHandler
-import java.util.function.Supplier
 
-class SafeTileEntity : TileEntity(TileEntityTypes.safeTileEntityType), INamedContainerProvider {
-    var customName: ITextComponent? = null
-    private val inventory = object : ItemStackHandler(15) {
+class SafeTileEntity : LockableLootTileEntity(TileEntityTypes.safeTileEntityType) {
+    private var items = NonNullList.withSize(15, ItemStack.EMPTY)
+    private val inventory = object : ItemStackHandler(items) {
         override fun onContentsChanged(slot: Int) {
-            markDirty()
+            super.onContentsChanged(slot)
+            setChanged()
         }
     }
 
-    private val inventoryCapability: LazyOptional<IItemHandler> = LazyOptional.of { inventory }
+    override fun getContainerSize(): Int = 15
 
-    override fun remove() {
-        super.remove()
-        inventoryCapability.invalidate()
+    private var inventoryCapability: LazyOptional<IItemHandlerModifiable>? = null
+
+    override fun clearCache() {
+        super.clearCache()
+        inventoryCapability?.invalidate()
+        inventoryCapability = null
     }
 
-    override fun getUpdateTag(): CompoundNBT = write(CompoundNBT())
+    override fun getUpdateTag(): CompoundNBT = save(CompoundNBT())
 
-    override fun write(nbt: CompoundNBT): CompoundNBT {
-        val nbt2 = super.write(nbt)
-        // probably due to some kind of bug that persisted in kotlin 1.3.72
-        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-        if (customName != null)
-            nbt2.putString("CustomName", ITextComponent.Serializer.toJson(customName))
-        nbt2.merge(inventory.serializeNBT())
-        return nbt2
+    override fun save(nbt: CompoundNBT): CompoundNBT {
+        super.save(nbt)
+        nbt.merge(inventory.serializeNBT())
+        return nbt
     }
 
-    override fun read(state: BlockState, nbt: CompoundNBT) {
-        super.read(state, nbt)
-        if (nbt.contains("CustomName", 8)) {
-            customName = ITextComponent.Serializer.getComponentFromJson(nbt.getString("CustomName"))
-        }
+    override fun load(state: BlockState, nbt: CompoundNBT) {
+        super.load(state, nbt)
         inventory.deserializeNBT(nbt)
     }
 
+    override fun createMenu(windowId: Int, playerInventory: PlayerInventory): Container =
+        SafeContainer(windowId, playerInventory, this)
+
+    override fun getDefaultName(): ITextComponent = TranslationTextComponent("container.ntm.safe")
+
+    override fun getItems(): NonNullList<ItemStack> = items
+
+    override fun setItems(newItems: NonNullList<ItemStack>) {
+        items = newItems
+    }
+
     override fun <T> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-        if (!removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return LazyOptional.of(this::createHandler).cast()
+        if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (inventoryCapability == null)
+                inventoryCapability = LazyOptional.of(this::createHandler)
+            return inventoryCapability!!.cast()
         }
         return super.getCapability(cap, side)
     }
 
-    private fun createHandler() = inventory
+    private fun createHandler(): IItemHandlerModifiable = inventory
 
-    override fun createMenu(windowId: Int, playerInventory: PlayerInventory, player: PlayerEntity) =
-            SafeContainer(windowId, playerInventory, this)
-
-    override fun getDisplayName() = customName ?: TranslationTextComponent(ModBlocks.safe.block.translationKey)
+    override fun invalidateCaps() {
+        super.invalidateCaps()
+        inventoryCapability?.invalidate()
+    }
 }

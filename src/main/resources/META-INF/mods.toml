@@ -1,9 +1,9 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[36,)"
 license="GPL v3.0"
 [[mods]]
 modId="ntm"
-version="0.0.1.0"
+version="0.0.4.0"
 displayName="Nuclear Tech Mod Remake"
 credits="HbM: Did well..."
 authors="MartinTheDragon"

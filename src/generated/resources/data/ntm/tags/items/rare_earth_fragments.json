@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:neodymium_fragment",
+    "ntm:cobalt_fragment",
+    "ntm:niobium_fragment",
+    "ntm:cerium_fragment",
+    "ntm:lanthanum_fragment",
+    "ntm:actinium_fragment"
+  ]
+}

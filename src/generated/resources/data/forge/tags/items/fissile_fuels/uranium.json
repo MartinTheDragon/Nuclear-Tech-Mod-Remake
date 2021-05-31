@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:uranium_fuel_ingot",
+    "ntm:uranium_fuel_nugget"
+  ]
+}

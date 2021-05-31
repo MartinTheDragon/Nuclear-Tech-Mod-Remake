@@ -24,70 +24,67 @@ object Radiation {
     var irradiatedEntityList = listOf<LivingEntity>()
 
     fun addEntityIrradiation(entity: LivingEntity, radiation: Float) {
-        if (entity.shouldBeDead) return
+        if (entity.isDeadOrDying) return
         @Suppress("ThrowableNotThrown")
         val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow { RuntimeException() }
         if (cap !is IIrradiationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
-        val newIrradiation = (cap.getIrradiation() + radiation).coerceAtLeast(0f)
+        val newIrradiation = (cap.getIrradiation() + radiation).coerceIn(0f, 2500f)
         cap.setIrradiation(newIrradiation)
     }
 
     fun setEntityIrradiation(entity: LivingEntity, radiation: Float) {
-        if (entity.shouldBeDead) return
+        if (entity.isDeadOrDying) return
         @Suppress("ThrowableNotThrown")
         val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow { RuntimeException() }
         if (cap !is IIrradiationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
-        val newIrradiation = radiation.coerceAtLeast(0f)
+        val newIrradiation = radiation.coerceIn(0f, 2500f)
         cap.setIrradiation(newIrradiation)
     }
 
     fun getEntityIrradiation(entity: LivingEntity): Float {
-        if (entity.shouldBeDead) return 0f
+        if (entity.isDeadOrDying) return 0f
+        if (!entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).isPresent) return 0f
         @Suppress("ThrowableNotThrown")
         val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow { RuntimeException() }
         if (cap !is IIrradiationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
         return cap.getIrradiation()
     }
 
+    // FIXME 3000 IQ strategy does not work anymore
     fun applyRadiationEffects(world: World) {
-        if (!world.isRemote) {
-            // 3000 IQ strategy to get irradiated entities without causing ConcurrentModificationException follows:
+        if (!world.isClientSide) {
+            // 3000 IQ strategy to get irradiated entities without causing ConcurrentModificationException follows (now with access transformation):
             if (world.gameTime % 20 == 0L) { // polling rate
-                val chunkManager = (world as ServerWorld).chunkProvider.chunkManager
-                val getLoadedChunksIterableMethod = chunkManager.javaClass.getDeclaredMethod("func_223491_f")
-                getLoadedChunksIterableMethod.isAccessible = true
-                @Suppress("UNCHECKED_CAST")
-                irradiatedEntityList = (getLoadedChunksIterableMethod(chunkManager) as Iterable<ChunkHolder>)
-                    .mapNotNull { it.chunkIfComplete }
-                    .flatMap { chunk -> chunk.entityLists.flatMap { it } }
+                irradiatedEntityList = (world as ServerWorld).chunkSource.chunkMap.entityMap.values
+                    .map { it.entity }
                     .filterIsInstance<LivingEntity>()
                     .filter { getEntityIrradiation(it) > 0 }
             }
             loop@ for (entity in irradiatedEntityList) {
                 val irradiation = getEntityIrradiation(entity)
                 when {
-                    entity is CreeperEntity && irradiation >= 200 && !entity.shouldBeDead -> {
+                    entity is CreeperEntity && irradiation >= 200 && !entity.isDeadOrDying -> {
                         if (world.random.nextInt(3) == 0) {
                             // TODO spawn nuclear creeper
                         } else
-                            entity.attackEntityFrom(DamageSources.radiation, 100f)
+                            entity.hurt(DamageSources.radiation, 100f)
                         continue@loop
                     }
                     entity is CowEntity && entity !is MooshroomEntity && irradiation >= 50 -> {
                         val creep = MooshroomEntity(EntityType.MOOSHROOM, world)
-                        creep.isChild = entity.isChild
-                        creep.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch)
-                        if (!entity.shouldBeDead && !world.isRemote)
-                            world.addEntity(creep)
+                        creep.isBaby = entity.isBaby
+                        creep.moveTo(entity.blockPosition(), entity.xRot, entity.yRot)
+                        if (!entity.isDeadOrDying && !world.isClientSide)
+                            world.addFreshEntity(creep)
                         entity.remove()
                         continue@loop
                     }
                     entity is VillagerEntity && irradiation >= 500 -> {
                         val creep = ZombieVillagerEntity(EntityType.ZOMBIE_VILLAGER, world)
-                        creep.isChild = entity.isChild
-                        creep.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch)
-                        if (!entity.shouldBeDead && !world.isRemote)
-                            world.addEntity(creep)
+                        creep.isBaby = entity.isBaby
+                        creep.moveTo(entity.blockPosition(), entity.xRot, entity.yRot)
+                        if (!entity.isDeadOrDying && !world.isClientSide)
+                            world.addFreshEntity(creep)
                         entity.remove()
                         continue@loop
                     }
@@ -105,52 +102,52 @@ object Radiation {
 
                 when {
                     irradiation >= 1000 -> {
-                        entity.attackEntityFrom(DamageSources.radiation, entity.maxHealth * 100)
+                        entity.hurt(DamageSources.radiation, 3.4028235e38f)
                         setEntityIrradiation(entity, 0f)
                     }
                     irradiation >= 800 -> {
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.NAUSEA, 5 * 20))
+                            entity.addEffect(EffectInstance(Effects.CONFUSION, 5 * 20))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.SLOWNESS, 10 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.MOVEMENT_SLOWDOWN, 10 * 20, 2))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.WEAKNESS, 10 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.WEAKNESS, 10 * 20, 2))
                         if (world.random.nextInt(500) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.POISON, 3 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.POISON, 3 * 20, 2))
                         if (world.random.nextInt(700) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.WITHER, 3 * 20, 1))
+                            entity.addEffect(EffectInstance(Effects.WITHER, 3 * 20, 1))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.HUNGER, 5 * 20, 3))
+                            entity.addEffect(EffectInstance(Effects.HUNGER, 5 * 20, 3))
                     }
                     irradiation >= 600 -> {
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.NAUSEA, 5 * 20))
+                            entity.addEffect(EffectInstance(Effects.CONFUSION, 5 * 20))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.SLOWNESS, 10 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.MOVEMENT_SLOWDOWN, 10 * 20, 2))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.WEAKNESS, 10 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.WEAKNESS, 10 * 20, 2))
                         if (world.random.nextInt(500) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.POISON, 3 * 20, 1))
+                            entity.addEffect(EffectInstance(Effects.POISON, 3 * 20, 1))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.HUNGER, 3 * 20, 3))
+                            entity.addEffect(EffectInstance(Effects.HUNGER, 3 * 20, 3))
                     }
                     irradiation >= 400 -> {
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.NAUSEA, 5 * 20))
+                            entity.addEffect(EffectInstance(Effects.CONFUSION, 5 * 20))
                         if (world.random.nextInt(500) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.SLOWNESS, 5 * 20))
+                            entity.addEffect(EffectInstance(Effects.MOVEMENT_SLOWDOWN, 5 * 20))
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.WEAKNESS, 5 * 20,1))
+                            entity.addEffect(EffectInstance(Effects.WEAKNESS, 5 * 20,1))
                         if (world.random.nextInt(500) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.HUNGER, 3 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.HUNGER, 3 * 20, 2))
                     }
                     irradiation >= 200 -> {
                         if (world.random.nextInt(300) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.NAUSEA, 5 * 20))
+                            entity.addEffect(EffectInstance(Effects.CONFUSION, 5 * 20))
                         if (world.random.nextInt(500) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.WEAKNESS, 5 * 20))
+                            entity.addEffect(EffectInstance(Effects.WEAKNESS, 5 * 20))
                         if (world.random.nextInt(700) == 0)
-                            entity.addPotionEffect(EffectInstance(Effects.HUNGER, 3 * 20, 2))
+                            entity.addEffect(EffectInstance(Effects.HUNGER, 3 * 20, 2))
                     }
                 }
             }

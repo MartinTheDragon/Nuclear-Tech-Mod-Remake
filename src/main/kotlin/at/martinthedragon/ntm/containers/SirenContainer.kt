@@ -45,36 +45,41 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
         }
     }
 
-    override fun canInteractWith(playerIn: PlayerEntity) =
-        playerIn.world.getBlockState(tileEntity.pos).block == ModBlocks.siren.block
+    override fun stillValid(playerIn: PlayerEntity) =
+        playerIn.level.getBlockState(tileEntity.blockPos).block == ModBlocks.siren.block
 
-    override fun transferStackInSlot(playerIn: PlayerEntity, index: Int): ItemStack {
-        var itemstack = ItemStack.EMPTY
-        val slot = inventorySlots[index]
-        if (slot != null && slot.hasStack) {
-            val itemstack1 = slot.stack
-            itemstack = itemstack1.copy()
-            if (index < 15) {
-                if (!mergeItemStack(itemstack1, 15, inventorySlots.size, true)) {
+    // TODO use access transformers to make a default function (moveItemStackTo is protected)
+    override fun quickMoveStack(player: PlayerEntity, index: Int): ItemStack {
+        var returnStack = ItemStack.EMPTY
+        val slot = slots[index]
+        if (slot != null && slot.hasItem()) {
+            val itemStack = slot.item
+            returnStack = itemStack.copy()
+            if (index < SLOT_COUNT) {
+                if (!moveItemStackTo(itemStack, SLOT_COUNT, slots.size, true))
                     return ItemStack.EMPTY
-                }
-            } else if (!mergeItemStack(itemstack1, 0, 15, false)) {
+            } else if (!moveItemStackTo(itemStack, 0, SLOT_COUNT, false))
                 return ItemStack.EMPTY
-            }
-            if (itemstack1.isEmpty) {
-                slot.putStack(ItemStack.EMPTY)
-            } else {
-                slot.onSlotChanged()
-            }
+
+            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
+            else slot.setChanged()
         }
 
-        return itemstack!!
+        return returnStack
+    }
+
+    override fun removed(player: PlayerEntity) {
+        super.removed(player)
+        tileEntity.stopPlaying()
+        tileEntity.stopOpen(player)
     }
 
     companion object {
+        const val SLOT_COUNT = 1
+
         fun fromNetwork(windowId: Int, playerInventory: PlayerInventory, buffer: PacketBuffer) =
                 SirenContainer(windowId, playerInventory, DistExecutor.safeRunForDist({
-                    DistExecutor.SafeSupplier { Minecraft.getInstance().world?.getTileEntity(buffer.readBlockPos()) }
+                    DistExecutor.SafeSupplier { Minecraft.getInstance().level?.getBlockEntity(buffer.readBlockPos()) }
                 }) {
                     throw IllegalAccessException("Cannot call function on server")
                 } as SirenTileEntity)

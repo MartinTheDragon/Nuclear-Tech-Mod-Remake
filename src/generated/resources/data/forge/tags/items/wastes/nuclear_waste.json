@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:wastes/hot_uranium",
+    "#forge:wastes/hot_thorium",
+    "#forge:wastes/hot_plutonium",
+    "#forge:wastes/hot_mox",
+    "#forge:wastes/uranium",
+    "#forge:wastes/thorium",
+    "#forge:wastes/plutonium",
+    "#forge:wastes/mox",
+    "ntm:nuclear_waste"
+  ]
+}

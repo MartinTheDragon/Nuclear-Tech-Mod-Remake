@@ -19,60 +19,54 @@ import net.minecraftforge.fml.network.NetworkHooks
 
 class Siren(properties: Properties) : Block(properties) {
     init {
-        defaultState = stateContainer.baseState.with(powered, false)
+        registerDefaultState(stateDefinition.any().setValue(POWERED, false))
     }
 
-    override fun onBlockActivated(state: BlockState, worldIn: World, pos: BlockPos, player: PlayerEntity, handIn: Hand, hit: BlockRayTraceResult): ActionResultType {
-        if (!worldIn.isRemote) {
-            val tileEntity = worldIn.getTileEntity(pos)
-            if (tileEntity is SirenTileEntity) {
-                NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
-            }
+    override fun use(state: BlockState, worldIn: World, pos: BlockPos, player: PlayerEntity, handIn: Hand, hit: BlockRayTraceResult): ActionResultType {
+        if (!worldIn.isClientSide) {
+            val tileEntity = worldIn.getBlockEntity(pos)
+            if (tileEntity is SirenTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
+            return ActionResultType.CONSUME
         }
         return ActionResultType.SUCCESS
     }
 
-    override fun fillStateContainer(builder: StateContainer.Builder<Block, BlockState>) {
-        builder.add(powered)
+    override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
+        builder.add(POWERED)
     }
 
     override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
-            defaultState.with(powered, false)
+            defaultBlockState().setValue(POWERED, false)
 
     override fun neighborChanged(state: BlockState, worldIn: World, pos: BlockPos, blockIn: Block, fromPos: BlockPos, isMoving: Boolean) {
-        val flag = worldIn.isBlockPowered(pos)
-        if (flag != state.get(powered)) {
-            val sirenTileEntity = worldIn.getTileEntity(pos)
+        val flag = worldIn.hasNeighborSignal(pos)
+        if (flag != state.getValue(POWERED)) {
+            val sirenTileEntity = worldIn.getBlockEntity(pos)
             if (sirenTileEntity is SirenTileEntity)
                 if (flag)
                     sirenTileEntity.startPlaying()
                 else
                     sirenTileEntity.stopPlaying()
-            worldIn.setBlockState(pos, state.with(powered, flag), 0b11)
+            worldIn.setBlock(pos, state.setValue(POWERED, flag), 0b11)
         }
     }
 
-    override fun onBlockHarvested(worldIn: World, pos: BlockPos, state: BlockState, player: PlayerEntity) {
-        val sirenTileEntity = worldIn.getTileEntity(pos)
-        if (sirenTileEntity is SirenTileEntity)
-            sirenTileEntity.stopPlaying()
-        super.onBlockHarvested(worldIn, pos, state, player)
-    }
-
-    override fun onReplaced(state: BlockState, worldIn: World, pos: BlockPos, newState: BlockState, isMoving: Boolean) {
-        if (!state.isIn(newState.block)) {
-            val sirenTileEntity = worldIn.getTileEntity(pos)
-            if (sirenTileEntity is SirenTileEntity)
-                sirenTileEntity.dropSirenTrack()
+    override fun onRemove(oldState: BlockState, world: World, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
+        if (!oldState.`is`(newState.block)) {
+            val tileEntity = world.getBlockEntity(pos)
+            if (tileEntity is SirenTileEntity)
+                tileEntity.dropSirenTrack()
         }
+
         @Suppress("DEPRECATION")
-        super.onReplaced(state, worldIn, pos, newState, isMoving)
+        super.onRemove(oldState, world, pos, newState, p_196243_5_)
     }
 
     override fun hasTileEntity(state: BlockState?) = true
+
     override fun createTileEntity(state: BlockState?, world: IBlockReader?) = SirenTileEntity()
 
     companion object {
-        val powered: BooleanProperty = BlockStateProperties.POWERED
+        val POWERED: BooleanProperty = BlockStateProperties.POWERED
     }
 }

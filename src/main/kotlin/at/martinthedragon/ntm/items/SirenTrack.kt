@@ -11,13 +11,13 @@ import net.minecraft.util.text.Style
 import net.minecraft.util.text.TranslationTextComponent
 
 class SirenTrack(val sound: SoundEvent, val volume: Float, val loop: Boolean, track: String, val color: Int) :
-        Item(Properties().maxStackSize(1).rarity(Rarity.UNCOMMON).group(CT.Templates.itemGroup)) {
+        Item(Properties().stacksTo(1).rarity(Rarity.UNCOMMON).tab(CT.Templates.itemGroup)) {
     val trackName: ITextComponent = TranslationTextComponent("item.ntm.$track.name")
-        .mergeStyle(Style.EMPTY.setColor(Color.fromInt(color)))
+        .withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))
     val trackType: ITextComponent = TranslationTextComponent("item.ntm.$track.type")
-        .mergeStyle(Style.EMPTY.setColor(Color.fromInt(color)))
+        .withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))
     val trackRange: ITextComponent = TranslationTextComponent("item.ntm.$track.range")
-        .mergeStyle(Style.EMPTY.setColor(Color.fromInt(color)))
+        .withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))
 
     init {
         setRegistryName(track)

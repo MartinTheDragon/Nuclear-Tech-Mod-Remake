@@ -6,5 +6,5 @@ import net.minecraft.inventory.container.Slot
 import net.minecraft.item.ItemStack
 
 class SirenTrackSlot(inventoryIn: IInventory, xPosition: Int, yPosition: Int) : Slot(inventoryIn, 1, xPosition, yPosition) {
-    override fun isItemValid(stack: ItemStack) = stack.item is SirenTrack
+    override fun mayPlace(stack: ItemStack) = stack.item is SirenTrack
 }

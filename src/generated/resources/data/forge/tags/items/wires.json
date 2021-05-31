@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:wires/aluminium",
+    "#forge:wires/copper",
+    "#forge:wires/tungsten",
+    "#forge:wires/super_conductor",
+    "#forge:wires/gold",
+    "ntm:red_copper_wire"
+  ]
+}

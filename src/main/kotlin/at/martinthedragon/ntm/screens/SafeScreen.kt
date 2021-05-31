@@ -20,19 +20,20 @@ class SafeScreen(
     private val texture = ResourceLocation(Main.MODID, "textures/gui/safe.png")
 
     init {
-        xSize = 175
-        ySize = 167
+        imageWidth = 175
+        imageHeight = 167
     }
 
     override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrix)
         super.render(matrix, mouseX, mouseY, partialTicks)
+        renderTooltip(matrix, mouseX, mouseY)
     }
 
-    override fun drawGuiContainerBackgroundLayer(matrixStack: MatrixStack, partialTicks: Float, x: Int, y: Int) {
+    override fun renderBg(matrixStack: MatrixStack, partialTicks: Float, x: Int, y: Int) {
         @Suppress("DEPRECATION")
         RenderSystem.color4f(1f, 1f, 1f, 1f)
-        Minecraft.getInstance().textureManager.bindTexture(texture)
+        minecraft!!.textureManager.bind(texture)
         blit(matrixStack, (width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
     }
 }

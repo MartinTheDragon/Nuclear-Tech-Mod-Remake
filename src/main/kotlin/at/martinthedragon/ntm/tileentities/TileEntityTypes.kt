@@ -8,12 +8,12 @@ import java.util.function.Supplier
 @Suppress("unused", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object TileEntityTypes {
     val safeTileEntityType: TileEntityType<*> = TileEntityType.Builder
-            .create(Supplier { SafeTileEntity() }, ModBlocks.safe)
+            .of(Supplier { SafeTileEntity() }, ModBlocks.safe)
             .build(null)
             .setRegistryName("safe")
             .register()
     val sirenTileEntityType: TileEntityType<*> = TileEntityType.Builder
-            .create(Supplier { SirenTileEntity() }, ModBlocks.siren)
+            .of(Supplier { SirenTileEntity() }, ModBlocks.siren)
             .build(null)
             .setRegistryName("siren")
             .register()

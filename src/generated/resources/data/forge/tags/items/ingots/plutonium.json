@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:plutonium_ingot",
+    "ntm:pu238_ingot",
+    "ntm:pu239_ingot",
+    "ntm:pu240_ingot",
+    "ntm:plutonium_fuel_ingot"
+  ]
+}
