@@ -48,7 +48,6 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
     override fun stillValid(playerIn: PlayerEntity) =
         playerIn.level.getBlockState(tileEntity.blockPos).block == ModBlocks.siren.block
 
-    // TODO use access transformers to make a default function (moveItemStackTo is protected)
     override fun quickMoveStack(player: PlayerEntity, index: Int): ItemStack {
         var returnStack = ItemStack.EMPTY
         val slot = slots[index]

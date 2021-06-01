@@ -4,6 +4,7 @@ package at.martinthedragon.ntm
 
 import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.ntm.containers.ContainerTypes
+import at.martinthedragon.ntm.datagen.BlockArmatureProvider
 import at.martinthedragon.ntm.datagen.BlockTagProvider
 import at.martinthedragon.ntm.datagen.ItemTagProvider
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
@@ -80,13 +81,15 @@ object RegistriesAndLifecycle {
 
     @SubscribeEvent @JvmStatic
     fun generateData(event: GatherDataEvent) {
+        val dataGenerator = event.generator
+        val existingFileHelper = event.existingFileHelper
         if (event.includeServer()) {
-            val dataGenerator = event.generator
-            val existingFileHelper = event.existingFileHelper
-
             val blockTagProvider = BlockTagProvider(dataGenerator, existingFileHelper)
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
+        }
+        if (event.includeClient()) {
+            dataGenerator.addProvider(BlockArmatureProvider(dataGenerator, existingFileHelper))
         }
     }
 
