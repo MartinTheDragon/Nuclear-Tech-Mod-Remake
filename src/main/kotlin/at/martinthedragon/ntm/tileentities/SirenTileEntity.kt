@@ -81,6 +81,11 @@ class SirenTileEntity : LockableLootTileEntity(TileEntityTypes.sirenTileEntityTy
         }
     }
 
+    override fun setRemoved() {
+        stopPlaying()
+        super.setRemoved()
+    }
+
     fun dropSirenTrack() {
         InventoryHelper.dropItemStack(
             level!!,

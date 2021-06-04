@@ -69,7 +69,6 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
 
     override fun removed(player: PlayerEntity) {
         super.removed(player)
-        tileEntity.stopPlaying()
         tileEntity.stopOpen(player)
     }
 

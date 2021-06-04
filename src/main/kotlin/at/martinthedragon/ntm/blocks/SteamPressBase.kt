@@ -6,20 +6,14 @@ import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItemUseContext
 import net.minecraft.item.ItemStack
 import net.minecraft.pathfinding.PathType
-import net.minecraft.util.Direction
 import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.shapes.IBooleanFunction
 import net.minecraft.util.math.shapes.ISelectionContext
 import net.minecraft.util.math.shapes.VoxelShape
 import net.minecraft.util.math.shapes.VoxelShapes
-import net.minecraft.world.Explosion
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.IWorld
-import net.minecraft.world.World
+import net.minecraft.world.*
 
 class SteamPressBase(properties: Properties) : Block(properties) {
     override fun getShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos, context: ISelectionContext): VoxelShape = baseShape
@@ -45,8 +39,18 @@ class SteamPressBase(properties: Properties) : Block(properties) {
         }
     }
 
-    override fun destroy(world: IWorld, pos: BlockPos, state: BlockState) {
-        removeSteamPressStructure(world, pos)
+    override fun onRemove(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        p_196243_5_: Boolean
+    ) {
+        if (!world.isClientSide && !state.`is`(newState.block))
+            removeSteamPressStructure(world, pos)
+
+        @Suppress("DEPRECATION")
+        super.onRemove(state, world, pos, newState, p_196243_5_)
     }
 
     private fun removeSteamPressStructure(worldIn: IWorld, pos: BlockPos) {
@@ -55,9 +59,9 @@ class SteamPressBase(properties: Properties) : Block(properties) {
             val blockPos2 = blockPos1.above()
 
             if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressFrame)
-                worldIn.setBlock(blockPos1, Blocks.AIR.defaultBlockState(), 0b100011)
+                worldIn.destroyBlock(blockPos1, false)
             if (worldIn.getBlockState(blockPos2).block == ModBlocks.steamPressTop)
-                worldIn.setBlock(blockPos2, Blocks.AIR.defaultBlockState(), 0b100011)
+                worldIn.destroyBlock(blockPos2, false)
         }
     }
 
