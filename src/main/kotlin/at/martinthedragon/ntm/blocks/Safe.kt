@@ -4,6 +4,7 @@ import at.martinthedragon.ntm.tileentities.SafeTileEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.HorizontalBlock
+import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.ServerPlayerEntity
@@ -62,6 +63,8 @@ class Safe(properties: Properties) : Block(properties) {
         @Suppress("DEPRECATION")
         super.onRemove(oldState, world, pos, newState, p_196243_5_)
     }
+
+    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
 
     override fun rotate(state: BlockState, rotation: Rotation): BlockState {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)))

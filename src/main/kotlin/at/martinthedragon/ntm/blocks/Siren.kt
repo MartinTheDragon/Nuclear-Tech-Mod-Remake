@@ -3,6 +3,7 @@ package at.martinthedragon.ntm.blocks
 import at.martinthedragon.ntm.tileentities.SirenTileEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.ServerPlayerEntity
 import net.minecraft.item.BlockItemUseContext
@@ -30,6 +31,8 @@ class Siren(properties: Properties) : Block(properties) {
         }
         return ActionResultType.SUCCESS
     }
+
+    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
 
     override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
         builder.add(POWERED)

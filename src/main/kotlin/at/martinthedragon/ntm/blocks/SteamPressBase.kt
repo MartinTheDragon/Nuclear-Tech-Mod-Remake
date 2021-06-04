@@ -4,6 +4,7 @@ import at.martinthedragon.ntm.ModBlocks
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItemUseContext
@@ -59,6 +60,8 @@ class SteamPressBase(properties: Properties) : Block(properties) {
                 worldIn.setBlock(blockPos2, Blocks.AIR.defaultBlockState(), 0b100011)
         }
     }
+
+    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
 
     companion object {
         private val middleShape: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 14.0, 14.0)

@@ -1,16 +1,20 @@
 package at.martinthedragon.ntm.blocks
 
 import at.martinthedragon.ntm.ModBlocks
+import at.martinthedragon.ntm.tileentities.SteamPressTopTileEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.pathfinding.PathType
+import net.minecraft.util.ActionResultType
+import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.BlockRayTraceResult
 import net.minecraft.util.math.shapes.ISelectionContext
 import net.minecraft.util.math.shapes.VoxelShape
 import net.minecraft.util.math.shapes.VoxelShapes
-import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
@@ -35,6 +39,12 @@ class SteamPressTop(properties: Properties) : Block(properties) {
                 worldIn.setBlock(blockPos2, Blocks.AIR.defaultBlockState(), 0b100011)
         }
     }
+
+    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
+
+    override fun hasTileEntity(state: BlockState?): Boolean = true
+
+    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = SteamPressTopTileEntity()
 
     companion object {
         private val halfBox: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0)

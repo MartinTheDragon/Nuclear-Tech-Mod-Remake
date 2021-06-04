@@ -4,7 +4,6 @@ package at.martinthedragon.ntm
 
 import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.ntm.containers.ContainerTypes
-import at.martinthedragon.ntm.datagen.BlockArmatureProvider
 import at.martinthedragon.ntm.datagen.BlockTagProvider
 import at.martinthedragon.ntm.datagen.ItemTagProvider
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
@@ -12,11 +11,9 @@ import net.minecraft.block.Block
 import net.minecraft.inventory.container.Container
 import net.minecraft.inventory.container.ContainerType
 import net.minecraft.item.Item
-import net.minecraft.stats.StatType
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
-import net.minecraft.util.registry.Registry
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
@@ -87,9 +84,6 @@ object RegistriesAndLifecycle {
             val blockTagProvider = BlockTagProvider(dataGenerator, existingFileHelper)
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
-        }
-        if (event.includeClient()) {
-            dataGenerator.addProvider(BlockArmatureProvider(dataGenerator, existingFileHelper))
         }
     }
 

@@ -4,6 +4,7 @@ import at.martinthedragon.ntm.ModBlocks
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
+import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.pathfinding.PathType
 import net.minecraft.util.math.BlockPos
@@ -36,6 +37,8 @@ class SteamPressFrame(properties: Properties) : Block(properties) {
                 worldIn.setBlock(blockPos2, Blocks.AIR.defaultBlockState(), 0b100011)
         }
     }
+
+    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
 
     companion object {
         private val bar1: VoxelShape = box(0.0, 0.0, 0.0, 2.0, 16.0, 2.0)
