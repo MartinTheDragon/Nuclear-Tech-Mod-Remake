@@ -29,7 +29,7 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.ItemStackHandler
 
-class SirenTileEntity : LockableLootTileEntity(TileEntityTypes.sirenTileEntityType) {
+class SirenTileEntity : LockableLootTileEntity(TileEntityTypes.sirenTileEntityType.get()) {
     private var items = NonNullList.withSize(1, ItemStack.EMPTY)
     private val inventory = object : ItemStackHandler(items) {
         override fun isItemValid(slot: Int, stack: ItemStack) = stack.item is SirenTrack

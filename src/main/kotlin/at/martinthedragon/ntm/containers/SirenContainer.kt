@@ -14,7 +14,7 @@ import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
-class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEntity: SirenTileEntity) : Container(ContainerTypes.sirenContainer, windowId) {
+class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEntity: SirenTileEntity) : Container(ContainerTypes.sirenContainer.get(), windowId) {
     init {
         val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
@@ -46,7 +46,7 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
     }
 
     override fun stillValid(playerIn: PlayerEntity) =
-        playerIn.level.getBlockState(tileEntity.blockPos).block == ModBlocks.siren.block
+        playerIn.level.getBlockState(tileEntity.blockPos).block == ModBlocks.siren.get().block
 
     override fun quickMoveStack(player: PlayerEntity, index: Int): ItemStack {
         var returnStack = ItemStack.EMPTY

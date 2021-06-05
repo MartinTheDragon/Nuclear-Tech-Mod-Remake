@@ -25,8 +25,7 @@ object Radiation {
 
     fun addEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
-        @Suppress("ThrowableNotThrown")
-        val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow { RuntimeException() }
+        val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow(::RuntimeException)
         if (cap !is IIrradiationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
         val newIrradiation = (cap.getIrradiation() + radiation).coerceIn(0f, 2500f)
         cap.setIrradiation(newIrradiation)
@@ -34,8 +33,7 @@ object Radiation {
 
     fun setEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
-        @Suppress("ThrowableNotThrown")
-        val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow { RuntimeException() }
+        val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow(::RuntimeException)
         if (cap !is IIrradiationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
         val newIrradiation = radiation.coerceIn(0f, 2500f)
         cap.setIrradiation(newIrradiation)
@@ -44,13 +42,11 @@ object Radiation {
     fun getEntityIrradiation(entity: LivingEntity): Float {
         if (entity.isDeadOrDying) return 0f
         if (!entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).isPresent) return 0f
-        @Suppress("ThrowableNotThrown")
-        val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow { RuntimeException() }
+        val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow(::RuntimeException)
         if (cap !is IIrradiationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
         return cap.getIrradiation()
     }
 
-    // FIXME 3000 IQ strategy does not work anymore
     fun applyRadiationEffects(world: World) {
         if (!world.isClientSide) {
             // 3000 IQ strategy to get irradiated entities without causing ConcurrentModificationException follows (now with access transformation):

@@ -62,9 +62,9 @@ object Config {
         commonBuilder.comment("If ores of this mod should be generated at all").define("generateOres", true)
 
         for (ore in WorldGeneration.ores) {
-            commonBuilder.comment("Ore generation settings for ${ore.registryName}").push(ore.registryName!!.path)
+            commonBuilder.comment("Ore generation settings for ${ore.get().registryName}").push(ore.get().registryName!!.path)
 
-            defaultOreGenSettings.getValue(ore.registryName!!.path).let { default ->
+            defaultOreGenSettings.getValue(ore.get().registryName!!.path).let { default ->
                 // oreGenSettings[ore.registryName!!.path] = WorldGeneration.OreGenerationSettings(
                         commonBuilder.comment("At which y-value the ore starts appearing", "Default: ${default.yStart}")
                                 .define("yStart", default.yStart)//.get(),

@@ -32,8 +32,8 @@ class SteamPressBase(properties: Properties) : Block(properties) {
         if (!worldIn.isClientSide) {
             val blockPos1 = pos.above()
             val blockPos2 = blockPos1.above()
-            worldIn.setBlockAndUpdate(blockPos1, ModBlocks.steamPressFrame.defaultBlockState())
-            worldIn.setBlockAndUpdate(blockPos2, ModBlocks.steamPressTop.defaultBlockState())
+            worldIn.setBlockAndUpdate(blockPos1, ModBlocks.steamPressFrame.get().defaultBlockState())
+            worldIn.setBlockAndUpdate(blockPos2, ModBlocks.steamPressTop.get().defaultBlockState())
             worldIn.updateNeighborsAt(pos, Blocks.AIR)
             state.updateNeighbourShapes(worldIn, pos, 0b11)
         }
@@ -58,9 +58,9 @@ class SteamPressBase(properties: Properties) : Block(properties) {
             val blockPos1 = pos.above()
             val blockPos2 = blockPos1.above()
 
-            if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressFrame)
+            if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressFrame.get())
                 worldIn.destroyBlock(blockPos1, false)
-            if (worldIn.getBlockState(blockPos2).block == ModBlocks.steamPressTop)
+            if (worldIn.getBlockState(blockPos2).block == ModBlocks.steamPressTop.get())
                 worldIn.destroyBlock(blockPos2, false)
         }
     }

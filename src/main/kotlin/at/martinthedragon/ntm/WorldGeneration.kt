@@ -36,11 +36,11 @@ object WorldGeneration {
     fun generateOres(event: BiomeLoadingEvent) {
         when(event.category) {
             Biome.Category.NETHER -> for (ore in netherOres) {
-                val oreGenConfig = Config.defaultNetherOreGenSettings.getValue(ore.registryName!!.path)
+                val oreGenConfig = Config.defaultNetherOreGenSettings.getValue(ore.get().registryName!!.path)
                 event.generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
                     Feature.ORE.configured(OreFeatureConfig(
                         OreFeatureConfig.FillerBlockType.NETHERRACK,
-                        ore.defaultBlockState(),
+                        ore.get().defaultBlockState(),
                         oreGenConfig.sizeVein
                     )).decorated(Placement.RANGE.configured(
                         TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
@@ -48,11 +48,11 @@ object WorldGeneration {
                 )
             }
             Biome.Category.THEEND -> for (ore in endOres) {
-                val oreGenConfig = Config.defaultEndOreGenSettings.getValue(ore.registryName!!.path)
+                val oreGenConfig = Config.defaultEndOreGenSettings.getValue(ore.get().registryName!!.path)
                 event.generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
                     Feature.ORE.configured(OreFeatureConfig(
                         END_STONE,
-                        ore.defaultBlockState(),
+                        ore.get().defaultBlockState(),
                         oreGenConfig.sizeVein
                     )).decorated(Placement.RANGE.configured(
                         TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)
@@ -60,11 +60,11 @@ object WorldGeneration {
                 )
             }
             else -> for (ore in ores) {
-                val oreGenConfig = Config.defaultOreGenSettings.getValue(ore.registryName!!.path)
+                val oreGenConfig = Config.defaultOreGenSettings.getValue(ore.get().registryName!!.path)
                 event.generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
                     Feature.ORE.configured(OreFeatureConfig(
                         OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                        ore.defaultBlockState(),
+                        ore.get().defaultBlockState(),
                         oreGenConfig.sizeVein
                     )).decorated(Placement.RANGE.configured(
                         TopSolidRangeConfig(oreGenConfig.yStart, 0, oreGenConfig.yEnd - oreGenConfig.yStart)

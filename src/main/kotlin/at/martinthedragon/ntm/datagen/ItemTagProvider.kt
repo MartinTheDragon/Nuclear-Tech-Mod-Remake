@@ -98,48 +98,48 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.INGOTS_PHOSPHORUS)
             .addTag(NuclearTags.Items.INGOTS_LITHIUM)
             .add(
-                ModItems.redCopperIngot, ModItems.advancedAlloyIngot,
-                ModItems.highSpeedSteelIngot, ModItems.schraraniumIngot,
-                ModItems.schrabidiumIngot, ModItems.magnetizedTungstenIngot,
-                ModItems.combineSteelIngot, ModItems.soliniumIngot,
-                ModItems.moxFuelIngot, ModItems.schrabidiumFuelIngot,
-                ModItems.highEnrichedSchrabidiumFuelIngot,
-                ModItems.lowEnrichedSchrabidiumFuelIngot,
-                ModItems.australiumIngot, ModItems.weidaniumIngot,
-                ModItems.reiiumIngot, ModItems.unobtainiumIngot,
-                ModItems.daffergonIngot, ModItems.verticiumIngot,
-                ModItems.deshIngot, ModItems.saturniteIngot,
-                ModItems.euphemiumIngot, ModItems.dineutroniumIngot,
-                ModItems.electroniumIngot
+                ModItems.redCopperIngot.get(), ModItems.advancedAlloyIngot.get(),
+                ModItems.highSpeedSteelIngot.get(), ModItems.schraraniumIngot.get(),
+                ModItems.schrabidiumIngot.get(), ModItems.magnetizedTungstenIngot.get(),
+                ModItems.combineSteelIngot.get(), ModItems.soliniumIngot.get(),
+                ModItems.moxFuelIngot.get(), ModItems.schrabidiumFuelIngot.get(),
+                ModItems.highEnrichedSchrabidiumFuelIngot.get(),
+                ModItems.lowEnrichedSchrabidiumFuelIngot.get(),
+                ModItems.australiumIngot.get(), ModItems.weidaniumIngot.get(),
+                ModItems.reiiumIngot.get(), ModItems.unobtainiumIngot.get(),
+                ModItems.daffergonIngot.get(), ModItems.verticiumIngot.get(),
+                ModItems.deshIngot.get(), ModItems.saturniteIngot.get(),
+                ModItems.euphemiumIngot.get(), ModItems.dineutroniumIngot.get(),
+                ModItems.electroniumIngot.get()
             )
 
         tag(NuclearTags.Items.INGOTS_URANIUM).add(
-            ModItems.uraniumIngot, ModItems.u233Ingot,
-            ModItems.u235Ingot, ModItems.u238Ingot,
-            ModItems.uraniumFuelIngot
+            ModItems.uraniumIngot.get(), ModItems.u233Ingot.get(),
+            ModItems.u235Ingot.get(), ModItems.u238Ingot.get(),
+            ModItems.uraniumFuelIngot.get()
         )
-        tag(NuclearTags.Items.INGOTS_THORIUM).add(ModItems.th232Ingot, ModItems.thoriumFuelIngot)
+        tag(NuclearTags.Items.INGOTS_THORIUM).add(ModItems.th232Ingot.get(), ModItems.thoriumFuelIngot.get())
         tag(NuclearTags.Items.INGOTS_PLUTONIUM).add(
-            ModItems.plutoniumIngot, ModItems.pu238Ingot,
-            ModItems.pu239Ingot, ModItems.pu240Ingot,
-            ModItems.plutoniumFuelIngot
+            ModItems.plutoniumIngot.get(), ModItems.pu238Ingot.get(),
+            ModItems.pu239Ingot.get(), ModItems.pu240Ingot.get(),
+            ModItems.plutoniumFuelIngot.get()
         )
-        tag(NuclearTags.Items.INGOTS_NEPTUNIUM).add(ModItems.neptuniumIngot)
-        tag(NuclearTags.Items.INGOTS_POLONIUM).add(ModItems.poloniumIngot)
-        tag(NuclearTags.Items.INGOTS_TITANIUM).add(ModItems.titaniumIngot)
-        tag(NuclearTags.Items.INGOTS_COPPER).add(ModItems.copperIngot)
-        tag(NuclearTags.Items.INGOTS_TUNGSTEN).add(ModItems.tungstenIngot)
-        tag(NuclearTags.Items.INGOTS_ALUMINIUM).add(ModItems.aluminiumIngot)
-        tag(NuclearTags.Items.INGOTS_STEEL).add(ModItems.steelIngot)
-        tag(NuclearTags.Items.INGOTS_LEAD).add(ModItems.leadIngot)
-        tag(NuclearTags.Items.INGOTS_BERYLLIUM).add(ModItems.berylliumIngot)
-        tag(NuclearTags.Items.INGOTS_COBALT).add(ModItems.cobaltIngot)
-        tag(NuclearTags.Items.INGOTS_POLYMER).add(ModItems.polymerIngot)
-        tag(NuclearTags.Items.INGOTS_LANTHANUM).add(ModItems.lanthanumIngot)
-        tag(NuclearTags.Items.INGOTS_ACTINIUM).add(ModItems.actiniumIngot)
-        tag(NuclearTags.Items.INGOTS_STARMETAL).add(ModItems.starmetalIngot)
-        tag(NuclearTags.Items.INGOTS_PHOSPHORUS).add(ModItems.whitePhosphorusIngot)
-        tag(NuclearTags.Items.INGOTS_LITHIUM).add(ModItems.lithiumCube)
+        tag(NuclearTags.Items.INGOTS_NEPTUNIUM).add(ModItems.neptuniumIngot.get())
+        tag(NuclearTags.Items.INGOTS_POLONIUM).add(ModItems.poloniumIngot.get())
+        tag(NuclearTags.Items.INGOTS_TITANIUM).add(ModItems.titaniumIngot.get())
+        tag(NuclearTags.Items.INGOTS_COPPER).add(ModItems.copperIngot.get())
+        tag(NuclearTags.Items.INGOTS_TUNGSTEN).add(ModItems.tungstenIngot.get())
+        tag(NuclearTags.Items.INGOTS_ALUMINIUM).add(ModItems.aluminiumIngot.get())
+        tag(NuclearTags.Items.INGOTS_STEEL).add(ModItems.steelIngot.get())
+        tag(NuclearTags.Items.INGOTS_LEAD).add(ModItems.leadIngot.get())
+        tag(NuclearTags.Items.INGOTS_BERYLLIUM).add(ModItems.berylliumIngot.get())
+        tag(NuclearTags.Items.INGOTS_COBALT).add(ModItems.cobaltIngot.get())
+        tag(NuclearTags.Items.INGOTS_POLYMER).add(ModItems.polymerIngot.get())
+        tag(NuclearTags.Items.INGOTS_LANTHANUM).add(ModItems.lanthanumIngot.get())
+        tag(NuclearTags.Items.INGOTS_ACTINIUM).add(ModItems.actiniumIngot.get())
+        tag(NuclearTags.Items.INGOTS_STARMETAL).add(ModItems.starmetalIngot.get())
+        tag(NuclearTags.Items.INGOTS_PHOSPHORUS).add(ModItems.whitePhosphorusIngot.get())
+        tag(NuclearTags.Items.INGOTS_LITHIUM).add(ModItems.lithiumCube.get())
     }
 
     private fun dustTags() {
@@ -186,61 +186,61 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.DUSTS_CORDITE)
             .addTag(NuclearTags.Items.DUSTS_BALLISTITE)
             .add(
-                ModItems.redCopperPowder, ModItems.advancedAlloyPowder,
-                ModItems.schrabidiumPowder, ModItems.magnetizedTungstenPowder,
-                ModItems.chlorophytePowder, ModItems.combineSteelPowder,
-                ModItems.lignitePowder, ModItems.australiumPowder,
-                ModItems.weidaniumPowder, ModItems.reiiumPowder,
-                ModItems.unobtainiumPowder, ModItems.daffergonPowder,
-                ModItems.verticiumPowder, ModItems.cloudResidue,
-                ModItems.thermonuclearAshes, ModItems.semtexMix,
-                ModItems.deshMix, ModItems.deshReadyMix,
-                ModItems.deshPowder, ModItems.nitaniumMix,
-                ModItems.sparkMix, ModItems.euphemiumPowder,
-                ModItems.dineutroniumPowder, ModItems.desaturatedRedstone
+                ModItems.redCopperPowder.get(), ModItems.advancedAlloyPowder.get(),
+                ModItems.schrabidiumPowder.get(), ModItems.magnetizedTungstenPowder.get(),
+                ModItems.chlorophytePowder.get(), ModItems.combineSteelPowder.get(),
+                ModItems.lignitePowder.get(), ModItems.australiumPowder.get(),
+                ModItems.weidaniumPowder.get(), ModItems.reiiumPowder.get(),
+                ModItems.unobtainiumPowder.get(), ModItems.daffergonPowder.get(),
+                ModItems.verticiumPowder.get(), ModItems.cloudResidue.get(),
+                ModItems.thermonuclearAshes.get(), ModItems.semtexMix.get(),
+                ModItems.deshMix.get(), ModItems.deshReadyMix.get(),
+                ModItems.deshPowder.get(), ModItems.nitaniumMix.get(),
+                ModItems.sparkMix.get(), ModItems.euphemiumPowder.get(),
+                ModItems.dineutroniumPowder.get(), ModItems.desaturatedRedstone.get()
             )
 
-        tag(NuclearTags.Items.DUSTS_SULFUR).add(ModItems.sulfur)
-        tag(NuclearTags.Items.DUSTS_NITER).add(ModItems.niter)
-        tag(NuclearTags.Items.DUSTS_FLUORITE).add(ModItems.fluorite)
-        tag(NuclearTags.Items.DUSTS_COAL).add(ModItems.coalPowder)
-        tag(NuclearTags.Items.DUSTS_IRON).add(ModItems.ironPowder)
-        tag(NuclearTags.Items.DUSTS_GOLD).add(ModItems.goldPowder)
-        tag(NuclearTags.Items.DUSTS_LAPIS).add(ModItems.lapisLazuliPowder)
-        tag(NuclearTags.Items.DUSTS_QUARTZ).add(ModItems.quartzPowder)
-        tag(NuclearTags.Items.DUSTS_DIAMOND).add(ModItems.diamondPowder)
-        tag(NuclearTags.Items.DUSTS_EMERALD).add(ModItems.emeraldPowder)
-        tag(NuclearTags.Items.DUSTS_URANIUM).add(ModItems.uraniumPowder)
-        tag(NuclearTags.Items.DUSTS_THORIUM).add(ModItems.thoriumPowder)
-        tag(NuclearTags.Items.DUSTS_PLUTONIUM).add(ModItems.plutoniumPowder)
-        tag(NuclearTags.Items.DUSTS_NEPTUNIUM).add(ModItems.neptuniumPowder)
-        tag(NuclearTags.Items.DUSTS_POLONIUM).add(ModItems.poloniumPowder)
-        tag(NuclearTags.Items.DUSTS_TITANIUM).add(ModItems.titaniumPowder)
-        tag(NuclearTags.Items.DUSTS_COPPER).add(ModItems.copperPowder)
-        tag(NuclearTags.Items.DUSTS_TUNGSTEN).add(ModItems.tungstenPowder)
-        tag(NuclearTags.Items.DUSTS_ALUMINIUM).add(ModItems.aluminiumPowder)
-        tag(NuclearTags.Items.DUSTS_STEEL).add(ModItems.steelPowder)
-        tag(NuclearTags.Items.DUSTS_LEAD).add(ModItems.leadPowder)
-        tag(NuclearTags.Items.DUSTS_BERYLLIUM).add(ModItems.berylliumPowder)
-        tag(NuclearTags.Items.DUSTS_POLYMER).add(ModItems.polymerPowder)
-        tag(NuclearTags.Items.DUSTS_LITHIUM).add(ModItems.lithiumPowder)
-        tag(NuclearTags.Items.DUSTS_NEODYMIUM).add(ModItems.neodymiumPowder)
-        tag(NuclearTags.Items.DUSTS_COBALT).add(ModItems.cobaltPowder)
-        tag(NuclearTags.Items.DUSTS_NIOBIUM).add(ModItems.niobiumPowder)
-        tag(NuclearTags.Items.DUSTS_CERIUM).add(ModItems.ceriumPowder)
-        tag(NuclearTags.Items.DUSTS_LANTHANUM).add(ModItems.lanthanumPowder)
-        tag(NuclearTags.Items.DUSTS_ACTINIUM).add(ModItems.actiniumPowder)
-        tag(NuclearTags.Items.DUSTS_ASBESTOS).add(ModItems.asbestosPowder)
-        tag(NuclearTags.Items.DUSTS_ENCHANTMENT).add(ModItems.enchantmentPowder)
-        tag(NuclearTags.Items.DUSTS_METEORITE).add(ModItems.meteoritePowder)
-        tag(NuclearTags.Items.DUSTS_DUST).add(ModItems.dust)
-        tag(NuclearTags.Items.DUSTS_PHOSPHORUS).add(ModItems.redPhosphorus)
-        tag(NuclearTags.Items.DUSTS_COLD).add(ModItems.cryoPowder)
-        tag(NuclearTags.Items.DUSTS_POISON).add(ModItems.poisonPowder)
-        tag(NuclearTags.Items.DUSTS_THERMITE).add(ModItems.thermite)
-        tag(NuclearTags.Items.DUSTS_ENERGY).add(ModItems.energyPowder)
-        tag(NuclearTags.Items.DUSTS_CORDITE).add(ModItems.cordite)
-        tag(NuclearTags.Items.DUSTS_BALLISTITE).add(ModItems.ballistite)
+        tag(NuclearTags.Items.DUSTS_SULFUR).add(ModItems.sulfur.get())
+        tag(NuclearTags.Items.DUSTS_NITER).add(ModItems.niter.get())
+        tag(NuclearTags.Items.DUSTS_FLUORITE).add(ModItems.fluorite.get())
+        tag(NuclearTags.Items.DUSTS_COAL).add(ModItems.coalPowder.get())
+        tag(NuclearTags.Items.DUSTS_IRON).add(ModItems.ironPowder.get())
+        tag(NuclearTags.Items.DUSTS_GOLD).add(ModItems.goldPowder.get())
+        tag(NuclearTags.Items.DUSTS_LAPIS).add(ModItems.lapisLazuliPowder.get())
+        tag(NuclearTags.Items.DUSTS_QUARTZ).add(ModItems.quartzPowder.get())
+        tag(NuclearTags.Items.DUSTS_DIAMOND).add(ModItems.diamondPowder.get())
+        tag(NuclearTags.Items.DUSTS_EMERALD).add(ModItems.emeraldPowder.get())
+        tag(NuclearTags.Items.DUSTS_URANIUM).add(ModItems.uraniumPowder.get())
+        tag(NuclearTags.Items.DUSTS_THORIUM).add(ModItems.thoriumPowder.get())
+        tag(NuclearTags.Items.DUSTS_PLUTONIUM).add(ModItems.plutoniumPowder.get())
+        tag(NuclearTags.Items.DUSTS_NEPTUNIUM).add(ModItems.neptuniumPowder.get())
+        tag(NuclearTags.Items.DUSTS_POLONIUM).add(ModItems.poloniumPowder.get())
+        tag(NuclearTags.Items.DUSTS_TITANIUM).add(ModItems.titaniumPowder.get())
+        tag(NuclearTags.Items.DUSTS_COPPER).add(ModItems.copperPowder.get())
+        tag(NuclearTags.Items.DUSTS_TUNGSTEN).add(ModItems.tungstenPowder.get())
+        tag(NuclearTags.Items.DUSTS_ALUMINIUM).add(ModItems.aluminiumPowder.get())
+        tag(NuclearTags.Items.DUSTS_STEEL).add(ModItems.steelPowder.get())
+        tag(NuclearTags.Items.DUSTS_LEAD).add(ModItems.leadPowder.get())
+        tag(NuclearTags.Items.DUSTS_BERYLLIUM).add(ModItems.berylliumPowder.get())
+        tag(NuclearTags.Items.DUSTS_POLYMER).add(ModItems.polymerPowder.get())
+        tag(NuclearTags.Items.DUSTS_LITHIUM).add(ModItems.lithiumPowder.get())
+        tag(NuclearTags.Items.DUSTS_NEODYMIUM).add(ModItems.neodymiumPowder.get())
+        tag(NuclearTags.Items.DUSTS_COBALT).add(ModItems.cobaltPowder.get())
+        tag(NuclearTags.Items.DUSTS_NIOBIUM).add(ModItems.niobiumPowder.get())
+        tag(NuclearTags.Items.DUSTS_CERIUM).add(ModItems.ceriumPowder.get())
+        tag(NuclearTags.Items.DUSTS_LANTHANUM).add(ModItems.lanthanumPowder.get())
+        tag(NuclearTags.Items.DUSTS_ACTINIUM).add(ModItems.actiniumPowder.get())
+        tag(NuclearTags.Items.DUSTS_ASBESTOS).add(ModItems.asbestosPowder.get())
+        tag(NuclearTags.Items.DUSTS_ENCHANTMENT).add(ModItems.enchantmentPowder.get())
+        tag(NuclearTags.Items.DUSTS_METEORITE).add(ModItems.meteoritePowder.get())
+        tag(NuclearTags.Items.DUSTS_DUST).add(ModItems.dust.get())
+        tag(NuclearTags.Items.DUSTS_PHOSPHORUS).add(ModItems.redPhosphorus.get())
+        tag(NuclearTags.Items.DUSTS_COLD).add(ModItems.cryoPowder.get())
+        tag(NuclearTags.Items.DUSTS_POISON).add(ModItems.poisonPowder.get())
+        tag(NuclearTags.Items.DUSTS_THERMITE).add(ModItems.thermite.get())
+        tag(NuclearTags.Items.DUSTS_ENERGY).add(ModItems.energyPowder.get())
+        tag(NuclearTags.Items.DUSTS_CORDITE).add(ModItems.cordite.get())
+        tag(NuclearTags.Items.DUSTS_BALLISTITE).add(ModItems.ballistite.get())
     }
 
     private fun crystalTags() {
@@ -273,36 +273,36 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.GEMS_CERIUM)
             .addTag(NuclearTags.Items.GEMS_LANTHANUM)
             .addTag(NuclearTags.Items.GEMS_ACTINIUM)
-            .add(ModItems.schraraniumCrystals, ModItems.schrabidiumCrystals)
+            .add(ModItems.schraraniumCrystals.get(), ModItems.schrabidiumCrystals.get())
 
-        tag(NuclearTags.Items.GEMS_IRON).add(ModItems.ironCrystals)
-        tag(NuclearTags.Items.GEMS_GOLD).add(ModItems.goldCrystals)
-        tag(NuclearTags.Items.GEMS_REDSTONE).add(ModItems.redstoneCrystals)
-        tag(NuclearTags.Items.GEMS_DIAMOND).add(ModItems.diamondCrystals)
-        tag(NuclearTags.Items.GEMS_URANIUM).add(ModItems.uraniumCrystals)
-        tag(NuclearTags.Items.GEMS_THORIUM).add(ModItems.thoriumCrystals)
-        tag(NuclearTags.Items.GEMS_PLUTONIUM).add(ModItems.plutoniumCrystals)
-        tag(NuclearTags.Items.GEMS_TITANIUM).add(ModItems.titaniumCrystals)
-        tag(NuclearTags.Items.GEMS_SULFUR).add(ModItems.sulfurCrystals)
-        tag(NuclearTags.Items.GEMS_NITER).add(ModItems.niterCrystals)
-        tag(NuclearTags.Items.GEMS_COPPER).add(ModItems.copperCrystals)
-        tag(NuclearTags.Items.GEMS_TUNGSTEN).add(ModItems.tungstenCrystals)
-        tag(NuclearTags.Items.GEMS_ALUMINIUM).add(ModItems.aluminiumCrystals)
-        tag(NuclearTags.Items.GEMS_FLUORITE).add(ModItems.fluoriteCrystals)
-        tag(NuclearTags.Items.GEMS_BERYLLIUM).add(ModItems.berylliumCrystals)
-        tag(NuclearTags.Items.GEMS_LEAD).add(ModItems.leadCrystals)
-        tag(NuclearTags.Items.GEMS_RARE_EARTH).add(ModItems.rareEarthCrystals)
-        tag(NuclearTags.Items.GEMS_PHOSPHORUS).add(ModItems.redPhosphorusCrystals)
-        tag(NuclearTags.Items.GEMS_LITHIUM).add(ModItems.lithiumCrystals)
-        tag(NuclearTags.Items.GEMS_STARMETAL).add(ModItems.starmetalCrystals)
-        tag(NuclearTags.Items.GEMS_TRIXITE).add(ModItems.trixiteCrystals)
+        tag(NuclearTags.Items.GEMS_IRON).add(ModItems.ironCrystals.get())
+        tag(NuclearTags.Items.GEMS_GOLD).add(ModItems.goldCrystals.get())
+        tag(NuclearTags.Items.GEMS_REDSTONE).add(ModItems.redstoneCrystals.get())
+        tag(NuclearTags.Items.GEMS_DIAMOND).add(ModItems.diamondCrystals.get())
+        tag(NuclearTags.Items.GEMS_URANIUM).add(ModItems.uraniumCrystals.get())
+        tag(NuclearTags.Items.GEMS_THORIUM).add(ModItems.thoriumCrystals.get())
+        tag(NuclearTags.Items.GEMS_PLUTONIUM).add(ModItems.plutoniumCrystals.get())
+        tag(NuclearTags.Items.GEMS_TITANIUM).add(ModItems.titaniumCrystals.get())
+        tag(NuclearTags.Items.GEMS_SULFUR).add(ModItems.sulfurCrystals.get())
+        tag(NuclearTags.Items.GEMS_NITER).add(ModItems.niterCrystals.get())
+        tag(NuclearTags.Items.GEMS_COPPER).add(ModItems.copperCrystals.get())
+        tag(NuclearTags.Items.GEMS_TUNGSTEN).add(ModItems.tungstenCrystals.get())
+        tag(NuclearTags.Items.GEMS_ALUMINIUM).add(ModItems.aluminiumCrystals.get())
+        tag(NuclearTags.Items.GEMS_FLUORITE).add(ModItems.fluoriteCrystals.get())
+        tag(NuclearTags.Items.GEMS_BERYLLIUM).add(ModItems.berylliumCrystals.get())
+        tag(NuclearTags.Items.GEMS_LEAD).add(ModItems.leadCrystals.get())
+        tag(NuclearTags.Items.GEMS_RARE_EARTH).add(ModItems.rareEarthCrystals.get())
+        tag(NuclearTags.Items.GEMS_PHOSPHORUS).add(ModItems.redPhosphorusCrystals.get())
+        tag(NuclearTags.Items.GEMS_LITHIUM).add(ModItems.lithiumCrystals.get())
+        tag(NuclearTags.Items.GEMS_STARMETAL).add(ModItems.starmetalCrystals.get())
+        tag(NuclearTags.Items.GEMS_TRIXITE).add(ModItems.trixiteCrystals.get())
 
-        tag(NuclearTags.Items.GEMS_NEODYMIUM).add(ModItems.neodymiumFragment)
-        tag(NuclearTags.Items.GEMS_COBALT).add(ModItems.cobaltFragment)
-        tag(NuclearTags.Items.GEMS_NIOBIUM).add(ModItems.niobiumFragment)
-        tag(NuclearTags.Items.GEMS_CERIUM).add(ModItems.ceriumFragment)
-        tag(NuclearTags.Items.GEMS_LANTHANUM).add(ModItems.lanthanumFragment)
-        tag(NuclearTags.Items.GEMS_ACTINIUM).add(ModItems.actiniumFragment)
+        tag(NuclearTags.Items.GEMS_NEODYMIUM).add(ModItems.neodymiumFragment.get())
+        tag(NuclearTags.Items.GEMS_COBALT).add(ModItems.cobaltFragment.get())
+        tag(NuclearTags.Items.GEMS_NIOBIUM).add(ModItems.niobiumFragment.get())
+        tag(NuclearTags.Items.GEMS_CERIUM).add(ModItems.ceriumFragment.get())
+        tag(NuclearTags.Items.GEMS_LANTHANUM).add(ModItems.lanthanumFragment.get())
+        tag(NuclearTags.Items.GEMS_ACTINIUM).add(ModItems.actiniumFragment.get())
     }
 
     private fun nuggetTags() {
@@ -316,33 +316,33 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.NUGGETS_BERYLLIUM)
             .addTag(NuclearTags.Items.NUGGETS_MERCURY)
             .add(
-                ModItems.schrabidiumNugget, ModItems.soliniumNugget,
-                ModItems.moxFuelNugget, ModItems.schrabidiumFuelNugget,
-                ModItems.highEnrichedSchrabidiumFuelNugget,
-                ModItems.lowEnrichedSchrabidiumFuelNugget,
-                ModItems.australiumNugget, ModItems.weidaniumNugget,
-                ModItems.reiiumNugget, ModItems.unobtainiumNugget,
-                ModItems.daffergonNugget, ModItems.verticiumNugget,
-                ModItems.deshNugget, ModItems.euphemiumNugget,
-                ModItems.dineutroniumNugget
+                ModItems.schrabidiumNugget.get(), ModItems.soliniumNugget.get(),
+                ModItems.moxFuelNugget.get(), ModItems.schrabidiumFuelNugget.get(),
+                ModItems.highEnrichedSchrabidiumFuelNugget.get(),
+                ModItems.lowEnrichedSchrabidiumFuelNugget.get(),
+                ModItems.australiumNugget.get(), ModItems.weidaniumNugget.get(),
+                ModItems.reiiumNugget.get(), ModItems.unobtainiumNugget.get(),
+                ModItems.daffergonNugget.get(), ModItems.verticiumNugget.get(),
+                ModItems.deshNugget.get(), ModItems.euphemiumNugget.get(),
+                ModItems.dineutroniumNugget.get()
             )
 
         tag(NuclearTags.Items.NUGGETS_URANIUM).add(
-            ModItems.uraniumNugget, ModItems.u233Nugget,
-            ModItems.u235Nugget, ModItems.u238Nugget,
-            ModItems.uraniumFuelNugget
+            ModItems.uraniumNugget.get(), ModItems.u233Nugget.get(),
+            ModItems.u235Nugget.get(), ModItems.u238Nugget.get(),
+            ModItems.uraniumFuelNugget.get()
         )
-        tag(NuclearTags.Items.NUGGETS_THORIUM).add(ModItems.th232Nugget, ModItems.thoriumFuelNugget)
+        tag(NuclearTags.Items.NUGGETS_THORIUM).add(ModItems.th232Nugget.get(), ModItems.thoriumFuelNugget.get())
         tag(NuclearTags.Items.NUGGETS_PLUTONIUM).add(
-            ModItems.plutoniumNugget, ModItems.pu238Nugget,
-            ModItems.pu239Nugget, ModItems.pu240Nugget,
-            ModItems.plutoniumFuelNugget
+            ModItems.plutoniumNugget.get(), ModItems.pu238Nugget.get(),
+            ModItems.pu239Nugget.get(), ModItems.pu240Nugget.get(),
+            ModItems.plutoniumFuelNugget.get()
         )
-        tag(NuclearTags.Items.NUGGETS_NEPTUNIUM).add(ModItems.neptuniumNugget)
-        tag(NuclearTags.Items.NUGGETS_POLONIUM).add(ModItems.poloniumNugget)
-        tag(NuclearTags.Items.NUGGETS_LEAD).add(ModItems.leadNugget)
-        tag(NuclearTags.Items.NUGGETS_BERYLLIUM).add(ModItems.berylliumNugget)
-        tag(NuclearTags.Items.NUGGETS_MERCURY).add(ModItems.mercuryDroplet)
+        tag(NuclearTags.Items.NUGGETS_NEPTUNIUM).add(ModItems.neptuniumNugget.get())
+        tag(NuclearTags.Items.NUGGETS_POLONIUM).add(ModItems.poloniumNugget.get())
+        tag(NuclearTags.Items.NUGGETS_LEAD).add(ModItems.leadNugget.get())
+        tag(NuclearTags.Items.NUGGETS_BERYLLIUM).add(ModItems.berylliumNugget.get())
+        tag(NuclearTags.Items.NUGGETS_MERCURY).add(ModItems.mercuryDroplet.get())
     }
 
     private fun plateTags() {
@@ -358,23 +358,23 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.PLATES_INSULATOR)
             .addTag(NuclearTags.Items.PLATES_KEVLAR)
             .add(
-                ModItems.advancedAlloyPlate, ModItems.schrabidiumPlate,
-                ModItems.combineSteelPlate, ModItems.mixedPlate,
-                ModItems.saturnitePlate, ModItems.paAAlloyPlate,
-                ModItems.dalekaniumPlate, ModItems.deshCompoundPlate,
-                ModItems.euphemiumCompoundPlate, ModItems.dineutroniumCompoundPlate
+                ModItems.advancedAlloyPlate.get(), ModItems.schrabidiumPlate.get(),
+                ModItems.combineSteelPlate.get(), ModItems.mixedPlate.get(),
+                ModItems.saturnitePlate.get(), ModItems.paAAlloyPlate.get(),
+                ModItems.dalekaniumPlate.get(), ModItems.deshCompoundPlate.get(),
+                ModItems.euphemiumCompoundPlate.get(), ModItems.dineutroniumCompoundPlate.get()
             )
 
-        tag(NuclearTags.Items.PLATES_IRON).add(ModItems.ironPlate)
-        tag(NuclearTags.Items.PLATES_GOLD).add(ModItems.goldPlate)
-        tag(NuclearTags.Items.PLATES_TITANIUM).add(ModItems.titaniumPlate)
-        tag(NuclearTags.Items.PLATES_ALUMINIUM).add(ModItems.aluminiumPlate)
-        tag(NuclearTags.Items.PLATES_STEEL).add(ModItems.steelPlate)
-        tag(NuclearTags.Items.PLATES_LEAD).add(ModItems.leadPlate)
-        tag(NuclearTags.Items.PLATES_COPPER).add(ModItems.copperPlate, ModItems.copperPanel)
-        tag(NuclearTags.Items.PLATES_NEUTRON_REFLECTOR).add(ModItems.neutronReflector)
-        tag(NuclearTags.Items.PLATES_INSULATOR).add(ModItems.insulator)
-        tag(NuclearTags.Items.PLATES_KEVLAR).add(ModItems.kevlarCeramicCompound)
+        tag(NuclearTags.Items.PLATES_IRON).add(ModItems.ironPlate.get())
+        tag(NuclearTags.Items.PLATES_GOLD).add(ModItems.goldPlate.get())
+        tag(NuclearTags.Items.PLATES_TITANIUM).add(ModItems.titaniumPlate.get())
+        tag(NuclearTags.Items.PLATES_ALUMINIUM).add(ModItems.aluminiumPlate.get())
+        tag(NuclearTags.Items.PLATES_STEEL).add(ModItems.steelPlate.get())
+        tag(NuclearTags.Items.PLATES_LEAD).add(ModItems.leadPlate.get())
+        tag(NuclearTags.Items.PLATES_COPPER).add(ModItems.copperPlate.get(), ModItems.copperPanel.get())
+        tag(NuclearTags.Items.PLATES_NEUTRON_REFLECTOR).add(ModItems.neutronReflector.get())
+        tag(NuclearTags.Items.PLATES_INSULATOR).add(ModItems.insulator.get())
+        tag(NuclearTags.Items.PLATES_KEVLAR).add(ModItems.kevlarCeramicCompound.get())
     }
 
     private fun wireTags() {
@@ -384,13 +384,13 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.WIRES_TUNGSTEN)
             .addTag(NuclearTags.Items.WIRES_SUPER_CONDUCTOR)
             .addTag(NuclearTags.Items.WIRES_GOLD)
-            .add(ModItems.redCopperWire)
+            .add(ModItems.redCopperWire.get())
 
-        tag(NuclearTags.Items.WIRES_ALUMINIUM).add(ModItems.aluminiumWire)
-        tag(NuclearTags.Items.WIRES_COPPER).add(ModItems.copperWire)
-        tag(NuclearTags.Items.WIRES_TUNGSTEN).add(ModItems.tungstenWire)
-        tag(NuclearTags.Items.WIRES_SUPER_CONDUCTOR).add(ModItems.superConductor, ModItems.highTemperatureSuperConductor)
-        tag(NuclearTags.Items.WIRES_GOLD).add(ModItems.goldWire)
+        tag(NuclearTags.Items.WIRES_ALUMINIUM).add(ModItems.aluminiumWire.get())
+        tag(NuclearTags.Items.WIRES_COPPER).add(ModItems.copperWire.get())
+        tag(NuclearTags.Items.WIRES_TUNGSTEN).add(ModItems.tungstenWire.get())
+        tag(NuclearTags.Items.WIRES_SUPER_CONDUCTOR).add(ModItems.superConductor.get(), ModItems.highTemperatureSuperConductor.get())
+        tag(NuclearTags.Items.WIRES_GOLD).add(ModItems.goldWire.get())
     }
 
     private fun coilTags() {
@@ -399,12 +399,12 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.COILS_SUPER_CONDUCTOR)
             .addTag(NuclearTags.Items.COILS_GOLD)
 
-        tag(NuclearTags.Items.COILS_COPPER).add(ModItems.copperCoil, ModItems.ringCoil)
+        tag(NuclearTags.Items.COILS_COPPER).add(ModItems.copperCoil.get(), ModItems.ringCoil.get())
         tag(NuclearTags.Items.COILS_SUPER_CONDUCTOR).add(
-            ModItems.superConductingCoil, ModItems.superConductingRingCoil,
-            ModItems.heatingCoil, ModItems.highTemperatureSuperConductingCoil
+            ModItems.superConductingCoil.get(), ModItems.superConductingRingCoil.get(),
+            ModItems.heatingCoil.get(), ModItems.highTemperatureSuperConductingCoil.get()
         )
-        tag(NuclearTags.Items.COILS_GOLD).add(ModItems.goldCoil, ModItems.goldRingCoil)
+        tag(NuclearTags.Items.COILS_GOLD).add(ModItems.goldCoil.get(), ModItems.goldRingCoil.get())
     }
 
     private fun fissileFuelTags() {
@@ -414,32 +414,32 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.FISSILE_FUELS_PLUTONIUM)
             .addTag(NuclearTags.Items.FISSILE_FUELS_MOX)
             .add(
-                ModItems.schrabidiumFuelIngot,
-                ModItems.highEnrichedSchrabidiumFuelIngot,
-                ModItems.lowEnrichedSchrabidiumFuelIngot
+                ModItems.schrabidiumFuelIngot.get(),
+                ModItems.highEnrichedSchrabidiumFuelIngot.get(),
+                ModItems.lowEnrichedSchrabidiumFuelIngot.get()
             )
 
-        tag(NuclearTags.Items.FISSILE_FUELS_URANIUM).add(ModItems.uraniumFuelIngot, ModItems.uraniumFuelNugget)
-        tag(NuclearTags.Items.FISSILE_FUELS_THORIUM).add(ModItems.thoriumFuelIngot, ModItems.thoriumFuelNugget)
-        tag(NuclearTags.Items.FISSILE_FUELS_PLUTONIUM).add(ModItems.plutoniumFuelIngot, ModItems.plutoniumFuelNugget)
-        tag(NuclearTags.Items.FISSILE_FUELS_MOX).add(ModItems.moxFuelIngot, ModItems.moxFuelNugget)
+        tag(NuclearTags.Items.FISSILE_FUELS_URANIUM).add(ModItems.uraniumFuelIngot.get(), ModItems.uraniumFuelNugget.get())
+        tag(NuclearTags.Items.FISSILE_FUELS_THORIUM).add(ModItems.thoriumFuelIngot.get(), ModItems.thoriumFuelNugget.get())
+        tag(NuclearTags.Items.FISSILE_FUELS_PLUTONIUM).add(ModItems.plutoniumFuelIngot.get(), ModItems.plutoniumFuelNugget.get())
+        tag(NuclearTags.Items.FISSILE_FUELS_MOX).add(ModItems.moxFuelIngot.get(), ModItems.moxFuelNugget.get())
     }
 
     private fun wasteTags() {
         tag(NuclearTags.Items.NUCLEAR_WASTE).add(
-            ModItems.nuclearWaste, ModItems.depletedUraniumFuel,
-            ModItems.depletedThoriumFuel, ModItems.depletedPlutoniumFuel,
-            ModItems.depletedMOXFuel, ModItems.depletedSchrabidiumFuel,
-            ModItems.hotDepletedUraniumFuel, ModItems.hotDepletedThoriumFuel,
-            ModItems.hotDepletedPlutoniumFuel, ModItems.hotDepletedMOXFuel,
-            ModItems.hotDepletedSchrabidiumFuel
+            ModItems.nuclearWaste.get(), ModItems.depletedUraniumFuel.get(),
+            ModItems.depletedThoriumFuel.get(), ModItems.depletedPlutoniumFuel.get(),
+            ModItems.depletedMOXFuel.get(), ModItems.depletedSchrabidiumFuel.get(),
+            ModItems.hotDepletedUraniumFuel.get(), ModItems.hotDepletedThoriumFuel.get(),
+            ModItems.hotDepletedPlutoniumFuel.get(), ModItems.hotDepletedMOXFuel.get(),
+            ModItems.hotDepletedSchrabidiumFuel.get()
         )
 
         tag(NuclearTags.Items.WASTES)
             .addTag(NuclearTags.Items.WASTES_SCRAP)
             .addTag(NuclearTags.Items.WASTES_NUCLEAR_WASTE)
 
-        tag(NuclearTags.Items.WASTES_SCRAP).add(ModItems.scrap)
+        tag(NuclearTags.Items.WASTES_SCRAP).add(ModItems.scrap.get())
         tag(NuclearTags.Items.WASTES_NUCLEAR_WASTE)
             .addTag(NuclearTags.Items.WASTES_HOT_URANIUM)
             .addTag(NuclearTags.Items.WASTES_HOT_THORIUM)
@@ -449,79 +449,79 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.WASTES_THORIUM)
             .addTag(NuclearTags.Items.WASTES_PLUTONIUM)
             .addTag(NuclearTags.Items.WASTES_MOX)
-            .add(ModItems.nuclearWaste)
+            .add(ModItems.nuclearWaste.get())
 
-        tag(NuclearTags.Items.WASTES_HOT_URANIUM).add(ModItems.hotDepletedUraniumFuel)
-        tag(NuclearTags.Items.WASTES_HOT_THORIUM).add(ModItems.hotDepletedThoriumFuel)
-        tag(NuclearTags.Items.WASTES_HOT_PLUTONIUM).add(ModItems.hotDepletedPlutoniumFuel)
-        tag(NuclearTags.Items.WASTES_HOT_MOX).add(ModItems.hotDepletedMOXFuel)
-        tag(NuclearTags.Items.WASTES_URANIUM).add(ModItems.depletedUraniumFuel)
-        tag(NuclearTags.Items.WASTES_THORIUM).add(ModItems.depletedThoriumFuel)
-        tag(NuclearTags.Items.WASTES_PLUTONIUM).add(ModItems.depletedPlutoniumFuel)
-        tag(NuclearTags.Items.WASTES_MOX).add(ModItems.depletedMOXFuel)
+        tag(NuclearTags.Items.WASTES_HOT_URANIUM).add(ModItems.hotDepletedUraniumFuel.get())
+        tag(NuclearTags.Items.WASTES_HOT_THORIUM).add(ModItems.hotDepletedThoriumFuel.get())
+        tag(NuclearTags.Items.WASTES_HOT_PLUTONIUM).add(ModItems.hotDepletedPlutoniumFuel.get())
+        tag(NuclearTags.Items.WASTES_HOT_MOX).add(ModItems.hotDepletedMOXFuel.get())
+        tag(NuclearTags.Items.WASTES_URANIUM).add(ModItems.depletedUraniumFuel.get())
+        tag(NuclearTags.Items.WASTES_THORIUM).add(ModItems.depletedThoriumFuel.get())
+        tag(NuclearTags.Items.WASTES_PLUTONIUM).add(ModItems.depletedPlutoniumFuel.get())
+        tag(NuclearTags.Items.WASTES_MOX).add(ModItems.depletedMOXFuel.get())
 
         tag(NuclearTags.Items.HOT_WASTES).add(
-            ModItems.hotDepletedUraniumFuel, ModItems.hotDepletedThoriumFuel,
-            ModItems.hotDepletedPlutoniumFuel, ModItems.hotDepletedMOXFuel,
-            ModItems.hotDepletedSchrabidiumFuel
+            ModItems.hotDepletedUraniumFuel.get(), ModItems.hotDepletedThoriumFuel.get(),
+            ModItems.hotDepletedPlutoniumFuel.get(), ModItems.hotDepletedMOXFuel.get(),
+            ModItems.hotDepletedSchrabidiumFuel.get()
         )
         tag(NuclearTags.Items.COLD_WASTES).add(
-            ModItems.depletedUraniumFuel,
-            ModItems.depletedThoriumFuel, ModItems.depletedPlutoniumFuel,
-            ModItems.depletedMOXFuel, ModItems.depletedSchrabidiumFuel,
+            ModItems.depletedUraniumFuel.get(), ModItems.depletedThoriumFuel.get(),
+            ModItems.depletedPlutoniumFuel.get(), ModItems.depletedMOXFuel.get(),
+            ModItems.depletedSchrabidiumFuel.get(),
         )
     }
 
     private fun miscTags() {
-        tag(NuclearTags.Items.COKE).add(ModItems.coke)
+        tag(NuclearTags.Items.COKE).add(ModItems.coke.get())
 
-        tag(NuclearTags.Items.YELLOWCAKE_URANIUM).add(ModItems.yellowcake)
+        tag(NuclearTags.Items.YELLOWCAKE_URANIUM).add(ModItems.yellowcake.get())
 
         tag(NuclearTags.Items.ORE_CRYSTALS).add(
-            ModItems.ironCrystals, ModItems.goldCrystals,
-            ModItems.redstoneCrystals, ModItems.diamondCrystals,
-            ModItems.uraniumCrystals, ModItems.thoriumCrystals,
-            ModItems.plutoniumCrystals, ModItems.titaniumCrystals,
-            ModItems.sulfurCrystals, ModItems.niterCrystals,
-            ModItems.copperCrystals, ModItems.tungstenCrystals,
-            ModItems.aluminiumCrystals, ModItems.fluoriteCrystals,
-            ModItems.berylliumCrystals, ModItems.leadCrystals,
-            ModItems.schraraniumCrystals, ModItems.schrabidiumCrystals,
-            ModItems.rareEarthCrystals, ModItems.redPhosphorusCrystals,
-            ModItems.lithiumCrystals, ModItems.starmetalCrystals,
-            ModItems.trixiteCrystals
+            ModItems.ironCrystals.get(), ModItems.goldCrystals.get(),
+            ModItems.redstoneCrystals.get(), ModItems.diamondCrystals.get(),
+            ModItems.uraniumCrystals.get(), ModItems.thoriumCrystals.get(),
+            ModItems.plutoniumCrystals.get(), ModItems.titaniumCrystals.get(),
+            ModItems.sulfurCrystals.get(), ModItems.niterCrystals.get(),
+            ModItems.copperCrystals.get(), ModItems.tungstenCrystals.get(),
+            ModItems.aluminiumCrystals.get(), ModItems.fluoriteCrystals.get(),
+            ModItems.berylliumCrystals.get(), ModItems.leadCrystals.get(),
+            ModItems.schraraniumCrystals.get(), ModItems.schrabidiumCrystals.get(),
+            ModItems.rareEarthCrystals.get(), ModItems.redPhosphorusCrystals.get(),
+            ModItems.lithiumCrystals.get(), ModItems.starmetalCrystals.get(),
+            ModItems.trixiteCrystals.get()
         )
 
         tag(NuclearTags.Items.RARE_EARTH_FRAGMENTS).add(
-            ModItems.neodymiumFragment, ModItems.cobaltFragment,
-            ModItems.niobiumFragment, ModItems.ceriumFragment,
-            ModItems.lanthanumFragment, ModItems.actiniumFragment,
+            ModItems.neodymiumFragment.get(), ModItems.cobaltFragment.get(),
+            ModItems.niobiumFragment.get(), ModItems.ceriumFragment.get(),
+            ModItems.lanthanumFragment.get(), ModItems.actiniumFragment.get(),
         )
 
-        tag(NuclearTags.Items.BIOMASS).add(ModItems.biomass).addTag(NuclearTags.Items.COMPRESSED_BIOMASS)
-        tag(NuclearTags.Items.COMPRESSED_BIOMASS).add(ModItems.compressedBiomass)
+        tag(NuclearTags.Items.BIOMASS).add(ModItems.biomass.get()).addTag(NuclearTags.Items.COMPRESSED_BIOMASS)
+        tag(NuclearTags.Items.COMPRESSED_BIOMASS).add(ModItems.compressedBiomass.get())
 
         tag(NuclearTags.Items.BOLTS).addTag(NuclearTags.Items.BOLTS_TUNGSTEN)
-        tag(NuclearTags.Items.BOLTS_TUNGSTEN).add(ModItems.tungstenBolt)
+        tag(NuclearTags.Items.BOLTS_TUNGSTEN).add(ModItems.tungstenBolt.get())
 
-        tag(NuclearTags.Items.FABRIC_HAZMAT).add(ModItems.hazmatCloth, ModItems.advancedHazmatCloth, ModItems.leadReinforcedHazmatCloth)
+        tag(NuclearTags.Items.FABRIC_HAZMAT).add(ModItems.hazmatCloth.get(), ModItems.advancedHazmatCloth.get(), ModItems.leadReinforcedHazmatCloth.get())
 
         tag(NuclearTags.Items.FILTERS).addTag(NuclearTags.Items.FILTERS_CARBON)
-        tag(NuclearTags.Items.FILTERS_CARBON).add(ModItems.activatedCarbonFilter)
+        tag(NuclearTags.Items.FILTERS_CARBON).add(ModItems.activatedCarbonFilter.get())
 
-        tag(NuclearTags.Items.SCRAP).add(ModItems.scrap)
+        tag(NuclearTags.Items.SCRAP).add(ModItems.scrap.get())
 
         tag(NuclearTags.Items.SIREN_TRACKS).add(
-            ModItems.sirenTrackHatchSiren, ModItems.sirenTrackAutopilotDisconnected,
-            ModItems.sirenTrackAMSSiren, ModItems.sirenTrackBlastDoorAlarm,
-            ModItems.sirenTrackAPCSiren, ModItems.sirenTrackKlaxon,
-            ModItems.sirenTrackVaultDoorAlarm, ModItems.sirenTrackSecurityAlert,
-            ModItems.sirenTrackStandardSiren, ModItems.sirenTrackClassicSiren,
-            ModItems.sirenTrackBankAlarm, ModItems.sirenTrackBeepSiren,
-            ModItems.sirenTrackContainerAlarm, ModItems.sirenTrackSweepSiren,
-            ModItems.sirenTrackMissileSiloSiren, ModItems.sirenTrackAirRaidSiren,
-            ModItems.sirenTrackNostromoSelfDestruct, ModItems.sirenTrackEASAlarmScreech,
-            ModItems.sirenTrackAPCPass, ModItems.sirenTrackRazortrainHorn,
+            ModItems.sirenTrackHatchSiren.get(), ModItems.sirenTrackAutopilotDisconnected.get(),
+            ModItems.sirenTrackAMSSiren.get(), ModItems.sirenTrackBlastDoorAlarm.get(),
+            ModItems.sirenTrackAPCSiren.get(), ModItems.sirenTrackKlaxon.get(),
+            ModItems.sirenTrackVaultDoorAlarm.get(), ModItems.sirenTrackSecurityAlert.get(),
+            ModItems.sirenTrackStandardSiren.get(), ModItems.sirenTrackClassicSiren.get(),
+            ModItems.sirenTrackBankAlarm.get(), ModItems.sirenTrackBeepSiren.get(),
+            ModItems.sirenTrackContainerAlarm.get(), ModItems.sirenTrackSweepSiren.get(),
+            ModItems.sirenTrackMissileSiloSiren.get(), ModItems.sirenTrackAirRaidSiren.get(),
+            ModItems.sirenTrackNostromoSelfDestruct.get(), ModItems.sirenTrackEASAlarmScreech.get(),
+            ModItems.sirenTrackAPCPass.get(), ModItems.sirenTrackRazortrainHorn.get(),
         )
     }
 
@@ -532,6 +532,6 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.PLATES_GOLD)
             .addTag(NuclearTags.Items.WIRES_GOLD)
             .addTag(NuclearTags.Items.COILS_GOLD)
-            .add(ModItems.goldBulletAssembly)
+            .add(ModItems.goldBulletAssembly.get())
     }
 }

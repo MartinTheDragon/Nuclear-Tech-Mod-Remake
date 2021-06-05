@@ -17,7 +17,7 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.ItemStackHandler
 
-class SafeTileEntity : LockableLootTileEntity(TileEntityTypes.safeTileEntityType) {
+class SafeTileEntity : LockableLootTileEntity(TileEntityTypes.safeTileEntityType.get()) {
     private var items = NonNullList.withSize(15, ItemStack.EMPTY)
     private val inventory = object : ItemStackHandler(items) {
         override fun onContentsChanged(slot: Int) {

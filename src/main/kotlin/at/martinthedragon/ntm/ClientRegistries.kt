@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.Mod
@@ -20,17 +21,18 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 @Suppress("unused", "UNUSED_PARAMETER")
 @Mod.EventBusSubscriber(modid = Main.MODID, value = [Dist.CLIENT], bus = Mod.EventBusSubscriber.Bus.MOD)
 object ClientRegistries {
-    @SubscribeEvent @JvmStatic
+    @SubscribeEvent(priority = EventPriority.LOWEST) // so that the actual container types get registered before this
+    @JvmStatic
     fun registerScreens(event: RegistryEvent.Register<ContainerType<*>>) {
         Main.logger.debug("Registering screens")
-        ScreenManager.register(ContainerTypes.safeContainer, ::SafeScreen)
-        ScreenManager.register(ContainerTypes.sirenContainer, ::SirenScreen)
+        ScreenManager.register(ContainerTypes.safeContainer.get(), ::SafeScreen)
+        ScreenManager.register(ContainerTypes.sirenContainer.get(), ::SirenScreen)
     }
 
     @SubscribeEvent @JvmStatic
     fun clientSetup(event: FMLClientSetupEvent) {
         Main.logger.debug("Binding TERs")
-        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.steamPressHeadTileEntityType, ::SteamPressTopTileEntityRenderer)
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.steamPressHeadTileEntityType.get(), ::SteamPressTopTileEntityRenderer)
     }
 
     @SubscribeEvent @JvmStatic

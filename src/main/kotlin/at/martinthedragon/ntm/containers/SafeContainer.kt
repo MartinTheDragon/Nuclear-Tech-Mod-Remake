@@ -14,7 +14,7 @@ import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
-class SafeContainer(windowId: Int, playerInventory: PlayerInventory, val tileEntity: SafeTileEntity) : Container(ContainerTypes.safeContainer, windowId) {
+class SafeContainer(windowId: Int, playerInventory: PlayerInventory, val tileEntity: SafeTileEntity) : Container(ContainerTypes.safeContainer.get(), windowId) {
     init {
         val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
@@ -49,7 +49,7 @@ class SafeContainer(windowId: Int, playerInventory: PlayerInventory, val tileEnt
     }
 
     override fun stillValid(player: PlayerEntity): Boolean =
-        player.level.getBlockState(tileEntity.blockPos).block == ModBlocks.safe.block
+        player.level.getBlockState(tileEntity.blockPos).block == ModBlocks.safe.get().block
 
     override fun quickMoveStack(player: PlayerEntity, index: Int): ItemStack {
         var returnStack = ItemStack.EMPTY

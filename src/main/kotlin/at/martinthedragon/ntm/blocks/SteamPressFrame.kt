@@ -50,9 +50,9 @@ class SteamPressFrame(properties: Properties) : Block(properties) {
             val blockPos1 = pos.below()
             val blockPos2 = pos.above()
 
-            if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressBase)
+            if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressBase.get())
                 worldIn.destroyBlock(blockPos1, drop)
-            if (worldIn.getBlockState(blockPos2).block == ModBlocks.steamPressTop)
+            if (worldIn.getBlockState(blockPos2).block == ModBlocks.steamPressTop.get())
                 worldIn.destroyBlock(blockPos2, false)
         }
     }

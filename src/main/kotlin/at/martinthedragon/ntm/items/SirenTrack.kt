@@ -18,8 +18,4 @@ class SirenTrack(val sound: SoundEvent, val volume: Float, val loop: Boolean, tr
         .withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))
     val trackRange: ITextComponent = TranslationTextComponent("item.ntm.$track.range")
         .withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))
-
-    init {
-        setRegistryName(track)
-    }
 }
