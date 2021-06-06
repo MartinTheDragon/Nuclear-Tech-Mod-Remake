@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "polonium_ingot",
   "ingredient": {
     "tag": "forge:dusts/polonium"
   },

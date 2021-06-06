@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "schrabidium_ingot",
   "ingredient": {
     "item": "ntm:schrabidium_ore"
   },

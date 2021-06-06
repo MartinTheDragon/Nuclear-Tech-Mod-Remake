@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "th232_ingot",
+  "ingredient": {
+    "item": "ntm:thorium_crystals"
+  },
+  "result": {
+    "item": "ntm:th232_ingot",
+    "count": 2
+  },
+  "experience": 2.0,
+  "cookingtime": 200
+}

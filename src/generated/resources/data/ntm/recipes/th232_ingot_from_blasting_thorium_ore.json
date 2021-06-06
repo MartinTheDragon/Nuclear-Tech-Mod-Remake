@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "th232_ingot",
   "ingredient": {
     "tag": "forge:ores/thorium"
   },

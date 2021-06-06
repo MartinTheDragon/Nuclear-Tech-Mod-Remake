@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "niter",
   "ingredient": {
     "tag": "forge:ores/salpeter"
   },

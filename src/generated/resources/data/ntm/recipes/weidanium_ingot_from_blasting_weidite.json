@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "weidanium_ingot",
   "ingredient": {
     "item": "ntm:weidite"
   },

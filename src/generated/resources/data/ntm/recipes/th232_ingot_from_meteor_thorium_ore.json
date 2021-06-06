@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "th232_ingot",
+  "ingredient": {
+    "item": "ntm:meteor_thorium_ore"
+  },
+  "result": "ntm:th232_ingot",
+  "experience": 6.0,
+  "cookingtime": 200
+}

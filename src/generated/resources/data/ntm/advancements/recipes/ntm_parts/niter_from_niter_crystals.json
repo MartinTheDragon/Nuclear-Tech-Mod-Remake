@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:niter_from_niter_crystals"
+    ]
+  },
+  "criteria": {
+    "has_niter_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:niter_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:niter_from_niter_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_niter_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

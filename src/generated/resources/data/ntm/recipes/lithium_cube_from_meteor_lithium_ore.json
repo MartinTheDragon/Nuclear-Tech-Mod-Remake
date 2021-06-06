@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "lithium_cube",
   "ingredient": {
     "item": "ntm:meteor_lithium_ore"
   },

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "plutonium_ingot",
+  "ingredient": {
+    "item": "ntm:plutonium_crystals"
+  },
+  "result": {
+    "item": "ntm:plutonium_ingot",
+    "count": 2
+  },
+  "experience": 1.5,
+  "cookingtime": 200
+}

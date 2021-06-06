@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "fluorite",
   "ingredient": {
     "tag": "forge:ores/fluorite"
   },

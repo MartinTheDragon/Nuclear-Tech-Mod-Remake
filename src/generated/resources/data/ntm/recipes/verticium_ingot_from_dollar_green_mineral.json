@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "verticium_ingot",
   "ingredient": {
     "item": "ntm:dollar_green_mineral"
   },

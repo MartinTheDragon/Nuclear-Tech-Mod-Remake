@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "red_phosphorus",
   "ingredient": {
     "item": "ntm:nether_phosphorus_ore"
   },

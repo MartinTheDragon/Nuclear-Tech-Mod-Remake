@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "lignite",
   "ingredient": {
     "tag": "forge:ores/lignite"
   },

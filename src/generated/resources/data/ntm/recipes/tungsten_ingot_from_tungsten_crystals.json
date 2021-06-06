@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "tungsten_ingot",
+  "ingredient": {
+    "item": "ntm:tungsten_crystals"
+  },
+  "result": {
+    "item": "ntm:tungsten_ingot",
+    "count": 2
+  },
+  "experience": 0.75,
+  "cookingtime": 200
+}

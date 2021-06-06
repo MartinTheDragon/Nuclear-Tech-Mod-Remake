@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "desh_mix",
+  "ingredient": {
+    "item": "ntm:rare_earth_ore"
+  },
+  "result": "ntm:desh_mix",
+  "experience": 1.5,
+  "cookingtime": 100
+}

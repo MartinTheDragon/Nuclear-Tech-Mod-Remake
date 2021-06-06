@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "starmetal_ingot",
   "ingredient": {
     "item": "ntm:starmetal_ore"
   },

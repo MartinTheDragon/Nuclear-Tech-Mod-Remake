@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "neptunium_ingot",
   "ingredient": {
     "tag": "forge:dusts/neptunium"
   },

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "tungsten_ingot",
   "ingredient": {
     "tag": "forge:ores/tungsten"
   },

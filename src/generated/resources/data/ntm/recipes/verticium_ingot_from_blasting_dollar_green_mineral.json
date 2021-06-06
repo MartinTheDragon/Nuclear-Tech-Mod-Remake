@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "verticium_ingot",
   "ingredient": {
     "item": "ntm:dollar_green_mineral"
   },

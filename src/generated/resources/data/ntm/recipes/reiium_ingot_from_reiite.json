@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "reiium_ingot",
   "ingredient": {
     "item": "ntm:reiite"
   },

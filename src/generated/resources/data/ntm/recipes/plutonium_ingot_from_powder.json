@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "plutonium_ingot",
   "ingredient": {
     "tag": "forge:dusts/plutonium"
   },

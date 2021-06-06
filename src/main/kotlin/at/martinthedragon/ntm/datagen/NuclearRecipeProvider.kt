@@ -6,6 +6,8 @@ import at.martinthedragon.ntm.ModItems
 import at.martinthedragon.ntm.NuclearTags
 import net.minecraft.data.*
 import net.minecraft.item.Item
+import net.minecraft.item.Items
+import net.minecraft.item.crafting.IRecipeSerializer
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.tags.ITag
 import net.minecraft.util.IItemProvider
@@ -121,13 +123,21 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromOre(ModBlockItems.brightblendeOre.get(), ModItems.unobtainiumIngot.get(), 2.5F, consumer)
         ingotFromOre(ModBlockItems.dellite.get(), ModItems.daffergonIngot.get(), 2.5F, consumer)
         ingotFromOre(ModBlockItems.dollarGreenMineral.get(), ModItems.verticiumIngot.get(), 2.5F, consumer)
+        ingotFromOre(ModBlockItems.rareEarthOre.get(), ModItems.deshMix.get(), 3F, consumer)
         ingotFromOre(ModBlockItems.netherUraniumOre.get(), ModItems.uraniumIngot.get(), 2F, consumer)
         ingotFromOre(ModBlockItems.netherPlutoniumOre.get(), ModItems.plutoniumIngot.get(), 3F, consumer)
         ingotFromOre(ModBlockItems.netherTungstenOre.get(), ModItems.tungstenIngot.get(), 1.5F, consumer)
         ingotFromOre(ModBlockItems.netherSulfurOre.get(), ModItems.sulfur.get(), .4F, consumer)
         ingotFromOre(ModBlockItems.netherPhosphorusOre.get(), ModItems.redPhosphorus.get(), 1F, consumer)
         ingotFromOre(ModBlockItems.netherSchrabidiumOre.get(), ModItems.schrabidiumIngot.get(), 100F, consumer)
-        // TODO meteor
+        ingotFromMeteorOre(ModBlockItems.meteorUraniumOre.get(), ModItems.uraniumIngot.get(), 3F, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorThoriumOre.get(), ModItems.th232Ingot.get(), 6f, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorTitaniumOre.get(), ModItems.titaniumIngot.get(), 2.4F, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorSulfurOre.get(), ModItems.sulfur.get(), 1F, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorCopperOre.get(), ModItems.copperIngot.get(), 1.5F, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorTungstenOre.get(), ModItems.tungstenIngot.get(), 2.25F, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorAluminiumOre.get(), ModItems.aluminiumIngot.get(), 1.8F, consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorLeadOre.get(), ModItems.leadIngot.get(), 1.8F, consumer)
         ingotFromOre(ModBlockItems.meteorLithiumOre.get(), ModItems.lithiumCube.get(), 5F, consumer)
         ingotFromOre(ModBlockItems.starmetalOre.get(), ModItems.starmetalIngot.get(), 10F, consumer)
 
@@ -151,6 +161,31 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromPowder(NuclearTags.Items.DUSTS_THORIUM, ModItems.th232Ingot.get(), "thorium_powder", consumer)
         ingotFromPowder(NuclearTags.Items.DUSTS_TITANIUM, ModItems.titaniumIngot.get(), "titanium_powder", consumer)
         ingotFromPowder(NuclearTags.Items.DUSTS_TUNGSTEN, ModItems.tungstenIngot.get(), "tungsten_powder", consumer)
+
+        // crystals to ingots
+        ingotFromCrystals(ModItems.ironCrystals.get(), Items.IRON_INGOT, .7F, consumer)
+        ingotFromCrystals(ModItems.goldCrystals.get(), Items.GOLD_INGOT, 1F, consumer)
+        ingotFromCrystals(ModItems.redstoneCrystals.get(), Items.REDSTONE, .7F, consumer, 6)
+        ingotFromCrystals(ModItems.diamondCrystals.get(), Items.DIAMOND, 1F, consumer)
+        ingotFromCrystals(ModItems.uraniumCrystals.get(), ModItems.uraniumIngot.get(), 1F, consumer)
+        ingotFromCrystals(ModItems.thoriumCrystals.get(), ModItems.th232Ingot.get(), 2F, consumer)
+        ingotFromCrystals(ModItems.plutoniumCrystals.get(), ModItems.plutoniumIngot.get(), 1.5F, consumer)
+        ingotFromCrystals(ModItems.titaniumCrystals.get(), ModItems.titaniumIngot.get(), .8F, consumer)
+        ingotFromCrystals(ModItems.sulfurCrystals.get(), ModItems.sulfur.get(), .2F, consumer, 6)
+        ingotFromCrystals(ModItems.niterCrystals.get(), ModItems.niter.get(), .2F, consumer, 6)
+        ingotFromCrystals(ModItems.copperCrystals.get(), ModItems.copperIngot.get(), .5F, consumer)
+        ingotFromCrystals(ModItems.tungstenCrystals.get(), ModItems.tungstenIngot.get(), .75F, consumer)
+        ingotFromCrystals(ModItems.aluminiumCrystals.get(), ModItems.aluminiumIngot.get(), .6F, consumer)
+        ingotFromCrystals(ModItems.fluoriteCrystals.get(), ModItems.fluorite.get(), .2F, consumer, 6)
+        ingotFromCrystals(ModItems.berylliumCrystals.get(), ModItems.berylliumIngot.get(), .75F, consumer)
+        ingotFromCrystals(ModItems.leadCrystals.get(), ModItems.leadIngot.get(), .6F, consumer)
+        ingotFromCrystals(ModItems.schraraniumCrystals.get(), ModItems.schrabidiumNugget.get(), 5F, consumer)
+        ingotFromCrystals(ModItems.schrabidiumCrystals.get(), ModItems.schrabidiumIngot.get(), 50F, consumer)
+        ingotFromCrystals(ModItems.rareEarthCrystals.get(), ModItems.deshMix.get(), 3F, consumer)
+        ingotFromCrystals(ModItems.redPhosphorusCrystals.get(), ModItems.redPhosphorus.get(), 1F, consumer, 6)
+        ingotFromCrystals(ModItems.lithiumCrystals.get(), ModItems.lithiumCube.get(), 2F, consumer)
+        ingotFromCrystals(ModItems.starmetalCrystals.get(), ModItems.starmetalIngot.get(), 10F, consumer)
+        ingotFromCrystals(ModItems.trixiteCrystals.get(), ModItems.plutoniumIngot.get(), 3F, consumer, 4)
 
         // ingots to blocks
         blockFromIngots(ModBlockItems.uraniumBlock.get(), ModItems.uraniumIngot.get(), consumer)
@@ -203,7 +238,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         blockFromIngots(ModBlockItems.daffergonBlock.get(), ModItems.daffergonIngot.get(), consumer)
         blockFromIngots(ModBlockItems.verticiumBlock.get(), ModItems.verticiumIngot.get(), consumer)
 
-        CookingRecipeBuilder.smelting(Ingredient.of(ModItems.combineScrapMetal.get()), ModItems.combineSteelIngot.get(), .5F, 200).unlockedBy("has_combine_steel_scrap_metal", has(ModItems.combineScrapMetal.get())).save(consumer, ResourceLocation(Main.MODID, "combine_steel_ingot_from_combine_steel_scrap_metal"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.combineScrapMetal.get()), .5F, 200, ModItems.combineSteelIngot.get()).group("combine_steel_ingot").unlockedBy("has_combine_steel_scrap_metal", has(ModItems.combineScrapMetal.get())).save(consumer, ResourceLocation(Main.MODID, "combine_steel_ingot_from_combine_steel_scrap_metal"))
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type
@@ -216,7 +251,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapelessRecipeBuilder.shapeless(result, 9).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
     }
 
-    // we need the ingredient name because tags aren't bound yet at this point
+    // we need the ingredient name because tags haven't been bound yet at this point
     private fun ingotFromBlock(result: IItemProvider, ingredient: ITag<Item>, ingredientName: String, consumer: Consumer<IFinishedRecipe>) {
         ShapelessRecipeBuilder.shapeless(result, 9).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_$ingredientName"))
     }
@@ -230,21 +265,30 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun ingotFromOre(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>) {
-        CookingRecipeBuilder.smelting(Ingredient.of(ingredient), result, experience, 200).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
-        CookingRecipeBuilder.blasting(Ingredient.of(ingredient), result, experience / 2, 100).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_blasting_${ingredient.asItem().registryName!!.path}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = IRecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_blasting_${ingredient.asItem().registryName!!.path}"))
     }
 
     private fun ingotFromOre(ingredient: ITag<Item>, result: IItemProvider, experience: Float, ingredientName: String, consumer: Consumer<IFinishedRecipe>) {
-        CookingRecipeBuilder.smelting(Ingredient.of(ingredient), result, experience, 200).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_$ingredientName"))
-        CookingRecipeBuilder.blasting(Ingredient.of(ingredient), result, experience / 2, 100).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_blasting_$ingredientName"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_$ingredientName"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = IRecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_blasting_$ingredientName"))
+    }
+
+    private fun ingotFromMeteorOre(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = IRecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_blasting_${ingredient.asItem().registryName!!.path}"))
     }
 
     private fun ingotFromPowder(ingredient: IItemProvider, result: IItemProvider, consumer: Consumer<IFinishedRecipe>) {
-        CookingRecipeBuilder.smelting(Ingredient.of(ingredient), result, .1F, 200).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_powder"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_powder"))
     }
 
     private fun ingotFromPowder(ingredient: ITag<Item>, result: IItemProvider, ingredientName: String, consumer: Consumer<IFinishedRecipe>) {
-        CookingRecipeBuilder.smelting(Ingredient.of(ingredient), result, .1F, 200).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_powder"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_powder"))
+    }
+
+    private fun ingotFromCrystals(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>, resultCount: Int = 2) {
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result, resultCount).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(Main.MODID, "${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
     }
 
     private fun blockFromIngots(result: IItemProvider, ingredient: IItemProvider, consumer: Consumer<IFinishedRecipe>) {

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "high_speed_steel_ingot",
   "ingredient": {
     "item": "ntm:high_speed_steel_powder"
   },

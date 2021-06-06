@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:tungsten_ingot_from_tungsten_crystals"
+    ]
+  },
+  "criteria": {
+    "has_tungsten_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:tungsten_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:tungsten_ingot_from_tungsten_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

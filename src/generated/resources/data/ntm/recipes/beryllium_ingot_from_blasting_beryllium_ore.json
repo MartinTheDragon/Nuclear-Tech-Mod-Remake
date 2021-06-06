@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "beryllium_ingot",
   "ingredient": {
     "tag": "forge:ores/beryllium"
   },

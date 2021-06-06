@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "combine_steel_ingot",
   "ingredient": {
     "item": "ntm:combine_scrap_metal"
   },

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "magnetized_tungsten_ingot",
   "ingredient": {
     "item": "ntm:magnetized_tungsten_powder"
   },

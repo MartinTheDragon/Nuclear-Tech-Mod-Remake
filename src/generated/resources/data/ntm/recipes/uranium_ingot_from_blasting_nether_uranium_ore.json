@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "uranium_ingot",
   "ingredient": {
     "item": "ntm:nether_uranium_ore"
   },

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "lead_ingot",
   "ingredient": {
     "tag": "forge:ores/lead"
   },

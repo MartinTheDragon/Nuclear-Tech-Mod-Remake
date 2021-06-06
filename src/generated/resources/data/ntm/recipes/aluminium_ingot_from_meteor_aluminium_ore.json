@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "aluminium_ingot",
+  "ingredient": {
+    "item": "ntm:meteor_aluminium_ore"
+  },
+  "result": "ntm:aluminium_ingot",
+  "experience": 1.8,
+  "cookingtime": 200
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:schrabidium_nugget_from_schraranium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_schraranium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:schraranium_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:schrabidium_nugget_from_schraranium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schraranium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "diamond",
+  "ingredient": {
+    "item": "ntm:diamond_crystals"
+  },
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 2
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

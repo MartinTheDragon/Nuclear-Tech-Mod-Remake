@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "australium_ingot",
   "ingredient": {
     "item": "ntm:australian_ore"
   },

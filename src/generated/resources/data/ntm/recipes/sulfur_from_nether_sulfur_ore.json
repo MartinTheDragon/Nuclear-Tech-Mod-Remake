@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "sulfur",
   "ingredient": {
     "item": "ntm:nether_sulfur_ore"
   },

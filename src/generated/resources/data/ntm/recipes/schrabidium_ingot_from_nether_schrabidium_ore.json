@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "schrabidium_ingot",
   "ingredient": {
     "item": "ntm:nether_schrabidium_ore"
   },

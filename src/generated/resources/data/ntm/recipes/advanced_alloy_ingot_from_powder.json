@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "advanced_alloy_ingot",
   "ingredient": {
     "item": "ntm:advanced_alloy_powder"
   },

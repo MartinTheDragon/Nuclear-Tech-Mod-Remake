@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "gold_ingot",
+  "ingredient": {
+    "item": "ntm:gold_crystals"
+  },
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 2
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

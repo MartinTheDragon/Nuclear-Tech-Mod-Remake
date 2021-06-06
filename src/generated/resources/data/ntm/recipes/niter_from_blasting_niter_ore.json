@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "niter",
   "ingredient": {
     "tag": "forge:ores/salpeter"
   },

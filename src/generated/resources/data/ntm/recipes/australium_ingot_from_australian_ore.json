@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "australium_ingot",
   "ingredient": {
     "item": "ntm:australian_ore"
   },

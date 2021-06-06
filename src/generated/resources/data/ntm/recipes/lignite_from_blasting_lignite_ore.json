@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "lignite",
   "ingredient": {
     "tag": "forge:ores/lignite"
   },

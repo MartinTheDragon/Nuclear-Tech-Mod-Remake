@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "tungsten_ingot",
   "ingredient": {
     "tag": "forge:dusts/tungsten"
   },

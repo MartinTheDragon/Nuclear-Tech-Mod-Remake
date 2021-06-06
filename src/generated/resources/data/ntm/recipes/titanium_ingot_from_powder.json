@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "titanium_ingot",
   "ingredient": {
     "tag": "forge:dusts/titanium"
   },

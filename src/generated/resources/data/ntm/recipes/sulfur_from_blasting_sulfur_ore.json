@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "sulfur",
   "ingredient": {
     "tag": "forge:ores/sulfur"
   },

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "polymer_ingot",
   "ingredient": {
     "tag": "forge:dusts/polymer"
   },

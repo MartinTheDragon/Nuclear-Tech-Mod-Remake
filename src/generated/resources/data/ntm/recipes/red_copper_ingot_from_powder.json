@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "group": "red_copper_ingot",
   "ingredient": {
     "item": "ntm:red_copper_powder"
   },

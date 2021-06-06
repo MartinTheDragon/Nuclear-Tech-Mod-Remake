@@ -1,5 +1,6 @@
 {
   "type": "minecraft:blasting",
+  "group": "daffergon_ingot",
   "ingredient": {
     "item": "ntm:dellite"
   },
