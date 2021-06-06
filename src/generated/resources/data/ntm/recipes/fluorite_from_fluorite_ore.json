@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/fluorite"
+  },
+  "result": "ntm:fluorite",
+  "experience": 0.2,
+  "cookingtime": 200
+}

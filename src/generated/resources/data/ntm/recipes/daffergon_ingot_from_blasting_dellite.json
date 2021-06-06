@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:dellite"
+  },
+  "result": "ntm:daffergon_ingot",
+  "experience": 1.25,
+  "cookingtime": 100
+}

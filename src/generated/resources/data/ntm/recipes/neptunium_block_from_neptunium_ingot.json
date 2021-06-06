@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "neptunium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/neptunium"
+    }
+  },
+  "result": {
+    "item": "ntm:neptunium_block"
+  }
+}

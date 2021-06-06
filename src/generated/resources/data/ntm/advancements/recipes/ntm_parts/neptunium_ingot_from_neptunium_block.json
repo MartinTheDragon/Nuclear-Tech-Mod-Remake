@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:neptunium_ingot_from_neptunium_block"
+    ]
+  },
+  "criteria": {
+    "has_neptunium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/neptunium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:neptunium_ingot_from_neptunium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_neptunium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

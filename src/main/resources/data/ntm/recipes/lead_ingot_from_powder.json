@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:lead_powder"
-  },
-  "result": "ntm:lead_ingot",
-  "experience": 0.5
-}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:thorium_fuel_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_thorium_fuel_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:thorium_fuel_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:thorium_fuel_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium_fuel_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

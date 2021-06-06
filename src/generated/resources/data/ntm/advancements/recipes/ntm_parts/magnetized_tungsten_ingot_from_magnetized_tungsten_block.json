@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:magnetized_tungsten_ingot_from_magnetized_tungsten_block"
+    ]
+  },
+  "criteria": {
+    "has_magnetized_tungsten_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:magnetized_tungsten_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:magnetized_tungsten_ingot_from_magnetized_tungsten_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magnetized_tungsten_block",
+      "has_the_recipe"
+    ]
+  ]
+}

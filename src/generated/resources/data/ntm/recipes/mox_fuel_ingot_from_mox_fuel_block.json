@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mox_fuel_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/mox"
+    }
+  ],
+  "result": {
+    "item": "ntm:mox_fuel_ingot",
+    "count": 9
+  }
+}

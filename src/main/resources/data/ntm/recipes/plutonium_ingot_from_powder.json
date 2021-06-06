@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "group": "plutonium_ingot",
-  "ingredient": {
-    "item": "ntm:plutonium_powder"
-  },
-  "result": "ntm:plutonium_ingot",
-  "cookingtime": 200
-}

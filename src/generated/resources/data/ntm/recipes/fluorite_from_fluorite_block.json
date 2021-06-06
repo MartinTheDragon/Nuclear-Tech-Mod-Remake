@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "fluorite",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/fluorite"
+    }
+  ],
+  "result": {
+    "item": "ntm:fluorite",
+    "count": 9
+  }
+}

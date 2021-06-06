@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "group": "th232_ingot",
-  "ingredient": {
-    "item": "ntm:thorium_powder"
-  },
-  "result": "ntm:th232_ingot",
-  "cookingtime": 200
-}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:advanced_alloy_ingot_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_advanced_alloy_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:advanced_alloy_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:advanced_alloy_ingot_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_advanced_alloy_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

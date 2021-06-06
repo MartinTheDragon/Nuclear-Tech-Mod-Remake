@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:neptunium_powder"
-  },
-  "result": "ntm:neptunium_ingot",
-  "cookingtime": 200
-}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:fluorite_block_from_fluorite"
+    ]
+  },
+  "criteria": {
+    "has_fluorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/fluorite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:fluorite_block_from_fluorite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fluorite",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/sulfur"
+  },
+  "result": "ntm:sulfur",
+  "experience": 0.1,
+  "cookingtime": 100
+}

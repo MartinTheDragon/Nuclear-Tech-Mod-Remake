@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "niter_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dusts/salpeter"
+    }
+  },
+  "result": {
+    "item": "ntm:niter_block"
+  }
+}

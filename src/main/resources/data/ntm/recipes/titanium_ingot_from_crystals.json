@@ -1,6 +1,5 @@
 {
   "type": "minecraft:smelting",
-  "group": "titanium_ingot",
   "ingredient": {
     "item": "ntm:titanium_crystals"
   },

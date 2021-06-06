@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:pu238_block_from_pu238_ingot"
+    ]
+  },
+  "criteria": {
+    "has_pu238_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:pu238_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:pu238_block_from_pu238_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pu238_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

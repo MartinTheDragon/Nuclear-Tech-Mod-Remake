@@ -1,6 +1,5 @@
 {
   "type": "minecraft:smelting",
-  "group": "th232_ingot",
   "ingredient": {
     "item": "ntm:thorium_crystals"
   },

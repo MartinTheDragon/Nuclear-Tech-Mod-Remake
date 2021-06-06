@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "beryllium_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/beryllium"
+    }
+  ],
+  "result": {
+    "item": "ntm:beryllium_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "starmetal_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ntm:starmetal_ingot"
+    }
+  },
+  "result": {
+    "item": "ntm:starmetal_block"
+  }
+}

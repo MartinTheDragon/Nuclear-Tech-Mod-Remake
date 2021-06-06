@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:reiite"
+  },
+  "result": "ntm:reiium_ingot",
+  "experience": 1.25,
+  "cookingtime": 100
+}

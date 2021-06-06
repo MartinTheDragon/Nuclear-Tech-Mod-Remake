@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:red_copper_powder"
-  },
-  "result": "ntm:red_copper_ingot",
-  "experience": 0.5
-}

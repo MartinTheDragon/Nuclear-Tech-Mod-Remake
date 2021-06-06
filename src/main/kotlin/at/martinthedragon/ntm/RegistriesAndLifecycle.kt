@@ -6,15 +6,13 @@ import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.ntm.containers.ContainerTypes
 import at.martinthedragon.ntm.datagen.BlockTagProvider
 import at.martinthedragon.ntm.datagen.ItemTagProvider
+import at.martinthedragon.ntm.datagen.NuclearRecipeProvider
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
 import net.minecraft.block.Block
-import net.minecraft.inventory.container.Container
 import net.minecraft.inventory.container.ContainerType
 import net.minecraft.item.Item
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
-import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
@@ -67,6 +65,7 @@ object RegistriesAndLifecycle {
             val blockTagProvider = BlockTagProvider(dataGenerator, existingFileHelper)
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
+            dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
         }
     }
 }

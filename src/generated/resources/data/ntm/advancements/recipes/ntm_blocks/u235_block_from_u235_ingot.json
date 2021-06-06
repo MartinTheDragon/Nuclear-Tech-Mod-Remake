@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:u235_block_from_u235_ingot"
+    ]
+  },
+  "criteria": {
+    "has_u235_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:u235_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:u235_block_from_u235_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_u235_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

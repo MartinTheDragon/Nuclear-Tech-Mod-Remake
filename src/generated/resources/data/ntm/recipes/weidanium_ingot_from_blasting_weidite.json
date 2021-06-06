@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:weidite"
+  },
+  "result": "ntm:weidanium_ingot",
+  "experience": 1.25,
+  "cookingtime": 100
+}

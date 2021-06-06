@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/fluorite"
+  },
+  "result": "ntm:fluorite",
+  "experience": 0.1,
+  "cookingtime": 100
+}

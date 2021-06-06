@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:nether_plutonium_ore"
+  },
+  "result": "ntm:plutonium_ingot",
+  "experience": 3.0,
+  "cookingtime": 200
+}

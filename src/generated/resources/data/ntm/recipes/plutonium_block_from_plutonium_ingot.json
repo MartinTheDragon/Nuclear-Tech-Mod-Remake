@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plutonium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ntm:plutonium_ingot"
+    }
+  },
+  "result": {
+    "item": "ntm:plutonium_block"
+  }
+}

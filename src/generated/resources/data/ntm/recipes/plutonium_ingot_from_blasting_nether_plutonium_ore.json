@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:nether_plutonium_ore"
+  },
+  "result": "ntm:plutonium_ingot",
+  "experience": 1.5,
+  "cookingtime": 100
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "verticium_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:verticium_block"
+    }
+  ],
+  "result": {
+    "item": "ntm:verticium_ingot",
+    "count": 9
+  }
+}

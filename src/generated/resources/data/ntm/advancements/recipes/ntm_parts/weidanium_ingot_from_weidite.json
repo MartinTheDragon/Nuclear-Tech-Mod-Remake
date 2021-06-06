@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:weidanium_ingot_from_weidite"
+    ]
+  },
+  "criteria": {
+    "has_weidite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:weidite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:weidanium_ingot_from_weidite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_weidite",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:nether_sulfur_ore"
+  },
+  "result": "ntm:sulfur",
+  "experience": 0.2,
+  "cookingtime": 100
+}

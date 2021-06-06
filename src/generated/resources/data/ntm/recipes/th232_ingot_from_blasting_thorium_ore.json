@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/thorium"
+  },
+  "result": "ntm:th232_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

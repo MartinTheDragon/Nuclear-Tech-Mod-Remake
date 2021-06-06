@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:daffergon_ingot_from_blasting_dellite"
+    ]
+  },
+  "criteria": {
+    "has_dellite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:dellite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:daffergon_ingot_from_blasting_dellite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dellite",
+      "has_the_recipe"
+    ]
+  ]
+}

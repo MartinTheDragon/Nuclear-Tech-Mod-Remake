@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:starmetal_ore"
+  },
+  "result": "ntm:starmetal_ingot",
+  "experience": 10.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "tungsten_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/tungsten"
+    }
+  ],
+  "result": {
+    "item": "ntm:tungsten_ingot",
+    "count": 9
+  }
+}

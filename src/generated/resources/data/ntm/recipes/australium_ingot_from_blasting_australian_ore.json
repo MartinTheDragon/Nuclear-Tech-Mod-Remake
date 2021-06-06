@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:australian_ore"
+  },
+  "result": "ntm:australium_ingot",
+  "experience": 1.25,
+  "cookingtime": 100
+}

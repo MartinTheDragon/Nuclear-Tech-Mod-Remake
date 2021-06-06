@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:dellite"
+  },
+  "result": "ntm:daffergon_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

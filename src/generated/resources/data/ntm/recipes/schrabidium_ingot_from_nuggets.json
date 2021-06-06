@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "schrabidium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ntm:schrabidium_fuel_nugget"
+    }
+  },
+  "result": {
+    "item": "ntm:schrabidium_ingot"
+  }
+}

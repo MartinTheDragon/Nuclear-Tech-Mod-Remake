@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "reiium_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:reiium_block"
+    }
+  ],
+  "result": {
+    "item": "ntm:reiium_ingot",
+    "count": 9
+  }
+}

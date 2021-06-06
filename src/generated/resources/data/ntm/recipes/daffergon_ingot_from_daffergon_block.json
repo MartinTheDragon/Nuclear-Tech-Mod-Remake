@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "daffergon_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:daffergon_block"
+    }
+  ],
+  "result": {
+    "item": "ntm:daffergon_ingot",
+    "count": 9
+  }
+}

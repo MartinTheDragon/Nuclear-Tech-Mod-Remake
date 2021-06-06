@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:australian_ore"
+  },
+  "result": "ntm:australium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

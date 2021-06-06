@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/lignite"
+  },
+  "result": "ntm:lignite",
+  "experience": 0.05,
+  "cookingtime": 200
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:australium_ingot_from_australium_block"
+    ]
+  },
+  "criteria": {
+    "has_australium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:australium_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:australium_ingot_from_australium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_australium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:nether_tungsten_ore"
+  },
+  "result": "ntm:tungsten_ingot",
+  "experience": 0.75,
+  "cookingtime": 100
+}

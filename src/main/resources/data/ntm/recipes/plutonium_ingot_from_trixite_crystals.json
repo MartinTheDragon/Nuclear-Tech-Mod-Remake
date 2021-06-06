@@ -1,6 +1,5 @@
 {
   "type": "minecraft:smelting",
-  "group": "plutonium_ingot",
   "ingredient": {
     "item": "ntm:trixite_crystals"
   },

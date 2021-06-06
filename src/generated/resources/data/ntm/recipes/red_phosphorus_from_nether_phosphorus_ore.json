@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:nether_phosphorus_ore"
+  },
+  "result": "ntm:red_phosphorus",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:blasting",
-  "group": "titanium_ingot",
   "ingredient": {
     "item": "ntm:meteor_titanium_ore"
   },

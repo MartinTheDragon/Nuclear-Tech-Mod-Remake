@@ -1,6 +1,5 @@
 {
   "type": "minecraft:blasting",
-  "group": "copper_ingot",
   "ingredient": {
     "item": "ntm:meteor_copper_ore"
   },

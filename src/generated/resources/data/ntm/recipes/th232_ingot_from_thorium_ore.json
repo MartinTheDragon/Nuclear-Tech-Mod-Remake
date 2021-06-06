@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/thorium"
+  },
+  "result": "ntm:th232_ingot",
+  "experience": 2.0,
+  "cookingtime": 200
+}

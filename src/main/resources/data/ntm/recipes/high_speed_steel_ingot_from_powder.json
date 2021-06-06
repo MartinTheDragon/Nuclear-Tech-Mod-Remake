@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:high_speed_steel_powder"
-  },
-  "result": "ntm:high_speed_steel_ingot",
-  "experience": 0.5
-}

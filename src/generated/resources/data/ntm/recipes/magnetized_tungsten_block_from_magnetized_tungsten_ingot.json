@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "magnetized_tungsten_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ntm:magnetized_tungsten_ingot"
+    }
+  },
+  "result": {
+    "item": "ntm:magnetized_tungsten_block"
+  }
+}

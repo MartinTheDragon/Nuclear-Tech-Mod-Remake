@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:meteor_lithium_ore"
+  },
+  "result": "ntm:lithium_cube",
+  "experience": 5.0,
+  "cookingtime": 200
+}

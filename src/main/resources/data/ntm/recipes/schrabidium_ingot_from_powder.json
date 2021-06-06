@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:schrabidium_powder"
-  },
-  "result": "ntm:schrabidium_ingot",
-  "experience": 1
-}

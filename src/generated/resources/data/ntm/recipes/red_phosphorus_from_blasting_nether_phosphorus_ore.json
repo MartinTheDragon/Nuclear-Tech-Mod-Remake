@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:nether_phosphorus_ore"
+  },
+  "result": "ntm:red_phosphorus",
+  "experience": 0.5,
+  "cookingtime": 100
+}

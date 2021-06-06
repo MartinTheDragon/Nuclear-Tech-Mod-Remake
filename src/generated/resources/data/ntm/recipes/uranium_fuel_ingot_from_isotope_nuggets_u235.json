@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "uranium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "ntm:u238_nugget"
+    },
+    {
+      "item": "ntm:u238_nugget"
+    },
+    {
+      "item": "ntm:u238_nugget"
+    },
+    {
+      "item": "ntm:u238_nugget"
+    },
+    {
+      "item": "ntm:u238_nugget"
+    },
+    {
+      "item": "ntm:u238_nugget"
+    },
+    {
+      "item": "ntm:u235_nugget"
+    },
+    {
+      "item": "ntm:u235_nugget"
+    },
+    {
+      "item": "ntm:u235_nugget"
+    }
+  ],
+  "result": {
+    "item": "ntm:uranium_fuel_ingot"
+  }
+}

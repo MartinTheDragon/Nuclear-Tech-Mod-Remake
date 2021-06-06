@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/beryllium"
+  },
+  "result": "ntm:beryllium_ingot",
+  "experience": 0.375,
+  "cookingtime": 100
+}

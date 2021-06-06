@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:nuclear_waste_block_from_nuclear_wastes_any"
+    ]
+  },
+  "criteria": {
+    "has_nuclear_wastes_any": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "ntm:cold_wastes"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:nuclear_waste_block_from_nuclear_wastes_any"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nuclear_wastes_any",
+      "has_the_recipe"
+    ]
+  ]
+}

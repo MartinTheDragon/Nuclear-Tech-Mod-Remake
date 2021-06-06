@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:reiium_ingot_from_reiite"
+    ]
+  },
+  "criteria": {
+    "has_reiite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:reiite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:reiium_ingot_from_reiite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_reiite",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:blasting",
-  "group": "th232_ingot",
   "ingredient": {
     "item": "ntm:meteor_thorium_ore"
   },

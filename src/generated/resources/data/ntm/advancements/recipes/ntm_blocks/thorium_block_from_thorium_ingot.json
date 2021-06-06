@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:thorium_block_from_thorium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_thorium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/thorium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:thorium_block_from_thorium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

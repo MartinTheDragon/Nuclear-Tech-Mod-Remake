@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:brightblende_ore"
+  },
+  "result": "ntm:unobtainium_ingot",
+  "experience": 1.25,
+  "cookingtime": 100
+}

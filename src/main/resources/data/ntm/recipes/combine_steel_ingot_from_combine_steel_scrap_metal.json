@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:combine_steel_scrap_metal"
-  },
-  "result": "ntm:combine_steel_ingot",
-  "experience": 0.5
-}

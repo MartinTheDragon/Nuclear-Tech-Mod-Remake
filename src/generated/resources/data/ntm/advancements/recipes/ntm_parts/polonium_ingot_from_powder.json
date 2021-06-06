@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:polonium_ingot_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_polonium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/polonium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:polonium_ingot_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polonium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

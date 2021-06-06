@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:schrabidium_ore"
+  },
+  "result": "ntm:schrabidium_ingot",
+  "experience": 25.0,
+  "cookingtime": 100
+}

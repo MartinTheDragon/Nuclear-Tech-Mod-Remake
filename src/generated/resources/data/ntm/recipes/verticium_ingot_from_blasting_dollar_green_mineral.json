@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:dollar_green_mineral"
+  },
+  "result": "ntm:verticium_ingot",
+  "experience": 1.25,
+  "cookingtime": 100
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:u233_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_u233_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:u233_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:u233_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_u233_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

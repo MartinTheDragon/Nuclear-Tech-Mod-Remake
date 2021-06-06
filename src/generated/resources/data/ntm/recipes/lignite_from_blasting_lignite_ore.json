@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:ores/lignite"
+  },
+  "result": "ntm:lignite",
+  "experience": 0.025,
+  "cookingtime": 100
+}

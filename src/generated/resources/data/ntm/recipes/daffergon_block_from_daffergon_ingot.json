@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "daffergon_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ntm:daffergon_ingot"
+    }
+  },
+  "result": {
+    "item": "ntm:daffergon_block"
+  }
+}

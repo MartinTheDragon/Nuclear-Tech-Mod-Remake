@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:brightblende_ore"
+  },
+  "result": "ntm:unobtainium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

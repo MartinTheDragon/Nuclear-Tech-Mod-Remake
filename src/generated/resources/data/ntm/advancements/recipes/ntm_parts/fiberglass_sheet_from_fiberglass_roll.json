@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:fiberglass_sheet_from_fiberglass_roll"
+    ]
+  },
+  "criteria": {
+    "has_fiberglass_roll": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:fiberglass_roll"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:fiberglass_sheet_from_fiberglass_roll"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fiberglass_roll",
+      "has_the_recipe"
+    ]
+  ]
+}

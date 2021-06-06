@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ntm:nether_schrabidium_ore"
+  },
+  "result": "ntm:schrabidium_ingot",
+  "experience": 100.0,
+  "cookingtime": 200
+}

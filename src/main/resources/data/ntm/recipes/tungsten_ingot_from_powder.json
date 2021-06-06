@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "ntm:tungsten_powder"
-  },
-  "result": "ntm:tungsten_ingot",
-  "experience": 0.5
-}

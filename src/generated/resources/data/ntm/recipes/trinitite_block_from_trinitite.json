@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "trinitite_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ntm:trinitite"
+    }
+  },
+  "result": {
+    "item": "ntm:trinitite_block"
+  }
+}

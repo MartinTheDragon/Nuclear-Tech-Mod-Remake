@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ntm:meteor_lithium_ore"
+  },
+  "result": "ntm:lithium_cube",
+  "experience": 2.5,
+  "cookingtime": 100
+}

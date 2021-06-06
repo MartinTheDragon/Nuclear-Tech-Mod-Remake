@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "th232_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/thorium"
+    }
+  ],
+  "result": {
+    "item": "ntm:th232_ingot",
+    "count": 9
+  }
+}

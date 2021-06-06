@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:tungsten_block_from_tungsten_ingot"
+    ]
+  },
+  "criteria": {
+    "has_tungsten_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/tungsten"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:tungsten_block_from_tungsten_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

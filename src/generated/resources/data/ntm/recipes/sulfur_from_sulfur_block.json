@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "sulfur",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/sulfur"
+    }
+  ],
+  "result": {
+    "item": "ntm:sulfur",
+    "count": 9
+  }
+}

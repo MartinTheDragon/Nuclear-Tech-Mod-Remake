@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ntm:verticium_block_from_verticium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_verticium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ntm:verticium_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ntm:verticium_block_from_verticium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_verticium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}
