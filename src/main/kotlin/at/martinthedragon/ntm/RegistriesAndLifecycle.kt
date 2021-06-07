@@ -6,6 +6,7 @@ import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.ntm.containers.ContainerTypes
 import at.martinthedragon.ntm.datagen.BlockTagProvider
 import at.martinthedragon.ntm.datagen.ItemTagProvider
+import at.martinthedragon.ntm.datagen.NuclearLootProvider
 import at.martinthedragon.ntm.datagen.NuclearRecipeProvider
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
 import net.minecraft.block.Block
@@ -66,6 +67,7 @@ object RegistriesAndLifecycle {
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
             dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
+            dataGenerator.addProvider(NuclearLootProvider(dataGenerator))
         }
     }
 }
