@@ -50,6 +50,6 @@ class SteamPressTopTileEntityRenderer(tileEntityRendererDispatcher: TileEntityRe
     }
 
     companion object {
-        val PRESS_HEAD_RESOURCE_LOCATION = RenderMaterial(PlayerContainer.BLOCK_ATLAS, ResourceLocation(Main.MODID, "blocks/machines/steam_press/steam_press_head"))
+        val PRESS_HEAD_RESOURCE_LOCATION = RenderMaterial(PlayerContainer.BLOCK_ATLAS, ResourceLocation(Main.MODID, "block/steam_press/steam_press_head"))
     }
 }

@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "ntm:items/circuits/military_grade_circuit_board_tier_4"
-  }
-}

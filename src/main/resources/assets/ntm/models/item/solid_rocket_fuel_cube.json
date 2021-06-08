@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "ntm:items/cubes/solid_rocket_fuel_cube"
-  }
-}
