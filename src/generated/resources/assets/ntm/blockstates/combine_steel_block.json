@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ntm:block/combine_steel_block"
+    }
+  }
+}

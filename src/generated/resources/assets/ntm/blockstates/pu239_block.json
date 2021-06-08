@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ntm:block/pu239_block"
+    }
+  }
+}

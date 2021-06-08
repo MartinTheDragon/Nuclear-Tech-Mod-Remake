@@ -1,8 +1,0 @@
-{
-  "forge_marker": 1,
-  "variants": {
-    "": {
-      "model": "ntm:block/deco_blocks/tungsten_deco_block"
-    }
-  }
-}

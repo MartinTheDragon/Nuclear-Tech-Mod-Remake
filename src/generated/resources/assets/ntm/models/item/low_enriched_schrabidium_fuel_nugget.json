@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ntm:item/low_enriched_schrabidium_fuel_nugget"
+  }
+}

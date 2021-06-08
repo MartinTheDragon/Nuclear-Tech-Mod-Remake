@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ntm:block/nuclear_waste_block"
+    }
+  }
+}

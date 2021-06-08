@@ -39,7 +39,7 @@ object ClientRegistries {
     fun registerTextureInAtlas(event: TextureStitchEvent.Pre) {
         if (event.map.location() == PlayerContainer.BLOCK_ATLAS) {
             Main.logger.debug("Adding atlas textures")
-            event.addSprite(ResourceLocation(Main.MODID, "blocks/machines/steam_press/steam_press_head"))
+            event.addSprite(ResourceLocation(Main.MODID, "block/steam_press/steam_press_head"))
         }
     }
 }

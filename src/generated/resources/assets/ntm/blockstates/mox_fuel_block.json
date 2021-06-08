@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ntm:block/mox_fuel_block"
+    }
+  }
+}

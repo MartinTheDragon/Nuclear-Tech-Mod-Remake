@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "ntm:items/warheads/small_incendiary_warhead"
-  }
-}

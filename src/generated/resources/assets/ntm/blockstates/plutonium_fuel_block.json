@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ntm:block/plutonium_fuel_block"
+    }
+  }
+}

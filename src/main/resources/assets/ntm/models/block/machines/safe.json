@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "front": "ntm:blocks/machines/safe_front",
-    "side": "ntm:blocks/machines/safe_side",
-    "top": "#side"
-  }
-}

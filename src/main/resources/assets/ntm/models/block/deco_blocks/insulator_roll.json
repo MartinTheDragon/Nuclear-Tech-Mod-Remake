@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "ntm:blocks/deco_blocks/insulator_roll_top",
-    "side": "ntm:blocks/deco_blocks/insulator_roll"
-  }
-}
