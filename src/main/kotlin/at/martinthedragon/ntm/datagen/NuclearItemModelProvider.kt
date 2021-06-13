@@ -2,7 +2,6 @@ package at.martinthedragon.ntm.datagen
 
 import at.martinthedragon.ntm.Main
 import at.martinthedragon.ntm.ModBlockItems
-import at.martinthedragon.ntm.ModBlocks
 import at.martinthedragon.ntm.ModItems
 import net.minecraft.data.DataGenerator
 import net.minecraft.item.Item

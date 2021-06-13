@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent
 
+@Suppress("unused", "UNUSED_PARAMETER")
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object EventSubscribers {
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -35,7 +36,7 @@ object EventSubscribers {
 
     @SubscribeEvent
     @JvmStatic
-    fun attachCapabilitiesEvent(event: AttachCapabilitiesEvent<Entity>) { // What the hell this is literal sorcery!!!
+    fun attachCapabilitiesEvent(event: AttachCapabilitiesEvent<Entity>) {
         if (event.`object` is LivingEntity)
             event.addCapability(ResourceLocation(Main.MODID, "irradiation_cap"), IrradiationCapabilityProvider())
     }

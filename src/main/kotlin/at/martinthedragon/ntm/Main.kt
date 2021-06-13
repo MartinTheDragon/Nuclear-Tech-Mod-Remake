@@ -6,10 +6,6 @@ import net.minecraftforge.fml.common.Mod
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 
-typealias CT = CreativeTabs
-typealias B = ModBlocks
-typealias BI = ModBlockItems
-
 @Mod(Main.MODID)
 class Main {
     init {
@@ -19,7 +15,6 @@ class Main {
 
     companion object {
         const val MODID = "ntm"
-
-        val logger: Logger = LogManager.getLogger()
+        val LOGGER: Logger = LogManager.getLogger()
     }
 }

@@ -1,11 +1,8 @@
-import net.minecraftforge.gradle.common.task.SignJar
-
 buildscript {
     ext.kotlin_version = '1.5.10'
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
@@ -203,45 +200,3 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
-
-tasks.register('signJar', SignJar) {
-    doLast {
-        dependsOn "reobfJar"
-
-        Properties properties = new Properties()
-        properties.load(project.file("local.properties").newDataInputStream())
-
-        // Skips if the keyStore property is missing.
-//    onlyIf {
-//        properties.hasProperty('keyStore')
-//    }
-
-        // findProperty allows us to reference the property without it existing.
-        // Using project.propName would cause the script to fail validation if
-        // the property did not exist.
-        keyStore = properties.getProperty('keyStore')
-        alias = properties.getProperty('keyStoreAlias')
-        storePass = properties.getProperty('keyStorePass')
-        keyPass = properties.getProperty('keyStoreKeyPass')
-        inputFile = jar.archiveFile
-        outputFile = jar.archiveFile
-
-        println "Signed jar outputted at ${jar.archiveFile}"
-    }
-}
-
-// TODO maybe this could be done more efficiently. we are loading the file two times in total
-signJar.configure {
-    doFirst {
-        if (!project.file("local.properties").exists()) {
-            throw new StopExecutionException()
-        }
-
-        Properties properties = new Properties()
-        properties.load(project.file("local.properties").newDataInputStream())
-        if (!properties.hasProperty("keyStore"))
-            throw new StopExecutionException()
-    }
-}
-
-build.dependsOn signJar

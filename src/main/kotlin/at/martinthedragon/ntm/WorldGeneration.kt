@@ -14,21 +14,21 @@ import net.minecraftforge.event.world.BiomeLoadingEvent
 object WorldGeneration {
     val netherBiomes = listOf("minecraft:nether_wastes", "minecraft:soul_sand_valley", "minecraft:crimson_forest", "minecraft:warped_forest", "minecraft:basalt_deltas")
     val ores = listOf(
-        B.uraniumOre, B.thoriumOre, B.titaniumOre,
-        B.sulfurOre, B.niterOre, B.copperOre,
-        B.tungstenOre, B.aluminiumOre, B.fluoriteOre,
-        B.berylliumOre, B.leadOre, B.ligniteOre,
-        B.asbestosOre, B.australianOre, B.weidite,
-        B.reiite, B.brightblendeOre, B.dellite,
-        B.dollarGreenMineral, B.rareEarthOre
+        ModBlocks.uraniumOre, ModBlocks.thoriumOre, ModBlocks.titaniumOre,
+        ModBlocks.sulfurOre, ModBlocks.niterOre, ModBlocks.copperOre,
+        ModBlocks.tungstenOre, ModBlocks.aluminiumOre, ModBlocks.fluoriteOre,
+        ModBlocks.berylliumOre, ModBlocks.leadOre, ModBlocks.ligniteOre,
+        ModBlocks.asbestosOre, ModBlocks.australianOre, ModBlocks.weidite,
+        ModBlocks.reiite, ModBlocks.brightblendeOre, ModBlocks.dellite,
+        ModBlocks.dollarGreenMineral, ModBlocks.rareEarthOre
     )
     val netherOres = listOf(
-        B.netherUraniumOre, B.netherPlutoniumOre,
-        B.netherTungstenOre, B.netherSulfurOre,
-        B.netherPhosphorusOre
+        ModBlocks.netherUraniumOre, ModBlocks.netherPlutoniumOre,
+        ModBlocks.netherTungstenOre, ModBlocks.netherSulfurOre,
+        ModBlocks.netherPhosphorusOre
     )
     val endOres = listOf(
-        B.trixite
+        ModBlocks.trixite
     )
 
     private val END_STONE = BlockMatchRuleTest(Blocks.END_STONE)

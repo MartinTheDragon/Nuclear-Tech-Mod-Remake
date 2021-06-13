@@ -23,6 +23,6 @@ open class EntityIrradiationHandler : IIrradiationHandlerModifiable, INBTSeriali
         onLoad()
     }
 
-    protected fun onLoad() {}
-    protected fun onIrradiationLevelChanged() {}
+    protected open fun onLoad() {}
+    protected open fun onIrradiationLevelChanged() {}
 }

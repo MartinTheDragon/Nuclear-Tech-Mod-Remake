@@ -12,11 +12,11 @@ import net.minecraft.world.World
 
 open class AutoTooltippedItem(properties: Properties) : Item(properties) {
     override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
-        autoTooltip(stack, worldIn, tooltip, flagIn)
+        autoTooltip(stack, tooltip)
     }
 }
 
-fun autoTooltip(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
+fun autoTooltip(stack: ItemStack, tooltip: MutableList<ITextComponent>) {
     val translationKey = "${stack.descriptionId}.desc"
 
     var test = 0

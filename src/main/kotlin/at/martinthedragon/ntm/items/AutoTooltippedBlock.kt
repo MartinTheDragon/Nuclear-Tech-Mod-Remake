@@ -9,6 +9,6 @@ import net.minecraft.world.World
 
 class AutoTooltippedBlockItem(block: Block, properties: Properties) : BlockItem(block, properties) {
     override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
-        autoTooltip(stack, worldIn, tooltip, flagIn)
+        autoTooltip(stack, tooltip)
     }
 }

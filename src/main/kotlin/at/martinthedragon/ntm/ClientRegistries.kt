@@ -24,21 +24,21 @@ object ClientRegistries {
     @SubscribeEvent(priority = EventPriority.LOWEST) // so that the actual container types get registered before this
     @JvmStatic
     fun registerScreens(event: RegistryEvent.Register<ContainerType<*>>) {
-        Main.logger.debug("Registering screens")
+        Main.LOGGER.debug("Registering screens")
         ScreenManager.register(ContainerTypes.safeContainer.get(), ::SafeScreen)
         ScreenManager.register(ContainerTypes.sirenContainer.get(), ::SirenScreen)
     }
 
     @SubscribeEvent @JvmStatic
     fun clientSetup(event: FMLClientSetupEvent) {
-        Main.logger.debug("Binding TERs")
+        Main.LOGGER.debug("Binding TERs")
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.steamPressHeadTileEntityType.get(), ::SteamPressTopTileEntityRenderer)
     }
 
     @SubscribeEvent @JvmStatic
     fun registerTextureInAtlas(event: TextureStitchEvent.Pre) {
         if (event.map.location() == PlayerContainer.BLOCK_ATLAS) {
-            Main.logger.debug("Adding atlas textures")
+            Main.LOGGER.debug("Adding atlas textures")
             event.addSprite(ResourceLocation(Main.MODID, "block/steam_press/steam_press_head"))
         }
     }

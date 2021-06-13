@@ -7,16 +7,11 @@ import net.minecraft.block.BlockState
 import net.minecraft.client.Minecraft
 import net.minecraft.client.audio.ISound
 import net.minecraft.client.audio.SimpleSound
-import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.InventoryHelper
-import net.minecraft.inventory.container.Container
-import net.minecraft.inventory.container.INamedContainerProvider
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.tileentity.LockableLootTileEntity
-import net.minecraft.tileentity.LockableTileEntity
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.Direction
 import net.minecraft.util.NonNullList
 import net.minecraft.util.SoundCategory

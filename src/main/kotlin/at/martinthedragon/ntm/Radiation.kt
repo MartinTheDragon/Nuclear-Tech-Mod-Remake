@@ -15,10 +15,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.potion.EffectInstance
 import net.minecraft.potion.Effects
 import net.minecraft.world.World
-import net.minecraft.world.server.ChunkHolder
-import net.minecraft.world.server.ChunkManager
 import net.minecraft.world.server.ServerWorld
-import java.util.*
 
 object Radiation {
     var irradiatedEntityList = listOf<LivingEntity>()

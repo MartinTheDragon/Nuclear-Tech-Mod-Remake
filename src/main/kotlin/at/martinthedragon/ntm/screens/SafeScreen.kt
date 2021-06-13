@@ -2,15 +2,12 @@ package at.martinthedragon.ntm.screens
 
 import at.martinthedragon.ntm.Main
 import at.martinthedragon.ntm.containers.SafeContainer
-import at.martinthedragon.ntm.items.SirenTrack
 import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
-import net.minecraftforge.items.CapabilityItemHandler
 
 class SafeScreen(
         container: SafeContainer,

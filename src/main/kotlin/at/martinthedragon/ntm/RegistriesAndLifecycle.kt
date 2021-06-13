@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package at.martinthedragon.ntm
 
 import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
@@ -22,6 +20,7 @@ import net.minecraftforge.registries.ForgeRegistries
 import net.minecraftforge.registries.ForgeRegistryEntry
 import net.minecraftforge.registries.RegistryManager
 
+@Suppress("unused")
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object RegistriesAndLifecycle {
     val BLOCKS: DeferredRegister<Block> = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MODID)
@@ -50,7 +49,7 @@ object RegistriesAndLifecycle {
     @Suppress("UNUSED_PARAMETER")
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
-        Main.logger.info("Hello World!")
+        Main.LOGGER.info("Hello World!")
         Config.createConfig()
         CapabilityIrradiationHandler.register()
     }
