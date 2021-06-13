@@ -20,6 +20,10 @@ object NuclearPacketHandler {
 
     private var currentPacketID = 0
 
+    fun initialize() {
+        registerMessage(CraftMachineTemplateMessage.Companion::decode, NetworkDirection.PLAY_TO_SERVER)
+    }
+
     fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {
         @Suppress("INACCESSIBLE_TYPE")
         INSTANCE.registerMessage(

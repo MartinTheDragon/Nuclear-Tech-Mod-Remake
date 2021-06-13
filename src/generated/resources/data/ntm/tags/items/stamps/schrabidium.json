@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:schrabidium_flat_stamp",
+    "ntm:schrabidium_plate_stamp",
+    "ntm:schrabidium_wire_stamp",
+    "ntm:schrabidium_circuit_stamp"
+  ]
+}

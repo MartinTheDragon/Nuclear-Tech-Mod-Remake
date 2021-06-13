@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:stone_flat_stamp",
+    "ntm:stone_plate_stamp",
+    "ntm:stone_wire_stamp",
+    "ntm:stone_circuit_stamp"
+  ]
+}

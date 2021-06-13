@@ -5,14 +5,12 @@ import at.martinthedragon.ntm.containers.SirenContainer
 import at.martinthedragon.ntm.items.SirenTrack
 import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraftforge.items.CapabilityItemHandler
 
-// FIXME closing the gui while the siren is powered stops the sound
 class SirenScreen(
         container: SirenContainer,
         playerInventory: PlayerInventory,
@@ -48,13 +46,6 @@ class SirenScreen(
             trackRange = sirenTrack.trackRange
             color = sirenTrack.color
         } else return
-
-//        val fontRenderer = minecraft!!.fontRenderer
-
-        // display track info
-//        fontRenderer.drawStringWithShadow(matrix, trackName, width / 2f + 17, height / 2f - 54, color)
-//        fontRenderer.drawStringWithShadow(matrix, trackType, width / 2f + 17, height / 2f - 44, color)
-//        fontRenderer.drawStringWithShadow(matrix, trackRange, width / 2f + 17, height / 2f - 34, color)
 
         font.draw(matrix, trackName, 123f / 2 - 12, 51f / 2 + 2, color)
         font.draw(matrix, trackType, 123f / 2 - 12, 51f / 2 + 12, color)

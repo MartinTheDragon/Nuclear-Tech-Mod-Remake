@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:stone_circuit_stamp",
+    "ntm:iron_circuit_stamp",
+    "ntm:steel_circuit_stamp",
+    "ntm:titanium_circuit_stamp",
+    "ntm:obsidian_circuit_stamp",
+    "ntm:schrabidium_circuit_stamp"
+  ]
+}

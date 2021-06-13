@@ -5,23 +5,28 @@ import net.minecraft.item.ItemStack
 
 enum class CreativeTabs(val itemGroup: ItemGroup) {
     Parts(
-            object : ItemGroup("ntm_parts") {
-                override fun makeIcon() = ItemStack(I.uraniumIngot.get())
-            }
+        object : ItemGroup("ntm_parts") {
+            override fun makeIcon() = ItemStack(ModItems.uraniumIngot.get())
+        }
     ),
-    Blocks(
-            object : ItemGroup("ntm_blocks") {
-                override fun makeIcon() = ItemStack(BI.uraniumOre.get())
-            }
+    Items(
+        object : ItemGroup("ntm_items") {
+            override fun makeIcon() = ItemStack(ModItems.stoneFlatStamp.get()) // TODO
+        }
     ),
     Templates(
-            object : ItemGroup("ntm_templates") {
-                override fun makeIcon() = ItemStack(I.sirenTrackAirRaidSiren.get()) // TODO
-            }
+        object : ItemGroup("ntm_templates") {
+            override fun makeIcon() = ItemStack(ModItems.machineTemplateFolder.get())
+        }
+    ),
+    Blocks(
+        object : ItemGroup("ntm_blocks") {
+            override fun makeIcon() = ItemStack(ModBlockItems.uraniumOre.get())
+        }
     ),
     Machines(
-            object : ItemGroup("ntm_machines") {
-                override fun makeIcon() = ItemStack(BI.safe.get()) // TODO
-            }
+        object : ItemGroup("ntm_machines") {
+            override fun makeIcon() = ItemStack(ModBlockItems.safe.get()) // TODO
+        }
     )
 }

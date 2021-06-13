@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:stone_flat_stamp",
+    "ntm:iron_flat_stamp",
+    "ntm:steel_flat_stamp",
+    "ntm:titanium_flat_stamp",
+    "ntm:obsidian_flat_stamp",
+    "ntm:schrabidium_flat_stamp"
+  ]
+}

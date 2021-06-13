@@ -274,6 +274,19 @@ object NuclearTags {
         val HOT_WASTES = tag("hot_wastes")
         val COLD_WASTES = tag("cold_wastes")
 
+        val MACHINE_TEMPLATE_FOLDER_RESULTS = tag("machine_template_folder_results")
+        val STAMPS = tag("stamps")
+        val FOLDER_STAMPS = tag("stamps/template_folder")
+        val FLAT_STAMPS = tag("stamps/flat")
+        val PLATE_STAMPS = tag("stamps/plate")
+        val WIRE_STAMPS = tag("stamps/wire")
+        val CIRCUIT_STAMPS = tag("stamps/circuit")
+        val STONE_STAMPS = tag("stamps/stone")
+        val IRON_STAMPS = tag("stamps/iron")
+        val STEEL_STAMPS = tag("stamps/steel")
+        val TITANIUM_STAMPS = tag("stamps/titanium")
+        val OBSIDIAN_STAMPS = tag("stamps/obsidian")
+        val SCHRABIDIUM_STAMPS = tag("stamps/schrabidium")
         val SIREN_TRACKS = tag("siren_tracks")
     }
 }

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#ntm:stamps/stone",
+    "#ntm:stamps/iron",
+    "#ntm:stamps/steel",
+    "#ntm:stamps/titanium",
+    "#ntm:stamps/obsidian",
+    "#ntm:stamps/schrabidium"
+  ]
+}

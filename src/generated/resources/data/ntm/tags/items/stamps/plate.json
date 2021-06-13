@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:stone_plate_stamp",
+    "ntm:iron_plate_stamp",
+    "ntm:steel_plate_stamp",
+    "ntm:titanium_plate_stamp",
+    "ntm:obsidian_plate_stamp",
+    "ntm:schrabidium_plate_stamp"
+  ]
+}

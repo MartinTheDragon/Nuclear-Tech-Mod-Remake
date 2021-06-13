@@ -1,10 +1,7 @@
 package at.martinthedragon.ntm
 
 import at.martinthedragon.ntm.RegistriesAndLifecycle.ITEMS
-import at.martinthedragon.ntm.items.AutoTooltippedItem
-import at.martinthedragon.ntm.items.EffectItem
-import at.martinthedragon.ntm.items.SirenTrack
-import at.martinthedragon.ntm.items.autoTooltip
+import at.martinthedragon.ntm.items.*
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.Food
 import net.minecraft.item.Item
@@ -446,6 +443,37 @@ object ModItems {
     val tinyNuclearWaste: RegistryObject<Item> = ITEMS.register("tiny_nuclear_waste") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CT.Parts.itemGroup), 2f) }
     val crystalHorn: RegistryObject<Item> = ITEMS.register("crystal_horn") { AutoTooltippedItem(Item.Properties().tab(CT.Parts.itemGroup)) }
     val charredCrystal: RegistryObject<Item> = ITEMS.register("charred_crystal") { AutoTooltippedItem(Item.Properties().tab(CT.Parts.itemGroup)) }
+
+    // Items and Fuel
+
+    val stoneFlatStamp: RegistryObject<Item> = ITEMS.register("stone_flat_stamp") { Item(Item.Properties().durability(10).tab(CT.Items.itemGroup)) }
+    val stonePlateStamp: RegistryObject<Item> = ITEMS.register("stone_plate_stamp") { Item(Item.Properties().durability(10).tab(CT.Items.itemGroup)) }
+    val stoneWireStamp: RegistryObject<Item> = ITEMS.register("stone_wire_stamp") { Item(Item.Properties().durability(10).tab(CT.Items.itemGroup)) }
+    val stoneCircuitStamp: RegistryObject<Item> = ITEMS.register("stone_circuit_stamp") { Item(Item.Properties().durability(10).tab(CT.Items.itemGroup)) }
+    val ironFlatStamp: RegistryObject<Item> = ITEMS.register("iron_flat_stamp") { Item(Item.Properties().durability(50).tab(CT.Items.itemGroup)) }
+    val ironPlateStamp: RegistryObject<Item> = ITEMS.register("iron_plate_stamp") { Item(Item.Properties().durability(50).tab(CT.Items.itemGroup)) }
+    val ironWireStamp: RegistryObject<Item> = ITEMS.register("iron_wire_stamp") { Item(Item.Properties().durability(50).tab(CT.Items.itemGroup)) }
+    val ironCircuitStamp: RegistryObject<Item> = ITEMS.register("iron_circuit_stamp") { Item(Item.Properties().durability(50).tab(CT.Items.itemGroup)) }
+    val steelFlatStamp: RegistryObject<Item> = ITEMS.register("steel_flat_stamp") { Item(Item.Properties().durability(100).tab(CT.Items.itemGroup)) }
+    val steelPlateStamp: RegistryObject<Item> = ITEMS.register("steel_plate_stamp") { Item(Item.Properties().durability(100).tab(CT.Items.itemGroup)) }
+    val steelWireStamp: RegistryObject<Item> = ITEMS.register("steel_wire_stamp") { Item(Item.Properties().durability(100).tab(CT.Items.itemGroup)) }
+    val steelCircuitStamp: RegistryObject<Item> = ITEMS.register("steel_circuit_stamp") { Item(Item.Properties().durability(100).tab(CT.Items.itemGroup)) }
+    val titaniumFlatStamp: RegistryObject<Item> = ITEMS.register("titanium_flat_stamp") { Item(Item.Properties().durability(150).tab(CT.Items.itemGroup)) }
+    val titaniumPlateStamp: RegistryObject<Item> = ITEMS.register("titanium_plate_stamp") { Item(Item.Properties().durability(150).tab(CT.Items.itemGroup)) }
+    val titaniumWireStamp: RegistryObject<Item> = ITEMS.register("titanium_wire_stamp") { Item(Item.Properties().durability(150).tab(CT.Items.itemGroup)) }
+    val titaniumCircuitStamp: RegistryObject<Item> = ITEMS.register("titanium_circuit_stamp") { Item(Item.Properties().durability(150).tab(CT.Items.itemGroup)) }
+    val obsidianFlatStamp: RegistryObject<Item> = ITEMS.register("obsidian_flat_stamp") { Item(Item.Properties().durability(170).tab(CT.Items.itemGroup)) }
+    val obsidianPlateStamp: RegistryObject<Item> = ITEMS.register("obsidian_plate_stamp") { Item(Item.Properties().durability(170).tab(CT.Items.itemGroup)) }
+    val obsidianWireStamp: RegistryObject<Item> = ITEMS.register("obsidian_wire_stamp") { Item(Item.Properties().durability(170).tab(CT.Items.itemGroup)) }
+    val obsidianCircuitStamp: RegistryObject<Item> = ITEMS.register("obsidian_circuit_stamp") { Item(Item.Properties().durability(170).tab(CT.Items.itemGroup)) }
+    val schrabidiumFlatStamp: RegistryObject<Item> = ITEMS.register("schrabidium_flat_stamp") { Item(Item.Properties().durability(3000).tab(CT.Items.itemGroup)) }
+    val schrabidiumPlateStamp: RegistryObject<Item> = ITEMS.register("schrabidium_plate_stamp") { Item(Item.Properties().durability(3000).tab(CT.Items.itemGroup)) }
+    val schrabidiumWireStamp: RegistryObject<Item> = ITEMS.register("schrabidium_wire_stamp") { Item(Item.Properties().durability(3000).tab(CT.Items.itemGroup)) }
+    val schrabidiumCircuitStamp: RegistryObject<Item> = ITEMS.register("schrabidium_circuit_stamp") { Item(Item.Properties().durability(3000).tab(CT.Items.itemGroup)) }
+
+    // Templates
+
+    val machineTemplateFolder: RegistryObject<TemplateFolder> = ITEMS.register("machine_template_folder") { TemplateFolder() }
 
     // Siren Tracks
     val sirenTrackHatchSiren: RegistryObject<Item> = ITEMS.register("siren_track_hatch_siren") { SirenTrack(SoundEvents.sirenTrackHatchSiren, 1f, true, "siren_track_hatch_siren", 0x334077) }

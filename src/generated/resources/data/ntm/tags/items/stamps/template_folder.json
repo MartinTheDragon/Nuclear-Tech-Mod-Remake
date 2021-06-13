@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#ntm:stamps/plate",
+    "#ntm:stamps/wire",
+    "#ntm:stamps/circuit"
+  ]
+}

@@ -27,6 +27,7 @@ class ItemTagProvider(
         fissileFuelTags()
         wasteTags()
         miscTags()
+        templateFolders()
         modifyVanillaTags()
     }
 
@@ -510,7 +511,9 @@ class ItemTagProvider(
         tag(NuclearTags.Items.FILTERS_CARBON).add(ModItems.activatedCarbonFilter.get())
 
         tag(NuclearTags.Items.SCRAP).add(ModItems.scrap.get())
+    }
 
+    private fun templateFolders() {
         tag(NuclearTags.Items.SIREN_TRACKS).add(
             ModItems.sirenTrackHatchSiren.get(), ModItems.sirenTrackAutopilotDisconnected.get(),
             ModItems.sirenTrackAMSSiren.get(), ModItems.sirenTrackBlastDoorAlarm.get(),
@@ -523,6 +526,88 @@ class ItemTagProvider(
             ModItems.sirenTrackNostromoSelfDestruct.get(), ModItems.sirenTrackEASAlarmScreech.get(),
             ModItems.sirenTrackAPCPass.get(), ModItems.sirenTrackRazortrainHorn.get(),
         )
+        tag(NuclearTags.Items.FLAT_STAMPS).add(
+            ModItems.stoneFlatStamp.get(),
+            ModItems.ironFlatStamp.get(),
+            ModItems.steelFlatStamp.get(),
+            ModItems.titaniumFlatStamp.get(),
+            ModItems.obsidianFlatStamp.get(),
+            ModItems.schrabidiumFlatStamp.get()
+        )
+        tag(NuclearTags.Items.PLATE_STAMPS).add(
+            ModItems.stonePlateStamp.get(),
+            ModItems.ironPlateStamp.get(),
+            ModItems.steelPlateStamp.get(),
+            ModItems.titaniumPlateStamp.get(),
+            ModItems.obsidianPlateStamp.get(),
+            ModItems.schrabidiumPlateStamp.get()
+        )
+        tag(NuclearTags.Items.WIRE_STAMPS).add(
+            ModItems.stoneWireStamp.get(),
+            ModItems.ironWireStamp.get(),
+            ModItems.steelWireStamp.get(),
+            ModItems.titaniumWireStamp.get(),
+            ModItems.obsidianWireStamp.get(),
+            ModItems.schrabidiumWireStamp.get()
+        )
+        tag(NuclearTags.Items.CIRCUIT_STAMPS).add(
+            ModItems.stoneCircuitStamp.get(),
+            ModItems.ironCircuitStamp.get(),
+            ModItems.steelCircuitStamp.get(),
+            ModItems.titaniumCircuitStamp.get(),
+            ModItems.obsidianCircuitStamp.get(),
+            ModItems.schrabidiumCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.FOLDER_STAMPS)
+            .addTag(NuclearTags.Items.PLATE_STAMPS)
+            .addTag(NuclearTags.Items.WIRE_STAMPS)
+            .addTag(NuclearTags.Items.CIRCUIT_STAMPS)
+        tag(NuclearTags.Items.STONE_STAMPS).add(
+            ModItems.stoneFlatStamp.get(),
+            ModItems.stonePlateStamp.get(),
+            ModItems.stoneWireStamp.get(),
+            ModItems.stoneCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.IRON_STAMPS).add(
+            ModItems.ironFlatStamp.get(),
+            ModItems.ironPlateStamp.get(),
+            ModItems.ironWireStamp.get(),
+            ModItems.ironCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.STEEL_STAMPS).add(
+            ModItems.steelFlatStamp.get(),
+            ModItems.steelPlateStamp.get(),
+            ModItems.steelWireStamp.get(),
+            ModItems.steelCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.TITANIUM_STAMPS).add(
+            ModItems.titaniumFlatStamp.get(),
+            ModItems.titaniumPlateStamp.get(),
+            ModItems.titaniumWireStamp.get(),
+            ModItems.titaniumCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.OBSIDIAN_STAMPS).add(
+            ModItems.obsidianFlatStamp.get(),
+            ModItems.obsidianPlateStamp.get(),
+            ModItems.obsidianWireStamp.get(),
+            ModItems.obsidianCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.SCHRABIDIUM_STAMPS).add(
+            ModItems.schrabidiumFlatStamp.get(),
+            ModItems.schrabidiumPlateStamp.get(),
+            ModItems.schrabidiumWireStamp.get(),
+            ModItems.schrabidiumCircuitStamp.get()
+        )
+        tag(NuclearTags.Items.STAMPS)
+            .addTag(NuclearTags.Items.STONE_STAMPS)
+            .addTag(NuclearTags.Items.IRON_STAMPS)
+            .addTag(NuclearTags.Items.STEEL_STAMPS)
+            .addTag(NuclearTags.Items.TITANIUM_STAMPS)
+            .addTag(NuclearTags.Items.OBSIDIAN_STAMPS)
+            .addTag(NuclearTags.Items.SCHRABIDIUM_STAMPS)
+        tag(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
+            .addTag(NuclearTags.Items.FOLDER_STAMPS)
+            .addTag(NuclearTags.Items.SIREN_TRACKS)
     }
 
     private fun modifyVanillaTags() {

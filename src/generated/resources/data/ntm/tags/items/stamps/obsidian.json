@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:obsidian_flat_stamp",
+    "ntm:obsidian_plate_stamp",
+    "ntm:obsidian_wire_stamp",
+    "ntm:obsidian_circuit_stamp"
+  ]
+}

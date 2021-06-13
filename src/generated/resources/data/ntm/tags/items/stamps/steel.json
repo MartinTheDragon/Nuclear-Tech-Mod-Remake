@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ntm:steel_flat_stamp",
+    "ntm:steel_plate_stamp",
+    "ntm:steel_wire_stamp",
+    "ntm:steel_circuit_stamp"
+  ]
+}
