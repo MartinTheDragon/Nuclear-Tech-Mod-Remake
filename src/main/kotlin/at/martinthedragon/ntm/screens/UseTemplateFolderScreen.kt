@@ -10,22 +10,28 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.IBidiRenderer
 import net.minecraft.client.gui.chat.NarratorChatListener
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.gui.widget.TextFieldWidget
 import net.minecraft.client.gui.widget.button.Button
+import net.minecraft.client.util.SearchTreeManager
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.tags.ItemTags
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.StringTextComponent
+import net.minecraft.util.text.TranslationTextComponent
 import net.minecraftforge.fml.client.gui.GuiUtils
+import java.util.*
 import kotlin.math.ceil
 import kotlin.math.min
 
-// TODO search bar
 class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
     private lateinit var backButton: Button
     private lateinit var nextButton: Button
     private lateinit var templateButtons: List<Button>
-    private var itemList = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS.name).values.toList<Item>()
-    private val pagesCount = ceil(itemList.size.toFloat() / RECIPES_PER_PAGE).toInt()
+    private lateinit var searchBox: TextFieldWidget
+    private val itemList = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS.name).values.toList<Item>()
+    private val searchResults: MutableList<Item> = mutableListOf()
+    private var pagesCount = ceil(itemList.size.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
     private var currentPage = 1
 
     override fun init() {
@@ -35,6 +41,9 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
         nextButton = addButton(ChangePageButton(width / 2 + GUI_WIDTH / 2 - 25, height / 2 - 7, true) {
             pageForward()
         })
+
+        children.add(backButton)
+        children.add(nextButton)
 
         val buttonsStartX = (width - GUI_WIDTH) / 2 + 25
         val buttonsStartY = (height - GUI_HEIGHT) / 2 + 26
@@ -49,9 +58,39 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
                     buttonNumberY * 5 + buttonNumberX
                 ))
         }
-        templateButtons = newButtons
+        templateButtons = newButtons.toList()
+        children.addAll(newButtons)
+
+        minecraft!!.keyboardHandler.setSendRepeatsToGui(true)
+
+        val left = (width - GUI_WIDTH) / 2
+        val top = (height - GUI_HEIGHT) / 2
+
+        searchBox = TextFieldWidget(font, left + 61, top + 213, 54, 10, TranslationTextComponent("itemGroup.search"))
+        with(searchBox) {
+            setMaxLength(50)
+            setBordered(false)
+            isVisible = true
+
+            setTextColor(0xFFFFFF)
+        }
+
+        children.add(searchBox)
 
         updateButtonVisibility()
+    }
+
+    override fun resize(minecraft: Minecraft, sizeX: Int, sizeY: Int) {
+        val searchString = searchBox.value
+        super.resize(minecraft, sizeX, sizeY)
+        searchBox.value = searchString
+        if (searchBox.value.isNotBlank())
+            refreshSearchResults()
+    }
+
+    override fun removed() {
+        super.removed()
+        minecraft!!.keyboardHandler.setSendRepeatsToGui(false)
     }
 
     private fun pageBack() {
@@ -72,8 +111,9 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
 
     // the index is the button's number
     private fun craftRecipe(index: Int) {
+        val results = if (searchResults.isEmpty()) itemList else searchResults
         NuclearPacketHandler.INSTANCE.sendToServer(CraftMachineTemplateMessage(
-            itemList[(currentPage - 1) * RECIPES_PER_PAGE + index].defaultInstance
+            results[(currentPage - 1) * RECIPES_PER_PAGE + index].defaultInstance
         ))
     }
 
@@ -81,7 +121,7 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
         backButton.visible = currentPage > 1
         nextButton.visible = currentPage < pagesCount
         if (currentPage == pagesCount) {
-            val itemCount = itemList.size - (currentPage - 1) * RECIPES_PER_PAGE
+            val itemCount = (if (searchResults.isEmpty()) itemList.size else searchResults.size) - (currentPage - 1) * RECIPES_PER_PAGE
             if (itemCount != 0) {
                 for (i in 0 until itemCount)
                     templateButtons[i].visible = true
@@ -102,23 +142,25 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
 
         super.render(matrixStack, mouseX, mouseY, partialTicks)
 
+        val itemsToShow = if (searchResults.isEmpty()) itemList else searchResults
+
         // item icons
 
-        val itemsCount = min(itemList.size - (currentPage - 1) * RECIPES_PER_PAGE, RECIPES_PER_PAGE)
+        val itemsCount = min(itemsToShow.size - (currentPage - 1) * RECIPES_PER_PAGE, RECIPES_PER_PAGE)
         val itemsStartX = (width - GUI_WIDTH) / 2 + 26
         val itemsStartY = (height - GUI_HEIGHT) / 2 + 27
         val itemOffset = 27
 
         for (itemNumberY in 0 until min(itemsCount / 5, 7)) for (itemNumberX in 0 until 5)
             renderButtonItem(
-                itemList[(currentPage - 1) * RECIPES_PER_PAGE + itemNumberY * 5 + itemNumberX],
+                itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + itemNumberY * 5 + itemNumberX],
                 itemsStartX + itemNumberX * itemOffset,
                 itemsStartY + itemNumberY * itemOffset
             )
         val lastRowItemsAmount = if (itemsCount == RECIPES_PER_PAGE) 0 else itemsCount.rem(5)
         for (lastRowEntry in 0 until lastRowItemsAmount)
             renderButtonItem(
-                itemList[(currentPage - 1) * RECIPES_PER_PAGE + itemsCount - lastRowItemsAmount + lastRowEntry],
+                itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + itemsCount - lastRowItemsAmount + lastRowEntry],
                 itemsStartX + lastRowEntry * itemOffset,
                 itemsStartY + itemsCount / 5 * itemOffset
             )
@@ -127,8 +169,8 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
 
         for (i in templateButtons.indices) {
             val button = templateButtons[i]
-            if (button.isHovered) {
-                val itemStack = itemList[(currentPage - 1) * RECIPES_PER_PAGE + i].defaultInstance
+            if (button.isHovered && button.visible) {
+                val itemStack = itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + i].defaultInstance
                 val font = itemStack.item.getFontRenderer(itemStack) ?: font
                 GuiUtils.preItemToolTip(itemStack)
                 renderWrappedToolTip(matrixStack, getTooltipFromItem(itemStack), mouseX, mouseY, font)
@@ -139,6 +181,14 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
         // page number
         IBidiRenderer.create(font, StringTextComponent("$currentPage / $pagesCount"))
             .renderCentered(matrixStack, width / 2, (height - GUI_HEIGHT) / 2 + 10)
+
+        // search bar
+        if (searchBox.isFocused) {
+            minecraft!!.textureManager.bind(TEMPLATE_FOLDER_GUI_LOCATION)
+            blit(matrixStack, x + 45, y + 211, 176, 54, 72, 12)
+        }
+
+        searchBox.render(matrixStack, mouseX, mouseY, partialTicks)
     }
 
     private fun renderButtonItem(item: Item, x: Int, y: Int) {
@@ -147,6 +197,41 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
         itemRenderer.renderAndDecorateItem(minecraft!!.player!!, item.defaultInstance, x, y)
         itemRenderer.blitOffset = 0F
         blitOffset = 0
+    }
+
+    override fun keyPressed(p_231046_1_: Int, p_231046_2_: Int, p_231046_3_: Int): Boolean {
+        searchBox.setFocus(true)
+        val searchString = searchBox.value
+        if (searchBox.keyPressed(p_231046_1_, p_231046_2_, p_231046_3_)) {
+            if (searchString != searchBox.value)
+                refreshSearchResults()
+            return true
+        }
+
+        return super.keyPressed(p_231046_1_, p_231046_2_, p_231046_3_)
+    }
+
+    override fun charTyped(char: Char, p_231042_2_: Int): Boolean {
+        searchBox.setFocus(true)
+        val searchString = searchBox.value
+        return if (searchBox.charTyped(char, p_231042_2_)) {
+            if (searchString != searchBox.value)
+                refreshSearchResults()
+            true
+        } else false
+    }
+
+    private fun refreshSearchResults() {
+        searchResults.clear()
+
+        val searchString = searchBox.value
+        if (searchString.isBlank()) return
+        val searchTree = minecraft!!.getSearchTree(SEARCH_TREE)
+        searchResults.addAll(searchTree.search(searchString.lowercase(Locale.ROOT)).map(ItemStack::getItem))
+        currentPage = 1
+        val itemsCount = if (searchResults.isEmpty()) itemList.size else searchResults.size
+        pagesCount = ceil(itemsCount.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
+        updateButtonVisibility()
     }
 
     class ChangePageButton(x: Int, y: Int, val isForward: Boolean, onPress: IPressable) :
@@ -183,5 +268,6 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
         const val GUI_HEIGHT = 229
         const val RECIPES_PER_PAGE = 35
         val TEMPLATE_FOLDER_GUI_LOCATION = ResourceLocation(Main.MODID, "textures/gui/machine_template_folder.png")
+        val SEARCH_TREE = SearchTreeManager.Key<ItemStack>()
     }
 }

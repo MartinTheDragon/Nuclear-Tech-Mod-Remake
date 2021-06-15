@@ -3,12 +3,19 @@ package at.martinthedragon.ntm
 import at.martinthedragon.ntm.containers.ContainerTypes
 import at.martinthedragon.ntm.screens.SafeScreen
 import at.martinthedragon.ntm.screens.SirenScreen
+import at.martinthedragon.ntm.screens.UseTemplateFolderScreen
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
 import at.martinthedragon.ntm.tileentities.renderers.SteamPressTopTileEntityRenderer
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScreenManager
+import net.minecraft.client.util.ITooltipFlag
+import net.minecraft.client.util.SearchTree
 import net.minecraft.inventory.container.ContainerType
 import net.minecraft.inventory.container.PlayerContainer
+import net.minecraft.item.ItemStack
+import net.minecraft.tags.ItemTags
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.text.TextFormatting
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.event.RegistryEvent
@@ -17,6 +24,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
+import net.minecraftforge.registries.ForgeRegistries
+import java.util.stream.Stream
 
 @Suppress("unused", "UNUSED_PARAMETER")
 @Mod.EventBusSubscriber(modid = Main.MODID, value = [Dist.CLIENT], bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -33,6 +42,14 @@ object ClientRegistries {
     fun clientSetup(event: FMLClientSetupEvent) {
         Main.LOGGER.debug("Binding TERs")
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.steamPressHeadTileEntityType.get(), ::SteamPressTopTileEntityRenderer)
+
+        Main.LOGGER.debug("Creating search trees")
+        val templateFolderSearchTree = SearchTree<ItemStack>({
+            it.getTooltipLines(null, ITooltipFlag.TooltipFlags.NORMAL).stream().map { tooltip ->
+                TextFormatting.stripFormatting(tooltip.string)!!.trim()
+            }
+        }) { Stream.of(ForgeRegistries.ITEMS.getKey(it.item)) }
+        Minecraft.getInstance().searchTreeManager.register(UseTemplateFolderScreen.SEARCH_TREE, templateFolderSearchTree)
     }
 
     @SubscribeEvent @JvmStatic
