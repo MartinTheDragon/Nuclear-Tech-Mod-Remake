@@ -80,7 +80,7 @@ object RegistriesAndLifecycle {
     }
 
     // this is currently needed as no forge registry exists for recipe types
-    @SubscribeEvent @JvmStatic
+    @SubscribeEvent @JvmStatic @Suppress("UNUSED_PARAMETER")
     fun registerRecipeTypes(event: RegistryEvent.Register<IRecipeSerializer<*>>) {
         RecipeTypes.registerTypes()
     }
