@@ -4,6 +4,7 @@ import at.martinthedragon.ntm.Main
 import at.martinthedragon.ntm.ModBlockItems
 import at.martinthedragon.ntm.ModItems
 import at.martinthedragon.ntm.NuclearTags
+import at.martinthedragon.ntm.recipes.PressRecipe
 import net.minecraft.data.*
 import net.minecraft.item.Item
 import net.minecraft.item.Items
@@ -239,6 +240,12 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         blockFromIngots(ModBlockItems.verticiumBlock.get(), ModItems.verticiumIngot.get(), consumer)
 
         ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.combineScrapMetal.get()), .5F, 200, ModItems.combineSteelIngot.get()).group("combine_steel_ingot").unlockedBy("has_combine_steel_scrap_metal", has(ModItems.combineScrapMetal.get())).save(consumer, ResourceLocation(Main.MODID, "combine_steel_ingot_from_combine_steel_scrap_metal"))
+
+        pressRecipes(consumer)
+    }
+
+    private fun pressRecipes(consumer: Consumer<IFinishedRecipe>) {
+        PressRecipeBuilder(ModItems.ironPlate.get(), PressRecipe.StampType.PLATE, 1F).requires(Items.IRON_INGOT).group("iron_plate").unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer, ResourceLocation(Main.MODID, "iron_plate"))
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type

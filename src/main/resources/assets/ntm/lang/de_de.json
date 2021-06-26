@@ -733,9 +733,13 @@
 
   "block.ntm.siren": "Sirene",
   "block.ntm.safe": "Panzerschrank",
+  "block.ntm.steam_press_base": "Dampfpresse",
 
   "container.ntm.siren": "Sirene",
   "container.ntm.safe": "Panzerschrank",
+  "container.ntm.steam_press": "Dampfpresse",
+  "block.ntm.steam_press_frame": "Dampfpresse",
+  "block.ntm.steam_press_top": "Dampfpresse",
 
   "subtitle.ntm.siren.playing_hatch": "Sirene läuft - Hatch Siren",
   "subtitle.ntm.siren.playing_autopilot_disconnected": "Sirene läuft - Autopilot Disconnected",
@@ -757,6 +761,7 @@
   "subtitle.ntm.siren.playing_eas": "Sirene läuft - EAS Alarm Screech",
   "subtitle.ntm.siren.playing_apc_pass": "Sirene läuft - APC Pass",
   "subtitle.ntm.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn",
+  "subtitle.ntm.press.operate": "Presse stampft",
 
   "death.attack.radiation": "%1$s starb an Strahlenvergiftung"
 }

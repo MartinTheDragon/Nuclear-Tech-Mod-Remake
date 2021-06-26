@@ -3,6 +3,7 @@ package at.martinthedragon.ntm
 import at.martinthedragon.ntm.containers.ContainerTypes
 import at.martinthedragon.ntm.screens.SafeScreen
 import at.martinthedragon.ntm.screens.SirenScreen
+import at.martinthedragon.ntm.screens.SteamPressScreen
 import at.martinthedragon.ntm.screens.UseTemplateFolderScreen
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
 import at.martinthedragon.ntm.tileentities.renderers.SteamPressTopTileEntityRenderer
@@ -36,6 +37,7 @@ object ClientRegistries {
         Main.LOGGER.debug("Registering screens")
         ScreenManager.register(ContainerTypes.safeContainer.get(), ::SafeScreen)
         ScreenManager.register(ContainerTypes.sirenContainer.get(), ::SirenScreen)
+        ScreenManager.register(ContainerTypes.pressContainer.get(), ::SteamPressScreen)
     }
 
     @SubscribeEvent @JvmStatic

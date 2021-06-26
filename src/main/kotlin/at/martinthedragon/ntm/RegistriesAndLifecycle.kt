@@ -3,12 +3,16 @@ package at.martinthedragon.ntm
 import at.martinthedragon.ntm.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.ntm.containers.ContainerTypes
 import at.martinthedragon.ntm.datagen.*
+import at.martinthedragon.ntm.recipes.RecipeSerializers
+import at.martinthedragon.ntm.recipes.RecipeTypes
 import at.martinthedragon.ntm.tileentities.TileEntityTypes
 import net.minecraft.block.Block
 import net.minecraft.inventory.container.ContainerType
 import net.minecraft.item.Item
+import net.minecraft.item.crafting.IRecipeSerializer
 import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
@@ -27,6 +31,7 @@ object RegistriesAndLifecycle {
     val ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID)
     val TILE_ENTITIES: DeferredRegister<TileEntityType<*>> = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Main.MODID)
     val CONTAINERS: DeferredRegister<ContainerType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, Main.MODID)
+    val RECIPE_SERIALIZERS: DeferredRegister<IRecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Main.MODID)
 
     init {
         BLOCKS.register(FMLJavaModLoadingContext.get().modEventBus)
@@ -38,6 +43,8 @@ object RegistriesAndLifecycle {
         TileEntityTypes
         CONTAINERS.register(FMLJavaModLoadingContext.get().modEventBus)
         ContainerTypes
+        RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().modEventBus)
+        RecipeSerializers
     }
 
     // using kotlin's strong type system
@@ -70,5 +77,11 @@ object RegistriesAndLifecycle {
             dataGenerator.addProvider(NuclearBlockStateProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
         }
+    }
+
+    // this is currently needed as no forge registry exists for recipe types
+    @SubscribeEvent @JvmStatic
+    fun registerRecipeTypes(event: RegistryEvent.Register<IRecipeSerializer<*>>) {
+        RecipeTypes.registerTypes()
     }
 }

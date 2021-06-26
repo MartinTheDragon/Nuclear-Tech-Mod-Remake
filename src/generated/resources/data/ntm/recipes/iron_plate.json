@@ -1,0 +1,12 @@
+{
+  "type": "ntm:pressing",
+  "group": "iron_plate",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "ntm:iron_plate"
+  },
+  "experience": 1.0
+}

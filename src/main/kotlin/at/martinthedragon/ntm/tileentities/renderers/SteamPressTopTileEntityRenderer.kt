@@ -34,17 +34,9 @@ class SteamPressTopTileEntityRenderer(tileEntityRendererDispatcher: TileEntityRe
         light: Int,
         otherLight: Int
     ) {
+        // TODO animation
         val position = 15F
-        if (tileEntity.headMoving) {
-            if (tileEntity.headPosition >= 15F) tileEntity.headMovingUp = true
-            else if (tileEntity.headPosition <= 0F) tileEntity.headMovingUp = false
-
-            if (tileEntity.headMovingUp) tileEntity.headPosition -= partialTicks
-            else tileEntity.headPosition += partialTicks
-        }
-
-        pressHead.y = position - tileEntity.headPosition
-
+        pressHead.y = position
         val vertexBuilder = PRESS_HEAD_RESOURCE_LOCATION.buffer(buffer, RenderType::entitySolid)
         pressHead.render(matrixStack, vertexBuilder, light, otherLight)
     }

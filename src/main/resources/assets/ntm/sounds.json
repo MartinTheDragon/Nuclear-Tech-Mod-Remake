@@ -218,5 +218,15 @@
         "attenuation_distance": 250
       }
     ]
+  },
+  "press.operate": {
+    "category": "block",
+    "subtitle": "subtitle.ntm.press.operate",
+    "sounds": [
+      {
+        "name": "ntm:blocks/press/press_operate",
+        "stream": false
+      }
+    ]
   }
 }

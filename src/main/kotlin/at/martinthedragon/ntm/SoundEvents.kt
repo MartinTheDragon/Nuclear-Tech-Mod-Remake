@@ -24,4 +24,5 @@ object SoundEvents {
     val sirenTrackEASAlarmScreech = SoundEvent(ResourceLocation(Main.MODID, "siren.eas"))
     val sirenTrackAPCPass = SoundEvent(ResourceLocation(Main.MODID, "siren.apc_pass"))
     val sirenTrackRazortrainHorn = SoundEvent(ResourceLocation(Main.MODID, "siren.razortrain_horn"))
+    val pressOperate = SoundEvent(ResourceLocation(Main.MODID, "press.operate"))
 }

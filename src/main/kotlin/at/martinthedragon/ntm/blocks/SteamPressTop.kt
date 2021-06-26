@@ -6,19 +6,40 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.ServerPlayerEntity
 import net.minecraft.pathfinding.PathType
+import net.minecraft.util.ActionResultType
+import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.BlockRayTraceResult
 import net.minecraft.util.math.shapes.ISelectionContext
 import net.minecraft.util.math.shapes.VoxelShape
 import net.minecraft.util.math.shapes.VoxelShapes
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
+import net.minecraftforge.fml.network.NetworkHooks
 
 class SteamPressTop(properties: Properties) : Block(properties) {
     override fun getShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos, context: ISelectionContext): VoxelShape = topShape
     override fun getInteractionShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos): VoxelShape = topShape
     override fun isPathfindable(state: BlockState, worldIn: IBlockReader, pos: BlockPos, type: PathType) = false
+
+    override fun use(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        player: PlayerEntity,
+        hand: Hand,
+        hit: BlockRayTraceResult
+    ): ActionResultType {
+        if (!world.isClientSide) {
+            val tileEntity = world.getBlockEntity(pos)
+            if (tileEntity is SteamPressTopTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
+        }
+
+        return ActionResultType.sidedSuccess(world.isClientSide)
+    }
 
     override fun onRemove(
         state: BlockState,
@@ -26,7 +47,7 @@ class SteamPressTop(properties: Properties) : Block(properties) {
         pos: BlockPos,
         newState: BlockState,
         p_196243_5_: Boolean
-    ) {
+    ) { // code for dropping items and xp is in SteamPressBase
         if (!world.isClientSide && !state.`is`(newState.block))
             removeSteamPressStructure(world, pos)
 

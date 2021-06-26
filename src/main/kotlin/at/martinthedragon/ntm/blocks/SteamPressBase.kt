@@ -1,24 +1,49 @@
 package at.martinthedragon.ntm.blocks
 
 import at.martinthedragon.ntm.ModBlocks
+import at.martinthedragon.ntm.tileentities.SteamPressTopTileEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.material.PushReaction
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.ServerPlayerEntity
+import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.BlockItemUseContext
 import net.minecraft.item.ItemStack
 import net.minecraft.pathfinding.PathType
+import net.minecraft.util.ActionResultType
+import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.BlockRayTraceResult
 import net.minecraft.util.math.shapes.ISelectionContext
 import net.minecraft.util.math.shapes.VoxelShape
 import net.minecraft.util.math.shapes.VoxelShapes
+import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.world.*
+import net.minecraftforge.fml.network.NetworkHooks
 
 class SteamPressBase(properties: Properties) : Block(properties) {
     override fun getShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos, context: ISelectionContext): VoxelShape = baseShape
     override fun getInteractionShape(state: BlockState, worldIn: IBlockReader, pos: BlockPos): VoxelShape = baseShape
     override fun isPathfindable(state: BlockState, worldIn: IBlockReader, pos: BlockPos, type: PathType) = false
+
+    override fun use(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        player: PlayerEntity,
+        hand: Hand,
+        hit: BlockRayTraceResult
+    ): ActionResultType {
+        if (!world.isClientSide) {
+            val tileEntity = world.getBlockEntity(pos.above(2))
+            if (tileEntity is SteamPressTopTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos.above(2))
+        }
+
+        return ActionResultType.sidedSuccess(world.isClientSide)
+    }
 
     override fun getStateForPlacement(context: BlockItemUseContext): BlockState? {
         val blockPos1 = context.clickedPos.above()
@@ -53,10 +78,16 @@ class SteamPressBase(properties: Properties) : Block(properties) {
         super.onRemove(state, world, pos, newState, p_196243_5_)
     }
 
-    private fun removeSteamPressStructure(worldIn: IWorld, pos: BlockPos) {
+    private fun removeSteamPressStructure(worldIn: World, pos: BlockPos) {
         if (!worldIn.isClientSide) {
             val blockPos1 = pos.above()
             val blockPos2 = blockPos1.above()
+
+            val tileEntity = worldIn.getBlockEntity(blockPos2)
+            if (tileEntity is SteamPressTopTileEntity) {
+                InventoryHelper.dropContents(worldIn, pos, tileEntity)
+                tileEntity.getRecipesToAwardAndPopExperience(worldIn, Vector3d.atCenterOf(pos))
+            }
 
             if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressFrame.get())
                 worldIn.destroyBlock(blockPos1, false)

@@ -733,9 +733,13 @@
 
   "block.ntm.siren": "Siren",
   "block.ntm.safe": "Safe",
+  "block.ntm.steam_press_base": "Steam Press",
+  "block.ntm.steam_press_frame": "Steam Press",
+  "block.ntm.steam_press_top": "Steam Press",
 
   "container.ntm.siren": "Siren",
   "container.ntm.safe": "Safe",
+  "container.ntm.steam_press": "Steam Press",
 
   "subtitle.ntm.siren.playing_hatch": "Siren is running - Hatch Siren",
   "subtitle.ntm.siren.playing_autopilot_disconnected": "Siren is running - Autopilot Disconnected",
@@ -757,6 +761,7 @@
   "subtitle.ntm.siren.playing_eas": "Siren is running - EAS Alarm Screech",
   "subtitle.ntm.siren.playing_apc_pass": "Siren is running - APC Pass",
   "subtitle.ntm.siren.playing_razortrain_horn": "Siren is running - Razortrain Horn",
+  "subtitle.ntm.press.operate": "Press stamps",
 
   "death.attack.radiation": "%1$s died from radiation poisoning"
 }
