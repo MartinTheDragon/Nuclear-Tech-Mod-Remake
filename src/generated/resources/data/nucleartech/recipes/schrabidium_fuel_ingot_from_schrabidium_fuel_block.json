@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "schrabidium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:schrabidium_fuel_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:schrabidium_fuel_ingot",
+    "count": 9
+  }
+}

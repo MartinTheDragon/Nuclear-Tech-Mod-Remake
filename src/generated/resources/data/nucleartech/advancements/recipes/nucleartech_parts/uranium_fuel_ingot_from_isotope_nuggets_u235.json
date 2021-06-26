@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium_fuel_ingot_from_isotope_nuggets_u235"
+    ]
+  },
+  "criteria": {
+    "has_u238_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:u238_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium_fuel_ingot_from_isotope_nuggets_u235"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_u238_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "ntm:plutonium_block",
-    "ntm:pu238_block",
-    "ntm:pu239_block",
-    "ntm:pu240_block",
-    "ntm:plutonium_fuel_block"
+    "nucleartech:plutonium_block",
+    "nucleartech:pu238_block",
+    "nucleartech:pu239_block",
+    "nucleartech:pu240_block",
+    "nucleartech:plutonium_fuel_block"
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium_fuel_ingot_from_isotope_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_plutonium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/plutonium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium_fuel_ingot_from_isotope_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plutonium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

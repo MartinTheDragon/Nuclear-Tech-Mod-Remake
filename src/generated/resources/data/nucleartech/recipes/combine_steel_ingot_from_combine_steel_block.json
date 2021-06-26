@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "combine_steel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:combine_steel_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:combine_steel_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "combine_steel_ingot",
+  "ingredient": {
+    "item": "nucleartech:combine_scrap_metal"
+  },
+  "result": "nucleartech:combine_steel_ingot",
+  "experience": 0.5,
+  "cookingtime": 200
+}

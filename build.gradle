@@ -18,7 +18,7 @@ apply plugin: 'kotlin'
 
 version = '1.16.5-0.0.4.0'
 group = 'at.martinthedragon' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'ntm'
+archivesBaseName = 'nucleartech'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -59,7 +59,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                ntm {
+                nuclearTech {
                     source sourceSets.main
                 }
             }
@@ -81,7 +81,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                ntm {
+                nucleartech {
                     source sourceSets.main
                 }
             }
@@ -103,10 +103,10 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'ntm', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'nucleartech', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                ntm {
+                nucleartech {
                     source sourceSets.main
                 }
             }

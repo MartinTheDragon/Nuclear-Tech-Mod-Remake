@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "niter",
+  "ingredient": {
+    "item": "nucleartech:niter_crystals"
+  },
+  "result": {
+    "item": "nucleartech:niter",
+    "count": 6
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "ntm:niter_block"
+    "nucleartech:niter_block"
   ]
 }

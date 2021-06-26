@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "aluminium_ingot",
+  "ingredient": {
+    "item": "nucleartech:meteor_aluminium_ore"
+  },
+  "result": "nucleartech:aluminium_ingot",
+  "experience": 0.9,
+  "cookingtime": 100
+}

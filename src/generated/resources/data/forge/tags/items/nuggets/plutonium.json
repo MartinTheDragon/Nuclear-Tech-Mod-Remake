@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "ntm:plutonium_nugget",
-    "ntm:pu238_nugget",
-    "ntm:pu239_nugget",
-    "ntm:pu240_nugget",
-    "ntm:plutonium_fuel_nugget"
+    "nucleartech:plutonium_nugget",
+    "nucleartech:pu238_nugget",
+    "nucleartech:pu239_nugget",
+    "nucleartech:pu240_nugget",
+    "nucleartech:plutonium_fuel_nugget"
   ]
 }

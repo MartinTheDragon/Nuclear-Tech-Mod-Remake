@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/burned_out_quad_schrabidium_rod"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "lead_ingot",
+  "ingredient": {
+    "item": "nucleartech:meteor_lead_ore"
+  },
+  "result": "nucleartech:lead_ingot",
+  "experience": 0.9,
+  "cookingtime": 100
+}

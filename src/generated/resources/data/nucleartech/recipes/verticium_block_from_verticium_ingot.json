@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "verticium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:verticium_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:verticium_block"
+  }
+}

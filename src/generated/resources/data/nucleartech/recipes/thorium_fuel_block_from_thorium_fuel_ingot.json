@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "thorium_fuel_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:thorium_fuel_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:thorium_fuel_block"
+  }
+}

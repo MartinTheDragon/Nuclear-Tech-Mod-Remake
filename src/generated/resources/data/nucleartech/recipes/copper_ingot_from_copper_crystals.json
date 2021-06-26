@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "copper_ingot",
+  "ingredient": {
+    "item": "nucleartech:copper_crystals"
+  },
+  "result": {
+    "item": "nucleartech:copper_ingot",
+    "count": 2
+  },
+  "experience": 0.5,
+  "cookingtime": 200
+}

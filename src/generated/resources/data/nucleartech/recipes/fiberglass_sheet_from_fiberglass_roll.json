@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "fiberglass_sheet",
+  "ingredients": [
+    {
+      "item": "nucleartech:fiberglass_roll"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:fiberglass_sheet",
+    "count": 9
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "daffergon_ingot",
+  "ingredient": {
+    "item": "nucleartech:dellite"
+  },
+  "result": "nucleartech:daffergon_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

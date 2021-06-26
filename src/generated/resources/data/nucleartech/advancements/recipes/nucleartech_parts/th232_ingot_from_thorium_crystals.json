@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:th232_ingot_from_thorium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_thorium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:thorium_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:th232_ingot_from_thorium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

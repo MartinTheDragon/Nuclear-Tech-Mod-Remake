@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "combine_steel_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:combine_steel_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:combine_steel_block"
+  }
+}

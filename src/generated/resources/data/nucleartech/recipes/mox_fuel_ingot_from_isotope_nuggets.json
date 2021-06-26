@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mox_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:u235_nugget"
+    },
+    {
+      "item": "nucleartech:u235_nugget"
+    },
+    {
+      "item": "nucleartech:u235_nugget"
+    },
+    {
+      "item": "nucleartech:pu238_nugget"
+    },
+    {
+      "item": "nucleartech:pu239_nugget"
+    },
+    {
+      "item": "nucleartech:pu239_nugget"
+    },
+    {
+      "item": "nucleartech:pu239_nugget"
+    },
+    {
+      "item": "nucleartech:u238_nugget"
+    },
+    {
+      "item": "nucleartech:u238_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:mox_fuel_ingot"
+  }
+}

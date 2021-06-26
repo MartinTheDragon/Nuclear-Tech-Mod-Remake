@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ntm:item/super_conducting_ring_coil"
-  }
-}

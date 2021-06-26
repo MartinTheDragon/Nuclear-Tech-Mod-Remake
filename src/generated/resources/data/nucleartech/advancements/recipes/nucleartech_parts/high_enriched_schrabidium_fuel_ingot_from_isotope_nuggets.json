@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:high_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_schrabidium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:schrabidium_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:high_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schrabidium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

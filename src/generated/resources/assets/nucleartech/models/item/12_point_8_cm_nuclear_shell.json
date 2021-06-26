@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/12_point_8_cm_nuclear_shell"
+  }
+}

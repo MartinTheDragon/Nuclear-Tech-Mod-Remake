@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thorium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:u233_nugget"
+    },
+    {
+      "item": "nucleartech:u233_nugget"
+    },
+    {
+      "item": "nucleartech:u233_nugget"
+    },
+    {
+      "tag": "forge:nuggets/thorium"
+    },
+    {
+      "tag": "forge:nuggets/thorium"
+    },
+    {
+      "tag": "forge:nuggets/thorium"
+    },
+    {
+      "tag": "forge:nuggets/thorium"
+    },
+    {
+      "tag": "forge:nuggets/thorium"
+    },
+    {
+      "tag": "forge:nuggets/thorium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:thorium_fuel_ingot"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "verticium_ingot",
+  "ingredient": {
+    "item": "nucleartech:dollar_green_mineral"
+  },
+  "result": "nucleartech:verticium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

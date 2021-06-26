@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/tiny_lithium_powder"
+  }
+}

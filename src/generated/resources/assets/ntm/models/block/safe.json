@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "side": "ntm:block/safe_side",
-    "front": "ntm:block/safe_front",
-    "top": "ntm:block/safe_side"
-  }
-}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium_ingot_from_trixite_crystals"
+    ]
+  },
+  "criteria": {
+    "has_trixite_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:trixite_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium_ingot_from_trixite_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_trixite_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

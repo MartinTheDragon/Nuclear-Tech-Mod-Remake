@@ -1,0 +1,12 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "iron_plate",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:iron_plate"
+  },
+  "experience": 1.0
+}

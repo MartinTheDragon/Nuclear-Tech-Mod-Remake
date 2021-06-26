@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:siren_track_hatch_siren",
+    "nucleartech:siren_track_autopilot_disconnected",
+    "nucleartech:siren_track_ams_siren",
+    "nucleartech:siren_track_blast_door_alarm",
+    "nucleartech:siren_track_apc_siren",
+    "nucleartech:siren_track_klaxon",
+    "nucleartech:siren_track_vault_door_alarm",
+    "nucleartech:siren_track_security_alert",
+    "nucleartech:siren_track_standard_siren",
+    "nucleartech:siren_track_classic_siren",
+    "nucleartech:siren_track_bank_alarm",
+    "nucleartech:siren_track_beep_siren",
+    "nucleartech:siren_track_container_alarm",
+    "nucleartech:siren_track_sweep_siren",
+    "nucleartech:siren_track_missile_silo_siren",
+    "nucleartech:siren_track_air_raid_siren",
+    "nucleartech:siren_track_nostromo_self_destruct",
+    "nucleartech:siren_track_eas_alarm_screech",
+    "nucleartech:siren_track_apc_pass",
+    "nucleartech:siren_track_razortrain_horn"
+  ]
+}

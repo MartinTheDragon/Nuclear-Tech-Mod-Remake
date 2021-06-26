@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:schrabidium_flat_stamp",
+    "nucleartech:schrabidium_plate_stamp",
+    "nucleartech:schrabidium_wire_stamp",
+    "nucleartech:schrabidium_circuit_stamp"
+  ]
+}

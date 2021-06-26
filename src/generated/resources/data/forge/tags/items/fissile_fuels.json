@@ -5,8 +5,8 @@
     "#forge:fissile_fuels/thorium",
     "#forge:fissile_fuels/plutonium",
     "#forge:fissile_fuels/mox",
-    "ntm:schrabidium_fuel_ingot",
-    "ntm:high_enriched_schrabidium_fuel_ingot",
-    "ntm:low_enriched_schrabidium_fuel_ingot"
+    "nucleartech:schrabidium_fuel_ingot",
+    "nucleartech:high_enriched_schrabidium_fuel_ingot",
+    "nucleartech:low_enriched_schrabidium_fuel_ingot"
   ]
 }

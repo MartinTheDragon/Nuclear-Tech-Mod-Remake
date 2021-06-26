@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "verticium_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:verticium_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:verticium_ingot",
+    "count": 9
+  }
+}

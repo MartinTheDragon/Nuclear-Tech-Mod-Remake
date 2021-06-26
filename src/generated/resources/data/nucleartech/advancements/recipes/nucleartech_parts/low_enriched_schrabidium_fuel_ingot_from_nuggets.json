@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:low_enriched_schrabidium_fuel_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_low_enriched_schrabidium_fuel_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:low_enriched_schrabidium_fuel_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:low_enriched_schrabidium_fuel_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_low_enriched_schrabidium_fuel_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

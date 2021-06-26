@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "tungsten_ingot",
+  "ingredient": {
+    "item": "nucleartech:meteor_tungsten_ore"
+  },
+  "result": "nucleartech:tungsten_ingot",
+  "experience": 2.25,
+  "cookingtime": 200
+}

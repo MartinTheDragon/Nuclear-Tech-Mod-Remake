@@ -6,6 +6,6 @@
     "#forge:wires/tungsten",
     "#forge:wires/super_conductor",
     "#forge:wires/gold",
-    "ntm:red_copper_wire"
+    "nucleartech:red_copper_wire"
   ]
 }

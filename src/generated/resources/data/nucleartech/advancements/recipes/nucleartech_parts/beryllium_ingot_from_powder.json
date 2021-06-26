@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:beryllium_ingot_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_beryllium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/beryllium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:beryllium_ingot_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beryllium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ntm:plutonium_fuel_ingot",
-    "ntm:plutonium_fuel_nugget"
+    "nucleartech:plutonium_fuel_ingot",
+    "nucleartech:plutonium_fuel_nugget"
   ]
 }

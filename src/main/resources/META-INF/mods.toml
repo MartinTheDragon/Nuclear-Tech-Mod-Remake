@@ -2,7 +2,7 @@ modLoader="javafml"
 loaderVersion="[36,)"
 license="GPL v3.0"
 [[mods]]
-modId="ntm"
+modId="nucleartech"
 version="0.0.4.0"
 displayName="Nuclear Tech Mod Remake"
 credits="HbM: Did well..."

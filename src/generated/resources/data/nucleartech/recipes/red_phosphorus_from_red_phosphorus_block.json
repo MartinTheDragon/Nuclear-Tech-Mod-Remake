@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "red_phosphorus",
+  "ingredients": [
+    {
+      "item": "nucleartech:red_phosphorus_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:red_phosphorus",
+    "count": 9
+  }
+}

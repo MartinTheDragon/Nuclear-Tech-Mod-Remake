@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:stone_flat_stamp",
+    "nucleartech:stone_plate_stamp",
+    "nucleartech:stone_wire_stamp",
+    "nucleartech:stone_circuit_stamp"
+  ]
+}

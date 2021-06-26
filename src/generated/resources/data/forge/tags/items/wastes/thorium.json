@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "ntm:depleted_thorium_fuel"
+    "nucleartech:depleted_thorium_fuel"
   ]
 }

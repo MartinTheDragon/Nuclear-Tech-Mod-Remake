@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:red_copper_block_from_red_copper_ingot"
+    ]
+  },
+  "criteria": {
+    "has_red_copper_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:red_copper_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:red_copper_block_from_red_copper_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_copper_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "magnetized_tungsten_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:magnetized_tungsten_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:magnetized_tungsten_ingot",
+    "count": 9
+  }
+}

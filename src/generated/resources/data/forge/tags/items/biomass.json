@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ntm:biomass",
+    "nucleartech:biomass",
     "#forge:biomass/compressed"
   ]
 }

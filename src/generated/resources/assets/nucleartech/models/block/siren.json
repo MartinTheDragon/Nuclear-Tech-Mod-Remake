@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "nucleartech:block/siren_side",
+    "end": "nucleartech:block/steel_block"
+  }
+}

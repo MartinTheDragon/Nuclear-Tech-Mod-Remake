@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "schrabidium_ingot",
+  "ingredient": {
+    "item": "nucleartech:schrabidium_crystals"
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_ingot",
+    "count": 2
+  },
+  "experience": 50.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nucleartech:block/safe"
+    },
+    "facing=south": {
+      "model": "nucleartech:block/safe",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nucleartech:block/safe",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "nucleartech:block/safe",
+      "y": 90
+    }
+  }
+}

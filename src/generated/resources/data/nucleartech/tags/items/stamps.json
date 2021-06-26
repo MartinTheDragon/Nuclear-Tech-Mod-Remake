@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#nucleartech:stamps/stone",
+    "#nucleartech:stamps/iron",
+    "#nucleartech:stamps/steel",
+    "#nucleartech:stamps/titanium",
+    "#nucleartech:stamps/obsidian",
+    "#nucleartech:stamps/schrabidium"
+  ]
+}

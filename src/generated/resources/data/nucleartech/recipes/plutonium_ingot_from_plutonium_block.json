@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "plutonium_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:plutonium_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:plutonium_ingot",
+    "count": 9
+  }
+}

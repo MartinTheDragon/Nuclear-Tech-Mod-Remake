@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:combine_steel_ingot_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_combine_steel_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:combine_steel_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:combine_steel_ingot_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_combine_steel_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

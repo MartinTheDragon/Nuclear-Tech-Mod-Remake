@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "trinitite",
+  "ingredients": [
+    {
+      "item": "nucleartech:trinitite_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:trinitite",
+    "count": 9
+  }
+}

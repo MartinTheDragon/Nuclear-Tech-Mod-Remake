@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:th232_ingot_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_thorium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/thorium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:th232_ingot_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "nucleartech:block/euphemium_etched_schrabidium_cluster_side",
+    "end": "nucleartech:block/euphemium_etched_schrabidium_cluster_end"
+  }
+}

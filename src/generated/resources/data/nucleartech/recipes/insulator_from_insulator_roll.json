@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "insulator",
+  "ingredients": [
+    {
+      "item": "nucleartech:insulator_roll"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:insulator",
+    "count": 9
+  }
+}

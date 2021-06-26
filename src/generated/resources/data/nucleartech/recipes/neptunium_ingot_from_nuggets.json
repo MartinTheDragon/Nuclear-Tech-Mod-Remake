@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "neptunium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/neptunium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:neptunium_ingot"
+  }
+}

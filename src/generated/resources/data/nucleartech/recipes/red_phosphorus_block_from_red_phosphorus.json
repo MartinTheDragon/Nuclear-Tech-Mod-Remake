@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "red_phosphorus_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:red_phosphorus"
+    }
+  },
+  "result": {
+    "item": "nucleartech:red_phosphorus_block"
+  }
+}

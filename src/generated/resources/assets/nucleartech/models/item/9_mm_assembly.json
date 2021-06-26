@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/9_mm_assembly"
+  }
+}

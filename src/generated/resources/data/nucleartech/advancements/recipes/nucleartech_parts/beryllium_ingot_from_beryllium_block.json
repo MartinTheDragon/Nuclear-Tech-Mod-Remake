@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:beryllium_ingot_from_beryllium_block"
+    ]
+  },
+  "criteria": {
+    "has_beryllium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:storage_blocks/beryllium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:beryllium_ingot_from_beryllium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beryllium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

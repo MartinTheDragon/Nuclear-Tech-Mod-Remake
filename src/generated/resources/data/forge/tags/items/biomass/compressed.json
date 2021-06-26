@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "ntm:compressed_biomass"
+    "nucleartech:compressed_biomass"
   ]
 }

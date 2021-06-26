@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "plutonium_ingot",
+  "ingredient": {
+    "item": "nucleartech:trixite_crystals"
+  },
+  "result": {
+    "item": "nucleartech:plutonium_ingot",
+    "count": 4
+  },
+  "experience": 3.0,
+  "cookingtime": 200
+}

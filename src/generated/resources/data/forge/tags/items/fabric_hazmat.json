@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "ntm:hazmat_cloth",
-    "ntm:advanced_hazmat_cloth",
-    "ntm:lead_reinforced_hazmat_cloth"
+    "nucleartech:hazmat_cloth",
+    "nucleartech:advanced_hazmat_cloth",
+    "nucleartech:lead_reinforced_hazmat_cloth"
   ]
 }

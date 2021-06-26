@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "ntm:neutron_reflector"
+    "nucleartech:neutron_reflector"
   ]
 }

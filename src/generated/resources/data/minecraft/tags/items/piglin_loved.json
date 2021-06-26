@@ -6,6 +6,6 @@
     "#forge:plates/gold",
     "#forge:wires/gold",
     "#forge:coils/gold",
-    "ntm:gold_bullet_assembly"
+    "nucleartech:gold_bullet_assembly"
   ]
 }

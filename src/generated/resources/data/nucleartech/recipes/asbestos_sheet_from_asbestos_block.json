@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "asbestos_sheet",
+  "ingredients": [
+    {
+      "item": "nucleartech:asbestos_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:asbestos_sheet",
+    "count": 9
+  }
+}

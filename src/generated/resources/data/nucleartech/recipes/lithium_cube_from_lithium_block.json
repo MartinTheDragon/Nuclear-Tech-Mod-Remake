@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "lithium_cube",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/lithium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:lithium_cube",
+    "count": 9
+  }
+}

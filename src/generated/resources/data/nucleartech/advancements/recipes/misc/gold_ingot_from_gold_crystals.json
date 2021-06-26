@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gold_ingot_from_gold_crystals"
+    ]
+  },
+  "criteria": {
+    "has_gold_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:gold_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gold_ingot_from_gold_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

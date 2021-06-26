@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "ntm:depleted_mox_fuel"
+    "nucleartech:depleted_mox_fuel"
   ]
 }

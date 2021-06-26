@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "ntm:iron_flat_stamp",
-    "ntm:iron_plate_stamp",
-    "ntm:iron_wire_stamp",
-    "ntm:iron_circuit_stamp"
-  ]
-}

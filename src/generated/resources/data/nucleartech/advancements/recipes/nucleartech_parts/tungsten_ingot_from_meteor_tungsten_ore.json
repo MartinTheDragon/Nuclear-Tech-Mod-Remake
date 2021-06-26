@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tungsten_ingot_from_meteor_tungsten_ore"
+    ]
+  },
+  "criteria": {
+    "has_meteor_tungsten_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:meteor_tungsten_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tungsten_ingot_from_meteor_tungsten_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_meteor_tungsten_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

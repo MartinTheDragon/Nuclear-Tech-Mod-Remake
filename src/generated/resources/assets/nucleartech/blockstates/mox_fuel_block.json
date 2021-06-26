@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "nucleartech:block/mox_fuel_block"
+    }
+  }
+}

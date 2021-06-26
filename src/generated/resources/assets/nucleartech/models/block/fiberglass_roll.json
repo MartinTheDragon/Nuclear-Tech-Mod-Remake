@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "nucleartech:block/fiberglass_roll_side",
+    "end": "nucleartech:block/fiberglass_roll_end"
+  }
+}

@@ -29,7 +29,7 @@
     "#forge:gems/cerium",
     "#forge:gems/lanthanum",
     "#forge:gems/actinium",
-    "ntm:schraranium_crystals",
-    "ntm:schrabidium_crystals"
+    "nucleartech:schraranium_crystals",
+    "nucleartech:schrabidium_crystals"
   ]
 }

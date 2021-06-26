@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "weidanium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:weidanium_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:weidanium_block"
+  }
+}

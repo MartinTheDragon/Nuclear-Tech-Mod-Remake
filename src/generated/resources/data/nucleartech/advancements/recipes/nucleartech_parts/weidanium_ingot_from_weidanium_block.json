@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:weidanium_ingot_from_weidanium_block"
+    ]
+  },
+  "criteria": {
+    "has_weidanium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:weidanium_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:weidanium_ingot_from_weidanium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_weidanium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

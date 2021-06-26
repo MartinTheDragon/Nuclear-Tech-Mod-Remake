@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ntm:th232_nugget",
-    "ntm:thorium_fuel_nugget"
+    "nucleartech:th232_nugget",
+    "nucleartech:thorium_fuel_nugget"
   ]
 }

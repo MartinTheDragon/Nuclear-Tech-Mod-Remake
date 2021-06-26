@@ -11,15 +11,15 @@
     "#forge:plates/neutron_reflector",
     "#forge:plates/insulator",
     "#forge:plates/kevlar",
-    "ntm:advanced_alloy_plate",
-    "ntm:schrabidium_plate",
-    "ntm:combine_steel_plate",
-    "ntm:mixed_plate",
-    "ntm:saturnite_plate",
-    "ntm:paa_alloy_plate",
-    "ntm:angry_metal",
-    "ntm:desh_compound_plate",
-    "ntm:euphemium_compound_plate",
-    "ntm:dineutronium_compound_plate"
+    "nucleartech:advanced_alloy_plate",
+    "nucleartech:schrabidium_plate",
+    "nucleartech:combine_steel_plate",
+    "nucleartech:mixed_plate",
+    "nucleartech:saturnite_plate",
+    "nucleartech:paa_alloy_plate",
+    "nucleartech:angry_metal",
+    "nucleartech:desh_compound_plate",
+    "nucleartech:euphemium_compound_plate",
+    "nucleartech:dineutronium_compound_plate"
   ]
 }

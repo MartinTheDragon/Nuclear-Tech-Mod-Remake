@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:steel_flat_stamp",
+    "nucleartech:steel_plate_stamp",
+    "nucleartech:steel_wire_stamp",
+    "nucleartech:steel_circuit_stamp"
+  ]
+}

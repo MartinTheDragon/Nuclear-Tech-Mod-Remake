@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "starmetal_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:starmetal_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:starmetal_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "starmetal_ingot",
+  "ingredient": {
+    "item": "nucleartech:starmetal_ore"
+  },
+  "result": "nucleartech:starmetal_ingot",
+  "experience": 10.0,
+  "cookingtime": 200
+}

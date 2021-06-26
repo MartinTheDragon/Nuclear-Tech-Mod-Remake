@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "side": "ntm:block/siren_side",
-    "end": "ntm:block/steel_block"
-  }
-}

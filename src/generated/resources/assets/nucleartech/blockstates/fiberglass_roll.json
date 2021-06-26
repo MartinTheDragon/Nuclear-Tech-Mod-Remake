@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "nucleartech:block/fiberglass_roll_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "nucleartech:block/fiberglass_roll"
+    },
+    "axis=z": {
+      "model": "nucleartech:block/fiberglass_roll_horizontal",
+      "x": 90
+    }
+  }
+}

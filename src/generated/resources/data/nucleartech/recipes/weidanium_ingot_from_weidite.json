@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "weidanium_ingot",
+  "ingredient": {
+    "item": "nucleartech:weidite"
+  },
+  "result": "nucleartech:weidanium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

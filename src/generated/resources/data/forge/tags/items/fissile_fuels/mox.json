@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ntm:mox_fuel_ingot",
-    "ntm:mox_fuel_nugget"
+    "nucleartech:mox_fuel_ingot",
+    "nucleartech:mox_fuel_nugget"
   ]
 }

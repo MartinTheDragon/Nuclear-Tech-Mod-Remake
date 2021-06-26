@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:u238_block_from_u238_ingot"
+    ]
+  },
+  "criteria": {
+    "has_u238_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:u238_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:u238_block_from_u238_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_u238_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

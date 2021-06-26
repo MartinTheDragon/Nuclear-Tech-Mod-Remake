@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "ntm:titanium_flat_stamp",
-    "ntm:titanium_plate_stamp",
-    "ntm:titanium_wire_stamp",
-    "ntm:titanium_circuit_stamp"
-  ]
-}

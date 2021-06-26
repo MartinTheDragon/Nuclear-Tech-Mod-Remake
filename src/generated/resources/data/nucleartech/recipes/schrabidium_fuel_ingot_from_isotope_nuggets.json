@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "schrabidium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:schrabidium_nugget"
+    },
+    {
+      "item": "nucleartech:schrabidium_nugget"
+    },
+    {
+      "item": "nucleartech:schrabidium_nugget"
+    },
+    {
+      "tag": "forge:nuggets/neptunium"
+    },
+    {
+      "tag": "forge:nuggets/neptunium"
+    },
+    {
+      "tag": "forge:nuggets/neptunium"
+    },
+    {
+      "tag": "forge:nuggets/beryllium"
+    },
+    {
+      "tag": "forge:nuggets/beryllium"
+    },
+    {
+      "tag": "forge:nuggets/beryllium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:schrabidium_fuel_ingot"
+  }
+}

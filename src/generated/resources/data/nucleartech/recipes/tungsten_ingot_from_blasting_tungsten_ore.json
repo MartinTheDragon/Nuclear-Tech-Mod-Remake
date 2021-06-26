@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "tungsten_ingot",
+  "ingredient": {
+    "tag": "forge:ores/tungsten"
+  },
+  "result": "nucleartech:tungsten_ingot",
+  "experience": 0.375,
+  "cookingtime": 100
+}

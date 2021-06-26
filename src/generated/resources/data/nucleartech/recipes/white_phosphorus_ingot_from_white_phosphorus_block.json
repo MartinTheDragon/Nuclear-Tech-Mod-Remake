@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "white_phosphorus_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:white_phosphorus_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:white_phosphorus_ingot",
+    "count": 9
+  }
+}

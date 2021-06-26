@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#nucleartech:stamps/plate",
+    "#nucleartech:stamps/wire",
+    "#nucleartech:stamps/circuit"
+  ]
+}

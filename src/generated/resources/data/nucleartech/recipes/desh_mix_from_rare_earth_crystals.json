@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "desh_mix",
+  "ingredient": {
+    "item": "nucleartech:rare_earth_crystals"
+  },
+  "result": {
+    "item": "nucleartech:desh_mix",
+    "count": 2
+  },
+  "experience": 3.0,
+  "cookingtime": 200
+}

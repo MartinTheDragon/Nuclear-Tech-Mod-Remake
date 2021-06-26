@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "ntm:uranium_block",
-    "ntm:u233_block",
-    "ntm:u235_block",
-    "ntm:u238_block",
-    "ntm:uranium_fuel_block"
+    "nucleartech:uranium_block",
+    "nucleartech:u233_block",
+    "nucleartech:u235_block",
+    "nucleartech:u238_block",
+    "nucleartech:uranium_fuel_block"
   ]
 }

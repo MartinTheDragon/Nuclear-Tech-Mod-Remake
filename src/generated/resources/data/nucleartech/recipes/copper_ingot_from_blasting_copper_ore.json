@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "copper_ingot",
+  "ingredient": {
+    "tag": "forge:ores/copper"
+  },
+  "result": "nucleartech:copper_ingot",
+  "experience": 0.25,
+  "cookingtime": 100
+}

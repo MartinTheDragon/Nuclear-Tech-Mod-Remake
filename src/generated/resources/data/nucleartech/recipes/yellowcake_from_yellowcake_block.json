@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "yellowcake",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/yellow_cake_uranium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:yellowcake",
+    "count": 9
+  }
+}

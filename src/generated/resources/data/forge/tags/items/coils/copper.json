@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ntm:copper_coil",
-    "ntm:ring_coil"
+    "nucleartech:copper_coil",
+    "nucleartech:ring_coil"
   ]
 }

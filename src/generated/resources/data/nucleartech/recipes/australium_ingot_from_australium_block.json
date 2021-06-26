@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "australium_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:australium_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:australium_ingot",
+    "count": 9
+  }
+}

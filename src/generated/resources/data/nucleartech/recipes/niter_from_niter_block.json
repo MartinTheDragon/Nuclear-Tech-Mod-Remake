@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "niter",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/salpeter"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:niter",
+    "count": 9
+  }
+}

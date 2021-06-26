@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:stone_wire_stamp",
+    "nucleartech:iron_wire_stamp",
+    "nucleartech:steel_wire_stamp",
+    "nucleartech:titanium_wire_stamp",
+    "nucleartech:obsidian_wire_stamp",
+    "nucleartech:schrabidium_wire_stamp"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:depleted_uranium_fuel",
+    "nucleartech:depleted_thorium_fuel",
+    "nucleartech:depleted_plutonium_fuel",
+    "nucleartech:depleted_mox_fuel",
+    "nucleartech:depleted_schrabidium_fuel"
+  ]
+}

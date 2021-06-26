@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:copper_ingot_from_copper_crystals"
+    ]
+  },
+  "criteria": {
+    "has_copper_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:copper_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:copper_ingot_from_copper_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "reiium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:reiium_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:reiium_block"
+  }
+}

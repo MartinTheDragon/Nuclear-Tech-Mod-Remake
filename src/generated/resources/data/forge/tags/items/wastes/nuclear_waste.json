@@ -9,6 +9,6 @@
     "#forge:wastes/thorium",
     "#forge:wastes/plutonium",
     "#forge:wastes/mox",
-    "ntm:nuclear_waste"
+    "nucleartech:nuclear_waste"
   ]
 }

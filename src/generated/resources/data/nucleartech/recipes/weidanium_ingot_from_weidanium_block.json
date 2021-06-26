@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "weidanium_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:weidanium_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:weidanium_ingot",
+    "count": 9
+  }
+}

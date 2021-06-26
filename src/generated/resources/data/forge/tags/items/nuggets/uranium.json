@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "ntm:uranium_nugget",
-    "ntm:u233_nugget",
-    "ntm:u235_nugget",
-    "ntm:u238_nugget",
-    "ntm:uranium_fuel_nugget"
+    "nucleartech:uranium_nugget",
+    "nucleartech:u233_nugget",
+    "nucleartech:u235_nugget",
+    "nucleartech:u238_nugget",
+    "nucleartech:uranium_fuel_nugget"
   ]
 }

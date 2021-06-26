@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "ntm:hot_depleted_plutonium_fuel"
+    "nucleartech:hot_depleted_plutonium_fuel"
   ]
 }

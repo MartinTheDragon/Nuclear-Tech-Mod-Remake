@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "ntm:super_conducting_coil",
-    "ntm:super_conducting_ring_coil",
-    "ntm:heating_coil",
-    "ntm:high_temperature_super_conducting_coil"
+    "nucleartech:super_conducting_coil",
+    "nucleartech:super_conducting_ring_coil",
+    "nucleartech:heating_coil",
+    "nucleartech:high_temperature_super_conducting_coil"
   ]
 }

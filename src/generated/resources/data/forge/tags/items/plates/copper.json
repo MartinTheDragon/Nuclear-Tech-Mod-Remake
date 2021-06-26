@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ntm:copper_plate",
-    "ntm:copper_panel"
+    "nucleartech:copper_plate",
+    "nucleartech:copper_panel"
   ]
 }

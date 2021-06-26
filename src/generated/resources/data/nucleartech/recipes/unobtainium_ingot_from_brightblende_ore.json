@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "unobtainium_ingot",
+  "ingredient": {
+    "item": "nucleartech:brightblende_ore"
+  },
+  "result": "nucleartech:unobtainium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

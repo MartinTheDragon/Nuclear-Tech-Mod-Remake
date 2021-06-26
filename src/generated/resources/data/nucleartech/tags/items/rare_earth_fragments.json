@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:neodymium_fragment",
+    "nucleartech:cobalt_fragment",
+    "nucleartech:niobium_fragment",
+    "nucleartech:cerium_fragment",
+    "nucleartech:lanthanum_fragment",
+    "nucleartech:actinium_fragment"
+  ]
+}

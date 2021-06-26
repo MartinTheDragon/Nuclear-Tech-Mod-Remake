@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:stone_plate_stamp",
+    "nucleartech:iron_plate_stamp",
+    "nucleartech:steel_plate_stamp",
+    "nucleartech:titanium_plate_stamp",
+    "nucleartech:obsidian_plate_stamp",
+    "nucleartech:schrabidium_plate_stamp"
+  ]
+}

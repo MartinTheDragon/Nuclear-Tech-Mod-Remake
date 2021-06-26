@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "lead_ingot",
+  "ingredient": {
+    "item": "nucleartech:lead_crystals"
+  },
+  "result": {
+    "item": "nucleartech:lead_ingot",
+    "count": 2
+  },
+  "experience": 0.6,
+  "cookingtime": 200
+}

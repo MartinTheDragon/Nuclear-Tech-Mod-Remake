@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "ntm:nuclear_waste",
-    "ntm:depleted_uranium_fuel",
-    "ntm:depleted_thorium_fuel",
-    "ntm:depleted_plutonium_fuel",
-    "ntm:depleted_mox_fuel",
-    "ntm:depleted_schrabidium_fuel",
-    "ntm:hot_depleted_uranium_fuel",
-    "ntm:hot_depleted_thorium_fuel",
-    "ntm:hot_depleted_plutonium_fuel",
-    "ntm:hot_depleted_mox_fuel",
-    "ntm:hot_depleted_schrabidium_fuel"
+    "nucleartech:nuclear_waste",
+    "nucleartech:depleted_uranium_fuel",
+    "nucleartech:depleted_thorium_fuel",
+    "nucleartech:depleted_plutonium_fuel",
+    "nucleartech:depleted_mox_fuel",
+    "nucleartech:depleted_schrabidium_fuel",
+    "nucleartech:hot_depleted_uranium_fuel",
+    "nucleartech:hot_depleted_thorium_fuel",
+    "nucleartech:hot_depleted_plutonium_fuel",
+    "nucleartech:hot_depleted_mox_fuel",
+    "nucleartech:hot_depleted_schrabidium_fuel"
   ]
 }

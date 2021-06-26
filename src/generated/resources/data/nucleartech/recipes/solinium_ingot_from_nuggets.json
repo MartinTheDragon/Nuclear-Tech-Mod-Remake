@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "solinium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:solinium_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:solinium_ingot"
+  }
+}

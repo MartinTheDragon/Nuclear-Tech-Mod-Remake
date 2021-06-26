@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:red_phosphorus_block_from_red_phosphorus"
+    ]
+  },
+  "criteria": {
+    "has_red_phosphorus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:red_phosphorus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:red_phosphorus_block_from_red_phosphorus"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_phosphorus",
+      "has_the_recipe"
+    ]
+  ]
+}

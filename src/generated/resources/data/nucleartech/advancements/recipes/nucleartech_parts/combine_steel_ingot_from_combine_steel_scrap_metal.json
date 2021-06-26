@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:combine_steel_ingot_from_combine_steel_scrap_metal"
+    ]
+  },
+  "criteria": {
+    "has_combine_steel_scrap_metal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:combine_scrap_metal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:combine_steel_ingot_from_combine_steel_scrap_metal"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_combine_steel_scrap_metal",
+      "has_the_recipe"
+    ]
+  ]
+}
