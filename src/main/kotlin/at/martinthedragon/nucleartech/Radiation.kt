@@ -90,7 +90,7 @@ object Radiation {
                 if (irradiation > 2500)
                     setEntityIrradiation(entity, 2500f)
 
-                if (entity is PlayerEntity && entity.isCreative)
+                if ((entity is PlayerEntity && (entity.isCreative || entity.isSpectator)) || entity.isInvulnerable || entity.isInvulnerableTo(DamageSources.radiation))
                     continue
 
                 when {

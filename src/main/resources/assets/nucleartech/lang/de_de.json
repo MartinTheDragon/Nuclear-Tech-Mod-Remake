@@ -763,8 +763,9 @@
   "subtitle.nucleartech.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn",
   "subtitle.nucleartech.press.operate": "Presse stampft",
 
-  "death.attack.radiation": "%1$s starb an Strahlenvergiftung",
+  "death.attack.nucleartech.radiation": "%1$s starb an Strahlenvergiftung",
 
   "jei.nucleartech.category.pressing": "Pressrezepte",
+  "jei.nucleartech.category.pressing.experience": "%s EP",
   "jei.nucleartech.info.items.machine_template_folder_results": "Wird hergestellt mit der Produktionsvorlagen-Zeichenmappe"
 }

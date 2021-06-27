@@ -763,8 +763,9 @@
   "subtitle.nucleartech.siren.playing_razortrain_horn": "Siren is running - Razortrain Horn",
   "subtitle.nucleartech.press.operate": "Press stamps",
 
-  "death.attack.radiation": "%1$s died from radiation poisoning",
+  "death.attack.nucleartech.radiation": "%1$s died from radiation poisoning",
 
   "jei.nucleartech.category.pressing": "Pressing",
+  "jei.nucleartech.category.pressing.experience": "%s XP",
   "jei.nucleartech.info.items.machine_template_folder_results": "Created using Machine Template Folder"
 }

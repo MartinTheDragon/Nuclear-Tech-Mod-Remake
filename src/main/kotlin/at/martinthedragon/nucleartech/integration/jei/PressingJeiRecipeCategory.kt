@@ -11,6 +11,7 @@ import mezz.jei.api.gui.drawable.IDrawableAnimated
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.ingredients.IIngredients
 import mezz.jei.api.recipe.category.IRecipeCategory
+import net.minecraft.client.Minecraft
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.Ingredient
 import net.minecraft.util.ResourceLocation
@@ -48,6 +49,17 @@ class PressingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<PressRe
 
     override fun draw(recipe: PressRecipe, matrixStack: MatrixStack, mouseX: Double, mouseY: Double) {
         pressArrow.draw(matrixStack, 0, 19)
+        drawExperience(recipe, matrixStack)
+    }
+
+    private fun drawExperience(recipe: PressRecipe, matrixStack: MatrixStack) {
+        val experience = recipe.experience
+        if (experience > 0) {
+            val experienceString = TranslationTextComponent("jei.${NuclearTech.MODID}.category.pressing.experience", experience)
+            val fontRenderer = Minecraft.getInstance().font
+            val stringWidth = fontRenderer.width(experienceString)
+            fontRenderer.draw(matrixStack, experienceString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)
+        }
     }
 
     companion object {
