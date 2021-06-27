@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "quartz",
+  "ingredient": {
+    "tag": "forge:dusts/quartz"
+  },
+  "stamp_type": "FLAT",
+  "result": {
+    "item": "minecraft:quartz",
+    "count": 1
+  },
+  "experience": 0.2
+}

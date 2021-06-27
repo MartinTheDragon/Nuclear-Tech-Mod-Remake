@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "schrabidium_plate",
+  "ingredient": {
+    "item": "nucleartech:schrabidium_ingot"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:schrabidium_plate",
+    "count": 1
+  },
+  "experience": 0.5
+}

@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "gold_wire",
+  "ingredient": {
+    "item": "minecraft:gold_ingot"
+  },
+  "stamp_type": "WIRE",
+  "result": {
+    "item": "nucleartech:gold_wire",
+    "count": 8
+  },
+  "experience": 0.1
+}

@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "coal",
+  "ingredient": {
+    "tag": "forge:dusts/coal"
+  },
+  "stamp_type": "FLAT",
+  "result": {
+    "item": "minecraft:coal",
+    "count": 1
+  },
+  "experience": 0.2
+}

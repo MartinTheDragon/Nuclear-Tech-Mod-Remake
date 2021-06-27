@@ -6,7 +6,8 @@
   },
   "stamp_type": "PLATE",
   "result": {
-    "item": "nucleartech:iron_plate"
+    "item": "nucleartech:iron_plate",
+    "count": 1
   },
-  "experience": 1.0
+  "experience": 0.1
 }

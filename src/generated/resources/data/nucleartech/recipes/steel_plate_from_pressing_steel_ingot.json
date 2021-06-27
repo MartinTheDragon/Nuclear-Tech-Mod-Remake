@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "steel_plate",
+  "ingredient": {
+    "tag": "forge:ingots/steel"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:steel_plate",
+    "count": 1
+  },
+  "experience": 0.1
+}

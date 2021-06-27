@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "lignite_briquette",
+  "ingredient": {
+    "item": "nucleartech:lignite_powder"
+  },
+  "stamp_type": "FLAT",
+  "result": {
+    "item": "nucleartech:lignite_briquette",
+    "count": 1
+  },
+  "experience": 0.1
+}

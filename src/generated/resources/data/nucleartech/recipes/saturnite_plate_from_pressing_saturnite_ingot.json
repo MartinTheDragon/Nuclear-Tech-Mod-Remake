@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "saturnite_plate",
+  "ingredient": {
+    "item": "nucleartech:saturnite_ingot"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:saturnite_plate",
+    "count": 1
+  },
+  "experience": 0.2
+}

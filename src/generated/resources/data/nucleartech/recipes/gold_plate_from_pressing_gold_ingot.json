@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "gold_plate",
+  "ingredient": {
+    "item": "minecraft:gold_ingot"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:gold_plate",
+    "count": 1
+  },
+  "experience": 0.1
+}

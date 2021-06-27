@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "copper_plate",
+  "ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:copper_plate",
+    "count": 1
+  },
+  "experience": 0.1
+}

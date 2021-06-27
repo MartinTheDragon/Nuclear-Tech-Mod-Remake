@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:saturnite_plate_from_pressing_saturnite_ingot"
+    ]
+  },
+  "criteria": {
+    "has_saturnite_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:saturnite_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:saturnite_plate_from_pressing_saturnite_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_saturnite_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

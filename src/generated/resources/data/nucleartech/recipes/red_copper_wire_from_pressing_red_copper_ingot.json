@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "red_copper_wire",
+  "ingredient": {
+    "item": "nucleartech:red_copper_ingot"
+  },
+  "stamp_type": "WIRE",
+  "result": {
+    "item": "nucleartech:red_copper_wire",
+    "count": 8
+  },
+  "experience": 0.1
+}

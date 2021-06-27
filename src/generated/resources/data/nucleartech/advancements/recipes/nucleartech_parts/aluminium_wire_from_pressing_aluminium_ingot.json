@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:aluminium_wire_from_pressing_aluminium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_aluminium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/aluminium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:aluminium_wire_from_pressing_aluminium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_aluminium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

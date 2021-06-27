@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "emerald",
+  "ingredient": {
+    "tag": "forge:dusts/emerald"
+  },
+  "stamp_type": "FLAT",
+  "result": {
+    "item": "minecraft:emerald",
+    "count": 1
+  },
+  "experience": 0.2
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:quartz_from_pressing_quartz_powder"
+    ]
+  },
+  "criteria": {
+    "has_quartz_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:quartz_from_pressing_quartz_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_quartz_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "basic_circuit",
+  "ingredient": {
+    "item": "nucleartech:basic_circuit_assembly"
+  },
+  "stamp_type": "CIRCUIT",
+  "result": {
+    "item": "nucleartech:basic_circuit",
+    "count": 1
+  },
+  "experience": 0.75
+}

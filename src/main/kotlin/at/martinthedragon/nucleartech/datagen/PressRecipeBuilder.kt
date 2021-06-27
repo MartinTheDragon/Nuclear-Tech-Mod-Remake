@@ -17,8 +17,8 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
-class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType, val experience: Float) {
-    constructor(result: IItemProvider, stampType: PressRecipe.StampType, experience: Float) : this(result.asItem(), stampType, experience)
+class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType, val experience: Float, val count: Int = 1) {
+    constructor(result: IItemProvider, stampType: PressRecipe.StampType, experience: Float, count: Int = 1) : this(result.asItem(), stampType, experience, count)
 
     private lateinit var ingredient: Ingredient
     private val advancement = Advancement.Builder.advancement()
@@ -50,12 +50,13 @@ class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType,
     fun save(consumer: Consumer<IFinishedRecipe>, recipeName: ResourceLocation = ForgeRegistries.ITEMS.getKey(result) ?: throw IllegalArgumentException("Result item '${result.registryName}' was not registered")) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
         advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(IRequirementsStrategy.OR)
-        consumer.accept(Result(recipeName, result, experience, stampType, group, ingredient, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}")))
+        consumer.accept(Result(recipeName, result, count, experience, stampType, group, ingredient, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }
 
     class Result(
         private val id: ResourceLocation,
         private val result: Item,
+        private val count: Int,
         private val experience: Float,
         private val stampType: PressRecipe.StampType,
         private val group: String,
@@ -72,6 +73,7 @@ class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType,
             rootObject.addProperty("stamp_type", stampType.name)
             val resultObject = JsonObject()
             resultObject.addProperty("item", ForgeRegistries.ITEMS.getKey(result).toString())
+            resultObject.addProperty("count", count)
             rootObject.add("result", resultObject)
             rootObject.addProperty("experience", experience)
         }

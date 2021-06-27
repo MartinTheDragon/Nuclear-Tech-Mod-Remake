@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:diamond_from_pressing_dense_coal_cluster"
+    ]
+  },
+  "criteria": {
+    "has_dense_coal_cluster": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:dense_coal_cluster"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:diamond_from_pressing_dense_coal_cluster"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dense_coal_cluster",
+      "has_the_recipe"
+    ]
+  ]
+}

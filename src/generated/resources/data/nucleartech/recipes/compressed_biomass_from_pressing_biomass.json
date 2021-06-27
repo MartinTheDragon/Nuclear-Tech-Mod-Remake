@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "compressed_biomass",
+  "ingredient": {
+    "tag": "forge:biomass"
+  },
+  "stamp_type": "FLAT",
+  "result": {
+    "item": "nucleartech:compressed_biomass",
+    "count": 1
+  },
+  "experience": 0.1
+}

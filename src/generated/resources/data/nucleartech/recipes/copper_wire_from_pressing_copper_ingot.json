@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "copper_wire",
+  "ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "stamp_type": "WIRE",
+  "result": {
+    "item": "nucleartech:copper_wire",
+    "count": 8
+  },
+  "experience": 0.1
+}

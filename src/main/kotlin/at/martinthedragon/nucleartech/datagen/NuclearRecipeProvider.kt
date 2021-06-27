@@ -15,6 +15,7 @@ import net.minecraft.util.IItemProvider
 import net.minecraft.util.ResourceLocation
 import java.util.function.Consumer
 
+@Suppress("SameParameterValue")
 class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator) {
     override fun getName(): String = "Nuclear Tech Mod Recipes"
 
@@ -245,7 +246,37 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun pressRecipes(consumer: Consumer<IFinishedRecipe>) {
-        PressRecipeBuilder(ModItems.ironPlate.get(), PressRecipe.StampType.PLATE, 1F).requires(Items.IRON_INGOT).group("iron_plate").unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer, ResourceLocation(NuclearTech.MODID, "iron_plate"))
+        flatPressRecipe(NuclearTags.Items.BIOMASS, ModItems.compressedBiomass.get(), "biomass", .1F, consumer)
+        flatPressRecipe(NuclearTags.Items.DUSTS_COAL, Items.COAL, "coal_powder", .2F, consumer)
+        flatPressRecipe(NuclearTags.Items.DUSTS_LAPIS, Items.LAPIS_LAZULI, "lapis_powder", .2F, consumer)
+        flatPressRecipe(NuclearTags.Items.DUSTS_DIAMOND, Items.DIAMOND, "diamond_powder", .2F, consumer)
+        flatPressRecipe(NuclearTags.Items.DUSTS_EMERALD, Items.EMERALD, "emerald_powder", .2F, consumer)
+        flatPressRecipe(NuclearTags.Items.DUSTS_QUARTZ, Items.QUARTZ, "quartz_powder", .2F, consumer)
+        flatPressRecipe(ModItems.lignitePowder.get(), ModItems.ligniteBriquette.get(), .1F, consumer)
+        flatPressRecipe(ModItems.denseCoalCluster.get(), Items.DIAMOND, 2F, consumer)
+
+        platePressRecipe(Items.IRON_INGOT, ModItems.ironPlate.get(), .1F, consumer)
+        platePressRecipe(Items.GOLD_INGOT, ModItems.goldPlate.get(), .1F, consumer)
+        platePressRecipe(NuclearTags.Items.INGOTS_STEEL, ModItems.steelPlate.get(), "steel_ingot", .1F, consumer)
+        platePressRecipe(NuclearTags.Items.INGOTS_COPPER, ModItems.copperPlate.get(), "copper_ingot", .1F, consumer)
+        platePressRecipe(NuclearTags.Items.INGOTS_TITANIUM, ModItems.titaniumPlate.get(), "titanium_ingot", .1F, consumer)
+        platePressRecipe(NuclearTags.Items.INGOTS_ALUMINIUM, ModItems.aluminiumPlate.get(), "aluminium_ingot", .1F, consumer)
+        platePressRecipe(NuclearTags.Items.INGOTS_LEAD, ModItems.leadPlate.get(), "lead_ingot", .1F, consumer)
+        platePressRecipe(ModItems.advancedAlloyIngot.get(), ModItems.advancedAlloyPlate.get(), .1F, consumer)
+        platePressRecipe(ModItems.combineSteelIngot.get(), ModItems.combineSteelPlate.get(), .1F, consumer)
+        platePressRecipe(ModItems.saturniteIngot.get(), ModItems.saturnitePlate.get(), .2F, consumer)
+        platePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumPlate.get(), .5F, consumer)
+
+        wirePressRecipe(Items.GOLD_INGOT, ModItems.goldWire.get(), .1F, consumer)
+        wirePressRecipe(NuclearTags.Items.INGOTS_COPPER, ModItems.copperWire.get(), "copper_ingot", .1F, consumer)
+        wirePressRecipe(ModItems.redCopperIngot.get(), ModItems.redCopperWire.get(), .1F, consumer)
+        wirePressRecipe(ModItems.advancedAlloyIngot.get(), ModItems.superConductor.get(), .1F, consumer)
+        wirePressRecipe(NuclearTags.Items.INGOTS_ALUMINIUM, ModItems.aluminiumWire.get(), "aluminium_ingot", .1F, consumer)
+        wirePressRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.tungstenWire.get(), "tungsten_ingot", .1F, consumer)
+        wirePressRecipe(ModItems.magnetizedTungstenIngot.get(), ModItems.highTemperatureSuperConductor.get(), .1F, consumer)
+        wirePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumWire.get(), .5F, consumer)
+
+        pressRecipe(ModItems.basicCircuitAssembly.get(), PressRecipe.StampType.CIRCUIT, ModItems.basicCircuit.get(), 1, .75F, consumer)
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type
@@ -304,5 +335,37 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun blockFromIngots(result: IItemProvider, ingredient: ITag<Item>, ingredientName: String, consumer: Consumer<IFinishedRecipe>) {
         ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_$ingredientName"))
+    }
+
+    private fun pressRecipe(ingredient: IItemProvider, stampType: PressRecipe.StampType, result: IItemProvider, count: Int, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_pressing_${ingredient.asItem().registryName!!.path}"))
+    }
+
+    private fun pressRecipe(ingredient: ITag<Item>, stampType: PressRecipe.StampType, result: IItemProvider, count: Int, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_pressing_$ingredientName"))
+    }
+
+    private fun flatPressRecipe(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        pressRecipe(ingredient, PressRecipe.StampType.FLAT, result, 1, experience, consumer)
+    }
+
+    private fun flatPressRecipe(ingredient: ITag<Item>, result: IItemProvider, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        pressRecipe(ingredient, PressRecipe.StampType.FLAT, result, 1, ingredientName, experience, consumer)
+    }
+
+    private fun platePressRecipe(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        pressRecipe(ingredient, PressRecipe.StampType.PLATE, result, 1, experience, consumer)
+    }
+
+    private fun platePressRecipe(ingredient: ITag<Item>, result: IItemProvider, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        pressRecipe(ingredient, PressRecipe.StampType.PLATE, result, 1, ingredientName, experience, consumer)
+    }
+
+    private fun wirePressRecipe(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        pressRecipe(ingredient, PressRecipe.StampType.WIRE, result, 8, experience, consumer)
+    }
+
+    private fun wirePressRecipe(ingredient: ITag<Item>, result: IItemProvider, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
+        pressRecipe(ingredient, PressRecipe.StampType.WIRE, result, 8, ingredientName, experience, consumer)
     }
 }

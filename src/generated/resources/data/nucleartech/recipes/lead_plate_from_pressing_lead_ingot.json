@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "lead_plate",
+  "ingredient": {
+    "tag": "forge:ingots/lead"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:lead_plate",
+    "count": 1
+  },
+  "experience": 0.1
+}

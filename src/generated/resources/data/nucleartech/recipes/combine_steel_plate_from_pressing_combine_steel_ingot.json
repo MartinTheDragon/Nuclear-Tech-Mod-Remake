@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "combine_steel_plate",
+  "ingredient": {
+    "item": "nucleartech:combine_steel_ingot"
+  },
+  "stamp_type": "PLATE",
+  "result": {
+    "item": "nucleartech:combine_steel_plate",
+    "count": 1
+  },
+  "experience": 0.1
+}

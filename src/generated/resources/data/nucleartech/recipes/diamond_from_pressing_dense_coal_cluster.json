@@ -1,0 +1,13 @@
+{
+  "type": "nucleartech:pressing",
+  "group": "diamond",
+  "ingredient": {
+    "item": "nucleartech:dense_coal_cluster"
+  },
+  "stamp_type": "FLAT",
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 1
+  },
+  "experience": 2.0
+}
