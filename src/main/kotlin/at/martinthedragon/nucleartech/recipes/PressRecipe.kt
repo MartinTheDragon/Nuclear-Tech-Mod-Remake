@@ -26,7 +26,7 @@ class PressRecipe(
     val result: ItemStack,
     val experience: Float
 ) : IRecipe<IInventory> {
-    enum class StampType(private val tag: ITag.INamedTag<*>) {
+    enum class StampType(val tag: ITag.INamedTag<Item>) {
         FLAT(NuclearTags.Items.FLAT_STAMPS),
         PLATE(NuclearTags.Items.PLATE_STAMPS),
         WIRE(NuclearTags.Items.WIRE_STAMPS),
