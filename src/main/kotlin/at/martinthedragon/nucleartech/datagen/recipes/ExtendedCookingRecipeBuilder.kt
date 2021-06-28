@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.datagen
+package at.martinthedragon.nucleartech.datagen.recipes
 
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement

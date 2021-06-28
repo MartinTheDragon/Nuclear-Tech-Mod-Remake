@@ -2,7 +2,7 @@
   "type": "nucleartech:pressing",
   "group": "iron_plate",
   "ingredient": {
-    "item": "minecraft:iron_ingot"
+    "tag": "forge:ingots/iron"
   },
   "stamp_type": "PLATE",
   "result": {

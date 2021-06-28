@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "tag": "forge:ingots/iron"
+  },
+  "second_ingredient": {
+    "item": "minecraft:coal"
+  },
+  "result": {
+    "item": "nucleartech:steel_ingot",
+    "count": 2
+  },
+  "experience": 0.25
+}

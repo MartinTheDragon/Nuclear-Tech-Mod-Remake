@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "item": "nucleartech:mixed_plate"
+  },
+  "second_ingredient": {
+    "tag": "forge:plates/gold"
+  },
+  "result": {
+    "item": "nucleartech:paa_alloy_plate",
+    "count": 2
+  },
+  "experience": 2.0
+}

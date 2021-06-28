@@ -16,4 +16,7 @@ object TileEntityTypes {
     val steamPressHeadTileEntityType: RegistryObject<TileEntityType<SteamPressTopTileEntity>> = TILE_ENTITIES.register("steam_press_top") {
         TileEntityType.Builder.of({ SteamPressTopTileEntity() }, ModBlocks.steamPressTop.get()).build(null)
     }
+    val blastFurnaceTileEntityType: RegistryObject<TileEntityType<BlastFurnaceTileEntity>> = TILE_ENTITIES.register("blast_furnace") {
+        TileEntityType.Builder.of({ BlastFurnaceTileEntity() }, ModBlocks.blastFurnace.get()).build(null)
+    }
 }

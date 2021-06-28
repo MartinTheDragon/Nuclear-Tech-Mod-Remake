@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.datagen
+package at.martinthedragon.nucleartech.datagen.recipes
 
 import at.martinthedragon.nucleartech.recipes.PressRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
@@ -50,6 +50,7 @@ class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType,
     fun save(consumer: Consumer<IFinishedRecipe>, recipeName: ResourceLocation = ForgeRegistries.ITEMS.getKey(result) ?: throw IllegalArgumentException("Result item '${result.registryName}' was not registered")) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
         advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(IRequirementsStrategy.OR)
+        if (!this::ingredient.isInitialized) throw IllegalStateException("No ingredient for recipe $recipeName specified")
         consumer.accept(Result(recipeName, result, count, experience, stampType, group, ingredient, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }
 

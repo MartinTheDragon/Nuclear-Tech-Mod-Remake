@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "tag": "forge:ingots/tungsten"
+  },
+  "second_ingredient": {
+    "item": "nucleartech:schrabidium_nugget"
+  },
+  "result": {
+    "item": "nucleartech:magnetized_tungsten_ingot",
+    "count": 1
+  },
+  "experience": 2.0
+}

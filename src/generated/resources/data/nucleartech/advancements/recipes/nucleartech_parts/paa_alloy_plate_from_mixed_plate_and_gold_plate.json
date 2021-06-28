@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:paa_alloy_plate_from_mixed_plate_and_gold_plate"
+    ]
+  },
+  "criteria": {
+    "has_mixed_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:mixed_plate"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:paa_alloy_plate_from_mixed_plate_and_gold_plate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mixed_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

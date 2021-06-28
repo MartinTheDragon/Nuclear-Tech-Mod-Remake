@@ -1,6 +1,7 @@
-package at.martinthedragon.nucleartech.integration.jei
+package at.martinthedragon.nucleartech.integration.jei.transfers
 
 import at.martinthedragon.nucleartech.containers.PressContainer
+import at.martinthedragon.nucleartech.integration.jei.categories.PressingJeiRecipeCategory
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo
 import net.minecraft.inventory.container.Slot
 import net.minecraft.util.ResourceLocation

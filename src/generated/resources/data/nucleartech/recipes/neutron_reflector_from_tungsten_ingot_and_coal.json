@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "tag": "forge:ingots/tungsten"
+  },
+  "second_ingredient": {
+    "item": "minecraft:coal"
+  },
+  "result": {
+    "item": "nucleartech:neutron_reflector",
+    "count": 2
+  },
+  "experience": 0.5
+}

@@ -1,9 +1,12 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.datagen.recipes.BlastingRecipeBuilder
+import at.martinthedragon.nucleartech.datagen.recipes.ExtendedCookingRecipeBuilder
+import at.martinthedragon.nucleartech.datagen.recipes.PressRecipeBuilder
 import at.martinthedragon.nucleartech.recipes.PressRecipe
 import net.minecraft.data.*
 import net.minecraft.item.Item
@@ -13,6 +16,7 @@ import net.minecraft.item.crafting.Ingredient
 import net.minecraft.tags.ITag
 import net.minecraft.util.IItemProvider
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.common.Tags
 import java.util.function.Consumer
 
 @Suppress("SameParameterValue")
@@ -243,6 +247,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.combineScrapMetal.get()), .5F, 200, ModItems.combineSteelIngot.get()).group("combine_steel_ingot").unlockedBy("has_combine_steel_scrap_metal", has(ModItems.combineScrapMetal.get())).save(consumer, ResourceLocation(NuclearTech.MODID, "combine_steel_ingot_from_combine_steel_scrap_metal"))
 
         pressRecipes(consumer)
+        blastFurnaceRecipes(consumer)
     }
 
     private fun pressRecipes(consumer: Consumer<IFinishedRecipe>) {
@@ -255,8 +260,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         flatPressRecipe(ModItems.lignitePowder.get(), ModItems.ligniteBriquette.get(), .1F, consumer)
         flatPressRecipe(ModItems.denseCoalCluster.get(), Items.DIAMOND, 2F, consumer)
 
-        platePressRecipe(Items.IRON_INGOT, ModItems.ironPlate.get(), .1F, consumer)
-        platePressRecipe(Items.GOLD_INGOT, ModItems.goldPlate.get(), .1F, consumer)
+        platePressRecipe(Tags.Items.INGOTS_IRON, ModItems.ironPlate.get(), "iron_ingot", .1F, consumer)
+        platePressRecipe(Tags.Items.INGOTS_GOLD, ModItems.goldPlate.get(), "gold_ingot", .1F, consumer)
         platePressRecipe(NuclearTags.Items.INGOTS_STEEL, ModItems.steelPlate.get(), "steel_ingot", .1F, consumer)
         platePressRecipe(NuclearTags.Items.INGOTS_COPPER, ModItems.copperPlate.get(), "copper_ingot", .1F, consumer)
         platePressRecipe(NuclearTags.Items.INGOTS_TITANIUM, ModItems.titaniumPlate.get(), "titanium_ingot", .1F, consumer)
@@ -267,7 +272,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         platePressRecipe(ModItems.saturniteIngot.get(), ModItems.saturnitePlate.get(), .2F, consumer)
         platePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumPlate.get(), .5F, consumer)
 
-        wirePressRecipe(Items.GOLD_INGOT, ModItems.goldWire.get(), .1F, consumer)
+        wirePressRecipe(Tags.Items.INGOTS_GOLD, ModItems.goldWire.get(), "gold_ingot", .1F, consumer)
         wirePressRecipe(NuclearTags.Items.INGOTS_COPPER, ModItems.copperWire.get(), "copper_ingot", .1F, consumer)
         wirePressRecipe(ModItems.redCopperIngot.get(), ModItems.redCopperWire.get(), .1F, consumer)
         wirePressRecipe(ModItems.advancedAlloyIngot.get(), ModItems.superConductor.get(), .1F, consumer)
@@ -277,6 +282,20 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         wirePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumWire.get(), .5F, consumer)
 
         pressRecipe(ModItems.basicCircuitAssembly.get(), PressRecipe.StampType.CIRCUIT, ModItems.basicCircuit.get(), 1, .75F, consumer)
+    }
+
+    private fun blastFurnaceRecipes(consumer: Consumer<IFinishedRecipe>) {
+        blastingRecipe(Tags.Items.INGOTS_IRON, Items.COAL, ModItems.steelIngot.get(), .25F, 2, "iron_ingot", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_COPPER, Tags.Items.DUSTS_REDSTONE, ModItems.redCopperIngot.get(), .25F, 2, "copper_ingot", "redstone", consumer)
+        blastingRecipe(ModItems.redCopperIngot.get(), NuclearTags.Items.INGOTS_STEEL, ModItems.advancedAlloyIngot.get(), .5F, 2, "steel_ingot", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, Items.COAL, ModItems.neutronReflector.get(), .5F, 2, "tungsten_ingot", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_LEAD, NuclearTags.Items.INGOTS_COPPER, ModItems.neutronReflector.get(), .25F, 4, "lead_ingot", "copper_ingot", consumer)
+        blastingRecipe(NuclearTags.Items.PLATES_LEAD, NuclearTags.Items.PLATES_COPPER, ModItems.neutronReflector.get(), .5F, 1, "lead_plate", "copper_plate", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_STEEL, NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.highSpeedSteelIngot.get(), .5F, 2, "steel_ingot", "tungsten_ingot", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_STEEL, NuclearTags.Items.INGOTS_COBALT, ModItems.highSpeedSteelIngot.get(), 1F, 2, "steel_ingot", "cobalt_ingot", consumer)
+        blastingRecipe(ModItems.mixedPlate.get(), NuclearTags.Items.PLATES_GOLD, ModItems.paAAlloyPlate.get(), 2F, 2, "gold_plate", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.schrabidiumNugget.get(), ModItems.magnetizedTungstenIngot.get(), 2F, 1, "tungsten_ingot", consumer)
+        blastingRecipe(ModItems.saturniteIngot.get(), NuclearTags.Items.DUSTS_METEORITE, ModItems.starmetalIngot.get(), 2F, 2, "meteorite_dust", consumer)
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type
@@ -367,5 +386,21 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun wirePressRecipe(ingredient: ITag<Item>, result: IItemProvider, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
         pressRecipe(ingredient, PressRecipe.StampType.WIRE, result, 8, ingredientName, experience, consumer)
+    }
+
+    private fun blastingRecipe(ingredient1: IItemProvider, ingredient2: IItemProvider, result: IItemProvider, experience: Float, count: Int, consumer: Consumer<IFinishedRecipe>) {
+        BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_${ingredient1.asItem().registryName!!.path}", has(ingredient1)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_${ingredient1.asItem().registryName!!.path}_and_${ingredient2.asItem().registryName!!.path}"))
+    }
+
+    private fun blastingRecipe(ingredient1: ITag<Item>, ingredient2: ITag<Item>, result: IItemProvider, experience: Float, count: Int, ingredientName1: String, ingredientName2: String, consumer: Consumer<IFinishedRecipe>) {
+        BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_$ingredientName1", has(ingredient1)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_${ingredientName1}_and_${ingredientName2}"))
+    }
+
+    private fun blastingRecipe(ingredient1: ITag<Item>, ingredient2: IItemProvider, result: IItemProvider, experience: Float, count: Int, ingredientName1: String, consumer: Consumer<IFinishedRecipe>) {
+        BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_$ingredientName1", has(ingredient1)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_${ingredientName1}_and_${ingredient2.asItem().registryName!!.path}"))
+    }
+
+    private fun blastingRecipe(ingredient1: IItemProvider, ingredient2: ITag<Item>, result: IItemProvider, experience: Float, count: Int, ingredientName2: String, consumer: Consumer<IFinishedRecipe>) {
+        BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_${ingredient1.asItem().registryName!!.path}", has(ingredient1)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_${ingredient1.asItem().registryName!!.path}_and_${ingredientName2}"))
     }
 }

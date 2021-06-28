@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:neutron_reflector_from_lead_plate_and_copper_plate"
+    ]
+  },
+  "criteria": {
+    "has_lead_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:plates/lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:neutron_reflector_from_lead_plate_and_copper_plate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lead_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

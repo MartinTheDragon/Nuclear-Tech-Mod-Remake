@@ -736,10 +736,12 @@
   "block.nucleartech.steam_press_base": "Steam Press",
   "block.nucleartech.steam_press_frame": "Steam Press",
   "block.nucleartech.steam_press_top": "Steam Press",
+  "block.nucleartech.blast_furnace": "Blast Furnace",
 
   "container.nucleartech.siren": "Siren",
   "container.nucleartech.safe": "Safe",
   "container.nucleartech.steam_press": "Steam Press",
+  "container.nucleartech.blast_furnace": "Blast Furnace",
 
   "subtitle.nucleartech.siren.playing_hatch": "Siren is running - Hatch Siren",
   "subtitle.nucleartech.siren.playing_autopilot_disconnected": "Siren is running - Autopilot Disconnected",
@@ -767,5 +769,7 @@
 
   "jei.nucleartech.category.pressing": "Pressing",
   "jei.nucleartech.category.pressing.experience": "%s XP",
+  "jei.nucleartech.category.blasting": "Blasting",
+  "jei.nucleartech.category.blasting.experience": "%s XP",
   "jei.nucleartech.info.items.machine_template_folder_results": "Created using Machine Template Folder"
 }

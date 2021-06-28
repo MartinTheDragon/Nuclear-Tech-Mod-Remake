@@ -2,7 +2,7 @@
   "type": "nucleartech:pressing",
   "group": "gold_plate",
   "ingredient": {
-    "item": "minecraft:gold_ingot"
+    "tag": "forge:ingots/gold"
   },
   "stamp_type": "PLATE",
   "result": {

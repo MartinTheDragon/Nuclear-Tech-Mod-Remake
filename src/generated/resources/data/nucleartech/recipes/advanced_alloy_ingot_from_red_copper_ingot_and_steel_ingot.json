@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "item": "nucleartech:red_copper_ingot"
+  },
+  "second_ingredient": {
+    "tag": "forge:ingots/steel"
+  },
+  "result": {
+    "item": "nucleartech:advanced_alloy_ingot",
+    "count": 2
+  },
+  "experience": 0.5
+}

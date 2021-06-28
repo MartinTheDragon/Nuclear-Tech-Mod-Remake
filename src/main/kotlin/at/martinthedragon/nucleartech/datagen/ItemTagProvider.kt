@@ -372,7 +372,7 @@ class ItemTagProvider(
         tag(NuclearTags.Items.PLATES_ALUMINIUM).add(ModItems.aluminiumPlate.get())
         tag(NuclearTags.Items.PLATES_STEEL).add(ModItems.steelPlate.get())
         tag(NuclearTags.Items.PLATES_LEAD).add(ModItems.leadPlate.get())
-        tag(NuclearTags.Items.PLATES_COPPER).add(ModItems.copperPlate.get(), ModItems.copperPanel.get())
+        tag(NuclearTags.Items.PLATES_COPPER).add(ModItems.copperPlate.get())
         tag(NuclearTags.Items.PLATES_NEUTRON_REFLECTOR).add(ModItems.neutronReflector.get())
         tag(NuclearTags.Items.PLATES_INSULATOR).add(ModItems.insulator.get())
         tag(NuclearTags.Items.PLATES_KEVLAR).add(ModItems.kevlarCeramicCompound.get())

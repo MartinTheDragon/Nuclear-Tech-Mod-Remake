@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "tag": "forge:plates/lead"
+  },
+  "second_ingredient": {
+    "tag": "forge:plates/copper"
+  },
+  "result": {
+    "item": "nucleartech:neutron_reflector",
+    "count": 1
+  },
+  "experience": 0.5
+}

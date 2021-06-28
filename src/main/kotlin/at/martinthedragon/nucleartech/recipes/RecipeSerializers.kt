@@ -5,4 +5,5 @@ import net.minecraftforge.fml.RegistryObject
 
 object RecipeSerializers {
     val PRESSING: RegistryObject<PressRecipe.Serializer> = RECIPE_SERIALIZERS.register("pressing") { PressRecipe.Serializer() }
+    val BLASTING: RegistryObject<BlastingRecipe.Serializer> = RECIPE_SERIALIZERS.register("blasting") { BlastingRecipe.Serializer() }
 }

@@ -1,10 +1,7 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.containers.ContainerTypes
-import at.martinthedragon.nucleartech.screens.SafeScreen
-import at.martinthedragon.nucleartech.screens.SirenScreen
-import at.martinthedragon.nucleartech.screens.SteamPressScreen
-import at.martinthedragon.nucleartech.screens.UseTemplateFolderScreen
+import at.martinthedragon.nucleartech.screens.*
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
 import at.martinthedragon.nucleartech.tileentities.renderers.SteamPressTopTileEntityRenderer
 import net.minecraft.client.Minecraft
@@ -37,6 +34,7 @@ object ClientRegistries {
         ScreenManager.register(ContainerTypes.safeContainer.get(), ::SafeScreen)
         ScreenManager.register(ContainerTypes.sirenContainer.get(), ::SirenScreen)
         ScreenManager.register(ContainerTypes.pressContainer.get(), ::SteamPressScreen)
+        ScreenManager.register(ContainerTypes.blastFurnaceContainer.get(), ::BlastFurnaceScreen)
     }
 
     @SubscribeEvent @JvmStatic

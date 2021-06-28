@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "item": "nucleartech:saturnite_ingot"
+  },
+  "second_ingredient": {
+    "tag": "forge:dusts/meteorite"
+  },
+  "result": {
+    "item": "nucleartech:starmetal_ingot",
+    "count": 2
+  },
+  "experience": 2.0
+}

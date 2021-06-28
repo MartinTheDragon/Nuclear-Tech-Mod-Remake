@@ -10,6 +10,7 @@ object RecipeTypes {
     private val typesToRegister = mutableMapOf<ResourceLocation, IRecipeType<*>>()
 
     val PRESSING = register<PressRecipe>("pressing")
+    val BLASTING = register<BlastingRecipe>("blasting")
 
     private fun <T : IRecipe<*>> register(name: String): IRecipeType<T> {
         val recipeType = object : IRecipeType<T> {

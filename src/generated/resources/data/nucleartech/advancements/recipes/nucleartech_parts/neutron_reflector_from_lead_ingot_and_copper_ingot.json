@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:neutron_reflector_from_lead_ingot_and_copper_ingot"
+    ]
+  },
+  "criteria": {
+    "has_lead_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:neutron_reflector_from_lead_ingot_and_copper_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lead_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

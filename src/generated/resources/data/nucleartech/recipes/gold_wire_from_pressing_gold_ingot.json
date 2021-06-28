@@ -2,7 +2,7 @@
   "type": "nucleartech:pressing",
   "group": "gold_wire",
   "ingredient": {
-    "item": "minecraft:gold_ingot"
+    "tag": "forge:ingots/gold"
   },
   "stamp_type": "WIRE",
   "result": {

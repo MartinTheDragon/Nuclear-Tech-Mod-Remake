@@ -170,6 +170,7 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.steamPressBase.get())
         add(ModBlocks.steamPressFrame.get()) { noDrop() }
         add(ModBlocks.steamPressTop.get()) { noDrop() }
+        dropSelf(ModBlocks.blastFurnace.get())
     }
 
     // automatically await a loot table for all blocks registered by this mod

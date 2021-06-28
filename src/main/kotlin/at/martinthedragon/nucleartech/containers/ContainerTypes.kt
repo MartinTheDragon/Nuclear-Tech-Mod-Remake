@@ -15,4 +15,7 @@ object ContainerTypes {
     val pressContainer: RegistryObject<ContainerType<PressContainer>> = CONTAINERS.register("press") {
         IForgeContainerType.create(PressContainer.Companion::fromNetwork)
     }
+    val blastFurnaceContainer: RegistryObject<ContainerType<BlastFurnaceContainer>> = CONTAINERS.register("blast_furnace") {
+        IForgeContainerType.create(BlastFurnaceContainer.Companion::fromNetwork)
+    }
 }

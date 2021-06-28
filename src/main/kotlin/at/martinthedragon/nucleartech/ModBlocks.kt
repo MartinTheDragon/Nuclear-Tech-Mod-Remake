@@ -150,4 +150,6 @@ object ModBlocks {
     val steamPressFrame: RegistryObject<Block> = BLOCKS.register("steam_press_frame") { SteamPressFrame(Properties.of(METAL).strength(5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val steamPressTop: RegistryObject<Block> = BLOCKS.register("steam_press_top") { SteamPressTop(Properties.of(METAL).strength(5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     // endregion
+
+    val blastFurnace: RegistryObject<BlastFurnace> = BLOCKS.register("blast_furnace") { BlastFurnace(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 }

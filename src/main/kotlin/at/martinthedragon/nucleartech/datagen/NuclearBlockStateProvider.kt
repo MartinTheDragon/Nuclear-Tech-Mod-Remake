@@ -1,11 +1,13 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.block.Block
 import net.minecraft.data.DataGenerator
+import net.minecraft.state.properties.BlockStateProperties
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.generators.BlockStateProvider
+import net.minecraftforge.client.model.generators.ConfiguredModel
 import net.minecraftforge.common.data.ExistingFileHelper
 
 class NuclearBlockStateProvider(
@@ -124,6 +126,19 @@ class NuclearBlockStateProvider(
         simpleBlock(ModBlocks.steamPressBase.get(), models().getExistingFile(ModBlocks.steamPressBase.id))
         simpleBlock(ModBlocks.steamPressFrame.get(), models().getExistingFile(ModBlocks.steamPressFrame.id))
         simpleBlock(ModBlocks.steamPressTop.get(), models().getExistingFile(ModBlocks.steamPressTop.id))
+        getVariantBuilder(ModBlocks.blastFurnace.get())
+            .forAllStates {
+                if (it.getValue(BlockStateProperties.LIT))
+                    ConfiguredModel.builder()
+                        .modelFile(models().orientableWithBottom("${ModBlocks.blastFurnace.id.path}_on", extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_front_on"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_top_on")))
+                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
+                        .build()
+                else
+                    ConfiguredModel.builder()
+                        .modelFile(models().orientableWithBottom(ModBlocks.blastFurnace.id.path, extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_front"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_top")))
+                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
+                        .build()
+            }
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.thoriumOre.get())
@@ -231,6 +246,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.hazmatBlock.get())
         copiedBlockItem(ModBlocks.siren.get())
         copiedBlockItem(ModBlocks.safe.get())
+        copiedBlockItem(ModBlocks.blastFurnace.get())
     }
 
     private fun extend(rl: ResourceLocation, suffix: String): ResourceLocation =

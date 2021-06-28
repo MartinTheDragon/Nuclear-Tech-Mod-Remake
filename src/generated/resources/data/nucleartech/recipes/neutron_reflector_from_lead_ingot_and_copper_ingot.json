@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:blasting",
+  "first_ingredient": {
+    "tag": "forge:ingots/lead"
+  },
+  "second_ingredient": {
+    "tag": "forge:ingots/copper"
+  },
+  "result": {
+    "item": "nucleartech:neutron_reflector",
+    "count": 4
+  },
+  "experience": 0.25
+}

@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.integration.jei
+package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
