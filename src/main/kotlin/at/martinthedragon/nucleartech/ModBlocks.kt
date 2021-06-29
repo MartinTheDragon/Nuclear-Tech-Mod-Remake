@@ -2,11 +2,8 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
+import net.minecraft.block.*
 import net.minecraft.block.AbstractBlock.Properties
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.RotatedPillarBlock
-import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material.*
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockReader
@@ -40,7 +37,7 @@ object ModBlocks {
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(0, 2)
     }}
     val asbestosOre: RegistryObject<Block> = BLOCKS.register("asbestos_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val schrabidiumOre: RegistryObject<Block> = BLOCKS.register("schrabidium_ore") { object : Block(Properties.of(STONE).strength(20f, 50f).harvestLevel(4)) {
+    val schrabidiumOre: RegistryObject<Block> = BLOCKS.register("schrabidium_ore") { object : Block(Properties.of(STONE).strength(20f, 50f).harvestLevel(4).hasPostProcess { _, _, _ -> true }.emissiveRendering { _, _, _ -> true }) {
         override fun getLightValue(state: BlockState?, world: IBlockReader?, pos: BlockPos?) = 7
     }}
     val australianOre: RegistryObject<Block> = BLOCKS.register("australian_ore") { Block(Properties.of(STONE).strength(6f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
@@ -61,7 +58,7 @@ object ModBlocks {
     val netherPhosphorusOre: RegistryObject<Block> = BLOCKS.register("nether_phosphorus_ore") { object : Block(Properties.of(STONE).strength(2f, 3f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(2, 5)
     }}
-    val netherSchrabidiumOre: RegistryObject<Block> = BLOCKS.register("nether_schrabidium_ore") { object : Block(Properties.of(STONE).strength(20f, 50f).harvestLevel(4).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
+    val netherSchrabidiumOre: RegistryObject<Block> = BLOCKS.register("nether_schrabidium_ore") { object : Block(Properties.of(STONE).strength(20f, 50f).harvestLevel(4).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().hasPostProcess { _, _, _ -> true }.emissiveRendering { _, _, _ -> true }) {
         override fun getLightValue(state: BlockState?, world: IBlockReader?, pos: BlockPos?) = 7
     }}
     val meteorUraniumOre: RegistryObject<Block> = BLOCKS.register("meteor_uranium_ore") { Block(Properties.of(STONE).strength(6f).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }

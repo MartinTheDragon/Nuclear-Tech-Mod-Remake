@@ -80,6 +80,9 @@ class BlastFurnace(properties: Properties) : Block(properties) {
         }
     }
 
+    override fun getLightValue(state: BlockState, world: IBlockReader, pos: BlockPos) =
+        if (state.getValue(LIT)) 13 else 0
+
     override fun hasAnalogOutputSignal(state: BlockState) = true
 
     override fun getAnalogOutputSignal(state: BlockState, world: World, pos: BlockPos): Int =
