@@ -3,7 +3,7 @@ loaderVersion="[36,)"
 license="GPL v3.0"
 [[mods]]
 modId="nucleartech"
-version="0.0.4.0"
+version="${mod_version}"
 displayName="Nuclear Tech Mod Remake"
 credits="HbM: Did well..."
 authors="MartinTheDragon"
