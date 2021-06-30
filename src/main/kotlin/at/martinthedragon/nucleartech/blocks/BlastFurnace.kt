@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.tileentities.BlastFurnaceTileEntity
+import net.minecraft.block.AbstractFurnaceBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.HorizontalBlock
@@ -14,6 +15,7 @@ import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.container.Container
 import net.minecraft.item.BlockItemUseContext
 import net.minecraft.item.ItemStack
+import net.minecraft.particles.ParticleTypes
 import net.minecraft.state.BooleanProperty
 import net.minecraft.state.DirectionProperty
 import net.minecraft.state.StateContainer
@@ -25,6 +27,7 @@ import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
+import java.util.*
 
 class BlastFurnace(properties: Properties) : Block(properties) {
     init {
@@ -77,6 +80,30 @@ class BlastFurnace(properties: Properties) : Block(properties) {
     override fun stepOn(world: World, pos: BlockPos, entity: Entity) {
         if (!entity.fireImmune() && world.getBlockState(pos).getValue(LIT) && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity)) {
             entity.hurt(DamageSource.HOT_FLOOR, 2F)
+        }
+    }
+
+    override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        if (state.getValue(LIT)) {
+            val posX = pos.x + .5
+            val posY = pos.y
+            val posZ = pos.z + .5
+
+            // front particles
+            val direction: Direction = state.getValue(AbstractFurnaceBlock.FACING)
+            val axis = direction.axis
+            val d4: Double = random.nextDouble() * 0.6 - 0.3
+            val d5 = if (axis == Direction.Axis.X) direction.stepX.toDouble() * 0.52 else d4
+            val d6: Double = random.nextDouble() * .5 // * 8.0 / 16.0
+            val d7 = if (axis == Direction.Axis.Z) direction.stepZ.toDouble() * 0.52 else d4
+            world.addParticle(ParticleTypes.SMOKE, posX + d5, posY + .25 + d6, posZ + d7, 0.0, 0.0, 0.0)
+            world.addParticle(ParticleTypes.FLAME, posX + d5, posY + .25 + d6, posZ + d7, 0.0, 0.0, 0.0)
+
+            // top particles
+            val topParticleX = random.nextDouble() * .8 + .1
+            val topParticleZ = random.nextDouble() * .8 + .1
+            world.addParticle(ParticleTypes.SMOKE, pos.x + topParticleX, posY + 1.0, pos.z + topParticleZ, 0.0, 0.05, 0.0)
+            world.addParticle(ParticleTypes.LAVA, pos.x + topParticleX, posY + 1.0, pos.z + topParticleZ, random.nextDouble() * .5, 5.0E-6, random.nextDouble() * .5)
         }
     }
 
