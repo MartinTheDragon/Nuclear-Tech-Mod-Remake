@@ -6,12 +6,14 @@ import at.martinthedragon.nucleartech.datagen.*
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
+import at.martinthedragon.nucleartech.worldgen.WorldGeneration
 import net.minecraft.block.Block
 import net.minecraft.inventory.container.ContainerType
 import net.minecraft.item.Item
 import net.minecraft.item.crafting.IRecipeSerializer
 import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
+import net.minecraft.world.gen.feature.Feature
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
@@ -32,6 +34,7 @@ object RegistriesAndLifecycle {
     val TILE_ENTITIES: DeferredRegister<TileEntityType<*>> = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, NuclearTech.MODID)
     val CONTAINERS: DeferredRegister<ContainerType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, NuclearTech.MODID)
     val RECIPE_SERIALIZERS: DeferredRegister<IRecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, NuclearTech.MODID)
+    val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
 
     init {
         BLOCKS.register(FMLJavaModLoadingContext.get().modEventBus)
@@ -45,6 +48,8 @@ object RegistriesAndLifecycle {
         ContainerTypes
         RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().modEventBus)
         RecipeSerializers
+        FEATURES.register(FMLJavaModLoadingContext.get().modEventBus)
+        WorldGeneration.Features
     }
 
     // using kotlin's strong type system

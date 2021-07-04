@@ -4,6 +4,7 @@
   "itemGroup.nucleartech_templates": "NTM Fertigungsvorlagen",
   "itemGroup.nucleartech_blocks": "NTM Erze und Blöcke",
   "itemGroup.nucleartech_machines": "NTM Maschinen",
+  "itemGroup.nucleartech_consumables": "NTM Verbrauchsgüter",
 
   "item.nucleartech.any.tooltip.radiation.radioactive": "[Radioaktiv]",
   "item.nucleartech.any.tooltip.radiation.blinding": "[Erblindend]",
@@ -608,6 +609,13 @@
   "item.nucleartech.charred_crystal": "Verkohlter Kristall",
   "item.nucleartech.charred_crystal.desc0": "Auch ein echtes Horn. Komisch, nicht?",
 
+  "item.nucleartech.oil_detector": "Ölvorkommen-Detektor",
+  "item.nucleartech.oil_detector.desc0": "Rechtsklick um nach Öl zu suchen.",
+  "item.nucleartech.oil_detector.desc1": "Detektor findet nur größere Vorkommen.",
+  "item.nucleartech.oil_detector.below": "Ölvorkommen direkt untertage!",
+  "item.nucleartech.oil_detector.near": "Ölvorkommen in der Nähe",
+  "item.nucleartech.oil_detector.no_oil": "Kein Öl gefunden",
+
   "block.nucleartech.uranium_ore": "Uranerz",
   "block.nucleartech.thorium_ore": "Thoriumerz",
   "block.nucleartech.titanium_ore": "Titanerz",
@@ -764,6 +772,7 @@
   "subtitle.nucleartech.siren.playing_apc_pass": "Sirene läuft - APC Pass",
   "subtitle.nucleartech.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn",
   "subtitle.nucleartech.press.operate": "Presse stampft",
+  "subtitle.nucleartech.item.generic.bleep": "Gerät piepst",
 
   "death.attack.nucleartech.radiation": "%1$s starb an Strahlenvergiftung",
 

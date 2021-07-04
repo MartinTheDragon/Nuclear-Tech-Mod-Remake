@@ -28,5 +28,10 @@ enum class CreativeTabs(val itemGroup: ItemGroup) {
         object : ItemGroup("nucleartech_machines") {
             override fun makeIcon() = ItemStack(ModBlockItems.safe.get()) // TODO
         }
+    ),
+    Consumables(
+        object : ItemGroup("nucleartech_consumables") {
+            override fun makeIcon() = ItemStack(ModItems.oilDetector.get()) // TODO
+        }
     )
 }

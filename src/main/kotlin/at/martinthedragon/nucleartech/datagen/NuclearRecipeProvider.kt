@@ -248,6 +248,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
         pressRecipes(consumer)
         blastFurnaceRecipes(consumer)
+        consumables(consumer)
     }
 
     private fun pressRecipes(consumer: Consumer<IFinishedRecipe>) {
@@ -296,6 +297,10 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         blastingRecipe(ModItems.mixedPlate.get(), NuclearTags.Items.PLATES_GOLD, ModItems.paAAlloyPlate.get(), 2F, 2, "gold_plate", consumer)
         blastingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.schrabidiumNugget.get(), ModItems.magnetizedTungstenIngot.get(), 2F, 1, "tungsten_ingot", consumer)
         blastingRecipe(ModItems.saturniteIngot.get(), NuclearTags.Items.DUSTS_METEORITE, ModItems.starmetalIngot.get(), 2F, 2, "meteorite_dust", consumer)
+    }
+
+    private fun consumables(consumer: Consumer<IFinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ModItems.oilDetector.get()).define('G', NuclearTags.Items.WIRES_GOLD).define('S', NuclearTags.Items.PLATES_STEEL).define('C', NuclearTags.Items.INGOTS_COPPER).define('A', ModItems.advancedCircuit.get()).pattern("G C").pattern("GAC").pattern("SSS").group("oil_detector").unlockedBy("has_${ModItems.advancedCircuit.id.path}", has(ModItems.advancedCircuit.get())).save(consumer, ResourceLocation(NuclearTech.MODID, "oil_detector"))
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type

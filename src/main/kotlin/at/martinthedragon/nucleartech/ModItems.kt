@@ -496,4 +496,8 @@ object ModItems {
     val sirenTrackEASAlarmScreech: RegistryObject<Item> = ITEMS.register("siren_track_eas_alarm_screech") { SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 1f, true, "siren_track_eas_alarm_screech", 0xB3A8C1) }
     val sirenTrackAPCPass: RegistryObject<Item> = ITEMS.register("siren_track_apc_pass") { SirenTrack(SoundEvents.sirenTrackAPCPass, 1f, false, "siren_track_apc_pass", 0x3437D3) }
     val sirenTrackRazortrainHorn: RegistryObject<Item> = ITEMS.register("siren_track_razortrain_horn") { SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 1f, false, "siren_track_razortrain_horn", 0x7750ED) }
+
+    // Consumables
+
+    val oilDetector: RegistryObject<OilDetector> = ITEMS.register("oil_detector") { OilDetector(Item.Properties().tab(CreativeTabs.Consumables.itemGroup).stacksTo(1)) }
 }

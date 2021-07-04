@@ -122,12 +122,10 @@ class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
         nextButton.visible = currentPage < pagesCount
         if (currentPage == pagesCount) {
             val itemCount = (if (searchResults.isEmpty()) itemList.size else searchResults.size) - (currentPage - 1) * RECIPES_PER_PAGE
-            if (itemCount != 0) {
-                for (i in 0 until itemCount)
-                    templateButtons[i].visible = true
-                for (i in itemCount until RECIPES_PER_PAGE)
-                    templateButtons[i].visible = false
-            }
+            for (i in 0 until itemCount)
+                templateButtons[i].visible = true
+            for (i in itemCount until RECIPES_PER_PAGE)
+                templateButtons[i].visible = false
         } else templateButtons.forEach { it.visible = true }
     }
 

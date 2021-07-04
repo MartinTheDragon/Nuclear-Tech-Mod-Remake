@@ -228,5 +228,15 @@
         "stream": false
       }
     ]
+  },
+  "item.generic.bleep": {
+    "category": "item",
+    "subtitle": "subtitle.nucleartech.item.generic.bleep",
+    "sounds": [
+      {
+        "name": "nucleartech:items/bleep",
+        "stream": false
+      }
+    ]
   }
 }

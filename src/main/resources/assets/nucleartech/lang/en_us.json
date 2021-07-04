@@ -4,6 +4,7 @@
   "itemGroup.nucleartech_templates": "NTM Templates",
   "itemGroup.nucleartech_blocks": "NTM Ores and Blocks",
   "itemGroup.nucleartech_machines": "NTM Machines",
+  "itemGroup.nucleartech_consumables": "NTM Consumables and Gear",
 
   "item.nucleartech.any.tooltip.radiation.radioactive": "[Radioactive]",
   "item.nucleartech.any.tooltip.radiation.blinding": "[Blinding]",
@@ -608,6 +609,13 @@
   "item.nucleartech.charred_crystal": "Charred Crystal",
   "item.nucleartech.charred_crystal.desc0": "Also a real horn. Weird, right?",
 
+  "item.nucleartech.oil_detector": "Oil Reservoir Detector",
+  "item.nucleartech.oil_detector.desc0": "Right-click to scan for oil.",
+  "item.nucleartech.oil_detector.desc1": "Detector will only find larger deposits.",
+  "item.nucleartech.oil_detector.below": "Oil deposit directly below!",
+  "item.nucleartech.oil_detector.near": "Oil detected nearby",
+  "item.nucleartech.oil_detector.no_oil": "No oil detected",
+
   "block.nucleartech.uranium_ore": "Uranium Ore",
   "block.nucleartech.thorium_ore": "Thorium Ore",
   "block.nucleartech.titanium_ore": "Titanium Ore",
@@ -764,6 +772,7 @@
   "subtitle.nucleartech.siren.playing_apc_pass": "Siren is running - APC Pass",
   "subtitle.nucleartech.siren.playing_razortrain_horn": "Siren is running - Razortrain Horn",
   "subtitle.nucleartech.press.operate": "Press stamps",
+  "subtitle.nucleartech.item.generic.bleep": "Device bleeps",
 
   "death.attack.nucleartech.radiation": "%1$s died from radiation poisoning",
 

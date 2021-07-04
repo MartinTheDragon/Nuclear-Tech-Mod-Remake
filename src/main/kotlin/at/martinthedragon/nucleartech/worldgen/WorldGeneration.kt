@@ -1,5 +1,9 @@
-package at.martinthedragon.nucleartech
+package at.martinthedragon.nucleartech.worldgen
 
+import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
+import at.martinthedragon.nucleartech.worldgen.features.OilBubbleFeature
 import net.minecraft.block.Blocks
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.registry.WorldGenRegistries
@@ -7,16 +11,14 @@ import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.BiomeGenerationSettings
 import net.minecraft.world.biome.Biomes
 import net.minecraft.world.gen.GenerationStage
-import net.minecraft.world.gen.feature.ConfiguredFeature
-import net.minecraft.world.gen.feature.Feature
-import net.minecraft.world.gen.feature.IFeatureConfig
-import net.minecraft.world.gen.feature.OreFeatureConfig
+import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest
 import net.minecraft.world.gen.placement.Placement
 import net.minecraft.world.gen.placement.TopSolidRangeConfig
 import net.minecraftforge.event.world.BiomeLoadingEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
 import net.minecraft.world.gen.feature.Features as VanillaFeatures
 
@@ -24,6 +26,10 @@ import net.minecraft.world.gen.feature.Features as VanillaFeatures
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object WorldGeneration {
     object Features {
+        val OIL_BUBBLE: RegistryObject<OilBubbleFeature> = FEATURES.register("oil_bubble") { OilBubbleFeature(NoFeatureConfig.CODEC) }
+    }
+
+    object ConfiguredFeatures {
         val ORE_URANIUM = register("ore_uranium", Feature.ORE.configured(OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.uraniumOre.get().defaultBlockState(), 5)).range(25).squared().count(6))
         val ORE_THORIUM = register("ore_thorium", Feature.ORE.configured(OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.thoriumOre.get().defaultBlockState(), 5)).range(30).squared().count(7))
         val ORE_TITANIUM = register("ore_titanium", Feature.ORE.configured(OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.titaniumOre.get().defaultBlockState(), 6)).range(35).squared().count(8))
@@ -49,6 +55,8 @@ object WorldGeneration {
         val ORE_SULFUR_NETHER = register("ore_sulfur_nether", Feature.ORE.configured(OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ModBlocks.netherSulfurOre.get().defaultBlockState(), 12)).decorated(VanillaFeatures.Placements.RANGE_10_20_ROOFED).squared().count(26))
         val ORE_PHOSPHORUS_NETHER = register("ore_phosphorus_nether", Feature.ORE.configured(OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ModBlocks.netherPhosphorusOre.get().defaultBlockState(), 3)).decorated(VanillaFeatures.Placements.RANGE_10_20_ROOFED).squared().count(24))
         val ORE_TRIXITE_END = register("ore_trixite_end", Feature.ORE.configured(OreFeatureConfig(FillerBlockTypes.END_STONE, ModBlocks.trixite.get().defaultBlockState(), 6)).decorated(VanillaFeatures.Placements.RANGE_10_20_ROOFED).squared().count(8))
+
+        val OIL_BUBBLE = register("oil_bubble", Features.OIL_BUBBLE.get().configured(IFeatureConfig.NONE).range(25).squared().chance(25))
 
         private fun <FC : IFeatureConfig?> register(name: String, configuredFeature: ConfiguredFeature<FC, *>): ConfiguredFeature<FC, *> =
             Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, "${NuclearTech.MODID}:$name", configuredFeature)
@@ -84,39 +92,41 @@ object WorldGeneration {
     }
 
     private fun addDefaultOres(builder: BiomeGenerationSettings.Builder) {
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_URANIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_THORIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_TITANIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_SULFUR)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_NITER)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_COPPER)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_TUNGSTEN)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_ALUMINIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_FLUORITE)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_BERYLLIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_LEAD)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_AUSTRALIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_WEIDANIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_REIIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_UNOBTAINIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_DAFFERGON)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_VERTICIUM)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_RARE_EARTH)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_URANIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_THORIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_TITANIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_SULFUR)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_NITER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_COPPER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_TUNGSTEN)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_ALUMINIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_FLUORITE)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_BERYLLIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_LEAD)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_AUSTRALIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_WEIDANIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_REIIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_UNOBTAINIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_DAFFERGON)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_VERTICIUM)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_RARE_EARTH)
+
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.OIL_BUBBLE)
     }
 
     private fun addLignite(builder: BiomeGenerationSettings.Builder) {
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_LIGNITE)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_LIGNITE)
     }
 
     private fun addNetherOres(builder: BiomeGenerationSettings.Builder) {
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_URANIUM_NETHER)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_PLUTONIUM_NETHER)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_TUNGSTEN_NETHER)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_SULFUR_NETHER)
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_PHOSPHORUS_NETHER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_URANIUM_NETHER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_PLUTONIUM_NETHER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_TUNGSTEN_NETHER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_SULFUR_NETHER)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_PHOSPHORUS_NETHER)
     }
 
     private fun addEndOres(builder: BiomeGenerationSettings.Builder) {
-        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Features.ORE_TRIXITE_END)
+        builder.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, ConfiguredFeatures.ORE_TRIXITE_END)
     }
 }

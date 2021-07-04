@@ -25,4 +25,6 @@ object SoundEvents {
     val sirenTrackAPCPass = SoundEvent(ResourceLocation(NuclearTech.MODID, "siren.apc_pass"))
     val sirenTrackRazortrainHorn = SoundEvent(ResourceLocation(NuclearTech.MODID, "siren.razortrain_horn"))
     val pressOperate = SoundEvent(ResourceLocation(NuclearTech.MODID, "press.operate"))
+
+    val itemGenericBleep = SoundEvent(ResourceLocation(NuclearTech.MODID, "item.generic.bleep"))
 }
