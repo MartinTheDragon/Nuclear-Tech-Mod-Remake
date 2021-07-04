@@ -57,7 +57,6 @@ object RegistriesAndLifecycle {
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
-        Config.createConfig()
         CapabilityIrradiationHandler.register()
     }
 

@@ -15,12 +15,6 @@ import net.minecraftforge.fml.event.server.FMLServerStoppedEvent
 @Suppress("unused", "UNUSED_PARAMETER")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object EventSubscribers {
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    @JvmStatic
-    fun biomeLoading(event: BiomeLoadingEvent) {
-        WorldGeneration.generateOres(event)
-    }
-
     @SubscribeEvent
     @JvmStatic
     fun onWorldTick(event: TickEvent.WorldTickEvent) {
