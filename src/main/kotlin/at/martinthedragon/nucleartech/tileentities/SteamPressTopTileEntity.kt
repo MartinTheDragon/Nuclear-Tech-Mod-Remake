@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.tileentities
 
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.containers.PressContainer
 import at.martinthedragon.nucleartech.recipes.PressRecipe
@@ -22,10 +23,7 @@ import net.minecraft.nbt.CompoundNBT
 import net.minecraft.tags.ItemTags
 import net.minecraft.tileentity.ITickableTileEntity
 import net.minecraft.tileentity.LockableTileEntity
-import net.minecraft.util.IIntArray
-import net.minecraft.util.NonNullList
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.SoundCategory
+import net.minecraft.util.*
 import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
@@ -147,7 +145,7 @@ class SteamPressTopTileEntity : LockableTileEntity(TileEntityTypes.steamPressHea
     override fun createMenu(windowId: Int, playerInventory: PlayerInventory): Container =
         PressContainer(windowId, playerInventory, this, dataAccess)
 
-    override fun getDefaultName(): ITextComponent = TranslationTextComponent("container.nucleartech.steam_press")
+    override fun getDefaultName(): ITextComponent = TranslationTextComponent("container.${NuclearTech.MODID}.steam_press")
 
     override fun setRecipeUsed(recipe: IRecipe<*>?) {
         if (recipe == null) return
@@ -265,13 +263,13 @@ class SteamPressTopTileEntity : LockableTileEntity(TileEntityTypes.steamPressHea
 
     private fun createHandler(): IItemHandler = inventory
 
-    override fun <T : Any?> getCapability(cap: Capability<T>): LazyOptional<T> {
+    override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
         if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (inventoryCapability == null)
                 inventoryCapability = LazyOptional.of(this::createHandler)
             return inventoryCapability!!.cast()
         }
-        return super.getCapability(cap)
+        return super.getCapability(cap, side)
     }
 
     override fun invalidateCaps() {

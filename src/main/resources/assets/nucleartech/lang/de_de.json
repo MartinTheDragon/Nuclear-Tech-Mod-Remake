@@ -745,11 +745,13 @@
   "block.nucleartech.steam_press_frame": "Dampfpresse",
   "block.nucleartech.steam_press_top": "Dampfpresse",
   "block.nucleartech.blast_furnace": "Hochofen",
+  "block.nucleartech.combustion_generator": "Verbrennungsgenerator",
 
   "container.nucleartech.siren": "Sirene",
   "container.nucleartech.safe": "Panzerschrank",
   "container.nucleartech.steam_press": "Dampfpresse",
   "container.nucleartech.blast_furnace": "Hochofen",
+  "container.nucleartech.combustion_generator": "Verbrennungsgenerator",
 
   "subtitle.nucleartech.siren.playing_hatch": "Sirene läuft - Hatch Siren",
   "subtitle.nucleartech.siren.playing_autopilot_disconnected": "Sirene läuft - Autopilot Disconnected",

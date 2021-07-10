@@ -3,7 +3,7 @@
   "group": "asbestos_sheet",
   "ingredients": [
     {
-      "item": "nucleartech:asbestos_block"
+      "tag": "forge:storage_blocks/asbestos"
     }
   ],
   "result": {

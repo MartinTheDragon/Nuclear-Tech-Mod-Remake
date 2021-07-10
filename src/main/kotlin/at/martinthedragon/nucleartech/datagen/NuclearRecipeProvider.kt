@@ -67,7 +67,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromBlock(ModItems.yellowcake.get(), NuclearTags.Items.STORAGE_BLOCKS_YELLOWCAKE, "yellowcake_block", consumer)
         ingotFromBlock(ModItems.insulator.get(), ModBlockItems.insulatorRoll.get(), consumer)
         ingotFromBlock(ModItems.fiberglassSheet.get(), ModBlockItems.fiberglassRoll.get(), consumer)
-        ingotFromBlock(ModItems.asbestosSheet.get(), ModBlockItems.asbestosBlock.get(), consumer)
+        ingotFromBlock(ModItems.asbestosSheet.get(), NuclearTags.Items.STORAGE_BLOCK_ASBESTOS, "asbestos_block", consumer)
         ingotFromBlock(ModItems.trinitite.get(), ModBlockItems.trinititeBlock.get(), consumer)
         ingotFromBlock(ModItems.nuclearWaste.get(), NuclearTags.Items.STORAGE_BLOCK_NUCLEAR_WASTE, "nuclear_waste_block", consumer)
         ingotFromBlock(ModItems.schrabidiumIngot.get(), ModBlockItems.schrabidiumBlock.get(), consumer)

@@ -139,6 +139,19 @@ class NuclearBlockStateProvider(
                         .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
                         .build()
             }
+        getVariantBuilder(ModBlocks.combustionGenerator.get())
+            .forAllStates {
+                if (it.getValue(BlockStateProperties.LIT))
+                    ConfiguredModel.builder()
+                        .modelFile(models().orientable(name(ModBlocks.combustionGenerator.get()) + "_on", extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_front_on"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side")))
+                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
+                        .build()
+                else
+                    ConfiguredModel.builder()
+                        .modelFile(models().orientable(name(ModBlocks.combustionGenerator.get()), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_front"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side")))
+                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
+                        .build()
+            }
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.thoriumOre.get())
@@ -247,7 +260,10 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.siren.get())
         copiedBlockItem(ModBlocks.safe.get())
         copiedBlockItem(ModBlocks.blastFurnace.get())
+        copiedBlockItem(ModBlocks.combustionGenerator.get())
     }
+
+    private fun name(block: Block) = block.registryName!!.path
 
     private fun extend(rl: ResourceLocation, suffix: String): ResourceLocation =
         ResourceLocation(rl.namespace, rl.path + suffix)

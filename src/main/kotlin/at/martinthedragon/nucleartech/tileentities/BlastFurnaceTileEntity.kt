@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.tileentities
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.blocks.BlastFurnace
 import at.martinthedragon.nucleartech.containers.BlastFurnaceContainer
 import at.martinthedragon.nucleartech.recipes.BlastingRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
-import net.minecraft.block.BlastFurnaceBlock
 import net.minecraft.block.BlockState
 import net.minecraft.entity.item.ExperienceOrbEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -21,6 +21,7 @@ import net.minecraft.item.crafting.RecipeItemHelper
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.tileentity.ITickableTileEntity
 import net.minecraft.tileentity.LockableTileEntity
+import net.minecraft.util.Direction
 import net.minecraft.util.IIntArray
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
@@ -250,7 +251,7 @@ class BlastFurnaceTileEntity : LockableTileEntity(TileEntityTypes.blastFurnaceTi
         if (wasLit != isLit) contentsChanged = true
 
         if (wasBlasting != isBlasting) {
-            level!!.setBlock(worldPosition, level!!.getBlockState(worldPosition).setValue(BlastFurnaceBlock.LIT, isLit && canBlast(recipe)), 0b11)
+            level!!.setBlock(worldPosition, level!!.getBlockState(worldPosition).setValue(BlastFurnace.LIT, isLit && canBlast(recipe)), 0b11)
         }
 
         if (contentsChanged) setChanged()
@@ -260,13 +261,13 @@ class BlastFurnaceTileEntity : LockableTileEntity(TileEntityTypes.blastFurnaceTi
 
     private fun createHandler(): IItemHandler = inventory
 
-    override fun <T : Any?> getCapability(cap: Capability<T>): LazyOptional<T> {
+    override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
         if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (inventoryCapability == null)
                 inventoryCapability = LazyOptional.of(this::createHandler)
             return inventoryCapability!!.cast()
         }
-        return super.getCapability(cap)
+        return super.getCapability(cap, side)
     }
 
     override fun invalidateCaps() {

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:asbestos_block"
+            "tag": "forge:storage_blocks/asbestos"
           }
         ]
       }
