@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "copper_panel",
+  "pattern": [
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:plates/copper"
+    }
+  },
+  "result": {
+    "item": "nucleartech:copper_panel"
+  }
+}

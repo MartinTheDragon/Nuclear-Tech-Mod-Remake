@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.tileentities.BlastFurnaceTileEntity
+import at.martinthedragon.nucleartech.world.dropExperience
 import net.minecraft.block.AbstractFurnaceBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -11,7 +12,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.inventory.InventoryHelper
 import net.minecraft.inventory.container.Container
 import net.minecraft.item.BlockItemUseContext
 import net.minecraft.item.ItemStack
@@ -52,11 +52,7 @@ class BlastFurnace(properties: Properties) : Block(properties) {
         defaultBlockState().setValue(FACING, context.horizontalDirection.opposite)
 
     override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        if (stack.hasCustomHoverName()) {
-            val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is BlastFurnaceTileEntity)
-                tileEntity.customName = stack.hoverName
-        }
+        setTileEntityCustomName<BlastFurnaceTileEntity>(world, pos, stack)
     }
 
     override fun onRemove(
@@ -66,12 +62,8 @@ class BlastFurnace(properties: Properties) : Block(properties) {
         newState: BlockState,
         p_196243_5_: Boolean
     ) {
-        if (!state.`is`(newState.block)) {
-            val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is BlastFurnaceTileEntity) {
-                InventoryHelper.dropContents(world, pos, tileEntity)
-                tileEntity.getRecipesToAwardAndPopExperience(world, Vector3d.atCenterOf(pos))
-            }
+        dropTileEntityContents<BlastFurnaceTileEntity>(state, world, pos, newState) {
+            world.dropExperience(Vector3d.atCenterOf(pos), it.getExperienceToDrop(null))
         }
         @Suppress("DEPRECATION")
         super.onRemove(state, world, pos, newState, p_196243_5_)

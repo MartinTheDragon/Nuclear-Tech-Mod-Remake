@@ -1,8 +1,9 @@
 {
-  "parent": "minecraft:block/orientable",
+  "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
     "side": "nucleartech:block/combustion_generator_side",
     "front": "nucleartech:block/combustion_generator_front",
+    "bottom": "nucleartech:block/combustion_generator_side",
     "top": "nucleartech:block/combustion_generator_side"
   }
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:heating_coil"
+    ]
+  },
+  "criteria": {
+    "has_tungsten_wire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:wires/tungsten"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:heating_coil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_wire",
+      "has_the_recipe"
+    ]
+  ]
+}

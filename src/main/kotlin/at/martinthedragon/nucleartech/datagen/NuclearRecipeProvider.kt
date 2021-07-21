@@ -248,6 +248,10 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
         pressRecipes(consumer)
         blastFurnaceRecipes(consumer)
+        parts(consumer)
+        machineItems(consumer)
+        templates(consumer)
+        machines(consumer)
         consumables(consumer)
     }
 
@@ -299,8 +303,35 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         blastingRecipe(ModItems.saturniteIngot.get(), NuclearTags.Items.DUSTS_METEORITE, ModItems.starmetalIngot.get(), 2F, 2, "meteorite_dust", consumer)
     }
 
+    private fun parts(consumer: Consumer<IFinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ModItems.copperPanel.get()).define('C', NuclearTags.Items.PLATES_COPPER).pattern("CCC").pattern("CCC").group(ModItems.copperPanel.id.path).unlockedBy("has${ModItems.copperPlate.id.path}", has(NuclearTags.Items.PLATES_COPPER)).save(consumer, ModItems.copperPanel.id)
+        ShapedRecipeBuilder.shaped(ModItems.heatingCoil.get()).define('T', NuclearTags.Items.WIRES_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("TTT").pattern("TIT").pattern("TTT").group(ModItems.heatingCoil.id.path).unlockedBy("has_${ModItems.tungstenWire.get()}", has(NuclearTags.Items.WIRES_TUNGSTEN)).save(consumer, ModItems.heatingCoil.id)
+        ShapedRecipeBuilder.shaped(ModItems.steelTank.get(), 2).define('S', NuclearTags.Items.PLATES_STEEL).define('T', NuclearTags.Items.PLATES_TITANIUM).pattern("STS").pattern("S S").pattern("STS").group(ModItems.steelTank.id.path).unlockedBy("has_${ModItems.steelPlate.id.path}", has(NuclearTags.Items.PLATES_STEEL)).save(consumer, ModItems.steelTank.id)
+    }
+
+    private fun machineItems(consumer: Consumer<IFinishedRecipe>) {
+        pressStamp(Tags.Items.STONE, ModItems.stoneFlatStamp.get(), consumer)
+        pressStamp(Tags.Items.INGOTS_IRON, ModItems.ironFlatStamp.get(), consumer)
+        pressStamp(NuclearTags.Items.INGOTS_STEEL, ModItems.steelFlatStamp.get(), consumer)
+        pressStamp(NuclearTags.Items.INGOTS_TITANIUM, ModItems.titaniumFlatStamp.get(), consumer)
+        pressStamp(Tags.Items.OBSIDIAN, ModItems.obsidianFlatStamp.get(), consumer)
+        pressStamp(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumFlatStamp.get(), consumer)
+    }
+
+    private fun templates(consumer: Consumer<IFinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ModItems.machineTemplateFolder.get()).define('B', Tags.Items.DYES_BLUE).define('P', Items.PAPER).define('W', Tags.Items.DYES_WHITE).pattern("BPB").pattern("WPW").pattern("BPB").group(ModItems.machineTemplateFolder.id.path).unlockedBy("has_${Items.PAPER.registryName!!.path}", has(Items.PAPER)).save(consumer, ModItems.machineTemplateFolder.id)
+    }
+
+    private fun machines(consumer: Consumer<IFinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ModBlockItems.siren.get()).define('S', NuclearTags.Items.PLATES_STEEL).define('I', NuclearTags.Items.PLATES_INSULATOR).define('C', ModItems.enhancedCircuit.get()).define('R', Tags.Items.DUSTS_REDSTONE).pattern("SIS").pattern("ICI").pattern("SRS").group(ModBlockItems.siren.id.path).unlockedBy("has_${ModItems.enhancedCircuit.id.path}", has(ModItems.enhancedCircuit.get())).save(consumer, ModBlockItems.siren.id)
+        ShapedRecipeBuilder.shaped(ModBlockItems.steamPress.get()).define('I', Tags.Items.INGOTS_IRON).define('F', Items.FURNACE).define('P', Items.PISTON).define('B', Tags.Items.STORAGE_BLOCKS_IRON).pattern("IFI").pattern("IPI").pattern("IBI").group(ModBlockItems.steamPress.id.path).unlockedBy("has_${Items.PISTON.registryName!!.path}", has(Items.PISTON)).save(consumer, ModBlockItems.steamPress.id)
+        ShapedRecipeBuilder.shaped(ModBlockItems.blastFurnace.get()).define('T', NuclearTags.Items.INGOTS_TUNGSTEN).define('C', ModItems.copperPanel.get()).define('H', Items.HOPPER).define('F', Items.FURNACE).pattern("T T").pattern("CHC").pattern("TFT").group(ModBlockItems.blastFurnace.id.path).unlockedBy("has_${ModItems.tungstenIngot.get()}", has(NuclearTags.Items.INGOTS_TUNGSTEN)).save(consumer, ModBlockItems.blastFurnace.id)
+        ShapedRecipeBuilder.shaped(ModBlockItems.combustionGenerator.get()).define('S', NuclearTags.Items.INGOTS_STEEL).define('T', ModItems.steelTank.get()).define('C', ModItems.redCopperIngot.get()).define('F', Items.FURNACE).pattern("STS").pattern("SCS").pattern("SFS").group(ModBlockItems.combustionGenerator.id.path).unlockedBy("has_${ModItems.redCopperIngot.id.path}", has(ModItems.redCopperIngot.get())).save(consumer, ModBlockItems.combustionGenerator.id)
+        ShapedRecipeBuilder.shaped(ModBlockItems.electricFurnace.get()).define('B', NuclearTags.Items.INGOTS_BERYLLIUM).define('C', ModItems.copperPanel.get()).define('F', Items.FURNACE).define('H', ModItems.heatingCoil.get()).pattern("BBB").pattern("CFC").pattern("HHH").group(ModBlockItems.electricFurnace.id.path).unlockedBy("has_${ModItems.berylliumIngot.id.path}", has(NuclearTags.Items.INGOTS_BERYLLIUM)).save(consumer, ModBlockItems.electricFurnace.id)
+    }
+
     private fun consumables(consumer: Consumer<IFinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(ModItems.oilDetector.get()).define('G', NuclearTags.Items.WIRES_GOLD).define('S', NuclearTags.Items.PLATES_STEEL).define('C', NuclearTags.Items.INGOTS_COPPER).define('A', ModItems.advancedCircuit.get()).pattern("G C").pattern("GAC").pattern("SSS").group("oil_detector").unlockedBy("has_${ModItems.advancedCircuit.id.path}", has(ModItems.advancedCircuit.get())).save(consumer, ResourceLocation(NuclearTech.MODID, "oil_detector"))
+        ShapedRecipeBuilder.shaped(ModItems.oilDetector.get()).define('G', NuclearTags.Items.WIRES_GOLD).define('S', NuclearTags.Items.PLATES_STEEL).define('C', NuclearTags.Items.INGOTS_COPPER).define('A', ModItems.advancedCircuit.get()).pattern("G C").pattern("GAC").pattern("SSS").group(ModItems.oilDetector.id.path).unlockedBy("has_${ModItems.advancedCircuit.id.path}", has(ModItems.advancedCircuit.get())).save(consumer, ModItems.oilDetector.id)
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type
@@ -391,6 +422,14 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun wirePressRecipe(ingredient: ITag<Item>, result: IItemProvider, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
         pressRecipe(ingredient, PressRecipe.StampType.WIRE, result, 8, ingredientName, experience, consumer)
+    }
+
+    private fun pressStamp(material: IItemProvider, result: IItemProvider, consumer: Consumer<IFinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(result).define('R', Tags.Items.DUSTS_REDSTONE).define('B', Tags.Items.INGOTS_BRICK).define('M', material).pattern(" R ").pattern("BBB").pattern("MMM").group("press_stamp_blanks").unlockedBy("has_${material.asItem().registryName!!.path}", has(material)).save(consumer, result.asItem().registryName!!)
+    }
+
+    private fun pressStamp(material: ITag<Item>, result: IItemProvider, consumer: Consumer<IFinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(result).define('R', Tags.Items.DUSTS_REDSTONE).define('B', Tags.Items.INGOTS_BRICK).define('M', material).pattern(" R ").pattern("BBB").pattern("MMM").group("press_stamp_blanks").unlockedBy("has_material_tag", has(material)).save(consumer, result.asItem().registryName!!)
     }
 
     private fun blastingRecipe(ingredient1: IItemProvider, ingredient2: IItemProvider, result: IItemProvider, experience: Float, count: Int, consumer: Consumer<IFinishedRecipe>) {

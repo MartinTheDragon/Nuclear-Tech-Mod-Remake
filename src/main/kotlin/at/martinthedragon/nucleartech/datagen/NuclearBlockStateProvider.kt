@@ -126,32 +126,9 @@ class NuclearBlockStateProvider(
         simpleBlock(ModBlocks.steamPressBase.get(), models().getExistingFile(ModBlocks.steamPressBase.id))
         simpleBlock(ModBlocks.steamPressFrame.get(), models().getExistingFile(ModBlocks.steamPressFrame.id))
         simpleBlock(ModBlocks.steamPressTop.get(), models().getExistingFile(ModBlocks.steamPressTop.id))
-        getVariantBuilder(ModBlocks.blastFurnace.get())
-            .forAllStates {
-                if (it.getValue(BlockStateProperties.LIT))
-                    ConfiguredModel.builder()
-                        .modelFile(models().orientableWithBottom("${ModBlocks.blastFurnace.id.path}_on", extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_front_on"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_top_on")))
-                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
-                        .build()
-                else
-                    ConfiguredModel.builder()
-                        .modelFile(models().orientableWithBottom(ModBlocks.blastFurnace.id.path, extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_front"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_side"), extend(blockTexture(ModBlocks.blastFurnace.get()), "_top")))
-                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
-                        .build()
-            }
-        getVariantBuilder(ModBlocks.combustionGenerator.get())
-            .forAllStates {
-                if (it.getValue(BlockStateProperties.LIT))
-                    ConfiguredModel.builder()
-                        .modelFile(models().orientable(name(ModBlocks.combustionGenerator.get()) + "_on", extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_front_on"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side")))
-                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
-                        .build()
-                else
-                    ConfiguredModel.builder()
-                        .modelFile(models().orientable(name(ModBlocks.combustionGenerator.get()), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_front"), extend(blockTexture(ModBlocks.combustionGenerator.get()), "_side")))
-                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
-                        .build()
-            }
+        litHorizontalBlock(ModBlocks.blastFurnace.get(), top = extend(blockTexture(ModBlocks.blastFurnace.get()), "_top"), topLit = extend(blockTexture(ModBlocks.blastFurnace.get()), "_top_on"))
+        litHorizontalBlock(ModBlocks.combustionGenerator.get())
+        litHorizontalBlock(ModBlocks.electricFurnace.get())
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.thoriumOre.get())
@@ -261,6 +238,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.safe.get())
         copiedBlockItem(ModBlocks.blastFurnace.get())
         copiedBlockItem(ModBlocks.combustionGenerator.get())
+        copiedBlockItem(ModBlocks.electricFurnace.get())
     }
 
     private fun name(block: Block) = block.registryName!!.path
@@ -270,5 +248,31 @@ class NuclearBlockStateProvider(
 
     private fun copiedBlockItem(block: Block) {
         simpleBlockItem(block, models().getExistingFile(block.registryName))
+    }
+
+    private fun litHorizontalBlock(
+        block: Block,
+        side: ResourceLocation = extend(blockTexture(block), "_side"),
+        sideLit: ResourceLocation = side,
+        front: ResourceLocation = extend(blockTexture(block), "_front"),
+        frontLit: ResourceLocation = extend(blockTexture(block), "_front_on"),
+        bottom: ResourceLocation = side,
+        bottomLit: ResourceLocation = sideLit,
+        top: ResourceLocation = side,
+        topLit: ResourceLocation = sideLit
+    ) {
+        getVariantBuilder(block)
+            .forAllStates {
+                if (it.getValue(BlockStateProperties.LIT))
+                    ConfiguredModel.builder()
+                        .modelFile(models().orientableWithBottom(name(block) + "_on", sideLit, frontLit, bottomLit, topLit))
+                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
+                        .build()
+                else
+                    ConfiguredModel.builder()
+                        .modelFile(models().orientableWithBottom(name(block), side, front, bottom, top))
+                        .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
+                        .build()
+            }
     }
 }

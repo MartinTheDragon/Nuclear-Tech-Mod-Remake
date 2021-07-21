@@ -4,11 +4,11 @@ import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.containers.PressContainer
+import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.recipes.PressRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
 import net.minecraft.block.BlockState
-import net.minecraft.entity.item.ExperienceOrbEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.IInventory
@@ -24,20 +24,16 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.tileentity.ITickableTileEntity
 import net.minecraft.tileentity.LockableTileEntity
 import net.minecraft.util.*
-import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
-import net.minecraft.world.World
 import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
-import kotlin.math.floor
-import kotlin.random.Random
 
-class SteamPressTopTileEntity : LockableTileEntity(TileEntityTypes.steamPressHeadTileEntityType.get()), IInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
+class SteamPressTopTileEntity : LockableTileEntity(TileEntityTypes.steamPressHeadTileEntityType.get()), IInventory, IRecipeHolder, IRecipeHelperPopulator, ExperienceRecipeResultTileEntity, ITickableTileEntity {
     private var litDuration = 0
     private var litTime = 0
     val isLit: Boolean
@@ -156,53 +152,23 @@ class SteamPressTopTileEntity : LockableTileEntity(TileEntityTypes.steamPressHea
 
     override fun awardUsedRecipes(player: PlayerEntity) {}
 
-    fun awardUsedRecipesAndPopExperience(player: PlayerEntity) {
-        val recipeList = getRecipesToAwardAndPopExperience(player.level, player.position())
-        player.awardRecipes(recipeList)
-        recipesUsed.clear()
-    }
+    override fun clearUsedRecipes() = recipesUsed.clear()
 
-    @OptIn(ExperimentalStdlibApi::class)
-    fun getRecipesToAwardAndPopExperience(world: World, pos: Vector3d): List<IRecipe<*>> {
-        return buildList<IRecipe<*>> {
-            for ((recipeID, amount) in recipesUsed.object2IntEntrySet()) {
-                world.recipeManager.byKey(recipeID).ifPresent {
-                    add(it)
-                    createExperience(world, pos, amount, (it as PressRecipe).experience)
-                }
-            }
-        }
-    }
+    override fun getExperienceToDrop(player: PlayerEntity?): Float =
+        recipesUsed.object2IntEntrySet().mapNotNull { (recipeID, amount) ->
+            (level!!.recipeManager.byKey(recipeID).orElse(null) as? PressRecipe)?.experience?.times(amount)
+        }.sum()
 
-    private fun createExperience(world: World, pos: Vector3d, times: Int, xpAmount: Float) {
-        var i = floor(times * xpAmount).toInt()
-        val f = (times * xpAmount) % 1
-        if (f != 0F && Random.nextFloat() < f) i++
-
-        while (i > 0) {
-            val j = ExperienceOrbEntity.getExperienceValue(i)
-            i -= j
-            world.addFreshEntity(ExperienceOrbEntity(world, pos.x, pos.y, pos.z, j))
-        }
-    }
+    override fun getRecipesToAward(player: PlayerEntity): List<IRecipe<*>> =
+        recipesUsed.keys.mapNotNull { player.level.recipeManager.byKey(it).orElse(null) }
 
     override fun fillStackedContents(recipeItemHelper: RecipeItemHelper) {
         for (itemStack in items) recipeItemHelper.accountStack(itemStack)
     }
 
-    private fun canPress(recipe: IRecipe<*>?): Boolean {
-        if (items[0].isEmpty || recipe == null) return false
-        val recipeResult = recipe.resultItem
-        if (recipeResult.isEmpty) return false
-
-        val resultStack = items[3]
-        return when {
-            resultStack.isEmpty -> true
-            !resultStack.sameItem(recipeResult) -> false
-            resultStack.count + recipeResult.count <= maxStackSize && resultStack.count + recipeResult.count <= resultStack.maxStackSize -> true
-            else -> resultStack.count + recipeResult.count <= recipeResult.maxStackSize
-        }
-    }
+    private fun canPress(recipe: IRecipe<*>?): Boolean =
+        if (items[0].isEmpty || recipe == null) false
+        else canTransferItem(recipe.resultItem, items[3], this)
 
     private fun getBurnDuration(fuel: ItemStack): Int = if (fuel.isEmpty) 0 else ForgeHooks.getBurnTime(fuel)
 

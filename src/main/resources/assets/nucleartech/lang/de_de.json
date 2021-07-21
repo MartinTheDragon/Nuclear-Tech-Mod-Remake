@@ -746,12 +746,16 @@
   "block.nucleartech.steam_press_top": "Dampfpresse",
   "block.nucleartech.blast_furnace": "Hochofen",
   "block.nucleartech.combustion_generator": "Verbrennungsgenerator",
+  "block.nucleartech.electric_furnace": "Elektrischer Ofen",
 
   "container.nucleartech.siren": "Sirene",
   "container.nucleartech.safe": "Panzerschrank",
   "container.nucleartech.steam_press": "Dampfpresse",
   "container.nucleartech.blast_furnace": "Hochofen",
   "container.nucleartech.combustion_generator": "Verbrennungsgenerator",
+  "container.nucleartech.electric_furnace": "Elektrischer Ofen",
+
+  "energy.nucleartech": "Energie",
 
   "subtitle.nucleartech.siren.playing_hatch": "Sirene läuft - Hatch Siren",
   "subtitle.nucleartech.siren.playing_autopilot_disconnected": "Sirene läuft - Autopilot Disconnected",
@@ -782,5 +786,5 @@
   "jei.nucleartech.category.pressing.experience": "%s EP",
   "jei.nucleartech.category.blasting": "Hochofenrezepte",
   "jei.nucleartech.category.blasting.experience": "%s EP",
-  "jei.nucleartech.info.items.machine_template_folder_results": "Wird hergestellt mit der Produktionsvorlagen-Zeichenmappe"
+  "jei.nucleartech.category.template_folder_results": "Vorlagen-Zeichenmappe"
 }

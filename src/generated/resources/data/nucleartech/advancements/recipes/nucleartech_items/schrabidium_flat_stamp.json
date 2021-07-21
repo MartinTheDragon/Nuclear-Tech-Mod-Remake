@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_flat_stamp"
+    ]
+  },
+  "criteria": {
+    "has_schrabidium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:schrabidium_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_flat_stamp"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schrabidium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

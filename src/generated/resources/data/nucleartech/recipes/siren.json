@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "siren",
+  "pattern": [
+    "SIS",
+    "ICI",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:plates/steel"
+    },
+    "I": {
+      "tag": "forge:plates/insulator"
+    },
+    "C": {
+      "item": "nucleartech:enhanced_circuit"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "nucleartech:siren"
+  }
+}

@@ -2,8 +2,11 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
-import net.minecraft.block.*
 import net.minecraft.block.AbstractBlock.Properties
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.RotatedPillarBlock
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material.*
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockReader
@@ -150,4 +153,5 @@ object ModBlocks {
 
     val blastFurnace: RegistryObject<BlastFurnace> = BLOCKS.register("blast_furnace") { BlastFurnace(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val combustionGenerator: RegistryObject<CombustionGenerator> = BLOCKS.register("combustion_generator") { CombustionGenerator(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val electricFurnace: RegistryObject<ElectricFurnace> = BLOCKS.register("electric_furnace") { ElectricFurnace(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 }

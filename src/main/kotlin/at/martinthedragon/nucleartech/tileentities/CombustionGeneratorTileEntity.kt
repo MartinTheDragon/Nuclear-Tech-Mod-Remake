@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.CombustionGenerator
 import at.martinthedragon.nucleartech.containers.CombustionGeneratorContainer
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
+import at.martinthedragon.nucleartech.energy.transferEnergy
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
@@ -71,17 +72,15 @@ class CombustionGeneratorTileEntity : LockableTileEntity(TileEntityTypes.combust
             setChanged()
         }
 
-        override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-            return when (slot) {
-                0 -> ForgeHooks.getBurnTime(stack) > 0
-                1 -> {
-                    val fluid = FluidUtil.getFluidContained(stack).let { if (!it.isPresent) return false else it.get() }
-                    tank.isFluidValid(fluid)
-                }
-                2 -> FluidUtil.getFluidContained(stack).let { if (!it.isPresent) return false else it.get() }.isEmpty
-                3 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
-                else -> true
+        override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
+            0 -> ForgeHooks.getBurnTime(stack) > 0
+            1 -> {
+                val fluid = FluidUtil.getFluidContained(stack).let { if (!it.isPresent) return false else it.get() }
+                tank.isFluidValid(fluid)
             }
+            2 -> FluidUtil.getFluidContained(stack).let { if (!it.isPresent) return false else it.get() }.isEmpty
+            3 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
+            else -> true
         }
     }
     private val tank = object : FluidTank(MAX_WATER, { it.fluid == Fluids.WATER }) {
@@ -198,21 +197,28 @@ class CombustionGeneratorTileEntity : LockableTileEntity(TileEntityTypes.combust
             } else items[1] = resultItem.copy() // if the item still has fluid, update it
         }
 
-        val energyItemSlot = items[3]
-        if (!energyItemSlot.isEmpty) {
-            energyItemSlot.getCapability(CapabilityEnergy.ENERGY).map { itemEnergyStorage ->
-                if (itemEnergyStorage.energyStored < itemEnergyStorage.maxEnergyStored)
-                    itemEnergyStorage.receiveEnergy(energyStorage.energyStored, true).let {
-                        if (it > 0) {
-                            itemEnergyStorage.receiveEnergy(energyStorage.extractEnergy(it, false), false)
-                        }
-                    }
+        if (energy > 0) {
+            val energyItemSlot = items[3]
+            if (!energyItemSlot.isEmpty) transferEnergy(energyStorage, energyItemSlot)
+
+            // TODO cache somehow TODO improve distribution
+            val hungryConsumers = Direction.values().associateWith {
+                val tileEntity = level?.getBlockEntity(blockPos.relative(it)) ?: return@associateWith null
+                tileEntity.getCapability(CapabilityEnergy.ENERGY, it.opposite)
+            }.filterValues { it != null && it.isPresent }.map { (_, consumer) -> consumer!!.resolve().get() }
+
+            if (hungryConsumers.isNotEmpty()) {
+                val energyForEach = energy / hungryConsumers.size
+                for (consumer in hungryConsumers) {
+                    transferEnergy(energyStorage, consumer, energyForEach)
+                }
             }
         }
 
         if (isLit && water - WATER_CONSUMPTION_RATE >= 0) {
             tank.fluid.shrink(WATER_CONSUMPTION_RATE)
             energy = (energy + ENERGY_PRODUCTION_RATE).coerceIn(0, MAX_ENERGY)
+            contentsChanged = true
         }
 
         if (wasLit != isLit) {
@@ -244,9 +250,9 @@ class CombustionGeneratorTileEntity : LockableTileEntity(TileEntityTypes.combust
 
     companion object {
         const val MAX_ENERGY = 400_000
-        const val MAX_WATER = FluidAttributes.BUCKET_VOLUME * 5
-        const val WATER_CONSUMPTION_RATE = 1
-        const val ENERGY_PRODUCTION_RATE = 100
-        const val ENERGY_TRANSFER_RATE = ENERGY_PRODUCTION_RATE * 5
+        const val MAX_WATER = FluidAttributes.BUCKET_VOLUME * 10
+        const val WATER_CONSUMPTION_RATE = 2
+        const val ENERGY_PRODUCTION_RATE = 50
+        const val ENERGY_TRANSFER_RATE = ENERGY_PRODUCTION_RATE * 10
     }
 }

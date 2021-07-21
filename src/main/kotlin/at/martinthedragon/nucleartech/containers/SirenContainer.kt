@@ -1,16 +1,13 @@
 package at.martinthedragon.nucleartech.containers
 
 import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.items.SirenTrack
 import at.martinthedragon.nucleartech.tileentities.SirenTileEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.container.Container
-import net.minecraft.inventory.container.Slot
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketBuffer
-import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
@@ -23,28 +20,6 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
     }
 
-    private fun addPlayerInventory(
-            addSlot: (Slot) -> Slot,
-            playerInventory: IInventory,
-            xStart: Int,
-            yStart: Int,
-            slotCreator: (inventory: IInventory, index: Int, x: Int, y: Int) -> Slot = ::Slot
-    ) {
-        val slotSize = 18
-        val rows = 3
-        val columns = 9
-
-        for (i in 0 until rows)
-            for (j in 0 until columns) {
-                addSlot(slotCreator(playerInventory, j + i * 9 + 9, xStart + j * slotSize, yStart + i * slotSize))
-            }
-        val newYStart = yStart + slotSize * rows + 4
-
-        for (i in 0 until columns) {
-            addSlot(slotCreator(playerInventory, i, xStart + i * slotSize, newYStart))
-        }
-    }
-
     override fun stillValid(playerIn: PlayerEntity) =
         playerIn.level.getBlockState(tileEntity.blockPos).block == ModBlocks.siren.get().block
 
@@ -54,16 +29,19 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
         if (slot != null && slot.hasItem()) {
             val itemStack = slot.item
             returnStack = itemStack.copy()
-            if (index < SLOT_COUNT) {
-                if (!moveItemStackTo(itemStack, SLOT_COUNT, slots.size, true))
-                    return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 0, SLOT_COUNT, false))
-                return ItemStack.EMPTY
+            if (index != 0) {
+                var successful = false
+                if (itemStack.item is SirenTrack && moveItemStackTo(itemStack, 0, 1, false)) successful = true
+                if (!successful && !tryMoveInPlayerInventory(index, 1, itemStack)) return ItemStack.EMPTY
+            } else if (!moveItemStackTo(itemStack, 1, slots.size, false)) return ItemStack.EMPTY
 
             if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
             else slot.setChanged()
-        }
 
+            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
+
+            slot.onTake(player, itemStack)
+        }
         return returnStack
     }
 
@@ -73,13 +51,7 @@ class SirenContainer(windowId: Int, playerInventory: PlayerInventory, val tileEn
     }
 
     companion object {
-        const val SLOT_COUNT = 1
-
         fun fromNetwork(windowId: Int, playerInventory: PlayerInventory, buffer: PacketBuffer) =
-                SirenContainer(windowId, playerInventory, DistExecutor.safeRunForDist({
-                    DistExecutor.SafeSupplier { Minecraft.getInstance().level?.getBlockEntity(buffer.readBlockPos()) }
-                }) {
-                    throw IllegalAccessException("Cannot call function on server")
-                } as SirenTileEntity)
+                SirenContainer(windowId, playerInventory, getTileEntityForContainer(buffer))
     }
 }

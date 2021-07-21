@@ -42,14 +42,8 @@ class Safe(properties: Properties) : Block(properties) {
 
     override fun createTileEntity(state: BlockState?, world: IBlockReader?) = SafeTileEntity()
 
-    // for custom names
-    override fun setPlacedBy(worldIn: World, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
-        if (stack.hasCustomHoverName()) {
-            val tileEntity = worldIn.getBlockEntity(pos)
-            if (tileEntity is SafeTileEntity) {
-                tileEntity.customName = stack.hoverName
-            }
-        }
+    override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) {
+        setTileEntityCustomName<SafeTileEntity>(world, pos, stack)
     }
 
     override fun onRemove(oldState: BlockState, world: World, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {

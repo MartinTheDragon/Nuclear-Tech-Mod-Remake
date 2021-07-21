@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "combustion_generator",
+  "pattern": [
+    "STS",
+    "SCS",
+    "SFS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "T": {
+      "item": "nucleartech:steel_tank"
+    },
+    "C": {
+      "item": "nucleartech:red_copper_ingot"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "nucleartech:combustion_generator"
+  }
+}

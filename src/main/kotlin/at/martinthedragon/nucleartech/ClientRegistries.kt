@@ -36,6 +36,7 @@ object ClientRegistries {
         ScreenManager.register(ContainerTypes.pressContainer.get(), ::SteamPressScreen)
         ScreenManager.register(ContainerTypes.blastFurnaceContainer.get(), ::BlastFurnaceScreen)
         ScreenManager.register(ContainerTypes.combustionGeneratorContainer.get(), ::CombustionGeneratorScreen)
+        ScreenManager.register(ContainerTypes.electricFurnaceContainer.get(), ::ElectricFurnaceScreen)
     }
 
     @SubscribeEvent @JvmStatic

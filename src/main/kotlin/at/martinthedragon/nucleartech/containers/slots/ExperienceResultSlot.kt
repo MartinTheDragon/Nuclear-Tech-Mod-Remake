@@ -1,14 +1,15 @@
 package at.martinthedragon.nucleartech.containers.slots
 
-import at.martinthedragon.nucleartech.tileentities.BlastFurnaceTileEntity
+import at.martinthedragon.nucleartech.tileentities.ExperienceRecipeResultTileEntity
+import at.martinthedragon.nucleartech.tileentities.dropExperienceAndAwardRecipes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.SlotItemHandler
 import kotlin.math.min
 
-class BlastResultSlot(
-    val tileEntity: BlastFurnaceTileEntity,
+open class ExperienceResultSlot(
+    val tileEntity: ExperienceRecipeResultTileEntity,
     val player: PlayerEntity,
     inventory: IItemHandler,
     index: Int,
@@ -16,7 +17,7 @@ class BlastResultSlot(
 ) : SlotItemHandler(inventory, index, xPosition, yPosition) {
     var removeCount = 0
 
-    override fun mayPlace(stack: ItemStack) = false
+    final override fun mayPlace(stack: ItemStack) = false
 
     override fun remove(amount: Int): ItemStack {
         if (hasItem()) removeCount += min(amount, item.count)
@@ -36,7 +37,7 @@ class BlastResultSlot(
     override fun checkTakeAchievements(itemStack: ItemStack) {
         itemStack.onCraftedBy(player.level, player, removeCount)
         if (!player.level.isClientSide)
-            tileEntity.awardUsedRecipesAndPopExperience(player)
+            tileEntity.dropExperienceAndAwardRecipes(player)
         removeCount = 0
     }
 }

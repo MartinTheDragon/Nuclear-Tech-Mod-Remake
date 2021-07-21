@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "blast_furnace",
+  "pattern": [
+    "T T",
+    "CHC",
+    "TFT"
+  ],
+  "key": {
+    "T": {
+      "tag": "forge:ingots/tungsten"
+    },
+    "C": {
+      "item": "nucleartech:copper_panel"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "nucleartech:blast_furnace"
+  }
+}

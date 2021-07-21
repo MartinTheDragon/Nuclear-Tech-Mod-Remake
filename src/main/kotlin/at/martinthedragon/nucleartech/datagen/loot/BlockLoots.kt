@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.datagen.loot
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.advancements.criterion.EnchantmentPredicate
 import net.minecraft.advancements.criterion.ItemPredicate
 import net.minecraft.advancements.criterion.MinMaxBounds
@@ -41,7 +41,9 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.oilDeposit.get())
         dropSelf(ModBlocks.emptyOilDeposit.get())
         dropSelf(ModBlocks.oilSand.get())
-        dropSelf(ModBlocks.ligniteOre.get())
+        add(ModBlocks.ligniteOre.get()) {
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.lignite.get()).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+        }
         dropSelf(ModBlocks.asbestosOre.get())
         dropSelf(ModBlocks.schrabidiumOre.get())
         dropSelf(ModBlocks.australianOre.get())
@@ -172,6 +174,7 @@ class BlockLoots : BlockLootTables() {
         add(ModBlocks.steamPressTop.get()) { noDrop() }
         dropSelf(ModBlocks.blastFurnace.get())
         dropSelf(ModBlocks.combustionGenerator.get())
+        dropSelf(ModBlocks.electricFurnace.get())
     }
 
     // automatically await a loot table for all blocks registered by this mod

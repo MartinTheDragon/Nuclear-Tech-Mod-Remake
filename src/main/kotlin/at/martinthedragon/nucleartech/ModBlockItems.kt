@@ -120,4 +120,5 @@ object ModBlockItems {
     val steamPress: RegistryObject<Item> = ITEMS.register("steam_press") { BlockItem(ModBlocks.steamPressBase.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val blastFurnace: RegistryObject<Item> = ITEMS.register("blast_furnace") { BlockItem(ModBlocks.blastFurnace.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val combustionGenerator: RegistryObject<Item> = ITEMS.register("combustion_generator") { BlockItem(ModBlocks.combustionGenerator.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
+    val electricFurnace: RegistryObject<Item> = ITEMS.register("electric_furnace") { BlockItem(ModBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
 }

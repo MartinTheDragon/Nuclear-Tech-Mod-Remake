@@ -1,14 +1,14 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.IBidiRenderer
-import net.minecraft.client.gui.chat.NarratorChatListener
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.gui.widget.TextFieldWidget
 import net.minecraft.client.gui.widget.button.Button
@@ -24,7 +24,7 @@ import java.util.*
 import kotlin.math.ceil
 import kotlin.math.min
 
-class UseTemplateFolderScreen : Screen(NarratorChatListener.NO_TITLE) {
+class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().description) {
     private lateinit var backButton: Button
     private lateinit var nextButton: Button
     private lateinit var templateButtons: List<Button>

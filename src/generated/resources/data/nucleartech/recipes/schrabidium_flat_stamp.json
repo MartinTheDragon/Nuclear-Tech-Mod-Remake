@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "press_stamp_blanks",
+  "pattern": [
+    " R ",
+    "BBB",
+    "MMM"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "B": {
+      "tag": "forge:ingots/brick"
+    },
+    "M": {
+      "item": "nucleartech:schrabidium_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_flat_stamp"
+  }
+}

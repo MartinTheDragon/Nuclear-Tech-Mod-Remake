@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:titanium_flat_stamp"
+    ]
+  },
+  "criteria": {
+    "has_material_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/titanium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:titanium_flat_stamp"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_material_tag",
+      "has_the_recipe"
+    ]
+  ]
+}

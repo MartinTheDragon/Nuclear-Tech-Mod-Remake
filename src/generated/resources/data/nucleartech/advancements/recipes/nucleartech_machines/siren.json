@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:siren"
+    ]
+  },
+  "criteria": {
+    "has_enhanced_circuit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:enhanced_circuit"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:siren"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_enhanced_circuit",
+      "has_the_recipe"
+    ]
+  ]
+}

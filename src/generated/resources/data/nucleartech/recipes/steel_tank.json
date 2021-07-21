@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "steel_tank",
+  "pattern": [
+    "STS",
+    "S S",
+    "STS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:plates/steel"
+    },
+    "T": {
+      "tag": "forge:plates/titanium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:steel_tank",
+    "count": 2
+  }
+}

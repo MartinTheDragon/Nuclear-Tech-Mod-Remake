@@ -3,11 +3,11 @@ package at.martinthedragon.nucleartech.tileentities
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.BlastFurnace
 import at.martinthedragon.nucleartech.containers.BlastFurnaceContainer
+import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.recipes.BlastingRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
 import net.minecraft.block.BlockState
-import net.minecraft.entity.item.ExperienceOrbEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.IInventory
@@ -25,20 +25,16 @@ import net.minecraft.util.Direction
 import net.minecraft.util.IIntArray
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
-import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
-import net.minecraft.world.World
 import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
-import kotlin.math.floor
-import kotlin.random.Random
 
-class BlastFurnaceTileEntity : LockableTileEntity(TileEntityTypes.blastFurnaceTileEntityType.get()), IInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
+class BlastFurnaceTileEntity : LockableTileEntity(TileEntityTypes.blastFurnaceTileEntityType.get()), IInventory, IRecipeHolder, IRecipeHelperPopulator, ExperienceRecipeResultTileEntity, ITickableTileEntity {
     private var litTime = 0
     private val isLit: Boolean
         get() = litTime > 0
@@ -144,35 +140,17 @@ class BlastFurnaceTileEntity : LockableTileEntity(TileEntityTypes.blastFurnaceTi
 
     override fun awardUsedRecipes(player: PlayerEntity) {}
 
-    fun awardUsedRecipesAndPopExperience(player: PlayerEntity) {
-        val recipeList = getRecipesToAwardAndPopExperience(player.level, player.position())
-        player.awardRecipes(recipeList)
+    override fun clearUsedRecipes() {
         recipesUsed.clear()
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
-    fun getRecipesToAwardAndPopExperience(world: World, pos: Vector3d): List<IRecipe<*>> {
-        return buildList<IRecipe<*>> {
-            for ((recipeID, amount) in recipesUsed.object2IntEntrySet()) {
-                world.recipeManager.byKey(recipeID).ifPresent {
-                    add(it)
-                    createExperience(world, pos, amount, (it as BlastingRecipe).experience)
-                }
-            }
-        }
-    }
+    override fun getExperienceToDrop(player: PlayerEntity?): Float =
+        recipesUsed.object2IntEntrySet().mapNotNull { (recipeID, amount) ->
+            (level!!.recipeManager.byKey(recipeID).orElse(null) as? BlastingRecipe)?.experience?.times(amount)
+        }.sum()
 
-    private fun createExperience(world: World, pos: Vector3d, times: Int, xpAmount: Float) {
-        var i = floor(times * xpAmount).toInt()
-        val f = (times * xpAmount) % 1
-        if (f != 0F && Random.nextFloat() < f) i++
-
-        while (i > 0) {
-            val j = ExperienceOrbEntity.getExperienceValue(i)
-            i -= j
-            world.addFreshEntity(ExperienceOrbEntity(world, pos.x, pos.y, pos.z, j))
-        }
-    }
+    override fun getRecipesToAward(player: PlayerEntity): List<IRecipe<*>> =
+        recipesUsed.keys.mapNotNull { player.level.recipeManager.byKey(it).orElse(null) }
 
     override fun fillStackedContents(recipeItemHelper: RecipeItemHelper) {
         for (itemStack in items) recipeItemHelper.accountStack(itemStack)
@@ -180,19 +158,9 @@ class BlastFurnaceTileEntity : LockableTileEntity(TileEntityTypes.blastFurnaceTi
 
     fun canBlast(): Boolean = canBlast(level!!.recipeManager.getRecipeFor(RecipeTypes.BLASTING, this, level!!).orElse(null))
 
-    private fun canBlast(recipe: IRecipe<*>?): Boolean {
-        if (items[0].isEmpty || items[1].isEmpty || recipe == null) return false
-        val recipeResult = recipe.resultItem
-        if (recipeResult.isEmpty) return false
-
-        val resultStack = items[3]
-        return when {
-            resultStack.isEmpty -> true
-            !resultStack.sameItem(recipeResult) -> false
-            resultStack.count + recipeResult.count <= maxStackSize && resultStack.count + recipeResult.count <= resultStack.maxStackSize -> true
-            else -> resultStack.count + recipeResult.count <= recipeResult.maxStackSize
-        }
-    }
+    private fun canBlast(recipe: IRecipe<*>?): Boolean =
+        if (items[0].isEmpty || items[1].isEmpty || recipe == null) false
+        else canTransferItem(recipe.resultItem, items[3], this)
 
     private fun getBurnDuration(fuel: ItemStack): Int = if (fuel.isEmpty) 0 else ForgeHooks.getBurnTime(fuel)
 

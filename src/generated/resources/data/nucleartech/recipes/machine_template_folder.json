@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "machine_template_folder",
+  "pattern": [
+    "BPB",
+    "WPW",
+    "BPB"
+  ],
+  "key": {
+    "B": {
+      "tag": "forge:dyes/blue"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "W": {
+      "tag": "forge:dyes/white"
+    }
+  },
+  "result": {
+    "item": "nucleartech:machine_template_folder"
+  }
+}

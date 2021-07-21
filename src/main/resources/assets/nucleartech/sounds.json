@@ -230,7 +230,7 @@
     ]
   },
   "item.generic.bleep": {
-    "category": "item",
+    "category": "neutral",
     "subtitle": "subtitle.nucleartech.item.generic.bleep",
     "sounds": [
       {

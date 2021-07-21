@@ -11,6 +11,7 @@ import net.minecraft.fluid.Fluids
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.StringTextComponent
+import net.minecraft.util.text.TranslationTextComponent
 
 class CombustionGeneratorScreen(
     container: CombustionGeneratorContainer,
@@ -54,14 +55,14 @@ class CombustionGeneratorScreen(
         if (isHovering(8, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
             renderWrappedToolTip(matrixStack,
                 listOf(
-                    StringTextComponent("Water"),
+                    TranslationTextComponent("block.minecraft.water"),
                     StringTextComponent("${menu.getWaterLevel()}/${CombustionGeneratorTileEntity.MAX_WATER} mB")
                 ), mouseX, mouseY, font
             )
         if (isHovering(152, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
             renderWrappedToolTip(matrixStack,
                 listOf(
-                    StringTextComponent("Energy"),
+                    TranslationTextComponent("energy.nucleartech"),
                     StringTextComponent("${menu.getEnergy() / 4F}/${CombustionGeneratorTileEntity.MAX_ENERGY / 4F} HE") // TODO make this somehow switch between HE and FE
                 ), mouseX, mouseY, font
             )

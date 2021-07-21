@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "side": "nucleartech:block/electric_furnace_side",
+    "front": "nucleartech:block/electric_furnace_front_on",
+    "bottom": "nucleartech:block/electric_furnace_side",
+    "top": "nucleartech:block/electric_furnace_side"
+  }
+}

@@ -1,10 +1,9 @@
 package at.martinthedragon.nucleartech.containers
 
 import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.containers.slots.PressResultSlot
+import at.martinthedragon.nucleartech.containers.slots.ExperienceResultSlot
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.tileentities.SteamPressTopTileEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.IInventory
@@ -19,7 +18,6 @@ import net.minecraft.network.PacketBuffer
 import net.minecraft.tags.ItemTags
 import net.minecraft.tileentity.AbstractFurnaceTileEntity
 import net.minecraft.util.IIntArray
-import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 import net.minecraft.util.IntArray as MinecraftIntArray
@@ -37,7 +35,7 @@ class PressContainer(
         addSlot(SlotItemHandler(inv, 0, 80, 53))
         addSlot(SlotItemHandler(inv, 1, 80, 17))
         addSlot(SlotItemHandler(inv, 2, 26, 53))
-        addSlot(PressResultSlot(tileEntity, playerInventory.player, inv, 3, 140, 35))
+        addSlot(ExperienceResultSlot(tileEntity, playerInventory.player, inv, 3, 140, 35))
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
         addDataSlots(data)
     }
@@ -71,27 +69,17 @@ class PressContainer(
             val itemStack = slot.item
             returnStack = itemStack.copy()
             if (index == 3) {
-                if (!moveItemStackTo(itemStack, 4, slots.size, true))
-                    return ItemStack.EMPTY
-
+                if (!moveItemStackTo(itemStack, 4, slots.size, true)) return ItemStack.EMPTY
                 slot.onQuickCraft(itemStack, returnStack)
             } else if (index != 0 && index != 1 && index != 2) {
-                if (canPress(itemStack)) {
-                    if (!moveItemStackTo(itemStack, 0, 1, false))
-                        return ItemStack.EMPTY
-                } else if (itemStack.item in ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STAMPS.name)) {
-                    if (!moveItemStackTo(itemStack, 1, 2, false))
-                        return ItemStack.EMPTY
-                } else if (AbstractFurnaceTileEntity.isFuel(itemStack)) {
-                    if (!moveItemStackTo(itemStack, 2, 3, false))
-                        return ItemStack.EMPTY
-                } else if (index >= 4 && index < (slots.size - 9).coerceAtLeast(5)) {
-                    if (!moveItemStackTo(itemStack, (slots.size - 9).coerceAtLeast(4), slots.size, false))
-                        return ItemStack.EMPTY
-                } else if (index >= (slots.size - 9) && index < slots.size && !moveItemStackTo(itemStack, 4, (slots.size - 9), false))
-                    return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 4, slots.size, false))
-                return ItemStack.EMPTY
+                var successful = false
+                when {
+                    canPress(itemStack) && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
+                    itemStack.item in ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STAMPS.name) && moveItemStackTo(itemStack, 1, 2, false) -> successful = true
+                    AbstractFurnaceTileEntity.isFuel(itemStack) && moveItemStackTo(itemStack, 2, 3, false) -> successful = true
+                }
+                if (!successful && !tryMoveInPlayerInventory(index, 4, itemStack)) return ItemStack.EMPTY
+            } else if (!moveItemStackTo(itemStack, 4, slots.size, false)) return ItemStack.EMPTY
 
             if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
             else slot.setChanged()
@@ -142,10 +130,6 @@ class PressContainer(
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: PlayerInventory, buffer: PacketBuffer) =
-            PressContainer(windowId, playerInventory, DistExecutor.safeRunForDist({
-                DistExecutor.SafeSupplier { Minecraft.getInstance().level?.getBlockEntity(buffer.readBlockPos()) }
-            }) {
-                throw IllegalAccessException("Cannot call function on server")
-            } as SteamPressTopTileEntity)
+            PressContainer(windowId, playerInventory, getTileEntityForContainer(buffer))
     }
 }

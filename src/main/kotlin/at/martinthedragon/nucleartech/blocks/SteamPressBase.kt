@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.tileentities.SteamPressTopTileEntity
+import at.martinthedragon.nucleartech.world.dropExperience
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -21,7 +22,8 @@ import net.minecraft.util.math.shapes.ISelectionContext
 import net.minecraft.util.math.shapes.VoxelShape
 import net.minecraft.util.math.shapes.VoxelShapes
 import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.*
+import net.minecraft.world.IBlockReader
+import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
 
 class SteamPressBase(properties: Properties) : Block(properties) {
@@ -86,7 +88,7 @@ class SteamPressBase(properties: Properties) : Block(properties) {
             val tileEntity = worldIn.getBlockEntity(blockPos2)
             if (tileEntity is SteamPressTopTileEntity) {
                 InventoryHelper.dropContents(worldIn, pos, tileEntity)
-                tileEntity.getRecipesToAwardAndPopExperience(worldIn, Vector3d.atCenterOf(pos))
+                worldIn.dropExperience(Vector3d.atCenterOf(pos), tileEntity.getExperienceToDrop(null))
             }
 
             if (worldIn.getBlockState(blockPos1).block == ModBlocks.steamPressFrame.get())
