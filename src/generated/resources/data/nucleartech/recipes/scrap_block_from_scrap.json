@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "scrap_block",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:scrap"
+    }
+  },
+  "result": {
+    "item": "nucleartech:scrap_block"
+  }
+}

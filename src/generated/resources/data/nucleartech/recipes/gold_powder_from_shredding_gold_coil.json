@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:gold_coil"
+  },
+  "result": {
+    "item": "nucleartech:gold_powder",
+    "count": 1
+  },
+  "experience": 0.1
+}

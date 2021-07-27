@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:asbestos_sheet"
+  },
+  "result": {
+    "item": "nucleartech:asbestos_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

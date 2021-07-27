@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:coke_from_powder"
+    ]
+  },
+  "criteria": {
+    "has_coal_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/coal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:coke_from_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_coal_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

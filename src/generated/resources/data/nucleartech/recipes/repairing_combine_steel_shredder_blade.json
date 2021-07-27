@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "combine_steel_shredder_blade",
+  "pattern": [
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "item": "nucleartech:combine_steel_plate"
+    },
+    "B": {
+      "item": "nucleartech:combine_steel_shredder_blade"
+    }
+  },
+  "result": {
+    "item": "nucleartech:combine_steel_shredder_blade"
+  }
+}

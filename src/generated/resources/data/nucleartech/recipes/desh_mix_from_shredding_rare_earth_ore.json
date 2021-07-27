@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:rare_earth_ore"
+  },
+  "result": {
+    "item": "nucleartech:desh_mix",
+    "count": 1
+  },
+  "experience": 1.5
+}

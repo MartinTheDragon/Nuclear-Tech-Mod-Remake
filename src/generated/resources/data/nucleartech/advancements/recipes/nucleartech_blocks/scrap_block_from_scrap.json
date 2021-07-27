@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:scrap_block_from_scrap"
+    ]
+  },
+  "criteria": {
+    "has_scrap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:scrap"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:scrap_block_from_scrap"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_scrap",
+      "has_the_recipe"
+    ]
+  ]
+}

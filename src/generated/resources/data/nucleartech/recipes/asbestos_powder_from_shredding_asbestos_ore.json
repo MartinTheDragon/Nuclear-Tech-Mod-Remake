@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/asbestos"
+  },
+  "result": {
+    "item": "nucleartech:asbestos_powder",
+    "count": 2
+  },
+  "experience": 0.4
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:verticium_block"
+  },
+  "result": {
+    "item": "nucleartech:verticium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

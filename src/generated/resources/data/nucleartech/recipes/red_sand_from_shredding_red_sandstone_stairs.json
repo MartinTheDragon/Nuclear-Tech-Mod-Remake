@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:red_sandstone_stairs"
+  },
+  "result": {
+    "item": "minecraft:red_sand",
+    "count": 3
+  },
+  "experience": 0.0
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/uranium"
+  },
+  "result": {
+    "item": "nucleartech:uranium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:stone"
+  },
+  "result": {
+    "item": "minecraft:gravel",
+    "count": 1
+  },
+  "experience": 0.0
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:quartz_pillar"
+  },
+  "result": {
+    "item": "nucleartech:quartz_powder",
+    "count": 4
+  },
+  "experience": 0.0
+}

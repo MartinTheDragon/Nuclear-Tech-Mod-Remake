@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:gems/actinium"
+  },
+  "result": {
+    "item": "nucleartech:tiny_actinium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

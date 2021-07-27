@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:enchanted_book"
+  },
+  "result": {
+    "item": "nucleartech:enchantment_powder",
+    "count": 1
+  },
+  "experience": 2.0
+}

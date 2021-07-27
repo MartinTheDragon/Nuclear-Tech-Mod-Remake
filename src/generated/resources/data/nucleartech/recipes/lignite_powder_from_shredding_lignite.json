@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:lignite"
+  },
+  "result": {
+    "item": "nucleartech:lignite_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

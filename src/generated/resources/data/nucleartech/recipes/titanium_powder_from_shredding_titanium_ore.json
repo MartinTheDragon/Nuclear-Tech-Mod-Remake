@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/titanium"
+  },
+  "result": {
+    "item": "nucleartech:titanium_powder",
+    "count": 2
+  },
+  "experience": 0.4
+}

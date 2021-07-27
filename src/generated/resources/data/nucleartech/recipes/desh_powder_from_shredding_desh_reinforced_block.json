@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:desh_reinforced_block"
+  },
+  "result": {
+    "item": "nucleartech:desh_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

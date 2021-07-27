@@ -3,6 +3,7 @@
   "values": [
     "#forge:ores/uranium",
     "#forge:ores/thorium",
+    "#forge:ores/plutonium",
     "#forge:ores/titanium",
     "#forge:ores/sulfur",
     "#forge:ores/salpeter",
@@ -24,7 +25,6 @@
     "nucleartech:dellite",
     "nucleartech:dollar_green_mineral",
     "nucleartech:nether_uranium_ore",
-    "nucleartech:nether_plutonium_ore",
     "nucleartech:nether_tungsten_ore",
     "nucleartech:nether_sulfur_ore",
     "nucleartech:nether_phosphorus_ore",

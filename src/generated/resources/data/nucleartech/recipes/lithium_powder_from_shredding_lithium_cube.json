@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ingots/lithium"
+  },
+  "result": {
+    "item": "nucleartech:lithium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

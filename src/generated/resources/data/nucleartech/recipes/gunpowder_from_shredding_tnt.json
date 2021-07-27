@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:tnt"
+  },
+  "result": {
+    "item": "minecraft:gunpowder",
+    "count": 5
+  },
+  "experience": 0.1
+}

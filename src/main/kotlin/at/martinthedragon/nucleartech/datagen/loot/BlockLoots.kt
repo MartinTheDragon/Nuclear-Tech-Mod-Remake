@@ -175,6 +175,7 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.blastFurnace.get())
         dropSelf(ModBlocks.combustionGenerator.get())
         dropSelf(ModBlocks.electricFurnace.get())
+        dropSelf(ModBlocks.shredder.get())
     }
 
     // automatically await a loot table for all blocks registered by this mod

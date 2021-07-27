@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ingots/lanthanum"
+  },
+  "result": {
+    "item": "nucleartech:lanthanum_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

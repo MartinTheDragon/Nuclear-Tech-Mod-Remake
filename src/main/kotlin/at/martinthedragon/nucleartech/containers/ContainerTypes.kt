@@ -24,4 +24,7 @@ object ContainerTypes {
     val electricFurnaceContainer: RegistryObject<ContainerType<ElectricFurnaceContainer>> = CONTAINERS.register("electric_furnace") {
         IForgeContainerType.create(ElectricFurnaceContainer.Companion::fromNetwork)
     }
+    val shredderContainer: RegistryObject<ContainerType<ShredderContainer>> = CONTAINERS.register("shredder") {
+        IForgeContainerType.create(ShredderContainer.Companion::fromNetwork)
+    }
 }

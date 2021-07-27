@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/lead"
+  },
+  "result": {
+    "item": "nucleartech:lead_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

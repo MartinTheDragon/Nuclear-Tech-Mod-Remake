@@ -25,4 +25,7 @@ object TileEntityTypes {
     val electricFurnaceTileEntityType: RegistryObject<TileEntityType<ElectricFurnaceTileEntity>> = TILE_ENTITIES.register("electric_furnace") {
         TileEntityType.Builder.of(::ElectricFurnaceTileEntity, ModBlocks.electricFurnace.get()).build(null)
     }
+    val shredderTileEntityType: RegistryObject<TileEntityType<ShredderTileEntity>> = TILE_ENTITIES.register("shredder") {
+        TileEntityType.Builder.of(::ShredderTileEntity, ModBlocks.shredder.get()).build(null)
+    }
 }

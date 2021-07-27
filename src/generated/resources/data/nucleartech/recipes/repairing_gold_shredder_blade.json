@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "gold_shredder_blade",
+  "pattern": [
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:plates/gold"
+    },
+    "B": {
+      "item": "nucleartech:gold_shredder_blade"
+    }
+  },
+  "result": {
+    "item": "nucleartech:gold_shredder_blade"
+  }
+}

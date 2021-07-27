@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "steel_shredder_blade",
+  "pattern": [
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:plates/steel"
+    },
+    "B": {
+      "item": "nucleartech:steel_shredder_blade"
+    }
+  },
+  "result": {
+    "item": "nucleartech:steel_shredder_blade"
+  }
+}

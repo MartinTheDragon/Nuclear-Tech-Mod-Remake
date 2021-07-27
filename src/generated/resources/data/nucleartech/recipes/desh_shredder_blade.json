@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_shredder_blade",
+  "pattern": [
+    "SDS",
+    "DBD",
+    "SDS"
+  ],
+  "key": {
+    "B": {
+      "item": "nucleartech:combine_steel_shredder_blade"
+    },
+    "D": {
+      "item": "nucleartech:desh_compound_plate"
+    },
+    "S": {
+      "item": "nucleartech:schrabidium_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:desh_shredder_blade"
+  }
+}

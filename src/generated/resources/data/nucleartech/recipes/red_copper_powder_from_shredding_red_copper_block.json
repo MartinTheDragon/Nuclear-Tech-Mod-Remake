@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:red_copper_block"
+  },
+  "result": {
+    "item": "nucleartech:red_copper_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

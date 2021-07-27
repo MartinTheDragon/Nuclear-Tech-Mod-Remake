@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:chiseled_quartz_block"
+  },
+  "result": {
+    "item": "nucleartech:quartz_powder",
+    "count": 4
+  },
+  "experience": 0.0
+}

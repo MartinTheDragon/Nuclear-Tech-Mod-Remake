@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:euphemium_block"
+  },
+  "result": {
+    "item": "nucleartech:euphemium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

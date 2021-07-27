@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:meteorite_fragment"
+  },
+  "result": {
+    "item": "nucleartech:tiny_meteorite_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/gold"
+  },
+  "result": {
+    "item": "nucleartech:gold_powder",
+    "count": 2
+  },
+  "experience": 0.5
+}

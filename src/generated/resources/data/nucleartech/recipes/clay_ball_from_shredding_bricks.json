@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:bricks"
+  },
+  "result": {
+    "item": "minecraft:clay_ball",
+    "count": 4
+  },
+  "experience": 0.0
+}

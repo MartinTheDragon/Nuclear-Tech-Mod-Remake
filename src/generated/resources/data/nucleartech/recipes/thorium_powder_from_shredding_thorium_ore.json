@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/thorium"
+  },
+  "result": {
+    "item": "nucleartech:thorium_powder",
+    "count": 2
+  },
+  "experience": 1.0
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:weidanium_ingot"
+  },
+  "result": {
+    "item": "nucleartech:weidanium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

@@ -129,6 +129,7 @@ class NuclearBlockStateProvider(
         litHorizontalBlock(ModBlocks.blastFurnace.get(), top = extend(blockTexture(ModBlocks.blastFurnace.get()), "_top"), topLit = extend(blockTexture(ModBlocks.blastFurnace.get()), "_top_on"))
         litHorizontalBlock(ModBlocks.combustionGenerator.get())
         litHorizontalBlock(ModBlocks.electricFurnace.get())
+        cubeAllSides(ModBlocks.shredder.get(), north = extend(blockTexture(ModBlocks.shredder.get()), "_front"), south = extend(blockTexture(ModBlocks.shredder.get()), "_front"), east = extend(blockTexture(ModBlocks.shredder.get()), "_side"), west = extend(blockTexture(ModBlocks.shredder.get()), "_side"))
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.thoriumOre.get())
@@ -239,6 +240,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.blastFurnace.get())
         copiedBlockItem(ModBlocks.combustionGenerator.get())
         copiedBlockItem(ModBlocks.electricFurnace.get())
+        copiedBlockItem(ModBlocks.shredder.get())
     }
 
     private fun name(block: Block) = block.registryName!!.path
@@ -248,6 +250,18 @@ class NuclearBlockStateProvider(
 
     private fun copiedBlockItem(block: Block) {
         simpleBlockItem(block, models().getExistingFile(block.registryName))
+    }
+
+    private fun cubeAllSides(
+        block: Block,
+        down: ResourceLocation = extend(blockTexture(block), "_down"),
+        up: ResourceLocation = extend(blockTexture(block), "_up"),
+        north: ResourceLocation = extend(blockTexture(block), "_north"),
+        south: ResourceLocation = extend(blockTexture(block), "_south"),
+        east: ResourceLocation = extend(blockTexture(block), "_east"),
+        west: ResourceLocation = extend(blockTexture(block), "_west")
+    ) {
+        simpleBlock(block, models().cube(name(block), down, up, north, south, east, west).texture("particle", north))
     }
 
     private fun litHorizontalBlock(

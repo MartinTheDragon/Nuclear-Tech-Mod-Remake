@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/quartz"
+  },
+  "result": {
+    "item": "nucleartech:quartz_powder",
+    "count": 4
+  },
+  "experience": 0.0
+}

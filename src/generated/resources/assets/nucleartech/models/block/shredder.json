@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "nucleartech:block/shredder_down",
+    "up": "nucleartech:block/shredder_up",
+    "north": "nucleartech:block/shredder_front",
+    "south": "nucleartech:block/shredder_front",
+    "east": "nucleartech:block/shredder_side",
+    "west": "nucleartech:block/shredder_side",
+    "particle": "nucleartech:block/shredder_front"
+  }
+}

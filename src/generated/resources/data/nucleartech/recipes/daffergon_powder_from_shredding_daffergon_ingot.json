@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:daffergon_ingot"
+  },
+  "result": {
+    "item": "nucleartech:daffergon_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

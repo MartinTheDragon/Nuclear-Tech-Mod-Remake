@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:magnetized_tungsten_ingot"
+  },
+  "result": {
+    "item": "nucleartech:magnetized_tungsten_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

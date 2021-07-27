@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:high_speed_steel_powder"
+  },
+  "result": {
+    "item": "nucleartech:high_speed_steel_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

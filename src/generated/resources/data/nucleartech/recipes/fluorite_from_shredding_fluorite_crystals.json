@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:fluorite_crystals"
+  },
+  "result": {
+    "item": "nucleartech:fluorite",
+    "count": 8
+  },
+  "experience": 0.1
+}

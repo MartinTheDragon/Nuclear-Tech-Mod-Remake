@@ -34,6 +34,7 @@ class ItemTagProvider(
     private fun copyFromBlocks() {
         copy(NuclearTags.Blocks.ORES_URANIUM, NuclearTags.Items.ORES_URANIUM)
         copy(NuclearTags.Blocks.ORES_THORIUM, NuclearTags.Items.ORES_THORIUM)
+        copy(NuclearTags.Blocks.ORES_PLUTONIUM, NuclearTags.Items.ORES_PLUTONIUM)
         copy(NuclearTags.Blocks.ORES_TITANIUM, NuclearTags.Items.ORES_TITANIUM)
         copy(NuclearTags.Blocks.ORES_SULFUR, NuclearTags.Items.ORES_SULFUR)
         copy(NuclearTags.Blocks.ORES_NITER, NuclearTags.Items.ORES_NITER)
@@ -511,6 +512,14 @@ class ItemTagProvider(
         tag(NuclearTags.Items.FILTERS_CARBON).add(ModItems.activatedCarbonFilter.get())
 
         tag(NuclearTags.Items.SCRAP).add(ModItems.scrap.get())
+
+        tag(NuclearTags.Items.SHREDDER_BLADES).add(
+            ModItems.aluminiumShredderBlade.get(), ModItems.goldShredderBlade.get(),
+            ModItems.ironShredderBlade.get(), ModItems.steelShredderBlade.get(),
+            ModItems.titaniumShredderBlade.get(), ModItems.advancedAlloyShredderBlade.get(),
+            ModItems.combineSteelShredderBlade.get(), ModItems.schrabidiumShredderBlade.get(),
+            ModItems.deshShredderBlade.get()
+        )
     }
 
     private fun templateFolders() {

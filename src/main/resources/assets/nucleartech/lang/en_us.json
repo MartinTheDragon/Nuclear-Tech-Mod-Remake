@@ -133,7 +133,7 @@
   "item.nucleartech.actinium_powder": "Actinium Powder",
   "item.nucleartech.asbestos_powder": "Asbestos Powder",
   "item.nucleartech.asbestos_powder.desc0": "§o\"Sniffffffff - MHHHHHHMHHHHHHHHH\"",
-  "item.nucleartech.enchanucleartechent_powder": "Enchanucleartechent Powder",
+  "item.nucleartech.enchantment_powder": "Enchantment Powder",
   "item.nucleartech.cloud_residue": "Cloud Residue",
   "item.nucleartech.thermonuclear_ashes": "Thermonuclear Ashes",
   "item.nucleartech.semtex_mix": "Semtex Mix",
@@ -516,6 +516,15 @@
   "item.nucleartech.schrabidium_plate_stamp": "Plate Stamp (Schrabidium)",
   "item.nucleartech.schrabidium_wire_stamp":  "Wire Stamp (Schrabidium)",
   "item.nucleartech.schrabidium_circuit_stamp": "Circuit Stamp (Schrabidium)",
+  "item.nucleartech.aluminium_shredder_blade": "Aluminium Shredder Blade",
+  "item.nucleartech.gold_shredder_blade": "Gold Shredder Blade",
+  "item.nucleartech.iron_shredder_blade": "Iron Shredder Blade",
+  "item.nucleartech.steel_shredder_blade": "Steel Shredder Blade",
+  "item.nucleartech.titanium_shredder_blade": "Titanium Shredder Blade",
+  "item.nucleartech.advanced_alloy_shredder_blade": "Advanced Alloy Shredder Blade",
+  "item.nucleartech.combine_steel_shredder_blade": "Combine Steel Shredder Blade",
+  "item.nucleartech.schrabidium_shredder_blade": "Schrabidium Shredder Blade",
+  "item.nucleartech.desh_shredder_blade": "Desh Shredder Blade",
 
   "item.nucleartech.machine_template_folder": "Machine Template Folder",
   "item.nucleartech.machine_template_folder.desc0": "Machine Templates: Paper + Dye",
@@ -747,6 +756,7 @@
   "block.nucleartech.blast_furnace": "Blast Furnace",
   "block.nucleartech.combustion_generator": "Combustion Generator",
   "block.nucleartech.electric_furnace": "Electric Furnace",
+  "block.nucleartech.shredder": "Shredder",
 
   "container.nucleartech.siren": "Siren",
   "container.nucleartech.safe": "Safe",
@@ -754,6 +764,7 @@
   "container.nucleartech.blast_furnace": "Blast Furnace",
   "container.nucleartech.combustion_generator": "Combustion Generator",
   "container.nucleartech.electric_furnace": "Electric Furnace",
+  "container.nucleartech.shredder": "Shredder",
 
   "energy.nucleartech": "Energy",
 
@@ -786,5 +797,6 @@
   "jei.nucleartech.category.pressing.experience": "%s XP",
   "jei.nucleartech.category.blasting": "Blasting",
   "jei.nucleartech.category.blasting.experience": "%s XP",
-  "jei.nucleartech.category.template_folder_results": "Template Folder"
+  "jei.nucleartech.category.template_folder_results": "Template Folder",
+  "jei.nucleartech.category.shredding": "Shredding"
 }

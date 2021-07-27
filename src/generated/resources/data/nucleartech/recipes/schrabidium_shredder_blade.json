@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "schrabidium_shredder_blade",
+  "pattern": [
+    " + ",
+    "+#+",
+    " + "
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:schrabidium_ingot"
+    },
+    "+": {
+      "item": "nucleartech:schrabidium_plate"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_shredder_blade"
+  }
+}

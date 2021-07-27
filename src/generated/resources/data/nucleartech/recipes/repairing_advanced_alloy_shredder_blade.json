@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "advanced_alloy_shredder_blade",
+  "pattern": [
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "item": "nucleartech:advanced_alloy_plate"
+    },
+    "B": {
+      "item": "nucleartech:advanced_alloy_shredder_blade"
+    }
+  },
+  "result": {
+    "item": "nucleartech:advanced_alloy_shredder_blade"
+  }
+}

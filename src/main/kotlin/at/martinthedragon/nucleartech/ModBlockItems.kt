@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
 import at.martinthedragon.nucleartech.items.AutoTooltippedBlockItem
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.item.Rarity
 import net.minecraftforge.fml.RegistryObject
 
@@ -82,7 +83,9 @@ object ModBlockItems {
     val whitePhosphorusBlock: RegistryObject<Item> = ITEMS.register("white_phosphorus_block") { BlockItem(ModBlocks.whitePhosphorusBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val redPhosphorusBlock: RegistryObject<Item> = ITEMS.register("red_phosphorus_block") { BlockItem(ModBlocks.redPhosphorusBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val yellowcakeBlock: RegistryObject<Item> = ITEMS.register("yellowcake_block") { BlockItem(ModBlocks.yellowcakeBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
-    val scrapBlock: RegistryObject<Item> = ITEMS.register("scrap_block") { BlockItem(ModBlocks.scrapBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val scrapBlock: RegistryObject<Item> = ITEMS.register("scrap_block") { object : BlockItem(ModBlocks.scrapBlock.get(), Properties().tab(CreativeTabs.Blocks.itemGroup)) {
+        override fun getBurnTime(itemStack: ItemStack?) = 4000
+    }}
     val electricalScrapBlock: RegistryObject<Item> = ITEMS.register("electrical_scrap_block") { BlockItem(ModBlocks.electricalScrapBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val insulatorRoll: RegistryObject<Item> = ITEMS.register("insulator_roll") { BlockItem(ModBlocks.insulatorRoll.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val fiberglassRoll: RegistryObject<Item> = ITEMS.register("fiberglass_roll") { BlockItem(ModBlocks.fiberglassRoll.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
@@ -121,4 +124,5 @@ object ModBlockItems {
     val blastFurnace: RegistryObject<Item> = ITEMS.register("blast_furnace") { BlockItem(ModBlocks.blastFurnace.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val combustionGenerator: RegistryObject<Item> = ITEMS.register("combustion_generator") { BlockItem(ModBlocks.combustionGenerator.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val electricFurnace: RegistryObject<Item> = ITEMS.register("electric_furnace") { BlockItem(ModBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
+    val shredder: RegistryObject<Item> = ITEMS.register("shredder") { BlockItem(ModBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
 }

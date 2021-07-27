@@ -11,6 +11,7 @@ object RecipeTypes {
 
     val PRESSING = register<PressRecipe>("pressing")
     val BLASTING = register<BlastingRecipe>("blasting")
+    val SHREDDING = register<ShreddingRecipe>("shredding")
 
     private fun <T : IRecipe<*>> register(name: String): IRecipeType<T> {
         val recipeType = object : IRecipeType<T> {

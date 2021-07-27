@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:trixite"
+  },
+  "result": {
+    "item": "nucleartech:plutonium_powder",
+    "count": 4
+  },
+  "experience": 1.5
+}

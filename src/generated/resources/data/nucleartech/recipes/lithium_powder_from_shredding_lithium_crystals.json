@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:lithium_crystals"
+  },
+  "result": {
+    "item": "nucleartech:lithium_powder",
+    "count": 3
+  },
+  "experience": 2.5
+}

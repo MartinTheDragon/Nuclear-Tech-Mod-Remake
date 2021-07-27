@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:gems/emerald"
+  },
+  "result": {
+    "item": "nucleartech:emerald_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

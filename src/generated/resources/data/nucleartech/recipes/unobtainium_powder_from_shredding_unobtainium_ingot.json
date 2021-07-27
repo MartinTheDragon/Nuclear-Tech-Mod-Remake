@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:unobtainium_ingot"
+  },
+  "result": {
+    "item": "nucleartech:unobtainium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

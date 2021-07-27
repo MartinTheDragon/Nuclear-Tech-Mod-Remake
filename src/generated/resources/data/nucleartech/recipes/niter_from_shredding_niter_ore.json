@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/salpeter"
+  },
+  "result": {
+    "item": "nucleartech:niter",
+    "count": 6
+  },
+  "experience": 0.1
+}

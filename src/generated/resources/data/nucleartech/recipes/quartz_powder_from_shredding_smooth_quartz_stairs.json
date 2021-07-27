@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:smooth_quartz_stairs"
+  },
+  "result": {
+    "item": "nucleartech:quartz_powder",
+    "count": 3
+  },
+  "experience": 0.0
+}

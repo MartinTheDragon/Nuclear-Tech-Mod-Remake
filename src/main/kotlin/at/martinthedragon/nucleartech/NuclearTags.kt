@@ -17,6 +17,7 @@ object NuclearTags {
 
         val ORES_URANIUM = forgeTag("ores/uranium")
         val ORES_THORIUM = forgeTag("ores/thorium")
+        val ORES_PLUTONIUM = forgeTag("ores/plutonium")
         val ORES_TITANIUM = forgeTag("ores/titanium")
         val ORES_SULFUR = forgeTag("ores/sulfur")
         val ORES_NITER = forgeTag("ores/salpeter")
@@ -66,6 +67,7 @@ object NuclearTags {
         // blocks
         val ORES_URANIUM = forgeTag("ores/uranium")
         val ORES_THORIUM = forgeTag("ores/thorium")
+        val ORES_PLUTONIUM = forgeTag("ores/plutonium")
         val ORES_TITANIUM = forgeTag("ores/titanium")
         val ORES_SULFUR = forgeTag("ores/sulfur")
         val ORES_NITER = forgeTag("ores/salpeter")
@@ -288,5 +290,7 @@ object NuclearTags {
         val OBSIDIAN_STAMPS = tag("stamps/obsidian")
         val SCHRABIDIUM_STAMPS = tag("stamps/schrabidium")
         val SIREN_TRACKS = tag("siren_tracks")
+
+        val SHREDDER_BLADES = tag("shredder_blades")
     }
 }

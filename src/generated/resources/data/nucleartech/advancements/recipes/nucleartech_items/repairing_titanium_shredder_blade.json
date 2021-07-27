@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:repairing_titanium_shredder_blade"
+    ]
+  },
+  "criteria": {
+    "has_titanium_shredder_blade": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:titanium_shredder_blade"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:repairing_titanium_shredder_blade"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_titanium_shredder_blade",
+      "has_the_recipe"
+    ]
+  ]
+}

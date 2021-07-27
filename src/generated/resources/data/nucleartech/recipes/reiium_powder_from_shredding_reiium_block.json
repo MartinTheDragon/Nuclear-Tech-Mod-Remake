@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:reiium_block"
+  },
+  "result": {
+    "item": "nucleartech:reiium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

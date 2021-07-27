@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_compound_plate",
+  "pattern": [
+    "PDP",
+    "DSD",
+    "PDP"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:dusts/polymer"
+    },
+    "D": {
+      "item": "nucleartech:desh_ingot"
+    },
+    "S": {
+      "item": "nucleartech:high_speed_steel_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:desh_compound_plate"
+  }
+}

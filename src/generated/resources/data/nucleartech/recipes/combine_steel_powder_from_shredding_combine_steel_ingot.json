@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:combine_steel_ingot"
+  },
+  "result": {
+    "item": "nucleartech:combine_steel_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

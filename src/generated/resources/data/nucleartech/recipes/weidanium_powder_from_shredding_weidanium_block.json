@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:weidanium_block"
+  },
+  "result": {
+    "item": "nucleartech:weidanium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

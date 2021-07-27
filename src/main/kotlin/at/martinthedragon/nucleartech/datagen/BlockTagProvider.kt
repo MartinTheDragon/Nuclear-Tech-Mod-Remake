@@ -21,6 +21,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(Tags.Blocks.ORES)
             .addTag(NuclearTags.Blocks.ORES_URANIUM)
             .addTag(NuclearTags.Blocks.ORES_THORIUM)
+            .addTag(NuclearTags.Blocks.ORES_PLUTONIUM)
             .addTag(NuclearTags.Blocks.ORES_TITANIUM)
             .addTag(NuclearTags.Blocks.ORES_SULFUR)
             .addTag(NuclearTags.Blocks.ORES_NITER)
@@ -39,8 +40,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
                 ModBlocks.weidite.get(), ModBlocks.reiite.get(),
                 ModBlocks.brightblendeOre.get(), ModBlocks.dellite.get(),
                 ModBlocks.dollarGreenMineral.get(), ModBlocks.netherUraniumOre.get(),
-                ModBlocks.netherPlutoniumOre.get(), ModBlocks.netherTungstenOre.get(),
-                ModBlocks.netherSulfurOre.get(), ModBlocks.netherPhosphorusOre.get(),
+                ModBlocks.netherTungstenOre.get(), ModBlocks.netherSulfurOre.get(), ModBlocks.netherPhosphorusOre.get(),
                 ModBlocks.netherSchrabidiumOre.get(), ModBlocks.meteorUraniumOre.get(),
                 ModBlocks.meteorThoriumOre.get(), ModBlocks.meteorTitaniumOre.get(),
                 ModBlocks.meteorSulfurOre.get(), ModBlocks.meteorCopperOre.get(),
@@ -51,6 +51,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
 
         tag(NuclearTags.Blocks.ORES_URANIUM).add(ModBlocks.uraniumOre.get())
         tag(NuclearTags.Blocks.ORES_THORIUM).add(ModBlocks.thoriumOre.get())
+        tag(NuclearTags.Blocks.ORES_PLUTONIUM).add(ModBlocks.netherPlutoniumOre.get())
         tag(NuclearTags.Blocks.ORES_TITANIUM).add(ModBlocks.titaniumOre.get())
         tag(NuclearTags.Blocks.ORES_SULFUR).add(ModBlocks.sulfurOre.get())
         tag(NuclearTags.Blocks.ORES_NITER).add(ModBlocks.niterOre.get())

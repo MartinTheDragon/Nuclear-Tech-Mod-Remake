@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/fluorite"
+  },
+  "result": {
+    "item": "nucleartech:fluorite",
+    "count": 6
+  },
+  "experience": 0.1
+}

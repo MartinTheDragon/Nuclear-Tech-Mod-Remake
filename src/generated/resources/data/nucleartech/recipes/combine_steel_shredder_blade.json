@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "combine_steel_shredder_blade",
+  "pattern": [
+    " + ",
+    "+#+",
+    " + "
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:combine_steel_ingot"
+    },
+    "+": {
+      "item": "nucleartech:combine_steel_plate"
+    }
+  },
+  "result": {
+    "item": "nucleartech:combine_steel_shredder_blade"
+  }
+}

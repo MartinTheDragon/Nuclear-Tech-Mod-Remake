@@ -133,7 +133,7 @@
   "item.nucleartech.actinium_powder": "Actiniumpulver",
   "item.nucleartech.asbestos_powder": "Asbestpulver",
   "item.nucleartech.asbestos_powder.desc0": "§o\"Sniffffffff - MHHHHHHMHHHHHHHHH\"",
-  "item.nucleartech.enchanucleartechent_powder": "Pulverisierte Verzauberung",
+  "item.nucleartech.enchantment_powder": "Pulverisierte Verzauberung",
   "item.nucleartech.cloud_residue": "Wolkenrückstände",
   "item.nucleartech.thermonuclear_ashes": "Thermonukleare Asche",
   "item.nucleartech.semtex_mix": "Semtexmischung",
@@ -516,6 +516,15 @@
   "item.nucleartech.schrabidium_plate_stamp": "Plattenstempel (Schrabidium)",
   "item.nucleartech.schrabidium_wire_stamp": "Kabelstempel (Schrabidium)",
   "item.nucleartech.schrabidium_circuit_stamp": "Schaltkreisstempel (Schrabidium)",
+  "item.nucleartech.aluminium_shredder_blade": "Aluminiumsägeblatt",
+  "item.nucleartech.gold_shredder_blade": "Goldsägeblatt",
+  "item.nucleartech.iron_shredder_blade": "Eisensägeblatt",
+  "item.nucleartech.steel_shredder_blade": "Stahlsägeblatt",
+  "item.nucleartech.titanium_shredder_blade": "Titansägeblatt",
+  "item.nucleartech.advanced_alloy_shredder_blade": "Fortgeschrittenes Legierungssägeblatt",
+  "item.nucleartech.combine_steel_shredder_blade": "Combine Stahlsägeblatt",
+  "item.nucleartech.schrabidium_shredder_blade": "Schrabidiumsägeblatt",
+  "item.nucleartech.desh_shredder_blade": "Deshsägeblatt",
 
   "item.nucleartech.machine_template_folder": "Produktionsvorlagen-Zeichenmappe",
   "item.nucleartech.machine_template_folder.desc0": "Maschinenvorlagen: Papier + Farbstoff",
@@ -747,6 +756,7 @@
   "block.nucleartech.blast_furnace": "Hochofen",
   "block.nucleartech.combustion_generator": "Verbrennungsgenerator",
   "block.nucleartech.electric_furnace": "Elektrischer Ofen",
+  "block.nucleartech.shredder": "Brecher",
 
   "container.nucleartech.siren": "Sirene",
   "container.nucleartech.safe": "Panzerschrank",
@@ -754,6 +764,7 @@
   "container.nucleartech.blast_furnace": "Hochofen",
   "container.nucleartech.combustion_generator": "Verbrennungsgenerator",
   "container.nucleartech.electric_furnace": "Elektrischer Ofen",
+  "container.nucleartech.shredder": "Brecher",
 
   "energy.nucleartech": "Energie",
 
@@ -786,5 +797,6 @@
   "jei.nucleartech.category.pressing.experience": "%s EP",
   "jei.nucleartech.category.blasting": "Hochofenrezepte",
   "jei.nucleartech.category.blasting.experience": "%s EP",
-  "jei.nucleartech.category.template_folder_results": "Vorlagen-Zeichenmappe"
+  "jei.nucleartech.category.template_folder_results": "Vorlagen-Zeichenmappe",
+  "jei.nucleartech.category.shredding": "Zerkleinerungsrezepte"
 }

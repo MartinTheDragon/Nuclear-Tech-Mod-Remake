@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "iron_shredder_blade",
+  "pattern": [
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:plates/iron"
+    },
+    "B": {
+      "item": "nucleartech:iron_shredder_blade"
+    }
+  },
+  "result": {
+    "item": "nucleartech:iron_shredder_blade"
+  }
+}

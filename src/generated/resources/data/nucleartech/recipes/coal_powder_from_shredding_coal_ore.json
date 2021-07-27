@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/coal"
+  },
+  "result": {
+    "item": "nucleartech:coal_powder",
+    "count": 6
+  },
+  "experience": 0.1
+}

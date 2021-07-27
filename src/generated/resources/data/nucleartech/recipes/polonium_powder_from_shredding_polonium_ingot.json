@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ingots/polonium"
+  },
+  "result": {
+    "item": "nucleartech:polonium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

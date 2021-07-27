@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:gems/quartz"
+  },
+  "result": {
+    "item": "nucleartech:quartz_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

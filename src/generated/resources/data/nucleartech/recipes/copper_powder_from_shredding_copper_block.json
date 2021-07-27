@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/copper"
+  },
+  "result": {
+    "item": "nucleartech:copper_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

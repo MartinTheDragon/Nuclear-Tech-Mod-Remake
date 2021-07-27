@@ -154,4 +154,5 @@ object ModBlocks {
     val blastFurnace: RegistryObject<BlastFurnace> = BLOCKS.register("blast_furnace") { BlastFurnace(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val combustionGenerator: RegistryObject<CombustionGenerator> = BLOCKS.register("combustion_generator") { CombustionGenerator(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val electricFurnace: RegistryObject<ElectricFurnace> = BLOCKS.register("electric_furnace") { ElectricFurnace(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val shredder: RegistryObject<Shredder> = BLOCKS.register("shredder") { Shredder(Properties.of(METAL).strength(5F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 }

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:brightblende_ore"
+  },
+  "result": {
+    "item": "nucleartech:unobtainium_powder",
+    "count": 2
+  },
+  "experience": 1.25
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "coke",
+  "ingredient": {
+    "tag": "forge:dusts/coal"
+  },
+  "result": "nucleartech:coke",
+  "experience": 0.1,
+  "cookingtime": 200
+}

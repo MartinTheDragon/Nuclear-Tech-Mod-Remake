@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:schrabidium_block"
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

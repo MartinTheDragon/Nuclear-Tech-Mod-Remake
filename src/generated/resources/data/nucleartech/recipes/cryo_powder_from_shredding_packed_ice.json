@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:packed_ice"
+  },
+  "result": {
+    "item": "nucleartech:cryo_powder",
+    "count": 1
+  },
+  "experience": 0.1
+}

@@ -9,11 +9,13 @@ import at.martinthedragon.nucleartech.containers.ElectricFurnaceContainer
 import at.martinthedragon.nucleartech.containers.PressContainer
 import at.martinthedragon.nucleartech.integration.jei.categories.BlastingJeiRecipeCategory
 import at.martinthedragon.nucleartech.integration.jei.categories.PressingJeiRecipeCategory
+import at.martinthedragon.nucleartech.integration.jei.categories.ShreddingJeiRecipeCategory
 import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJeiRecipeCategory
 import at.martinthedragon.nucleartech.integration.jei.transfers.PressingRecipeTransferInfo
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.screens.BlastFurnaceScreen
 import at.martinthedragon.nucleartech.screens.ElectricFurnaceScreen
+import at.martinthedragon.nucleartech.screens.ShredderScreen
 import at.martinthedragon.nucleartech.screens.SteamPressScreen
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.JeiPlugin
@@ -38,6 +40,7 @@ class JeiIntegration : IModPlugin {
         registration.addRecipeCategories(TemplateFolderJeiRecipeCategory(registration.jeiHelpers.guiHelper))
         registration.addRecipeCategories(PressingJeiRecipeCategory(registration.jeiHelpers.guiHelper))
         registration.addRecipeCategories(BlastingJeiRecipeCategory(registration.jeiHelpers.guiHelper))
+        registration.addRecipeCategories(ShreddingJeiRecipeCategory(registration.jeiHelpers.guiHelper))
     }
 
     override fun registerRecipes(registration: IRecipeRegistration) {
@@ -64,6 +67,7 @@ class JeiIntegration : IModPlugin {
             .withDefault { emptyList() }
         registration.addRecipes(recipeMap.getValue(RecipeTypes.PRESSING), PressingJeiRecipeCategory.UID)
         registration.addRecipes(recipeMap.getValue(RecipeTypes.BLASTING), BlastingJeiRecipeCategory.UID)
+        registration.addRecipes(recipeMap.getValue(RecipeTypes.SHREDDING), ShreddingJeiRecipeCategory.UID)
     }
 
     override fun registerRecipeCatalysts(registration: IRecipeCatalystRegistration) {
@@ -73,6 +77,7 @@ class JeiIntegration : IModPlugin {
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.blastFurnace.get()), BlastingJeiRecipeCategory.UID, VanillaRecipeCategoryUid.FUEL)
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.combustionGenerator.get()), VanillaRecipeCategoryUid.FUEL)
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.electricFurnace.get()), VanillaRecipeCategoryUid.FURNACE)
+        registration.addRecipeCatalyst(ItemStack(ModBlockItems.shredder.get()), ShreddingJeiRecipeCategory.UID)
     }
 
     override fun registerRecipeTransferHandlers(registration: IRecipeTransferRegistration) {
@@ -87,5 +92,6 @@ class JeiIntegration : IModPlugin {
         registration.addRecipeClickArea(SteamPressScreen::class.java, 103, 34, 24, 17, PressingJeiRecipeCategory.UID)
         registration.addRecipeClickArea(BlastFurnaceScreen::class.java, 101, 35, 24, 17, BlastingJeiRecipeCategory.UID)
         registration.addRecipeClickArea(ElectricFurnaceScreen::class.java, 79, 34, 24, 17, VanillaRecipeCategoryUid.FURNACE)
+        registration.addRecipeClickArea(ShredderScreen::class.java, 43, 89, 54, 14, ShreddingJeiRecipeCategory.UID)
     }
 }

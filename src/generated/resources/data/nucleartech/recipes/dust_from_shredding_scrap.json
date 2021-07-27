@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:scrap"
+  },
+  "result": {
+    "item": "nucleartech:dust",
+    "count": 1
+  },
+  "experience": 0.25
+}

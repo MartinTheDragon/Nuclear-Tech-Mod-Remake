@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:sandstone"
+  },
+  "result": {
+    "item": "minecraft:sand",
+    "count": 4
+  },
+  "experience": 0.0
+}

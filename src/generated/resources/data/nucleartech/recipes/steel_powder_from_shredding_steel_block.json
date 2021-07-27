@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/steel"
+  },
+  "result": {
+    "item": "nucleartech:steel_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

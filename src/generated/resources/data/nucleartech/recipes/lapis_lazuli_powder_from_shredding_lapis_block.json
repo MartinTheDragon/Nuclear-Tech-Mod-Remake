@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/lapis"
+  },
+  "result": {
+    "item": "nucleartech:lapis_lazuli_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

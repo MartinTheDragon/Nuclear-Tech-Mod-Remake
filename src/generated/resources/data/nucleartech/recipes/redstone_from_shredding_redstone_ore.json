@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/redstone"
+  },
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 6
+  },
+  "experience": 0.35
+}

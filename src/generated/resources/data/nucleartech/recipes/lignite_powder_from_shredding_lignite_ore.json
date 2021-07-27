@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/lignite"
+  },
+  "result": {
+    "item": "nucleartech:lignite_powder",
+    "count": 2
+  },
+  "experience": 0.05
+}

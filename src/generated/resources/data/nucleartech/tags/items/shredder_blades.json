@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:aluminium_shredder_blade",
+    "nucleartech:gold_shredder_blade",
+    "nucleartech:iron_shredder_blade",
+    "nucleartech:steel_shredder_blade",
+    "nucleartech:titanium_shredder_blade",
+    "nucleartech:advanced_alloy_shredder_blade",
+    "nucleartech:combine_steel_shredder_blade",
+    "nucleartech:schrabidium_shredder_blade",
+    "nucleartech:desh_shredder_blade"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/diamond"
+  },
+  "result": {
+    "item": "nucleartech:diamond_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

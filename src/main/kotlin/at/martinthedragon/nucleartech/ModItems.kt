@@ -149,7 +149,9 @@ object ModItems {
     val euphemiumPowder: RegistryObject<Item> = ITEMS.register("euphemium_powder") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts.itemGroup).rarity(Rarity.EPIC)) }
     val dineutroniumPowder: RegistryObject<Item> = ITEMS.register("dineutronium_powder") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
     val desaturatedRedstone: RegistryObject<Item> = ITEMS.register("desaturated_redstone") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
-    val dust: RegistryObject<Item> = ITEMS.register("dust") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
+    val dust: RegistryObject<Item> = ITEMS.register("dust") { object : AutoTooltippedItem(Properties().tab(CreativeTabs.Parts.itemGroup)) {
+        override fun getBurnTime(itemStack: ItemStack?) = 400
+    }}
     val tinyLithiumPowder: RegistryObject<Item> = ITEMS.register("tiny_lithium_powder") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
     val tinyNeodymiumPowder: RegistryObject<Item> = ITEMS.register("tiny_neodymium_powder") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
     val tinyCobaltPowder: RegistryObject<Item> = ITEMS.register("tiny_cobalt_powder") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
@@ -427,7 +429,9 @@ object ModItems {
     val jeraRune: RegistryObject<Item> = ITEMS.register("jera_rune") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup).stacksTo(1)) }
     val thurisazRune: RegistryObject<Item> = ITEMS.register("thurisaz_rune") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup).stacksTo(1)) }
     val burnedOutQuadSchrabidiumFuelRod: RegistryObject<Item> = ITEMS.register("burned_out_quad_schrabidium_rod") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts.itemGroup).stacksTo(1).rarity(Rarity.EPIC)) }
-    val scrap: RegistryObject<Item> = ITEMS.register("scrap") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
+    val scrap: RegistryObject<Item> = ITEMS.register("scrap") { object : Item(Properties().tab(CreativeTabs.Parts.itemGroup)) {
+        override fun getBurnTime(itemStack: ItemStack?) = 800
+    }}
     val hotDepletedUraniumFuel: RegistryObject<Item> = ITEMS.register("hot_depleted_uranium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Hot), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 15f) }
     val hotDepletedThoriumFuel: RegistryObject<Item> = ITEMS.register("hot_depleted_thorium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Hot), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 10f) }
     val hotDepletedPlutoniumFuel: RegistryObject<Item> = ITEMS.register("hot_depleted_plutonium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Hot), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 15f) }
@@ -470,6 +474,15 @@ object ModItems {
     val schrabidiumPlateStamp: RegistryObject<Item> = ITEMS.register("schrabidium_plate_stamp") { Item(Item.Properties().durability(3000).tab(CreativeTabs.Items.itemGroup)) }
     val schrabidiumWireStamp: RegistryObject<Item> = ITEMS.register("schrabidium_wire_stamp") { Item(Item.Properties().durability(3000).tab(CreativeTabs.Items.itemGroup)) }
     val schrabidiumCircuitStamp: RegistryObject<Item> = ITEMS.register("schrabidium_circuit_stamp") { Item(Item.Properties().durability(3000).tab(CreativeTabs.Items.itemGroup)) }
+    val aluminiumShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("aluminium_shredder_blade") { ShredderBlade(Item.Properties().durability(20).tab(CreativeTabs.Items.itemGroup)) }
+    val goldShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("gold_shredder_blade") { ShredderBlade(Item.Properties().durability(30).tab(CreativeTabs.Items.itemGroup)) }
+    val ironShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("iron_shredder_blade") { ShredderBlade(Item.Properties().durability(100).tab(CreativeTabs.Items.itemGroup)) }
+    val steelShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("steel_shredder_blade") { ShredderBlade(Item.Properties().durability(200).tab(CreativeTabs.Items.itemGroup)) }
+    val titaniumShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("titanium_shredder_blade") { ShredderBlade(Item.Properties().durability(350).tab(CreativeTabs.Items.itemGroup)) }
+    val advancedAlloyShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("advanced_alloy_shredder_blade") { ShredderBlade(Item.Properties().durability(700).tab(CreativeTabs.Items.itemGroup)) }
+    val combineSteelShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("combine_steel_shredder_blade") { ShredderBlade(Item.Properties().durability(1500).tab(CreativeTabs.Items.itemGroup)) }
+    val schrabidiumShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("schrabidium_shredder_blade") { ShredderBlade(Item.Properties().durability(2000).tab(CreativeTabs.Items.itemGroup)) }
+    val deshShredderBlade: RegistryObject<ShredderBlade> = ITEMS.register("desh_shredder_blade") { ShredderBlade(Item.Properties().stacksTo(1).tab(CreativeTabs.Items.itemGroup)) }
 
     // Templates
 

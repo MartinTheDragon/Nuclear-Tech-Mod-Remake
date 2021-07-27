@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:australium_block"
+  },
+  "result": {
+    "item": "nucleartech:australium_powder",
+    "count": 9
+  },
+  "experience": 0.0
+}

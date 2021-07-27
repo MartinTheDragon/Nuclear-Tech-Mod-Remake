@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:gems/cerium"
+  },
+  "result": {
+    "item": "nucleartech:tiny_cerium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

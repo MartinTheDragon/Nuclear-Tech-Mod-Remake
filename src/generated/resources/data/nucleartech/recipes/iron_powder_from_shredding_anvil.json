@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "minecraft:anvil"
+  },
+  "result": {
+    "item": "nucleartech:iron_powder",
+    "count": 31
+  },
+  "experience": 0.0
+}

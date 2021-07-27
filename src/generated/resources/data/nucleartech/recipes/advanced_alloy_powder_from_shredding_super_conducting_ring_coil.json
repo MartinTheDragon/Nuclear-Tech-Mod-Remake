@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:super_conducting_ring_coil"
+  },
+  "result": {
+    "item": "nucleartech:advanced_alloy_powder",
+    "count": 2
+  },
+  "experience": 0.1
+}
