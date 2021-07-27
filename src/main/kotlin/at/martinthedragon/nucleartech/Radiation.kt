@@ -8,17 +8,17 @@ import net.minecraft.entity.merchant.villager.VillagerEntity
 import net.minecraft.entity.monster.CreeperEntity
 import net.minecraft.entity.monster.SkeletonEntity
 import net.minecraft.entity.monster.ZombieEntity
-import net.minecraft.entity.monster.ZombieVillagerEntity
 import net.minecraft.entity.passive.CowEntity
 import net.minecraft.entity.passive.MooshroomEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.potion.EffectInstance
 import net.minecraft.potion.Effects
 import net.minecraft.world.World
+import net.minecraft.world.server.ChunkManager
 import net.minecraft.world.server.ServerWorld
 
 object Radiation {
-    var irradiatedEntityList = listOf<LivingEntity>()
+    var irradiatedEntityList = listOf<LivingEntity>() // TODO still a bit spaghetti, consider doing it differently
 
     fun addEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
@@ -49,46 +49,26 @@ object Radiation {
             // 3000 IQ strategy to get irradiated entities without causing ConcurrentModificationException follows (now with access transformation):
             if (world.gameTime % 20 == 0L) { // polling rate
                 irradiatedEntityList = (world as ServerWorld).chunkSource.chunkMap.entityMap.values
-                    .map { it.entity }
+                    .map(ChunkManager.EntityTracker::entity)
                     .filterIsInstance<LivingEntity>()
                     .filter { getEntityIrradiation(it) > 0 }
             }
-            loop@ for (entity in irradiatedEntityList) {
+            for (entity in irradiatedEntityList) {
                 val irradiation = getEntityIrradiation(entity)
                 when {
-                    entity is CreeperEntity && irradiation >= 200 && !entity.isDeadOrDying -> {
-                        if (world.random.nextInt(3) == 0) {
-                            // TODO spawn nuclear creeper
-                        } else
-                            entity.hurt(DamageSources.radiation, 100f)
-                        continue@loop
-                    }
-                    entity is CowEntity && entity !is MooshroomEntity && irradiation >= 50 -> {
-                        val creep = MooshroomEntity(EntityType.MOOSHROOM, world)
-                        creep.isBaby = entity.isBaby
-                        creep.moveTo(entity.blockPosition(), entity.xRot, entity.yRot)
-                        if (!entity.isDeadOrDying && !world.isClientSide)
-                            world.addFreshEntity(creep)
-                        entity.remove()
-                        continue@loop
-                    }
-                    entity is VillagerEntity && irradiation >= 500 -> {
-                        val creep = ZombieVillagerEntity(EntityType.ZOMBIE_VILLAGER, world)
-                        creep.isBaby = entity.isBaby
-                        creep.moveTo(entity.blockPosition(), entity.xRot, entity.yRot)
-                        if (!entity.isDeadOrDying && !world.isClientSide)
-                            world.addFreshEntity(creep)
-                        entity.remove()
-                        continue@loop
-                    }
+                    entity is CreeperEntity && irradiation >= 200 && !entity.isDeadOrDying -> if (world.random.nextInt(3) == 0) {
+                        // TODO spawn nuclear creeper
+                    } else entity.hurt(DamageSources.radiation, 100f)
+                    entity is CowEntity && entity !is MooshroomEntity && irradiation >= 50 -> entity.convertTo(EntityType.MOOSHROOM, true)
+                    entity is VillagerEntity && irradiation >= 500 -> entity.convertTo(EntityType.ZOMBIE, true)
                 }
+
+                if (irradiation > 2500)
+                    setEntityIrradiation(entity, 2500f)
 
                 // TODO add nuclear creeper to exclusions
                 if (irradiation < 200 || entity is MooshroomEntity || entity is ZombieEntity || entity is SkeletonEntity)
                     continue
-
-                if (irradiation > 2500)
-                    setEntityIrradiation(entity, 2500f)
 
                 if ((entity is PlayerEntity && (entity.isCreative || entity.isSpectator)) || entity.isInvulnerable || entity.isInvulnerableTo(DamageSources.radiation))
                     continue
