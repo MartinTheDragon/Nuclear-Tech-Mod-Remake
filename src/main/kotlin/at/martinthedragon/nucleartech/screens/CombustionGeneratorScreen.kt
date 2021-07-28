@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.containers.CombustionGeneratorContainer
+import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.rendering.renderGuiFluid
 import at.martinthedragon.nucleartech.tileentities.CombustionGeneratorTileEntity
 import com.mojang.blaze3d.matrix.MatrixStack
@@ -63,7 +64,7 @@ class CombustionGeneratorScreen(
             renderWrappedToolTip(matrixStack,
                 listOf(
                     TranslationTextComponent("energy.nucleartech"),
-                    StringTextComponent("${menu.getEnergy() / 4F}/${CombustionGeneratorTileEntity.MAX_ENERGY / 4F} HE") // TODO make this somehow switch between HE and FE
+                    StringTextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(CombustionGeneratorTileEntity.MAX_ENERGY)} HE") // TODO make this somehow switch between HE and FE
                 ), mouseX, mouseY, font
             )
     }

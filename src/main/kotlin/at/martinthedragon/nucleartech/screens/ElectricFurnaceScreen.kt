@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.containers.ElectricFurnaceContainer
+import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.tileentities.ElectricFurnaceTileEntity
 import com.mojang.blaze3d.matrix.MatrixStack
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
@@ -51,7 +52,7 @@ class ElectricFurnaceScreen(
             renderWrappedToolTip(matrix,
                 listOf(
                     TranslationTextComponent("energy.nucleartech"),
-                    StringTextComponent("${menu.getEnergy() / 4F}/${ElectricFurnaceTileEntity.MAX_ENERGY / 4F} HE")
+                    StringTextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(ElectricFurnaceTileEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )
     }

@@ -450,6 +450,40 @@ object ModItems {
 
     // Items and Fuel
 
+    val battery: RegistryObject<BatteryItem> = ITEMS.register("battery") { BatteryItem(20_000, 400, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val redstonePowerCell: RegistryObject<BatteryItem> = ITEMS.register("redstone_power_cell") { BatteryItem(60_000, 400, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sixfoldRedstonePowerCell: RegistryObject<BatteryItem> = ITEMS.register("sixfold_redstone_power_cell") { BatteryItem(360_000, 400, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val twentyFourFoldRedstonePowerCell: RegistryObject<BatteryItem> = ITEMS.register("twenty_four_fold_redstone_power_cell") { BatteryItem(1_440_000, 400, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val advancedBattery: RegistryObject<BatteryItem> = ITEMS.register("advanced_battery") { BatteryItem(80_000, 2_000, 2_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val advancedPowerCell: RegistryObject<BatteryItem> = ITEMS.register("advanced_power_cell") { BatteryItem(240_000, 2_000, 2_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val quadrupleAdvancedPowerCell: RegistryObject<BatteryItem> = ITEMS.register("quadruple_advanced_power_cell") { BatteryItem(960_000, 2_000, 2_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val twelveFoldAdvancedPowerCell: RegistryObject<BatteryItem> = ITEMS.register("twelvefold_advanced_power_cell") { BatteryItem(2_880_000, 2_000, 2_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val lithiumBattery: RegistryObject<BatteryItem> = ITEMS.register("lithium_battery") { BatteryItem(1_000_000, 4_000, 4_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val lithiumPowerCell: RegistryObject<BatteryItem> = ITEMS.register("lithium_power_cell") { BatteryItem(3_000_000, 4_000, 4_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val tripleLithiumPowerCell: RegistryObject<BatteryItem> = ITEMS.register("triple_lithium_power_cell") { BatteryItem(9_000_000, 4_000, 4_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sixfoldLithiumPowerCell: RegistryObject<BatteryItem> = ITEMS.register("sixfold_lithium_power_cell") { BatteryItem(18_000_000, 4_000, 4_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val schrabidiumBattery: RegistryObject<BatteryItem> = ITEMS.register("schrabidium_battery") { BatteryItem(4_000_000, 20_000, 20_000, Item.Properties().rarity(Rarity.RARE).tab(CreativeTabs.Items.itemGroup)) }
+    val schrabidiumPowerCell: RegistryObject<BatteryItem> = ITEMS.register("schrabidium_power_cell") { BatteryItem(12_000_000, 20_000, 20_000, Item.Properties().rarity(Rarity.RARE).tab(CreativeTabs.Items.itemGroup)) }
+    val doubleSchrabidiumPowerCell: RegistryObject<BatteryItem> = ITEMS.register("double_schrabidium_power_cell") { BatteryItem(24_000_000, 20_000, 20_000, Item.Properties().rarity(Rarity.RARE).tab(CreativeTabs.Items.itemGroup)) }
+    val quadrupleSchrabidiumPowerCell: RegistryObject<BatteryItem> = ITEMS.register("quadruple_schrabidium_power_cell") { BatteryItem(48_000_000, 20_000, 20_000, Item.Properties().rarity(Rarity.RARE).tab(CreativeTabs.Items.itemGroup)) }
+    val sparkBattery: RegistryObject<BatteryItem> = ITEMS.register("spark_battery") { BatteryItem(400_000_000, 8_000_000, 8_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val offBrandSparkBattery: RegistryObject<BatteryItem> = ITEMS.register("off_brand_spark_battery") { BatteryItem(20_000_000, 160_000, 800_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkPowerCell: RegistryObject<BatteryItem> = ITEMS.register("spark_power_cell") { BatteryItem(2_400_000_000L, 8_000_000, 8_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkArcaneCarBattery: RegistryObject<BatteryItem> = ITEMS.register("spark_arcane_car_battery") { BatteryItem(10_000_000_000L, 8_000_000, 8_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkArcaneEnergyStorageArray: RegistryObject<BatteryItem> = ITEMS.register("spark_arcane_energy_storage_array") { BatteryItem(40_000_000_000L, 8_000_000, 8_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkArcaneMassEnergyVoid: RegistryObject<BatteryItem> = ITEMS.register("spark_arcane_mass_energy_void") { BatteryItem(400_000_000_000L, 80_000_000, 80_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkArcaneDiracSea: RegistryObject<BatteryItem> = ITEMS.register("spark_arcane_dirac_sea") { BatteryItem(1_000_000_000_000L, 80_000_000, 80_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkSolidSpaceTimeCrystal: RegistryObject<BatteryItem> = ITEMS.register("spark_solid_space_time_crystal") { BatteryItem(4_000_000_000_000L, 800_000_000, 800_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val sparkLudicrousPhysicsDefyingEnergyStorageUnit: RegistryObject<BatteryItem> = ITEMS.register("spark_ludicrous_physics_defying_energy_storage_unit") { BatteryItem(400_000_000_000_000L, 800_000_000, 800_000_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    // TODO electronium cube
+    val infiniteBattery: RegistryObject<BatteryItem> = ITEMS.register("infinite_battery") { BatteryOfInfinity(Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val singleUseBattery: RegistryObject<BatteryItem> = ITEMS.register("single_use_battery") { BatteryItem(6_000, 0, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val largeSingleUseBattery: RegistryObject<BatteryItem> = ITEMS.register("large_single_use_battery") { BatteryItem(14_000, 0, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val potatoBattery: RegistryObject<BatteryItem> = ITEMS.register("potato_battery") { BatteryItem(400, 0, 400, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    // TODO PotatOS
+    val steamPoweredEnergyStorageTank: RegistryObject<BatteryItem> = ITEMS.register("steam_powered_energy_storage_tank") { BatteryItem(240_000, 1_200, 24_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+    val largeSteamPoweredEnergyStorageTank: RegistryObject<BatteryItem> = ITEMS.register("large_steam_powered_energy_storage_tank") { BatteryItem(400_000, 2_000, 40_000, Item.Properties().tab(CreativeTabs.Items.itemGroup)) }
+
     val stoneFlatStamp: RegistryObject<Item> = ITEMS.register("stone_flat_stamp") { Item(Item.Properties().durability(10).tab(CreativeTabs.Items.itemGroup)) }
     val stonePlateStamp: RegistryObject<Item> = ITEMS.register("stone_plate_stamp") { Item(Item.Properties().durability(10).tab(CreativeTabs.Items.itemGroup)) }
     val stoneWireStamp: RegistryObject<Item> = ITEMS.register("stone_wire_stamp") { Item(Item.Properties().durability(10).tab(CreativeTabs.Items.itemGroup)) }
