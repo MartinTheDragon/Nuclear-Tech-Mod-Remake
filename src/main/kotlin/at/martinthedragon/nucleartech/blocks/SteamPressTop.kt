@@ -47,7 +47,7 @@ class SteamPressTop(properties: Properties) : Block(properties) {
         pos: BlockPos,
         newState: BlockState,
         p_196243_5_: Boolean
-    ) { // code for dropping items and xp is in SteamPressBase
+    ) { // code for dropping random and xp is in SteamPressBase
         if (!world.isClientSide && !state.`is`(newState.block))
             removeSteamPressStructure(world, pos)
 

@@ -824,7 +824,7 @@
   "subtitle.nucleartech.siren.playing_apc_pass": "Sirene läuft - APC Pass",
   "subtitle.nucleartech.siren.playing_razortrain_horn": "Sirene läuft - Razortrain Horn",
   "subtitle.nucleartech.press.operate": "Presse stampft",
-  "subtitle.nucleartech.item.generic.bleep": "Gerät piepst",
+  "subtitle.nucleartech.random.bleep": "Gerät piepst",
 
   "death.attack.nucleartech.radiation": "%1$s starb an Strahlenvergiftung",
 

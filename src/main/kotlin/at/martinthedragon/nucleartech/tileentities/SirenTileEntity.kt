@@ -48,7 +48,7 @@ class SirenTileEntity : LockableLootTileEntity(TileEntityTypes.sirenTileEntityTy
 
             if (item is SirenTrack) {
                 val sound = SimpleSound(
-                        item.sound.location,
+                        item.soundSupplier.get().location,
                         SoundCategory.BLOCKS,
                         item.volume,
                         1f,

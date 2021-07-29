@@ -11,8 +11,9 @@ import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.Style
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraft.world.World
+import java.util.function.Supplier
 
-class SirenTrack(val sound: SoundEvent, val volume: Float, val loop: Boolean, track: String, val color: Int) :
+class SirenTrack(val soundSupplier: Supplier<SoundEvent>, val volume: Float, val loop: Boolean, track: String, val color: Int) :
         Item(Properties().stacksTo(1).rarity(Rarity.UNCOMMON).tab(CreativeTabs.Templates.itemGroup)) {
     val trackName: ITextComponent = TranslationTextComponent("item.nucleartech.$track.name")
         .withStyle(Style.EMPTY.withColor(Color.fromRgb(color)))

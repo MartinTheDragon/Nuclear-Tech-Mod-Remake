@@ -1,105 +1,86 @@
 {
   "siren.hatch": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_hatch",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/hatch",
-        "stream": false,
         "attenuation_distance": 250
       }
     ]
   },
   "siren.autopilot_disconnected": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_autopilot_disconnected",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/autopilot_disconnected",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.ams": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_ams",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/ams",
-        "stream": false,
         "attenuation_distance": 100
       }
     ]
   },
   "siren.blast_door": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_blast_door",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/blast_door",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.apc": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_apc",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/apc",
-        "stream": false,
         "attenuation_distance": 100
       }
     ]
   },
   "siren.klaxon": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_klaxon",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/klaxon",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.vault_door": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_vault_door",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/vault_door",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.security": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_security",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/security",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.standard": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_standard",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/standard",
-        "stream": false,
         "attenuation_distance": 250
       }
     ]
   },
   "siren.classic": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_classic",
     "sounds": [
       {
@@ -110,62 +91,51 @@
     ]
   },
   "siren.bank": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_bank",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/bank",
-        "stream": false,
         "attenuation_distance": 100
       }
     ]
   },
   "siren.beep": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_beep",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/beep",
-        "stream": false,
         "attenuation_distance": 100
       }
     ]
   },
   "siren.container": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_container",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/container",
-        "stream": false,
         "attenuation_distance": 100
       }
     ]
   },
   "siren.sweep": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_sweep",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/sweep",
-        "stream": false,
         "attenuation_distance": 500
       }
     ]
   },
   "siren.missile_silo": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_missile_silo",
     "sounds": [
       {
-        "name": "nucleartech:blocks/siren/hatch",
-        "stream": false,
+        "name": "nucleartech:blocks/siren/missile_silo",
         "attenuation_distance": 500
       }
     ]
   },
   "siren.air_raid": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_air_raid",
     "sounds": [
       {
@@ -176,67 +146,51 @@
     ]
   },
   "siren.nostromo_self_destruct": {
-    "category": "block",
-    "subtitle": "subtitle.nucleartech.siren.nostromo_self_destruct",
+    "subtitle": "subtitle.nucleartech.siren.playing_nostromo_self_destruct",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/nostromo_self_destruct",
-        "stream": false,
         "attenuation_distance": 100
       }
     ]
   },
   "siren.eas": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_eas",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/eas",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.apc_pass": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_apc_pass",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/apc_pass",
-        "stream": false,
         "attenuation_distance": 50
       }
     ]
   },
   "siren.razortrain_horn": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.siren.playing_razortrain_horn",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/razortrain_horn",
-        "stream": false,
         "attenuation_distance": 250
       }
     ]
   },
   "press.operate": {
-    "category": "block",
     "subtitle": "subtitle.nucleartech.press.operate",
     "sounds": [
-      {
-        "name": "nucleartech:blocks/press/press_operate",
-        "stream": false
-      }
+      "nucleartech:blocks/press/press_operate"
     ]
   },
-  "item.generic.bleep": {
-    "category": "neutral",
-    "subtitle": "subtitle.nucleartech.item.generic.bleep",
+  "random.bleep": {
+    "subtitle": "subtitle.nucleartech.random.bleep",
     "sounds": [
-      {
-        "name": "nucleartech:items/bleep",
-        "stream": false
-      }
+      "nucleartech:random/bleep"
     ]
   }
 }

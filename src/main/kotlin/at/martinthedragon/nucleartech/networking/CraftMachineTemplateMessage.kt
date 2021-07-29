@@ -30,7 +30,7 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     return@enqueueWork // h4xx0r detected
                 }
                 
-                // check whether the player is creative or has the items necessary
+                // check whether the player is creative or has the random necessary
                 if (!sender.isCreative) {
                     fun removeIfPossible(player: ServerPlayerEntity, vararg items: Item?): Boolean {
                         if (items.any { it == null }) return false

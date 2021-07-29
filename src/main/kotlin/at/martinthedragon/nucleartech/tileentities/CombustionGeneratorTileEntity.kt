@@ -175,7 +175,7 @@ class CombustionGeneratorTileEntity : LockableTileEntity(TileEntityTypes.combust
                             .drain(FluidStack(Fluids.WATER, Int.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE)
                             .isEmpty
                     }
-            ) { // on success, transfer items if possible
+            ) { // on success, transfer random if possible
                 when {
                     outputSlot.isEmpty -> {
                         waterInput.shrink(1)

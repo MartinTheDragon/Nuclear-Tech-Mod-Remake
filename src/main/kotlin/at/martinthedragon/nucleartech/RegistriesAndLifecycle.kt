@@ -13,6 +13,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.crafting.IRecipeSerializer
 import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
+import net.minecraft.util.SoundEvent
 import net.minecraft.world.gen.feature.Feature
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -35,6 +36,7 @@ object RegistriesAndLifecycle {
     val CONTAINERS: DeferredRegister<ContainerType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, NuclearTech.MODID)
     val RECIPE_SERIALIZERS: DeferredRegister<IRecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, NuclearTech.MODID)
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
+    val SOUNDS: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NuclearTech.MODID)
 
     init {
         BLOCKS.register(FMLJavaModLoadingContext.get().modEventBus)
@@ -50,6 +52,8 @@ object RegistriesAndLifecycle {
         RecipeSerializers
         FEATURES.register(FMLJavaModLoadingContext.get().modEventBus)
         WorldGeneration.Features
+        SOUNDS.register(FMLJavaModLoadingContext.get().modEventBus)
+        SoundEvents
     }
 
     // using kotlin's strong type system
@@ -80,6 +84,7 @@ object RegistriesAndLifecycle {
         if (event.includeClient()) {
             dataGenerator.addProvider(NuclearBlockStateProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
+            dataGenerator.addProvider(NuclearSoundsProvider(dataGenerator, existingFileHelper))
         }
     }
 

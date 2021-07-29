@@ -169,12 +169,12 @@ class ShredderTileEntity : LockableTileEntity(TileEntityTypes.shredderTileEntity
                         .getRecipeFor(RecipeTypes.SHREDDING, Inventory(items[it].copy()), level!!)
                         .orElse(null)
                 }.filterNot { (_, recipe) -> recipe == null }
-            val scrapStacks = (0..8).filter { !items[it].isEmpty && !recipes.contains(it) } // find no recipe items
+            val scrapStacks = (0..8).filter { !items[it].isEmpty && !recipes.contains(it) } // find no recipe random
             val scrapItem = ItemStack(ModItems.scrap.get())
             if (shreddingProgress >= SHREDDING_TIME) {
 
                 // do all found recipes
-                for ((slotIndex, recipe) in recipes) { // FIXME split items to fill the stack: 63 + 2 -> 64 + 1
+                for ((slotIndex, recipe) in recipes) { // FIXME split random to fill the stack: 63 + 2 -> 64 + 1
                     val availableSlotIndex = (12..29).firstOrNull { canTransferItem(recipe.resultItem, items[it], this) } ?: continue
                     val resultSlot = items[availableSlotIndex]
                     if (resultSlot.isEmpty) items[availableSlotIndex] = recipe.resultItem.copy()

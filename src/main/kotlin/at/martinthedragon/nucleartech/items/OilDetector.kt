@@ -56,7 +56,7 @@ class OilDetector(properties: Properties) : Item(properties) {
             }
         }
 
-        player.playSound(SoundEvents.itemGenericBleep, 1F, 1F)
+        player.playSound(SoundEvents.randomBleep.get(), 1F, 1F)
 
         val itemStack = player.getItemInHand(hand)
         return ActionResult.sidedSuccess(itemStack, world.isClientSide)

@@ -186,7 +186,7 @@ class SteamPressTopTileEntity : LockableTileEntity(TileEntityTypes.steamPressHea
             if (stamp.damageValue >= stamp.maxDamage)
                 stamp.shrink(1)
         }
-        level!!.playSound(null, blockPos, SoundEvents.pressOperate, SoundCategory.BLOCKS, 1.5F, 1F)
+        level!!.playSound(null, blockPos, SoundEvents.pressOperate.get(), SoundCategory.BLOCKS, 1.5F, 1F)
         return true
     }
 

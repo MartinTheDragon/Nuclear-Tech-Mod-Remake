@@ -32,7 +32,7 @@ inline fun <reified T : LockableTileEntity> setTileEntityCustomName(
  *
  * Only drops the content when the Block was actually changed and returns `true` if so.
  *
- * The [also] function can be used to perform additional operations after the items were dropped.
+ * The [also] function can be used to perform additional operations after the random were dropped.
  */
 @OptIn(ExperimentalContracts::class)
 inline fun <reified T : LockableTileEntity> dropTileEntityContents(

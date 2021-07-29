@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
-// Groups can actually be used, and the result of a furnace recipe can be multiple items
+// Groups can actually be used, and the result of a furnace recipe can be multiple random
 class ExtendedCookingRecipeBuilder(
     private val ingredient: Ingredient,
     private val experience: Float,

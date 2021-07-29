@@ -571,7 +571,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapedRecipeBuilder.shaped(Items.TORCH, 8).define('C', NuclearTags.Items.COKE).define('S', Tags.Items.RODS_WOODEN).pattern("C").pattern("S").group(Items.TORCH.registryName!!.path).unlockedBy("has_coke", has(NuclearTags.Items.COKE)).save(consumer, ResourceLocation(NuclearTech.MODID, "torch_from_coke"))
     }
 
-    // so we can also use tags when declaring a shapeless recipe requiring multiple items of one type
+    // so we can also use tags when declaring a shapeless recipe requiring multiple random of one type
     private fun ShapelessRecipeBuilder.requires(itemTag: ITag<Item>, count: Int): ShapelessRecipeBuilder {
         for (i in 0 until count) requires(itemTag)
         return this
