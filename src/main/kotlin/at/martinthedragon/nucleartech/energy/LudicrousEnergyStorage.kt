@@ -11,23 +11,23 @@ open class LudicrousEnergyStorage(
 ) : IEnergyStorage {
     override fun receiveEnergy(maxReceive: Int, simulate: Boolean): Int {
         if (!canReceive()) return 0
-        val energyReceived = min(capacity - energy, min(this.maxReceive, maxReceive).toLong()).toInt()
+        val energyReceived = min(getActualMaxEnergyStored() - getActualEnergyStored(), min(this.maxReceive, maxReceive).toLong()).toInt()
         if (!simulate) energy += energyReceived
         return energyReceived
     }
 
     override fun extractEnergy(maxExtract: Int, simulate: Boolean): Int {
         if (!canExtract()) return 0
-        val energyExtracted = min(energy, min(this.maxExtract, maxExtract).toLong()).toInt()
+        val energyExtracted = min(energyStored, min(this.maxExtract, maxExtract))
         if (!simulate) energy -= energyExtracted
         return energyExtracted
     }
 
-    override fun getEnergyStored() = energy.toInt()
+    override fun getEnergyStored() = if (energy > Int.MAX_VALUE) Int.MAX_VALUE else energy.toInt()
 
     fun getActualEnergyStored(): Long = energy
 
-    override fun getMaxEnergyStored(): Int = capacity.toInt()
+    override fun getMaxEnergyStored(): Int = if (capacity > Int.MAX_VALUE) Int.MAX_VALUE else capacity.toInt()
 
     fun getActualMaxEnergyStored(): Long = capacity
 

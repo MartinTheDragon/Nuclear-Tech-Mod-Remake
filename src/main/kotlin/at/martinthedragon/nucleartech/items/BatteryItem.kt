@@ -51,11 +51,19 @@ open class BatteryItem(
         tooltip.add(TranslationTextComponent("item.${NuclearTech.MODID}.batteries.discharge_rate", EnergyFormatter.formatEnergy(dischargeRate)).withStyle(Style.EMPTY.applyFormat(TextFormatting.GRAY)))
     }
 
+    /*
+    FIXME client-side duplication glitch
+    For some reason, a duplication glitch occurs exceptionally often with this approach. Other mods' implementations also
+    have that problem, but here, almost every tenth shift-click creates a dead copy on the client, even in machines from
+    other mods. Behind this could be a tag modification even though the item does not exist anymore, and the client tries
+    to save it anyway.
+    */
     override fun initCapabilities(stack: ItemStack, nbt: CompoundNBT?): ICapabilityProvider = object : ICapabilityProvider {
         @Suppress("UsePropertyAccessSyntax")
         private val energyCapability = LazyOptional.of { // doing it this way has the added benefit of the damage tag actually working ('cause it's delayed)
             object : LudicrousEnergyStorage(capacity, chargeRate, dischargeRate, stack.getOrCreateTag().getLong("Energy")) {
                 override fun receiveEnergy(maxReceive: Int, simulate: Boolean): Int {
+                    if (stack.isEmpty || stack.item !is BatteryItem) return 0
                     val energyTransferred = super.receiveEnergy(maxReceive, simulate)
                     if (!simulate) {
                         stack.damageValue = ((getActualMaxEnergyStored() - getActualEnergyStored()).toDouble() / energyPerDamage.toDouble()).toInt()
@@ -65,6 +73,7 @@ open class BatteryItem(
                 }
 
                 override fun extractEnergy(maxExtract: Int, simulate: Boolean): Int {
+                    if (stack.isEmpty || stack.item !is BatteryItem) return 0
                     val energyTransferred = super.extractEnergy(maxExtract, simulate)
                     if (!simulate) {
                         stack.damageValue = ((getActualMaxEnergyStored() - getActualEnergyStored()).toDouble() / energyPerDamage.toDouble()).toInt()
