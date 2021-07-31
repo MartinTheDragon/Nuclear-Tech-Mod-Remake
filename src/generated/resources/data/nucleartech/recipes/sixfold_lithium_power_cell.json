@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:battery",
+  "pattern": [
+    "WPW",
+    "BWB",
+    "WPW"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/gold"
+    },
+    "P": {
+      "tag": "forge:plates/titanium"
+    },
+    "B": {
+      "item": "nucleartech:triple_lithium_power_cell"
+    }
+  },
+  "result": {
+    "item": "nucleartech:sixfold_lithium_power_cell"
+  }
+}

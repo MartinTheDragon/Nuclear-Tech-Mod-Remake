@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:battery",
+  "pattern": [
+    "WBW",
+    "PBP",
+    "WBW"
+  ],
+  "key": {
+    "W": {
+      "item": "nucleartech:red_copper_wire"
+    },
+    "P": {
+      "tag": "forge:plates/copper"
+    },
+    "B": {
+      "item": "nucleartech:advanced_battery"
+    }
+  },
+  "result": {
+    "item": "nucleartech:advanced_power_cell"
+  }
+}

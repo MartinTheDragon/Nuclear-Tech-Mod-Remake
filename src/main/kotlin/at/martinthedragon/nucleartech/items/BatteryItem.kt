@@ -28,7 +28,10 @@ open class BatteryItem(
     val dischargeRate: Int,
     properties: Properties
 ) : Item(properties.setNoRepair().stacksTo(1).durability(1000)) {
-    private val energyPerDamage = capacity / 1000
+    val energyPerDamage = capacity / 1000
+
+    override fun getDamage(stack: ItemStack?) = // to fix durability bar in tag-less stacks // TODO maybe consider calculating the damage here to avoid de-syncs
+        if (!stack!!.hasTag()) getMaxDamage(stack) else stack.tag!!.getInt("Damage")
 
     override fun canBeDepleted() = false
 

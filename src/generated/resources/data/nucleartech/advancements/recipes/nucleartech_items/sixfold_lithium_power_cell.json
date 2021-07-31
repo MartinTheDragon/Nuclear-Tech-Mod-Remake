@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:sixfold_lithium_power_cell"
+    ]
+  },
+  "criteria": {
+    "has_battery": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:triple_lithium_power_cell"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:sixfold_lithium_power_cell"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_battery",
+      "has_the_recipe"
+    ]
+  ]
+}

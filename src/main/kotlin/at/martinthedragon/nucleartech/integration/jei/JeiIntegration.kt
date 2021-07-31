@@ -7,11 +7,9 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.containers.BlastFurnaceContainer
 import at.martinthedragon.nucleartech.containers.ElectricFurnaceContainer
 import at.martinthedragon.nucleartech.containers.PressContainer
-import at.martinthedragon.nucleartech.integration.jei.categories.BlastingJeiRecipeCategory
-import at.martinthedragon.nucleartech.integration.jei.categories.PressingJeiRecipeCategory
-import at.martinthedragon.nucleartech.integration.jei.categories.ShreddingJeiRecipeCategory
-import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJeiRecipeCategory
+import at.martinthedragon.nucleartech.integration.jei.categories.*
 import at.martinthedragon.nucleartech.integration.jei.transfers.PressingRecipeTransferInfo
+import at.martinthedragon.nucleartech.recipes.BatteryRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.screens.BlastFurnaceScreen
 import at.martinthedragon.nucleartech.screens.ElectricFurnaceScreen
@@ -41,6 +39,11 @@ class JeiIntegration : IModPlugin {
         registration.addRecipeCategories(PressingJeiRecipeCategory(registration.jeiHelpers.guiHelper))
         registration.addRecipeCategories(BlastingJeiRecipeCategory(registration.jeiHelpers.guiHelper))
         registration.addRecipeCategories(ShreddingJeiRecipeCategory(registration.jeiHelpers.guiHelper))
+    }
+
+    override fun registerVanillaCategoryExtensions(registration: IVanillaCategoryExtensionRegistration) {
+        val craftingCategory = registration.craftingCategory
+        craftingCategory.addCategoryExtension(BatteryRecipe::class.java, ::BatteryCraftingJeiRecipeCategory)
     }
 
     override fun registerRecipes(registration: IRecipeRegistration) {
