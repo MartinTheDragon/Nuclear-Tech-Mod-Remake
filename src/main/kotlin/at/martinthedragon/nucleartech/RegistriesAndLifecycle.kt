@@ -3,11 +3,12 @@ package at.martinthedragon.nucleartech
 import at.martinthedragon.nucleartech.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.datagen.*
+import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
-import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
 import at.martinthedragon.nucleartech.worldgen.WorldGeneration
 import net.minecraft.block.Block
+import net.minecraft.entity.EntityType
 import net.minecraft.inventory.container.ContainerType
 import net.minecraft.item.Item
 import net.minecraft.item.crafting.IRecipeSerializer
@@ -15,7 +16,6 @@ import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.SoundEvent
 import net.minecraft.world.gen.feature.Feature
-import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
@@ -33,6 +33,7 @@ object RegistriesAndLifecycle {
     val BLOCKS: DeferredRegister<Block> = DeferredRegister.create(ForgeRegistries.BLOCKS, NuclearTech.MODID)
     val ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, NuclearTech.MODID)
     val TILE_ENTITIES: DeferredRegister<TileEntityType<*>> = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, NuclearTech.MODID)
+    val ENTITIES: DeferredRegister<EntityType<*>> = DeferredRegister.create(ForgeRegistries.ENTITIES, NuclearTech.MODID)
     val CONTAINERS: DeferredRegister<ContainerType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, NuclearTech.MODID)
     val RECIPE_SERIALIZERS: DeferredRegister<IRecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, NuclearTech.MODID)
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
@@ -46,6 +47,8 @@ object RegistriesAndLifecycle {
         ModItems
         TILE_ENTITIES.register(FMLJavaModLoadingContext.get().modEventBus)
         TileEntityTypes
+        ENTITIES.register(FMLJavaModLoadingContext.get().modEventBus)
+        EntityTypes
         CONTAINERS.register(FMLJavaModLoadingContext.get().modEventBus)
         ContainerTypes
         RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().modEventBus)
@@ -86,11 +89,5 @@ object RegistriesAndLifecycle {
             dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearSoundsProvider(dataGenerator, existingFileHelper))
         }
-    }
-
-    // this is currently needed as no forge registry exists for recipe types
-    @SubscribeEvent @JvmStatic @Suppress("UNUSED_PARAMETER")
-    fun registerRecipeTypes(event: RegistryEvent.Register<IRecipeSerializer<*>>) {
-        RecipeTypes.registerTypes()
     }
 }
