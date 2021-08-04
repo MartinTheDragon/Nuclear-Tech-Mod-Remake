@@ -547,4 +547,8 @@ object ModItems {
     // Consumables
 
     val oilDetector: RegistryObject<OilDetector> = ITEMS.register("oil_detector") { OilDetector(Item.Properties().tab(CreativeTabs.Consumables.itemGroup).stacksTo(1)) }
+
+    // Hidden
+
+    val creativeNuclearExplosionSpawner: RegistryObject<CreativeNuclearExplosionSpawner> = ITEMS.register("creative_nuclear_explosion_spawner") { CreativeNuclearExplosionSpawner(Item.Properties().stacksTo(1)) }
 }

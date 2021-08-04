@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.containers.ContainerTypes
+import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.entities.renderers.NukeExplosionRenderer
 import at.martinthedragon.nucleartech.screens.*
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
 import at.martinthedragon.nucleartech.tileentities.renderers.SteamPressTopTileEntityRenderer
@@ -19,6 +21,7 @@ import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.client.registry.ClientRegistry
+import net.minecraftforge.fml.client.registry.RenderingRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.registries.ForgeRegistries
@@ -44,6 +47,9 @@ object ClientRegistries {
     fun clientSetup(event: FMLClientSetupEvent) {
         NuclearTech.LOGGER.debug("Binding TERs")
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.steamPressHeadTileEntityType.get(), ::SteamPressTopTileEntityRenderer)
+
+        NuclearTech.LOGGER.debug("Registering Entity Renderers")
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nukeExplosionEntity.get(), ::NukeExplosionRenderer)
 
         NuclearTech.LOGGER.debug("Creating search trees")
         val templateFolderSearchTree = SearchTree<ItemStack>({

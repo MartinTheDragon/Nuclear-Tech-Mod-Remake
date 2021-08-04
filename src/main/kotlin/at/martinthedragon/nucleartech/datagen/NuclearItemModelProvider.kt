@@ -516,6 +516,7 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.sirenTrackAPCPass.get())
         simpleItem(ModItems.sirenTrackRazortrainHorn.get())
         simpleItem(ModItems.oilDetector.get())
+        simpleItem(ModItems.creativeNuclearExplosionSpawner.get())
 
         // BlockItems
 

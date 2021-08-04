@@ -660,6 +660,8 @@
   "item.nucleartech.oil_detector.near": "Oil detected nearby",
   "item.nucleartech.oil_detector.no_oil": "No oil detected",
 
+  "item.nucleartech.creative_nuclear_explosion_spawner": "Nuclear Explosion Spawner",
+
   "block.nucleartech.uranium_ore": "Uranium Ore",
   "block.nucleartech.thorium_ore": "Thorium Ore",
   "block.nucleartech.titanium_ore": "Titanium Ore",
@@ -827,6 +829,7 @@
   "subtitle.nucleartech.random.bleep": "Device bleeps",
 
   "death.attack.nucleartech.radiation": "%1$s died from radiation poisoning",
+  "death.attack.nucleartech.nuclear_blast": "%1$s was blown away by a nuclear explosion",
 
   "jei.nucleartech.category.pressing": "Pressing",
   "jei.nucleartech.category.pressing.experience": "%s XP",
