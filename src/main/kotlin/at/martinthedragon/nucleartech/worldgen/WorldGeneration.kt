@@ -3,14 +3,17 @@ package at.martinthedragon.nucleartech.worldgen
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
+import at.martinthedragon.nucleartech.worldgen.features.BigGlowingMushroomFeature
 import at.martinthedragon.nucleartech.worldgen.features.OilBubbleFeature
 import net.minecraft.block.Blocks
+import net.minecraft.block.HugeMushroomBlock
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.registry.WorldGenRegistries
 import net.minecraft.world.biome.Biome
 import net.minecraft.world.biome.BiomeGenerationSettings
 import net.minecraft.world.biome.Biomes
 import net.minecraft.world.gen.GenerationStage
+import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider
 import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.feature.template.BlockMatchRuleTest
 import net.minecraft.world.gen.placement.Placement
@@ -27,6 +30,7 @@ import net.minecraft.world.gen.feature.Features as VanillaFeatures
 object WorldGeneration {
     object Features {
         val OIL_BUBBLE: RegistryObject<OilBubbleFeature> = FEATURES.register("oil_bubble") { OilBubbleFeature(NoFeatureConfig.CODEC) }
+        val BIG_GLOWING_MUSHROOM: RegistryObject<BigGlowingMushroomFeature> = FEATURES.register("huge_glowing_mushroom") { BigGlowingMushroomFeature(BigMushroomFeatureConfig.CODEC) }
     }
 
     object ConfiguredFeatures {
@@ -57,6 +61,8 @@ object WorldGeneration {
         val ORE_TRIXITE_END = register("ore_trixite_end", Feature.ORE.configured(OreFeatureConfig(FillerBlockTypes.END_STONE, ModBlocks.trixite.get().defaultBlockState(), 6)).decorated(VanillaFeatures.Placements.RANGE_10_20_ROOFED).squared().count(8))
 
         val OIL_BUBBLE = register("oil_bubble", Features.OIL_BUBBLE.get().configured(IFeatureConfig.NONE).range(25).squared().chance(25))
+
+        val BIG_GLOWING_MUSHROOM = register("huge_glowing_mushroom", Features.BIG_GLOWING_MUSHROOM.get().configured(BigMushroomFeatureConfig(SimpleBlockStateProvider(ModBlocks.glowingMushroomBlock.get().defaultBlockState()), SimpleBlockStateProvider(ModBlocks.glowingMushroomStem.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 4)))
 
         private fun <FC : IFeatureConfig?> register(name: String, configuredFeature: ConfiguredFeature<FC, *>): ConfiguredFeature<FC, *> =
             Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, "${NuclearTech.MODID}:$name", configuredFeature)

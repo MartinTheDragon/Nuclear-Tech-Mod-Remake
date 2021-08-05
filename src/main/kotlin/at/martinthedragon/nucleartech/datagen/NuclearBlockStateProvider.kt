@@ -3,6 +3,8 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
+import net.minecraft.block.SixWayBlock
 import net.minecraft.data.DataGenerator
 import net.minecraft.state.properties.BlockStateProperties
 import net.minecraft.util.ResourceLocation
@@ -121,6 +123,39 @@ class NuclearBlockStateProvider(
         simpleBlock(ModBlocks.berylliumDecoBlock.get())
         simpleBlock(ModBlocks.asbestosRoof.get())
         simpleBlock(ModBlocks.hazmatBlock.get())
+        simpleBlock(ModBlocks.glowingMushroom.get(), models().cross("glowing_mushroom", blockTexture(ModBlocks.glowingMushroom.get())))
+        val singleFaceTemplateModelFile = models().getExistingFile(mcLoc("block/template_single_face"))
+        val glowingMushroomModelFile = models().getBuilder("glowing_mushroom_block").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(ModBlocks.glowingMushroomBlock.get()))
+        val glowingMushroomInsideModelFile = models().getBuilder("glowing_mushroom_block_inside").parent(singleFaceTemplateModelFile).texture("texture", extend(blockTexture(ModBlocks.glowingMushroomBlock.get()), "_inside"))
+        val glowingMushroomStemModelFile = models().getBuilder("glowing_mushroom_stem").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(ModBlocks.glowingMushroomStem.get()))
+        getMultipartBuilder(ModBlocks.glowingMushroomBlock.get())
+            .part().modelFile(glowingMushroomModelFile).addModel().condition(SixWayBlock.NORTH, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationY(90).uvLock(true).addModel().condition(SixWayBlock.EAST, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationY(180).uvLock(true).addModel().condition(SixWayBlock.SOUTH, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationY(270).uvLock(true).addModel().condition(SixWayBlock.WEST, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationX(270).uvLock(true).addModel().condition(SixWayBlock.UP, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationX(90).uvLock(true).addModel().condition(SixWayBlock.DOWN, true).end()
+            .part().modelFile(glowingMushroomInsideModelFile).addModel().condition(SixWayBlock.NORTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(90).uvLock(false).addModel().condition(SixWayBlock.EAST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(180).uvLock(false).addModel().condition(SixWayBlock.SOUTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(SixWayBlock.WEST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(SixWayBlock.UP, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(SixWayBlock.DOWN, false).end()
+        getMultipartBuilder(ModBlocks.glowingMushroomStem.get())
+            .part().modelFile(glowingMushroomStemModelFile).addModel().condition(SixWayBlock.NORTH, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationY(90).uvLock(true).addModel().condition(SixWayBlock.EAST, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationY(180).uvLock(true).addModel().condition(SixWayBlock.SOUTH, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationY(270).uvLock(true).addModel().condition(SixWayBlock.WEST, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationX(270).uvLock(true).addModel().condition(SixWayBlock.UP, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationX(90).uvLock(true).addModel().condition(SixWayBlock.DOWN, true).end()
+            .part().modelFile(glowingMushroomInsideModelFile).addModel().condition(SixWayBlock.NORTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(90).uvLock(false).addModel().condition(SixWayBlock.EAST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(180).uvLock(false).addModel().condition(SixWayBlock.SOUTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(SixWayBlock.WEST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(SixWayBlock.UP, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(SixWayBlock.DOWN, false).end()
+        simpleBlock(ModBlocks.deadGrass.get(), models().cubeBottomTop("dead_grass", extend(blockTexture(ModBlocks.deadGrass.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(ModBlocks.deadGrass.get()), "_top")))
+        simpleBlock(ModBlocks.glowingMycelium.get(), models().cubeBottomTop("glowing_mycelium", extend(blockTexture(ModBlocks.glowingMycelium.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(ModBlocks.glowingMycelium.get()), "_top")))
         simpleBlock(ModBlocks.siren.get(), models().cubeColumn("siren", extend(blockTexture(ModBlocks.siren.get()), "_side"), blockTexture(ModBlocks.steelBlock.get())))
         horizontalBlock(ModBlocks.safe.get(), extend(blockTexture(ModBlocks.safe.get()), "_side"), extend(blockTexture(ModBlocks.safe.get()), "_front"), extend(blockTexture(ModBlocks.safe.get()), "_side"))
         simpleBlock(ModBlocks.steamPressBase.get(), models().getExistingFile(ModBlocks.steamPressBase.id))
@@ -235,12 +270,23 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.berylliumDecoBlock.get())
         copiedBlockItem(ModBlocks.asbestosRoof.get())
         copiedBlockItem(ModBlocks.hazmatBlock.get())
+        simpleItem(ModBlocks.glowingMushroom.get())
+        copiedBlockItem(ModBlocks.deadGrass.get())
+        copiedBlockItem(ModBlocks.glowingMycelium.get())
         copiedBlockItem(ModBlocks.siren.get())
         copiedBlockItem(ModBlocks.safe.get())
         copiedBlockItem(ModBlocks.blastFurnace.get())
         copiedBlockItem(ModBlocks.combustionGenerator.get())
         copiedBlockItem(ModBlocks.electricFurnace.get())
         copiedBlockItem(ModBlocks.shredder.get())
+    }
+
+    private val generatedItem = models().getExistingFile(mcLoc("item/generated"))
+
+    private fun simpleItem(block: Block) {
+        itemModels().getBuilder(block.registryName!!.path)
+            .parent(generatedItem)
+            .texture("layer0", blockTexture(block))
     }
 
     private fun name(block: Block) = block.registryName!!.path

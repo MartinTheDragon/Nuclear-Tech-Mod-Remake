@@ -785,6 +785,12 @@
   "block.nucleartech.reinforced_sandstone": "Verstärkter Sandstein",
   "block.nucleartech.reinforced_redstone_lamp": "Verstärkte Redstone-Lampe",
 
+  "block.nucleartech.glowing_mushroom": "Leuchtender Pilz",
+  "block.nucleartech.glowing_mushroom_block": "Leuchtender Pilzblock",
+  "block.nucleartech.glowing_mushroom_stem": "Leuchtender Pilzstamm",
+  "block.nucleartech.dead_grass": "Totes Gras",
+  "block.nucleartech.glowing_mycelium": "Leuchtendes Myzel",
+
   "block.nucleartech.siren": "Sirene",
   "block.nucleartech.safe": "Panzerschrank",
   "block.nucleartech.steam_press_base": "Dampfpresse",

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "nucleartech:block/dead_grass_side",
+    "bottom": "minecraft:block/dirt",
+    "top": "nucleartech:block/dead_grass_top"
+  }
+}

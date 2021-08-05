@@ -118,6 +118,12 @@ object ModBlockItems {
     val asbestosRoof: RegistryObject<Item> = ITEMS.register("asbestos_roof") { BlockItem(ModBlocks.asbestosRoof.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val hazmatBlock: RegistryObject<Item> = ITEMS.register("hazmat_block") { BlockItem(ModBlocks.hazmatBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
 
+    val glowingMushroom: RegistryObject<Item> = ITEMS.register("glowing_mushroom") { BlockItem(ModBlocks.glowingMushroom.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val glowingMushroomBlock: RegistryObject<Item> = ITEMS.register("glowing_mushroom_block") { BlockItem(ModBlocks.glowingMushroomBlock.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val glowingMushroomStem: RegistryObject<Item> = ITEMS.register("glowing_mushroom_stem") { BlockItem(ModBlocks.glowingMushroomStem.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val deadGrass: RegistryObject<Item> = ITEMS.register("dead_grass") { BlockItem(ModBlocks.deadGrass.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val glowingMycelium: RegistryObject<Item> = ITEMS.register("glowing_mycelium") { BlockItem(ModBlocks.glowingMycelium.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+
     val siren: RegistryObject<Item> = ITEMS.register("siren") { BlockItem(ModBlocks.siren.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val safe: RegistryObject<Item> = ITEMS.register("safe") { BlockItem(ModBlocks.safe.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val steamPress: RegistryObject<Item> = ITEMS.register("steam_press") { BlockItem(ModBlocks.steamPressBase.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }

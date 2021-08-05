@@ -2,12 +2,10 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
+import net.minecraft.block.*
 import net.minecraft.block.AbstractBlock.Properties
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.RotatedPillarBlock
-import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material.*
+import net.minecraft.block.material.MaterialColor
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.IWorldReader
@@ -141,6 +139,12 @@ object ModBlocks {
     val berylliumDecoBlock: RegistryObject<Block> = BLOCKS.register("beryllium_deco_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val asbestosRoof: RegistryObject<Block> = BLOCKS.register("asbestos_roof") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val hazmatBlock: RegistryObject<Block> = BLOCKS.register("hazmat_block") { Block(Properties.of(WOOL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.WOOL)) }
+
+    val glowingMushroom: RegistryObject<GlowingMushroom> = BLOCKS.register("glowing_mushroom") { GlowingMushroom(Properties.of(PLANT, MaterialColor.COLOR_GREEN).noCollission().randomTicks().instabreak().lightLevel { 7 }.hasPostProcess { _, _, _, -> true }.sound(SoundType.GRASS)) }
+    val glowingMushroomBlock: RegistryObject<HugeMushroomBlock> = BLOCKS.register("glowing_mushroom_block") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 15 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }
+    val glowingMushroomStem: RegistryObject<HugeMushroomBlock> = BLOCKS.register("glowing_mushroom_stem") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 12 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }
+    val deadGrass: RegistryObject<DeadGrass> = BLOCKS.register("dead_grass") { DeadGrass(Properties.of(GRASS, MaterialColor.COLOR_BROWN).strength(.6F).randomTicks().harvestTool(ToolType.SHOVEL).sound(SoundType.GRASS)) }
+    val glowingMycelium: RegistryObject<GlowingMycelium> = BLOCKS.register("glowing_mycelium") { GlowingMycelium(Properties.of(GRASS, MaterialColor.COLOR_LIGHT_GREEN).strength(.6F).randomTicks().harvestTool(ToolType.SHOVEL).lightLevel { 15 }.hasPostProcess { _, _, _, -> true }.sound(SoundType.GRASS)) }
 
     val siren: RegistryObject<Block> = BLOCKS.register("siren") { Siren(Properties.of(METAL).strength(5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val safe: RegistryObject<Block> = BLOCKS.register("safe") { Safe(Properties.of(METAL).strength(25f, 1200f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }

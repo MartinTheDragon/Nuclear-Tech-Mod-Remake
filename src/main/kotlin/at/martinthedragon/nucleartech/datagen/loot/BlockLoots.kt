@@ -8,6 +8,7 @@ import net.minecraft.advancements.criterion.EnchantmentPredicate
 import net.minecraft.advancements.criterion.ItemPredicate
 import net.minecraft.advancements.criterion.MinMaxBounds
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.data.loot.BlockLootTables
 import net.minecraft.enchantment.Enchantments
 import net.minecraft.item.Items
@@ -165,6 +166,12 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.berylliumDecoBlock.get())
         dropSelf(ModBlocks.asbestosRoof.get())
         dropSelf(ModBlocks.hazmatBlock.get())
+
+        dropSelf(ModBlocks.glowingMushroom.get())
+        add(ModBlocks.glowingMushroomBlock.get()) { createMushroomBlockDrop(it, ModBlocks.glowingMushroom.get()) }
+        dropWhenSilkTouch(ModBlocks.glowingMushroomStem.get())
+        add(ModBlocks.deadGrass.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
+        add(ModBlocks.glowingMycelium.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
 
         dropSelf(ModBlocks.siren.get())
         dropSelf(ModBlocks.safe.get())

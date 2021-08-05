@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
+import net.minecraft.block.Blocks
 import net.minecraft.data.BlockTagsProvider
 import net.minecraft.data.DataGenerator
 import net.minecraftforge.common.Tags
@@ -138,5 +139,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
     private fun miscTags() {
         tag(Tags.Blocks.SAND).addTag(NuclearTags.Blocks.SAND_OIL)
         tag(NuclearTags.Blocks.SAND_OIL).add(ModBlocks.oilSand.get())
+        tag(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK).add(ModBlocks.deadGrass.get(), ModBlocks.glowingMycelium.get())
+        tag(NuclearTags.Blocks.GLOWING_MYCELIUM_SPREADABLE).addTag(Tags.Blocks.DIRT).add(ModBlocks.deadGrass.get(), Blocks.GRASS_PATH)
     }
 }

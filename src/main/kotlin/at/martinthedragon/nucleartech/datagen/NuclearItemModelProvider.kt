@@ -1,8 +1,10 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ModBlockItems
+import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.NuclearTech
+import net.minecraft.block.Block
 import net.minecraft.data.DataGenerator
 import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
@@ -520,9 +522,12 @@ class NuclearItemModelProvider(
 
         // BlockItems
 
+        getBuilder(ModBlockItems.glowingMushroomBlock.id.path).parent(cubeAll).texture("all", blockTexture(ModBlocks.glowingMushroomBlock.get()))
+        getBuilder(ModBlockItems.glowingMushroomStem.id.path).parent(cubeAll).texture("all", blockTexture(ModBlocks.glowingMushroomStem.get()))
         simpleItem(ModBlockItems.steamPress.get())
     }
 
+    private val cubeAll = getExistingFile(mcLoc("block/cube_all"))
     private val generatedItem = getExistingFile(mcLoc("item/generated"))
 
     private fun simpleItem(item: Item) {
@@ -530,6 +535,9 @@ class NuclearItemModelProvider(
             .parent(generatedItem)
             .texture("layer0", itemTexture(item))
     }
+
+    private fun blockTexture(block: Block) =
+        ResourceLocation(block.registryName!!.namespace, "$BLOCK_FOLDER/${block.registryName!!.path}")
 
     private fun itemTexture(item: Item) =
         ResourceLocation(item.registryName!!.namespace, "$ITEM_FOLDER/${item.registryName!!.path}")

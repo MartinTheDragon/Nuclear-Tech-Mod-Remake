@@ -56,6 +56,8 @@ object NuclearTags {
         val STORAGE_BLOCK_NUCLEAR_WASTE = forgeTag("storage_blocks/nuclear_waste")
 
         val SAND_OIL = forgeTag("sand/oil")
+        val GLOWING_MUSHROOM_GROW_BLOCK = tag("glowing_mushroom_grow_block")
+        val GLOWING_MYCELIUM_SPREADABLE = tag("glowing_mycelium_spreadable")
     }
 
     object Items {
@@ -106,7 +108,8 @@ object NuclearTags {
         val STORAGE_BLOCK_NUCLEAR_WASTE = forgeTag("storage_blocks/nuclear_waste")
 
         val SAND_OIL = forgeTag("sand/oil")
-        
+        val GLOWING_MUSHROOM_GROW_BLOCK = tag("glowing_mushroom_grow_block")
+
         // actualItems
         val INGOTS_URANIUM = forgeTag("ingots/uranium")
         val INGOTS_THORIUM = forgeTag("ingots/thorium")

@@ -8,6 +8,8 @@ import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
 import at.martinthedragon.nucleartech.tileentities.renderers.SteamPressTopTileEntityRenderer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScreenManager
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.RenderTypeLookup
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.client.util.SearchTree
 import net.minecraft.inventory.container.ContainerType
@@ -58,6 +60,9 @@ object ClientRegistries {
             }
         }) { Stream.of(ForgeRegistries.ITEMS.getKey(it.item)) }
         Minecraft.getInstance().searchTreeManager.register(UseTemplateFolderScreen.SEARCH_TREE, templateFolderSearchTree)
+
+        NuclearTech.LOGGER.debug("Setting rendering layers")
+        RenderTypeLookup.setRenderLayer(ModBlocks.glowingMushroom.get(), RenderType.cutout())
     }
 
     @SubscribeEvent @JvmStatic

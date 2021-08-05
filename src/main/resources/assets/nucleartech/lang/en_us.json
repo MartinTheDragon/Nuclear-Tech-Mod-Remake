@@ -785,6 +785,12 @@
   "block.nucleartech.reinforced_sandstone": "Reinforced Sandstone",
   "block.nucleartech.reinforced_redstone_lamp": "Reinforced Redstone Lamp",
 
+  "block.nucleartech.glowing_mushroom": "Glowing Mushroom",
+  "block.nucleartech.glowing_mushroom_block": "Glowing Mushroom Block",
+  "block.nucleartech.glowing_mushroom_stem": "Glowing Mushroom Stem",
+  "block.nucleartech.dead_grass": "Dead Grass",
+  "block.nucleartech.glowing_mycelium": "Glowing Mycelium",
+
   "block.nucleartech.siren": "Siren",
   "block.nucleartech.safe": "Safe",
   "block.nucleartech.steam_press_base": "Steam Press",
