@@ -51,7 +51,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
                 ModBlocks.starmetalOre.get(), ModBlocks.trixite.get()
             )
 
-        tag(NuclearTags.Blocks.ORES_URANIUM).add(ModBlocks.uraniumOre.get())
+        tag(NuclearTags.Blocks.ORES_URANIUM).add(ModBlocks.uraniumOre.get(), ModBlocks.scorchedUraniumOre.get(), ModBlocks.netherUraniumOre.get(), ModBlocks.scorchedNetherUraniumOre.get())
         tag(NuclearTags.Blocks.ORES_THORIUM).add(ModBlocks.thoriumOre.get())
         tag(NuclearTags.Blocks.ORES_PLUTONIUM).add(ModBlocks.netherPlutoniumOre.get())
         tag(NuclearTags.Blocks.ORES_TITANIUM).add(ModBlocks.titaniumOre.get())

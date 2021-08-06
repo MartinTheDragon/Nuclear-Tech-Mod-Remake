@@ -665,6 +665,7 @@
   "item.nucleartech.creative_nuclear_explosion_spawner": "Nuclear Explosion Spawner",
 
   "block.nucleartech.uranium_ore": "Uranium Ore",
+  "block.nucleartech.scorched_uranium_ore": "Scorched Uranium Ore",
   "block.nucleartech.thorium_ore": "Thorium Ore",
   "block.nucleartech.titanium_ore": "Titanium Ore",
   "block.nucleartech.sulfur_ore": "Sulfur Ore",
@@ -697,6 +698,7 @@
   "block.nucleartech.dollar_green_mineral.desc0": "Verticium Ore",
   "block.nucleartech.rare_earth_ore": "Rare Earth Ore",
   "block.nucleartech.nether_uranium_ore": "Nether Uranium Ore",
+  "block.nucleartech.scorched_nether_uranium_ore": "Scorched Nether Uranium Ore",
   "block.nucleartech.nether_plutonium_ore": "Nether Plutonium Ore",
   "block.nucleartech.nether_tungsten_ore": "Nether Tungsten Ore",
   "block.nucleartech.nether_sulfur_ore": "Nether Sulfur Ore",
@@ -822,6 +824,9 @@
   "container.nucleartech.combustion_generator": "Combustion Generator",
   "container.nucleartech.electric_furnace": "Electric Furnace",
   "container.nucleartech.shredder": "Shredder",
+
+  "entity.nucleartech.nuke_explosion_entity": "Nuclear Explosion",
+  "entity.nucleartech.fallout_rain_entity": "Fallout Rain",
 
   "energy.nucleartech": "Energy",
 

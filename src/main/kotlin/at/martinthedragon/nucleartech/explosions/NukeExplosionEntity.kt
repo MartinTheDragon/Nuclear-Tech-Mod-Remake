@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.explosions
 
 import at.martinthedragon.nucleartech.DamageSources
+import at.martinthedragon.nucleartech.entities.EntityTypes
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.CatEntity
@@ -21,6 +22,7 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
     var length = 0
     var isMuted = false
     var hasFallout = true
+    var extraFallout = 0
 
     // TODO maybe ocean detonations can be made less expensive if the biomes are checked
     private var explosion: NukeExplosionRay? = null
@@ -49,7 +51,10 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
             !explosion!!.initialized -> explosion!!.collectTips(speed * 10)
             explosion!!.tipsCount > 0 -> explosion!!.processTips(1024) // TODO config
             hasFallout -> {
-                // TODO fallout
+                val fallout = FalloutRainEntity(EntityTypes.falloutRainEntity.get(), level)
+                fallout.moveTo(this@NukeExplosionEntity.position())
+                fallout.setScale((this@NukeExplosionEntity.length * 1.8 + extraFallout).toInt()) // TODO config
+                level.addFreshEntity(fallout)
                 remove()
             }
             else -> remove()

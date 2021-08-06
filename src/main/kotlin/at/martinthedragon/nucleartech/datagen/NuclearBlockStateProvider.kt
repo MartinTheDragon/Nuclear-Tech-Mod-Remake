@@ -20,6 +20,7 @@ class NuclearBlockStateProvider(
 
     override fun registerStatesAndModels() {
         simpleBlock(ModBlocks.uraniumOre.get())
+        simpleBlock(ModBlocks.scorchedUraniumOre.get())
         simpleBlock(ModBlocks.thoriumOre.get())
         simpleBlock(ModBlocks.titaniumOre.get())
         simpleBlock(ModBlocks.sulfurOre.get())
@@ -44,6 +45,7 @@ class NuclearBlockStateProvider(
         simpleBlock(ModBlocks.dollarGreenMineral.get())
         simpleBlock(ModBlocks.rareEarthOre.get())
         simpleBlock(ModBlocks.netherUraniumOre.get())
+        simpleBlock(ModBlocks.scorchedNetherUraniumOre.get())
         simpleBlock(ModBlocks.netherPlutoniumOre.get())
         simpleBlock(ModBlocks.netherTungstenOre.get())
         simpleBlock(ModBlocks.netherSulfurOre.get())
@@ -178,6 +180,7 @@ class NuclearBlockStateProvider(
         cubeAllSides(ModBlocks.shredder.get(), north = extend(blockTexture(ModBlocks.shredder.get()), "_front"), south = extend(blockTexture(ModBlocks.shredder.get()), "_front"), east = extend(blockTexture(ModBlocks.shredder.get()), "_side"), west = extend(blockTexture(ModBlocks.shredder.get()), "_side"))
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
+        copiedBlockItem(ModBlocks.scorchedUraniumOre.get())
         copiedBlockItem(ModBlocks.thoriumOre.get())
         copiedBlockItem(ModBlocks.titaniumOre.get())
         copiedBlockItem(ModBlocks.sulfurOre.get())
@@ -202,6 +205,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.dollarGreenMineral.get())
         copiedBlockItem(ModBlocks.rareEarthOre.get())
         copiedBlockItem(ModBlocks.netherUraniumOre.get())
+        copiedBlockItem(ModBlocks.scorchedNetherUraniumOre.get())
         copiedBlockItem(ModBlocks.netherPlutoniumOre.get())
         copiedBlockItem(ModBlocks.netherTungstenOre.get())
         copiedBlockItem(ModBlocks.netherSulfurOre.get())

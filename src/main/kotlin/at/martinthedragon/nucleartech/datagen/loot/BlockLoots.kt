@@ -24,6 +24,7 @@ import net.minecraftforge.registries.ForgeRegistries
 class BlockLoots : BlockLootTables() {
     override fun addTables() {
         dropSelf(ModBlocks.uraniumOre.get())
+        dropSelf(ModBlocks.scorchedUraniumOre.get())
         dropSelf(ModBlocks.thoriumOre.get())
         dropSelf(ModBlocks.titaniumOre.get())
         add(ModBlocks.sulfurOre.get()) {
@@ -71,6 +72,7 @@ class BlockLoots : BlockLootTables() {
         }
 
         dropSelf(ModBlocks.netherUraniumOre.get())
+        dropSelf(ModBlocks.scorchedNetherUraniumOre.get())
         dropSelf(ModBlocks.netherPlutoniumOre.get())
         dropSelf(ModBlocks.netherTungstenOre.get())
         add(ModBlocks.netherSulfurOre.get()) {

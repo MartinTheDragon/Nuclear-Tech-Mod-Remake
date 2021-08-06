@@ -14,27 +14,28 @@ import net.minecraftforge.fml.RegistryObject
 import kotlin.random.Random
 
 object ModBlocks {
-    val uraniumOre: RegistryObject<Block> = BLOCKS.register("uranium_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val thoriumOre: RegistryObject<Block> = BLOCKS.register("thorium_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val titaniumOre: RegistryObject<Block> = BLOCKS.register("titanium_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val sulfurOre: RegistryObject<Block> = BLOCKS.register("sulfur_ore") { object : Block(Properties.of(STONE).strength(2f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
+    val uraniumOre: RegistryObject<Block> = BLOCKS.register("uranium_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val scorchedUraniumOre: RegistryObject<Block> = BLOCKS.register("scorched_uranium_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val thoriumOre: RegistryObject<Block> = BLOCKS.register("thorium_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val titaniumOre: RegistryObject<Block> = BLOCKS.register("titanium_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val sulfurOre: RegistryObject<Block> = BLOCKS.register("sulfur_ore") { object : Block(Properties.of(STONE).strength(3F, 6F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(1, 3)
     }}
-    val niterOre: RegistryObject<Block> = BLOCKS.register("niter_ore") { object : Block(Properties.of(STONE).strength(2f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()){
+    val niterOre: RegistryObject<Block> = BLOCKS.register("niter_ore") { object : Block(Properties.of(STONE).strength(3F, 6F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()){
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(2, 4)
     }}
-    val copperOre: RegistryObject<Block> = BLOCKS.register("copper_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val tungstenOre: RegistryObject<Block> = BLOCKS.register("tungsten_ore") { Block(Properties.of(STONE).strength(3f, 4f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val aluminiumOre: RegistryObject<Block> = BLOCKS.register("aluminium_ore") { Block(Properties.of(STONE).strength(2f, 3f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val fluoriteOre: RegistryObject<Block> = BLOCKS.register("fluorite_ore") { object : Block(Properties.of(STONE).strength(2f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
+    val copperOre: RegistryObject<Block> = BLOCKS.register("copper_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val tungstenOre: RegistryObject<Block> = BLOCKS.register("tungsten_ore") { Block(Properties.of(STONE).strength(6F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val aluminiumOre: RegistryObject<Block> = BLOCKS.register("aluminium_ore") { Block(Properties.of(STONE).strength(4F, 8F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val fluoriteOre: RegistryObject<Block> = BLOCKS.register("fluorite_ore") { object : Block(Properties.of(STONE).strength(3F, 6F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(2, 4)
     }}
-    val berylliumOre: RegistryObject<Block> = BLOCKS.register("beryllium_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val leadOre: RegistryObject<Block> = BLOCKS.register("lead_ore") { Block(Properties.of(STONE).strength(4f, 6f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val oilDeposit: RegistryObject<Block> = BLOCKS.register("oil_deposit") { Block(Properties.of(STONE).strength(1f, 2f).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val emptyOilDeposit: RegistryObject<Block> = BLOCKS.register("empty_oil_deposit") { Block(Properties.of(STONE).strength(1f, 2f).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
-    val oilSand: RegistryObject<Block> = BLOCKS.register("oil_sand") { Block(Properties.of(SAND).strength(1f).harvestLevel(-1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)) }
-    val ligniteOre: RegistryObject<Block> = BLOCKS.register("lignite_ore") { object : Block(Properties.of(STONE).strength(3f).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
+    val berylliumOre: RegistryObject<Block> = BLOCKS.register("beryllium_ore") { Block(Properties.of(STONE).strength(5F, 15F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val leadOre: RegistryObject<Block> = BLOCKS.register("lead_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val oilDeposit: RegistryObject<Block> = BLOCKS.register("oil_deposit") { Block(Properties.of(STONE).strength(1F, 2F).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val emptyOilDeposit: RegistryObject<Block> = BLOCKS.register("empty_oil_deposit") { Block(Properties.of(STONE).strength(1F, 1F).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val oilSand: RegistryObject<Block> = BLOCKS.register("oil_sand") { Block(Properties.of(SAND).strength(1F).harvestLevel(-1).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)) }
+    val ligniteOre: RegistryObject<Block> = BLOCKS.register("lignite_ore") { object : Block(Properties.of(STONE).strength(3F).harvestLevel(0).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(0, 2)
     }}
     val asbestosOre: RegistryObject<Block> = BLOCKS.register("asbestos_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
@@ -51,6 +52,7 @@ object ModBlocks {
         override fun getExpDrop(state: BlockState?, world: IWorldReader?, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(3, 7)
     }}
     val netherUraniumOre: RegistryObject<Block> = BLOCKS.register("nether_uranium_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
+    val scorchedNetherUraniumOre: RegistryObject<Block> = BLOCKS.register("scorched_nether_uranium_ore") { Block(Properties.of(STONE).strength(3F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
     val netherPlutoniumOre: RegistryObject<Block> = BLOCKS.register("nether_plutonium_ore") { Block(Properties.of(STONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
     val netherTungstenOre: RegistryObject<Block> = BLOCKS.register("nether_tungsten_ore") { Block(Properties.of(STONE).strength(3f, 4f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
     val netherSulfurOre: RegistryObject<Block> = BLOCKS.register("nether_sulfur_ore") { object : Block(Properties.of(STONE).strength(2f, 3f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) {
@@ -152,10 +154,10 @@ object ModBlocks {
 
     // TODO chunk radiation
     val slakedSellafite: RegistryObject<Block> = BLOCKS.register("slaked_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
     val boilingSellafite: RegistryObject<Block> = BLOCKS.register("boiling_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
     val infernalSellafite: RegistryObject<Block> = BLOCKS.register("infernal_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
     val sellafiteCorium: RegistryObject<Block> = BLOCKS.register("sellafite_corium") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
 

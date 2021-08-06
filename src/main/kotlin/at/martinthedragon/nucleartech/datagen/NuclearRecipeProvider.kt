@@ -129,7 +129,6 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromOre(ModBlockItems.dellite.get(), ModItems.daffergonIngot.get(), 2.5F, consumer)
         ingotFromOre(ModBlockItems.dollarGreenMineral.get(), ModItems.verticiumIngot.get(), 2.5F, consumer)
         ingotFromOre(ModBlockItems.rareEarthOre.get(), ModItems.deshMix.get(), 3F, consumer)
-        ingotFromOre(ModBlockItems.netherUraniumOre.get(), ModItems.uraniumIngot.get(), 2F, consumer)
         ingotFromOre(NuclearTags.Items.ORES_PLUTONIUM, ModItems.plutoniumIngot.get(), 3F, "plutonium_ore", consumer)
         ingotFromOre(ModBlockItems.netherTungstenOre.get(), ModItems.tungstenIngot.get(), 1.5F, consumer)
         ingotFromOre(ModBlockItems.netherSulfurOre.get(), ModItems.sulfur.get(), .4F, consumer)

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.RegistryObject
 @Suppress("unused")
 object ModBlockItems {
     val uraniumOre: RegistryObject<Item> = ITEMS.register("uranium_ore") { BlockItem(ModBlocks.uraniumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val scorchedUraniumOre: RegistryObject<Item> = ITEMS.register("scorched_uranium_ore") { BlockItem(ModBlocks.scorchedUraniumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val thoriumOre: RegistryObject<Item> = ITEMS.register("thorium_ore") { BlockItem(ModBlocks.thoriumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val titaniumOre: RegistryObject<Item> = ITEMS.register("titanium_ore") { BlockItem(ModBlocks.titaniumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val sulfurOre: RegistryObject<Item> = ITEMS.register("sulfur_ore") { BlockItem(ModBlocks.sulfurOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
@@ -36,6 +37,7 @@ object ModBlockItems {
     val dollarGreenMineral: RegistryObject<Item> = ITEMS.register("dollar_green_mineral") { AutoTooltippedBlockItem(ModBlocks.dollarGreenMineral.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup).rarity(Rarity.UNCOMMON)) }
     val rareEarthOre: RegistryObject<Item> = ITEMS.register("rare_earth_ore") { BlockItem(ModBlocks.rareEarthOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup).rarity(Rarity.UNCOMMON)) }
     val netherUraniumOre: RegistryObject<Item> = ITEMS.register("nether_uranium_ore") { BlockItem(ModBlocks.netherUraniumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val scorchedNetherUraniumOre: RegistryObject<Item> = ITEMS.register("scorched_nether_uranium_ore") { BlockItem(ModBlocks.scorchedNetherUraniumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val netherPlutoniumOre: RegistryObject<Item> = ITEMS.register("nether_plutonium_ore") { BlockItem(ModBlocks.netherPlutoniumOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val netherTungstenOre: RegistryObject<Item> = ITEMS.register("nether_tungsten_ore") { BlockItem(ModBlocks.netherTungstenOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val netherSulfurOre: RegistryObject<Item> = ITEMS.register("nether_sulfur_ore") { BlockItem(ModBlocks.netherSulfurOre.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }

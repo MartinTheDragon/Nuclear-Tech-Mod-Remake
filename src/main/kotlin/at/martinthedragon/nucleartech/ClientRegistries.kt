@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.entities.renderers.FalloutRainRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NukeExplosionRenderer
 import at.martinthedragon.nucleartech.screens.*
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
@@ -52,6 +53,7 @@ object ClientRegistries {
 
         NuclearTech.LOGGER.debug("Registering Entity Renderers")
         RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nukeExplosionEntity.get(), ::NukeExplosionRenderer)
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypes.falloutRainEntity.get(), ::FalloutRainRenderer)
 
         NuclearTech.LOGGER.debug("Creating search trees")
         val templateFolderSearchTree = SearchTree<ItemStack>({

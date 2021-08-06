@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:uranium_ore"
+    "nucleartech:uranium_ore",
+    "nucleartech:scorched_uranium_ore",
+    "nucleartech:nether_uranium_ore",
+    "nucleartech:scorched_nether_uranium_ore"
   ]
 }

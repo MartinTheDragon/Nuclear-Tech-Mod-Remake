@@ -665,6 +665,7 @@
   "item.nucleartech.creative_nuclear_explosion_spawner": "Atomexplosionserzeuger",
 
   "block.nucleartech.uranium_ore": "Uranerz",
+  "block.nucleartech.scorched_uranium_ore": "Verschmortes Uranerz",
   "block.nucleartech.thorium_ore": "Thoriumerz",
   "block.nucleartech.titanium_ore": "Titanerz",
   "block.nucleartech.sulfur_ore": "Schwefelerz",
@@ -697,6 +698,7 @@
   "block.nucleartech.dollar_green_mineral.desc0": "Verticiumerz",
   "block.nucleartech.rare_earth_ore": "Seltene-Erden-Erz",
   "block.nucleartech.nether_uranium_ore": "Netheruranerz",
+  "block.nucleartech.scorched_nether_uranium_ore": "Verschmortes Netheruranerz",
   "block.nucleartech.nether_plutonium_ore": "Netherplutoniumerz",
   "block.nucleartech.nether_tungsten_ore": "Netherwolframerz",
   "block.nucleartech.nether_sulfur_ore": "Netherschwefelerz",
@@ -822,6 +824,9 @@
   "container.nucleartech.combustion_generator": "Verbrennungsgenerator",
   "container.nucleartech.electric_furnace": "Elektrischer Ofen",
   "container.nucleartech.shredder": "Brecher",
+
+  "entity.nucleartech.nuke_explosion_entity": "Nukleare Explosion",
+  "entity.nucleartech.fallout_rain_entity": "Fallout-Regen",
 
   "energy.nucleartech": "Energie",
 
