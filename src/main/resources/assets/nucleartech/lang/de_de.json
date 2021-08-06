@@ -797,6 +797,14 @@
   "block.nucleartech.charred_log": "Verkohltes Holz",
   "block.nucleartech.charred_planks": "Verkohlte Holzbretter",
 
+  "block.nucleartech.slaked_sellafite": "Gelöschtes Sellafit",
+  "block.nucleartech.sellafite": "Sellafit",
+  "block.nucleartech.hot_sellafite": "Heißes Sellafit",
+  "block.nucleartech.boiling_sellafite": "Kochendes Sellafit",
+  "block.nucleartech.blazing_sellafite": "Flammendes Sellafit",
+  "block.nucleartech.infernal_sellafite": "Infernales Sellafit",
+  "block.nucleartech.sellafite_corium": "Sellafit-Corium",
+
   "block.nucleartech.siren": "Sirene",
   "block.nucleartech.safe": "Panzerschrank",
   "block.nucleartech.steam_press_base": "Dampfpresse",

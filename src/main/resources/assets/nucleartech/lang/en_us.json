@@ -797,6 +797,14 @@
   "block.nucleartech.charred_log": "Charred Log",
   "block.nucleartech.charred_planks": "Charred Planks",
 
+  "block.nucleartech.slaked_sellafite": "Slaked Sellafite",
+  "block.nucleartech.sellafite": "Sellafite",
+  "block.nucleartech.hot_sellafite": "Hot Sellafite",
+  "block.nucleartech.boiling_sellafite": "Boiling Sellafite",
+  "block.nucleartech.blazing_sellafite": "Blazing Sellafite",
+  "block.nucleartech.infernal_sellafite": "Infernal Sellafite",
+  "block.nucleartech.sellafite_corium": "Sellafite-Corium",
+
   "block.nucleartech.siren": "Siren",
   "block.nucleartech.safe": "Safe",
   "block.nucleartech.steam_press_base": "Steam Press",

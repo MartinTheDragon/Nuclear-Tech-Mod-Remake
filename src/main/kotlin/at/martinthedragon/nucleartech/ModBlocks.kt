@@ -150,6 +150,15 @@ object ModBlocks {
     val charredLog: RegistryObject<RotatedPillarBlock> = BLOCKS.register("charred_log") { RotatedPillarBlock(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
     val charredPlanks: RegistryObject<Block> = BLOCKS.register("charred_planks") { Block(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(.5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
 
+    // TODO chunk radiation
+    val slakedSellafite: RegistryObject<Block> = BLOCKS.register("slaked_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val boilingSellafite: RegistryObject<Block> = BLOCKS.register("boiling_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val infernalSellafite: RegistryObject<Block> = BLOCKS.register("infernal_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val sellafiteCorium: RegistryObject<Block> = BLOCKS.register("sellafite_corium") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+
     val siren: RegistryObject<Block> = BLOCKS.register("siren") { Siren(Properties.of(METAL).strength(5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val safe: RegistryObject<Block> = BLOCKS.register("safe") { Safe(Properties.of(METAL).strength(25f, 1200f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 

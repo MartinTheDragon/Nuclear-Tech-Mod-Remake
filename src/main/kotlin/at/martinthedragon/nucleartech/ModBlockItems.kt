@@ -133,6 +133,14 @@ object ModBlockItems {
         override fun getBurnTime(itemStack: ItemStack?, recipeType: IRecipeType<*>?) = 300
     }}
 
+    val slakedSellafite: RegistryObject<Item> = ITEMS.register("slaked_sellafite") { BlockItem(ModBlocks.slakedSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val sellafite: RegistryObject<Item> = ITEMS.register("sellafite") { BlockItem(ModBlocks.sellafite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val hotSellafite: RegistryObject<Item> = ITEMS.register("hot_sellafite") { BlockItem(ModBlocks.hotSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val boilingSellafite: RegistryObject<Item> = ITEMS.register("boiling_sellafite") { BlockItem(ModBlocks.boilingSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val blazingSellafite: RegistryObject<Item> = ITEMS.register("blazing_sellafite") { BlockItem(ModBlocks.blazingSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val infernalSellafite: RegistryObject<Item> = ITEMS.register("infernal_sellafite") { BlockItem(ModBlocks.infernalSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val sellafiteCorium: RegistryObject<Item> = ITEMS.register("sellafite_corium") { BlockItem(ModBlocks.sellafiteCorium.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+
     val siren: RegistryObject<Item> = ITEMS.register("siren") { BlockItem(ModBlocks.siren.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val safe: RegistryObject<Item> = ITEMS.register("safe") { BlockItem(ModBlocks.safe.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val steamPress: RegistryObject<Item> = ITEMS.register("steam_press") { BlockItem(ModBlocks.steamPressBase.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }

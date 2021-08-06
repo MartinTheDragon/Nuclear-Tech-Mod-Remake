@@ -177,6 +177,13 @@ class BlockLoots : BlockLootTables() {
         add(ModBlocks.redTrinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
         add(ModBlocks.charredLog.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(Items.COAL).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.burntBark.get()).`when`(hasNoSilkTouchCondition)).apply(SetCount.setCount(RandomValueRange.between(-999F, 1F))).apply(LimitCount.limitCount(IntClamper.lowerBound(0)))) }
         add(ModBlocks.charredPlanks.get()) { createOreDrop(it, Items.COAL) }
+        dropSelf(ModBlocks.slakedSellafite.get())
+        dropSelf(ModBlocks.sellafite.get())
+        dropSelf(ModBlocks.hotSellafite.get())
+        dropSelf(ModBlocks.boilingSellafite.get())
+        dropSelf(ModBlocks.blazingSellafite.get())
+        dropSelf(ModBlocks.infernalSellafite.get())
+        dropSelf(ModBlocks.sellafiteCorium.get())
 
         dropSelf(ModBlocks.siren.get())
         dropSelf(ModBlocks.safe.get())
