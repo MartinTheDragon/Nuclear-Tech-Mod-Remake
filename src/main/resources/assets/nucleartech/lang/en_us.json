@@ -464,6 +464,8 @@
   "item.nucleartech.poison_gas_cartridge.desc1": "*cough cough* Halp pls!",
   "item.nucleartech.magnetron": "Magnetron",
   "item.nucleartech.dense_coal_cluster": "Dense Coal Cluster",
+  "item.nucleartech.burnt_bark": "Burnt Bark",
+  "item.nucleartech.burnt_bark.desc0": "A piece of bark from an exploded golden oak tree.",
   "item.nucleartech.machine_upgrade_template": "Machine Upgrade Template",
 
   "item.nucleartech.blank_rune": "Blank Catalyst Matrix",
@@ -792,6 +794,8 @@
   "block.nucleartech.glowing_mycelium": "Glowing Mycelium",
   "block.nucleartech.trinitite_ore": "Trinitite Ore",
   "block.nucleartech.red_trinitite_ore": "Red Trinitite Ore",
+  "block.nucleartech.charred_log": "Charred Log",
+  "block.nucleartech.charred_planks": "Charred Planks",
 
   "block.nucleartech.siren": "Siren",
   "block.nucleartech.safe": "Safe",

@@ -147,6 +147,8 @@ object ModBlocks {
     val glowingMycelium: RegistryObject<GlowingMycelium> = BLOCKS.register("glowing_mycelium") { GlowingMycelium(Properties.of(GRASS, MaterialColor.COLOR_LIGHT_GREEN).strength(.6F).randomTicks().harvestTool(ToolType.SHOVEL).lightLevel { 15 }.hasPostProcess { _, _, _, -> true }.sound(SoundType.GRASS)) }
     val trinitite: RegistryObject<Trinitite> = BLOCKS.register("trinitite_ore") { Trinitite(Properties.of(SAND, MaterialColor.COLOR_GREEN).strength(.5F, 2.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)) }
     val redTrinitite: RegistryObject<Trinitite> = BLOCKS.register("red_trinitite_ore") { Trinitite(Properties.of(SAND, MaterialColor.COLOR_GREEN).strength(.5F, 2.5F).harvestTool(ToolType.SHOVEL).sound(SoundType.SAND)) }
+    val charredLog: RegistryObject<RotatedPillarBlock> = BLOCKS.register("charred_log") { RotatedPillarBlock(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
+    val charredPlanks: RegistryObject<Block> = BLOCKS.register("charred_planks") { Block(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(.5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
 
     val siren: RegistryObject<Block> = BLOCKS.register("siren") { Siren(Properties.of(METAL).strength(5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val safe: RegistryObject<Block> = BLOCKS.register("safe") { Safe(Properties.of(METAL).strength(25f, 1200f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }

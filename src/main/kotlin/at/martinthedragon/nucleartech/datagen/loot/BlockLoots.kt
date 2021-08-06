@@ -17,6 +17,7 @@ import net.minecraft.loot.conditions.MatchTool
 import net.minecraft.loot.conditions.RandomChance
 import net.minecraft.loot.functions.ApplyBonus
 import net.minecraft.loot.functions.ExplosionDecay
+import net.minecraft.loot.functions.LimitCount
 import net.minecraft.loot.functions.SetCount
 import net.minecraftforge.registries.ForgeRegistries
 
@@ -174,6 +175,8 @@ class BlockLoots : BlockLootTables() {
         add(ModBlocks.glowingMycelium.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
         add(ModBlocks.trinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
         add(ModBlocks.redTrinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
+        add(ModBlocks.charredLog.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(Items.COAL).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.burntBark.get()).`when`(hasNoSilkTouchCondition)).apply(SetCount.setCount(RandomValueRange.between(-999F, 1F))).apply(LimitCount.limitCount(IntClamper.lowerBound(0)))) }
+        add(ModBlocks.charredPlanks.get()) { createOreDrop(it, Items.COAL) }
 
         dropSelf(ModBlocks.siren.get())
         dropSelf(ModBlocks.safe.get())

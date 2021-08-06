@@ -464,6 +464,8 @@
   "item.nucleartech.poison_gas_cartridge.desc1": "*hust hust* Hilfä!",
   "item.nucleartech.magnetron": "Magnetron",
   "item.nucleartech.dense_coal_cluster": "Dichter Kohlecluster",
+  "item.nucleartech.burnt_bark": "Verbrannte Rinde",
+  "item.nucleartech.burnt_bark.desc0": "Ein Stück Rinde von einer explodierten goldenen Eiche.",
   "item.nucleartech.machine_upgrade_template": "Maschinenupgrade-Vorlage",
 
   "item.nucleartech.blank_rune": "Blanke Katalysatormatrix",
@@ -792,6 +794,8 @@
   "block.nucleartech.glowing_mycelium": "Leuchtendes Myzel",
   "block.nucleartech.trinitite_ore": "Trinititerz",
   "block.nucleartech.red_trinitite_ore": "Rotes Trinititerz",
+  "block.nucleartech.charred_log": "Verkohltes Holz",
+  "block.nucleartech.charred_planks": "Verkohlte Holzbretter",
 
   "block.nucleartech.siren": "Sirene",
   "block.nucleartech.safe": "Panzerschrank",

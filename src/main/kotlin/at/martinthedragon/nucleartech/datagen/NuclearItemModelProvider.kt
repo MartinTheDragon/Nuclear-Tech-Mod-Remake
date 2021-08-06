@@ -408,6 +408,7 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.poisonGasCartridge.get())
         simpleItem(ModItems.magnetron.get())
         simpleItem(ModItems.denseCoalCluster.get())
+        simpleItem(ModItems.burntBark.get())
         simpleItem(ModItems.machineUpgradeTemplate.get())
         simpleItem(ModItems.blankRune.get())
         simpleItem(ModItems.isaRune.get())

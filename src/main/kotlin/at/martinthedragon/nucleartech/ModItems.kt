@@ -421,6 +421,7 @@ object ModItems {
     val poisonGasCartridge: RegistryObject<Item> = ITEMS.register("poison_gas_cartridge") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
     val magnetron: RegistryObject<Item> = ITEMS.register("magnetron") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
     val denseCoalCluster: RegistryObject<Item> = ITEMS.register("dense_coal_cluster") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
+    val burntBark: RegistryObject<Item> = ITEMS.register("burnt_bark") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }
     val machineUpgradeTemplate: RegistryObject<Item> = ITEMS.register("machine_upgrade_template") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup).stacksTo(1)) }
     val blankRune: RegistryObject<Item> = ITEMS.register("blank_rune") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup).stacksTo(1)) }
     val isaRune: RegistryObject<Item> = ITEMS.register("isa_rune") { Item(Item.Properties().tab(CreativeTabs.Parts.itemGroup).stacksTo(1)) }

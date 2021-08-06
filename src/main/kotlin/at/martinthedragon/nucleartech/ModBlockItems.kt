@@ -6,6 +6,7 @@ import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Rarity
+import net.minecraft.item.crafting.IRecipeType
 import net.minecraftforge.fml.RegistryObject
 
 @Suppress("unused")
@@ -125,6 +126,12 @@ object ModBlockItems {
     val glowingMycelium: RegistryObject<Item> = ITEMS.register("glowing_mycelium") { BlockItem(ModBlocks.glowingMycelium.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val trinititeOre: RegistryObject<Item> = ITEMS.register("trinitite_ore") { BlockItem(ModBlocks.trinitite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val redTrinititeOre: RegistryObject<Item> = ITEMS.register("red_trinitite_ore") { BlockItem(ModBlocks.redTrinitite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val charredLog: RegistryObject<Item> = ITEMS.register("charred_log") { object : BlockItem(ModBlocks.charredLog.get(), Properties().tab(CreativeTabs.Blocks.itemGroup)) {
+        override fun getBurnTime(itemStack: ItemStack?, recipeType: IRecipeType<*>?) = 300
+    }}
+    val charredPlanks: RegistryObject<Item> = ITEMS.register("charred_planks") { object : BlockItem(ModBlocks.charredPlanks.get(), Properties().tab(CreativeTabs.Blocks.itemGroup)) {
+        override fun getBurnTime(itemStack: ItemStack?, recipeType: IRecipeType<*>?) = 300
+    }}
 
     val siren: RegistryObject<Item> = ITEMS.register("siren") { BlockItem(ModBlocks.siren.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val safe: RegistryObject<Item> = ITEMS.register("safe") { BlockItem(ModBlocks.safe.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
