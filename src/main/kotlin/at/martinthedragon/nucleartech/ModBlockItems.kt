@@ -123,6 +123,8 @@ object ModBlockItems {
     val glowingMushroomStem: RegistryObject<Item> = ITEMS.register("glowing_mushroom_stem") { BlockItem(ModBlocks.glowingMushroomStem.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val deadGrass: RegistryObject<Item> = ITEMS.register("dead_grass") { BlockItem(ModBlocks.deadGrass.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
     val glowingMycelium: RegistryObject<Item> = ITEMS.register("glowing_mycelium") { BlockItem(ModBlocks.glowingMycelium.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val trinititeOre: RegistryObject<Item> = ITEMS.register("trinitite_ore") { BlockItem(ModBlocks.trinitite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
+    val redTrinititeOre: RegistryObject<Item> = ITEMS.register("red_trinitite_ore") { BlockItem(ModBlocks.redTrinitite.get(), Item.Properties().tab(CreativeTabs.Blocks.itemGroup)) }
 
     val siren: RegistryObject<Item> = ITEMS.register("siren") { BlockItem(ModBlocks.siren.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }
     val safe: RegistryObject<Item> = ITEMS.register("safe") { BlockItem(ModBlocks.safe.get(), Item.Properties().tab(CreativeTabs.Machines.itemGroup)) }

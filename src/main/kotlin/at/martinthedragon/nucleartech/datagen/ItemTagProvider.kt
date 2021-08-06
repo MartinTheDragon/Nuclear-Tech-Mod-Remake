@@ -48,6 +48,7 @@ class ItemTagProvider(
         copy(NuclearTags.Blocks.ORES_LIGNITE, NuclearTags.Items.ORES_LIGNITE)
         copy(NuclearTags.Blocks.ORES_ASBESTOS, NuclearTags.Items.ORES_ASBESTOS)
         copy(NuclearTags.Blocks.ORES_RARE_EARTH, NuclearTags.Items.ORES_RARE_EARTH)
+        copy(NuclearTags.Blocks.ORES_TRINITITE, NuclearTags.Items.ORES_TRINITITE)
         copy(Tags.Blocks.ORES, Tags.Items.ORES)
 
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_URANIUM, NuclearTags.Items.STORAGE_BLOCKS_URANIUM)

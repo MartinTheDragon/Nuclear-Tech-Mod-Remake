@@ -549,6 +549,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun blocks(consumer: Consumer<IFinishedRecipe>) {
         ShapedRecipeBuilder.shaped(ModBlockItems.scrapBlock.get()).define('#', NuclearTags.Items.SCRAP).pattern("##").pattern("##").group(ModBlockItems.scrapBlock.id.path).unlockedBy("has_scrap", has(NuclearTags.Items.SCRAP)).save(consumer, ResourceLocation(NuclearTech.MODID, "${ModBlockItems.scrapBlock.id.path}_from_scrap"))
+        ShapelessRecipeBuilder.shapeless(ModBlockItems.trinititeOre.get()).requires(Tags.Items.SAND_COLORLESS).requires(ModItems.trinitite.get()).group(ModBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(ModItems.trinitite.get())).save(consumer, ModBlockItems.trinititeOre.id)
+        ShapelessRecipeBuilder.shapeless(ModBlockItems.redTrinititeOre.get()).requires(Tags.Items.SAND_RED).requires(ModItems.trinitite.get()).group(ModBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(ModItems.trinitite.get())).save(consumer, ModBlockItems.redTrinititeOre.id)
     }
 
     private fun machines(consumer: Consumer<IFinishedRecipe>) {

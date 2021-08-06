@@ -442,7 +442,7 @@ object ModItems {
     val depletedPlutoniumFuel: RegistryObject<Item> = ITEMS.register("depleted_plutonium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 15f) }
     val depletedMOXFuel: RegistryObject<Item> = ITEMS.register("depleted_mox_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 15f) }
     val depletedSchrabidiumFuel: RegistryObject<Item> = ITEMS.register("depleted_schrabidium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Blinding), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 40f) }
-    val trinitite: RegistryObject<Item> = ITEMS.register("trinitite") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 5f) }
+    val trinitite: RegistryObject<Item> = ITEMS.register("trinitite") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts.itemGroup), .1f) }
     val nuclearWaste: RegistryObject<Item> = ITEMS.register("nuclear_waste") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 15f) }
     val tinyNuclearWaste: RegistryObject<Item> = ITEMS.register("tiny_nuclear_waste") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts.itemGroup), 2f) }
     val crystalHorn: RegistryObject<Item> = ITEMS.register("crystal_horn") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts.itemGroup)) }

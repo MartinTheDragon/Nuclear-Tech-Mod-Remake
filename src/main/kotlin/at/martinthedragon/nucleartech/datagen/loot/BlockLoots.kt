@@ -172,6 +172,8 @@ class BlockLoots : BlockLootTables() {
         dropWhenSilkTouch(ModBlocks.glowingMushroomStem.get())
         add(ModBlocks.deadGrass.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
         add(ModBlocks.glowingMycelium.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
+        add(ModBlocks.trinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
+        add(ModBlocks.redTrinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
 
         dropSelf(ModBlocks.siren.get())
         dropSelf(ModBlocks.safe.get())

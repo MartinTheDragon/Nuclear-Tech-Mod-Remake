@@ -32,6 +32,8 @@ object NuclearTags {
         val ORES_ASBESTOS = forgeTag("ores/asbestos")
         val ORES_RARE_EARTH = forgeTag("ores/rare_earth")
 
+        val ORES_TRINITITE = forgeTag("ores/trinitite")
+
         val STORAGE_BLOCKS_URANIUM = forgeTag("storage_blocks/uranium")
         val STORAGE_BLOCKS_NEPTUNIUM = forgeTag("storage_blocks/neptunium")
         val STORAGE_BLOCKS_MOX = forgeTag("storage_blocks/mox")
@@ -83,6 +85,8 @@ object NuclearTags {
         val ORES_LIGNITE = forgeTag("ores/lignite")
         val ORES_ASBESTOS = forgeTag("ores/asbestos")
         val ORES_RARE_EARTH = forgeTag("ores/rare_earth")
+
+        val ORES_TRINITITE = forgeTag("ores/trinitite")
 
         val STORAGE_BLOCKS_URANIUM = forgeTag("storage_blocks/uranium")
         val STORAGE_BLOCKS_NEPTUNIUM = forgeTag("storage_blocks/neptunium")

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:trinitite_ore"
+    ]
+  },
+  "criteria": {
+    "has_trinitite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "nucleartech:trinitite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:trinitite_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_trinitite",
+      "has_the_recipe"
+    ]
+  ]
+}

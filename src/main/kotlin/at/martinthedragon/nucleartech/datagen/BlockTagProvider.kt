@@ -36,6 +36,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
             .addTag(NuclearTags.Blocks.ORES_LIGNITE)
             .addTag(NuclearTags.Blocks.ORES_ASBESTOS)
             .addTag(NuclearTags.Blocks.ORES_RARE_EARTH)
+            .addTag(NuclearTags.Blocks.ORES_TRINITITE)
             .add(
                 ModBlocks.schrabidiumOre.get(), ModBlocks.australianOre.get(),
                 ModBlocks.weidite.get(), ModBlocks.reiite.get(),
@@ -66,6 +67,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(NuclearTags.Blocks.ORES_LIGNITE).add(ModBlocks.ligniteOre.get())
         tag(NuclearTags.Blocks.ORES_ASBESTOS).add(ModBlocks.asbestosOre.get())
         tag(NuclearTags.Blocks.ORES_RARE_EARTH).add(ModBlocks.rareEarthOre.get())
+        tag(NuclearTags.Blocks.ORES_TRINITITE).add(ModBlocks.trinitite.get(), ModBlocks.redTrinitite.get())
     }
 
     private fun storageBlockTags() {

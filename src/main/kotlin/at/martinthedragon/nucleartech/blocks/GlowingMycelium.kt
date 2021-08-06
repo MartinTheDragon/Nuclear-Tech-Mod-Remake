@@ -47,7 +47,7 @@ class GlowingMycelium(properties: Properties) : DeadGrass(properties) {
     }
 
     override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-        if (random.nextInt(10) == 0) {
+        if (random.nextInt(5) == 0) {
             world.addParticle(
                 ParticleTypes.MYCELIUM,
                 pos.x.toDouble() + random.nextDouble(),
