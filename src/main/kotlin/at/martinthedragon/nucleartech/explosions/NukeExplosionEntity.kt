@@ -64,9 +64,28 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
     // TODO client rendering data
     override fun defineSynchedData() {}
 
-    override fun readAdditionalSaveData(nbt: CompoundNBT) {}
+    override fun readAdditionalSaveData(nbt: CompoundNBT) {
+        strength = nbt.getInt("Strength")
+        speed = nbt.getInt("Speed")
+        length = nbt.getInt("Length")
+        isMuted = nbt.getBoolean("IsMuted")
+        hasFallout = nbt.getBoolean("HasFallout")
+        extraFallout = nbt.getInt("ExtraFallout")
+        val explosionNbt = nbt.getCompound("ExplosionData")
+        if (!explosionNbt.isEmpty) explosion = NukeExplosionRay.deserialize(level, explosionNbt)
+    }
 
-    override fun addAdditionalSaveData(nbt: CompoundNBT) {}
+    override fun addAdditionalSaveData(nbt: CompoundNBT) {
+        nbt.putInt("Strength", strength)
+        nbt.putInt("Speed", speed)
+        nbt.putInt("Length", length)
+        nbt.putBoolean("IsMuted", isMuted)
+        nbt.putBoolean("HasFallout", hasFallout)
+        nbt.putInt("ExtraFallout", extraFallout)
+        if (explosion != null) {
+            nbt.put("ExplosionData", explosion!!.serialize())
+        }
+    }
 
     override fun getAddEntityPacket(): IPacket<*> = NetworkHooks.getEntitySpawningPacket(this)
 

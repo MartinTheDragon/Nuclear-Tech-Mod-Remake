@@ -1,6 +1,10 @@
 package at.martinthedragon.nucleartech.explosions
 
+import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.block.Blocks
+import net.minecraft.nbt.CompoundNBT
+import net.minecraft.nbt.IntNBT
+import net.minecraft.nbt.ListNBT
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.world.World
@@ -113,5 +117,66 @@ class NukeExplosionRay(
             }
         }
         processed += count
+    }
+
+    // do not try getting the entity's data using the /data command! the huge amount of data will halt the game. no kidding, this can be megabytes worth of data
+    // TODO serialize efficiently
+    fun serialize(): CompoundNBT {
+        val nbt = CompoundNBT()
+        val posNbt = ListNBT()
+        posNbt.add(IntNBT.valueOf(pos.x))
+        posNbt.add(IntNBT.valueOf(pos.y))
+        posNbt.add(IntNBT.valueOf(pos.z))
+        nbt.put("Pos", posNbt)
+        nbt.putInt("Strength", strength)
+        nbt.putInt("Length", length)
+
+        val tipsDataX = LongArray(tipsCount) { tips[it].x.toRawBits() }
+        val tipsDataY = LongArray(tipsCount) { tips[it].y.toRawBits() }
+        val tipsDataZ = LongArray(tipsCount) { tips[it].z.toRawBits() }
+        val tipsData = CompoundNBT()
+        tipsData.putLongArray("TipsDataX", tipsDataX)
+        tipsData.putLongArray("TipsDataY", tipsDataY)
+        tipsData.putLongArray("TipsDataZ", tipsDataZ)
+        nbt.put("ExplosionData", tipsData)
+
+        nbt.putInt("StartY", startY)
+        nbt.putInt("StartCircumference", startCircumference)
+        nbt.putBoolean("Initialized", initialized)
+        nbt.putInt("Processed", processed)
+        return nbt
+    }
+
+    companion object {
+        fun deserialize(world: World, nbt: CompoundNBT): NukeExplosionRay {
+            val posNbt = nbt.getList("Pos", 3)
+            val explosion = NukeExplosionRay(
+                world,
+                BlockPos(posNbt.getInt(0), posNbt.getInt(1), posNbt.getInt(2)),
+                nbt.getInt("Strength"), nbt.getInt("Length")
+            )
+
+            val tipsData = nbt.getCompound("ExplosionData")
+            val tipsDataX = tipsData.getLongArray("TipsDataX")
+            val tipsDataY = tipsData.getLongArray("TipsDataY")
+            val tipsDataZ = tipsData.getLongArray("TipsDataZ")
+            val dataAmount = if (tipsDataX.size == tipsDataY.size && tipsDataX.size == tipsDataZ.size) tipsDataX.size else {
+                NuclearTech.LOGGER.error("NukeExplosionRay @ ${explosion.pos} has corrupted explosion data. Salvaging...")
+                min(tipsDataX.size, min(tipsDataY.size, tipsDataZ.size))
+            }
+            for (i in 0 until dataAmount) {
+                val x = Double.fromBits(tipsDataX[i])
+                val y = Double.fromBits(tipsDataY[i])
+                val z = Double.fromBits(tipsDataZ[i])
+                explosion.tips.add(Vector3d(x, y , z))
+            }
+            explosion.apply {
+                startY = nbt.getInt("StartY")
+                startCircumference = nbt.getInt("StartCircumference")
+                initialized = nbt.getBoolean("Initialized")
+                processed = nbt.getInt("Processed")
+            }
+            return explosion
+        }
     }
 }
