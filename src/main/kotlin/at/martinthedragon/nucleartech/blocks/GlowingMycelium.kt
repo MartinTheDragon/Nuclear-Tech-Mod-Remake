@@ -30,7 +30,8 @@ class GlowingMycelium(properties: Properties) : DeadGrass(properties) {
                 }
             }
 
-        if (random.nextInt(10) == 0) { // add new mushrooms
+        // add new mushrooms
+        if (world.isEmptyBlock(pos.above()) && random.nextInt(10) == 0 && ModBlocks.glowingMushroom.get().defaultBlockState().canSurvive(world, pos.above())) {
             var count = 0
             for (i in -5..4) {
                 for (j in -5..5) {
