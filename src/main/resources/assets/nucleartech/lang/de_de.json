@@ -663,6 +663,16 @@
   "item.nucleartech.oil_detector.no_oil": "Kein Öl gefunden",
 
   "item.nucleartech.creative_nuclear_explosion_spawner": "Atomexplosionserzeuger",
+  "creative_nuclear_explosion_spawner.nucleartech.strength": "Stärke",
+  "creative_nuclear_explosion_spawner.nucleartech.muted": "Stumm",
+  "creative_nuclear_explosion_spawner.nucleartech.has_fallout": "Mit Fallout",
+  "creative_nuclear_explosion_spawner.nucleartech.extra_fallout": "Extra Fallout",
+  "creative_nuclear_explosion_spawner.nucleartech.position": "Position",
+  "creative_nuclear_explosion_spawner.nucleartech.cancel": "Abbrechen",
+  "creative_nuclear_explosion_spawner.nucleartech.start": "Starten",
+  "creative_nuclear_explosion_spawner.nucleartech.error_strength": "Kann den Stärke-Wert nicht lesen",
+  "creative_nuclear_explosion_spawner.nucleartech.error_extra_fallout": "Kann den Extra-Fallout-Wert nicht lesen",
+  "creative_nuclear_explosion_spawner.nucleartech.error_insufficient_permission": "Kann den Atomexplosionserzeuger nicht benutzen: Unzureichende Berechtigung",
 
   "block.nucleartech.uranium_ore": "Uranerz",
   "block.nucleartech.scorched_uranium_ore": "Verschmortes Uranerz",

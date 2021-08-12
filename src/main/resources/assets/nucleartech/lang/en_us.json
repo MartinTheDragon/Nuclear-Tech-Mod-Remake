@@ -663,6 +663,16 @@
   "item.nucleartech.oil_detector.no_oil": "No oil detected",
 
   "item.nucleartech.creative_nuclear_explosion_spawner": "Nuclear Explosion Spawner",
+  "creative_nuclear_explosion_spawner.nucleartech.strength": "Strength",
+  "creative_nuclear_explosion_spawner.nucleartech.muted": "Muted",
+  "creative_nuclear_explosion_spawner.nucleartech.has_fallout": "Has Fallout",
+  "creative_nuclear_explosion_spawner.nucleartech.extra_fallout": "Extra Fallout",
+  "creative_nuclear_explosion_spawner.nucleartech.position": "Position",
+  "creative_nuclear_explosion_spawner.nucleartech.cancel": "Cancel",
+  "creative_nuclear_explosion_spawner.nucleartech.start": "Start",
+  "creative_nuclear_explosion_spawner.nucleartech.error_strength": "Cannot parse strength value",
+  "creative_nuclear_explosion_spawner.nucleartech.error_extra_fallout": "Cannot parse extra fallout value",
+  "creative_nuclear_explosion_spawner.nucleartech.error_insufficient_permission": "Cannot use Nuclear Explosion Spawner: Insufficient permission",
 
   "block.nucleartech.uranium_ore": "Uranium Ore",
   "block.nucleartech.scorched_uranium_ore": "Scorched Uranium Ore",
