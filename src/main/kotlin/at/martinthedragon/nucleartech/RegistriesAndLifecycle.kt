@@ -88,6 +88,9 @@ object RegistriesAndLifecycle {
             dataGenerator.addProvider(NuclearBlockStateProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearSoundsProvider(dataGenerator, existingFileHelper))
+
+            for (translation in NuclearLanguageProviders.getLanguageProviders(dataGenerator))
+                dataGenerator.addProvider(translation)
         }
     }
 }

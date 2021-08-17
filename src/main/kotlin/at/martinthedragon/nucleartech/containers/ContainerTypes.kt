@@ -12,7 +12,7 @@ object ContainerTypes {
     val sirenContainer: RegistryObject<ContainerType<SirenContainer>> = CONTAINERS.register("siren") {
         IForgeContainerType.create(SirenContainer.Companion::fromNetwork)
     }
-    val pressContainer: RegistryObject<ContainerType<PressContainer>> = CONTAINERS.register("press") {
+    val steamPressContainer: RegistryObject<ContainerType<PressContainer>> = CONTAINERS.register("steam_press") {
         IForgeContainerType.create(PressContainer.Companion::fromNetwork)
     }
     val blastFurnaceContainer: RegistryObject<ContainerType<BlastFurnaceContainer>> = CONTAINERS.register("blast_furnace") {

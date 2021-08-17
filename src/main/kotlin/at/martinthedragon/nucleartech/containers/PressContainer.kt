@@ -27,7 +27,7 @@ class PressContainer(
     val playerInventory: PlayerInventory,
     val tileEntity: SteamPressTopTileEntity,
     val data: IIntArray = MinecraftIntArray(4)
-) : RecipeBookContainer<SteamPressTopTileEntity>(ContainerTypes.pressContainer.get(), windowId) {
+) : RecipeBookContainer<SteamPressTopTileEntity>(ContainerTypes.steamPressContainer.get(), windowId) {
     private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
     private val level = playerInventory.player.level
 
