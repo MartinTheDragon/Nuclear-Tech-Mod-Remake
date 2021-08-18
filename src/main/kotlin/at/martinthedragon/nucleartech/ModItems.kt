@@ -524,26 +524,26 @@ object ModItems {
     val machineTemplateFolder: RegistryObject<TemplateFolder> = ITEMS.register("machine_template_folder") { TemplateFolder() }
 
     // Siren Tracks
-    val sirenTrackHatchSiren: RegistryObject<Item> = ITEMS.register("siren_track_hatch_siren") { SirenTrack(SoundEvents.sirenTrackHatchSiren, 1f, true, "siren_track_hatch_siren", 0x334077) }
-    val sirenTrackAutopilotDisconnected: RegistryObject<Item> = ITEMS.register("siren_track_autopilot_disconnected") { SirenTrack(SoundEvents.sirenTrackAutopilotDisconnected, 1f, true, "siren_track_autopilot_disconnected", 0xB5B5B5) }
-    val sirenTrackAMSSiren: RegistryObject<Item> = ITEMS.register("siren_track_ams_siren") { SirenTrack(SoundEvents.sirenTrackAMSSiren, 1f, true, "siren_track_ams_siren", 0xE5BB52) }
-    val sirenTrackBlastDoorAlarm: RegistryObject<Item> = ITEMS.register("siren_track_blast_door_alarm") { SirenTrack(SoundEvents.sirenTrackBlastDoorAlarm, 1f, true, "siren_track_blast_door_alarm", 0xB20000) }
-    val sirenTrackAPCSiren: RegistryObject<Item> = ITEMS.register("siren_track_apc_siren") { SirenTrack(SoundEvents.sirenTrackAPCSiren, 1f, true, "siren_track_apc_siren", 0x3666A0) }
-    val sirenTrackKlaxon: RegistryObject<Item> = ITEMS.register("siren_track_klaxon") { SirenTrack(SoundEvents.sirenTrackKlaxon, 1f, true, "siren_track_klaxon", 0x808080) }
-    val sirenTrackVaultDoorAlarm: RegistryObject<Item> = ITEMS.register("siren_track_vault_door_alarm") { SirenTrack(SoundEvents.sirenTrackVaultDoorAlarm, 1f, true, "siren_track_vault_door_alarm", 0x8C810B) }
-    val sirenTrackSecurityAlert: RegistryObject<Item> = ITEMS.register("siren_track_security_alert") { SirenTrack(SoundEvents.sirenTrackSecurityAlert, 1f, true, "siren_track_security_alert", 0x76818E) }
-    val sirenTrackStandardSiren: RegistryObject<Item> = ITEMS.register("siren_track_standard_siren") { SirenTrack(SoundEvents.sirenTrackStandardSiren, 1f, true, "siren_track_standard_siren", 0x660000) }
-    val sirenTrackClassicSiren: RegistryObject<Item> = ITEMS.register("siren_track_classic_siren") { SirenTrack(SoundEvents.sirenTrackClassicSiren, 1f, true, "siren_track_classic_siren", 0xC0CFE8) }
-    val sirenTrackBankAlarm: RegistryObject<Item> = ITEMS.register("siren_track_bank_alarm") { SirenTrack(SoundEvents.sirenTrackBankAlarm, 1f, true, "siren_track_bank_alarm", 0x3684E2) }
-    val sirenTrackBeepSiren: RegistryObject<Item> = ITEMS.register("siren_track_beep_siren") { SirenTrack(SoundEvents.sirenTrackBeepSiren, 1f, true, "siren_track_beep_siren", 0xD3D3D3) }
-    val sirenTrackContainerAlarm: RegistryObject<Item> = ITEMS.register("siren_track_container_alarm") { SirenTrack(SoundEvents.sirenTrackContainerAlarm, 1f, true, "siren_track_container_alarm", 0xE0BA9F) }
-    val sirenTrackSweepSiren: RegistryObject<Item> = ITEMS.register("siren_track_sweep_siren") { SirenTrack(SoundEvents.sirenTrackSweepSiren, 1f, true, "siren_track_sweep_siren", 0xEDEA5A) }
-    val sirenTrackMissileSiloSiren: RegistryObject<Item> = ITEMS.register("siren_track_missile_silo_siren") { SirenTrack(SoundEvents.sirenTrackMissileSiloSiren, 1f, true, "siren_track_missile_silo_siren", 0xABAB9A) }
-    val sirenTrackAirRaidSiren: RegistryObject<Item> = ITEMS.register("siren_track_air_raid_siren") { SirenTrack(SoundEvents.sirenTrackAirRaidSiren, 1f, false, "siren_track_air_raid_siren", 0xDF3795) }
-    val sirenTrackNostromoSelfDestruct: RegistryObject<Item> = ITEMS.register("siren_track_nostromo_self_destruct") { SirenTrack(SoundEvents.sirenTrackNostromoSelfDestruct, 1f, true, "siren_track_nostromo_self_destruct", 0x5DD800) }
-    val sirenTrackEASAlarmScreech: RegistryObject<Item> = ITEMS.register("siren_track_eas_alarm_screech") { SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 1f, true, "siren_track_eas_alarm_screech", 0xB3A8C1) }
-    val sirenTrackAPCPass: RegistryObject<Item> = ITEMS.register("siren_track_apc_pass") { SirenTrack(SoundEvents.sirenTrackAPCPass, 1f, false, "siren_track_apc_pass", 0x3437D3) }
-    val sirenTrackRazortrainHorn: RegistryObject<Item> = ITEMS.register("siren_track_razortrain_horn") { SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 1f, false, "siren_track_razortrain_horn", 0x7750ED) }
+    val sirenTrackHatchSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_hatch_siren") { SirenTrack(SoundEvents.sirenTrackHatchSiren, 250, true, 0x334077) }
+    val sirenTrackAutopilotDisconnected: RegistryObject<SirenTrack> = ITEMS.register("siren_track_autopilot_disconnected") { SirenTrack(SoundEvents.sirenTrackAutopilotDisconnected, 50, true, 0xB5B5B5) }
+    val sirenTrackAMSSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_ams_siren") { SirenTrack(SoundEvents.sirenTrackAMSSiren, 100, true, 0xE5BB52) }
+    val sirenTrackBlastDoorAlarm: RegistryObject<SirenTrack> = ITEMS.register("siren_track_blast_door_alarm") { SirenTrack(SoundEvents.sirenTrackBlastDoorAlarm, 50, true, 0xB20000) }
+    val sirenTrackAPCSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_apc_siren") { SirenTrack(SoundEvents.sirenTrackAPCSiren, 100, true, 0x3666A0) }
+    val sirenTrackKlaxon: RegistryObject<SirenTrack> = ITEMS.register("siren_track_klaxon") { SirenTrack(SoundEvents.sirenTrackKlaxon, 50, true, 0x808080) }
+    val sirenTrackVaultDoorAlarm: RegistryObject<SirenTrack> = ITEMS.register("siren_track_vault_door_alarm") { SirenTrack(SoundEvents.sirenTrackVaultDoorAlarm, 50, true, 0x8C810B) }
+    val sirenTrackSecurityAlert: RegistryObject<SirenTrack> = ITEMS.register("siren_track_security_alert") { SirenTrack(SoundEvents.sirenTrackSecurityAlert, 50, true, 0x76818E) }
+    val sirenTrackStandardSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_standard_siren") { SirenTrack(SoundEvents.sirenTrackStandardSiren, 250, true, 0x660000) }
+    val sirenTrackClassicSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_classic_siren") { SirenTrack(SoundEvents.sirenTrackClassicSiren, 250, true, 0xC0CFE8) }
+    val sirenTrackBankAlarm: RegistryObject<SirenTrack> = ITEMS.register("siren_track_bank_alarm") { SirenTrack(SoundEvents.sirenTrackBankAlarm, 100, true, 0x3684E2) }
+    val sirenTrackBeepSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_beep_siren") { SirenTrack(SoundEvents.sirenTrackBeepSiren, 100, true, 0xD3D3D3) }
+    val sirenTrackContainerAlarm: RegistryObject<SirenTrack> = ITEMS.register("siren_track_container_alarm") { SirenTrack(SoundEvents.sirenTrackContainerAlarm, 100, true, 0xE0BA9F) }
+    val sirenTrackSweepSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_sweep_siren") { SirenTrack(SoundEvents.sirenTrackSweepSiren, 500, true, 0xEDEA5A) }
+    val sirenTrackMissileSiloSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_missile_silo_siren") { SirenTrack(SoundEvents.sirenTrackMissileSiloSiren, 500, true, 0xABAB9A) }
+    val sirenTrackAirRaidSiren: RegistryObject<SirenTrack> = ITEMS.register("siren_track_air_raid_siren") { SirenTrack(SoundEvents.sirenTrackAirRaidSiren, 1000, false, 0xDF3795) }
+    val sirenTrackNostromoSelfDestruct: RegistryObject<SirenTrack> = ITEMS.register("siren_track_nostromo_self_destruct") { SirenTrack(SoundEvents.sirenTrackNostromoSelfDestruct, 100, true, 0x5DD800) }
+    val sirenTrackEASAlarmScreech: RegistryObject<SirenTrack> = ITEMS.register("siren_track_eas_alarm_screech") { SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 50, true, 0xB3A8C1) }
+    val sirenTrackAPCPass: RegistryObject<SirenTrack> = ITEMS.register("siren_track_apc_pass") { SirenTrack(SoundEvents.sirenTrackAPCPass, 50, false, 0x3437D3) }
+    val sirenTrackRazortrainHorn: RegistryObject<SirenTrack> = ITEMS.register("siren_track_razortrain_horn") { SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
 
     // Consumables
 

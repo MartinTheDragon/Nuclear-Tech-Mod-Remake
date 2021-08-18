@@ -50,7 +50,7 @@ class SirenTileEntity : LockableLootTileEntity(TileEntityTypes.sirenTileEntityTy
                 val sound = SimpleSound(
                         item.soundSupplier.get().location,
                         SoundCategory.BLOCKS,
-                        item.volume,
+                        item.range.toFloat(),
                         1f,
                         item.loop,
                         0,

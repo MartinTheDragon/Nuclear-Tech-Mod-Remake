@@ -1,6 +1,6 @@
 {
   "siren.hatch": {
-    "subtitle": "subtitle.nucleartech.siren.playing_hatch",
+    "subtitle": "subtitle.nucleartech.siren.hatch",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/hatch",
@@ -9,7 +9,7 @@
     ]
   },
   "siren.autopilot_disconnected": {
-    "subtitle": "subtitle.nucleartech.siren.playing_autopilot_disconnected",
+    "subtitle": "subtitle.nucleartech.siren.autopilot_disconnected",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/autopilot_disconnected",
@@ -18,7 +18,7 @@
     ]
   },
   "siren.ams": {
-    "subtitle": "subtitle.nucleartech.siren.playing_ams",
+    "subtitle": "subtitle.nucleartech.siren.ams",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/ams",
@@ -27,7 +27,7 @@
     ]
   },
   "siren.blast_door": {
-    "subtitle": "subtitle.nucleartech.siren.playing_blast_door",
+    "subtitle": "subtitle.nucleartech.siren.blast_door",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/blast_door",
@@ -36,7 +36,7 @@
     ]
   },
   "siren.apc": {
-    "subtitle": "subtitle.nucleartech.siren.playing_apc",
+    "subtitle": "subtitle.nucleartech.siren.apc",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/apc",
@@ -45,7 +45,7 @@
     ]
   },
   "siren.klaxon": {
-    "subtitle": "subtitle.nucleartech.siren.playing_klaxon",
+    "subtitle": "subtitle.nucleartech.siren.klaxon",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/klaxon",
@@ -54,7 +54,7 @@
     ]
   },
   "siren.vault_door": {
-    "subtitle": "subtitle.nucleartech.siren.playing_vault_door",
+    "subtitle": "subtitle.nucleartech.siren.vault_door",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/vault_door",
@@ -63,7 +63,7 @@
     ]
   },
   "siren.security": {
-    "subtitle": "subtitle.nucleartech.siren.playing_security",
+    "subtitle": "subtitle.nucleartech.siren.security",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/security",
@@ -72,7 +72,7 @@
     ]
   },
   "siren.standard": {
-    "subtitle": "subtitle.nucleartech.siren.playing_standard",
+    "subtitle": "subtitle.nucleartech.siren.standard",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/standard",
@@ -81,7 +81,7 @@
     ]
   },
   "siren.classic": {
-    "subtitle": "subtitle.nucleartech.siren.playing_classic",
+    "subtitle": "subtitle.nucleartech.siren.classic",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/classic",
@@ -91,7 +91,7 @@
     ]
   },
   "siren.bank": {
-    "subtitle": "subtitle.nucleartech.siren.playing_bank",
+    "subtitle": "subtitle.nucleartech.siren.bank",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/bank",
@@ -100,7 +100,7 @@
     ]
   },
   "siren.beep": {
-    "subtitle": "subtitle.nucleartech.siren.playing_beep",
+    "subtitle": "subtitle.nucleartech.siren.beep",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/beep",
@@ -109,7 +109,7 @@
     ]
   },
   "siren.container": {
-    "subtitle": "subtitle.nucleartech.siren.playing_container",
+    "subtitle": "subtitle.nucleartech.siren.container",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/container",
@@ -118,7 +118,7 @@
     ]
   },
   "siren.sweep": {
-    "subtitle": "subtitle.nucleartech.siren.playing_sweep",
+    "subtitle": "subtitle.nucleartech.siren.sweep",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/sweep",
@@ -127,7 +127,7 @@
     ]
   },
   "siren.missile_silo": {
-    "subtitle": "subtitle.nucleartech.siren.playing_missile_silo",
+    "subtitle": "subtitle.nucleartech.siren.missile_silo",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/missile_silo",
@@ -136,7 +136,7 @@
     ]
   },
   "siren.air_raid": {
-    "subtitle": "subtitle.nucleartech.siren.playing_air_raid",
+    "subtitle": "subtitle.nucleartech.siren.air_raid",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/air_raid",
@@ -146,7 +146,7 @@
     ]
   },
   "siren.nostromo_self_destruct": {
-    "subtitle": "subtitle.nucleartech.siren.playing_nostromo_self_destruct",
+    "subtitle": "subtitle.nucleartech.siren.nostromo_self_destruct",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/nostromo_self_destruct",
@@ -155,7 +155,7 @@
     ]
   },
   "siren.eas": {
-    "subtitle": "subtitle.nucleartech.siren.playing_eas",
+    "subtitle": "subtitle.nucleartech.siren.eas",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/eas",
@@ -164,7 +164,7 @@
     ]
   },
   "siren.apc_pass": {
-    "subtitle": "subtitle.nucleartech.siren.playing_apc_pass",
+    "subtitle": "subtitle.nucleartech.siren.apc_pass",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/apc_pass",
@@ -173,7 +173,7 @@
     ]
   },
   "siren.razortrain_horn": {
-    "subtitle": "subtitle.nucleartech.siren.playing_razortrain_horn",
+    "subtitle": "subtitle.nucleartech.siren.razortrain_horn",
     "sounds": [
       {
         "name": "nucleartech:blocks/siren/razortrain_horn",

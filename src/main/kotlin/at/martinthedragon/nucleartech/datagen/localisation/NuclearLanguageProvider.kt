@@ -32,14 +32,21 @@ abstract class NuclearLanguageProvider(
             if (exceptionOnMissing) throw IllegalStateException(errorMessage.toString())
             else NuclearTech.LOGGER.error(errorMessage.toString())
         }
+
+        if (!NuclearLanguageProviders.keys.containsAll(data.keys)) {
+            val extraTranslations = data.keys subtract NuclearLanguageProviders.keys
+            val errorMessage = StringBuilder().appendLine("Extra translations in locale $locale that are non-existent in default locale:")
+            for (extra in extraTranslations) errorMessage.appendLine(extra.prependIndent())
+            NuclearTech.LOGGER.error(errorMessage.toString())
+        }
     }
 
-    protected fun addBlockDesc(supplier: Supplier<out Block>, desc: String, count: Int = 0) {
-        add("${supplier.get().descriptionId}.desc$count", desc)
+    protected fun addBlockDesc(supplier: Supplier<out Block>, desc: String) {
+        add("${supplier.get().descriptionId}.desc", desc)
     }
 
-    protected fun addItemDesc(supplier: Supplier<out Item>, desc: String, count: Int = 0) {
-        add("${supplier.get().descriptionId}.desc$count", desc)
+    protected fun addItemDesc(supplier: Supplier<out Item>, desc: String) {
+        add("${supplier.get().descriptionId}.desc", desc)
     }
 
     protected fun addContainerType(key: Supplier<out ContainerType<*>>, name: String) {
@@ -52,15 +59,6 @@ abstract class NuclearLanguageProvider(
 
     protected fun addDamageSource(key: DamageSource, name: String) {
         add("death.attack.${key.msgId}", name)
-    }
-
-    // TODO replace with formatted strings
-    protected open fun addSirenTrack(supplier: Supplier<out Item>, name: String, loop: Boolean, range: Int) {
-        val baseID = supplier.get().descriptionId
-        add(baseID, "Siren Track - $name")
-        add("$baseID.name", name)
-        add("$baseID.type", if (loop) "Type: Loop" else "Type: Play Once")
-        add("$baseID.range", "Range: $range Meters")
     }
 
     companion object {

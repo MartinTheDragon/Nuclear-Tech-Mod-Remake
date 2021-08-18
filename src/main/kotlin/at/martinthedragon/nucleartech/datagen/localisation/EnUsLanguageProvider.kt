@@ -40,8 +40,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.berylliumOre, "Beryllium Ore")
         addBlock(ModBlocks.leadOre, "Lead Ore")
         addBlock(ModBlocks.oilDeposit, "Oil Deposit")
-        addBlockDesc(ModBlocks.oilDeposit, "You weren't supposed to mine that.")
-        addBlockDesc(ModBlocks.oilDeposit, "Come on, get a derrick you doofus.", 1)
+        addBlockDesc(ModBlocks.oilDeposit, "You weren't supposed to mine that.\nCome on, get a derrick you doofus.")
         addBlock(ModBlocks.emptyOilDeposit, "Empty Oil Deposit")
         addBlock(ModBlocks.oilSand, "Oil Sand")
         addBlock(ModBlocks.ligniteOre, "Lignite Ore")
@@ -228,9 +227,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.whitePhosphorusIngot, "White Phosphorus Bar")
 
         addItem(ModItems.semtexBar, "Semtex Bar")
-        addItemDesc(ModItems.semtexBar, "Semtex H Plastic Explosive")
-        addItemDesc(ModItems.semtexBar, "Performant explosive for many applications.", 1)
-        addItemDesc(ModItems.semtexBar, "Edible", 2)
+        addItemDesc(ModItems.semtexBar,
+            "Semtex H Plastic Explosive\n" +
+                    "Performant explosive for many applications.\n" +
+                    "Edible"
+        )
 
         addItem(ModItems.lithiumCube, "Lithium Cube")
         addItem(ModItems.solidFuelCube, "Solid Fuel Cube")
@@ -306,8 +307,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sparkMix, "Spark Mix")
         addItem(ModItems.meteoritePowder, "Meteorite Powder")
         addItem(ModItems.euphemiumPowder, "Euphemium Powder")
-        addItemDesc(ModItems.euphemiumPowder, "Pulverized pink.")
-        addItemDesc(ModItems.euphemiumPowder, "Tastes like strawberries.", 1)
+        addItemDesc(ModItems.euphemiumPowder, "Pulverized pink.\nTastes like strawberries.")
         addItem(ModItems.dineutroniumPowder, "Dineutronium Powder")
         addItem(ModItems.desaturatedRedstone, "Desaturated Redstone")
         addItem(ModItems.dust, "Dust")
@@ -321,12 +321,10 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.tinyActiniumPowder, "Tiny Actinium Powder")
         addItem(ModItems.tinyMeteoritePowder, "Tiny Meteorite Powder")
         addItem(ModItems.redPhosphorus, "Red Phosphorus")
-        addItemDesc(ModItems.redPhosphorus, "Used in multi purpose bombs:")
-        addItemDesc(ModItems.redPhosphorus, "Incendiary bombs are fun!", 1)
+        addItemDesc(ModItems.redPhosphorus, "Used in multi purpose bombs:\nIncendiary bombs are fun!")
         addItem(ModItems.cryoPowder, "Cryo Powder")
         addItem(ModItems.poisonPowder, "Poison Powder")
-        addItemDesc(ModItems.poisonPowder, "Used in multi purpose bombs:")
-        addItemDesc(ModItems.poisonPowder, "Warning: Poisonous!", 1)
+        addItemDesc(ModItems.poisonPowder, "Used in multi purpose bombs:\nWarning: Poisonous!")
         addItem(ModItems.thermite, "Thermite")
         addItem(ModItems.energyPowder, "Energy Powder")
 
@@ -398,9 +396,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.verticiumNugget, "Verticium Nugget")
         addItem(ModItems.deshNugget, "Desh Nugget")
         addItem(ModItems.euphemiumNugget, "Euphemium Nugget")
-        addItemDesc(ModItems.euphemiumNugget, "A small piece of a pink metal.")
-        addItemDesc(ModItems.euphemiumNugget, "Its properties are still unknown,", 1)
-        addItemDesc(ModItems.euphemiumNugget, "DEAL WITH IT carefully.", 2)
+        addItemDesc(ModItems.euphemiumNugget,
+            "A small piece of a pink metal.\n" +
+                    "Its properties are still unknown,\n" +
+                    "DEAL WITH IT carefully."
+        )
         addItem(ModItems.dineutroniumNugget, "Dineutronium Nugget")
 
         addItem(ModItems.ironPlate, "Iron Plate")
@@ -472,9 +472,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.chlorinePinwheel, "Chlorine Pinwheel")
         addItem(ModItems.telepad, "Telepad")
         addItem(ModItems.entanglementKit, "Entaglement Kit")
-        addItemDesc(ModItems.entanglementKit, "Teleporter crafting item.")
-        addItemDesc(ModItems.entanglementKit, "Enables dimension-shifting via", 1)
-        addItemDesc(ModItems.entanglementKit, "beryllium-enhanced resource scanner.", 2)
+        addItemDesc(ModItems.entanglementKit,
+            "Teleporter crafting item.\n" +
+                    "Enables dimension-shifting via\n" +
+                    "beryllium-enhanced resource scanner."
+        )
         addItem(ModItems.stabilizerComponent, "Stabilizer Component")
         addItem(ModItems.emitterComponent, "Emitter Component")
         addItem(ModItems.aluminiumCap, "Aluminium Cap")
@@ -505,7 +507,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addItem(ModItems.smallWarhead, "Small Warhead")
         addItem(ModItems.mediumWarhead, "Medium Warhead")
-        addItem(ModItems.largeWarhead, "Large warhead")
+        addItem(ModItems.largeWarhead, "Large Warhead")
         addItem(ModItems.smallIncendiaryWarhead, "Small Incendiary Warhead")
         addItem(ModItems.mediumIncendiaryWarhead, "Medium Incendiary Warhead")
         addItem(ModItems.largeIncendiaryWarhead, "Large Incendiary Warhead")
@@ -617,13 +619,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItemDesc(ModItems.ownOpinion, "Well, I like it...")
 
         addItem(ModItems.explosivePellets, "Explosive Pellets")
-        addItemDesc(ModItems.explosivePellets, "Used in multi purpose bombs:")
-        addItemDesc(ModItems.explosivePellets, "Adds some extra boom!", 1)
+        addItemDesc(ModItems.explosivePellets, "Used in multi purpose bombs:\nAdds some extra boom!")
         addItem(ModItems.leadPellets, "Lead Pellets")
         addItem(ModItems.flechettes, "Flechettes")
         addItem(ModItems.poisonGasCartridge, "Poison Gas Cartridge")
-        addItemDesc(ModItems.poisonGasCartridge, "Used in multi purpose bombs:")
-        addItemDesc(ModItems.poisonGasCartridge, "*cough cough* Halp pls!", 1)
+        addItemDesc(ModItems.poisonGasCartridge, "Used in multi purpose bombs:\n*cough cough* Halp pls!")
         addItem(ModItems.magnetron, "Magnetron")
         addItem(ModItems.denseCoalCluster, "Dense Coal Cluster")
         addItem(ModItems.burntBark, "Burnt Bark")
@@ -638,15 +638,14 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.thurisazRune, "Additive Catalyst Matrix")
 
         addItem(ModItems.burnedOutQuadSchrabidiumFuelRod, "Burned Out Quad Schrabidium Rod")
-        addItemDesc(ModItems.burnedOutQuadSchrabidiumFuelRod, "A quad fuel rod which contains a")
-        addItemDesc(ModItems.burnedOutQuadSchrabidiumFuelRod, "very small amount of a strange new element.", 1)
+        addItemDesc(ModItems.burnedOutQuadSchrabidiumFuelRod, "A quad fuel rod which contains a\nvery small amount of a strange new element.")
 
         addItem(ModItems.scrap, "Scrap")
         addItem(ModItems.hotDepletedUraniumFuel, "Hot Depleted Uranium Fuel")
         addItem(ModItems.hotDepletedThoriumFuel, "Hot Depleted Thorium Fuel")
-        addItem(ModItems.hotDepletedPlutoniumFuel, "Hot Depleted Thorium Fuel")
+        addItem(ModItems.hotDepletedPlutoniumFuel, "Hot Depleted Plutonium Fuel")
         addItem(ModItems.hotDepletedMOXFuel, "Hot Depleted MOX Fuel")
-        addItem(ModItems.hotDepletedSchrabidiumFuel, "Hot Deplted Schrabidium Fuel")
+        addItem(ModItems.hotDepletedSchrabidiumFuel, "Hot Depleted Schrabidium Fuel")
         addItem(ModItems.depletedUraniumFuel, "Depleted Uranium Fuel")
         addItem(ModItems.depletedThoriumFuel, "Depleted Thorium Fuel")
         addItem(ModItems.depletedPlutoniumFuel, "Depleted Plutonium Fuel")
@@ -732,35 +731,40 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.deshShredderBlade, "Desh Shredder Blade")
 
         addItem(ModItems.machineTemplateFolder, "Machine Template Folder")
-        addItemDesc(ModItems.machineTemplateFolder, "Machine Templates: Paper + Dye")
-        addItemDesc(ModItems.machineTemplateFolder, "Fluid IDs: Iron Plate + Dye", 1)
-        addItemDesc(ModItems.machineTemplateFolder, "Press Stamps: Flat Stamp", 2)
-        addItemDesc(ModItems.machineTemplateFolder, "Siren Tracks: Insulator + Steel Plate", 3)
+        addItemDesc(ModItems.machineTemplateFolder,
+            "Machine Templates: Paper + Dye\n" +
+                    "Fluid IDs: Iron Plate + Dye\n" +
+                    "Press Stamps: Flat Stamp\n" +
+                    "Siren Tracks: Insulator + Steel Plate"
+        )
 
-        addSirenTrack(ModItems.sirenTrackHatchSiren, "Hatch Siren", true, 250)
-        addSirenTrack(ModItems.sirenTrackAutopilotDisconnected, "Autopilot Disconnected", true, 50)
-        addSirenTrack(ModItems.sirenTrackAMSSiren, "AMS Siren", true, 100)
-        addSirenTrack(ModItems.sirenTrackBlastDoorAlarm, "Blast Door Alarm", true, 50)
-        addSirenTrack(ModItems.sirenTrackAPCSiren, "APC Siren", true, 100)
-        addSirenTrack(ModItems.sirenTrackKlaxon, "Klaxon", true, 50)
-        addSirenTrack(ModItems.sirenTrackVaultDoorAlarm, "Vault Door Alarm", true, 50)
-        addSirenTrack(ModItems.sirenTrackSecurityAlert, "Security Alert", true, 50)
-        addSirenTrack(ModItems.sirenTrackStandardSiren, "Standard Siren", true, 250)
-        addSirenTrack(ModItems.sirenTrackClassicSiren, "Classic Siren", true, 250)
-        addSirenTrack(ModItems.sirenTrackBankAlarm, "Bank Alarm", true, 100)
-        addSirenTrack(ModItems.sirenTrackBeepSiren, "Beep Siren", true, 100)
-        addSirenTrack(ModItems.sirenTrackContainerAlarm, "Container Alarm", true, 100)
-        addSirenTrack(ModItems.sirenTrackSweepSiren, "Sweep Siren", true, 500)
-        addSirenTrack(ModItems.sirenTrackMissileSiloSiren, "Missile Silo Siren", true, 500)
-        addSirenTrack(ModItems.sirenTrackAirRaidSiren, "Air Raid Siren", false, 1000)
-        addSirenTrack(ModItems.sirenTrackNostromoSelfDestruct, "Nostromo Self Destruct", true, 100)
-        addSirenTrack(ModItems.sirenTrackEASAlarmScreech, "EAS Alarm Screech", true, 50)
-        addSirenTrack(ModItems.sirenTrackAPCPass, "APC Pass", false, 50)
-        addSirenTrack(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn", false, 250)
+        add("item.$MODID.siren_tracks.siren_track", "Siren Track")
+        add("item.$MODID.siren_tracks.type_loop", "Type: Loop")
+        add("item.$MODID.siren_tracks.type_once", "Type: Play Once")
+        add("item.$MODID.siren_tracks.range", "Range: %s Meters")
+        addItem(ModItems.sirenTrackHatchSiren, "Hatch Siren")
+        addItem(ModItems.sirenTrackAutopilotDisconnected, "Autopilot Disconnected")
+        addItem(ModItems.sirenTrackAMSSiren, "AMS Siren")
+        addItem(ModItems.sirenTrackBlastDoorAlarm, "Blast Door Alarm")
+        addItem(ModItems.sirenTrackAPCSiren, "APC Siren")
+        addItem(ModItems.sirenTrackKlaxon, "Klaxon")
+        addItem(ModItems.sirenTrackVaultDoorAlarm, "Vault Door Alarm")
+        addItem(ModItems.sirenTrackSecurityAlert, "Security Alert")
+        addItem(ModItems.sirenTrackStandardSiren, "Standard Siren")
+        addItem(ModItems.sirenTrackClassicSiren, "Classic Siren")
+        addItem(ModItems.sirenTrackBankAlarm, "Bank Alarm")
+        addItem(ModItems.sirenTrackBeepSiren, "Beep Siren")
+        addItem(ModItems.sirenTrackContainerAlarm, "Container Alarm")
+        addItem(ModItems.sirenTrackSweepSiren, "Sweep Siren")
+        addItem(ModItems.sirenTrackMissileSiloSiren, "Missile Silo Siren")
+        addItem(ModItems.sirenTrackAirRaidSiren, "Air Raid Siren")
+        addItem(ModItems.sirenTrackNostromoSelfDestruct, "Nostromo Self Destruct")
+        addItem(ModItems.sirenTrackEASAlarmScreech, "EAS Alarm Screech")
+        addItem(ModItems.sirenTrackAPCPass, "APC Pass")
+        addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
         addItem(ModItems.oilDetector, "Oil Reservoir Detector")
-        addItemDesc(ModItems.oilDetector, "Right-click to scan for oil.")
-        addItemDesc(ModItems.oilDetector, "Detector will only find large deposits.", 1)
+        addItemDesc(ModItems.oilDetector, "Right-click to scan for oil.\nDetector will only find large deposits.")
         add(ModItems.oilDetector.get().descriptionId + ".below", "Oil deposit directly below!")
         add(ModItems.oilDetector.get().descriptionId + ".near", "Oil deposit detected nearby")
         add(ModItems.oilDetector.get().descriptionId + ".no_oil", "No oil detected")

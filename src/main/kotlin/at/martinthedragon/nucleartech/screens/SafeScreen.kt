@@ -17,8 +17,8 @@ class SafeScreen(
     private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/safe.png")
 
     init {
-        imageWidth = 175
-        imageHeight = 167
+        imageWidth = 176
+        imageHeight = 168
     }
 
     override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
@@ -31,6 +31,6 @@ class SafeScreen(
         @Suppress("DEPRECATION")
         RenderSystem.color4f(1f, 1f, 1f, 1f)
         minecraft!!.textureManager.bind(texture)
-        blit(matrixStack, (width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
+        blit(matrixStack, leftPos, topPos, 0, 0, xSize, ySize)
     }
 }
