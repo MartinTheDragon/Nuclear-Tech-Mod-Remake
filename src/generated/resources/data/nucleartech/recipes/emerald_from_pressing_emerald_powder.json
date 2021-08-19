@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "emerald",
   "ingredient": {
     "tag": "forge:dusts/emerald"
   },

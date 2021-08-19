@@ -627,11 +627,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun pressRecipe(ingredient: IItemProvider, stampType: PressRecipe.StampType, result: IItemProvider, count: Int, experience: Float, consumer: Consumer<IFinishedRecipe>) {
-        PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_pressing_${ingredient.asItem().registryName!!.path}"))
+        PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_pressing_${ingredient.asItem().registryName!!.path}"))
     }
 
     private fun pressRecipe(ingredient: ITag<Item>, stampType: PressRecipe.StampType, result: IItemProvider, count: Int, ingredientName: String, experience: Float, consumer: Consumer<IFinishedRecipe>) {
-        PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_pressing_$ingredientName"))
+        PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ResourceLocation(NuclearTech.MODID, "${result.asItem().registryName!!.path}_from_pressing_$ingredientName"))
     }
 
     private fun flatPressRecipe(ingredient: IItemProvider, result: IItemProvider, experience: Float, consumer: Consumer<IFinishedRecipe>) {

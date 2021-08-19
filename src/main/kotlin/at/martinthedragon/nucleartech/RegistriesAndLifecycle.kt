@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.datagen.*
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
+import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
 import at.martinthedragon.nucleartech.worldgen.WorldGeneration
 import net.minecraft.block.Block
@@ -15,7 +16,9 @@ import net.minecraft.item.crafting.IRecipeSerializer
 import net.minecraft.tileentity.TileEntityType
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.SoundEvent
+import net.minecraft.util.registry.Registry
 import net.minecraft.world.gen.feature.Feature
+import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
@@ -92,5 +95,11 @@ object RegistriesAndLifecycle {
             for (translation in NuclearLanguageProviders.getLanguageProviders(dataGenerator))
                 dataGenerator.addProvider(translation)
         }
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun registerRecipeTypes(event: RegistryEvent.Register<IRecipeSerializer<*>>) {
+        // no forge registry for recipe types currently available
+        RecipeTypes.getTypes().forEach { Registry.register(Registry.RECIPE_TYPE, it.toString(), it) }
     }
 }

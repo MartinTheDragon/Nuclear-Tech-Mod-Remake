@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "titanium_plate",
   "ingredient": {
     "tag": "forge:ingots/titanium"
   },

@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "quartz",
   "ingredient": {
     "tag": "forge:dusts/quartz"
   },

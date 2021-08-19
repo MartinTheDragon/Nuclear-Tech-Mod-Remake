@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "gold_wire",
   "ingredient": {
     "tag": "forge:ingots/gold"
   },

@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "lapis_lazuli",
   "ingredient": {
     "tag": "forge:dusts/lapis"
   },

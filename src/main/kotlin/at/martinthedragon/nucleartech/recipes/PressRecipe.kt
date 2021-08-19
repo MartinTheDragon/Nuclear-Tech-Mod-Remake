@@ -20,7 +20,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry
 
 class PressRecipe(
     val recipeID: ResourceLocation,
-    val groupName: String,
     val stampType: StampType,
     val ingredient: Ingredient,
     val result: ItemStack,
@@ -49,15 +48,14 @@ class PressRecipe(
 
     override fun getId() = recipeID
 
-    override fun getGroup() = groupName
-
     override fun getSerializer() = RecipeSerializers.PRESSING.get()
 
     override fun getType() = RecipeTypes.PRESSING
 
+    override fun isSpecial() = true
+
     class Serializer : ForgeRegistryEntry<IRecipeSerializer<*>>(), IRecipeSerializer<PressRecipe> {
         override fun fromJson(id: ResourceLocation, jsonObject: JsonObject): PressRecipe {
-            val group = JSONUtils.getAsString(jsonObject, "group", "")
             val stampType = try {
                 StampType.valueOf(JSONUtils.getAsString(jsonObject, "stamp_type").uppercase())
             } catch (e: IllegalArgumentException) {
@@ -66,20 +64,18 @@ class PressRecipe(
             val ingredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(jsonObject, "ingredient"))
             val result = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(jsonObject, "result"))
             val experience = JSONUtils.getAsFloat(jsonObject, "experience", 0F)
-            return PressRecipe(id, group, stampType, ingredient, result, experience)
+            return PressRecipe(id, stampType, ingredient, result, experience)
         }
 
         override fun fromNetwork(id: ResourceLocation, packetBuffer: PacketBuffer): PressRecipe {
-            val group = packetBuffer.readUtf()
             val stampType = packetBuffer.readEnum(StampType::class.java)
             val ingredient = Ingredient.fromNetwork(packetBuffer)
             val result = packetBuffer.readItem()
             val experience = packetBuffer.readFloat()
-            return PressRecipe(id, group, stampType, ingredient, result, experience)
+            return PressRecipe(id, stampType, ingredient, result, experience)
         }
 
         override fun toNetwork(packetBuffer: PacketBuffer, recipe: PressRecipe) {
-            packetBuffer.writeUtf(recipe.group)
             packetBuffer.writeEnum(recipe.stampType)
             recipe.ingredient.toNetwork(packetBuffer)
             packetBuffer.writeItem(recipe.resultItem)

@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "saturnite_plate",
   "ingredient": {
     "item": "nucleartech:saturnite_ingot"
   },

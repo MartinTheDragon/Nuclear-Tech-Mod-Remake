@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "diamond",
   "ingredient": {
     "tag": "forge:dusts/diamond"
   },

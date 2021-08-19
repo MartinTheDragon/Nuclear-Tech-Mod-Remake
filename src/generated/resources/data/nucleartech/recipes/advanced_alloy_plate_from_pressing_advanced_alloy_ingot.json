@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "advanced_alloy_plate",
   "ingredient": {
     "item": "nucleartech:advanced_alloy_ingot"
   },

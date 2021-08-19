@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "iron_plate",
   "ingredient": {
     "tag": "forge:ingots/iron"
   },

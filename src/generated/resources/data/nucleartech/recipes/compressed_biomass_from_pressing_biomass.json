@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "compressed_biomass",
   "ingredient": {
     "tag": "forge:biomass"
   },

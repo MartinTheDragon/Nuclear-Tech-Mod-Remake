@@ -38,6 +38,8 @@ class BlastingRecipe(
 
     override fun getType() = RecipeTypes.BLASTING
 
+    override fun isSpecial() = true
+
     class Serializer : ForgeRegistryEntry<IRecipeSerializer<*>>(), IRecipeSerializer<BlastingRecipe> {
         override fun fromJson(id: ResourceLocation, jsonObject: JsonObject): BlastingRecipe {
             val ingredient1 = Ingredient.fromJson(JSONUtils.getAsJsonObject(jsonObject, "first_ingredient"))

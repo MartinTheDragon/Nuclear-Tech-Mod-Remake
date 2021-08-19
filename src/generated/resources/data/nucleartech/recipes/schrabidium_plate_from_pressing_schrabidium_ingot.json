@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "schrabidium_plate",
   "ingredient": {
     "item": "nucleartech:schrabidium_ingot"
   },

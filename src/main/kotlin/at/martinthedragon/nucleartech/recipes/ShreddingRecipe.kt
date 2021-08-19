@@ -34,6 +34,8 @@ class ShreddingRecipe(
 
     override fun getType() = RecipeTypes.SHREDDING
 
+    override fun isSpecial() = true
+
     class Serializer : ForgeRegistryEntry<IRecipeSerializer<*>>(), IRecipeSerializer<ShreddingRecipe> {
         override fun fromJson(id: ResourceLocation, json: JsonObject): ShreddingRecipe {
             val ingredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ingredient"))

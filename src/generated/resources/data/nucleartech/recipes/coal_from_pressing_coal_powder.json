@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "coal",
   "ingredient": {
     "tag": "forge:dusts/coal"
   },

@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "tungsten_wire",
   "ingredient": {
     "tag": "forge:ingots/tungsten"
   },

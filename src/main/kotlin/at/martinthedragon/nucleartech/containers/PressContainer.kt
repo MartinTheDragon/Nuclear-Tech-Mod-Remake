@@ -8,12 +8,9 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Inventory
-import net.minecraft.inventory.container.RecipeBookContainer
+import net.minecraft.inventory.container.Container
 import net.minecraft.inventory.container.Slot
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.IRecipe
-import net.minecraft.item.crafting.RecipeBookCategory
-import net.minecraft.item.crafting.RecipeItemHelper
 import net.minecraft.network.PacketBuffer
 import net.minecraft.tags.ItemTags
 import net.minecraft.tileentity.AbstractFurnaceTileEntity
@@ -27,7 +24,7 @@ class PressContainer(
     val playerInventory: PlayerInventory,
     val tileEntity: SteamPressTopTileEntity,
     val data: IIntArray = MinecraftIntArray(4)
-) : RecipeBookContainer<SteamPressTopTileEntity>(ContainerTypes.steamPressContainer.get(), windowId) {
+) : Container(ContainerTypes.steamPressContainer.get(), windowId) {
     private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
     private val level = playerInventory.player.level
 
@@ -95,26 +92,6 @@ class PressContainer(
         level.recipeManager.getRecipeFor(RecipeTypes.PRESSING, Inventory(itemStack), level).isPresent
 
     override fun stillValid(player: PlayerEntity) = playerInventory.stillValid(player)
-
-    override fun fillCraftSlotsStackedContents(recipeItemHelper: RecipeItemHelper) {
-        tileEntity.fillStackedContents(recipeItemHelper)
-    }
-
-    override fun clearCraftingContent() {
-        tileEntity.clearContent()
-    }
-
-    override fun recipeMatches(recipe: IRecipe<in SteamPressTopTileEntity>) = recipe.matches(tileEntity, level)
-
-    override fun getResultSlotIndex() = 3
-
-    override fun getGridWidth() = 1
-
-    override fun getGridHeight() = 1
-
-    override fun getSize() = 4
-
-    override fun getRecipeBookType() = RecipeBookCategory.CRAFTING
 
     fun getBurnProgress(): Int {
         val burnTime = data[0]

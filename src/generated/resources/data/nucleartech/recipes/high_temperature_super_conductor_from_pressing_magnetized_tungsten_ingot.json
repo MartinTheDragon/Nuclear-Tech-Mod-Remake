@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "high_temperature_super_conductor",
   "ingredient": {
     "item": "nucleartech:magnetized_tungsten_ingot"
   },

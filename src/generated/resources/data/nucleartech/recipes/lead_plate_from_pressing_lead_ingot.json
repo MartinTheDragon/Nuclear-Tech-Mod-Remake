@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "lead_plate",
   "ingredient": {
     "tag": "forge:ingots/lead"
   },

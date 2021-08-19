@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "aluminium_wire",
   "ingredient": {
     "tag": "forge:ingots/aluminium"
   },

@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "diamond",
   "ingredient": {
     "item": "nucleartech:dense_coal_cluster"
   },

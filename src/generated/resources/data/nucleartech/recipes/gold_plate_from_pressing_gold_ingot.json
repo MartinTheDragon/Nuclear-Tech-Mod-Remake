@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "gold_plate",
   "ingredient": {
     "tag": "forge:ingots/gold"
   },

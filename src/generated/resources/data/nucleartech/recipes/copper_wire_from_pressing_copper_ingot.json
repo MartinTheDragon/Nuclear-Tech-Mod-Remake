@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "copper_wire",
   "ingredient": {
     "tag": "forge:ingots/copper"
   },

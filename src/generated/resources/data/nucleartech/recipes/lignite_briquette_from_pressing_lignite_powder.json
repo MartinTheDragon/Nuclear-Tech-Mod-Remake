@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "lignite_briquette",
   "ingredient": {
     "item": "nucleartech:lignite_powder"
   },

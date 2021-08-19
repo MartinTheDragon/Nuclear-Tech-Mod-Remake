@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "combine_steel_plate",
   "ingredient": {
     "item": "nucleartech:combine_steel_ingot"
   },

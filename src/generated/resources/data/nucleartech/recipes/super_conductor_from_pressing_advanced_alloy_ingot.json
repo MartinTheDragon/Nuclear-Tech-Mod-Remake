@@ -1,6 +1,5 @@
 {
   "type": "nucleartech:pressing",
-  "group": "super_conductor",
   "ingredient": {
     "item": "nucleartech:advanced_alloy_ingot"
   },
