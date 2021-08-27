@@ -4,6 +4,8 @@ import at.martinthedragon.nucleartech.capabilites.CapabilityIrradiationHandler
 import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.datagen.*
 import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.entities.NuclearCreeperEntity
+import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
@@ -19,6 +21,8 @@ import net.minecraft.util.SoundEvent
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.gen.feature.Feature
 import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
@@ -43,22 +47,23 @@ object RegistriesAndLifecycle {
     val SOUNDS: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NuclearTech.MODID)
 
     init {
-        BLOCKS.register(FMLJavaModLoadingContext.get().modEventBus)
+        val modEventBus = FMLJavaModLoadingContext.get().modEventBus
+        BLOCKS.register(modEventBus)
         ModBlocks
-        ITEMS.register(FMLJavaModLoadingContext.get().modEventBus)
+        ITEMS.register(modEventBus)
         ModBlockItems
         ModItems
-        TILE_ENTITIES.register(FMLJavaModLoadingContext.get().modEventBus)
+        TILE_ENTITIES.register(modEventBus)
         TileEntityTypes
-        ENTITIES.register(FMLJavaModLoadingContext.get().modEventBus)
+        ENTITIES.register(modEventBus)
         EntityTypes
-        CONTAINERS.register(FMLJavaModLoadingContext.get().modEventBus)
+        CONTAINERS.register(modEventBus)
         ContainerTypes
-        RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().modEventBus)
+        RECIPE_SERIALIZERS.register(modEventBus)
         RecipeSerializers
-        FEATURES.register(FMLJavaModLoadingContext.get().modEventBus)
+        FEATURES.register(modEventBus)
         WorldGeneration.Features
-        SOUNDS.register(FMLJavaModLoadingContext.get().modEventBus)
+        SOUNDS.register(modEventBus)
         SoundEvents
     }
 
@@ -73,6 +78,11 @@ object RegistriesAndLifecycle {
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
         CapabilityIrradiationHandler.register()
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun createAttributes(event: EntityAttributeCreationEvent) {
+        event.put(EntityTypes.nuclearCreeperEntity.get(), NuclearCreeperEntity.createAttributes())
     }
 
     @SubscribeEvent @JvmStatic
@@ -101,5 +111,12 @@ object RegistriesAndLifecycle {
     fun registerRecipeTypes(event: RegistryEvent.Register<IRecipeSerializer<*>>) {
         // no forge registry for recipe types currently available
         RecipeTypes.getTypes().forEach { Registry.register(Registry.RECIPE_TYPE, it.toString(), it) }
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @JvmStatic
+    fun registerSpawnEggs(event: RegistryEvent.Register<EntityType<*>>) {
+        NuclearSpawnEggItem.registerSpawnEggEntities()
     }
 }

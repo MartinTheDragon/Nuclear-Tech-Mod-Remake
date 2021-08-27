@@ -1,37 +1,20 @@
 package at.martinthedragon.nucleartech
 
+import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
+import java.util.function.Supplier
 
 enum class CreativeTabs(val itemGroup: ItemGroup) {
-    Parts(
-        object : ItemGroup("nucleartech_parts") {
-            override fun makeIcon() = ItemStack(ModItems.uraniumIngot.get())
-        }
-    ),
-    Items(
-        object : ItemGroup("nucleartech_items") {
-            override fun makeIcon() = ItemStack(ModItems.stoneFlatStamp.get()) // TODO
-        }
-    ),
-    Templates(
-        object : ItemGroup("nucleartech_templates") {
-            override fun makeIcon() = ItemStack(ModItems.machineTemplateFolder.get())
-        }
-    ),
-    Blocks(
-        object : ItemGroup("nucleartech_blocks") {
-            override fun makeIcon() = ItemStack(ModBlockItems.uraniumOre.get())
-        }
-    ),
-    Machines(
-        object : ItemGroup("nucleartech_machines") {
-            override fun makeIcon() = ItemStack(ModBlockItems.safe.get()) // TODO
-        }
-    ),
-    Consumables(
-        object : ItemGroup("nucleartech_consumables") {
-            override fun makeIcon() = ItemStack(ModItems.oilDetector.get()) // TODO
-        }
-    )
+    Parts(createItemGroup("parts", ModItems.uraniumIngot)),
+    Items(createItemGroup("items", ModItems.stoneFlatStamp)), // TODO
+    Templates(createItemGroup("templates", ModItems.machineTemplateFolder)),
+    Blocks(createItemGroup("blocks", ModBlockItems.uraniumOre)),
+    Machines(createItemGroup("machines", ModBlockItems.safe)), // TODO
+    Consumables(createItemGroup("consumables", ModItems.oilDetector)),
+    Miscellaneous(createItemGroup("miscellaneous", ModItems.nuclearCreeperSpawnEgg))
+}
+
+private fun createItemGroup(name: String, iconItem: Supplier<out Item>) = object : ItemGroup("${NuclearTech.MODID}_$name") {
+    override fun makeIcon() = ItemStack(iconItem.get()) // do not cache, because Forge plans on making registries reloadable
 }

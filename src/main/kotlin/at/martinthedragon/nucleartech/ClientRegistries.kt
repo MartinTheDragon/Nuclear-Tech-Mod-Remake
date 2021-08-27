@@ -3,7 +3,9 @@ package at.martinthedragon.nucleartech
 import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.renderers.FalloutRainRenderer
+import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NukeExplosionRenderer
+import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
 import at.martinthedragon.nucleartech.screens.*
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
 import at.martinthedragon.nucleartech.tileentities.renderers.SteamPressTopTileEntityRenderer
@@ -19,6 +21,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.client.event.ColorHandlerEvent
 import net.minecraftforge.client.event.TextureStitchEvent
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.EventPriority
@@ -54,6 +57,7 @@ object ClientRegistries {
         NuclearTech.LOGGER.debug("Registering Entity Renderers")
         RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nukeExplosionEntity.get(), ::NukeExplosionRenderer)
         RenderingRegistry.registerEntityRenderingHandler(EntityTypes.falloutRainEntity.get(), ::FalloutRainRenderer)
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nuclearCreeperEntity.get(), ::NuclearCreeperRenderer)
 
         NuclearTech.LOGGER.debug("Creating search trees")
         val templateFolderSearchTree = SearchTree<ItemStack>({
@@ -72,6 +76,16 @@ object ClientRegistries {
         if (event.map.location() == PlayerContainer.BLOCK_ATLAS) {
             NuclearTech.LOGGER.debug("Adding atlas textures")
             event.addSprite(ResourceLocation(NuclearTech.MODID, "block/steam_press/steam_press_head"))
+        }
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun registerColors(event: ColorHandlerEvent) {
+        if (event is ColorHandlerEvent.Item) {
+            val itemColors = event.itemColors
+            for (spawnEgg in NuclearSpawnEggItem.resolvedMap.values) {
+                itemColors.register({ _, color -> spawnEgg.getColor(color) }, spawnEgg)
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("itemGroup.${MODID}_blocks", "NTM Erze und Blöcke")
         add("itemGroup.${MODID}_machines", "NTM Maschinen")
         add("itemGroup.${MODID}_consumables", "NTM Verbrauchsgüter")
+        add("itemGroup.${MODID}_miscellaneous", "NTM Verschiedenes")
 
         add(EffectItem.EffectTypes.Radioactive.effectInfo.string, "[Radioaktiv]")
         add(EffectItem.EffectTypes.Blinding.effectInfo.string, "[Erblindend]")
@@ -781,6 +782,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addEntityType(EntityTypes.nukeExplosionEntity, "Nukleare Explosion")
         addEntityType(EntityTypes.falloutRainEntity, "Fallout-Regen")
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeperEntity, "Nuklearer Creeper")
 
         addContainerType(ContainerTypes.sirenContainer, "Sirene")
         addContainerType(ContainerTypes.safeContainer, "Panzerschrank")
@@ -823,4 +825,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.template_folder_results", "Vorlagen-Zeichenmappe")
         add("jei.$MODID.category.shredding", "Zerkleinerungsrezepte")
     }
+
+    override val spawnEggSuffix = "-Spawn-Ei"
+    override val spawnEggEntityStringWordSeparator = '-'
 }

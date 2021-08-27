@@ -12,7 +12,7 @@ import net.minecraft.data.DataGenerator
 
 class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.EN_US) {
     override fun validate() {
-        NuclearLanguageProviders.keys = data.keys.toSet()
+        NuclearLanguageProviders.keys = super.data.keys.toSet()
     }
 
     override fun addTranslations() {
@@ -22,6 +22,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("itemGroup.${MODID}_blocks", "NTM Ores and Blocks")
         add("itemGroup.${MODID}_machines", "NTM Machines")
         add("itemGroup.${MODID}_consumables", "NTM Consumables and Gear")
+        add("itemGroup.${MODID}_miscellaneous", "NTM Miscellaneous Items")
 
         add(EffectItem.EffectTypes.Radioactive.effectInfo.string, "[Radioactive]")
         add(EffectItem.EffectTypes.Blinding.effectInfo.string, "[Blinding]")
@@ -785,6 +786,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addEntityType(EntityTypes.nukeExplosionEntity, "Nuclear Explosion")
         addEntityType(EntityTypes.falloutRainEntity, "Fallout Rain")
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeperEntity, "Nuclear Creeper")
 
         addContainerType(ContainerTypes.sirenContainer, "Siren")
         addContainerType(ContainerTypes.safeContainer, "Safe")
@@ -827,4 +829,6 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.template_folder_results", "Template Folder")
         add("jei.$MODID.category.shredding", "Shredding")
     }
+
+    override val spawnEggSuffix = " Spawn Egg"
 }

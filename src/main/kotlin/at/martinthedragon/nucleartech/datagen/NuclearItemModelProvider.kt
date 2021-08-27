@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
 import net.minecraft.block.Block
 import net.minecraft.data.DataGenerator
 import net.minecraft.item.Item
@@ -521,6 +522,10 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.oilDetector.get())
         simpleItem(ModItems.creativeNuclearExplosionSpawner.get())
 
+        for (spawnEgg in NuclearSpawnEggItem.resolvedMap.values) {
+            spawnEgg(spawnEgg)
+        }
+
         // BlockItems
 
         getBuilder(ModBlockItems.glowingMushroomBlock.id.path).parent(cubeAll).texture("all", blockTexture(ModBlocks.glowingMushroomBlock.get()))
@@ -530,11 +535,16 @@ class NuclearItemModelProvider(
 
     private val cubeAll = getExistingFile(mcLoc("block/cube_all"))
     private val generatedItem = getExistingFile(mcLoc("item/generated"))
+    private val spawnEggItem = getExistingFile(mcLoc("item/template_spawn_egg"))
 
     private fun simpleItem(item: Item) {
         getBuilder(item.registryName!!.path)
             .parent(generatedItem)
             .texture("layer0", itemTexture(item))
+    }
+
+    private fun spawnEgg(item: Item) {
+        getBuilder(item.registryName!!.path).parent(spawnEggItem)
     }
 
     private fun blockTexture(block: Block) =
