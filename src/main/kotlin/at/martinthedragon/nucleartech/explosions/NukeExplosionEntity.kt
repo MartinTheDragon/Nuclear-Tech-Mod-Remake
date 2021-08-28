@@ -2,6 +2,8 @@ package at.martinthedragon.nucleartech.explosions
 
 import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.entities.FalloutRainEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosionRay
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.CatEntity

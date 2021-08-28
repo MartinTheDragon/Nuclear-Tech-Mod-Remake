@@ -1,6 +1,5 @@
-package at.martinthedragon.nucleartech.capabilites
+package at.martinthedragon.nucleartech.capabilites.radiation
 
-import at.martinthedragon.nucleartech.radiation.EntityIrradiationHandler
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.nbt.INBT
 import net.minecraft.util.Direction

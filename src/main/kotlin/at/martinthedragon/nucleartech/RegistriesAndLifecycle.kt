@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.capabilites.CapabilityIrradiationHandler
+import at.martinthedragon.nucleartech.capabilites.radiation.CapabilityIrradiationHandler
 import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.datagen.*
 import at.martinthedragon.nucleartech.entities.EntityTypes

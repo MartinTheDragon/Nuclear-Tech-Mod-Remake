@@ -1,13 +1,11 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.capabilites.IrradiationCapabilityProvider
+import at.martinthedragon.nucleartech.capabilites.radiation.IrradiationCapabilityProvider
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.TickEvent
-import net.minecraftforge.event.world.BiomeLoadingEvent
-import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent

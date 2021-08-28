@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.capabilites.CapabilityIrradiationHandler
-import at.martinthedragon.nucleartech.capabilites.IIrradiationHandlerModifiable
+import at.martinthedragon.nucleartech.capabilites.radiation.CapabilityIrradiationHandler
+import at.martinthedragon.nucleartech.capabilites.radiation.IIrradiationHandlerModifiable
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.merchant.villager.VillagerEntity

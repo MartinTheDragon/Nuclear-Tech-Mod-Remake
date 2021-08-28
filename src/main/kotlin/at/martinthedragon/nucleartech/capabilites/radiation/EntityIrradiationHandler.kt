@@ -1,6 +1,5 @@
-package at.martinthedragon.nucleartech.radiation
+package at.martinthedragon.nucleartech.capabilites.radiation
 
-import at.martinthedragon.nucleartech.capabilites.IIrradiationHandlerModifiable
 import net.minecraft.nbt.CompoundNBT
 import net.minecraftforge.common.util.INBTSerializable
 

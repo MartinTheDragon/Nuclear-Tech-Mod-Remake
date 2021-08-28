@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.explosions
+package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
