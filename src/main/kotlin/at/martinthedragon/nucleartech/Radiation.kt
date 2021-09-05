@@ -18,8 +18,9 @@ import net.minecraft.world.server.ChunkManager
 import net.minecraft.world.server.ServerWorld
 
 object Radiation {
-    var irradiatedEntityList = listOf<LivingEntity>() // TODO still a bit spaghetti, consider doing it differently
+    internal var irradiatedEntityList = listOf<LivingEntity>() // TODO still a bit spaghetti, consider doing it differently
 
+    @JvmStatic
     fun addEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
         val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow(::RuntimeException)
@@ -28,6 +29,7 @@ object Radiation {
         cap.setIrradiation(newIrradiation)
     }
 
+    @JvmStatic
     fun setEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
         val cap = entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).orElseThrow(::RuntimeException)
@@ -36,6 +38,7 @@ object Radiation {
         cap.setIrradiation(newIrradiation)
     }
 
+    @JvmStatic
     fun getEntityIrradiation(entity: LivingEntity): Float {
         if (entity.isDeadOrDying) return 0f
         if (!entity.getCapability(CapabilityIrradiationHandler.irradiationHandlerCapability).isPresent) return 0f
@@ -44,7 +47,7 @@ object Radiation {
         return cap.getIrradiation()
     }
 
-    fun applyRadiationEffects(world: World) {
+    internal fun applyRadiationEffects(world: World) {
         if (!world.isClientSide) {
             // 3000 IQ strategy to get irradiated entities without causing ConcurrentModificationException follows (now with access transformation):
             if (world.gameTime % 20 == 0L) { // polling rate

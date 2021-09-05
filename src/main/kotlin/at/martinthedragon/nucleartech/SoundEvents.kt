@@ -28,4 +28,6 @@ object SoundEvents {
     val sirenTrackRazortrainHorn: RegistryObject<SoundEvent> = SOUNDS.register("siren.razortrain_horn") { SoundEvent(ResourceLocation(NuclearTech.MODID, "siren.razortrain_horn")) }
     val pressOperate: RegistryObject<SoundEvent> = SOUNDS.register("press.operate") { SoundEvent(ResourceLocation(NuclearTech.MODID, "press.operate")) }
     val randomBleep: RegistryObject<SoundEvent> = SOUNDS.register("random.bleep") { SoundEvent(ResourceLocation(NuclearTech.MODID, "random.bleep")) }
+    val randomBoop: RegistryObject<SoundEvent> = SOUNDS.register("random.boop") { SoundEvent(ResourceLocation(NuclearTech.MODID, "random.boop")) }
+    val randomUnpack: RegistryObject<SoundEvent> = SOUNDS.register("random.unpack") { SoundEvent(ResourceLocation(NuclearTech.MODID, "random.unpack")) }
 }

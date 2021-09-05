@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
+import at.martinthedragon.nucleartech.blocks.FatMan
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.*
 import net.minecraft.client.util.ITooltipFlag
@@ -542,6 +543,19 @@ object ModItems {
     val sirenTrackEASAlarmScreech: RegistryObject<SirenTrack> = ITEMS.register("siren_track_eas_alarm_screech") { SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 50, true, 0xB3A8C1) }
     val sirenTrackAPCPass: RegistryObject<SirenTrack> = ITEMS.register("siren_track_apc_pass") { SirenTrack(SoundEvents.sirenTrackAPCPass, 50, false, 0x3437D3) }
     val sirenTrackRazortrainHorn: RegistryObject<SirenTrack> = ITEMS.register("siren_track_razortrain_horn") { SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
+
+    // Bomb Items
+
+    val bundleOfImplosionPropellant: RegistryObject<Item> = ITEMS.register("bundle_of_implosion_propellant") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val bombIgniter: RegistryObject<Item> = ITEMS.register("bomb_igniter") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val plutoniumCore: RegistryObject<Item> = ITEMS.register("plutonium_core") { object : EffectItem(listOf(EffectTypes.Radioactive), Properties().tab(CreativeTabs.Bombs).stacksTo(1), 5F) {
+        override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
+            autoTooltip(stack, tooltip)
+            super.appendHoverText(stack, worldIn, tooltip, flagIn)
+        }
+    }}
+    val detonator: RegistryObject<Detonator> = ITEMS.register("detonator") { Detonator(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val fatManKit: RegistryObject<BombKitItem> = ITEMS.register("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatMan.requiredComponents, 0xFFD800, Item.Properties().tab(CreativeTabs.Bombs)) }
 
     // Consumables
 

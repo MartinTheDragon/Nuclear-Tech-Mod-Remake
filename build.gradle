@@ -1,7 +1,7 @@
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
         mavenCentral()
+        maven { url = 'https://files.minecraftforge.net/maven' } // using it after central because they messed up their repo
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
@@ -208,15 +208,17 @@ repositories {
     mavenCentral()
 }
 
+def kotlinCompilerArgs = ["-Xopt-in=kotlin.RequiresOptIn", "-Xjvm-default=all"]
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs += kotlinCompilerArgs
     }
 }
 compileTestKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs += kotlinCompilerArgs
     }
 }

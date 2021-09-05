@@ -10,7 +10,9 @@ import java.util.*
 import kotlin.reflect.KClass
 
 object NuclearPacketHandler {
-    private const val PROTOCOL_VERSION = "1"
+    const val PROTOCOL_VERSION = "1"
+
+    @JvmField
     val INSTANCE: SimpleChannel = NetworkRegistry.newSimpleChannel(
         ResourceLocation(NuclearTech.MODID, "main"),
         this::PROTOCOL_VERSION,
@@ -20,12 +22,12 @@ object NuclearPacketHandler {
 
     private var currentPacketID = 0
 
-    fun initialize() {
+    internal fun initialize() {
         registerMessage(CraftMachineTemplateMessage.Companion::decode, NetworkDirection.PLAY_TO_SERVER)
         registerMessage(SpawnNuclearExplosionMessage.Companion::decode, NetworkDirection.PLAY_TO_SERVER)
     }
 
-    fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {
+    private fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {
         @Suppress("INACCESSIBLE_TYPE")
         INSTANCE.registerMessage(
             currentPacketID++,
@@ -38,7 +40,7 @@ object NuclearPacketHandler {
         return this
     }
 
-    inline fun <reified T : NetworkMessage<T>> registerMessage(noinline decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null) =
+    private inline fun <reified T : NetworkMessage<T>> registerMessage(noinline decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null) =
         registerMessage(T::class, decoder, networkDirection)
 
 }

@@ -74,6 +74,6 @@ class Safe(properties: Properties) : Block(properties) {
     }
 
     companion object {
-        val FACING: DirectionProperty = HorizontalBlock.FACING
+        @JvmField val FACING: DirectionProperty = HorizontalBlock.FACING
     }
 }

@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.entities.renderers
 
-import at.martinthedragon.nucleartech.explosions.FalloutRainEntity
+import at.martinthedragon.nucleartech.entities.FalloutRainEntity
 import net.minecraft.client.renderer.culling.ClippingHelper
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererManager

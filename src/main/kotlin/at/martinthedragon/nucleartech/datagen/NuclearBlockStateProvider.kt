@@ -8,8 +8,11 @@ import net.minecraft.block.SixWayBlock
 import net.minecraft.data.DataGenerator
 import net.minecraft.state.properties.BlockStateProperties
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.client.model.generators.BlockModelBuilder
 import net.minecraftforge.client.model.generators.BlockStateProvider
 import net.minecraftforge.client.model.generators.ConfiguredModel
+import net.minecraftforge.client.model.generators.ModelBuilder
+import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder
 import net.minecraftforge.common.data.ExistingFileHelper
 
 class NuclearBlockStateProvider(
@@ -178,6 +181,18 @@ class NuclearBlockStateProvider(
         litHorizontalBlock(ModBlocks.combustionGenerator.get())
         litHorizontalBlock(ModBlocks.electricFurnace.get())
         cubeAllSides(ModBlocks.shredder.get(), north = extend(blockTexture(ModBlocks.shredder.get()), "_front"), south = extend(blockTexture(ModBlocks.shredder.get()), "_front"), east = extend(blockTexture(ModBlocks.shredder.get()), "_side"), west = extend(blockTexture(ModBlocks.shredder.get()), "_side"))
+        horizontalBlock(ModBlocks.fatMan.get(), models().getBuilder("fat_man")
+            .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
+            .modelLocation(modLoc("models/block/fat_man/fat_man.obj"))
+            .flipV(true).detectCullableFaces(false).end()
+            .texture("fat_man_texture", modLoc("block/fat_man"))
+            .texture("particle", modLoc("block/fat_man"))
+            .parent(blockTransformsModel)
+            .transforms()
+            .transform(ModelBuilder.Perspective.GUI).rotation(30F, 225F, 0F).translation(2.5F, -3F, 0F).scale(.34F).end()
+            .transform(ModelBuilder.Perspective.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.5F).end()
+            .end()
+        )
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.scorchedUraniumOre.get())
@@ -305,8 +320,10 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.combustionGenerator.get())
         copiedBlockItem(ModBlocks.electricFurnace.get())
         copiedBlockItem(ModBlocks.shredder.get())
+        copiedBlockItem(ModBlocks.fatMan.get())
     }
 
+    private val blockTransformsModel = models().getExistingFile(mcLoc("block/block"))
     private val generatedItem = models().getExistingFile(mcLoc("item/generated"))
 
     private fun simpleItem(block: Block) {

@@ -1,8 +1,6 @@
 package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ENTITIES
-import at.martinthedragon.nucleartech.explosions.FalloutRainEntity
-import at.martinthedragon.nucleartech.explosions.NukeExplosionEntity
 import net.minecraft.entity.EntityClassification
 import net.minecraft.entity.EntityType
 import net.minecraftforge.fml.RegistryObject

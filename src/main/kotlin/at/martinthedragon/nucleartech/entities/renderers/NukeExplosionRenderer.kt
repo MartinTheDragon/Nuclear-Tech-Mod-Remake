@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.entities.renderers
 
-import at.martinthedragon.nucleartech.explosions.NukeExplosionEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import net.minecraft.client.renderer.culling.ClippingHelper
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererManager

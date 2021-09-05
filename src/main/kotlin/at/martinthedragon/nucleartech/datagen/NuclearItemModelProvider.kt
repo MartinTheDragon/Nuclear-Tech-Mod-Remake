@@ -4,12 +4,14 @@ import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.items.BombKitItem
 import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
 import net.minecraft.block.Block
 import net.minecraft.data.DataGenerator
 import net.minecraft.item.Item
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.generators.ItemModelProvider
+import net.minecraftforge.client.model.generators.ModelFile
 import net.minecraftforge.common.data.ExistingFileHelper
 
 class NuclearItemModelProvider(
@@ -519,12 +521,20 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.sirenTrackEASAlarmScreech.get())
         simpleItem(ModItems.sirenTrackAPCPass.get())
         simpleItem(ModItems.sirenTrackRazortrainHorn.get())
+        simpleItem(ModItems.bundleOfImplosionPropellant.get())
+        simpleItem(ModItems.bombIgniter.get())
+        simpleItem(ModItems.plutoniumCore.get())
+        simpleItem(ModItems.detonator.get())
         simpleItem(ModItems.oilDetector.get())
         simpleItem(ModItems.creativeNuclearExplosionSpawner.get())
 
-        for (spawnEgg in NuclearSpawnEggItem.resolvedMap.values) {
-            spawnEgg(spawnEgg)
-        }
+        bombKitItem = getBuilder("template_bomb_kit").parent(generatedItem)
+            .texture("layer0", modLoc("$ITEM_FOLDER/bomb_kit"))
+            .texture("layer1", modLoc("$ITEM_FOLDER/bomb_kit_overlay"))
+
+        for (bombKit in BombKitItem.allKits) bombKit(bombKit)
+
+        for (spawnEgg in NuclearSpawnEggItem.resolvedMap.values) spawnEgg(spawnEgg)
 
         // BlockItems
 
@@ -536,11 +546,16 @@ class NuclearItemModelProvider(
     private val cubeAll = getExistingFile(mcLoc("block/cube_all"))
     private val generatedItem = getExistingFile(mcLoc("item/generated"))
     private val spawnEggItem = getExistingFile(mcLoc("item/template_spawn_egg"))
+    private lateinit var bombKitItem: ModelFile
 
     private fun simpleItem(item: Item) {
         getBuilder(item.registryName!!.path)
             .parent(generatedItem)
             .texture("layer0", itemTexture(item))
+    }
+
+    private fun bombKit(item: Item) {
+        getBuilder(item.registryName!!.path).parent(bombKitItem)
     }
 
     private fun spawnEgg(item: Item) {

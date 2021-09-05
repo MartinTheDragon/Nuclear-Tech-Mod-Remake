@@ -11,6 +11,7 @@ import kotlin.math.min
  *
  * Negative values for [amount] are allowed, but may not always work and are unrecommended.
  */
+@JvmOverloads
 fun transferEnergy(from: IEnergyStorage, to: IEnergyStorage, amount: Int = Int.MAX_VALUE): Int =
     if (to.energyStored < to.maxEnergyStored)
         to.receiveEnergy(from.energyStored, true).let { maxPossible ->
@@ -26,6 +27,7 @@ fun transferEnergy(from: IEnergyStorage, to: IEnergyStorage, amount: Int = Int.M
  *
  * Negative values for [amount] are allowed, but may not always work and are unrecommended.
  */
+@JvmOverloads
 fun transferEnergy(from: ItemStack, to: ItemStack, amount: Int = Int.MAX_VALUE): Int =
     from.getCapability(CapabilityEnergy.ENERGY).map { fromStorage ->
         to.getCapability(CapabilityEnergy.ENERGY).map { toStorage ->
@@ -39,6 +41,7 @@ fun transferEnergy(from: ItemStack, to: ItemStack, amount: Int = Int.MAX_VALUE):
  *
  * Negative values for [amount] are allowed, but may not always work and are unrecommended.
  */
+@JvmOverloads
 fun transferEnergy(from: ItemStack, to: IEnergyStorage, amount: Int = Int.MAX_VALUE): Int =
     from.getCapability(CapabilityEnergy.ENERGY).map { itemStackEnergy ->
         transferEnergy(itemStackEnergy, to, amount)
@@ -50,6 +53,7 @@ fun transferEnergy(from: ItemStack, to: IEnergyStorage, amount: Int = Int.MAX_VA
  *
  * Negative values for [amount] are allowed, but may not always work and are unrecommended.
  */
+@JvmOverloads
 fun transferEnergy(from: IEnergyStorage, to: ItemStack, amount: Int = Int.MAX_VALUE): Int =
     to.getCapability(CapabilityEnergy.ENERGY).map { itemStackEnergy ->
         transferEnergy(from, itemStackEnergy, amount)

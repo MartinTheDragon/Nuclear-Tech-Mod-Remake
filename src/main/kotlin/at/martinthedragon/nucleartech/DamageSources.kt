@@ -4,5 +4,5 @@ import net.minecraft.util.DamageSource
 
 object DamageSources {
     val radiation: DamageSource = DamageSource("${NuclearTech.MODID}.radiation").bypassArmor()
-    val nuclearBlast: DamageSource = DamageSource("${NuclearTech.MODID}.nuclear_blast").setExplosion()
+    val nuclearBlast: DamageSource = DamageSource("${NuclearTech.MODID}.nuclearBlast").setExplosion()
 }

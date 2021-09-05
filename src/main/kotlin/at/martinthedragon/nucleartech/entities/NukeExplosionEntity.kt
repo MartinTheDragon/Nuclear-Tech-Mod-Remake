@@ -1,9 +1,6 @@
-package at.martinthedragon.nucleartech.explosions
+package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.DamageSources
-import at.martinthedragon.nucleartech.entities.EntityTypes
-import at.martinthedragon.nucleartech.entities.FalloutRainEntity
-import at.martinthedragon.nucleartech.entities.NukeExplosionRay
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.CatEntity
@@ -17,6 +14,7 @@ import net.minecraft.util.math.RayTraceContext
 import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
+import kotlin.math.ceil
 
 class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: World) : Entity(entityType, world) {
     var strength = 0
@@ -122,5 +120,13 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
             entity is CatEntity -> false
             else -> true
         }
+
+        fun create(world: World, pos: Vector3d, strength: Int): Boolean = if (world.isClientSide) false
+        else world.addFreshEntity(NukeExplosionEntity(EntityTypes.nukeExplosionEntity.get(), world).apply {
+            this@apply.strength = strength
+            speed = ceil(100000F / strength).toInt()
+            length = strength / 2
+            moveTo(pos)
+        })
     }
 }

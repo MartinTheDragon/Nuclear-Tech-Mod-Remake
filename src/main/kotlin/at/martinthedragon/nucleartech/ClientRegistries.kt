@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.renderers.FalloutRainRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NukeExplosionRenderer
+import at.martinthedragon.nucleartech.items.BombKitItem
 import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
 import at.martinthedragon.nucleartech.screens.*
 import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
@@ -47,6 +48,8 @@ object ClientRegistries {
         ScreenManager.register(ContainerTypes.combustionGeneratorContainer.get(), ::CombustionGeneratorScreen)
         ScreenManager.register(ContainerTypes.electricFurnaceContainer.get(), ::ElectricFurnaceScreen)
         ScreenManager.register(ContainerTypes.shredderContainer.get(), ::ShredderScreen)
+
+        ScreenManager.register(ContainerTypes.fatManContainer.get(), ::FatManScreen)
     }
 
     @SubscribeEvent @JvmStatic
@@ -83,8 +86,11 @@ object ClientRegistries {
     fun registerColors(event: ColorHandlerEvent) {
         if (event is ColorHandlerEvent.Item) {
             val itemColors = event.itemColors
+            for (bombKit in BombKitItem.allKits) {
+                itemColors.register({ _, layer -> if (layer == 0) -1 else bombKit.color }, bombKit)
+            }
             for (spawnEgg in NuclearSpawnEggItem.resolvedMap.values) {
-                itemColors.register({ _, color -> spawnEgg.getColor(color) }, spawnEgg)
+                itemColors.register({ _, layer -> spawnEgg.getColor(layer) }, spawnEgg)
             }
         }
     }

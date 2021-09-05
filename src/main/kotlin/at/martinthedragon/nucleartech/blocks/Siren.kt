@@ -70,6 +70,6 @@ class Siren(properties: Properties) : Block(properties) {
     override fun createTileEntity(state: BlockState?, world: IBlockReader?) = SirenTileEntity()
 
     companion object {
-        val POWERED: BooleanProperty = BlockStateProperties.POWERED
+        @JvmField val POWERED: BooleanProperty = BlockStateProperties.POWERED
     }
 }

@@ -11,7 +11,7 @@ object CapabilityIrradiationHandler {
     @CapabilityInject(IIrradiationHandler::class)
     lateinit var irradiationHandlerCapability: Capability<IIrradiationHandler>
 
-    fun register() {
+    internal fun register() {
         CapabilityManager.INSTANCE.register(IIrradiationHandler::class.java,
             object : Capability.IStorage<IIrradiationHandler> {
                 override fun writeNBT(

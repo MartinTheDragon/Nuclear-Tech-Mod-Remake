@@ -17,6 +17,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("itemGroup.${MODID}_templates", "NTM Fertigungsvorlagen")
         add("itemGroup.${MODID}_blocks", "NTM Erze und Blöcke")
         add("itemGroup.${MODID}_machines", "NTM Maschinen")
+        add("itemGroup.${MODID}_bombs", "NTM Bomben")
         add("itemGroup.${MODID}_consumables", "NTM Verbrauchsgüter")
         add("itemGroup.${MODID}_miscellaneous", "NTM Verschiedenes")
 
@@ -167,6 +168,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.combustionGenerator, "Verbrennungsgenerator")
         addBlock(ModBlocks.electricFurnace, "Elektrischer Ofen")
         addBlock(ModBlocks.shredder, "Brecher")
+
+        addBlock(ModBlocks.fatMan, "Fat Man")
 
         addItem(ModItems.uraniumIngot, "Uranbarren")
         addItem(ModItems.u233Ingot, "U233-Barren")
@@ -760,6 +763,27 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackAPCPass, "APC Pass")
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        addItem(ModItems.bundleOfImplosionPropellant, "Implosions-Treibladung")
+        addItemDesc(ModItems.bundleOfImplosionPropellant, "Wird gebraucht für:\nFat Man\nIvy Mike\nTsar Bombe")
+        addItem(ModItems.bombIgniter, "Zünder")
+        addItemDesc(ModItems.bombIgniter, "Wird gebraucht für Fat Man")
+        addItem(ModItems.plutoniumCore, "Plutoniumkern")
+        addItemDesc(ModItems.plutoniumCore, "Wird gebraucht für:\nFat Man\nIvy Mike\nTsar Bombe")
+        addItem(ModItems.detonator, "Fernzünder")
+        addItemDesc(ModItems.detonator, "Shift-Rechtsklick auf einen Sprengstoff um die Position zu setzen,\nRechtsklick um zu sprengen!")
+        val detonatorDescriptionId = ModItems.detonator.get().descriptionId
+        add("$detonatorDescriptionId.tooltip_no_position_set", "Keine Position gesetzt!")
+        add("$detonatorDescriptionId.position_set", "Position gesetzt!")
+        add("$detonatorDescriptionId.error_position_not_set", "Die Position wurde noch nicht gesetzt!")
+        add("$detonatorDescriptionId.error_position_not_loaded", "Das Ziel ist momentan nicht in der Welt geladen!")
+        add("$detonatorDescriptionId.error_not_explosive", "Das Ziel ist kein gültiger Sprengstoff!")
+        add("$detonatorDescriptionId.error_invalid_tile_entity", "Serverfehler: Die TileEntity des Ziels ist ungültig!")
+        add("$detonatorDescriptionId.error_missing_components", "Der Sprengstoff ist unvollständig!")
+        add("$detonatorDescriptionId.error_detonation_prohibited", "Die Sprengung wurde aufgehalten!")
+        add("$detonatorDescriptionId.error_unknown", "Ein unbekannter Fehler ist während der Sprengung aufgetreten")
+        add("$detonatorDescriptionId.detonation_successful", "Sprengung!")
+        addItem(ModItems.fatManKit, "Fat Man Kit")
+
         addItem(ModItems.oilDetector, "Ölvorkommen-Detektor")
         addItemDesc(ModItems.oilDetector, "Rechtsklick um nach Öl zu suchen.\nDetektor findet nur größere Vorkommen.")
         add(ModItems.oilDetector.get().descriptionId + ".below", "Ölvorkommen direkt untertage!")
@@ -792,6 +816,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addContainerType(ContainerTypes.electricFurnaceContainer, "Elektrischer Ofen")
         addContainerType(ContainerTypes.shredderContainer, "Brecher")
 
+        addContainerType(ContainerTypes.fatManContainer, "Fat Man")
+
         addSound(SoundEvents.sirenTrackHatchSiren, "Sirene läuft: Hatch Siren")
         addSound(SoundEvents.sirenTrackAutopilotDisconnected, "Sirene läuft: Autopilot Disconnected")
         addSound(SoundEvents.sirenTrackAMSSiren, "Sirene läuft: AMS Siren")
@@ -814,6 +840,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackRazortrainHorn, "Sirene läuft: Razortrain Horn")
         addSound(SoundEvents.pressOperate, "Presse stampft")
         addSound(SoundEvents.randomBleep, "Gerät piepst")
+        addSound(SoundEvents.randomBoop, "Gerät boopt")
+        addSound(SoundEvents.randomUnpack, "Gegenstand ausgepackt")
 
         addDamageSource(DamageSources.radiation, "%1\$s starb an Strahlenvergiftung")
         addDamageSource(DamageSources.nuclearBlast, "%1\$s wurde von einer Atomexplosion weggeblasen")

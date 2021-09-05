@@ -84,6 +84,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
                 }
                 block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> level.setBlockAndUpdate(pos, ModBlocks.deadGrass.get().defaultBlockState()).also { return }
                 block.`is`(Blocks.MYCELIUM) -> level.setBlockAndUpdate(pos, ModBlocks.glowingMycelium.get().defaultBlockState()).also { return }
+                // FIXME drops tall flowers, e.g. peonies
                 block.block is IPlantable || block.block is IGrowable -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
                 block.`is`(Tags.Blocks.SAND) -> {
                     if (random.nextInt(60) == 0)

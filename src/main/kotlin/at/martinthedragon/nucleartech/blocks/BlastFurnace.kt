@@ -119,7 +119,7 @@ class BlastFurnace(properties: Properties) : Block(properties) {
     override fun createTileEntity(state: BlockState?, world: IBlockReader?) = BlastFurnaceTileEntity()
 
     companion object {
-        val FACING: DirectionProperty = HorizontalBlock.FACING
-        val LIT: BooleanProperty = BlockStateProperties.LIT
+        @JvmField val FACING: DirectionProperty = HorizontalBlock.FACING
+        @JvmField val LIT: BooleanProperty = BlockStateProperties.LIT
     }
 }

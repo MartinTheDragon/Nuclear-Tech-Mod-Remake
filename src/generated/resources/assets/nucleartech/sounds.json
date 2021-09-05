@@ -192,5 +192,18 @@
     "sounds": [
       "nucleartech:random/bleep"
     ]
+  },
+  "random.boop": {
+    "subtitle": "subtitle.nucleartech.random.boop",
+    "sounds": [
+      "nucleartech:random/boop"
+    ]
+  },
+  "random.unpack": {
+    "subtitle": "subtitle.nucleartech.random.unpack",
+    "sounds": [
+      "nucleartech:random/unpack1",
+      "nucleartech:random/unpack2"
+    ]
   }
 }

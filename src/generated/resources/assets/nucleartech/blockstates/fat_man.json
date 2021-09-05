@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nucleartech:block/fat_man"
+    },
+    "facing=south": {
+      "model": "nucleartech:block/fat_man",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nucleartech:block/fat_man",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "nucleartech:block/fat_man",
+      "y": 90
+    }
+  }
+}

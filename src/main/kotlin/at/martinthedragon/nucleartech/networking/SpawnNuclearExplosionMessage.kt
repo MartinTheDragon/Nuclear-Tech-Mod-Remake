@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.entities.EntityTypes
-import at.martinthedragon.nucleartech.explosions.NukeExplosionEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.Util
@@ -50,6 +50,7 @@ class SpawnNuclearExplosionMessage(
     }
 
     companion object {
+        @JvmStatic
         fun decode(packetBuffer: PacketBuffer) = SpawnNuclearExplosionMessage(
             packetBuffer.readInt(),
             packetBuffer.readBoolean(),

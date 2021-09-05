@@ -83,6 +83,7 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
     }
 
     companion object {
+        @JvmStatic
         fun decode(packetBuffer: PacketBuffer) = CraftMachineTemplateMessage(packetBuffer.readItem())
     }
 }

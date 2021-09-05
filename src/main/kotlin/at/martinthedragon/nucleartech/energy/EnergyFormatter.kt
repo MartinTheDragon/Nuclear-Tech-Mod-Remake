@@ -8,10 +8,12 @@ object EnergyFormatter {
         FE(1.0, 0)
     }
 
+    @JvmOverloads @JvmStatic
     fun formatEnergy(amount: Int, unit: EnergyUnit = EnergyUnit.HE, withUnit: Boolean = false): String =
         formatEnergy(amount.toLong(), unit, withUnit)
 
     // dirty but performant implementation
+    @JvmOverloads @JvmStatic
     fun formatEnergy(amount: Long, unit: EnergyUnit = EnergyUnit.HE, withUnit: Boolean = false): String {
         val amountInUnit = amount * unit.ratio
         val valueForSuffix: Double

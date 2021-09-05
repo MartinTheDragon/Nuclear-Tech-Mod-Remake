@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/bomb_kit",
+    "layer1": "nucleartech:item/bomb_kit_overlay"
+  }
+}
