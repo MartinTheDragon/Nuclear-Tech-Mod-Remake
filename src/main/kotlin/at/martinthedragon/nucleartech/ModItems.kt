@@ -2,12 +2,10 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
 import at.martinthedragon.nucleartech.blocks.FatMan
+import at.martinthedragon.nucleartech.blocks.LittleBoy
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.*
-import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.*
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.world.World
 import net.minecraftforge.fml.RegistryObject
 
 @Suppress("unused")
@@ -21,12 +19,7 @@ object ModItems {
     val pu238Ingot: RegistryObject<Item> = ITEMS.register("pu238_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 2.5f) }
     val pu239Ingot: RegistryObject<Item> = ITEMS.register("pu239_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 5f) }
     val pu240Ingot: RegistryObject<Item> = ITEMS.register("pu240_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 5f) }
-    val neptuniumIngot: RegistryObject<Item> = ITEMS.register("neptunium_ingot") { object : EffectItem(listOf(EffectTypes.Radioactive), Properties().tab(CreativeTabs.Parts), 2.5f) {
-        override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
-            autoTooltip(stack, tooltip)
-            super.appendHoverText(stack, worldIn, tooltip, flagIn)
-        }
-    }}
+    val neptuniumIngot: RegistryObject<Item> = ITEMS.register("neptunium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 2.5f) }
     val poloniumIngot: RegistryObject<Item> = ITEMS.register("polonium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 10f) }
     val titaniumIngot: RegistryObject<Item> = ITEMS.register("titanium_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val copperIngot: RegistryObject<Item> = ITEMS.register("copper_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
@@ -40,12 +33,7 @@ object ModItems {
     val cobaltIngot: RegistryObject<Item> = ITEMS.register("cobalt_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val highSpeedSteelIngot: RegistryObject<Item> = ITEMS.register("high_speed_steel_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val polymerIngot: RegistryObject<Item> = ITEMS.register("polymer_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
-    val schraraniumIngot: RegistryObject<Item> = ITEMS.register("schraranium_ingot") { object : EffectItem(listOf(EffectTypes.Radioactive, EffectTypes.Blinding), Properties().tab(CreativeTabs.Parts), 2.5f) {
-        override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
-            autoTooltip(stack, tooltip)
-            super.appendHoverText(stack, worldIn, tooltip, flagIn)
-        }
-    }}
+    val schraraniumIngot: RegistryObject<Item> = ITEMS.register("schraranium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Blinding), Item.Properties().tab(CreativeTabs.Parts), 2.5f) }
     val schrabidiumIngot: RegistryObject<Item> = ITEMS.register("schrabidium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Blinding), Item.Properties().tab(CreativeTabs.Parts).rarity(Rarity.RARE), 7.5f) }
     val magnetizedTungstenIngot: RegistryObject<Item> = ITEMS.register("magnetized_tungsten_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val combineSteelIngot: RegistryObject<Item> = ITEMS.register("combine_steel_ingot") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts)) }
@@ -546,15 +534,16 @@ object ModItems {
 
     // Bomb Items
 
+    val neutronShieldingLittleBoy: RegistryObject<Item> = ITEMS.register("neutron_shielding_little_boy") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val subcriticalUraniumTarget: RegistryObject<Item> = ITEMS.register("subcritical_u235_target") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1), 5F) }
+    val uraniumProjectile: RegistryObject<Item> = ITEMS.register("u235_projectile") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1), 1.5F) }
+    val propellantLittleBoy: RegistryObject<Item> = ITEMS.register("propellant_little_boy") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val bombIgniterLittleBoy: RegistryObject<Item> = ITEMS.register("bomb_igniter_little_boy") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
     val bundleOfImplosionPropellant: RegistryObject<Item> = ITEMS.register("bundle_of_implosion_propellant") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
-    val bombIgniter: RegistryObject<Item> = ITEMS.register("bomb_igniter") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
-    val plutoniumCore: RegistryObject<Item> = ITEMS.register("plutonium_core") { object : EffectItem(listOf(EffectTypes.Radioactive), Properties().tab(CreativeTabs.Bombs).stacksTo(1), 5F) {
-        override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
-            autoTooltip(stack, tooltip)
-            super.appendHoverText(stack, worldIn, tooltip, flagIn)
-        }
-    }}
+    val bombIgniterFatMan: RegistryObject<Item> = ITEMS.register("bomb_igniter_fat_man") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val plutoniumCore: RegistryObject<Item> = ITEMS.register("plutonium_core") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1), 5F) }
     val detonator: RegistryObject<Detonator> = ITEMS.register("detonator") { Detonator(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val littleBoyKit: RegistryObject<BombKitItem> = ITEMS.register("little_boy_kit") { BombKitItem(mapOf(ModBlockItems.littleBoy to 1) + LittleBoy.requiredComponents, 0x0026FF, Item.Properties().tab(CreativeTabs.Bombs)) }
     val fatManKit: RegistryObject<BombKitItem> = ITEMS.register("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatMan.requiredComponents, 0xFFD800, Item.Properties().tab(CreativeTabs.Bombs)) }
 
     // Consumables

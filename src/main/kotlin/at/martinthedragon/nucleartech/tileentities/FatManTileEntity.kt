@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.FatMan
 import at.martinthedragon.nucleartech.containers.FatManContainer
 import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
+import at.martinthedragon.nucleartech.math.toVector3dMiddle
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
@@ -13,7 +14,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.tileentity.LockableTileEntity
 import net.minecraft.util.*
-import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
@@ -47,7 +47,7 @@ class FatManTileEntity : LockableTileEntity(TileEntityTypes.fatManTileEntityType
 
         override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
             in 0..3 -> stack.item == ModItems.bundleOfImplosionPropellant.get()
-            4 -> stack.item == ModItems.bombIgniter.get()
+            4 -> stack.item == ModItems.bombIgniterFatMan.get()
             5 -> stack.item == ModItems.plutoniumCore.get()
             else -> false
         }
@@ -75,7 +75,7 @@ class FatManTileEntity : LockableTileEntity(TileEntityTypes.fatManTileEntityType
         level!!.playSound(null, worldPosition, SoundEvents.GENERIC_EXPLODE, SoundCategory.BLOCKS, 1F, level!!.random.nextFloat() * .1F + .9F)
         NukeExplosionEntity.create(
             level!!,
-            Vector3d(blockPos.x + .5, blockPos.y + .5, blockPos.z + .5),
+            blockPos.toVector3dMiddle(),
             350 // TODO config
         )
     } else false
@@ -91,7 +91,7 @@ class FatManTileEntity : LockableTileEntity(TileEntityTypes.fatManTileEntityType
         if (getItem(1).let { it.item == ModItems.bundleOfImplosionPropellant.get() && !it.isEmpty }) result = result or 0b10000
         if (getItem(2).let { it.item == ModItems.bundleOfImplosionPropellant.get() && !it.isEmpty }) result = result or 0b1000
         if (getItem(3).let { it.item == ModItems.bundleOfImplosionPropellant.get() && !it.isEmpty }) result = result or 0b100
-        if (getItem(4).let { it.item == ModItems.bombIgniter.get() && !it.isEmpty }) result = result or 0b10
+        if (getItem(4).let { it.item == ModItems.bombIgniterFatMan.get() && !it.isEmpty }) result = result or 0b10
         if (getItem(5).let { it.item == ModItems.plutoniumCore.get() && !it.isEmpty }) result = result or 0b1
         if (result == 0b111111) result = 0b1111111
         bombCompletion = result

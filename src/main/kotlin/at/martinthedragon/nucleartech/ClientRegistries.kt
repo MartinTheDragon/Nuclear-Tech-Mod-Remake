@@ -49,6 +49,7 @@ object ClientRegistries {
         ScreenManager.register(ContainerTypes.electricFurnaceContainer.get(), ::ElectricFurnaceScreen)
         ScreenManager.register(ContainerTypes.shredderContainer.get(), ::ShredderScreen)
 
+        ScreenManager.register(ContainerTypes.littleBoyContainer.get(), ::LittleBoyScreen)
         ScreenManager.register(ContainerTypes.fatManContainer.get(), ::FatManScreen)
     }
 

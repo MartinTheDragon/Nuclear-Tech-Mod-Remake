@@ -198,6 +198,7 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.electricFurnace.get())
         dropSelf(ModBlocks.shredder.get())
 
+        dropSelf(ModBlocks.littleBoy.get())
         dropSelf(ModBlocks.fatMan.get())
     }
 

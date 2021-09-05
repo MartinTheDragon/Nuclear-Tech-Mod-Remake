@@ -13,5 +13,6 @@ object ContainerTypes {
     val combustionGeneratorContainer: RegistryObject<ContainerType<CombustionGeneratorContainer>> = CONTAINERS.register("combustion_generator") { IForgeContainerType.create(CombustionGeneratorContainer::fromNetwork) }
     val electricFurnaceContainer: RegistryObject<ContainerType<ElectricFurnaceContainer>> = CONTAINERS.register("electric_furnace") { IForgeContainerType.create(ElectricFurnaceContainer::fromNetwork) }
     val shredderContainer: RegistryObject<ContainerType<ShredderContainer>> = CONTAINERS.register("shredder") { IForgeContainerType.create(ShredderContainer::fromNetwork) }
+    val littleBoyContainer: RegistryObject<ContainerType<LittleBoyContainer>> = CONTAINERS.register("little_boy") { IForgeContainerType.create(LittleBoyContainer::fromNetwork) }
     val fatManContainer: RegistryObject<ContainerType<FatManContainer>> = CONTAINERS.register("fat_man") { IForgeContainerType.create(FatManContainer::fromNetwork) }
 }

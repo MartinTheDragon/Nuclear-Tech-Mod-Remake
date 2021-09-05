@@ -24,7 +24,7 @@ open class EffectItem(val effectTypes: List<EffectTypes>, properties: Properties
 
     override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
         // separate from other tooltip
-        if (tooltip.size > 1) tooltip.add(StringTextComponent.EMPTY)
+        if (autoTooltip(stack, tooltip, true)) tooltip.add(StringTextComponent.EMPTY)
 
         for (effectType in effectTypes) tooltip.add(effectType.effectInfo)
         if (radPerSecond > 0f)

@@ -15,6 +15,7 @@ object TileEntityTypes {
     val combustionGeneratorTileEntityType: RegistryObject<TileEntityType<CombustionGeneratorTileEntity>> = TILE_ENTITIES.register("combustion_generator") { TileEntityType.Builder.of(::CombustionGeneratorTileEntity, ModBlocks.combustionGenerator.get()).build() }
     val electricFurnaceTileEntityType: RegistryObject<TileEntityType<ElectricFurnaceTileEntity>> = TILE_ENTITIES.register("electric_furnace") { TileEntityType.Builder.of(::ElectricFurnaceTileEntity, ModBlocks.electricFurnace.get()).build() }
     val shredderTileEntityType: RegistryObject<TileEntityType<ShredderTileEntity>> = TILE_ENTITIES.register("shredder") { TileEntityType.Builder.of(::ShredderTileEntity, ModBlocks.shredder.get()).build() }
+    val littleBoyTileEntityType: RegistryObject<TileEntityType<LittleBoyTileEntity>> = TILE_ENTITIES.register("little_boy") { TileEntityType.Builder.of(::LittleBoyTileEntity, ModBlocks.littleBoy.get()).build() }
     val fatManTileEntityType: RegistryObject<TileEntityType<FatManTileEntity>> = TILE_ENTITIES.register("fat_man") { TileEntityType.Builder.of(::FatManTileEntity, ModBlocks.fatMan.get()).build() }
 
     private fun <T : TileEntity> TileEntityType.Builder<T>.build() = build(null)

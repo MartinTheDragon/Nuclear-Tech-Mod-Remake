@@ -169,6 +169,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.electricFurnace, "Elektrischer Ofen")
         addBlock(ModBlocks.shredder, "Brecher")
 
+        addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
 
         addItem(ModItems.uraniumIngot, "Uranbarren")
@@ -763,10 +764,23 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackAPCPass, "APC Pass")
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        run {
+            val usedInLittleBoy = "Wird gebraucht für:\nLittle Boy"
+            addItem(ModItems.neutronShieldingLittleBoy, "Neutronenschild")
+            addItemDesc(ModItems.neutronShieldingLittleBoy, usedInLittleBoy)
+            addItem(ModItems.subcriticalUraniumTarget, "Unterkritischer U235-Hohlkörper")
+            addItemDesc(ModItems.subcriticalUraniumTarget, usedInLittleBoy)
+            addItem(ModItems.uraniumProjectile, "U235 Geschoss")
+            addItemDesc(ModItems.uraniumProjectile, usedInLittleBoy)
+            addItem(ModItems.propellantLittleBoy, "Treibladung")
+            addItemDesc(ModItems.propellantLittleBoy, usedInLittleBoy)
+            addItem(ModItems.bombIgniterLittleBoy, "Zünder")
+            addItemDesc(ModItems.bombIgniterLittleBoy, usedInLittleBoy)
+        }
         addItem(ModItems.bundleOfImplosionPropellant, "Implosions-Treibladung")
         addItemDesc(ModItems.bundleOfImplosionPropellant, "Wird gebraucht für:\nFat Man\nIvy Mike\nTsar Bombe")
-        addItem(ModItems.bombIgniter, "Zünder")
-        addItemDesc(ModItems.bombIgniter, "Wird gebraucht für Fat Man")
+        addItem(ModItems.bombIgniterFatMan, "Zünder")
+        addItemDesc(ModItems.bombIgniterFatMan, "Wird gebraucht für Fat Man")
         addItem(ModItems.plutoniumCore, "Plutoniumkern")
         addItemDesc(ModItems.plutoniumCore, "Wird gebraucht für:\nFat Man\nIvy Mike\nTsar Bombe")
         addItem(ModItems.detonator, "Fernzünder")
@@ -782,6 +796,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("$detonatorDescriptionId.error_detonation_prohibited", "Die Sprengung wurde aufgehalten!")
         add("$detonatorDescriptionId.error_unknown", "Ein unbekannter Fehler ist während der Sprengung aufgetreten")
         add("$detonatorDescriptionId.detonation_successful", "Sprengung!")
+        addItem(ModItems.littleBoyKit, "Little Boy Kit")
         addItem(ModItems.fatManKit, "Fat Man Kit")
 
         addItem(ModItems.oilDetector, "Ölvorkommen-Detektor")
@@ -816,6 +831,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addContainerType(ContainerTypes.electricFurnaceContainer, "Elektrischer Ofen")
         addContainerType(ContainerTypes.shredderContainer, "Brecher")
 
+        addContainerType(ContainerTypes.littleBoyContainer, "Little Boy")
         addContainerType(ContainerTypes.fatManContainer, "Fat Man")
 
         addSound(SoundEvents.sirenTrackHatchSiren, "Sirene läuft: Hatch Siren")

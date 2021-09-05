@@ -15,8 +15,9 @@ import net.minecraft.util.text.TranslationTextComponent
 import net.minecraft.world.World
 
 class OilDetector(properties: Properties) : Item(properties) {
-    override fun appendHoverText(stack: ItemStack, world: World?, tooltip: MutableList<ITextComponent>, flag: ITooltipFlag) =
+    override fun appendHoverText(stack: ItemStack, world: World?, tooltip: MutableList<ITextComponent>, flag: ITooltipFlag) {
         autoTooltip(stack, tooltip)
+    }
 
     override fun use(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
         fun checkColumns(world: World, playerPos: BlockPos, offsetX: Int, offsetZ: Int): Boolean {

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "nucleartech:item/bomb_igniter"
+    "layer0": "nucleartech:item/bomb_igniter_fat_man"
   }
 }

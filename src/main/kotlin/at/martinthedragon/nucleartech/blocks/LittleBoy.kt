@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.explosions.IgnitableExplosive
-import at.martinthedragon.nucleartech.tileentities.FatManTileEntity
+import at.martinthedragon.nucleartech.tileentities.LittleBoyTileEntity
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.HorizontalBlock
@@ -23,7 +23,7 @@ import net.minecraft.world.IBlockReader
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
 
-class FatMan(properties: Properties) : Block(properties), IgnitableExplosive {
+class LittleBoy(properties: Properties) : Block(properties), IgnitableExplosive {
     override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
         builder.add(HorizontalBlock.FACING)
     }
@@ -32,24 +32,27 @@ class FatMan(properties: Properties) : Block(properties), IgnitableExplosive {
         defaultBlockState().setValue(HorizontalBlock.FACING, context.horizontalDirection.counterClockWise)
 
     override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
+
     override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        setTileEntityCustomName<FatManTileEntity>(world, pos, stack)
+        setTileEntityCustomName<LittleBoyTileEntity>(world, pos, stack)
     }
+
     override fun onRemove(state: BlockState, world: World, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<FatManTileEntity>(state, world, pos, newState)
+        dropTileEntityContents<LittleBoyTileEntity>(state, world, pos, newState)
         @Suppress("DEPRECATION")
         super.onRemove(state, world, pos, newState, p_196243_5_)
     }
+
     override fun use(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockRayTraceResult): ActionResultType {
         if (!world.isClientSide) {
             val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is FatManTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
+            if (tileEntity is LittleBoyTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
         }
         return ActionResultType.sidedSuccess(world.isClientSide)
     }
 
     override fun hasTileEntity(state: BlockState?) = true
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = FatManTileEntity()
+    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = LittleBoyTileEntity()
 
     override fun rotate(state: BlockState, rotation: Rotation): BlockState =
         state.setValue(HorizontalBlock.FACING, rotation.rotate(state.getValue(HorizontalBlock.FACING)))
@@ -60,9 +63,11 @@ class FatMan(properties: Properties) : Block(properties), IgnitableExplosive {
 
     companion object {
         val requiredComponents = mapOf(
-            ModItems.bundleOfImplosionPropellant to 4,
-            ModItems.bombIgniterFatMan to 1,
-            ModItems.plutoniumCore to 1
+            ModItems.neutronShieldingLittleBoy to 1,
+            ModItems.subcriticalUraniumTarget to 1,
+            ModItems.uraniumProjectile to 1,
+            ModItems.propellantLittleBoy to 1,
+            ModItems.bombIgniterLittleBoy to 1
         )
     }
 }

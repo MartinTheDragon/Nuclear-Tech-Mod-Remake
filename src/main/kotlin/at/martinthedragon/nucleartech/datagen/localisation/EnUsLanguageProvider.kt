@@ -173,6 +173,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.electricFurnace, "Electric Furnace")
         addBlock(ModBlocks.shredder, "Shredder")
 
+        addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
 
         addItem(ModItems.uraniumIngot, "Uranium Ingot")
@@ -767,10 +768,23 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackAPCPass, "APC Pass")
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        run {
+            val usedInLittleBoy = "Used in:\nLittle Boy"
+            addItem(ModItems.neutronShieldingLittleBoy, "Neutron Shielding")
+            addItemDesc(ModItems.neutronShieldingLittleBoy, usedInLittleBoy)
+            addItem(ModItems.subcriticalUraniumTarget, "Subcritical U235 Target")
+            addItemDesc(ModItems.subcriticalUraniumTarget, usedInLittleBoy)
+            addItem(ModItems.uraniumProjectile, "U235 Projectile")
+            addItemDesc(ModItems.uraniumProjectile, usedInLittleBoy)
+            addItem(ModItems.propellantLittleBoy, "Propellant")
+            addItemDesc(ModItems.propellantLittleBoy, usedInLittleBoy)
+            addItem(ModItems.bombIgniterLittleBoy, "Bomb Igniter")
+            addItemDesc(ModItems.bombIgniterLittleBoy, usedInLittleBoy)
+        }
         addItem(ModItems.bundleOfImplosionPropellant, "Bundle of Implosion Propellant")
         addItemDesc(ModItems.bundleOfImplosionPropellant, "Used in:\nFat Man\nIvy Mike\nTsar Bomba")
-        addItem(ModItems.bombIgniter, "Bomb Igniter")
-        addItemDesc(ModItems.bombIgniter, "Used in Fat Man")
+        addItem(ModItems.bombIgniterFatMan, "Bomb Igniter")
+        addItemDesc(ModItems.bombIgniterFatMan, "Used in Fat Man")
         addItem(ModItems.plutoniumCore, "Plutonium Core")
         addItemDesc(ModItems.plutoniumCore, "Used in:\nFat Man\nIvy Mike\nTsar Bomba")
         addItem(ModItems.detonator, "Detonator")
@@ -786,6 +800,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("$detonatorDescriptionId.error_detonation_prohibited", "The detonation was prohibited!")
         add("$detonatorDescriptionId.error_unknown", "An unknown error occurred during the detonation")
         add("$detonatorDescriptionId.detonation_successful", "Detonated!")
+        addItem(ModItems.littleBoyKit, "Little Boy Kit")
         addItem(ModItems.fatManKit, "Fat Man Kit")
 
         addItem(ModItems.oilDetector, "Oil Reservoir Detector")
@@ -820,6 +835,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addContainerType(ContainerTypes.electricFurnaceContainer, "Electric Furnace")
         addContainerType(ContainerTypes.shredderContainer, "Shredder")
 
+        addContainerType(ContainerTypes.littleBoyContainer, "Little Boy")
         addContainerType(ContainerTypes.fatManContainer, "Fat Man")
 
         addSound(SoundEvents.sirenTrackHatchSiren, "Siren running: Hatch Siren")

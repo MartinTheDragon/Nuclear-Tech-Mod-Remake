@@ -151,6 +151,7 @@ object ModBlockItems {
     val electricFurnace: RegistryObject<Item> = ITEMS.register("electric_furnace") { BlockItem(ModBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val shredder: RegistryObject<Item> = ITEMS.register("shredder") { BlockItem(ModBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
 
+    val littleBoy: RegistryObject<Item> = ITEMS.register("little_boy") { BlockItem(ModBlocks.littleBoy.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
     val fatMan: RegistryObject<Item> = ITEMS.register("fat_man") { BlockItem(ModBlocks.fatMan.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
 
     private fun Item.Properties.tab(tab: CreativeTabs): Item.Properties = tab(tab.itemGroup)

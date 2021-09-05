@@ -181,6 +181,18 @@ class NuclearBlockStateProvider(
         litHorizontalBlock(ModBlocks.combustionGenerator.get())
         litHorizontalBlock(ModBlocks.electricFurnace.get())
         cubeAllSides(ModBlocks.shredder.get(), north = extend(blockTexture(ModBlocks.shredder.get()), "_front"), south = extend(blockTexture(ModBlocks.shredder.get()), "_front"), east = extend(blockTexture(ModBlocks.shredder.get()), "_side"), west = extend(blockTexture(ModBlocks.shredder.get()), "_side"))
+        horizontalBlock(ModBlocks.littleBoy.get(), models().getBuilder("little_boy")
+            .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
+            .modelLocation(modLoc("models/block/little_boy/little_boy.obj"))
+            .flipV(true).detectCullableFaces(false).end()
+            .texture("little_boy_texture", modLoc("block/little_boy"))
+            .texture("particle", modLoc("block/little_boy"))
+            .parent(blockTransformsModel)
+            .transforms()
+            .transform(ModelBuilder.Perspective.GUI).rotation(30F, 225F, 0F).translation(3F, -2F, 0F).scale(.34F).end()
+            .transform(ModelBuilder.Perspective.FIXED).rotation(0F, 90F, 0F).scale(.5F).end()
+            .end()
+        )
         horizontalBlock(ModBlocks.fatMan.get(), models().getBuilder("fat_man")
             .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
             .modelLocation(modLoc("models/block/fat_man/fat_man.obj"))
@@ -320,6 +332,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.combustionGenerator.get())
         copiedBlockItem(ModBlocks.electricFurnace.get())
         copiedBlockItem(ModBlocks.shredder.get())
+        copiedBlockItem(ModBlocks.littleBoy.get())
         copiedBlockItem(ModBlocks.fatMan.get())
     }
 

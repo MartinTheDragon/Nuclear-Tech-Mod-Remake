@@ -177,5 +177,6 @@ object ModBlocks {
 
     // Bombs
 
+    val littleBoy: RegistryObject<LittleBoy> = BLOCKS.register("little_boy") { LittleBoy(Properties.of(METAL).strength(5F, 6000F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
     val fatMan: RegistryObject<FatMan> = BLOCKS.register("fat_man") { FatMan(Properties.of(METAL).strength(5F, 6000F).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
 }
