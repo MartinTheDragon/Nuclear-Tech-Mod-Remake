@@ -17,7 +17,7 @@ class BombKitItem(
     val items: Map<out Supplier<out IItemProvider>, Int>,
     val color: Int,
     properties: Properties
-) : Item(properties) {
+) : Item(properties.stacksTo(1)) {
     init {
         allKits += this
     }
