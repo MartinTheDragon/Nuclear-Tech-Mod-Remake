@@ -19,6 +19,8 @@ abstract class NuclearLanguageProvider(
     private val locale: String,
     private val exceptionOnMissing: Boolean = true
 ) : LanguageProvider(dataGenerator, NuclearTech.MODID, locale) {
+    protected val translations = mutableMapOf<String, String>()
+
     override fun getName() = "Nuclear Tech ${super.getName()}"
 
     override fun run(cache: DirectoryCache) {
@@ -27,20 +29,25 @@ abstract class NuclearLanguageProvider(
     }
 
     protected open fun validate() {
-        if (!super.data.keys.containsAll(NuclearLanguageProviders.keys)) {
-            val missingTranslations = NuclearLanguageProviders.keys subtract super.data.keys
+        if (!translations.keys.containsAll(NuclearLanguageProviders.keys)) {
+            val missingTranslations = NuclearLanguageProviders.keys subtract translations.keys
             val errorMessage = StringBuilder().appendLine("Missing translations in locale $locale for following keys:")
             for (missing in missingTranslations) errorMessage.appendLine(missing.prependIndent())
             if (exceptionOnMissing) throw IllegalStateException(errorMessage.toString())
             else NuclearTech.LOGGER.error(errorMessage.toString())
         }
 
-        if (!NuclearLanguageProviders.keys.containsAll(super.data.keys)) {
-            val extraTranslations = super.data.keys subtract NuclearLanguageProviders.keys
+        if (!NuclearLanguageProviders.keys.containsAll(translations.keys)) {
+            val extraTranslations = translations.keys subtract NuclearLanguageProviders.keys
             val errorMessage = StringBuilder().appendLine("Extra translations in locale $locale that are non-existent in default locale:")
             for (extra in extraTranslations) errorMessage.appendLine(extra.prependIndent())
             NuclearTech.LOGGER.error(errorMessage.toString())
         }
+    }
+
+    override fun add(key: String, value: String) {
+        translations[key] = value
+        super.add(key, value)
     }
 
     protected fun addBlockDesc(supplier: Supplier<out Block>, desc: String) {

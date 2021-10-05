@@ -549,6 +549,7 @@ object ModItems {
     // Consumables
 
     val oilDetector: RegistryObject<OilDetector> = ITEMS.register("oil_detector") { OilDetector(Item.Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
+    val geigerCounter: RegistryObject<GeigerCounterItem> = ITEMS.register("handheld_geiger_counter") { GeigerCounterItem(Item.Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
 
     // Miscellaneous
 

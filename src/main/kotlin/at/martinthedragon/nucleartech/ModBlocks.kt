@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
+import at.martinthedragon.nucleartech.hazards.items.HazardItemEffect
 import net.minecraft.block.*
 import net.minecraft.block.AbstractBlock.Properties
 import net.minecraft.block.material.Material.*
@@ -78,10 +79,10 @@ object ModBlocks {
     val starmetalOre: RegistryObject<Block> = BLOCKS.register("starmetal_ore") { Block(Properties.of(STONE).strength(6f).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
     val trixite: RegistryObject<Block> = BLOCKS.register("trixite") { Block(Properties.of(STONE).strength(4f, 9f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
 
-    val uraniumBlock: RegistryObject<Block> = BLOCKS.register("uranium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val u233Block: RegistryObject<Block> = BLOCKS.register("u233_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val u235Block: RegistryObject<Block> = BLOCKS.register("u235_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val u238Block: RegistryObject<Block> = BLOCKS.register("u238_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val uraniumBlock: RegistryObject<Block> = BLOCKS.register("uranium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U) }
+    val u233Block: RegistryObject<Block> = BLOCKS.register("u233_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U233) }
+    val u235Block: RegistryObject<Block> = BLOCKS.register("u235_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U235) }
+    val u238Block: RegistryObject<Block> = BLOCKS.register("u238_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U238) }
     val uraniumFuelBlock: RegistryObject<Block> = BLOCKS.register("uranium_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val neptuniumBlock: RegistryObject<Block> = BLOCKS.register("neptunium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val moxFuelBlock: RegistryObject<Block> = BLOCKS.register("mox_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }

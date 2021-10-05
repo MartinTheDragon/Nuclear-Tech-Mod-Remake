@@ -804,6 +804,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(ModItems.oilDetector.get().descriptionId + ".below", "Ölvorkommen direkt untertage!")
         add(ModItems.oilDetector.get().descriptionId + ".near", "Ölvorkommen in der Nähe")
         add(ModItems.oilDetector.get().descriptionId + ".no_oil", "Kein Öl gefunden")
+        addItem(ModItems.geigerCounter, "Mobiler Geigerzähler")
 
         addItem(ModItems.creativeNuclearExplosionSpawner, "Atomexplosionserzeuger")
         add("creative_nuclear_explosion_spawner.$MODID.strength", "Stärke")

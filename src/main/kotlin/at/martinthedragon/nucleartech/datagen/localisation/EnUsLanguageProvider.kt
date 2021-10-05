@@ -12,7 +12,7 @@ import net.minecraft.data.DataGenerator
 
 class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.EN_US) {
     override fun validate() {
-        NuclearLanguageProviders.keys = super.data.keys.toSet()
+        NuclearLanguageProviders.keys = translations.keys.toSet()
     }
 
     override fun addTranslations() {
@@ -808,6 +808,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(ModItems.oilDetector.get().descriptionId + ".below", "Oil deposit directly below!")
         add(ModItems.oilDetector.get().descriptionId + ".near", "Oil deposit detected nearby")
         add(ModItems.oilDetector.get().descriptionId + ".no_oil", "No oil detected")
+        addItem(ModItems.geigerCounter, "Handheld Geiger Counter")
 
         addItem(ModItems.creativeNuclearExplosionSpawner, "Nuclear Explosion Spawner")
         add("creative_nuclear_explosion_spawner.$MODID.strength", "Strength")

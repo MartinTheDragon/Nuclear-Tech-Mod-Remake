@@ -531,6 +531,7 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.plutoniumCore.get())
         simpleItem(ModItems.detonator.get())
         simpleItem(ModItems.oilDetector.get())
+        simpleItem(ModItems.geigerCounter.get())
         simpleItem(ModItems.creativeNuclearExplosionSpawner.get())
 
         bombKitItem = getBuilder("template_bomb_kit").parent(generatedItem)
