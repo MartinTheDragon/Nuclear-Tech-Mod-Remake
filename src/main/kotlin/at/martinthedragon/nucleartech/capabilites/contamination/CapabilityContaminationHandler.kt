@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.capabilites.contamination
 
+import net.minecraft.entity.LivingEntity
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.nbt.INBT
 import net.minecraft.util.Direction
@@ -46,4 +47,9 @@ object CapabilityContaminationHandler {
                 }
             }, ::EntityContaminationHandler)
     }
+
+    fun getCapability(entity: LivingEntity) =
+        entity.getCapability(contaminationHandlerCapability)
+            .takeIf { it.isPresent }
+            ?.orElseThrow(::Error) as? IContaminationHandlerModifiable
 }

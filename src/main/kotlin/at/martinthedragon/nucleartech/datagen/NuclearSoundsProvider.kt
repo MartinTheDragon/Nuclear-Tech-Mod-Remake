@@ -39,6 +39,12 @@ class NuclearSoundsProvider(
         add(SoundEvents.randomBleep, definition().with(sound(ntm("random/bleep"))).subtitle(ntmSubtitle("random.bleep")))
         add(SoundEvents.randomBoop, definition().with(sound(ntm("random/boop"))).subtitle(ntmSubtitle("random.boop")))
         add(SoundEvents.randomUnpack, definition().with(sound(ntm("random/unpack1")), sound(ntm("random/unpack2"))).subtitle(ntmSubtitle("random.unpack")))
+        add(SoundEvents.geiger1, definition().with(sound(ntm("geiger/geiger1"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.geiger2, definition().with(sound(ntm("geiger/geiger2"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.geiger3, definition().with(sound(ntm("geiger/geiger3"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.geiger4, definition().with(sound(ntm("geiger/geiger4"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.geiger5, definition().with(sound(ntm("geiger/geiger5"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.geiger6, definition().with(sound(ntm("geiger/geiger6"))).subtitle(ntmSubtitle("geiger.click")))
     }
 
     private fun ntm(location: String) = ResourceLocation(NuclearTech.MODID, location)

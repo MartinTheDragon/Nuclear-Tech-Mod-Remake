@@ -1,7 +1,6 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.capabilites.contamination.CapabilityContaminationHandler
-import at.martinthedragon.nucleartech.capabilites.contamination.IContaminationHandlerModifiable
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.merchant.villager.VillagerEntity
@@ -23,27 +22,21 @@ object Radiation {
     @JvmStatic
     fun addEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
-        val cap = entity.getCapability(CapabilityContaminationHandler.contaminationHandlerCapability).orElseThrow(::RuntimeException)
-        if (cap !is IContaminationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
-        val newIrradiation = (cap.getIrradiation() + radiation).coerceIn(0f, 2500f)
-        cap.setIrradiation(newIrradiation)
+        val cap = CapabilityContaminationHandler.getCapability(entity) ?: return
+        cap.setIrradiation((cap.getIrradiation() + radiation).coerceIn(0F, 2500F))
     }
 
     @JvmStatic
     fun setEntityIrradiation(entity: LivingEntity, radiation: Float) {
         if (entity.isDeadOrDying) return
-        val cap = entity.getCapability(CapabilityContaminationHandler.contaminationHandlerCapability).orElseThrow(::RuntimeException)
-        if (cap !is IContaminationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
-        val newIrradiation = radiation.coerceIn(0f, 2500f)
-        cap.setIrradiation(newIrradiation)
+        val cap = CapabilityContaminationHandler.getCapability(entity) ?: return
+        cap.setIrradiation(radiation.coerceIn(0F, 2500F))
     }
 
     @JvmStatic
     fun getEntityIrradiation(entity: LivingEntity): Float {
-        if (entity.isDeadOrDying) return 0f
-        if (!entity.getCapability(CapabilityContaminationHandler.contaminationHandlerCapability).isPresent) return 0f
-        val cap = entity.getCapability(CapabilityContaminationHandler.contaminationHandlerCapability).orElseThrow(::RuntimeException)
-        if (cap !is IContaminationHandlerModifiable) throw RuntimeException("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
+        if (entity.isDeadOrDying) return 0F
+        val cap = CapabilityContaminationHandler.getCapability(entity) ?: return 0F
         return cap.getIrradiation()
     }
 

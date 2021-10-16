@@ -7,6 +7,9 @@ interface IContaminationHandlerModifiable : IContaminationHandler {
     fun setBlacklung(amount: Int)
     fun setBombTimer(value: Int)
     fun setContagion(value: Int)
+
+    fun setCumulativeRadiation(value: Float)
+    fun setRadPerSecond(value: Float)
 }
 
 fun IContaminationHandlerModifiable.addIrradiation(amount: Float) =

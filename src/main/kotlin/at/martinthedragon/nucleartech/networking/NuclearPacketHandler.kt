@@ -23,8 +23,10 @@ object NuclearPacketHandler {
     private var currentPacketID = 0
 
     internal fun initialize() {
-        registerMessage(CraftMachineTemplateMessage.Companion::decode, NetworkDirection.PLAY_TO_SERVER)
-        registerMessage(SpawnNuclearExplosionMessage.Companion::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(CraftMachineTemplateMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(SpawnNuclearExplosionMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+
+        registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
     }
 
     private fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {

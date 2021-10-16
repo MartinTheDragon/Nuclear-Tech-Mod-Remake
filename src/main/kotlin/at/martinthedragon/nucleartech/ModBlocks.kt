@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
-import at.martinthedragon.nucleartech.hazards.items.HazardItemEffect
 import net.minecraft.block.*
 import net.minecraft.block.AbstractBlock.Properties
 import net.minecraft.block.material.Material.*
@@ -13,6 +12,7 @@ import net.minecraft.world.IWorldReader
 import net.minecraftforge.common.ToolType
 import net.minecraftforge.fml.RegistryObject
 import kotlin.random.Random
+import at.martinthedragon.nucleartech.hazards.items.HazardItemEffect.Companion as RadValue
 
 object ModBlocks {
     val uraniumOre: RegistryObject<Block> = BLOCKS.register("uranium_ore") { Block(Properties.of(STONE).strength(5F, 10F).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
@@ -79,20 +79,20 @@ object ModBlocks {
     val starmetalOre: RegistryObject<Block> = BLOCKS.register("starmetal_ore") { Block(Properties.of(STONE).strength(6f).harvestLevel(3).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
     val trixite: RegistryObject<Block> = BLOCKS.register("trixite") { Block(Properties.of(STONE).strength(4f, 9f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops()) }
 
-    val uraniumBlock: RegistryObject<Block> = BLOCKS.register("uranium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U) }
-    val u233Block: RegistryObject<Block> = BLOCKS.register("u233_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U233) }
-    val u235Block: RegistryObject<Block> = BLOCKS.register("u235_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U235) }
-    val u238Block: RegistryObject<Block> = BLOCKS.register("u238_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardItemEffect.U238) }
-    val uraniumFuelBlock: RegistryObject<Block> = BLOCKS.register("uranium_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val neptuniumBlock: RegistryObject<Block> = BLOCKS.register("neptunium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val moxFuelBlock: RegistryObject<Block> = BLOCKS.register("mox_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val plutoniumBlock: RegistryObject<Block> = BLOCKS.register("plutonium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val pu238Block: RegistryObject<Block> = BLOCKS.register("pu238_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val pu239Block: RegistryObject<Block> = BLOCKS.register("pu239_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val pu240Block: RegistryObject<Block> = BLOCKS.register("pu240_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val plutoniumFuelBlock: RegistryObject<Block> = BLOCKS.register("plutonium_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val thoriumBlock: RegistryObject<Block> = BLOCKS.register("thorium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val thoriumFuelBlock: RegistryObject<Block> = BLOCKS.register("thorium_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val uraniumBlock: RegistryObject<Block> = BLOCKS.register("uranium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U) }
+    val u233Block: RegistryObject<Block> = BLOCKS.register("u233_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U233) }
+    val u235Block: RegistryObject<Block> = BLOCKS.register("u235_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U235) }
+    val u238Block: RegistryObject<Block> = BLOCKS.register("u238_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U238) }
+    val uraniumFuelBlock: RegistryObject<Block> = BLOCKS.register("uranium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.UF) }
+    val neptuniumBlock: RegistryObject<Block> = BLOCKS.register("neptunium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Np237) }
+    val moxFuelBlock: RegistryObject<Block> = BLOCKS.register("mox_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.MOX) }
+    val plutoniumBlock: RegistryObject<Block> = BLOCKS.register("plutonium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu) }
+    val pu238Block: RegistryObject<Block> = BLOCKS.register("pu238_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu238) }
+    val pu239Block: RegistryObject<Block> = BLOCKS.register("pu239_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu239) }
+    val pu240Block: RegistryObject<Block> = BLOCKS.register("pu240_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu240) }
+    val plutoniumFuelBlock: RegistryObject<Block> = BLOCKS.register("plutonium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.PuF) }
+    val thoriumBlock: RegistryObject<Block> = BLOCKS.register("thorium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Th232) }
+    val thoriumFuelBlock: RegistryObject<Block> = BLOCKS.register("thorium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.ThF) }
     val titaniumBlock: RegistryObject<Block> = BLOCKS.register("titanium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val sulfurBlock: RegistryObject<Block> = BLOCKS.register("sulfur_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val niterBlock: RegistryObject<Block> = BLOCKS.register("niter_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
@@ -115,11 +115,11 @@ object ModBlocks {
     val insulatorRoll: RegistryObject<RotatedPillarBlock> = BLOCKS.register("insulator_roll") { RotatedPillarBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)) }
     val fiberglassRoll: RegistryObject<RotatedPillarBlock> = BLOCKS.register("fiberglass_roll") { RotatedPillarBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL)) }
     val asbestosBlock: RegistryObject<Block> = BLOCKS.register("asbestos_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val trinititeBlock: RegistryObject<Block> = BLOCKS.register("trinitite_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val nuclearWasteBlock: RegistryObject<Block> = BLOCKS.register("nuclear_waste_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val schrabidiumBlock: RegistryObject<Block> = BLOCKS.register("schrabidium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val soliniumBlock: RegistryObject<Block> = BLOCKS.register("solinium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val schrabidiumFuelBlock: RegistryObject<Block> = BLOCKS.register("schrabidium_fuel_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val trinititeBlock: RegistryObject<Block> = BLOCKS.register("trinitite_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Trinitite) }
+    val nuclearWasteBlock: RegistryObject<Block> = BLOCKS.register("nuclear_waste_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Waste) }
+    val schrabidiumBlock: RegistryObject<Block> = BLOCKS.register("schrabidium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Sa326) }
+    val soliniumBlock: RegistryObject<Block> = BLOCKS.register("solinium_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Sa327) }
+    val schrabidiumFuelBlock: RegistryObject<Block> = BLOCKS.register("schrabidium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.SaF) }
     val euphemiumBlock: RegistryObject<Block> = BLOCKS.register("euphemium_block") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val schrabidiumCluster: RegistryObject<Block> = BLOCKS.register("schrabidium_cluster") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val euphemiumEtchedSchrabidiumCluster: RegistryObject<Block> = BLOCKS.register("euphemium_etched_schrabidium_cluster") { Block(Properties.of(METAL).strength(6f).harvestLevel(1).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
@@ -153,14 +153,13 @@ object ModBlocks {
     val charredLog: RegistryObject<RotatedPillarBlock> = BLOCKS.register("charred_log") { RotatedPillarBlock(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
     val charredPlanks: RegistryObject<Block> = BLOCKS.register("charred_planks") { Block(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(.5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
 
-    // TODO chunk radiation
     val slakedSellafite: RegistryObject<Block> = BLOCKS.register("slaked_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val boilingSellafite: RegistryObject<Block> = BLOCKS.register("boiling_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val infernalSellafite: RegistryObject<Block> = BLOCKS.register("infernal_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val sellafiteCorium: RegistryObject<Block> = BLOCKS.register("sellafite_corium") { Block(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
+    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.5F) }
+    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(1F) }
+    val boilingSellafite: RegistryObject<Block> = BLOCKS.register("boiling_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(2.5F) }
+    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(4F) }
+    val infernalSellafite: RegistryObject<Block> = BLOCKS.register("infernal_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(6F) }
+    val sellafiteCorium: RegistryObject<Block> = BLOCKS.register("sellafite_corium") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(10F) }
 
     // Machines
 

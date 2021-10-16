@@ -52,7 +52,7 @@ object ChunkRadiation : ChunkRadiationHandler {
         perWorldRadiation[event.world]?.remove(event.chunk.pos)
     }
 
-    override fun getRadiation(world: World, pos: BlockPos): Float {
+    override fun getRadiation(world: IWorld, pos: BlockPos): Float {
         val worldRadiation = perWorldRadiation[world] ?: return 0F
         return worldRadiation[ChunkPos(pos)] ?: 0F
     }

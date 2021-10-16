@@ -7,4 +7,7 @@ interface IContaminationHandler {
     fun getBlacklung(): Int
     fun getBombTimer(): Int
     fun getContagion(): Int
+
+    fun getCumulativeRadiation(): Float
+    fun getRadPerSecond(): Float
 }

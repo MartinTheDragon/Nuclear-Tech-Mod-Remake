@@ -863,9 +863,16 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.randomBleep, "Device bleeps")
         addSound(SoundEvents.randomBoop, "Device boops")
         addSound(SoundEvents.randomUnpack, "Item unpacked")
+        add("subtitle.$MODID.geiger.click", "Geiger Counter clicks")
 
         addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning")
         addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion")
+
+        add("geiger.title", "GEIGER COUNTER")
+        add("geiger.chunkRadiation", "Current chunk radiation:")
+        add("geiger.totalEnvironmentRadiation", "Total environmental radiation:")
+        add("geiger.playerIrradiation", "Player irradiation:")
+        add("geiger.playerResistance", "Player resistance:")
 
         add("jei.$MODID.category.pressing", "Pressing")
         add("jei.$MODID.category.pressing.experience", "%s XP")

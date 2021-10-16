@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.capabilites.contamination
 import net.minecraft.nbt.CompoundNBT
 import net.minecraftforge.common.util.INBTSerializable
 
+/** Gets synced at [at.martinthedragon.nucleartech.hazards.EntityContaminationEffects] */
 open class EntityContaminationHandler : IContaminationHandlerModifiable, INBTSerializable<CompoundNBT> {
     protected var irradiationLevel = 0F
     protected var digammaLevel = 0F
@@ -10,6 +11,9 @@ open class EntityContaminationHandler : IContaminationHandlerModifiable, INBTSer
     protected var blacklungLevel = 0
     protected var bombTimerValue = 0
     protected var contagionValue = 0
+
+    protected var cumulativeRadiationValue = 0F
+    protected var radPerSecondValue = 0F
 
     override fun setIrradiation(amount: Float) {
         irradiationLevel = amount
@@ -41,12 +45,18 @@ open class EntityContaminationHandler : IContaminationHandlerModifiable, INBTSer
         onContagionValueChanged()
     }
 
+    override fun setCumulativeRadiation(value: Float) { cumulativeRadiationValue = value }
+    override fun setRadPerSecond(value: Float) { radPerSecondValue = value }
+
     override fun getIrradiation(): Float = irradiationLevel
     override fun getDigamma(): Float = digammaLevel
     override fun getAsbestos(): Int = asbestosLevel
     override fun getBlacklung(): Int = blacklungLevel
     override fun getBombTimer(): Int = bombTimerValue
     override fun getContagion(): Int = contagionValue
+
+    override fun getCumulativeRadiation(): Float = cumulativeRadiationValue
+    override fun getRadPerSecond(): Float = radPerSecondValue
 
     override fun serializeNBT(): CompoundNBT = CompoundNBT().apply {
         putFloat("radiation", irradiationLevel)

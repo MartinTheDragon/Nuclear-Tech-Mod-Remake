@@ -1,10 +1,9 @@
 package at.martinthedragon.nucleartech.hazards
 
-import at.martinthedragon.nucleartech.capabilites.contamination.CapabilityContaminationHandler
-import at.martinthedragon.nucleartech.capabilites.contamination.IContaminationHandlerModifiable
-import at.martinthedragon.nucleartech.capabilites.contamination.addDigamma
-import at.martinthedragon.nucleartech.capabilites.contamination.addIrradiation
+import at.martinthedragon.nucleartech.capabilites.contamination.*
 import at.martinthedragon.nucleartech.entities.NuclearCreeperEntity
+import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessage
+import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -13,14 +12,24 @@ import net.minecraft.entity.monster.ZombieEntity
 import net.minecraft.entity.passive.CatEntity
 import net.minecraft.entity.passive.MooshroomEntity
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.ServerPlayerEntity
+import net.minecraftforge.fml.network.NetworkDirection
 import kotlin.math.pow
 
 object EntityContaminationEffects {
     fun update(entity: LivingEntity) {
         if (entity.level.isClientSide) return
 
-        val capability = entity.getCapability(CapabilityContaminationHandler.contaminationHandlerCapability).orElseThrow(::Error)
-        if (capability !is IContaminationHandlerModifiable) throw Error("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
+        val capability = CapabilityContaminationHandler.getCapability(entity) ?: return
+        if (entity.tickCount % 20 == 0) {
+            capability.setRadPerSecond(capability.getCumulativeRadiation())
+            capability.setCumulativeRadiation(0F)
+        }
+
+        if (entity is ServerPlayerEntity) {
+            capability as? EntityContaminationHandler ?: throw RuntimeException("Custom contamination handlers aren't supported yet")
+            NuclearPacketHandler.INSTANCE.sendTo(ContaminationValuesUpdateMessage(capability.serializeNBT()), entity.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT)
+        }
 
         val bombTimer = capability.getBombTimer()
         if (bombTimer > 0) {
@@ -86,6 +95,8 @@ object EntityContaminationEffects {
         contaminationType: ContaminationType,
         amount: Float
     ): Boolean {
+        if (hazardType == HazardType.Radiation) capability.setCumulativeRadiation(capability.getCumulativeRadiation() + amount)
+
         if (entity is PlayerEntity) {
             // TODO check for armor
 

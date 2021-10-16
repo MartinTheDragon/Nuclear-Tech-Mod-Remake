@@ -205,5 +205,41 @@
       "nucleartech:random/unpack1",
       "nucleartech:random/unpack2"
     ]
+  },
+  "geiger.geiger1": {
+    "subtitle": "subtitle.nucleartech.geiger.click",
+    "sounds": [
+      "nucleartech:geiger/geiger1"
+    ]
+  },
+  "geiger.geiger2": {
+    "subtitle": "subtitle.nucleartech.geiger.click",
+    "sounds": [
+      "nucleartech:geiger/geiger2"
+    ]
+  },
+  "geiger.geiger3": {
+    "subtitle": "subtitle.nucleartech.geiger.click",
+    "sounds": [
+      "nucleartech:geiger/geiger3"
+    ]
+  },
+  "geiger.geiger4": {
+    "subtitle": "subtitle.nucleartech.geiger.click",
+    "sounds": [
+      "nucleartech:geiger/geiger4"
+    ]
+  },
+  "geiger.geiger5": {
+    "subtitle": "subtitle.nucleartech.geiger.click",
+    "sounds": [
+      "nucleartech:geiger/geiger5"
+    ]
+  },
+  "geiger.geiger6": {
+    "subtitle": "subtitle.nucleartech.geiger.click",
+    "sounds": [
+      "nucleartech:geiger/geiger6"
+    ]
   }
 }
