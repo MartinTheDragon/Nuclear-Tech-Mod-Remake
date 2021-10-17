@@ -1,10 +1,17 @@
 package at.martinthedragon.nucleartech.world
 
+import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
+import net.minecraft.block.Blocks
+import net.minecraft.block.IGrowable
+import net.minecraft.tags.BlockTags
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.ChunkPos
 import net.minecraft.world.IWorld
 import net.minecraft.world.World
+import net.minecraft.world.gen.Heightmap
+import net.minecraft.world.server.ServerWorld
+import net.minecraftforge.common.IPlantable
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.event.world.ChunkDataEvent
 import net.minecraftforge.event.world.ChunkEvent
@@ -75,7 +82,8 @@ object ChunkRadiation : ChunkRadiationHandler {
                 eggTimer = 0
             }
 
-            // TODO world radiation effects
+            // TODO config
+            irradiateEnvironment()
         }
     }
 
@@ -99,6 +107,37 @@ object ChunkRadiation : ChunkRadiationHandler {
                     } else worldRadiation[newPos] = radiation * percent
 
                     // TODO fog
+                }
+            }
+        }
+    }
+
+    private fun irradiateEnvironment() {
+        for ((world, radiationMap) in perWorldRadiation) {
+            if (world !is ServerWorld) continue
+            if (radiationMap.isEmpty()) continue
+
+            for (chunk in 0..4) {
+                val (pos, radiation) = radiationMap.entries.random()
+                val chunkProvider = world.chunkSource
+
+                if (radiation < 10F || !chunkProvider.hasChunk(pos.x, pos.z)) continue
+
+                for (i in 0..4) for (a in 0..15) for (b in 0..15) {
+                    if (world.random.nextInt(5) != 0) continue
+
+                    val x = pos.minBlockX + a
+                    val z = pos.minBlockZ + b
+                    val y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z) - world.random.nextInt(3)
+                    val blockPos = BlockPos(x, y, z)
+                    val block = world.getBlockState(blockPos)
+
+                    // TODO config
+                    when {
+                        block.`is`(BlockTags.LEAVES) -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
+                        block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> world.setBlockAndUpdate(blockPos, ModBlocks.deadGrass.get().defaultBlockState())
+                        block.block is IPlantable || block.block is IGrowable -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
+                    }
                 }
             }
         }
