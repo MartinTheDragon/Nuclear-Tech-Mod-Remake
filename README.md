@@ -9,7 +9,7 @@ But you can still test the current state of the mod by either building the mod y
 
 ### Credits
 
-For a (non-exhaustive) list of who worked on this project and the original, look at the [credits file](Credits.md "Credits.md").
+For a (non-exhaustive) list of who worked on this project and the original, look at the [credits file](/Credits.md "Credits.md").
 
 ### License
 
