@@ -154,12 +154,12 @@ object ModBlocks {
     val charredPlanks: RegistryObject<Block> = BLOCKS.register("charred_planks") { Block(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(.5F, 2.5F).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) }
 
     val slakedSellafite: RegistryObject<Block> = BLOCKS.register("slaked_sellafite") { Block(Properties.of(STONE, MaterialColor.COLOR_GRAY).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)) }
-    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.5F) }
-    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(1F) }
-    val boilingSellafite: RegistryObject<Block> = BLOCKS.register("boiling_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(2.5F) }
-    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(4F) }
-    val infernalSellafite: RegistryObject<Block> = BLOCKS.register("infernal_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(6F) }
-    val sellafiteCorium: RegistryObject<Block> = BLOCKS.register("sellafite_corium") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(10F) }
+    val sellafite: RegistryObject<Block> = BLOCKS.register("sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.05F) }
+    val hotSellafite: RegistryObject<Block> = BLOCKS.register("hot_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.1F) }
+    val boilingSellafite: RegistryObject<Block> = BLOCKS.register("boiling_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.25F) }
+    val blazingSellafite: RegistryObject<Block> = BLOCKS.register("blazing_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.4F) }
+    val infernalSellafite: RegistryObject<Block> = BLOCKS.register("infernal_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.6F) }
+    val sellafiteCorium: RegistryObject<Block> = BLOCKS.register("sellafite_corium") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(1F) }
 
     // Machines
 

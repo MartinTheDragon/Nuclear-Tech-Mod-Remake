@@ -98,6 +98,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
                     else if (randomValue < 10) level.setBlockAndUpdate(pos, Blocks.EMERALD_ORE.defaultBlockState())
                     return
                 }
+                block.`is`(Blocks.SNOW_BLOCK) || block.`is`(Blocks.SNOW) -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
                 block.`is`(BlockTags.LOGS_THAT_BURN) -> level.setBlockAndUpdate(pos, ModBlocks.charredLog.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, block.getOptionalValue(RotatedPillarBlock.AXIS).orElse(Direction.Axis.Y)))
                 block.`is`(Blocks.RED_MUSHROOM_BLOCK) || block.`is`(Blocks.BROWN_MUSHROOM_BLOCK) -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
                 block.`is`(Blocks.MUSHROOM_STEM) -> level.setBlockAndUpdate(pos, ModBlocks.charredLog.get().defaultBlockState())
