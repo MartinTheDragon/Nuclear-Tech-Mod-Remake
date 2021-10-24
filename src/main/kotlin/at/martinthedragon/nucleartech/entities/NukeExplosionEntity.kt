@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.config.NuclearConfig
+import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.CatEntity
@@ -16,6 +17,8 @@ import net.minecraft.util.math.vector.Vector3d
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
 import kotlin.math.ceil
+import kotlin.math.min
+import kotlin.math.pow
 
 class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: World) : Entity(entityType, world) {
     var strength = 0
@@ -31,12 +34,17 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
     override fun tick() {
         super.tick()
 
+        if (level.isClientSide) return
+
         if (strength == 0) {
             remove()
             return
         }
 
-        // TODO chunk radiation
+        if (hasFallout && explosion != null) {
+            val rad = min(length * .5F * length.toFloat().pow(1.5F) / 35F, 15_000F) * .25F
+            ChunkRadiation.incrementRadiation(level, blockPosition(), rad)
+        }
 
         if (!isMuted) {
             level.playSound(null, blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.AMBIENT, 10000F, .8F + random.nextFloat() * .2F)
