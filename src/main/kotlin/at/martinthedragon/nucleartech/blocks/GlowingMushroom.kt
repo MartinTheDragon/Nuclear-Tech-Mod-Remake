@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.worldgen.WorldGeneration
 import net.minecraft.block.BlockState
 import net.minecraft.block.MushroomBlock
@@ -15,9 +16,12 @@ class GlowingMushroom(properties: Properties) : MushroomBlock(properties) {
         world.getBlockState(pos.below()).`is`(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)
 
     override fun randomTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
-        // TODO check mycelium config
-        if (world.getBlockState(pos.below()).`is`(ModBlocks.deadGrass.get()) && random.nextInt(5) == 0)
+        if (NuclearConfig.world.enableGlowingMyceliumSpread.get() &&
+            world.getBlockState(pos.below()).`is`(ModBlocks.deadGrass.get()) &&
+            random.nextInt(5) == 0
+        ) {
             world.setBlockAndUpdate(pos.below(), ModBlocks.glowingMycelium.get().defaultBlockState()) // create new mycelium
+        }
         if (random.nextInt(if (world.getBlockState(pos.below()).`is`(ModBlocks.glowingMycelium.get())) 10 else 1000) != 0) return
         var currentPos = pos
         var count = 5

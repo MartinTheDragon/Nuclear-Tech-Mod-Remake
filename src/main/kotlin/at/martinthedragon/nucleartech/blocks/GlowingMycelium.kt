@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.block.BlockState
 import net.minecraft.particles.ParticleTypes
 import net.minecraft.util.math.BlockPos
@@ -12,23 +13,21 @@ import java.util.*
 class GlowingMycelium(properties: Properties) : DeadGrass(properties) {
     // TODO contamination effect
 
-    // TODO configurable mycelium
     override fun randomTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
         @Suppress("DEPRECATION")
         super.randomTick(state, world, pos, random)
 
-        if (random.nextInt(8) == 0)
-            for (i in -1..1) { // spread
-                for (j in -1..1) {
-                    for (k in -1..1) {
-                        val otherBlockPos = pos.offset(i, j, k)
-                        val otherBlock = world.getBlockState(otherBlockPos)
-                        if (otherBlock.isSolidRender(world, otherBlockPos) && canExist(state, world, otherBlockPos) && (otherBlock.`is`(NuclearTags.Blocks.GLOWING_MYCELIUM_SPREADABLE))) {
-                            world.setBlockAndUpdate(otherBlockPos, ModBlocks.glowingMycelium.get().defaultBlockState())
-                        }
+        if (NuclearConfig.world.enableGlowingMyceliumSpread.get() && random.nextInt(8) == 0) for (i in -1..1) { // spread
+            for (j in -1..1) {
+                for (k in -1..1) {
+                    val otherBlockPos = pos.offset(i, j, k)
+                    val otherBlock = world.getBlockState(otherBlockPos)
+                    if (otherBlock.isSolidRender(world, otherBlockPos) && canExist(state, world, otherBlockPos) && (otherBlock.`is`(NuclearTags.Blocks.GLOWING_MYCELIUM_SPREADABLE))) {
+                        world.setBlockAndUpdate(otherBlockPos, ModBlocks.glowingMycelium.get().defaultBlockState())
                     }
                 }
             }
+        }
 
         // add new mushrooms
         if (world.isEmptyBlock(pos.above()) && random.nextInt(10) == 0 && ModBlocks.glowingMushroom.get().defaultBlockState().canSurvive(world, pos.above())) {

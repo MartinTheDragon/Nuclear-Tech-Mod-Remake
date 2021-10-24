@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.DamageSources
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.passive.CatEntity
@@ -49,11 +50,11 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
 
         when {
             !explosion!!.initialized -> explosion!!.collectTips(speed * 10)
-            explosion!!.tipsCount > 0 -> explosion!!.processTips(1024) // TODO config
+            explosion!!.tipsCount > 0 -> explosion!!.processTips(NuclearConfig.explosions.explosionSpeed.get())
             hasFallout -> {
                 val fallout = FalloutRainEntity(EntityTypes.falloutRainEntity.get(), level)
                 fallout.moveTo(this@NukeExplosionEntity.position())
-                fallout.setScale((this@NukeExplosionEntity.length * 1.8 + extraFallout).toInt()) // TODO config
+                fallout.setScale(((this@NukeExplosionEntity.length * 1.8 + extraFallout) * NuclearConfig.explosions.falloutRange.get() / 100.0).toInt())
                 level.addFreshEntity(fallout)
                 remove()
             }

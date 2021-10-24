@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.hazards
 
 import at.martinthedragon.nucleartech.capabilites.contamination.*
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.entities.NuclearCreeperEntity
 import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -37,7 +38,10 @@ object EntityContaminationEffects {
             // TODO explode
         }
 
-        // TODO burn in nether if 528 mode enabled
+        // TODO either make nether mobs immune, or prevent their spawns
+        if (NuclearConfig.general.enable528Mode.get() && !entity.fireImmune() && entity.level.dimensionType().ultraWarm()) // 528 effect
+            entity.setSecondsOnFire(5)
+
         handleRadiation(entity, capability)
     }
 
@@ -47,12 +51,15 @@ object EntityContaminationEffects {
         val world = entity.level
         if (world.isClientSide) return // TODO client-side effects
 
-        val chunkRadiation = ChunkRadiation.getRadiation(world, entity.blockPosition())
+        val chunkRadiation = ChunkRadiation.getRadiation(world, entity.blockPosition()).run {
+            val netherRadiation = NuclearConfig.radiation.netherRadiation.get()
+            if (world.dimensionType().ultraWarm() && netherRadiation > 0 && this < netherRadiation) netherRadiation.toFloat()
+            else this
+        }
         if (chunkRadiation > 0) {
             contaminate(entity, capability, HazardType.Radiation, ContaminationType.Creative, chunkRadiation / 20F)
         }
 
-        // TODO nether radiation
         // TODO all the nice vomitting
     }
 
@@ -104,7 +111,7 @@ object EntityContaminationEffects {
             if (entity.tickCount < 200) return false
         }
 
-        if (hazardType == HazardType.Radiation && isRadiationImmune(entity)) return false // TODO check config
+        if (hazardType == HazardType.Radiation && (isRadiationImmune(entity) || !NuclearConfig.radiation.enableEntityIrradiation.get())) return false
 
         when (hazardType) {
             HazardType.Radiation -> capability.addIrradiation(amount * (if (contaminationType == ContaminationType.Bypass) 1F else calculateRadiationMod(entity)))

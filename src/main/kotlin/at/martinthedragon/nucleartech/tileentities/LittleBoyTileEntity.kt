@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.tileentities
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.LittleBoy
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.containers.LittleBoyContainer
 import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import at.martinthedragon.nucleartech.math.toVector3dMiddle
@@ -102,7 +103,7 @@ class LittleBoyTileEntity : LockableTileEntity(TileEntityTypes.littleBoyTileEnti
         NukeExplosionEntity.create(
             level!!,
             blockPos.toVector3dMiddle(),
-            240 // TODO config
+            NuclearConfig.explosions.littleBoyStrength.get()
         )
     } else false
 

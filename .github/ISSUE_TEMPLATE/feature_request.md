@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Do you think that one feature is definitely missing? Try suggesting it!
+about: Do you think that just this one feature is definitely missing? Try suggesting it!
 title: "[FEATURE] <Descriptive title here>"
 labels: enhancement
 assignees: MartinTheDragon

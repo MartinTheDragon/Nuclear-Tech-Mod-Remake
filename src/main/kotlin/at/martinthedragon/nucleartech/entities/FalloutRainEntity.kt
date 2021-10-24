@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.block.Blocks
 import net.minecraft.block.IGrowable
 import net.minecraft.block.RotatedPillarBlock
@@ -33,7 +34,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
         super.tick()
 
         if (!level.isClientSide) {
-            for (i in 0 until 256) { // TODO make configurable
+            for (i in 0 until NuclearConfig.explosions.falloutSpeed.get()) {
                 val circumference = if (radProgress == 0) 1.0 else radProgress * PI * 4
                 val part = 360.0 / circumference
                 val vector = Vector3d(radProgress * .5, 0.0, 0.0)

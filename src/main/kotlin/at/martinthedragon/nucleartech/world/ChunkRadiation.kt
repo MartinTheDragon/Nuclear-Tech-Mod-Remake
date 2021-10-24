@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.world
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.block.Blocks
 import net.minecraft.block.IGrowable
 import net.minecraft.tags.BlockTags
@@ -82,8 +83,8 @@ object ChunkRadiation : ChunkRadiationHandler {
                 eggTimer = 0
             }
 
-            // TODO config
-            irradiateEnvironment()
+            if (NuclearConfig.radiation.worldRadiationEffects.get())
+                irradiateEnvironment()
         }
     }
 
@@ -121,7 +122,7 @@ object ChunkRadiation : ChunkRadiationHandler {
                 val (pos, radiation) = radiationMap.entries.random()
                 val chunkProvider = world.chunkSource
 
-                if (radiation < 10F || !chunkProvider.hasChunk(pos.x, pos.z)) continue
+                if (radiation < NuclearConfig.radiation.worldRadiationThreshold.get() || !chunkProvider.hasChunk(pos.x, pos.z)) continue
 
                 for (i in 0..4) for (a in 0..15) for (b in 0..15) {
                     if (world.random.nextInt(5) != 0) continue

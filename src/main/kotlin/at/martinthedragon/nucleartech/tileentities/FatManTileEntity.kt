@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.tileentities
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.FatMan
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.containers.FatManContainer
 import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import at.martinthedragon.nucleartech.math.toVector3dMiddle
@@ -76,7 +77,7 @@ class FatManTileEntity : LockableTileEntity(TileEntityTypes.fatManTileEntityType
         NukeExplosionEntity.create(
             level!!,
             blockPos.toVector3dMiddle(),
-            350 // TODO config
+            NuclearConfig.explosions.fatManStrength.get()
         )
     } else false
 
