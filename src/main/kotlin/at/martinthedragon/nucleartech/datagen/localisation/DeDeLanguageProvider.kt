@@ -861,8 +861,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.randomUnpack, "Gegenstand ausgepackt")
         add("subtitle.$MODID.geiger.click", "Geigerzähler klickt")
 
-        addDamageSource(DamageSources.radiation, "%1\$s starb an Strahlenvergiftung")
-        addDamageSource(DamageSources.nuclearBlast, "%1\$s wurde von einer Atomexplosion weggeblasen")
+        addDamageSource(DamageSources.radiation, "%1\$s starb an Strahlenvergiftung", "%1\$s fiel während des Kampfes mit %2\$s der Strahlenkrankheit zum Opfer")
+        addDamageSource(DamageSources.nuclearBlast, "%1\$s wurde von einer Atomexplosion weggeblasen", "%1\$s wurde während des Kampfes mit %2\$s atomisiert")
 
         add("geiger.title", "GEIGERZÄHLER")
         add("geiger.chunkRadiation", "Chunk-Strahlung:")

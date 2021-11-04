@@ -865,8 +865,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.randomUnpack, "Item unpacked")
         add("subtitle.$MODID.geiger.click", "Geiger Counter clicks")
 
-        addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning")
-        addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion")
+        addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning", "%1\$s fell victim to acute radiation syndrome whilst fighting %2\$s")
+        addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion", "%1\$s got nuked whilst fighting %2\$s")
 
         add("geiger.title", "GEIGER COUNTER")
         add("geiger.chunkRadiation", "Current chunk radiation:")

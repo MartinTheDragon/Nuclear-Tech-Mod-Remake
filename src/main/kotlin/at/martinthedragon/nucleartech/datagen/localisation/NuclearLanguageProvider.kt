@@ -66,8 +66,9 @@ abstract class NuclearLanguageProvider(
         add("subtitle.${key.get().registryName!!.namespace}.${key.get().registryName!!.path}", name)
     }
 
-    protected fun addDamageSource(key: DamageSource, name: String) {
-        add("death.attack.${key.msgId}", name)
+    protected fun addDamageSource(key: DamageSource, message: String, killCreditMessage: String? = null) {
+        add("death.attack.${key.msgId}", message)
+        if (killCreditMessage != null) add("death.attack.${key.msgId}.player", killCreditMessage)
     }
 
     /** What to append to the spawn egg name */
