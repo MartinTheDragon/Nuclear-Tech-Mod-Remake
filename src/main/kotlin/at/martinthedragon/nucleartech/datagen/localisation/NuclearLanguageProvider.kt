@@ -72,14 +72,17 @@ abstract class NuclearLanguageProvider(
     }
 
     /** What to append to the spawn egg name */
-    abstract val spawnEggSuffix: String // TODO maybe some languages prefix it?
+    abstract val spawnEggSuffix: String
+    /** If `true`, prefixes the suffix instead */
+    open val spawnEggSuffixIsPrefix = false
     /** What to replace spaces with in the name of the entity for the spawn egg */
     open val spawnEggEntityStringWordSeparator = ' '
 
     protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, name: String) {
         val spawnEgg = SpawnEggItem.byId(key.get()) ?: throw IllegalStateException("No spawn egg registered for entity $name")
         addEntityType(key, name)
-        add(spawnEgg, name.replace(' ', spawnEggEntityStringWordSeparator) + spawnEggSuffix)
+        val formatted = name.replace(' ', spawnEggEntityStringWordSeparator)
+        add(spawnEgg, if (spawnEggSuffixIsPrefix) spawnEggSuffix + formatted else formatted + spawnEggSuffix)
     }
 
     companion object {
