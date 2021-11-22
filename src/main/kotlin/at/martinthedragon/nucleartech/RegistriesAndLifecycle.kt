@@ -100,6 +100,7 @@ object RegistriesAndLifecycle {
         if (event.includeClient()) {
             dataGenerator.addProvider(NuclearBlockStateProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
+            dataGenerator.addProvider(NuclearModelProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearSoundsProvider(dataGenerator, existingFileHelper))
 
             for (translation in NuclearLanguageProviders.getLanguageProviders(dataGenerator))

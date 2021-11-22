@@ -1,6 +1,5 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.network.PacketBuffer
@@ -8,7 +7,6 @@ import net.minecraft.util.Util
 import net.minecraft.util.math.vector.Vector3d
 import net.minecraftforge.fml.network.NetworkEvent
 import java.util.function.Supplier
-import kotlin.math.ceil
 
 class SpawnNuclearExplosionMessage(
     private val strength: Int,
@@ -35,16 +33,7 @@ class SpawnNuclearExplosionMessage(
                     sender.sendMessage(UseCreativeNuclearExplosionSpawnerScreen.ERR_INSUFFICIENT_PERMISSION, Util.NIL_UUID)
                     return@enqueueWork
                 }
-                val world = sender.getLevel()
-                world.addFreshEntity(NukeExplosionEntity(EntityTypes.nukeExplosionEntity.get(), world).apply {
-                    strength = this@SpawnNuclearExplosionMessage.strength
-                    speed = ceil(100000F / strength).toInt()
-                    length = strength / 2
-                    isMuted = muted
-                    hasFallout = this@SpawnNuclearExplosionMessage.hasFallout
-                    extraFallout = this@SpawnNuclearExplosionMessage.extraFallout
-                    moveTo(position)
-                })
+                NukeExplosionEntity.create(sender.getLevel(), position, strength, hasFallout, extraFallout, muted)
             }
         context.get().packetHandled = true
     }

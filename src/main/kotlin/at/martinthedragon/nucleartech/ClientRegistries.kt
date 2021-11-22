@@ -3,8 +3,9 @@ package at.martinthedragon.nucleartech
 import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.renderers.FalloutRainRenderer
+import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
-import at.martinthedragon.nucleartech.entities.renderers.NukeExplosionRenderer
+import at.martinthedragon.nucleartech.entities.renderers.NukeCloudRenderer
 import at.martinthedragon.nucleartech.items.BombKitItem
 import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
 import at.martinthedragon.nucleartech.screens.*
@@ -23,7 +24,9 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.TextFormatting
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.ColorHandlerEvent
+import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.client.event.TextureStitchEvent
+import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -59,7 +62,8 @@ object ClientRegistries {
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.steamPressHeadTileEntityType.get(), ::SteamPressTopTileEntityRenderer)
 
         NuclearTech.LOGGER.debug("Registering Entity Renderers")
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nukeExplosionEntity.get(), ::NukeExplosionRenderer)
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nukeExplosionEntity.get(), ::NoopRenderer)
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nukeCloudEntity.get(), ::NukeCloudRenderer)
         RenderingRegistry.registerEntityRenderingHandler(EntityTypes.falloutRainEntity.get(), ::FalloutRainRenderer)
         RenderingRegistry.registerEntityRenderingHandler(EntityTypes.nuclearCreeperEntity.get(), ::NuclearCreeperRenderer)
 
@@ -94,5 +98,10 @@ object ClientRegistries {
                 itemColors.register({ _, layer -> spawnEgg.getColor(layer) }, spawnEgg)
             }
         }
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun registerModels(event: ModelRegistryEvent) {
+        ModelLoader.addSpecialModel(ResourceLocation(NuclearTech.MODID, "other/nuke_mush"))
     }
 }

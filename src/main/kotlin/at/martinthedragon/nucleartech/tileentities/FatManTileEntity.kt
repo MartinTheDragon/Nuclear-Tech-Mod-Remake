@@ -69,7 +69,6 @@ class FatManTileEntity : LockableTileEntity(TileEntityTypes.fatManTileEntityType
 
     override fun getRequiredDetonationComponents() = FatMan.requiredComponents
 
-    // TODO gr4ph1x
     override fun detonate(): Boolean = if (level != null && !level!!.isClientSide) {
         setRemoved()
         level!!.removeBlock(worldPosition, false)
