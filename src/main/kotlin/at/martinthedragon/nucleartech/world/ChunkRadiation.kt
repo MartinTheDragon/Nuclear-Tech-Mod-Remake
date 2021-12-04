@@ -3,15 +3,15 @@ package at.martinthedragon.nucleartech.world
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.config.NuclearConfig
-import net.minecraft.block.Blocks
-import net.minecraft.block.IGrowable
+import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.BlockTags
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.ChunkPos
-import net.minecraft.world.IWorld
-import net.minecraft.world.World
-import net.minecraft.world.gen.Heightmap
-import net.minecraft.world.server.ServerWorld
+import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
+import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.event.world.ChunkDataEvent
@@ -25,7 +25,7 @@ import kotlin.math.max
 
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object ChunkRadiation : ChunkRadiationHandler {
-    private val perWorldRadiation = mutableMapOf<IWorld, MutableMap<ChunkPos, Float>>()
+    private val perWorldRadiation = mutableMapOf<LevelAccessor, MutableMap<ChunkPos, Float>>()
 
     @SubscribeEvent @JvmStatic
     fun onWorldLoad(event: WorldEvent.Load) {
@@ -60,16 +60,16 @@ object ChunkRadiation : ChunkRadiationHandler {
         perWorldRadiation[event.world]?.remove(event.chunk.pos)
     }
 
-    override fun getRadiation(world: IWorld, pos: BlockPos): Float {
+    override fun getRadiation(world: LevelAccessor, pos: BlockPos): Float {
         val worldRadiation = perWorldRadiation[world] ?: return 0F
         return worldRadiation[ChunkPos(pos)] ?: 0F
     }
 
-    override fun setRadiation(world: World, pos: BlockPos, radiation: Float) {
+    override fun setRadiation(world: Level, pos: BlockPos, radiation: Float) {
         if (!world.worldBorder.isWithinBounds(pos)) return
         val worldRadiation = perWorldRadiation[world] ?: return
         worldRadiation[ChunkPos(pos)] = radiation
-        world.getChunkAt(pos).markUnsaved()
+        world.getChunkAt(pos).isUnsaved = true
     }
 
     private var eggTimer = 0
@@ -115,7 +115,7 @@ object ChunkRadiation : ChunkRadiationHandler {
 
     private fun irradiateEnvironment() {
         for ((world, radiationMap) in perWorldRadiation) {
-            if (world !is ServerWorld) continue
+            if (world !is ServerLevel) continue
             if (radiationMap.isEmpty()) continue
 
             for (chunk in 0..4) {
@@ -129,7 +129,7 @@ object ChunkRadiation : ChunkRadiationHandler {
 
                     val x = pos.minBlockX + a
                     val z = pos.minBlockZ + b
-                    val y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z) - world.random.nextInt(3)
+                    val y = world.getHeight(Heightmap.Types.WORLD_SURFACE, x, z) - world.random.nextInt(3)
                     val blockPos = BlockPos(x, y, z)
                     val block = world.getBlockState(blockPos)
 
@@ -137,7 +137,7 @@ object ChunkRadiation : ChunkRadiationHandler {
                     when {
                         block.`is`(BlockTags.LEAVES) -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
                         block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> world.setBlockAndUpdate(blockPos, ModBlocks.deadGrass.get().defaultBlockState())
-                        block.block is IPlantable || block.block is IGrowable -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
+                        block.block is IPlantable || block.block is BonemealableBlock -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
                     }
                 }
             }

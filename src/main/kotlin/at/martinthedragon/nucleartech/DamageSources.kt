@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech
 
-import net.minecraft.util.DamageSource
+import net.minecraft.world.damagesource.DamageSource
 
 object DamageSources {
     val radiation: DamageSource = DamageSource("${NuclearTech.MODID}.radiation").bypassArmor()

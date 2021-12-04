@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:daffergon_powder_from_shredding_daffergon_block"
+    ]
+  },
+  "criteria": {
+    "has_daffergon_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:daffergon_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:daffergon_powder_from_shredding_daffergon_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_daffergon_block",
+      "has_the_recipe"
+    ]
+  ]
+}

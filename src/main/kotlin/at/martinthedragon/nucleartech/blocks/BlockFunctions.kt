@@ -1,23 +1,27 @@
 package at.martinthedragon.nucleartech.blocks
 
-import net.minecraft.block.BlockState
-import net.minecraft.inventory.InventoryHelper
-import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.LockableTileEntity
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
+import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.Containers
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraftforge.network.NetworkHooks
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 /**
- * Tailored for custom naming by [net.minecraft.block.Block.setPlacedBy]
+ * Tailored for custom naming by [net.minecraft.world.level.block.Block.setPlacedBy]
  *
- * Sets the [customName][LockableTileEntity.setCustomName] of the LockableTileEntity [T] if the [ItemStack's][stack]
+ * Sets the [customName][BaseContainerBlockEntity.setCustomName] of the BaseContainerBlockEntity [T] if the [ItemStack's][stack]
  * name is a [custom hover name][ItemStack.hasCustomHoverName].
  */
-inline fun <reified T : LockableTileEntity> setTileEntityCustomName(
-    world: World,
+inline fun <reified T : BaseContainerBlockEntity> setTileEntityCustomName(
+    world: Level,
     pos: BlockPos,
     stack: ItemStack
 ) {
@@ -28,16 +32,16 @@ inline fun <reified T : LockableTileEntity> setTileEntityCustomName(
 }
 
 /**
- * Tailored for dropping inventories by [net.minecraft.block.Block.onRemove]
+ * Tailored for dropping inventories by [net.minecraft.world.level.block.Block.onRemove]
  *
  * Only drops the content when the Block was actually changed and returns `true` if so.
  *
  * The [also] function can be used to perform additional operations after the random were dropped.
  */
 @OptIn(ExperimentalContracts::class)
-inline fun <reified T : LockableTileEntity> dropTileEntityContents(
+inline fun <reified T : BaseContainerBlockEntity> dropTileEntityContents(
     state: BlockState,
-    world: World,
+    level: Level,
     pos: BlockPos,
     newState: BlockState,
     also: (tileEntity: T) -> Unit = {}
@@ -47,12 +51,20 @@ inline fun <reified T : LockableTileEntity> dropTileEntityContents(
     }
 
     if (!state.`is`(newState.block)) {
-        val tileEntity = world.getBlockEntity(pos)
+        val tileEntity = level.getBlockEntity(pos)
         if (tileEntity is T) {
-            InventoryHelper.dropContents(world, pos, tileEntity)
+            Containers.dropContents(level, pos, tileEntity)
             also(tileEntity)
             return true
         }
     }
     return false
+}
+
+inline fun <reified T : BaseContainerBlockEntity> openMenu(level: Level, pos: BlockPos, player: Player): InteractionResult {
+    if (!level.isClientSide) {
+        val blockEntity = level.getBlockEntity(pos)
+        if (blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, pos)
+    }
+    return InteractionResult.sidedSuccess(level.isClientSide)
 }

@@ -1,0 +1,9 @@
+{
+  "textures": {
+    "fireball_texture": "nucleartech:entity/mushroom_cloud/fireball"
+  },
+  "loader": "forge:obj",
+  "model": "nucleartech:models/other/mushroom_cloud/mush.obj",
+  "detectCullableFaces": false,
+  "flip-v": true
+}

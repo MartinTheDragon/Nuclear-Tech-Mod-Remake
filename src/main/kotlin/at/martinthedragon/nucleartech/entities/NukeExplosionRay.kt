@@ -1,22 +1,22 @@
 package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
-import net.minecraft.block.Blocks
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.nbt.IntNBT
-import net.minecraft.nbt.ListNBT
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.World
+import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.IntTag
+import net.minecraft.nbt.ListTag
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.phys.Vec3
 import kotlin.math.*
 
 class NukeExplosionRay(
-    val world: World,
+    val world: Level,
     val pos: BlockPos,
     val strength: Int,
     val length: Int
 ) {
-    private val tips = mutableListOf<Vector3d>()
+    private val tips = mutableListOf<Vec3>()
     val tipsCount: Int
         get() = tips.size
     private var startY = 0
@@ -33,19 +33,19 @@ class NukeExplosionRay(
         for (v in startY..bowCount) {
             val part = PI / bow
             val rot = part * -v
-            val height = Vector3d(0.0, -strength.toDouble(), 0.0).zRot(rot.toFloat())
+            val height = Vec3(0.0, -strength.toDouble(), 0.0).zRot(rot.toFloat())
             val y = height.y
             val sectionRad = sqrt(strength.toFloat().pow(2F) - y.toFloat().pow(2F))
             val circumference = 2 * PI * sectionRad
 
             for (r in startCircumference..circumference.toInt()) {
-                val vec = Vector3d(sectionRad.toDouble(), y, 0.0).normalize().yRot((360 / circumference * r).toFloat())
+                val vec = Vec3(sectionRad.toDouble(), y, 0.0).normalize().yRot((360 / circumference * r).toFloat())
                 var remaining = strength.toFloat()
-                var lastPos: Vector3d? = null
+                var lastPos: Vec3? = null
 
                 for (i in 0 until strength) {
                     if (i > length) break
-                    val newPos = Vector3d(
+                    val newPos = Vec3(
                         pos.x + vec.x * i,
                         pos.y + vec.y * i,
                         pos.z + vec.z * i
@@ -60,7 +60,7 @@ class NukeExplosionRay(
                     remaining -= if (block.material.isLiquid) 2.5F.pow(7.5F - fac.toFloat())
                     else block.getExplosionResistance(world, newBlockPos, null).pow(7.5F - fac.toFloat())
 
-                    if (remaining > 0 && !block.isAir(world, pos)) lastPos = newPos // this version of isAir will be removed in 1.17
+                    if (remaining > 0 && !block.isAir) lastPos = newPos // this version of isAir will be removed in 1.17
 
                     if (remaining <= 0 || i + 1 > length) {
                         if (tips.size < Int.MAX_VALUE - 100 && lastPos != null)
@@ -96,7 +96,7 @@ class NukeExplosionRay(
 
             world.setBlockAndUpdate(BlockPos(tip), Blocks.AIR.defaultBlockState())
 
-            val vector = Vector3d(
+            val vector = Vec3(
                 tip.x - pos.x,
                 tip.y - pos.y,
                 tip.z - pos.z
@@ -109,7 +109,7 @@ class NukeExplosionRay(
                 val currentPos = normalVector.multiply(distanceDouble, distanceDouble, distanceDouble)
                     .add(pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble())
                     .let { BlockPos(it.x.roundToInt(), it.y.roundToInt(), it.z.roundToInt()) }
-                if (!world.getBlockState(currentPos).isAir(world, currentPos)) {
+                if (!world.getBlockState(currentPos).isAir) {
                     world.setBlock(currentPos, Blocks.AIR.defaultBlockState(), 0b10) // only sends the removed block. does not update neighbors
                     destroyedBlocks++
                 }
@@ -121,12 +121,12 @@ class NukeExplosionRay(
 
     // do not try getting the entity's data using the /data command! the huge amount of data will halt the game. no kidding, this can be megabytes worth of data
     // TODO serialize efficiently
-    fun serialize(): CompoundNBT {
-        val nbt = CompoundNBT()
-        val posNbt = ListNBT()
-        posNbt.add(IntNBT.valueOf(pos.x))
-        posNbt.add(IntNBT.valueOf(pos.y))
-        posNbt.add(IntNBT.valueOf(pos.z))
+    fun serialize(): CompoundTag {
+        val nbt = CompoundTag()
+        val posNbt = ListTag()
+        posNbt.add(IntTag.valueOf(pos.x))
+        posNbt.add(IntTag.valueOf(pos.y))
+        posNbt.add(IntTag.valueOf(pos.z))
         nbt.put("Pos", posNbt)
         nbt.putInt("Strength", strength)
         nbt.putInt("Length", length)
@@ -134,7 +134,7 @@ class NukeExplosionRay(
         val tipsDataX = LongArray(tipsCount) { tips[it].x.toRawBits() }
         val tipsDataY = LongArray(tipsCount) { tips[it].y.toRawBits() }
         val tipsDataZ = LongArray(tipsCount) { tips[it].z.toRawBits() }
-        val tipsData = CompoundNBT()
+        val tipsData = CompoundTag()
         tipsData.putLongArray("TipsDataX", tipsDataX)
         tipsData.putLongArray("TipsDataY", tipsDataY)
         tipsData.putLongArray("TipsDataZ", tipsDataZ)
@@ -148,7 +148,7 @@ class NukeExplosionRay(
     }
 
     companion object {
-        fun deserialize(world: World, nbt: CompoundNBT): NukeExplosionRay {
+        fun deserialize(world: Level, nbt: CompoundTag): NukeExplosionRay {
             val posNbt = nbt.getList("Pos", 3)
             val explosion = NukeExplosionRay(
                 world,
@@ -168,7 +168,7 @@ class NukeExplosionRay(
                 val x = Double.fromBits(tipsDataX[i])
                 val y = Double.fromBits(tipsDataY[i])
                 val z = Double.fromBits(tipsDataZ[i])
-                explosion.tips.add(Vector3d(x, y , z))
+                explosion.tips.add(Vec3(x, y , z))
             }
             explosion.apply {
                 startY = nbt.getInt("StartY")

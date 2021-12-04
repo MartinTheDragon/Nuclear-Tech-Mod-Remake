@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:neptunium_powder_from_shredding_neptunium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_neptunium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/neptunium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:neptunium_powder_from_shredding_neptunium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_neptunium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

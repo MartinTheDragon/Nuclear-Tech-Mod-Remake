@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.SOUNDS
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.SoundEvent
-import net.minecraftforge.fml.RegistryObject
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.sounds.SoundEvent
+import net.minecraftforge.registries.RegistryObject
 
 object SoundEvents {
     val sirenTrackHatchSiren: RegistryObject<SoundEvent> = SOUNDS.register("siren.hatch") { SoundEvent(modLoc("siren.hatch")) }

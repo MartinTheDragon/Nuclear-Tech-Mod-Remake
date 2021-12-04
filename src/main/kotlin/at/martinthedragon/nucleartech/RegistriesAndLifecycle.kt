@@ -1,48 +1,42 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.capabilites.contamination.CapabilityContaminationHandler
-import at.martinthedragon.nucleartech.containers.ContainerTypes
+import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.datagen.*
 import at.martinthedragon.nucleartech.entities.EntityTypes
-import at.martinthedragon.nucleartech.entities.NuclearCreeperEntity
-import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
+import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
-import at.martinthedragon.nucleartech.tileentities.TileEntityTypes
-import at.martinthedragon.nucleartech.worldgen.WorldGeneration
-import net.minecraft.block.Block
-import net.minecraft.entity.EntityType
-import net.minecraft.inventory.container.ContainerType
-import net.minecraft.item.Item
-import net.minecraft.item.crafting.IRecipeSerializer
-import net.minecraft.tileentity.TileEntityType
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.SoundEvent
-import net.minecraft.util.registry.Registry
-import net.minecraft.world.gen.feature.Feature
+import net.minecraft.core.Registry
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.inventory.MenuType
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent
-import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.RegistryObject
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import net.minecraftforge.registries.ForgeRegistryEntry
-import net.minecraftforge.registries.RegistryManager
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent
+import net.minecraftforge.registries.*
 
 @Suppress("unused")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object RegistriesAndLifecycle {
     val BLOCKS: DeferredRegister<Block> = DeferredRegister.create(ForgeRegistries.BLOCKS, NuclearTech.MODID)
     val ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, NuclearTech.MODID)
-    val TILE_ENTITIES: DeferredRegister<TileEntityType<*>> = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, NuclearTech.MODID)
+    val BLOCK_ENTITIES: DeferredRegister<BlockEntityType<*>> = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, NuclearTech.MODID)
     val ENTITIES: DeferredRegister<EntityType<*>> = DeferredRegister.create(ForgeRegistries.ENTITIES, NuclearTech.MODID)
-    val CONTAINERS: DeferredRegister<ContainerType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, NuclearTech.MODID)
-    val RECIPE_SERIALIZERS: DeferredRegister<IRecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, NuclearTech.MODID)
+    val MENUS: DeferredRegister<MenuType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, NuclearTech.MODID)
+    val RECIPE_SERIALIZERS: DeferredRegister<RecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, NuclearTech.MODID)
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
     val SOUNDS: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NuclearTech.MODID)
 
@@ -53,16 +47,16 @@ object RegistriesAndLifecycle {
         ITEMS.register(modEventBus)
         ModBlockItems
         ModItems
-        TILE_ENTITIES.register(modEventBus)
-        TileEntityTypes
+        BLOCK_ENTITIES.register(modEventBus)
+        BlockEntityTypes
         ENTITIES.register(modEventBus)
         EntityTypes
-        CONTAINERS.register(modEventBus)
-        ContainerTypes
+        MENUS.register(modEventBus)
+        MenuTypes
         RECIPE_SERIALIZERS.register(modEventBus)
         RecipeSerializers
-        FEATURES.register(modEventBus)
-        WorldGeneration.Features
+//        FEATURES.register(modEventBus)
+//        WorldGeneration.Features
         SOUNDS.register(modEventBus)
         SoundEvents
     }
@@ -77,12 +71,11 @@ object RegistriesAndLifecycle {
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
-        CapabilityContaminationHandler.register()
     }
 
     @SubscribeEvent @JvmStatic
     fun createAttributes(event: EntityAttributeCreationEvent) {
-        event.put(EntityTypes.nuclearCreeperEntity.get(), NuclearCreeperEntity.createAttributes())
+        event.put(EntityTypes.nuclearCreeper.get(), NuclearCreeper.createAttributes())
     }
 
     @SubscribeEvent @JvmStatic
@@ -109,15 +102,13 @@ object RegistriesAndLifecycle {
     }
 
     @SubscribeEvent @JvmStatic
-    fun registerRecipeTypes(event: RegistryEvent.Register<IRecipeSerializer<*>>) {
+    fun registerRecipeTypes(event: RegistryEvent.Register<RecipeSerializer<*>>) {
         // no forge registry for recipe types currently available
         RecipeTypes.getTypes().forEach { Registry.register(Registry.RECIPE_TYPE, it.toString(), it) }
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    @JvmStatic
-    fun registerSpawnEggs(event: RegistryEvent.Register<EntityType<*>>) {
-        NuclearSpawnEggItem.registerSpawnEggEntities()
+    @SubscribeEvent @JvmStatic
+    fun registerCapabilities(event: RegisterCapabilitiesEvent) {
+        event.register(ContaminationHandler::class.java)
     }
 }

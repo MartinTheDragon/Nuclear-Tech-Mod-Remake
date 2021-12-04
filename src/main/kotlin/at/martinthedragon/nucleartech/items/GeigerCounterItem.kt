@@ -2,41 +2,38 @@ package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.Radiation
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.capabilites.contamination.CapabilityContaminationHandler
+import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
 import at.martinthedragon.nucleartech.world.ChunkRadiation
-import net.minecraft.entity.Entity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.util.SoundCategory
-import net.minecraft.util.text.StringTextComponent
-import net.minecraft.util.text.TextFormatting
-import net.minecraft.util.text.TranslationTextComponent
-import net.minecraft.world.World
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.sounds.SoundSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 import kotlin.random.Random
 
 class GeigerCounterItem(properties: Properties) : Item(properties) {
-    override fun use(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
+    override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         player.playSound(SoundEvents.randomBoop.get(), 1F, 1F)
         if (!world.isClientSide) {
             printGeigerData(player)
         }
-        return ActionResult.sidedSuccess(player.getItemInHand(hand), world.isClientSide)
+        return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), world.isClientSide)
     }
 
-    override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, isSelected: Boolean) {
+    override fun inventoryTick(stack: ItemStack, world: Level, entity: Entity, slot: Int, isSelected: Boolean) {
         if (entity !is LivingEntity || world.isClientSide) return
 
         // TODO check for FSB armor
 
-        val capability = entity.getCapability(CapabilityContaminationHandler.contaminationHandlerCapability)
-            .takeIf { it.isPresent }
-            ?.orElseThrow(::Error)
-            ?: return
+        val capability = Capabilities.getContamination(entity) ?: return
 
         val radPerSecond = capability.getRadPerSecond()
 
@@ -53,7 +50,7 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             if (radPerSecond > 25) intensity = intensity or (1 shl 5)
 
             // making use of short-circuiting
-            if ((likelihood == 1 || random.nextInt(likelihood) == 0) && intensity > 0) {
+            if ((likelihood == 1 || world.random.nextInt(likelihood) == 0) && intensity > 0) {
                 val sound = when (Random.nextInt(intensity.countTrailingZeroBits(), intensity.countOneBits() + intensity.countTrailingZeroBits()) + 1) {
                     1 -> SoundEvents.geiger1
                     2 -> SoundEvents.geiger2
@@ -64,20 +61,20 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
                     else -> SoundEvents.geiger1
                 }
 
-                world.playSound(null, entity, sound.get(), SoundCategory.PLAYERS, 1F, 1F)
+                world.playSound(null, entity, sound.get(), SoundSource.PLAYERS, 1F, 1F)
             }
 
-        } else if (random.nextInt(50) == 0)
+        } else if (world.random.nextInt(50) == 0)
             world.playSound(null, entity,
-                if (random.nextInt(2) == 0) SoundEvents.geiger2.get() else SoundEvents.geiger1.get(),
-                SoundCategory.PLAYERS, 1F, 1F
+                if (world.random.nextInt(2) == 0) SoundEvents.geiger2.get() else SoundEvents.geiger1.get(),
+                SoundSource.PLAYERS, 1F, 1F
             )
     }
 
     companion object {
-        fun printGeigerData(player: PlayerEntity) {
+        fun printGeigerData(player: Player) {
             val world = player.level
-            val capability = CapabilityContaminationHandler.getCapability(player) ?: return
+            val capability = Capabilities.getContamination(player) ?: return
 
             // for that hbm approved decimal rounding
             val chunkRadiation = (ChunkRadiation.getRadiation(world, player.blockPosition()) * 10F).toInt() / 10F
@@ -87,49 +84,49 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             // TODO coefficient
 
             player.displayClientMessage(
-                StringTextComponent("===== ☢ ")
-                    .append(TranslationTextComponent("geiger.title"))
-                    .append(StringTextComponent(" ☢ ====="))
-                    .withStyle(TextFormatting.GOLD), false
+                TextComponent("===== ☢ ")
+                    .append(TranslatableComponent("geiger.title"))
+                    .append(TextComponent(" ☢ ====="))
+                    .withStyle(ChatFormatting.GOLD), false
             )
             player.displayClientMessage(
-                TranslationTextComponent("geiger.chunkRadiation")
-                    .append(StringTextComponent(" $chunkRadiation RAD/s").withStyle(getColorForRadValue(chunkRadiation)))
-                    .withStyle(TextFormatting.YELLOW), false
+                TranslatableComponent("geiger.chunkRadiation")
+                    .append(TextComponent(" $chunkRadiation RAD/s").withStyle(getColorForRadValue(chunkRadiation)))
+                    .withStyle(ChatFormatting.YELLOW), false
             )
             player.displayClientMessage(
-                TranslationTextComponent("geiger.totalEnvironmentRadiation")
-                    .append(StringTextComponent(" $environmentRadiation RAD/s").withStyle(getColorForRadValue(environmentRadiation)))
-                    .withStyle(TextFormatting.YELLOW), false
+                TranslatableComponent("geiger.totalEnvironmentRadiation")
+                    .append(TextComponent(" $environmentRadiation RAD/s").withStyle(getColorForRadValue(environmentRadiation)))
+                    .withStyle(ChatFormatting.YELLOW), false
             )
             player.displayClientMessage(
-                TranslationTextComponent("geiger.playerIrradiation")
-                    .append(StringTextComponent(" $playerIrradiation RAD").withStyle(getColorForPlayerRadValue(playerIrradiation)))
-                    .withStyle(TextFormatting.YELLOW), false
+                TranslatableComponent("geiger.playerIrradiation")
+                    .append(TextComponent(" $playerIrradiation RAD").withStyle(getColorForPlayerRadValue(playerIrradiation)))
+                    .withStyle(ChatFormatting.YELLOW), false
             )
             player.displayClientMessage(
-                TranslationTextComponent("geiger.playerResistance")
-                    .append(StringTextComponent(" $playerResistance%").withStyle(TextFormatting.WHITE))
-                    .withStyle(TextFormatting.YELLOW), false
+                TranslatableComponent("geiger.playerResistance")
+                    .append(TextComponent(" $playerResistance%").withStyle(ChatFormatting.WHITE))
+                    .withStyle(ChatFormatting.YELLOW), false
             )
         }
 
-        private fun getColorForRadValue(rad: Float): TextFormatting = when {
-            rad == 0F -> TextFormatting.GREEN
-            rad < 1F -> TextFormatting.YELLOW
-            rad < 10F -> TextFormatting.GOLD
-            rad < 100F -> TextFormatting.RED
-            rad < 1000F -> TextFormatting.DARK_RED
-            else -> TextFormatting.DARK_GRAY
+        private fun getColorForRadValue(rad: Float): ChatFormatting = when {
+            rad == 0F -> ChatFormatting.GREEN
+            rad < 1F -> ChatFormatting.YELLOW
+            rad < 10F -> ChatFormatting.GOLD
+            rad < 100F -> ChatFormatting.RED
+            rad < 1000F -> ChatFormatting.DARK_RED
+            else -> ChatFormatting.DARK_GRAY
         }
 
-        private fun getColorForPlayerRadValue(rad: Float): TextFormatting = when {
-            rad < 200 -> TextFormatting.GREEN
-            rad < 400 -> TextFormatting.YELLOW
-            rad < 600 -> TextFormatting.GOLD
-            rad < 800 -> TextFormatting.RED
-            rad < 1000 -> TextFormatting.DARK_RED
-            else -> TextFormatting.DARK_GRAY
+        private fun getColorForPlayerRadValue(rad: Float): ChatFormatting = when {
+            rad < 200 -> ChatFormatting.GREEN
+            rad < 400 -> ChatFormatting.YELLOW
+            rad < 600 -> ChatFormatting.GOLD
+            rad < 800 -> ChatFormatting.RED
+            rad < 1000 -> ChatFormatting.DARK_RED
+            else -> ChatFormatting.DARK_GRAY
         }
     }
 }

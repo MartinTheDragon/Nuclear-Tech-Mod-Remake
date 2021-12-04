@@ -1,125 +1,82 @@
 package at.martinthedragon.nucleartech.blocks
 
-import at.martinthedragon.nucleartech.tileentities.BlastFurnaceTileEntity
+import at.martinthedragon.nucleartech.blocks.entities.BlastFurnaceBlockEntity
+import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
 import at.martinthedragon.nucleartech.world.dropExperience
-import net.minecraft.block.AbstractFurnaceBlock
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.HorizontalBlock
-import net.minecraft.block.material.PushReaction
-import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.entity.Entity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.inventory.container.Container
-import net.minecraft.item.BlockItemUseContext
-import net.minecraft.item.ItemStack
-import net.minecraft.particles.ParticleTypes
-import net.minecraft.state.BooleanProperty
-import net.minecraft.state.DirectionProperty
-import net.minecraft.state.StateContainer
-import net.minecraft.state.properties.BlockStateProperties
-import net.minecraft.util.*
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.BlockRayTraceResult
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.World
-import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.item.enchantment.EnchantmentHelper
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.Vec3
 import java.util.*
 
-class BlastFurnace(properties: Properties) : Block(properties) {
-    init {
-        registerDefaultState(stateDefinition.any().setValue(LIT, false))
+class BlastFurnace(properties: Properties) : BaseEntityBlock(properties) {
+    init { registerDefaultState(stateDefinition.any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH).setValue(BlockStateProperties.LIT, false)) }
+
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(HorizontalDirectionalBlock.FACING, BlockStateProperties.LIT) }
+    override fun getStateForPlacement(context: BlockPlaceContext): BlockState = defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.horizontalDirection.opposite)
+    override fun getRenderShape(state: BlockState) = RenderShape.MODEL
+
+    override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<BlastFurnaceBlockEntity>(level, pos, player)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<BlastFurnaceBlockEntity>(level, pos, stack)
+
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
+        dropTileEntityContents<BlastFurnaceBlockEntity>(state, level, pos, newState) { level.dropExperience(Vec3.atCenterOf(pos), it.getExperienceToDrop(null)) }
+        @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 
-    override fun use(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockRayTraceResult): ActionResultType {
-        if (!world.isClientSide) {
-            val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is BlastFurnaceTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
-        }
-        return ActionResultType.sidedSuccess(world.isClientSide)
-    }
-
-    override fun getPistonPushReaction(p_149656_1_: BlockState) = PushReaction.BLOCK
-
-    override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
-        builder.add(FACING, LIT)
-    }
-
-    override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
-        defaultBlockState().setValue(FACING, context.horizontalDirection.opposite)
-
-    override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        setTileEntityCustomName<BlastFurnaceTileEntity>(world, pos, stack)
-    }
-
-    override fun onRemove(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        newState: BlockState,
-        p_196243_5_: Boolean
-    ) {
-        dropTileEntityContents<BlastFurnaceTileEntity>(state, world, pos, newState) {
-            world.dropExperience(Vector3d.atCenterOf(pos), it.getExperienceToDrop(null))
-        }
-        @Suppress("DEPRECATION")
-        super.onRemove(state, world, pos, newState, p_196243_5_)
-    }
-
-    override fun stepOn(world: World, pos: BlockPos, entity: Entity) {
-        if (!entity.fireImmune() && world.getBlockState(pos).getValue(LIT) && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity)) {
+    override fun stepOn(level: Level, pos: BlockPos, state: BlockState, entity: Entity) {
+        if (!entity.fireImmune() && level.getBlockState(pos).getValue(BlockStateProperties.LIT) && entity is LivingEntity && !EnchantmentHelper.hasFrostWalker(entity))
             entity.hurt(DamageSource.HOT_FLOOR, 2F)
-        }
     }
 
-    override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-        if (state.getValue(LIT)) {
+    override fun animateTick(state: BlockState, level: Level, pos: BlockPos, random: Random) {
+        if (state.getValue(BlockStateProperties.LIT)) {
             val posX = pos.x + .5
             val posY = pos.y
             val posZ = pos.z + .5
 
             // front particles
-            val direction: Direction = state.getValue(AbstractFurnaceBlock.FACING)
+            val direction: Direction = state.getValue(HorizontalDirectionalBlock.FACING)
             val axis = direction.axis
             val d4: Double = random.nextDouble() * 0.6 - 0.3
             val d5 = if (axis == Direction.Axis.X) direction.stepX.toDouble() * 0.52 else d4
             val d6: Double = random.nextDouble() * .5 // * 8.0 / 16.0
             val d7 = if (axis == Direction.Axis.Z) direction.stepZ.toDouble() * 0.52 else d4
-            world.addParticle(ParticleTypes.SMOKE, posX + d5, posY + .25 + d6, posZ + d7, 0.0, 0.0, 0.0)
-            world.addParticle(ParticleTypes.FLAME, posX + d5, posY + .25 + d6, posZ + d7, 0.0, 0.0, 0.0)
+            level.addParticle(ParticleTypes.SMOKE, posX + d5, posY + .25 + d6, posZ + d7, 0.0, 0.0, 0.0)
+            level.addParticle(ParticleTypes.FLAME, posX + d5, posY + .25 + d6, posZ + d7, 0.0, 0.0, 0.0)
 
             // top particles
             val topParticleX = random.nextDouble() * .8 + .1
             val topParticleZ = random.nextDouble() * .8 + .1
-            world.addParticle(ParticleTypes.SMOKE, pos.x + topParticleX, posY + 1.0, pos.z + topParticleZ, 0.0, 0.05, 0.0)
-            world.addParticle(ParticleTypes.LAVA, pos.x + topParticleX, posY + 1.0, pos.z + topParticleZ, random.nextDouble() * .5, 5.0E-6, random.nextDouble() * .5)
+            level.addParticle(ParticleTypes.SMOKE, pos.x + topParticleX, posY + 1.0, pos.z + topParticleZ, 0.0, 0.05, 0.0)
+            level.addParticle(ParticleTypes.LAVA, pos.x + topParticleX, posY + 1.0, pos.z + topParticleZ, random.nextDouble() * .5, 5.0E-6, random.nextDouble() * .5)
         }
     }
 
-    override fun getLightValue(state: BlockState, world: IBlockReader, pos: BlockPos) =
-        if (state.getValue(LIT)) 13 else 0
-
     override fun hasAnalogOutputSignal(state: BlockState) = true
+    override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos) = AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos))
 
-    override fun getAnalogOutputSignal(state: BlockState, world: World, pos: BlockPos): Int =
-        Container.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos))
+    override fun rotate(state: BlockState, rotation: Rotation): BlockState = state.setValue(HorizontalDirectionalBlock.FACING, rotation.rotate(state.getValue(HorizontalDirectionalBlock.FACING)))
+    override fun mirror(state: BlockState, mirror: Mirror): BlockState = @Suppress("DEPRECATION") state.rotate(mirror.getRotation(state.getValue(HorizontalDirectionalBlock.FACING)))
 
-    override fun rotate(state: BlockState, direction: Rotation): BlockState =
-        state.setValue(FACING, direction.rotate(state.getValue(FACING)))
-
-    @Suppress("DEPRECATION")
-    override fun mirror(state: BlockState, mirror: Mirror): BlockState =
-        state.rotate(mirror.getRotation(state.getValue(FACING)))
-
-    override fun hasTileEntity(state: BlockState?) = true
-
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = BlastFurnaceTileEntity()
-
-    companion object {
-        @JvmField val FACING: DirectionProperty = HorizontalBlock.FACING
-        @JvmField val LIT: BooleanProperty = BlockStateProperties.LIT
-    }
+    override fun newBlockEntity(pos: BlockPos, state: BlockState) = BlastFurnaceBlockEntity(pos, state)
+    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.blastFurnaceBlockEntityType.get())
 }

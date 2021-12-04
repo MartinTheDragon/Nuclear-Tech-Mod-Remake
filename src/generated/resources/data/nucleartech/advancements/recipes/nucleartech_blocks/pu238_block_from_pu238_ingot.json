@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:pu238_ingot"
+            "items": [
+              "nucleartech:pu238_ingot"
+            ]
           }
         ]
       }

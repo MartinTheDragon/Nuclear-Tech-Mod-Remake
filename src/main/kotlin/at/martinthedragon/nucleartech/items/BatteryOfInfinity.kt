@@ -1,13 +1,13 @@
 package at.martinthedragon.nucleartech.items
 
-import net.minecraft.client.util.ITooltipFlag
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.util.Direction
-import net.minecraft.util.NonNullList
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.world.World
+import net.minecraft.core.Direction
+import net.minecraft.core.NonNullList
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.Level
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.minecraftforge.common.util.LazyOptional
@@ -15,15 +15,15 @@ import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.energy.EnergyStorage
 
 class BatteryOfInfinity(properties: Properties) : BatteryItem(0, 0, 0, properties) {
-    override fun showDurabilityBar(stack: ItemStack?) = false
+    override fun isBarVisible(stack: ItemStack?) = false
 
-    override fun fillItemCategory(tab: ItemGroup, items: NonNullList<ItemStack>) {
+    override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         if (allowdedIn(tab)) items.add(ItemStack(this))
     }
 
-    override fun appendHoverText(stack: ItemStack, world: World?, tooltip: MutableList<ITextComponent>, extra: ITooltipFlag) {}
+    override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, extra: TooltipFlag) {}
 
-    override fun initCapabilities(stack: ItemStack, nbt: CompoundNBT?): ICapabilityProvider = object : ICapabilityProvider {
+    override fun initCapabilities(stack: ItemStack, nbt: CompoundTag?): ICapabilityProvider = object : ICapabilityProvider {
         private val energyStorage = object : EnergyStorage(0, 0, 0, 0) {
             override fun canExtract() = true
             override fun canReceive() = true

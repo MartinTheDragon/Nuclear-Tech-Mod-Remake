@@ -1,28 +1,32 @@
 package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.containers.FatManContainer
-import com.mojang.blaze3d.matrix.MatrixStack
-import net.minecraft.client.gui.screen.inventory.ContainerScreen
-import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.text.ITextComponent
+import at.martinthedragon.nucleartech.menus.FatManMenu
+import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.PoseStack
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.entity.player.Inventory
 
 class FatManScreen(
-    container: FatManContainer,
-    playerInventory: PlayerInventory,
-    title: ITextComponent
-) : ContainerScreen<FatManContainer>(container, playerInventory, title) {
+    container: FatManMenu,
+    playerInventory: Inventory,
+    title: Component
+) : AbstractContainerScreen<FatManMenu>(container, playerInventory, title) {
     private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/fat_man.png")
 
-    override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+    override fun render(matrix: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrix)
         super.render(matrix, mouseX, mouseY, partialTicks)
         renderTooltip(matrix, mouseX, mouseY)
     }
 
-    override fun renderBg(matrix: MatrixStack, partialTicks: Float, mouseX: Int, mouseY: Int) {
-        minecraft!!.textureManager.bind(texture)
+    override fun renderBg(matrix: PoseStack, partialTicks: Float, mouseX: Int, mouseY: Int) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, texture)
         blit(matrix, leftPos, topPos, 0, 0, xSize, ySize)
 
         val bombCompletion = menu.getBombCompletion()

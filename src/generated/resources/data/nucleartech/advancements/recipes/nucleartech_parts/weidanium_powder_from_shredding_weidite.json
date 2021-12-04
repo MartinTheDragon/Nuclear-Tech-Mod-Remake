@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:weidanium_powder_from_shredding_weidite"
+    ]
+  },
+  "criteria": {
+    "has_weidite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:weidite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:weidanium_powder_from_shredding_weidite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_weidite",
+      "has_the_recipe"
+    ]
+  ]
+}

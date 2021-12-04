@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:gold_shredder_blade"
+            "items": [
+              "nucleartech:gold_shredder_blade"
+            ]
           }
         ]
       }

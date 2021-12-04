@@ -3,28 +3,28 @@ package at.martinthedragon.nucleartech.entities
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.config.NuclearConfig
-import net.minecraft.block.Blocks
-import net.minecraft.block.IGrowable
-import net.minecraft.block.RotatedPillarBlock
-import net.minecraft.block.material.Material
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.network.IPacket
-import net.minecraft.network.datasync.DataParameter
-import net.minecraft.network.datasync.DataSerializers
-import net.minecraft.network.datasync.EntityDataManager
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.tags.BlockTags
-import net.minecraft.util.Direction
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.World
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
+import net.minecraft.world.level.block.RotatedPillarBlock
+import net.minecraft.world.level.material.Material
+import net.minecraft.world.phys.Vec3
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.Tags
-import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraftforge.network.NetworkHooks
 import kotlin.math.PI
 
-class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World) : Entity(entityType, world) {
+class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: Level) : Entity(entityType, world) {
     var revProgress = 0
         private set
     var radProgress = 0
@@ -37,7 +37,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
             for (i in 0 until NuclearConfig.explosions.falloutSpeed.get()) {
                 val circumference = if (radProgress == 0) 1.0 else radProgress * PI * 4
                 val part = 360.0 / circumference
-                val vector = Vector3d(radProgress * .5, 0.0, 0.0)
+                val vector = Vec3(radProgress * .5, 0.0, 0.0)
                     .yRot((part * revProgress).toFloat())
                 val distance = radProgress * 100 / getScale() * .5
 
@@ -50,7 +50,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
                     radProgress++
                 }
 
-                if (radProgress > getScale() * 2) remove()
+                if (radProgress > getScale() * 2) remove(RemovalReason.DISCARDED)
             }
         }
 
@@ -64,7 +64,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
             val pos = BlockPos(x, y, z)
             val block = level.getBlockState(pos)
 
-            if (block.isAir(level, pos)) continue
+            if (block.isAir) continue
 
             // TODO place fallout
 
@@ -86,7 +86,7 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
                 block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> level.setBlockAndUpdate(pos, ModBlocks.deadGrass.get().defaultBlockState()).also { return }
                 block.`is`(Blocks.MYCELIUM) -> level.setBlockAndUpdate(pos, ModBlocks.glowingMycelium.get().defaultBlockState()).also { return }
                 // FIXME drops tall flowers, e.g. peonies
-                block.block is IPlantable || block.block is IGrowable -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
+                block.block is IPlantable || block.block is BonemealableBlock -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
                 block.`is`(Tags.Blocks.SAND) -> {
                     if (random.nextInt(60) == 0)
                         level.setBlockAndUpdate(pos, if (block.`is`(Tags.Blocks.SAND_RED)) ModBlocks.redTrinitite.get().defaultBlockState() else ModBlocks.trinitite.get().defaultBlockState())
@@ -123,25 +123,25 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: World)
         entityData.define(SCALE, 0)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundNBT) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         setScale(nbt.getInt("Scale"))
         revProgress = nbt.getInt("RevProgress")
         radProgress = nbt.getInt("RadProgress")
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundNBT) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putInt("Scale", getScale())
         nbt.putInt("RevProgress", revProgress)
         nbt.putInt("RadProgress", radProgress)
     }
 
-    override fun getAddEntityPacket(): IPacket<*> = NetworkHooks.getEntitySpawningPacket(this)
+    override fun getAddEntityPacket(): Packet<*> = NetworkHooks.getEntitySpawningPacket(this)
 
     fun getScale(): Int = entityData.get(SCALE).coerceAtLeast(1)
 
     fun setScale(scale: Int) = entityData.set(SCALE, scale)
 
     companion object {
-        private val SCALE: DataParameter<Int> = EntityDataManager.defineId(FalloutRainEntity::class.java, DataSerializers.INT)
+        private val SCALE: EntityDataAccessor<Int> = SynchedEntityData.defineId(FalloutRainEntity::class.java, EntityDataSerializers.INT)
     }
 }

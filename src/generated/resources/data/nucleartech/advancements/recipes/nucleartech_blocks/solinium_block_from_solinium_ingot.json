@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:solinium_ingot"
+            "items": [
+              "nucleartech:solinium_ingot"
+            ]
           }
         ]
       }

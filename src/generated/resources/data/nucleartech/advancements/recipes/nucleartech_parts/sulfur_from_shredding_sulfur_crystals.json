@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:sulfur_from_shredding_sulfur_crystals"
+    ]
+  },
+  "criteria": {
+    "has_sulfur_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:sulfur_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:sulfur_from_shredding_sulfur_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sulfur_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

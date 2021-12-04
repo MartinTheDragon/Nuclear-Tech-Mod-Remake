@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:dust_from_shredding_scrap"
+    ]
+  },
+  "criteria": {
+    "has_scrap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:scrap"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:dust_from_shredding_scrap"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_scrap",
+      "has_the_recipe"
+    ]
+  ]
+}

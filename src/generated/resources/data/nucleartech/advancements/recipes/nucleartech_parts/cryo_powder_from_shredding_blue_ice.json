@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cryo_powder_from_shredding_blue_ice"
+    ]
+  },
+  "criteria": {
+    "has_blue_ice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:blue_ice"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cryo_powder_from_shredding_blue_ice"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_ice",
+      "has_the_recipe"
+    ]
+  ]
+}

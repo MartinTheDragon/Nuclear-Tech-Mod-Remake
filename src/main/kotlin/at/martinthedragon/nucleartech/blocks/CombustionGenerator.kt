@@ -1,115 +1,87 @@
 package at.martinthedragon.nucleartech.blocks
 
-import at.martinthedragon.nucleartech.tileentities.CombustionGeneratorTileEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.HorizontalBlock
-import net.minecraft.block.material.PushReaction
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.inventory.container.Container
-import net.minecraft.item.BlockItemUseContext
-import net.minecraft.item.ItemStack
-import net.minecraft.particles.ParticleTypes
-import net.minecraft.state.BooleanProperty
-import net.minecraft.state.DirectionProperty
-import net.minecraft.state.StateContainer
-import net.minecraft.state.properties.BlockStateProperties
-import net.minecraft.util.*
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.BlockRayTraceResult
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.World
+import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.blocks.entities.CombustionGeneratorBlockEntity
+import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
+import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraftforge.fluids.FluidUtil
-import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraftforge.network.NetworkHooks
 import java.util.*
 
-class CombustionGenerator(properties: Properties) : Block(properties) {
-    init {
-        registerDefaultState(stateDefinition.any().setValue(LIT, false))
+class CombustionGenerator(properties: Properties) : BaseEntityBlock(properties) {
+    init { registerDefaultState(stateDefinition.any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH).setValue(BlockStateProperties.LIT, false)) }
+
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(HorizontalDirectionalBlock.FACING, BlockStateProperties.LIT) }
+    override fun getStateForPlacement(context: BlockPlaceContext): BlockState = defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.horizontalDirection.opposite)
+    override fun getRenderShape(state: BlockState) = RenderShape.MODEL
+
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<CombustionGeneratorBlockEntity>(level, pos, stack)
+
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
+        dropTileEntityContents<CombustionGeneratorBlockEntity>(state, level, pos, newState)
+        @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 
-    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
-
-    override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
-        builder.add(FACING, LIT)
-    }
-
-    override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
-        defaultBlockState().setValue(FACING, context.horizontalDirection.opposite)
-
-    override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        setTileEntityCustomName<CombustionGeneratorTileEntity>(world, pos, stack)
-    }
-
-    override fun onRemove(
-        state: BlockState,
-        world: World,
-        pos: BlockPos,
-        newState: BlockState,
-        p_196243_5_: Boolean
-    ) {
-        dropTileEntityContents<CombustionGeneratorTileEntity>(state, world, pos, newState)
-        @Suppress("DEPRECATION")
-        super.onRemove(state, world, pos, newState, p_196243_5_)
-    }
-
-    override fun use(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockRayTraceResult): ActionResultType {
-        if (!world.isClientSide) {
-            if (!FluidUtil.interactWithFluidHandler(player, hand, world, pos, hit.direction)) {
-                val tileEntity = world.getBlockEntity(pos)
-                if (tileEntity is CombustionGeneratorTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
+    override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult): InteractionResult {
+        if (!level.isClientSide) {
+            if (!FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.direction)) {
+                val blockEntity = level.getBlockEntity(pos)
+                if (blockEntity is CombustionGeneratorBlockEntity) NetworkHooks.openGui(player as ServerPlayer, blockEntity, pos)
             }
         }
-        return ActionResultType.sidedSuccess(world.isClientSide)
+        return InteractionResult.sidedSuccess(level.isClientSide)
     }
 
-    override fun animateTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
-        if (state.getValue(LIT)) {
+    override fun animateTick(state: BlockState, level: Level, pos: BlockPos, random: Random) {
+        if (state.getValue(BlockStateProperties.LIT)) {
             val posX = pos.x + 0.5
             val posY = pos.y.toDouble()
             val posZ = pos.z + 0.5
             if (random.nextDouble() < 0.1) {
-                world.playLocalSound(
+                level.playLocalSound(
                     posX, posY, posZ,
                     SoundEvents.FURNACE_FIRE_CRACKLE,
-                    SoundCategory.BLOCKS,
+                    SoundSource.BLOCKS,
                     1.0f, 1.0f, false
                 )
             }
-            val direction = state.getValue(FACING)
+            val direction = state.getValue(HorizontalDirectionalBlock.FACING)
             val axis = direction.axis
             val d4 = random.nextDouble() * 0.6 - 0.3
             val d5 = if (axis == Direction.Axis.X) direction.stepX.toDouble() * 0.52 else d4
             val d6 = random.nextDouble() * 6.0 / 16.0
             val d7 = if (axis == Direction.Axis.Z) direction.stepZ.toDouble() * 0.52 else d4
-            world.addParticle(ParticleTypes.SMOKE, posX + d5, posY + d6, posZ + d7, 0.0, 0.0, 0.0)
-            world.addParticle(ParticleTypes.FLAME, posX + d5, posY + d6, posZ + d7, 0.0, 0.0, 0.0)
+            level.addParticle(ParticleTypes.SMOKE, posX + d5, posY + d6, posZ + d7, 0.0, 0.0, 0.0)
+            level.addParticle(ParticleTypes.FLAME, posX + d5, posY + d6, posZ + d7, 0.0, 0.0, 0.0)
         }
     }
 
     override fun hasAnalogOutputSignal(state: BlockState) = true
+    override fun getAnalogOutputSignal(state: BlockState, level: Level, pos: BlockPos) = AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos))
 
-    override fun getAnalogOutputSignal(state: BlockState, world: World, pos: BlockPos) =
-        Container.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos))
+    override fun rotate(state: BlockState, rotation: Rotation): BlockState = state.setValue(HorizontalDirectionalBlock.FACING, rotation.rotate(state.getValue(HorizontalDirectionalBlock.FACING)))
+    override fun mirror(state: BlockState, mirror: Mirror): BlockState = @Suppress("DEPRECATION") state.rotate(mirror.getRotation(state.getValue(HorizontalDirectionalBlock.FACING)))
 
-    override fun getLightValue(state: BlockState, world: IBlockReader, pos: BlockPos) =
-        if (state.getValue(LIT)) 13 else 0
-
-    override fun rotate(state: BlockState, direction: Rotation): BlockState =
-        state.setValue(FACING, direction.rotate(state.getValue(FACING)))
-
-    @Suppress("DEPRECATION")
-    override fun mirror(state: BlockState, mirror: Mirror): BlockState =
-        state.rotate(mirror.getRotation(state.getValue(FACING)))
-
-    override fun hasTileEntity(state: BlockState?) = true
-
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = CombustionGeneratorTileEntity()
-
-    companion object {
-        @JvmField val FACING: DirectionProperty = HorizontalBlock.FACING
-        @JvmField val LIT: BooleanProperty = BlockStateProperties.LIT
-    }
+    override fun newBlockEntity(pos: BlockPos, state: BlockState): BlockEntity = CombustionGeneratorBlockEntity(pos, state)
+    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.combustionGeneratorBlockEntityType.get())
 }

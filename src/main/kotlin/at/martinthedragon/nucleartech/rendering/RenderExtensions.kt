@@ -1,15 +1,15 @@
 package at.martinthedragon.nucleartech.rendering
 
 import at.martinthedragon.nucleartech.math.toVector3f
-import com.mojang.blaze3d.matrix.MatrixStack
-import com.mojang.blaze3d.vertex.IVertexBuilder
-import net.minecraft.block.BlockState
-import net.minecraft.client.renderer.BlockModelRenderer
-import net.minecraft.client.renderer.model.BakedQuad
-import net.minecraft.client.renderer.model.IBakedModel
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats
-import net.minecraft.util.Direction
-import net.minecraft.util.math.vector.Vector4f
+import com.mojang.blaze3d.vertex.DefaultVertexFormat
+import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.blaze3d.vertex.VertexConsumer
+import com.mojang.math.Vector4f
+import net.minecraft.client.renderer.block.ModelBlockRenderer
+import net.minecraft.client.renderer.block.model.BakedQuad
+import net.minecraft.client.resources.model.BakedModel
+import net.minecraft.core.Direction
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraftforge.client.model.data.IModelData
 import org.lwjgl.system.MemoryStack
 import kotlin.experimental.and
@@ -17,11 +17,11 @@ import java.util.Random as JavaRandom
 
 // Note: For it to work, it needs special values in the RenderType
 @Suppress("unused")
-fun BlockModelRenderer.renderModelAlpha(
-    matrix: MatrixStack.Entry,
-    builder: IVertexBuilder,
+fun ModelBlockRenderer.renderModelAlpha(
+    matrix: PoseStack.Pose,
+    builder: VertexConsumer,
     blockState: BlockState?,
-    model: IBakedModel,
+    model: BakedModel,
     red: Float,
     green: Float,
     blue: Float,
@@ -40,8 +40,8 @@ fun BlockModelRenderer.renderModelAlpha(
 }
 
 private fun renderQuadListAlpha(
-    matrix: MatrixStack.Entry,
-    builder: IVertexBuilder,
+    matrix: PoseStack.Pose,
+    builder: VertexConsumer,
     red: Float,
     green: Float,
     blue: Float,
@@ -71,8 +71,8 @@ private fun renderQuadListAlpha(
     }
 }
 
-fun IVertexBuilder.putBulkDataAlpha(
-    matrix: MatrixStack.Entry,
+fun VertexConsumer.putBulkDataAlpha(
+    matrix: PoseStack.Pose,
     quad: BakedQuad,
     red: Float,
     green: Float,
@@ -82,8 +82,8 @@ fun IVertexBuilder.putBulkDataAlpha(
     overlay: Int
 ) = putBulkDataAlpha(matrix, quad, floatArrayOf(1F, 1F, 1F, 1F), red, green, blue, alpha, intArrayOf(light, light, light, light), overlay, false)
 
-fun IVertexBuilder.putBulkDataAlpha(
-    matrix: MatrixStack.Entry,
+fun VertexConsumer.putBulkDataAlpha(
+    matrix: PoseStack.Pose,
     quad: BakedQuad,
     colorMultipler: FloatArray,
     red: Float,
@@ -100,7 +100,7 @@ fun IVertexBuilder.putBulkDataAlpha(
     normal.transform(matrix.normal())
 
     val memoryStack = MemoryStack.stackPush()
-    val byteBuffer = memoryStack.malloc(DefaultVertexFormats.BLOCK.vertexSize)
+    val byteBuffer = memoryStack.malloc(DefaultVertexFormat.BLOCK.vertexSize)
     val intBuffer = byteBuffer.asIntBuffer()
 
     for (i in 0 until vertices.size / 8) {
@@ -139,6 +139,7 @@ fun IVertexBuilder.putBulkDataAlpha(
             bakedLight,
             normal.x(), normal.y(), normal.z()
         )
+
     }
 
     memoryStack.pop()

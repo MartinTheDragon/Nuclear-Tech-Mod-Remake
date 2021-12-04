@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lead_powder_from_shredding_lead_ore"
+    ]
+  },
+  "criteria": {
+    "has_lead_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ores/lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lead_powder_from_shredding_lead_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lead_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

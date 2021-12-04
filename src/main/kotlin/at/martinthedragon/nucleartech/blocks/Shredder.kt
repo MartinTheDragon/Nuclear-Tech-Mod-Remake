@@ -1,53 +1,38 @@
 package at.martinthedragon.nucleartech.blocks
 
-import at.martinthedragon.nucleartech.tileentities.ShredderTileEntity
+import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.blocks.entities.ShredderBlockEntity
+import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
 import at.martinthedragon.nucleartech.world.dropExperience
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.material.PushReaction
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.inventory.container.Container
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ActionResultType
-import net.minecraft.util.Hand
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.BlockRayTraceResult
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.World
-import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraft.core.BlockPos
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.BaseEntityBlock
+import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.BlockHitResult
+import net.minecraft.world.phys.Vec3
 
-class Shredder(properties: Properties) : Block(properties) {
-    override fun use(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockRayTraceResult): ActionResultType {
-        if (!world.isClientSide) {
-            val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is ShredderTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
-        }
-        return ActionResultType.sidedSuccess(world.isClientSide)
-    }
+class Shredder(properties: Properties) : BaseEntityBlock(properties) {
+    override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
-    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
+    override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<ShredderBlockEntity>(level, pos, player)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<ShredderBlockEntity>(level, pos, stack)
 
-    override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        setTileEntityCustomName<ShredderTileEntity>(world, pos, stack)
-    }
-
-    override fun onRemove(state: BlockState, world: World, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<ShredderTileEntity>(state, world, pos, newState) {
-            world.dropExperience(Vector3d.atCenterOf(pos), it.getExperienceToDrop(null))
-        }
-        @Suppress("DEPRECATION")
-        super.onRemove(state, world, pos, newState, p_196243_5_)
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
+        dropTileEntityContents<ShredderBlockEntity>(state, level, pos, newState) { level.dropExperience(Vec3.atCenterOf(pos), it.getExperienceToDrop(null)) }
+        @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 
     override fun hasAnalogOutputSignal(state: BlockState) = true
+    override fun getAnalogOutputSignal(state: BlockState, world: Level, pos: BlockPos) = AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos))
 
-    override fun getAnalogOutputSignal(state: BlockState, world: World, pos: BlockPos): Int =
-        Container.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos))
-
-    override fun hasTileEntity(state: BlockState?) = true
-
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = ShredderTileEntity()
+    override fun newBlockEntity(pos: BlockPos, state: BlockState) = ShredderBlockEntity(pos, state)
+    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.shredderBlockEntityType.get())
 }

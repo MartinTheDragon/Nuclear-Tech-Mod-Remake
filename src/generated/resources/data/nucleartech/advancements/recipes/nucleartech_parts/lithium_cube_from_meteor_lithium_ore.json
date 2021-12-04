@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:meteor_lithium_ore"
+            "items": [
+              "nucleartech:meteor_lithium_ore"
+            ]
           }
         ]
       }

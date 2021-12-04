@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:advanced_alloy_powder"
+            "items": [
+              "nucleartech:advanced_alloy_powder"
+            ]
           }
         ]
       }

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:diamond_powder_from_shredding_diamond_crystals"
+    ]
+  },
+  "criteria": {
+    "has_diamond_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:diamond_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:diamond_powder_from_shredding_diamond_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

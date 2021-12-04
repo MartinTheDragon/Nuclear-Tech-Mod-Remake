@@ -2,7 +2,8 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -27,10 +28,11 @@
     },
     {
       "rolls": {
+        "type": "minecraft:uniform",
         "min": 6.0,
-        "max": 16.0,
-        "type": "minecraft:uniform"
+        "max": 16.0
       },
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:tag",

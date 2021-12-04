@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tungsten_powder_from_shredding_tungsten_crystals"
+    ]
+  },
+  "criteria": {
+    "has_tungsten_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:tungsten_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tungsten_powder_from_shredding_tungsten_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

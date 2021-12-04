@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lanthanum_powder_from_shredding_lanthanum_ingot"
+    ]
+  },
+  "criteria": {
+    "has_lanthanum_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/lanthanum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lanthanum_powder_from_shredding_lanthanum_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lanthanum_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

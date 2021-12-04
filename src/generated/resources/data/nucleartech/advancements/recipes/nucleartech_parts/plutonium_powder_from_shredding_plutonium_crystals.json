@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium_powder_from_shredding_plutonium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_plutonium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:plutonium_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium_powder_from_shredding_plutonium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plutonium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

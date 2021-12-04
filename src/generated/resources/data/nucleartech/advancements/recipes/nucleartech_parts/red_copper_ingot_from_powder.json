@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:red_copper_powder"
+            "items": [
+              "nucleartech:red_copper_powder"
+            ]
           }
         ]
       }

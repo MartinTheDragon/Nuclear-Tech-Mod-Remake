@@ -4,26 +4,28 @@ import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.networking.SpawnNuclearExplosionMessage
-import com.mojang.blaze3d.matrix.MatrixStack
+import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.brigadier.StringReader
 import com.mojang.brigadier.exceptions.CommandSyntaxException
+import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.gui.widget.TextFieldWidget
-import net.minecraft.client.gui.widget.button.Button
-import net.minecraft.command.arguments.Vec3Argument
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.StringTextComponent
-import net.minecraft.util.text.TextFormatting
-import net.minecraft.util.text.TranslationTextComponent
+import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.components.EditBox
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.commands.arguments.coordinates.Vec3Argument
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.resources.ResourceLocation
 
 class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclearExplosionSpawner.get().description) {
-    private lateinit var strengthEdit: TextFieldWidget
+    private lateinit var strengthEdit: EditBox
     private lateinit var isMutedButton: BooleanSwitchButton
     private lateinit var hasFalloutButton: BooleanSwitchButton
-    private lateinit var extraFalloutEdit: TextFieldWidget
-    private lateinit var positionEdit: TextFieldWidget
+    private lateinit var extraFalloutEdit: EditBox
+    private lateinit var positionEdit: EditBox
     private lateinit var cancelButton: Button
     private lateinit var startButton: Button
 
@@ -31,37 +33,33 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclear
         val startX = width / 2 - GUI_WIDTH / 2
         val startY = height / 2 - GUI_HEIGHT / 2
         minecraft!!.keyboardHandler.setSendRepeatsToGui(true)
-        strengthEdit = object : TextFieldWidget(font, startX + 116, startY + 18, 52, 16, STRENGTH_LABEL) {
+        strengthEdit = object : EditBox(font, startX + 116, startY + 18, 52, 16, STRENGTH_LABEL) {
             override fun charTyped(char: Char, p_231042_2_: Int): Boolean = if (!char.isDigit()) false else super.charTyped(char, p_231042_2_)
         }
         strengthEdit.setMaxLength(3)
         strengthEdit.value = "200"
-        children += strengthEdit
+        addRenderableWidget(strengthEdit)
         isMutedButton = BooleanSwitchButton(startX + 152, startY + 36, false, MUTED_LABEL) {}
-        children += isMutedButton
-        buttons += isMutedButton
+        addRenderableWidget(isMutedButton)
         hasFalloutButton = BooleanSwitchButton(startX + 152, startY + 54, true, HAS_FALLOUT_LABEL) {}
-        children += hasFalloutButton
-        buttons += hasFalloutButton
-        extraFalloutEdit = object : TextFieldWidget(font, startX + 116, startY + 72, 52, 16, EXTRA_FALLOUT_LABEL) {
+        addRenderableWidget(hasFalloutButton)
+        extraFalloutEdit = object : EditBox(font, startX + 116, startY + 72, 52, 16, EXTRA_FALLOUT_LABEL) {
             override fun charTyped(char: Char, p_231042_2_: Int): Boolean = if (!char.isDigit()) false else super.charTyped(char, p_231042_2_)
         }
         extraFalloutEdit.setMaxLength(4)
         extraFalloutEdit.value = "0"
-        children += extraFalloutEdit
-        positionEdit = object : TextFieldWidget(font, startX + 116, startY + 90, 52, 16, POSITION_LABEL) {
+        addRenderableWidget(extraFalloutEdit)
+        positionEdit = object : EditBox(font, startX + 116, startY + 90, 52, 16, POSITION_LABEL) {
             override fun charTyped(char: Char, p_231042_2_: Int): Boolean = if (!char.isDigit() && char !in listOf('~', '-', '.', '^')) false else super.charTyped(char, p_231042_2_)
         }
         positionEdit.setMaxLength(64)
         positionEdit.value = "~ ~ ~"
-        children += positionEdit
+        addRenderableWidget(positionEdit)
 
         cancelButton = Button(startX + 8, startY + 112, 76, 20, CANCEL_LABEL) { onCancel() }
-        buttons += cancelButton
-        children += cancelButton
+        addRenderableWidget(cancelButton)
         startButton = Button(startX + 92, startY + 112, 76, 20, START_LABEL) { onStart() }
-        buttons += startButton
-        children += startButton
+        addRenderableWidget(startButton)
 
         setInitialFocus(strengthEdit)
     }
@@ -83,11 +81,13 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclear
         positionEdit.tick()
     }
 
-    private var error: ITextComponent? = null
+    private var error: Component? = null
 
-    override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+    override fun render(matrix: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrix)
-        minecraft!!.textureManager.bind(GUI_LOCATION)
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, GUI_LOCATION)
         val startX = (width - GUI_WIDTH) / 2
         val startY = (height - GUI_HEIGHT) / 2
         blit(matrix, startX, startY, 0, 0, GUI_WIDTH, GUI_HEIGHT)
@@ -127,7 +127,7 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclear
         val position = try {
             Vec3Argument.vec3().parse(StringReader(positionEdit.value)).getPosition(commandSource)
         } catch (e: CommandSyntaxException) {
-            error = StringTextComponent(e.localizedMessage)
+            error = TextComponent(e.localizedMessage)
             return
         }
         NuclearPacketHandler.INSTANCE.sendToServer(SpawnNuclearExplosionMessage(strength, muted, fallout, extraFallout, position))
@@ -140,16 +140,18 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclear
 
     override fun isPauseScreen() = false
 
-    class BooleanSwitchButton(x: Int, y: Int, startValue: Boolean, label: ITextComponent, onPress: IPressable) :
+    class BooleanSwitchButton(x: Int, y: Int, startValue: Boolean, label: Component, onPress: OnPress) :
         Button(x, y, 16, 16, label, onPress)
     {
         var on = startValue
             private set
 
-        override fun renderButton(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
-            Minecraft.getInstance().textureManager.bind(GUI_LOCATION)
+        override fun renderButton(matrix: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+            RenderSystem.setShaderTexture(0, GUI_LOCATION)
             val x = if (on) GUI_WIDTH + 16 else GUI_WIDTH
-            val y = if (isHovered()) 16 else 0
+            val y = if (isHoveredOrFocused) 16 else 0
             blit(matrix, this.x, this.y, x, y, width, height)
         }
 
@@ -163,15 +165,15 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclear
         const val GUI_WIDTH = 176
         const val GUI_HEIGHT = 141
         val GUI_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/gui/creative_nuclear_explosion_spawner.png")
-        private val STRENGTH_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.strength")
-        private val MUTED_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.muted")
-        private val HAS_FALLOUT_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.has_fallout")
-        private val EXTRA_FALLOUT_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.extra_fallout")
-        private val POSITION_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.position")
-        private val CANCEL_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.cancel")
-        private val START_LABEL = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.start")
-        private val ERR_STRENGTH = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_strength")
-        private val ERR_EXTRA_FALLOUT = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_extra_fallout")
-        val ERR_INSUFFICIENT_PERMISSION: ITextComponent = TranslationTextComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_insufficient_permission").withStyle(TextFormatting.RED)
+        private val STRENGTH_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.strength")
+        private val MUTED_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.muted")
+        private val HAS_FALLOUT_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.has_fallout")
+        private val EXTRA_FALLOUT_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.extra_fallout")
+        private val POSITION_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.position")
+        private val CANCEL_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.cancel")
+        private val START_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.start")
+        private val ERR_STRENGTH = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_strength")
+        private val ERR_EXTRA_FALLOUT = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_extra_fallout")
+        val ERR_INSUFFICIENT_PERMISSION: Component = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_insufficient_permission").withStyle(ChatFormatting.RED)
     }
 }

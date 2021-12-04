@@ -2,12 +2,12 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
-import net.minecraft.block.Block
-import net.minecraft.block.Blocks
-import net.minecraft.block.SixWayBlock
 import net.minecraft.data.DataGenerator
-import net.minecraft.state.properties.BlockStateProperties
-import net.minecraft.util.ResourceLocation
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.PipeBlock
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraftforge.client.model.generators.BlockModelBuilder
 import net.minecraftforge.client.model.generators.BlockStateProvider
 import net.minecraftforge.client.model.generators.ConfiguredModel
@@ -134,31 +134,31 @@ class NuclearBlockStateProvider(
         val glowingMushroomInsideModelFile = models().getBuilder("glowing_mushroom_block_inside").parent(singleFaceTemplateModelFile).texture("texture", extend(blockTexture(ModBlocks.glowingMushroomBlock.get()), "_inside"))
         val glowingMushroomStemModelFile = models().getBuilder("glowing_mushroom_stem").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(ModBlocks.glowingMushroomStem.get()))
         getMultipartBuilder(ModBlocks.glowingMushroomBlock.get())
-            .part().modelFile(glowingMushroomModelFile).addModel().condition(SixWayBlock.NORTH, true).end()
-            .part().modelFile(glowingMushroomModelFile).rotationY(90).uvLock(true).addModel().condition(SixWayBlock.EAST, true).end()
-            .part().modelFile(glowingMushroomModelFile).rotationY(180).uvLock(true).addModel().condition(SixWayBlock.SOUTH, true).end()
-            .part().modelFile(glowingMushroomModelFile).rotationY(270).uvLock(true).addModel().condition(SixWayBlock.WEST, true).end()
-            .part().modelFile(glowingMushroomModelFile).rotationX(270).uvLock(true).addModel().condition(SixWayBlock.UP, true).end()
-            .part().modelFile(glowingMushroomModelFile).rotationX(90).uvLock(true).addModel().condition(SixWayBlock.DOWN, true).end()
-            .part().modelFile(glowingMushroomInsideModelFile).addModel().condition(SixWayBlock.NORTH, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationY(90).uvLock(false).addModel().condition(SixWayBlock.EAST, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationY(180).uvLock(false).addModel().condition(SixWayBlock.SOUTH, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(SixWayBlock.WEST, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(SixWayBlock.UP, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(SixWayBlock.DOWN, false).end()
+            .part().modelFile(glowingMushroomModelFile).addModel().condition(PipeBlock.NORTH, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationY(90).uvLock(true).addModel().condition(PipeBlock.EAST, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationY(180).uvLock(true).addModel().condition(PipeBlock.SOUTH, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationY(270).uvLock(true).addModel().condition(PipeBlock.WEST, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationX(270).uvLock(true).addModel().condition(PipeBlock.UP, true).end()
+            .part().modelFile(glowingMushroomModelFile).rotationX(90).uvLock(true).addModel().condition(PipeBlock.DOWN, true).end()
+            .part().modelFile(glowingMushroomInsideModelFile).addModel().condition(PipeBlock.NORTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(90).uvLock(false).addModel().condition(PipeBlock.EAST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(180).uvLock(false).addModel().condition(PipeBlock.SOUTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(PipeBlock.WEST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(PipeBlock.UP, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(PipeBlock.DOWN, false).end()
         getMultipartBuilder(ModBlocks.glowingMushroomStem.get())
-            .part().modelFile(glowingMushroomStemModelFile).addModel().condition(SixWayBlock.NORTH, true).end()
-            .part().modelFile(glowingMushroomStemModelFile).rotationY(90).uvLock(true).addModel().condition(SixWayBlock.EAST, true).end()
-            .part().modelFile(glowingMushroomStemModelFile).rotationY(180).uvLock(true).addModel().condition(SixWayBlock.SOUTH, true).end()
-            .part().modelFile(glowingMushroomStemModelFile).rotationY(270).uvLock(true).addModel().condition(SixWayBlock.WEST, true).end()
-            .part().modelFile(glowingMushroomStemModelFile).rotationX(270).uvLock(true).addModel().condition(SixWayBlock.UP, true).end()
-            .part().modelFile(glowingMushroomStemModelFile).rotationX(90).uvLock(true).addModel().condition(SixWayBlock.DOWN, true).end()
-            .part().modelFile(glowingMushroomInsideModelFile).addModel().condition(SixWayBlock.NORTH, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationY(90).uvLock(false).addModel().condition(SixWayBlock.EAST, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationY(180).uvLock(false).addModel().condition(SixWayBlock.SOUTH, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(SixWayBlock.WEST, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(SixWayBlock.UP, false).end()
-            .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(SixWayBlock.DOWN, false).end()
+            .part().modelFile(glowingMushroomStemModelFile).addModel().condition(PipeBlock.NORTH, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationY(90).uvLock(true).addModel().condition(PipeBlock.EAST, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationY(180).uvLock(true).addModel().condition(PipeBlock.SOUTH, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationY(270).uvLock(true).addModel().condition(PipeBlock.WEST, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationX(270).uvLock(true).addModel().condition(PipeBlock.UP, true).end()
+            .part().modelFile(glowingMushroomStemModelFile).rotationX(90).uvLock(true).addModel().condition(PipeBlock.DOWN, true).end()
+            .part().modelFile(glowingMushroomInsideModelFile).addModel().condition(PipeBlock.NORTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(90).uvLock(false).addModel().condition(PipeBlock.EAST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(180).uvLock(false).addModel().condition(PipeBlock.SOUTH, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(PipeBlock.WEST, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(PipeBlock.UP, false).end()
+            .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(PipeBlock.DOWN, false).end()
         simpleBlock(ModBlocks.deadGrass.get(), models().cubeBottomTop("dead_grass", extend(blockTexture(ModBlocks.deadGrass.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(ModBlocks.deadGrass.get()), "_top")))
         simpleBlock(ModBlocks.glowingMycelium.get(), models().cubeBottomTop("glowing_mycelium", extend(blockTexture(ModBlocks.glowingMycelium.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(ModBlocks.glowingMycelium.get()), "_top")))
         simpleBlock(ModBlocks.trinitite.get())

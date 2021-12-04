@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:titanium_crystals"
+            "items": [
+              "nucleartech:titanium_crystals"
+            ]
           }
         ]
       }

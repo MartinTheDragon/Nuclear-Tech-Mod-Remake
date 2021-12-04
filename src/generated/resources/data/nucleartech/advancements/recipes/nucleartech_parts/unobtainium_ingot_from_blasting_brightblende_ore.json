@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:brightblende_ore"
+            "items": [
+              "nucleartech:brightblende_ore"
+            ]
           }
         ]
       }

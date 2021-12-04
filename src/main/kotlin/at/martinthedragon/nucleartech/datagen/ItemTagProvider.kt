@@ -1,8 +1,10 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.data.DataGenerator
-import net.minecraft.data.ItemTagsProvider
+import net.minecraft.data.tags.ItemTagsProvider
 import net.minecraft.tags.ItemTags
 import net.minecraftforge.common.Tags
 import net.minecraftforge.common.data.ExistingFileHelper

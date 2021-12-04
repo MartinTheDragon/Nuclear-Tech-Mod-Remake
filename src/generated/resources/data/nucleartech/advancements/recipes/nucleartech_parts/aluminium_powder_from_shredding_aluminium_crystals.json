@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:aluminium_powder_from_shredding_aluminium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_aluminium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:aluminium_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:aluminium_powder_from_shredding_aluminium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_aluminium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

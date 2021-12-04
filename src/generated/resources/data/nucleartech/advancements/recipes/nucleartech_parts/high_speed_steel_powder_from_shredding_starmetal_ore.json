@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:high_speed_steel_powder_from_shredding_starmetal_ore"
+    ]
+  },
+  "criteria": {
+    "has_starmetal_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:starmetal_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:high_speed_steel_powder_from_shredding_starmetal_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_starmetal_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

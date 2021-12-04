@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:redstone_power_cell"
+            "items": [
+              "nucleartech:redstone_power_cell"
+            ]
           }
         ]
       }

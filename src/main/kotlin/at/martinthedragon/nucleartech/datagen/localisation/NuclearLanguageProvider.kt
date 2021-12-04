@@ -2,15 +2,14 @@ package at.martinthedragon.nucleartech.datagen.localisation
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
-import net.minecraft.block.Block
 import net.minecraft.data.DataGenerator
-import net.minecraft.data.DirectoryCache
-import net.minecraft.entity.EntityType
-import net.minecraft.inventory.container.ContainerType
-import net.minecraft.item.Item
-import net.minecraft.item.SpawnEggItem
-import net.minecraft.util.DamageSource
-import net.minecraft.util.SoundEvent
+import net.minecraft.data.HashCache
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.world.damagesource.DamageSource
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.inventory.MenuType
+import net.minecraft.world.item.Item
+import net.minecraft.world.level.block.Block
 import net.minecraftforge.common.data.LanguageProvider
 import java.util.function.Supplier
 
@@ -23,7 +22,7 @@ abstract class NuclearLanguageProvider(
 
     override fun getName() = "Nuclear Tech ${super.getName()}"
 
-    override fun run(cache: DirectoryCache) {
+    override fun run(cache: HashCache) {
         super.run(cache)
         validate()
     }
@@ -58,7 +57,7 @@ abstract class NuclearLanguageProvider(
         add("${supplier.get().descriptionId}.desc", desc)
     }
 
-    protected fun addContainerType(key: Supplier<out ContainerType<*>>, name: String) {
+    protected fun addMenuType(key: Supplier<out MenuType<*>>, name: String) {
         add("container.${key.get().registryName!!.namespace}.${key.get().registryName!!.path}", name)
     }
 
@@ -79,10 +78,10 @@ abstract class NuclearLanguageProvider(
     open val spawnEggEntityStringWordSeparator = ' '
 
     protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, name: String) {
-        val spawnEgg = SpawnEggItem.byId(key.get()) ?: throw IllegalStateException("No spawn egg registered for entity $name")
+//        val spawnEgg = ForgeSpawnEggItem.fromEntityType(key.get()) ?: throw IllegalStateException("No spawn egg registered for entity $name")
         addEntityType(key, name)
-        val formatted = name.replace(' ', spawnEggEntityStringWordSeparator)
-        add(spawnEgg, if (spawnEggSuffixIsPrefix) spawnEggSuffix + formatted else formatted + spawnEggSuffix)
+//        val formatted = name.replace(' ', spawnEggEntityStringWordSeparator)
+//        add(spawnEgg, if (spawnEggSuffixIsPrefix) spawnEggSuffix + formatted else formatted + spawnEggSuffix)
     }
 
     companion object {

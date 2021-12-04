@@ -3,16 +3,17 @@ package at.martinthedragon.nucleartech.datagen.recipes
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementRewards
-import net.minecraft.advancements.IRequirementsStrategy
-import net.minecraft.advancements.criterion.CriterionInstance
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger
-import net.minecraft.data.IFinishedRecipe
-import net.minecraft.item.Item
-import net.minecraft.item.crafting.CookingRecipeSerializer
-import net.minecraft.item.crafting.IRecipeSerializer
-import net.minecraft.item.crafting.Ingredient
-import net.minecraft.util.IItemProvider
-import net.minecraft.util.ResourceLocation
+import net.minecraft.advancements.CriterionTriggerInstance
+import net.minecraft.advancements.RequirementsStrategy
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
+import net.minecraft.data.recipes.FinishedRecipe
+import net.minecraft.data.recipes.RecipeBuilder
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.SimpleCookingSerializer
+import net.minecraft.world.level.ItemLike
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
@@ -23,43 +24,39 @@ class ExtendedCookingRecipeBuilder(
     private val cookingTime: Int,
     private val result: Item,
     private val resultCount: Int = 1,
-    private val serializer: CookingRecipeSerializer<*> = IRecipeSerializer.SMELTING_RECIPE
-) {
+    private val serializer: SimpleCookingSerializer<*> = RecipeSerializer.SMELTING_RECIPE
+) : RecipeBuilder {
     constructor(
         ingredient: Ingredient,
         experience: Float,
         cookingTime: Int,
-        result: IItemProvider,
+        result: ItemLike,
         resultCount: Int = 1,
-        serializer: CookingRecipeSerializer<*> = IRecipeSerializer.SMELTING_RECIPE
+        serializer: SimpleCookingSerializer<*> = RecipeSerializer.SMELTING_RECIPE
     ) : this(ingredient, experience, cookingTime, result.asItem(), resultCount, serializer)
 
     private val advancement = Advancement.Builder.advancement()
     private var group = ""
 
-    fun unlockedBy(criterionName: String, criterionInstance: CriterionInstance): ExtendedCookingRecipeBuilder {
+    override fun unlockedBy(criterionName: String, criterionInstance: CriterionTriggerInstance): ExtendedCookingRecipeBuilder {
         advancement.addCriterion(criterionName, criterionInstance)
         return this
     }
 
-    fun group(groupName: String): ExtendedCookingRecipeBuilder {
-        group = groupName
+    override fun getResult() = result
+
+    override fun group(groupName: String?): ExtendedCookingRecipeBuilder {
+        group = groupName ?: ""
         return this
     }
 
-    fun save(consumer: Consumer<IFinishedRecipe>) =
-        save(consumer, ForgeRegistries.ITEMS.getKey(result) ?: throw IllegalStateException("Item '${result.registryName}' hasn't been registered yet"))
-
-    fun save(consumer: Consumer<IFinishedRecipe>, recipeName: String) =
-        save(consumer, ResourceLocation(recipeName))
-
-    fun save(consumer: Consumer<IFinishedRecipe>, recipeName: ResourceLocation) {
+    override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
 
         advancement.parent(ResourceLocation("recipes/root"))
             .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName))
             .rewards(AdvancementRewards.Builder.recipe(recipeName))
-            .requirements(IRequirementsStrategy.OR)
+            .requirements(RequirementsStrategy.OR)
 
         consumer.accept(
             Result(
@@ -80,10 +77,8 @@ class ExtendedCookingRecipeBuilder(
         private val cookingTime: Int,
         private val advancement: Advancement.Builder,
         private val advancementID: ResourceLocation,
-        private val serializer: CookingRecipeSerializer<*>
-    ) : IFinishedRecipe {
-
-
+        private val serializer: SimpleCookingSerializer<*>
+    ) : FinishedRecipe {
         override fun serializeRecipeData(rootObject: JsonObject) {
             if (group.isNotBlank())
                 rootObject.addProperty("group", group)
@@ -103,7 +98,7 @@ class ExtendedCookingRecipeBuilder(
 
         override fun getId(): ResourceLocation = id
 
-        override fun getType(): IRecipeSerializer<*> = serializer
+        override fun getType(): RecipeSerializer<*> = serializer
 
         override fun serializeAdvancement(): JsonObject = advancement.serializeToJson()
 

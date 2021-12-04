@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gunpowder_from_shredding_tnt"
+    ]
+  },
+  "criteria": {
+    "has_tnt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:tnt"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gunpowder_from_shredding_tnt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tnt",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -5,45 +5,46 @@ import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementRewards
-import net.minecraft.advancements.ICriterionInstance
-import net.minecraft.advancements.IRequirementsStrategy
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger
-import net.minecraft.data.IFinishedRecipe
-import net.minecraft.item.Item
-import net.minecraft.item.crafting.Ingredient
-import net.minecraft.tags.ITag
-import net.minecraft.util.IItemProvider
-import net.minecraft.util.ResourceLocation
+import net.minecraft.advancements.CriterionTriggerInstance
+import net.minecraft.advancements.RequirementsStrategy
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
+import net.minecraft.data.recipes.FinishedRecipe
+import net.minecraft.data.recipes.RecipeBuilder
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.tags.Tag
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.ItemLike
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
-class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType, val experience: Float, val count: Int = 1) {
-    constructor(result: IItemProvider, stampType: PressRecipe.StampType, experience: Float, count: Int = 1) : this(result.asItem(), stampType, experience, count)
+class PressRecipeBuilder(private val result: Item, val stampType: PressRecipe.StampType, val experience: Float, val count: Int = 1) : RecipeBuilder {
+    constructor(result: ItemLike, stampType: PressRecipe.StampType, experience: Float, count: Int = 1) : this(result.asItem(), stampType, experience, count)
 
     private lateinit var ingredient: Ingredient
     private val advancement = Advancement.Builder.advancement()
 
-    fun requires(tag: ITag<Item>): PressRecipeBuilder = requires(Ingredient.of(tag))
+    fun requires(tag: Tag<Item>): PressRecipeBuilder = requires(Ingredient.of(tag))
 
-    fun requires(item: IItemProvider): PressRecipeBuilder = requires(Ingredient.of(item))
+    fun requires(item: ItemLike): PressRecipeBuilder = requires(Ingredient.of(item))
 
     fun requires(ingredient: Ingredient): PressRecipeBuilder {
         this.ingredient = ingredient
         return this
     }
 
-    fun unlockedBy(criterionName: String, criterion: ICriterionInstance): PressRecipeBuilder {
+    override fun unlockedBy(criterionName: String, criterion: CriterionTriggerInstance): PressRecipeBuilder {
         advancement.addCriterion(criterionName, criterion)
         return this
     }
 
-    fun save(consumer: Consumer<IFinishedRecipe>, recipeName: String) {
-        save(consumer, ResourceLocation(recipeName))
-    }
+    override fun group(group: String?) = this
 
-    fun save(consumer: Consumer<IFinishedRecipe>, recipeName: ResourceLocation = ForgeRegistries.ITEMS.getKey(result) ?: throw IllegalArgumentException("Result item '${result.registryName}' was not registered")) {
+    override fun getResult() = result
+
+    override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
-        advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(IRequirementsStrategy.OR)
+        advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
         if (!this::ingredient.isInitialized) throw IllegalStateException("No ingredient for recipe $recipeName specified")
         consumer.accept(Result(recipeName, result, count, experience, stampType, ingredient, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }
@@ -57,7 +58,7 @@ class PressRecipeBuilder(val result: Item, val stampType: PressRecipe.StampType,
         private val ingredient: Ingredient,
         private val advancement: Advancement.Builder,
         private val advancementID: ResourceLocation
-    ) : IFinishedRecipe {
+    ) : FinishedRecipe {
         override fun serializeRecipeData(rootObject: JsonObject) {
             rootObject.add("ingredient", ingredient.toJson())
             rootObject.addProperty("stamp_type", stampType.name)

@@ -1,13 +1,27 @@
 modLoader="javafml"
-loaderVersion="[36,)"
+loaderVersion="[39,)"
 license="GPL v3.0"
+issueTrackerURL="https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/issues"
 [[mods]]
 modId="nucleartech"
-version="${mod_version}"
-displayName="Nuclear Tech Mod Remake"
+version="${file.jarVersion}"
+displayName="Nuclear Tech Mod"
+displayURL="https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake"
 credits="HbM: Did well..."
 authors="MartinTheDragon"
 description='''All the high quality nuclear bombs and machinery you can only find in this mod or in the older 1.7.10 version!
 The mod with both quantity and quality ;D
 A recreation by MartinTheDragon of HbMinecraft's Nuclear Tech Mod.
 '''
+[[dependencies.nucleartech]]
+    modId="forge"
+    mandatory=true
+    versionRange="[39,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.nucleartech]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.1,1.19)"
+    ordering="NONE"
+    side="BOTH"

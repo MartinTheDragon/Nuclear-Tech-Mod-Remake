@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:sand_from_shredding_gravel"
+    ]
+  },
+  "criteria": {
+    "has_gravel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gravel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:sand_from_shredding_gravel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gravel",
+      "has_the_recipe"
+    ]
+  ]
+}

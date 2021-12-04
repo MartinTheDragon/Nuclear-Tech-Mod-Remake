@@ -4,10 +4,10 @@ import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.containers.ContainerTypes
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.EffectItem
+import at.martinthedragon.nucleartech.menus.MenuTypes
 import net.minecraft.data.DataGenerator
 
 class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.DE_DE) {
@@ -823,18 +823,18 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.nukeExplosionEntity, "Nukleare Explosion")
         addEntityType(EntityTypes.nukeCloudEntity, "Atompilz")
         addEntityType(EntityTypes.falloutRainEntity, "Fallout-Regen")
-        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeperEntity, "Nuklearer Creeper")
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuklearer Creeper")
 
-        addContainerType(ContainerTypes.sirenContainer, "Sirene")
-        addContainerType(ContainerTypes.safeContainer, "Panzerschrank")
-        addContainerType(ContainerTypes.steamPressContainer, "Dampfpresse")
-        addContainerType(ContainerTypes.blastFurnaceContainer, "Hochofen")
-        addContainerType(ContainerTypes.combustionGeneratorContainer, "Verbrennungsgenerator")
-        addContainerType(ContainerTypes.electricFurnaceContainer, "Elektrischer Ofen")
-        addContainerType(ContainerTypes.shredderContainer, "Brecher")
+        addMenuType(MenuTypes.sirenMenu, "Sirene")
+        addMenuType(MenuTypes.safeMenu, "Panzerschrank")
+        addMenuType(MenuTypes.steamPressMenu, "Dampfpresse")
+        addMenuType(MenuTypes.blastFurnaceMenu, "Hochofen")
+        addMenuType(MenuTypes.combustionGeneratorMenu, "Verbrennungsgenerator")
+        addMenuType(MenuTypes.electricFurnaceMenu, "Elektrischer Ofen")
+        addMenuType(MenuTypes.shredderMenu, "Brecher")
 
-        addContainerType(ContainerTypes.littleBoyContainer, "Little Boy")
-        addContainerType(ContainerTypes.fatManContainer, "Fat Man")
+        addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
+        addMenuType(MenuTypes.fatManMenu, "Fat Man")
 
         addSound(SoundEvents.sirenTrackHatchSiren, "Sirene läuft: Hatch Siren")
         addSound(SoundEvents.sirenTrackAutopilotDisconnected, "Sirene läuft: Autopilot Disconnected")

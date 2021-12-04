@@ -1,21 +1,18 @@
-package at.martinthedragon.nucleartech.integration.jei.transfers
-
-import at.martinthedragon.nucleartech.containers.PressContainer
-import at.martinthedragon.nucleartech.integration.jei.categories.PressingJeiRecipeCategory
-import mezz.jei.api.recipe.transfer.IRecipeTransferInfo
-import net.minecraft.inventory.container.Slot
-import net.minecraft.util.ResourceLocation
-
-class PressingRecipeTransferInfo : IRecipeTransferInfo<PressContainer> {
-    override fun getContainerClass(): Class<PressContainer> = PressContainer::class.java
-
-    override fun getRecipeCategoryUid(): ResourceLocation = PressingJeiRecipeCategory.UID
-
-    override fun canHandle(p0: PressContainer) = true
-
-    override fun getRecipeSlots(p0: PressContainer): MutableList<Slot> = MutableList(2) { p0.slots[it] }
-
-    override fun getInventorySlots(p0: PressContainer): MutableList<Slot> = MutableList(36) { p0.slots[it + 4] }
-
-    override fun requireCompleteSets() = false
-}
+//package at.martinthedragon.nucleartech.integration.jei.transfers
+//
+//import at.martinthedragon.nucleartech.integration.jei.categories.PressingJeiRecipeCategory
+//import at.martinthedragon.nucleartech.menus.PressMenu
+//import at.martinthedragon.nucleartech.recipes.PressRecipe
+//import mezz.jei.api.recipe.transfer.IRecipeTransferInfo
+//import net.minecraft.resources.ResourceLocation
+//import net.minecraft.world.inventory.Slot
+//
+//class PressingRecipeTransferInfo : IRecipeTransferInfo<PressMenu, PressRecipe> {
+//    override fun getContainerClass(): Class<PressMenu> = PressMenu::class.java
+//    override fun getRecipeClass(): Class<PressRecipe> = PressRecipe::class.java
+//    override fun getRecipeCategoryUid(): ResourceLocation = PressingJeiRecipeCategory.UID
+//    override fun canHandle(container: PressMenu, recipe: PressRecipe) = true
+//    override fun getRecipeSlots(container: PressMenu, recipe: PressRecipe): MutableList<Slot> = MutableList(2) { container.slots[it] }
+//    override fun getInventorySlots(container: PressMenu, recipe: PressRecipe): MutableList<Slot> = MutableList(36) { container.slots[it + 4] }
+//    override fun requireCompleteSets(container: PressMenu, recipe: PressRecipe) = false
+//}

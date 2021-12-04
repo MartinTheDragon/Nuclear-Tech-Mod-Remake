@@ -2,17 +2,17 @@ package at.martinthedragon.nucleartech.recipes
 
 import at.martinthedragon.nucleartech.items.BatteryItem
 import com.google.gson.JsonObject
-import net.minecraft.inventory.CraftingInventory
-import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.*
-import net.minecraft.network.PacketBuffer
-import net.minecraft.util.NonNullList
-import net.minecraft.util.ResourceLocation
+import net.minecraft.core.NonNullList
+import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.inventory.CraftingContainer
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.crafting.*
 import net.minecraftforge.common.crafting.IShapedRecipe
 import net.minecraftforge.registries.ForgeRegistryEntry
 
-class BatteryRecipe(private val delegate: ShapedRecipe) : ICraftingRecipe, IShapedRecipe<CraftingInventory> by delegate { // i got frustrated on having to use access transformers and everything. then i remembered kotlin has delegation...
-    override fun assemble(inventory: CraftingInventory): ItemStack {
+class BatteryRecipe(private val delegate: ShapedRecipe) : CraftingRecipe, IShapedRecipe<CraftingContainer> by delegate { // i got frustrated on having to use access transformers and everything. then i remembered kotlin has delegation...
+    override fun assemble(inventory: CraftingContainer): ItemStack {
         if (resultItem.item !is BatteryItem) return resultItem.copy()
         @OptIn(ExperimentalStdlibApi::class)
         val batteries = buildList<ItemStack> {
@@ -30,19 +30,19 @@ class BatteryRecipe(private val delegate: ShapedRecipe) : ICraftingRecipe, IShap
     }
 
     override fun getSerializer() = RecipeSerializers.BATTERY.get()
-    override fun getType(): IRecipeType<*> = delegate.type
+    override fun getType(): RecipeType<*> = delegate.type
     override fun isSpecial() = true
     override fun getIngredients(): NonNullList<Ingredient> = delegate.ingredients
 
-    class Serializer : ForgeRegistryEntry<IRecipeSerializer<*>>(), IRecipeSerializer<BatteryRecipe> {
+    class Serializer : ForgeRegistryEntry<RecipeSerializer<*>>(), RecipeSerializer<BatteryRecipe> {
         override fun fromJson(id: ResourceLocation, json: JsonObject): BatteryRecipe =
-            BatteryRecipe(IRecipeSerializer.SHAPED_RECIPE.fromJson(id, json))
+            BatteryRecipe(RecipeSerializer.SHAPED_RECIPE.fromJson(id, json))
 
-        override fun fromNetwork(id: ResourceLocation, packet: PacketBuffer): BatteryRecipe? {
-            return BatteryRecipe(IRecipeSerializer.SHAPED_RECIPE.fromNetwork(id, packet) ?: return null)
+        override fun fromNetwork(id: ResourceLocation, packet: FriendlyByteBuf): BatteryRecipe? {
+            return BatteryRecipe(RecipeSerializer.SHAPED_RECIPE.fromNetwork(id, packet) ?: return null)
         }
 
-        override fun toNetwork(packet: PacketBuffer, recipe: BatteryRecipe) =
-            IRecipeSerializer.SHAPED_RECIPE.toNetwork(packet, recipe.delegate)
+        override fun toNetwork(packet: FriendlyByteBuf, recipe: BatteryRecipe) =
+            RecipeSerializer.SHAPED_RECIPE.toNetwork(packet, recipe.delegate)
     }
 }

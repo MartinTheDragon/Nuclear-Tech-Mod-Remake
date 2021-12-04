@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium_powder_from_shredding_trixite"
+    ]
+  },
+  "criteria": {
+    "has_trixite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:trixite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium_powder_from_shredding_trixite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_trixite",
+      "has_the_recipe"
+    ]
+  ]
+}

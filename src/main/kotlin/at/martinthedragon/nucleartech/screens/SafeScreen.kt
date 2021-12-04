@@ -1,19 +1,20 @@
 package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.containers.SafeContainer
-import com.mojang.blaze3d.matrix.MatrixStack
+import at.martinthedragon.nucleartech.menus.SafeMenu
 import com.mojang.blaze3d.systems.RenderSystem
-import net.minecraft.client.gui.screen.inventory.ContainerScreen
-import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.text.ITextComponent
+import com.mojang.blaze3d.vertex.PoseStack
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.entity.player.Inventory
 
 class SafeScreen(
-        container: SafeContainer,
-        playerInventory: PlayerInventory,
-        title: ITextComponent
-) : ContainerScreen<SafeContainer>(container, playerInventory, title) {
+    container: SafeMenu,
+    playerInventory: Inventory,
+    title: Component
+) : AbstractContainerScreen<SafeMenu>(container, playerInventory, title) {
     private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/safe.png")
 
     init {
@@ -21,16 +22,16 @@ class SafeScreen(
         imageHeight = 168
     }
 
-    override fun render(matrix: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+    override fun render(matrix: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrix)
         super.render(matrix, mouseX, mouseY, partialTicks)
         renderTooltip(matrix, mouseX, mouseY)
     }
 
-    override fun renderBg(matrixStack: MatrixStack, partialTicks: Float, x: Int, y: Int) {
-        @Suppress("DEPRECATION")
-        RenderSystem.color4f(1f, 1f, 1f, 1f)
-        minecraft!!.textureManager.bind(texture)
+    override fun renderBg(matrixStack: PoseStack, partialTicks: Float, x: Int, y: Int) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, texture)
         blit(matrixStack, leftPos, topPos, 0, 0, xSize, ySize)
     }
 }

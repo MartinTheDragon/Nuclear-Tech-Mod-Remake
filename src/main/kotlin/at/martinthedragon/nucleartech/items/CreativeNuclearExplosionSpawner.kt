@@ -2,19 +2,18 @@ package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
+import net.minecraft.Util
 import net.minecraft.client.Minecraft
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ActionResult
-import net.minecraft.util.ActionResultType
-import net.minecraft.util.Hand
-import net.minecraft.util.Util
-import net.minecraft.world.World
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 
 // more like destructive
 class CreativeNuclearExplosionSpawner(properties: Properties) : Item(properties) {
-    override fun use(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
+    override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val item = player.getItemInHand(hand)
 
         if (player.isShiftKeyDown) { // quick detonation
@@ -23,7 +22,7 @@ class CreativeNuclearExplosionSpawner(properties: Properties) : Item(properties)
                     NukeExplosionEntity.create(world, player.position(), 200)
                 } else {
                     player.sendMessage(UseCreativeNuclearExplosionSpawnerScreen.ERR_INSUFFICIENT_PERMISSION, Util.NIL_UUID)
-                    return ActionResult(ActionResultType.PASS, item)
+                    return InteractionResultHolder.pass(item)
                 }
             }
         } else if (world.isClientSide) { // open advanced GUI
@@ -32,6 +31,6 @@ class CreativeNuclearExplosionSpawner(properties: Properties) : Item(properties)
             else player.displayClientMessage(UseCreativeNuclearExplosionSpawnerScreen.ERR_INSUFFICIENT_PERMISSION, false)
         }
 
-        return ActionResult.sidedSuccess(item, world.isClientSide)
+        return InteractionResultHolder.sidedSuccess(item, world.isClientSide)
     }
 }

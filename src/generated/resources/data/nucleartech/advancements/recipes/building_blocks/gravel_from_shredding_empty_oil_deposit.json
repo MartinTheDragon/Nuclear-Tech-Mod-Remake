@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gravel_from_shredding_empty_oil_deposit"
+    ]
+  },
+  "criteria": {
+    "has_empty_oil_deposit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:empty_oil_deposit"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gravel_from_shredding_empty_oil_deposit"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_empty_oil_deposit",
+      "has_the_recipe"
+    ]
+  ]
+}

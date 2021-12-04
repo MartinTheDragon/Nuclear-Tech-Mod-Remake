@@ -4,40 +4,47 @@ import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
-import net.minecraft.advancements.criterion.EnchantmentPredicate
-import net.minecraft.advancements.criterion.ItemPredicate
-import net.minecraft.advancements.criterion.MinMaxBounds
-import net.minecraft.block.Block
-import net.minecraft.block.Blocks
-import net.minecraft.data.loot.BlockLootTables
-import net.minecraft.enchantment.Enchantments
-import net.minecraft.item.Items
-import net.minecraft.loot.*
-import net.minecraft.loot.conditions.MatchTool
-import net.minecraft.loot.conditions.RandomChance
-import net.minecraft.loot.functions.ApplyBonus
-import net.minecraft.loot.functions.ExplosionDecay
-import net.minecraft.loot.functions.LimitCount
-import net.minecraft.loot.functions.SetCount
+import net.minecraft.advancements.critereon.EnchantmentPredicate
+import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.advancements.critereon.MinMaxBounds
+import net.minecraft.data.loot.BlockLoot
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.enchantment.Enchantments
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.storage.loot.IntRange
+import net.minecraft.world.level.storage.loot.LootPool
+import net.minecraft.world.level.storage.loot.LootTable
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
+import net.minecraft.world.level.storage.loot.entries.LootItem
+import net.minecraft.world.level.storage.loot.entries.TagEntry
+import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
+import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay
+import net.minecraft.world.level.storage.loot.functions.LimitCount
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
+import net.minecraft.world.level.storage.loot.predicates.MatchTool
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import net.minecraftforge.registries.ForgeRegistries
 
-class BlockLoots : BlockLootTables() {
+class BlockLoots : BlockLoot() {
     override fun addTables() {
         dropSelf(ModBlocks.uraniumOre.get())
         dropSelf(ModBlocks.scorchedUraniumOre.get())
         dropSelf(ModBlocks.thoriumOre.get())
         dropSelf(ModBlocks.titaniumOre.get())
         add(ModBlocks.sulfurOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.sulfur.get()).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
         }
         add(ModBlocks.niterOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.niter.get()).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.niter.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
         }
         dropSelf(ModBlocks.copperOre.get())
         dropSelf(ModBlocks.tungstenOre.get())
         dropSelf(ModBlocks.aluminiumOre.get())
         add(ModBlocks.fluoriteOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.fluorite.get()).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.fluorite.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
         }
         dropSelf(ModBlocks.berylliumOre.get())
         dropSelf(ModBlocks.leadOre.get())
@@ -45,7 +52,7 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.emptyOilDeposit.get())
         dropSelf(ModBlocks.oilSand.get())
         add(ModBlocks.ligniteOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.lignite.get()).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.lignite.get()).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
         }
         dropSelf(ModBlocks.asbestosOre.get())
         dropSelf(ModBlocks.schrabidiumOre.get())
@@ -56,18 +63,19 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.dellite.get())
         dropSelf(ModBlocks.dollarGreenMineral.get())
 
-        val hasSilkTouchCondition = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.IntBound.atLeast(1))))
+        val hasSilkTouchCondition = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))
+        ))
         val hasNoSilkTouchCondition = hasSilkTouchCondition.invert()
 
         add(ModBlocks.rareEarthOre.get()) {
             LootTable.lootTable().withPool(LootPool.lootPool()
-                .setRolls(ConstantRange.exactly(1))
-                .add(ItemLootEntry.lootTableItem(ModBlocks.rareEarthOre.get()))
+                .setRolls(ConstantValue.exactly(1F))
+                .add(LootItem.lootTableItem(ModBlocks.rareEarthOre.get()))
                 .`when`(hasSilkTouchCondition)
             ).withPool(LootPool.lootPool()
-                .setRolls(RandomValueRange.between(6F, 16F))
-                .add(TagLootEntry.expandTag(NuclearTags.Items.RARE_EARTH_FRAGMENTS).apply(ExplosionDecay.explosionDecay()))
-                .apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+                .setRolls(UniformGenerator.between(6F, 16F))
+                .add(TagEntry.expandTag(NuclearTags.Items.RARE_EARTH_FRAGMENTS).apply(ApplyExplosionDecay.explosionDecay()))
+                .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
                 .`when`(hasNoSilkTouchCondition))
         }
 
@@ -76,17 +84,17 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.netherPlutoniumOre.get())
         dropSelf(ModBlocks.netherTungstenOre.get())
         add(ModBlocks.netherSulfurOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.sulfur.get()).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
         }
 
         add(ModBlocks.netherPhosphorusOre.get()) {
             LootTable.lootTable().withPool(LootPool.lootPool()
-                .setRolls(ConstantRange.exactly(1))
-                .add(AlternativesLootEntry.alternatives(
-                    ItemLootEntry.lootTableItem(ModBlocks.netherPhosphorusOre.get()).`when`(hasSilkTouchCondition),
-                    ItemLootEntry.lootTableItem(ModItems.redPhosphorus.get()).`when`(RandomChance.randomChance(.4F)),
-                    ItemLootEntry.lootTableItem(Items.BLAZE_POWDER).`when`(RandomChance.randomChance(.4F)),
-                    ItemLootEntry.lootTableItem(ModItems.whitePhosphorusIngot.get()).`when`(RandomChance.randomChance(.2F))
+                .setRolls(ConstantValue.exactly(1F))
+                .add(AlternativesEntry.alternatives(
+                    LootItem.lootTableItem(ModBlocks.netherPhosphorusOre.get()).`when`(hasSilkTouchCondition),
+                    LootItem.lootTableItem(ModItems.redPhosphorus.get()).`when`(LootItemRandomChanceCondition.randomChance(.4F)),
+                    LootItem.lootTableItem(Items.BLAZE_POWDER).`when`(LootItemRandomChanceCondition.randomChance(.4F)),
+                    LootItem.lootTableItem(ModItems.whitePhosphorusIngot.get()).`when`(LootItemRandomChanceCondition.randomChance(.2F))
                 ))
             )
         }
@@ -96,7 +104,7 @@ class BlockLoots : BlockLootTables() {
         dropSelf(ModBlocks.meteorThoriumOre.get())
         dropSelf(ModBlocks.meteorTitaniumOre.get())
         add(ModBlocks.meteorSulfurOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(ModItems.sulfur.get()).apply(SetCount.setCount(RandomValueRange.between(6F, 12F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
+            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(6F, 12F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
         }
         dropSelf(ModBlocks.meteorCopperOre.get())
         dropSelf(ModBlocks.meteorTungstenOre.get())
@@ -175,9 +183,9 @@ class BlockLoots : BlockLootTables() {
         dropWhenSilkTouch(ModBlocks.glowingMushroomStem.get())
         add(ModBlocks.deadGrass.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
         add(ModBlocks.glowingMycelium.get()) { createSingleItemTableWithSilkTouch(it, Blocks.DIRT) }
-        add(ModBlocks.trinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
-        add(ModBlocks.redTrinitite.get()) { createSilkTouchDispatchTable(it, ItemLootEntry.lootTableItem(ModItems.trinitite.get())) }
-        add(ModBlocks.charredLog.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, ItemLootEntry.lootTableItem(Items.COAL).apply(SetCount.setCount(RandomValueRange.between(2F, 4F))).apply(ApplyBonus.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))).withPool(LootPool.lootPool().setRolls(ConstantRange.exactly(1)).add(ItemLootEntry.lootTableItem(ModItems.burntBark.get()).`when`(hasNoSilkTouchCondition)).apply(SetCount.setCount(RandomValueRange.between(-999F, 1F))).apply(LimitCount.limitCount(IntClamper.lowerBound(0)))) }
+        add(ModBlocks.trinitite.get()) { createSilkTouchDispatchTable(it, LootItem.lootTableItem(ModItems.trinitite.get())) }
+        add(ModBlocks.redTrinitite.get()) { createSilkTouchDispatchTable(it, LootItem.lootTableItem(ModItems.trinitite.get())) }
+        add(ModBlocks.charredLog.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(Items.COAL).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1F)).add(LootItem.lootTableItem(ModItems.burntBark.get()).`when`(hasNoSilkTouchCondition)).apply(SetItemCountFunction.setCount(UniformGenerator.between(-999F, 1F))).apply(LimitCount.limitCount(IntRange.lowerBound(0)))) }
         add(ModBlocks.charredPlanks.get()) { createOreDrop(it, Items.COAL) }
         dropSelf(ModBlocks.slakedSellafite.get())
         dropSelf(ModBlocks.sellafite.get())

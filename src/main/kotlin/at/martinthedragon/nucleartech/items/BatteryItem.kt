@@ -3,20 +3,20 @@ package at.martinthedragon.nucleartech.items
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.energy.LudicrousEnergyStorage
-import net.minecraft.client.util.ITooltipFlag
-import net.minecraft.enchantment.Enchantment
-import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.util.Direction
-import net.minecraft.util.NonNullList
-import net.minecraft.util.math.MathHelper
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.Style
-import net.minecraft.util.text.TextFormatting
-import net.minecraft.util.text.TranslationTextComponent
-import net.minecraft.world.World
+import net.minecraft.ChatFormatting
+import net.minecraft.core.Direction
+import net.minecraft.core.NonNullList
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.Style
+import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.util.Mth
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.item.enchantment.Enchantment
+import net.minecraft.world.level.Level
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.ICapabilityProvider
 import net.minecraftforge.common.util.LazyOptional
@@ -37,21 +37,21 @@ open class BatteryItem(
 
     override fun canApplyAtEnchantingTable(stack: ItemStack?, enchantment: Enchantment?) = false
 
-    override fun showDurabilityBar(stack: ItemStack?) = true
+    override fun isBarVisible(stack: ItemStack?) = true
 
-    override fun getRGBDurabilityForDisplay(stack: ItemStack?) = MathHelper.color(0, 255, 100)
+    override fun getBarColor(stack: ItemStack?) = Mth.color(0, 255, 100)
 
-    override fun fillItemCategory(tab: ItemGroup, items: NonNullList<ItemStack>) {
+    override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         if (allowdedIn(tab)) {
             if (chargeRate > 0) items.add(ItemStack(this).apply { damageValue = 1000 })
             items.add(ItemStack(this).apply { orCreateTag.putLong("Energy", capacity) })
         }
     }
 
-    override fun appendHoverText(stack: ItemStack, world: World?, tooltip: MutableList<ITextComponent>, extra: ITooltipFlag) {
-        tooltip.add(TranslationTextComponent("item.${NuclearTech.MODID}.batteries.energy_stored", EnergyFormatter.formatEnergy(stack.orCreateTag.getLong("Energy")), EnergyFormatter.formatEnergy(capacity)).withStyle(Style.EMPTY.applyFormat(TextFormatting.GRAY))) // TODO configurable units
-        tooltip.add(TranslationTextComponent("item.${NuclearTech.MODID}.batteries.charge_rate", EnergyFormatter.formatEnergy(chargeRate)).withStyle(Style.EMPTY.applyFormat(TextFormatting.GRAY)))
-        tooltip.add(TranslationTextComponent("item.${NuclearTech.MODID}.batteries.discharge_rate", EnergyFormatter.formatEnergy(dischargeRate)).withStyle(Style.EMPTY.applyFormat(TextFormatting.GRAY)))
+    override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, extra: TooltipFlag) {
+        tooltip.add(TranslatableComponent("item.${NuclearTech.MODID}.batteries.energy_stored", EnergyFormatter.formatEnergy(stack.orCreateTag.getLong("Energy")), EnergyFormatter.formatEnergy(capacity)).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY))) // TODO configurable units
+        tooltip.add(TranslatableComponent("item.${NuclearTech.MODID}.batteries.charge_rate", EnergyFormatter.formatEnergy(chargeRate)).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY)))
+        tooltip.add(TranslatableComponent("item.${NuclearTech.MODID}.batteries.discharge_rate", EnergyFormatter.formatEnergy(dischargeRate)).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY)))
     }
 
     /*
@@ -61,7 +61,7 @@ open class BatteryItem(
     other mods. Behind this could be a tag modification even though the item does not exist anymore, and the client tries
     to save it anyway.
     */
-    override fun initCapabilities(stack: ItemStack, nbt: CompoundNBT?): ICapabilityProvider = object : ICapabilityProvider {
+    override fun initCapabilities(stack: ItemStack, nbt: CompoundTag?): ICapabilityProvider = object : ICapabilityProvider {
         @Suppress("UsePropertyAccessSyntax")
         private val energyCapability = LazyOptional.of { // doing it this way has the added benefit of the damage tag actually working ('cause it's delayed)
             object : LudicrousEnergyStorage(capacity, chargeRate, dischargeRate, stack.getOrCreateTag().getLong("Energy")) {

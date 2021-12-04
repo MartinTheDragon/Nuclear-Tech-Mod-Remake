@@ -5,8 +5,13 @@ import at.martinthedragon.nucleartech.blocks.FatMan
 import at.martinthedragon.nucleartech.blocks.LittleBoy
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.*
-import net.minecraft.item.*
-import net.minecraftforge.fml.RegistryObject
+import net.minecraft.world.food.FoodProperties
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Rarity
+import net.minecraft.world.item.crafting.RecipeType
+import net.minecraftforge.common.ForgeSpawnEggItem
+import net.minecraftforge.registries.RegistryObject
 
 @Suppress("unused")
 object ModItems {
@@ -60,7 +65,7 @@ object ModItems {
     val dineutroniumIngot: RegistryObject<Item> = ITEMS.register("dineutronium_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val electroniumIngot: RegistryObject<Item> = ITEMS.register("electronium_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val whitePhosphorusIngot: RegistryObject<Item> = ITEMS.register("white_phosphorus_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Hot), Item.Properties().tab(CreativeTabs.Parts)) }
-    val semtexBar: RegistryObject<Item> = ITEMS.register("semtex_bar") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts).food(Food.Builder().nutrition(4).saturationMod(0.5f).build())) }
+    val semtexBar: RegistryObject<Item> = ITEMS.register("semtex_bar") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts).food(FoodProperties.Builder().nutrition(4).saturationMod(0.5f).build())) }
     val lithiumCube: RegistryObject<Item> = ITEMS.register("lithium_cube") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val solidFuelCube: RegistryObject<Item> = ITEMS.register("solid_fuel_cube") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val solidRocketFuelCube: RegistryObject<Item> = ITEMS.register("solid_rocket_fuel_cube") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
@@ -69,13 +74,13 @@ object ModItems {
     val mercuryDroplet: RegistryObject<Item> = ITEMS.register("mercury_droplet") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val mercuryBottle: RegistryObject<Item> = ITEMS.register("mercury_bottle") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val coke: RegistryObject<Item> = ITEMS.register("coke") { object : Item(Properties().tab(CreativeTabs.Parts)) {
-        override fun getBurnTime(itemStack: ItemStack?) = 3200
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 3200
     }}
     val lignite: RegistryObject<Item> = ITEMS.register("lignite") { object : Item(Properties().tab(CreativeTabs.Parts)) {
-        override fun getBurnTime(itemStack: ItemStack?) = 1200
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 1200
     }}
     val ligniteBriquette: RegistryObject<Item> = ITEMS.register("lignite_briquette") { object : Item(Properties().tab(CreativeTabs.Parts)) {
-        override fun getBurnTime(itemStack: ItemStack?) = 1600
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 1600
     }}
     val sulfur: RegistryObject<Item> = ITEMS.register("sulfur") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val niter: RegistryObject<Item> = ITEMS.register("niter") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
@@ -137,7 +142,7 @@ object ModItems {
     val dineutroniumPowder: RegistryObject<Item> = ITEMS.register("dineutronium_powder") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val desaturatedRedstone: RegistryObject<Item> = ITEMS.register("desaturated_redstone") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val dust: RegistryObject<Item> = ITEMS.register("dust") { object : AutoTooltippedItem(Properties().tab(CreativeTabs.Parts)) {
-        override fun getBurnTime(itemStack: ItemStack?) = 400
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 400
     }}
     val tinyLithiumPowder: RegistryObject<Item> = ITEMS.register("tiny_lithium_powder") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val tinyNeodymiumPowder: RegistryObject<Item> = ITEMS.register("tiny_neodymium_powder") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
@@ -418,7 +423,7 @@ object ModItems {
     val thurisazRune: RegistryObject<Item> = ITEMS.register("thurisaz_rune") { Item(Item.Properties().tab(CreativeTabs.Parts).stacksTo(1)) }
     val burnedOutQuadSchrabidiumFuelRod: RegistryObject<Item> = ITEMS.register("burned_out_quad_schrabidium_rod") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Parts).stacksTo(1).rarity(Rarity.EPIC)) }
     val scrap: RegistryObject<Item> = ITEMS.register("scrap") { object : Item(Properties().tab(CreativeTabs.Parts)) {
-        override fun getBurnTime(itemStack: ItemStack?) = 800
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 800
     }}
     val hotDepletedUraniumFuel: RegistryObject<Item> = ITEMS.register("hot_depleted_uranium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Hot), Item.Properties().tab(CreativeTabs.Parts), 15f) }
     val hotDepletedThoriumFuel: RegistryObject<Item> = ITEMS.register("hot_depleted_thorium_fuel") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Hot), Item.Properties().tab(CreativeTabs.Parts), 10f) }
@@ -553,7 +558,7 @@ object ModItems {
 
     // Miscellaneous
 
-    val nuclearCreeperSpawnEgg: RegistryObject<SpawnEggItem> = ITEMS.register("nuclear_creeper_spawn_egg") { NuclearSpawnEggItem(EntityTypes.nuclearCreeperEntity, 0x1E3E2E, 0x66B300, Item.Properties().tab(CreativeTabs.Miscellaneous)) }
+    val nuclearCreeperSpawnEgg: RegistryObject<ForgeSpawnEggItem> = ITEMS.register("nuclear_creeper_spawn_egg") { ForgeSpawnEggItem(EntityTypes.nuclearCreeper, 0x1E3E2E, 0x66B300, Item.Properties().tab(CreativeTabs.Miscellaneous)) }
 
     // Hidden
 

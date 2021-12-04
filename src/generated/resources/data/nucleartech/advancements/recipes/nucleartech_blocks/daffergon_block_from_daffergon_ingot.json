@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:daffergon_ingot"
+            "items": [
+              "nucleartech:daffergon_ingot"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:combine_scrap_metal"
+            "items": [
+              "nucleartech:combine_scrap_metal"
+            ]
           }
         ]
       }

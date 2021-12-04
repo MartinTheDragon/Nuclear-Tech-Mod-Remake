@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.NuclearTech
-import net.minecraft.network.PacketBuffer
-import net.minecraft.util.ResourceLocation
-import net.minecraftforge.fml.network.NetworkDirection
-import net.minecraftforge.fml.network.NetworkRegistry
-import net.minecraftforge.fml.network.simple.SimpleChannel
+import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.resources.ResourceLocation
+import net.minecraftforge.network.NetworkDirection
+import net.minecraftforge.network.NetworkRegistry
+import net.minecraftforge.network.simple.SimpleChannel
 import java.util.*
 import kotlin.reflect.KClass
 
@@ -29,7 +29,7 @@ object NuclearPacketHandler {
         registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
     }
 
-    private fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {
+    private fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (FriendlyByteBuf) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {
         @Suppress("INACCESSIBLE_TYPE")
         INSTANCE.registerMessage(
             currentPacketID++,
@@ -42,7 +42,7 @@ object NuclearPacketHandler {
         return this
     }
 
-    private inline fun <reified T : NetworkMessage<T>> registerMessage(noinline decoder: (PacketBuffer) -> T, networkDirection: NetworkDirection? = null) =
+    private inline fun <reified T : NetworkMessage<T>> registerMessage(noinline decoder: (FriendlyByteBuf) -> T, networkDirection: NetworkDirection? = null) =
         registerMessage(T::class, decoder, networkDirection)
 
 }

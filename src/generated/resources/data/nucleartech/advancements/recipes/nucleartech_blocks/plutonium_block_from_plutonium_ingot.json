@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:plutonium_ingot"
+            "items": [
+              "nucleartech:plutonium_ingot"
+            ]
           }
         ]
       }

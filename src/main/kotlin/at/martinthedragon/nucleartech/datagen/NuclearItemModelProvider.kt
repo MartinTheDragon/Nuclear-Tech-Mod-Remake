@@ -5,11 +5,10 @@ import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.items.BombKitItem
-import at.martinthedragon.nucleartech.items.NuclearSpawnEggItem
-import net.minecraft.block.Block
 import net.minecraft.data.DataGenerator
-import net.minecraft.item.Item
-import net.minecraft.util.ResourceLocation
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Item
+import net.minecraft.world.level.block.Block
 import net.minecraftforge.client.model.generators.ItemModelProvider
 import net.minecraftforge.client.model.generators.ModelFile
 import net.minecraftforge.common.data.ExistingFileHelper
@@ -540,7 +539,7 @@ class NuclearItemModelProvider(
 
         for (bombKit in BombKitItem.allKits) bombKit(bombKit)
 
-        for (spawnEgg in NuclearSpawnEggItem.resolvedMap.values) spawnEgg(spawnEgg)
+        spawnEgg(ModItems.nuclearCreeperSpawnEgg.get())
 
         // BlockItems
 

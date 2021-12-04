@@ -23,18 +23,20 @@ Feel free to contribute!
 - Doctor17 (russian localization)
 - Drillgon200 (effects, models, porting)
 - UFFR (fork with all sorts of features)
+- Pu-238 (Tom impact effects)
 - Bismarck (chinese localization)
 - FirzzleFrazzle (models)
 - Minecreep (models)
 - VT-6/24 (models, textures)
-- PheodoreKaczynski (textures)
+- PheodoreKaczynski (textures, various machines)
 - Vær (fibrosis code)
-- Adam29 (liquid petroleum)
+- Adam29 (liquid petroleum, ethanol)
 - Pashtet (russian localization)
 - Sten89 (models)
 - Pixelguru26 (textures)
 - impbk2002 (project settings)
 - OvermindDL1 (project settings)
+- TehTemmie (reacher radiation function)
 
 ### Technologies used
 

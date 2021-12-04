@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:nether_phosphorus_ore"
+            "items": [
+              "nucleartech:nether_phosphorus_ore"
+            ]
           }
         ]
       }

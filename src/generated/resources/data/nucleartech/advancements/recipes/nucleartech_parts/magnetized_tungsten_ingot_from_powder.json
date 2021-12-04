@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:magnetized_tungsten_powder"
+            "items": [
+              "nucleartech:magnetized_tungsten_powder"
+            ]
           }
         ]
       }

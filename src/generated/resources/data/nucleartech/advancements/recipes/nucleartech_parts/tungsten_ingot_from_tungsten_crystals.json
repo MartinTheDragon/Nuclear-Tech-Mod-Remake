@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:tungsten_crystals"
+            "items": [
+              "nucleartech:tungsten_crystals"
+            ]
           }
         ]
       }

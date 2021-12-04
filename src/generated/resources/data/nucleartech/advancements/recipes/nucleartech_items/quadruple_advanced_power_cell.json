@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:advanced_power_cell"
+            "items": [
+              "nucleartech:advanced_power_cell"
+            ]
           }
         ]
       }

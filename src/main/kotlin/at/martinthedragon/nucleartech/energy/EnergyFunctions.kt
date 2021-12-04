@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.energy
 
-import net.minecraft.item.ItemStack
+import net.minecraft.world.item.ItemStack
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.energy.IEnergyStorage
 import kotlin.math.min

@@ -3,24 +3,24 @@ package at.martinthedragon.nucleartech.entities
 import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.world.ChunkRadiation
-import net.minecraft.entity.Entity
-import net.minecraft.entity.EntityType
-import net.minecraft.entity.passive.CatEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.network.IPacket
-import net.minecraft.util.math.AxisAlignedBB
-import net.minecraft.util.math.RayTraceContext
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.World
-import net.minecraft.world.server.ServerWorld
-import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.Packet
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.animal.Cat
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.level.ClipContext
+import net.minecraft.world.level.Level
+import net.minecraft.world.phys.AABB
+import net.minecraft.world.phys.Vec3
+import net.minecraftforge.network.NetworkHooks
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.pow
 
-class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: World) : Entity(entityType, world) {
+class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Level) : Entity(entityType, world) {
     var strength = 0
     var speed = 0
     var length = 0
@@ -37,7 +37,7 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
         if (level.isClientSide) return
 
         if (strength == 0) {
-            remove()
+            remove(RemovalReason.DISCARDED)
             return
         }
 
@@ -53,14 +53,14 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
         when {
             !explosion!!.initialized -> explosion!!.collectTips(speed * 10)
             explosion!!.tipsCount > 0 -> explosion!!.processTips(NuclearConfig.explosions.explosionSpeed.get())
-            else -> remove()
+            else -> remove(RemovalReason.DISCARDED)
         }
     }
 
-    override fun remove(keepData: Boolean) {
-        super.remove(keepData)
+    override fun remove(reason: RemovalReason) {
+        super.remove(reason)
         if (nukeCloudEntityUUID != null) {
-            ((level as? ServerWorld)?.getEntity(nukeCloudEntityUUID!!) as? NukeCloudEntity)?.finish()
+            ((level as? ServerLevel)?.getEntity(nukeCloudEntityUUID!!) as? MushroomCloudEntity)?.finish()
         }
         if (hasFallout) {
             val fallout = FalloutRainEntity(EntityTypes.falloutRainEntity.get(), level)
@@ -72,7 +72,7 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
 
     override fun defineSynchedData() {}
 
-    override fun readAdditionalSaveData(nbt: CompoundNBT) {
+    override fun readAdditionalSaveData(nbt: CompoundTag) {
         strength = nbt.getInt("Strength")
         speed = nbt.getInt("Speed")
         length = nbt.getInt("Length")
@@ -85,7 +85,7 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
         }
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundNBT) {
+    override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putInt("Strength", strength)
         nbt.putInt("Speed", speed)
         nbt.putInt("Length", length)
@@ -95,24 +95,24 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
         if (nukeCloudEntityUUID != null) nbt.putUUID("NukeCloudEntity", nukeCloudEntityUUID!!)
     }
 
-    override fun getAddEntityPacket(): IPacket<*> = NetworkHooks.getEntitySpawningPacket(this)
+    override fun getAddEntityPacket(): Packet<*> = NetworkHooks.getEntitySpawningPacket(this)
 
     companion object {
-        fun dealDamage(world: World, pos: Vector3d, radius: Double, maxDamage: Float = 250F) {
+        fun dealDamage(world: Level, pos: Vec3, radius: Double, maxDamage: Float = 250F) {
             val entities = world.getEntities(null,
-                AxisAlignedBB(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z).inflate(radius, radius, radius),
+                AABB(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z).inflate(radius, radius, radius),
                 Companion::canExplode
             )
 
             for (entity in entities) {
                 val distance = pos.distanceTo(entity.position())
                 if (distance <= radius) {
-                    world.clip(RayTraceContext(pos, entity.position(), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, null))
+                    world.clip(ClipContext(pos, entity.position(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null))
                     val damage = maxDamage * (radius - distance) /  radius
                     entity.hurt(DamageSources.nuclearBlast, damage.toFloat())
                     entity.setSecondsOnFire(5)
 
-                    val knockBack = Vector3d(
+                    val knockBack = Vec3(
                         entity.x - pos.x,
                         entity.y + entity.eyeHeight - pos.y,
                         entity.z - pos.z
@@ -124,14 +124,14 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
         }
 
         fun canExplode(entity: Entity): Boolean = when {
-            entity is PlayerEntity && entity.isCreative -> false
-            entity is CatEntity -> false
+            entity is Player && entity.isCreative -> false
+            entity is Cat -> false
             else -> true
         }
 
         fun create(
-            world: World,
-            pos: Vector3d,
+            world: Level,
+            pos: Vec3,
             strength: Int,
             hasFallout: Boolean = true,
             extraFallout: Int = 0,
@@ -140,7 +140,7 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Wo
         ): Boolean {
             return if (world.isClientSide) false
             else {
-                val cloudEntityUUID = if (withVfx) NukeCloudEntity.create(world, pos, strength * .0025F, isMuted = muted) else null
+                val cloudEntityUUID = if (withVfx) MushroomCloudEntity.create(world, pos, strength * .0025F, isMuted = muted) else null
                 val explosionEntity = NukeExplosionEntity(EntityTypes.nukeExplosionEntity.get(), world).apply {
                     this@apply.strength = strength
                     speed = ceil(100000F / strength).toInt()

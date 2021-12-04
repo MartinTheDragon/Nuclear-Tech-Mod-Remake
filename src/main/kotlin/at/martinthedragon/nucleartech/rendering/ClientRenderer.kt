@@ -3,12 +3,14 @@ package at.martinthedragon.nucleartech.rendering
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.Radiation
-import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.AbstractGui
-import net.minecraft.util.ResourceLocation
-import net.minecraft.world.gen.SimplexNoiseGenerator
+import net.minecraft.client.gui.GuiComponent
+import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.level.levelgen.SingleThreadedRandomSource
+import net.minecraft.world.level.levelgen.synth.SimplexNoise
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.EntityViewRenderEvent
 import net.minecraftforge.client.event.RenderGameOverlayEvent
@@ -27,7 +29,7 @@ object ClientRenderer {
     fun renderOverlays(event: RenderGameOverlayEvent.Pre) {
         val player = minecraft.player ?: return
 
-        if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR) {
+        if (event.type == RenderGameOverlayEvent.ElementType.LAYER) {
             // TODO check for FSB armor
 
             if (player.inventory.hasAnyOf(setOf(ModItems.geigerCounter.get()))) {
@@ -41,12 +43,11 @@ object ClientRenderer {
     private var previousResult = 0F
     private var lastResult = 0F
 
-    private fun renderGeigerHUD(matrixStack: MatrixStack, radValueIn: Float) {
+    private fun renderGeigerHUD(matrixStack: PoseStack, radValueIn: Float) {
         matrixStack.pushPose()
         RenderSystem.enableBlend()
         RenderSystem.defaultBlendFunc()
-        @Suppress("DEPRECATION")
-        RenderSystem.color4f(1F, 1F, 1F, 1F)
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F)
 
         val radiation = lastResult - previousResult
 
@@ -60,15 +61,17 @@ object ClientRenderer {
         val posX = 16
         val posY = minecraft.window.guiScaledHeight - 20
 
-        minecraft.textureManager.bind(GEIGER_OVERLAY)
-        AbstractGui.blit(matrixStack, posX, posY, 0, 0F, 0F, 94, 18, 128, 128)
-        AbstractGui.blit(matrixStack, posX + 1, posY + 1, 0, 1F, 19F, barFillAmount, 16, 128, 128)
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, GEIGER_OVERLAY)
+        GuiComponent.blit(matrixStack, posX, posY, 0, 0F, 0F, 94, 18, 128, 128)
+        GuiComponent.blit(matrixStack, posX + 1, posY + 1, 0, 1F, 19F, barFillAmount, 16, 128, 128)
 
         // 74 = length of bar
         when {
-            radiation >= 25 -> AbstractGui.blit(matrixStack, posX + 76, posY - 18, 0, 36F, 36F, 18, 18, 128, 128)
-            radiation >= 10 -> AbstractGui.blit(matrixStack, posX + 76, posY - 18, 0, 18F, 36F, 18, 18, 128, 128)
-            radiation >= 2.5 -> AbstractGui.blit(matrixStack, posX + 76, posY - 18, 0, 0F, 36F, 18, 18, 128, 128)
+            radiation >= 25 -> GuiComponent.blit(matrixStack, posX + 76, posY - 18, 0, 36F, 36F, 18, 18, 128, 128)
+            radiation >= 10 -> GuiComponent.blit(matrixStack, posX + 76, posY - 18, 0, 18F, 36F, 18, 18, 128, 128)
+            radiation >= 2.5 -> GuiComponent.blit(matrixStack, posX + 76, posY - 18, 0, 0F, 36F, 18, 18, 128, 128)
         }
 
         when {
@@ -89,7 +92,7 @@ object ClientRenderer {
         private const val MAX_Z_OFFSET = 0.6
         private const val MAX_Y_OFFSET = 0.3
 
-        private val perlinNoise = SimplexNoiseGenerator(java.util.Random(Random.nextLong()))
+        private val perlinNoise = SimplexNoise(SingleThreadedRandomSource(Random.nextLong()))
         private var lastNanoTime = 0L
         private var intensityLevelRotational = 0.0
             set(value) { field = value.coerceIn(0.0, 1.0) }
@@ -113,7 +116,6 @@ object ClientRenderer {
 
         @SubscribeEvent @JvmStatic
         fun tick(event: EntityViewRenderEvent.CameraSetup) {
-            event.info
             if (intensityLevelRotational > 0.0) {
                 val noiseInput = System.nanoTime() * 5E-8
                 val shake = intensityLevelRotational * intensityLevelRotational
@@ -126,7 +128,7 @@ object ClientRenderer {
             if (intensityLevelTranslational > 0.0) {
                 val noiseInput = System.nanoTime() * 5E-8
                 val shake = intensityLevelTranslational * intensityLevelTranslational
-                event.info.move(
+                event.camera.move(
                     MAX_X_OFFSET * shake * perlinNoise.getValue(noiseInput + 500, -noiseInput - 500),
                     MAX_Y_OFFSET * shake * perlinNoise.getValue(noiseInput + 250, -noiseInput - 250),
                     MAX_Z_OFFSET * shake * perlinNoise.getValue(noiseInput - 500, -noiseInput + 500)

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:trinitite_block"
+            "items": [
+              "nucleartech:trinitite_block"
+            ]
           }
         ]
       }

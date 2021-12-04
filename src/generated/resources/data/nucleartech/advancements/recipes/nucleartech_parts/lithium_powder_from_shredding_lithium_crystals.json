@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lithium_powder_from_shredding_lithium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_lithium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:lithium_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lithium_powder_from_shredding_lithium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lithium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

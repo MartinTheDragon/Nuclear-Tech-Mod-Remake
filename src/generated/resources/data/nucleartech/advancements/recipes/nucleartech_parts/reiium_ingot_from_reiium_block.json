@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:reiium_block"
+            "items": [
+              "nucleartech:reiium_block"
+            ]
           }
         ]
       }

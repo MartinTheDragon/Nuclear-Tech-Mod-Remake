@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:iron_powder_from_shredding_iron_crystals"
+    ]
+  },
+  "criteria": {
+    "has_iron_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:iron_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:iron_powder_from_shredding_iron_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

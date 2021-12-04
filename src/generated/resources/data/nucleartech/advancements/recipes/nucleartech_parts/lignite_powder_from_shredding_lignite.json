@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lignite_powder_from_shredding_lignite"
+    ]
+  },
+  "criteria": {
+    "has_lignite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:lignite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lignite_powder_from_shredding_lignite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lignite",
+      "has_the_recipe"
+    ]
+  ]
+}

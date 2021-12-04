@@ -2,18 +2,18 @@ package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
-import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
-import net.minecraft.network.PacketBuffer
+import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraftforge.common.Tags
-import net.minecraftforge.fml.network.NetworkEvent
+import net.minecraftforge.network.NetworkEvent
 import java.util.function.Supplier
 
 class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftMachineTemplateMessage> {
-    override fun encode(packetBuffer: PacketBuffer) {
+    override fun encode(packetBuffer: FriendlyByteBuf) {
         packetBuffer.writeItem(result)
     }
 
@@ -32,7 +32,7 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                 
                 // check whether the player is creative or has the random necessary
                 if (!sender.isCreative) {
-                    fun removeIfPossible(player: ServerPlayerEntity, vararg items: Item?): Boolean {
+                    fun removeIfPossible(player: ServerPlayer, vararg items: Item?): Boolean {
                         if (items.any { it == null }) return false
 
                         val slots = IntArray(items.size)
@@ -84,6 +84,6 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
 
     companion object {
         @JvmStatic
-        fun decode(packetBuffer: PacketBuffer) = CraftMachineTemplateMessage(packetBuffer.readItem())
+        fun decode(packetBuffer: FriendlyByteBuf) = CraftMachineTemplateMessage(packetBuffer.readItem())
     }
 }

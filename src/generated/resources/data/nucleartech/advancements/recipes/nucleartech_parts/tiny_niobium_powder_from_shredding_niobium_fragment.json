@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tiny_niobium_powder_from_shredding_niobium_fragment"
+    ]
+  },
+  "criteria": {
+    "has_niobium_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/niobium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tiny_niobium_powder_from_shredding_niobium_fragment"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_niobium_fragment",
+      "has_the_recipe"
+    ]
+  ]
+}

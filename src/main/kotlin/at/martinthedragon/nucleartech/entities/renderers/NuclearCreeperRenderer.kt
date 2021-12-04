@@ -1,23 +1,24 @@
 package at.martinthedragon.nucleartech.entities.renderers
 
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.entities.NuclearCreeperEntity
-import at.martinthedragon.nucleartech.entities.renderers.layers.NuclearCreeperChargeLayer
-import com.mojang.blaze3d.matrix.MatrixStack
-import net.minecraft.client.renderer.entity.EntityRendererManager
+import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.entities.renderers.layers.NuclearCreeperPowerLayer
+import com.mojang.blaze3d.vertex.PoseStack
+import net.minecraft.client.model.CreeperModel
+import net.minecraft.client.model.geom.ModelLayers
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.MobRenderer
-import net.minecraft.client.renderer.entity.model.CreeperModel
-import net.minecraft.util.ResourceLocation
+import net.minecraft.resources.ResourceLocation
 import kotlin.math.sin
 
-class NuclearCreeperRenderer(entityRendererManager: EntityRendererManager) :
-    MobRenderer<NuclearCreeperEntity, CreeperModel<NuclearCreeperEntity>>(entityRendererManager, CreeperModel(), .5F)
-{
+class NuclearCreeperRenderer(context: EntityRendererProvider.Context) : MobRenderer<NuclearCreeper, CreeperModel<NuclearCreeper>>(context, CreeperModel(context.bakeLayer(ModelLayers.CREEPER)), .5F) {
+    private val NUCLEAR_CREEPER_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/entity/nuclear_creeper/nuclear_creeper.png")
+
     init {
-        addLayer(NuclearCreeperChargeLayer(this))
+        addLayer(NuclearCreeperPowerLayer(this, context.modelSet))
     }
 
-    override fun scale(entity: NuclearCreeperEntity, matrix: MatrixStack, partialTicks: Float) {
+    override fun scale(entity: NuclearCreeper, matrix: PoseStack, partialTicks: Float) {
         val swelling = entity.getSwelling(partialTicks)
         val pulse = 1F + sin(swelling * 100F) * swelling * .01F
         var swellingForScale = swelling.coerceIn(0F, 1F)
@@ -28,14 +29,10 @@ class NuclearCreeperRenderer(entityRendererManager: EntityRendererManager) :
         matrix.scale(horizontalScale, verticalScale, horizontalScale)
     }
 
-    override fun getWhiteOverlayProgress(entity: NuclearCreeperEntity, partialTicks: Float): Float {
+    override fun getWhiteOverlayProgress(entity: NuclearCreeper, partialTicks: Float): Float {
         val swelling = entity.getSwelling(partialTicks)
         return if ((swelling * 10F).toInt() % 2 == 0) 0F else swelling.coerceIn(.5F, 1F)
     }
 
-    override fun getTextureLocation(p0: NuclearCreeperEntity) = NUCLEAR_CREEPER_LOCATION
-
-    companion object {
-        private val NUCLEAR_CREEPER_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/entity/nuclear_creeper/nuclear_creeper.png")
-    }
+    override fun getTextureLocation(p0: NuclearCreeper) = NUCLEAR_CREEPER_LOCATION
 }

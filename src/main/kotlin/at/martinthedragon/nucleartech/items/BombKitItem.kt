@@ -1,20 +1,19 @@
 package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.SoundEvents
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.util.IItemProvider
-import net.minecraft.util.SoundCategory
-import net.minecraft.world.World
+import net.minecraft.sounds.SoundSource
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.ItemLike
+import net.minecraft.world.level.Level
 import java.util.function.Supplier
 import kotlin.math.min
-import net.minecraft.util.SoundEvents as MinecraftSounds
 
 class BombKitItem(
-    val items: Map<out Supplier<out IItemProvider>, Int>,
+    val items: Map<out Supplier<out ItemLike>, Int>,
     val color: Int,
     properties: Properties
 ) : Item(properties.stacksTo(1)) {
@@ -22,12 +21,12 @@ class BombKitItem(
         allKits += this
     }
 
-    override fun use(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
+    override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val stack = player.getItemInHand(hand).copy()
         stack.shrink(1)
         if (world.isClientSide) {
             player.playSound(SoundEvents.randomUnpack.get(), 1F, 1F)
-            return ActionResult.success(stack)
+            return InteractionResultHolder.success(stack)
         }
 
         for ((itemSupplier, amount) in items) {
@@ -45,7 +44,7 @@ class BombKitItem(
                     player.drop(newStack, false)?.makeFakeItem()
                     // cannot use player.playSound here because we already checked for server
                     player.level.playSound(null, player.x, player.y, player.z,
-                        MinecraftSounds.ITEM_PICKUP, SoundCategory.PLAYERS,
+                        net.minecraft.sounds.SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS,
                         .2F, ((player.random.nextFloat() - player.random.nextFloat()) * .7F + 1F) * 2F
                     )
                     player.inventoryMenu.broadcastChanges()
@@ -60,7 +59,7 @@ class BombKitItem(
                 amountLeft -= possibleAmount
             }
         }
-        return ActionResult.consume(stack)
+        return InteractionResultHolder.consume(stack)
     }
 
     companion object {

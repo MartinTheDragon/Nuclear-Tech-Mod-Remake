@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tiny_cerium_powder_from_shredding_cerium_fragment"
+    ]
+  },
+  "criteria": {
+    "has_cerium_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gems/cerium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tiny_cerium_powder_from_shredding_cerium_fragment"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cerium_fragment",
+      "has_the_recipe"
+    ]
+  ]
+}

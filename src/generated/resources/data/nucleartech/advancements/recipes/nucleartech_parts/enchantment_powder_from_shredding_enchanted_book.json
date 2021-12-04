@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:enchantment_powder_from_shredding_enchanted_book"
+    ]
+  },
+  "criteria": {
+    "has_enchanted_book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:enchanted_book"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:enchantment_powder_from_shredding_enchanted_book"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_enchanted_book",
+      "has_the_recipe"
+    ]
+  ]
+}

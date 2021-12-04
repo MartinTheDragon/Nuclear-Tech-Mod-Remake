@@ -1,75 +1,43 @@
 package at.martinthedragon.nucleartech.blocks
 
-import at.martinthedragon.nucleartech.tileentities.SirenTileEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.material.PushReaction
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.item.BlockItemUseContext
-import net.minecraft.state.BooleanProperty
-import net.minecraft.state.StateContainer
-import net.minecraft.state.properties.BlockStateProperties
-import net.minecraft.util.ActionResultType
-import net.minecraft.util.Hand
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.BlockRayTraceResult
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.World
-import net.minecraftforge.fml.network.NetworkHooks
+import at.martinthedragon.nucleartech.blocks.entities.SirenBlockEntity
+import net.minecraft.core.BlockPos
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.BaseEntityBlock
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.RenderShape
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.phys.BlockHitResult
 
-class Siren(properties: Properties) : Block(properties) {
-    init {
-        registerDefaultState(stateDefinition.any().setValue(POWERED, false))
+class Siren(properties: Properties) : BaseEntityBlock(properties) {
+    init { registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.POWERED, false)) }
+
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(BlockStateProperties.POWERED) }
+    override fun getStateForPlacement(context: BlockPlaceContext): BlockState = defaultBlockState().setValue(BlockStateProperties.POWERED, false)
+    override fun getRenderShape(state: BlockState) = RenderShape.MODEL
+
+    override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, handIn: InteractionHand, hit: BlockHitResult) = openMenu<SirenBlockEntity>(level, pos, player)
+
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
+        dropTileEntityContents<SirenBlockEntity>(state, level, pos, newState)
+        @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 
-    override fun use(state: BlockState, worldIn: World, pos: BlockPos, player: PlayerEntity, handIn: Hand, hit: BlockRayTraceResult): ActionResultType {
-        if (!worldIn.isClientSide) {
-            val tileEntity = worldIn.getBlockEntity(pos)
-            if (tileEntity is SirenTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
-            return ActionResultType.CONSUME
-        }
-        return ActionResultType.SUCCESS
-    }
-
-    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
-
-    override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
-        builder.add(POWERED)
-    }
-
-    override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
-            defaultBlockState().setValue(POWERED, false)
-
-    override fun neighborChanged(state: BlockState, worldIn: World, pos: BlockPos, blockIn: Block, fromPos: BlockPos, isMoving: Boolean) {
-        val flag = worldIn.hasNeighborSignal(pos)
-        if (flag != state.getValue(POWERED)) {
-            val sirenTileEntity = worldIn.getBlockEntity(pos)
-            if (sirenTileEntity is SirenTileEntity)
-                if (flag)
-                    sirenTileEntity.startPlaying()
-                else
-                    sirenTileEntity.stopPlaying()
-            worldIn.setBlock(pos, state.setValue(POWERED, flag), 0b11)
+    override fun neighborChanged(state: BlockState, level: Level, pos: BlockPos, block: Block, neighborPos: BlockPos, isMoving: Boolean) {
+        val flag = level.hasNeighborSignal(pos)
+        if (flag != state.getValue(BlockStateProperties.POWERED)) {
+            val sirenTileEntity = level.getBlockEntity(pos)
+            if (sirenTileEntity is SirenBlockEntity)
+                if (flag) sirenTileEntity.startPlaying()
+                else sirenTileEntity.stopPlaying()
+            level.setBlock(pos, state.setValue(BlockStateProperties.POWERED, flag), 0b11)
         }
     }
 
-    override fun onRemove(oldState: BlockState, world: World, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        if (!oldState.`is`(newState.block)) {
-            val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is SirenTileEntity)
-                tileEntity.dropSirenTrack()
-        }
-
-        @Suppress("DEPRECATION")
-        super.onRemove(oldState, world, pos, newState, p_196243_5_)
-    }
-
-    override fun hasTileEntity(state: BlockState?) = true
-
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = SirenTileEntity()
-
-    companion object {
-        @JvmField val POWERED: BooleanProperty = BlockStateProperties.POWERED
-    }
+    override fun newBlockEntity(pos: BlockPos, state: BlockState) = SirenBlockEntity(pos, state)
 }

@@ -5,21 +5,21 @@ import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
-import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.IBidiRenderer
-import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.gui.widget.TextFieldWidget
-import net.minecraft.client.gui.widget.button.Button
-import net.minecraft.client.util.SearchTreeManager
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
+import net.minecraft.client.gui.GuiComponent
+import net.minecraft.client.gui.components.Button
+import net.minecraft.client.gui.components.EditBox
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.client.searchtree.SearchRegistry
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.text.StringTextComponent
-import net.minecraft.util.text.TranslationTextComponent
-import net.minecraftforge.fml.client.gui.GuiUtils
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.min
@@ -28,22 +28,19 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
     private lateinit var backButton: Button
     private lateinit var nextButton: Button
     private lateinit var templateButtons: List<Button>
-    private lateinit var searchBox: TextFieldWidget
+    private lateinit var searchBox: EditBox
     private val itemList = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS.name).values.toList<Item>()
     private val searchResults: MutableList<Item> = mutableListOf()
     private var pagesCount = ceil(itemList.size.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
     private var currentPage = 1
 
     override fun init() {
-        backButton = addButton(ChangePageButton(width / 2 - GUI_WIDTH / 2 + 7, height / 2 - 7, false) {
+        backButton = addRenderableWidget(ChangePageButton(width / 2 - GUI_WIDTH / 2 + 7, height / 2 - 7, false) {
             pageBack()
         })
-        nextButton = addButton(ChangePageButton(width / 2 + GUI_WIDTH / 2 - 25, height / 2 - 7, true) {
+        nextButton = addRenderableWidget(ChangePageButton(width / 2 + GUI_WIDTH / 2 - 25, height / 2 - 7, true) {
             pageForward()
         })
-
-        children.add(backButton)
-        children.add(nextButton)
 
         val buttonsStartX = (width - GUI_WIDTH) / 2 + 25
         val buttonsStartY = (height - GUI_HEIGHT) / 2 + 26
@@ -52,21 +49,20 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         val newButtons = mutableListOf<Button>()
         for (buttonNumberY in 0 until 7) for (buttonNumberX in 0 until 5) {
             newButtons +=
-                addButton(CraftButton(
+                addRenderableWidget(CraftButton(
                     buttonsStartX + buttonNumberX * buttonOffset,
                     buttonsStartY + buttonNumberY * buttonOffset,
                     buttonNumberY * 5 + buttonNumberX
                 ))
         }
         templateButtons = newButtons.toList()
-        children.addAll(newButtons)
 
         minecraft!!.keyboardHandler.setSendRepeatsToGui(true)
 
         val left = (width - GUI_WIDTH) / 2
         val top = (height - GUI_HEIGHT) / 2
 
-        searchBox = TextFieldWidget(font, left + 61, top + 213, 54, 10, TranslationTextComponent("itemGroup.search"))
+        searchBox = addRenderableWidget(EditBox(font, left + 61, top + 213, 54, 10, TranslatableComponent("itemGroup.search")))
         with(searchBox) {
             setMaxLength(50)
             setBordered(false)
@@ -74,8 +70,6 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
 
             setTextColor(0xFFFFFF)
         }
-
-        children.add(searchBox)
 
         updateButtonVisibility()
     }
@@ -129,11 +123,11 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         } else templateButtons.forEach { it.visible = true }
     }
 
-    override fun render(matrixStack: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+    override fun render(matrixStack: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrixStack)
-        @Suppress("DEPRECATION")
-        RenderSystem.color4f(1f, 1f, 1f, 1f)
-        minecraft!!.textureManager.bind(TEMPLATE_FOLDER_GUI_LOCATION)
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, TEMPLATE_FOLDER_GUI_LOCATION)
         val x = (width - GUI_WIDTH) / 2
         val y = (height - GUI_HEIGHT) / 2
         blit(matrixStack, x, y, 0, 0, GUI_WIDTH, GUI_HEIGHT)
@@ -167,22 +161,20 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
 
         for (i in templateButtons.indices) {
             val button = templateButtons[i]
-            if (button.isHovered && button.visible) {
+            if (button.isHoveredOrFocused && button.visible) {
                 val itemStack = itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + i].defaultInstance
-                val font = itemStack.item.getFontRenderer(itemStack) ?: font
-                GuiUtils.preItemToolTip(itemStack)
-                renderWrappedToolTip(matrixStack, getTooltipFromItem(itemStack), mouseX, mouseY, font)
-                GuiUtils.postItemToolTip()
+                renderComponentTooltip(matrixStack, getTooltipFromItem(itemStack), mouseX, mouseY, font)
             }
         }
 
         // page number
-        IBidiRenderer.create(font, StringTextComponent("$currentPage / $pagesCount"))
-            .renderCentered(matrixStack, width / 2, (height - GUI_HEIGHT) / 2 + 10)
+        GuiComponent.drawCenteredString(matrixStack, font, TextComponent("$currentPage / $pagesCount"), width / 2, (height - GUI_HEIGHT) / 2 + 10, 0xFFFFFF)
 
         // search bar
         if (searchBox.isFocused) {
-            minecraft!!.textureManager.bind(TEMPLATE_FOLDER_GUI_LOCATION)
+            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+            RenderSystem.setShaderTexture(0, TEMPLATE_FOLDER_GUI_LOCATION)
             blit(matrixStack, x + 45, y + 211, 176, 54, 72, 12)
         }
 
@@ -192,7 +184,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
     private fun renderButtonItem(item: Item, x: Int, y: Int) {
         blitOffset = 100
         itemRenderer.blitOffset = 100F
-        itemRenderer.renderAndDecorateItem(minecraft!!.player!!, item.defaultInstance, x, y)
+        itemRenderer.renderAndDecorateItem(item.defaultInstance, x, y)
         itemRenderer.blitOffset = 0F
         blitOffset = 0
     }
@@ -232,15 +224,15 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         updateButtonVisibility()
     }
 
-    class ChangePageButton(x: Int, y: Int, val isForward: Boolean, onPress: IPressable) :
-        Button(x, y, 18, 18, StringTextComponent.EMPTY, onPress) {
+    class ChangePageButton(x: Int, y: Int, val isForward: Boolean, onPress: OnPress) :
+        Button(x, y, 18, 18, TextComponent.EMPTY, onPress) {
 
-        override fun renderButton(matrixStack: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
-            @Suppress("DEPRECATION")
-            RenderSystem.color4f(1f, 1f, 1f, 1f)
-            Minecraft.getInstance().textureManager.bind(TEMPLATE_FOLDER_GUI_LOCATION)
+        override fun renderButton(matrixStack: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+            RenderSystem.setShaderTexture(0, TEMPLATE_FOLDER_GUI_LOCATION)
 
-            val x = if (isHovered()) GUI_WIDTH + 18 else GUI_WIDTH
+            val x = if (isHoveredOrFocused) GUI_WIDTH + 18 else GUI_WIDTH
             val y = if (isForward) 36 else 18
 
             blit(matrixStack, this.x, this.y, x, y, 18, 18)
@@ -249,13 +241,13 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
 
     override fun isPauseScreen(): Boolean = false
 
-    inner class CraftButton(x: Int, y: Int, val index: Int) : Button(x, y, 18, 18, StringTextComponent.EMPTY, { craftRecipe(index) }) {
-        override fun renderButton(matrixStack: MatrixStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
-            @Suppress("DEPRECATION")
-            RenderSystem.color4f(1f, 1f, 1f, 1f)
-            Minecraft.getInstance().textureManager.bind(TEMPLATE_FOLDER_GUI_LOCATION)
+    inner class CraftButton(x: Int, y: Int, val index: Int) : Button(x, y, 18, 18, TextComponent.EMPTY, { craftRecipe(index) }) {
+        override fun renderButton(matrixStack: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader)
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+            RenderSystem.setShaderTexture(0, TEMPLATE_FOLDER_GUI_LOCATION)
 
-            val x = if (isHovered()) GUI_WIDTH + 18 else GUI_WIDTH
+            val x = if (isHoveredOrFocused) GUI_WIDTH + 18 else GUI_WIDTH
 
             blit(matrixStack, this.x, this.y, x, 0, 18, 18)
         }
@@ -266,6 +258,6 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         const val GUI_HEIGHT = 229
         const val RECIPES_PER_PAGE = 35
         val TEMPLATE_FOLDER_GUI_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/gui/machine_template_folder.png")
-        val SEARCH_TREE = SearchTreeManager.Key<ItemStack>()
+        val SEARCH_TREE = SearchRegistry.Key<ItemStack>()
     }
 }

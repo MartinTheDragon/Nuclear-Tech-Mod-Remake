@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:uranium_block"
+            "items": [
+              "nucleartech:uranium_block"
+            ]
           }
         ]
       }

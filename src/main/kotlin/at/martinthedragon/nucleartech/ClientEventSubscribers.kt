@@ -2,8 +2,8 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.screens.UseTemplateFolderScreen
 import net.minecraft.client.Minecraft
-import net.minecraft.item.Item
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.Item
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.event.TagsUpdatedEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent

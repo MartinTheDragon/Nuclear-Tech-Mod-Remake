@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:mox_fuel_ingot"
+            "items": [
+              "nucleartech:mox_fuel_ingot"
+            ]
           }
         ]
       }

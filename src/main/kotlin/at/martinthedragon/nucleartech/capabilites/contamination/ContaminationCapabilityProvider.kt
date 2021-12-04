@@ -1,21 +1,22 @@
 package at.martinthedragon.nucleartech.capabilites.contamination
 
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.util.Direction
+import at.martinthedragon.nucleartech.capabilites.Capabilities
+import net.minecraft.core.Direction
+import net.minecraft.nbt.CompoundTag
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.capabilities.ICapabilitySerializable
 import net.minecraftforge.common.util.LazyOptional
 
-class ContaminationCapabilityProvider : ICapabilitySerializable<CompoundNBT> {
+class ContaminationCapabilityProvider : ICapabilitySerializable<CompoundTag> {
     private val contaminationHandler = EntityContaminationHandler()
 
     override fun <T> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> =
-        if (cap == CapabilityContaminationHandler.contaminationHandlerCapability) LazyOptional.of { contaminationHandler }.cast()
+        if (cap == Capabilities.CONTAMINATION_CAPABILITY) LazyOptional.of { contaminationHandler }.cast()
         else LazyOptional.empty()
 
-    override fun serializeNBT(): CompoundNBT = contaminationHandler.serializeNBT()
+    override fun serializeNBT(): CompoundTag = contaminationHandler.serializeNBT()
 
-    override fun deserializeNBT(nbt: CompoundNBT) {
+    override fun deserializeNBT(nbt: CompoundTag) {
         contaminationHandler.deserializeNBT(nbt)
     }
 }

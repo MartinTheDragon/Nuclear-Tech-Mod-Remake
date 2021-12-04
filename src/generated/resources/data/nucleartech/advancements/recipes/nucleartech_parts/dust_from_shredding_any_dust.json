@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:dust_from_shredding_any_dust"
+    ]
+  },
+  "criteria": {
+    "has_any_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:dust_from_shredding_any_dust"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_any_dust",
+      "has_the_recipe"
+    ]
+  ]
+}

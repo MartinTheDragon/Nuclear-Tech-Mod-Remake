@@ -3,20 +3,20 @@ package at.martinthedragon.nucleartech.items
 import at.martinthedragon.nucleartech.CreativeTabs
 import at.martinthedragon.nucleartech.screens.UseTemplateFolderScreen
 import net.minecraft.client.Minecraft
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
-import net.minecraft.util.ActionResult
-import net.minecraft.util.Hand
-import net.minecraft.world.World
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.Level
 
 class TemplateFolder : AutoTooltippedItem(Properties().stacksTo(1).tab(CreativeTabs.Templates.itemGroup)) {
-    override fun use(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
+    override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val itemStack = player.getItemInHand(hand)
 
         if (world.isClientSide) {
             Minecraft.getInstance().setScreen(UseTemplateFolderScreen())
         }
 
-        return ActionResult.sidedSuccess(itemStack, world.isClientSide)
+        return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide)
     }
 }

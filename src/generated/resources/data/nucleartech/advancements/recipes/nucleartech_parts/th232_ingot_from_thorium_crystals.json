@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:thorium_crystals"
+            "items": [
+              "nucleartech:thorium_crystals"
+            ]
           }
         ]
       }

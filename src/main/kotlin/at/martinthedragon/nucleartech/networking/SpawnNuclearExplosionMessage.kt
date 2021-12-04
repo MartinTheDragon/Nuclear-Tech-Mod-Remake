@@ -2,10 +2,10 @@ package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
-import net.minecraft.network.PacketBuffer
-import net.minecraft.util.Util
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraftforge.fml.network.NetworkEvent
+import net.minecraft.Util
+import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.world.phys.Vec3
+import net.minecraftforge.network.NetworkEvent
 import java.util.function.Supplier
 
 class SpawnNuclearExplosionMessage(
@@ -13,9 +13,9 @@ class SpawnNuclearExplosionMessage(
     private val muted: Boolean,
     private val hasFallout: Boolean,
     private val extraFallout: Int,
-    private val position: Vector3d
+    private val position: Vec3
 ) : NetworkMessage<SpawnNuclearExplosionMessage> {
-    override fun encode(packetBuffer: PacketBuffer) {
+    override fun encode(packetBuffer: FriendlyByteBuf) {
         packetBuffer.writeInt(strength)
         packetBuffer.writeBoolean(muted)
         packetBuffer.writeBoolean(hasFallout)
@@ -40,12 +40,12 @@ class SpawnNuclearExplosionMessage(
 
     companion object {
         @JvmStatic
-        fun decode(packetBuffer: PacketBuffer) = SpawnNuclearExplosionMessage(
+        fun decode(packetBuffer: FriendlyByteBuf) = SpawnNuclearExplosionMessage(
             packetBuffer.readInt(),
             packetBuffer.readBoolean(),
             packetBuffer.readBoolean(),
             packetBuffer.readInt(),
-            Vector3d(packetBuffer.readDouble(), packetBuffer.readDouble(), packetBuffer.readDouble())
+            Vec3(packetBuffer.readDouble(), packetBuffer.readDouble(), packetBuffer.readDouble())
         )
     }
 }

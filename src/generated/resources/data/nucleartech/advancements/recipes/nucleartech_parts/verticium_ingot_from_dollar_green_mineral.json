@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:dollar_green_mineral"
+            "items": [
+              "nucleartech:dollar_green_mineral"
+            ]
           }
         ]
       }

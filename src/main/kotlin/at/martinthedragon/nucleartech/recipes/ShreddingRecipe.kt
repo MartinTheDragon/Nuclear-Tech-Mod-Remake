@@ -1,16 +1,16 @@
 package at.martinthedragon.nucleartech.recipes
 
 import com.google.gson.JsonObject
-import net.minecraft.inventory.IInventory
-import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.IRecipe
-import net.minecraft.item.crafting.IRecipeSerializer
-import net.minecraft.item.crafting.Ingredient
-import net.minecraft.item.crafting.ShapedRecipe
-import net.minecraft.network.PacketBuffer
-import net.minecraft.util.JSONUtils
-import net.minecraft.util.ResourceLocation
-import net.minecraft.world.World
+import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.GsonHelper
+import net.minecraft.world.Container
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.item.crafting.Recipe
+import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.ShapedRecipe
+import net.minecraft.world.level.Level
 import net.minecraftforge.registries.ForgeRegistryEntry
 
 class ShreddingRecipe(
@@ -18,11 +18,11 @@ class ShreddingRecipe(
     val ingredient: Ingredient,
     val result: ItemStack,
     val experience: Float
-) : IRecipe<IInventory> {
-    override fun matches(inventory: IInventory, world: World): Boolean =
+) : Recipe<Container> {
+    override fun matches(inventory: Container, world: Level): Boolean =
         (0..8).map { inventory.getItem(it) }.any { ingredient.test(it) }
 
-    override fun assemble(inventory: IInventory): ItemStack = resultItem.copy()
+    override fun assemble(inventory: Container): ItemStack = resultItem.copy()
 
     override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
 
@@ -36,22 +36,22 @@ class ShreddingRecipe(
 
     override fun isSpecial() = true
 
-    class Serializer : ForgeRegistryEntry<IRecipeSerializer<*>>(), IRecipeSerializer<ShreddingRecipe> {
+    class Serializer : ForgeRegistryEntry<RecipeSerializer<*>>(), RecipeSerializer<ShreddingRecipe> {
         override fun fromJson(id: ResourceLocation, json: JsonObject): ShreddingRecipe {
-            val ingredient = Ingredient.fromJson(JSONUtils.getAsJsonObject(json, "ingredient"))
-            val result = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"))
-            val experience = JSONUtils.getAsFloat(json, "experience")
+            val ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"))
+            val result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"))
+            val experience = GsonHelper.getAsFloat(json, "experience")
             return ShreddingRecipe(id, ingredient, result, experience)
         }
 
-        override fun fromNetwork(id: ResourceLocation, packetBuffer: PacketBuffer): ShreddingRecipe {
+        override fun fromNetwork(id: ResourceLocation, packetBuffer: FriendlyByteBuf): ShreddingRecipe {
             val ingredient = Ingredient.fromNetwork(packetBuffer)
             val result = packetBuffer.readItem()
             val experience = packetBuffer.readFloat()
             return ShreddingRecipe(id, ingredient, result, experience)
         }
 
-        override fun toNetwork(packetBuffer: PacketBuffer, recipe: ShreddingRecipe) {
+        override fun toNetwork(packetBuffer: FriendlyByteBuf, recipe: ShreddingRecipe) {
             recipe.ingredient.toNetwork(packetBuffer)
             packetBuffer.writeItem(recipe.resultItem)
             packetBuffer.writeFloat(recipe.experience)

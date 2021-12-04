@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium_powder_from_shredding_uranium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_uranium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:uranium_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium_powder_from_shredding_uranium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

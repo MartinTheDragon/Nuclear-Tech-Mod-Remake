@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:australium_powder_from_shredding_australian_ore"
+    ]
+  },
+  "criteria": {
+    "has_australian_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:australian_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:australium_powder_from_shredding_australian_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_australian_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.hazards.blocks
 
-import net.minecraft.block.BlockState
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.server.ServerWorld
+import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
 interface HazardBlockEffect {
     /** Gets called every second */
-    fun tick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random)
+    fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: Random)
 }

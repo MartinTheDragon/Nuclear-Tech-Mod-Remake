@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:iron_powder_from_shredding_anvil"
+    ]
+  },
+  "criteria": {
+    "has_anvil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:anvil"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:iron_powder_from_shredding_anvil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_anvil",
+      "has_the_recipe"
+    ]
+  ]
+}

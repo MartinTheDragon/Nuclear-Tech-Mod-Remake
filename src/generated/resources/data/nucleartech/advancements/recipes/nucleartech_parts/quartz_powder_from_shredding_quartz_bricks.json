@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:quartz_powder_from_shredding_quartz_bricks"
+    ]
+  },
+  "criteria": {
+    "has_quartz_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:quartz_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:quartz_powder_from_shredding_quartz_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_quartz_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

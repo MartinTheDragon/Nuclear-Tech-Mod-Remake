@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:white_phosphorus_ingot"
+            "items": [
+              "nucleartech:white_phosphorus_ingot"
+            ]
           }
         ]
       }

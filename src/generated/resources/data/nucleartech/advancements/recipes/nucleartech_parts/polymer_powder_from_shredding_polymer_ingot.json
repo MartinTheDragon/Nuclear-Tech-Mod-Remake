@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:polymer_powder_from_shredding_polymer_ingot"
+    ]
+  },
+  "criteria": {
+    "has_polymer_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/polymer"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:polymer_powder_from_shredding_polymer_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polymer_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

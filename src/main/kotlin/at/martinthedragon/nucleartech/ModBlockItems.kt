@@ -2,12 +2,12 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
 import at.martinthedragon.nucleartech.items.AutoTooltippedBlockItem
-import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.Rarity
-import net.minecraft.item.crafting.IRecipeType
-import net.minecraftforge.fml.RegistryObject
+import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Rarity
+import net.minecraft.world.item.crafting.RecipeType
+import net.minecraftforge.registries.RegistryObject
 
 @Suppress("unused")
 object ModBlockItems {
@@ -87,7 +87,7 @@ object ModBlockItems {
     val redPhosphorusBlock: RegistryObject<Item> = ITEMS.register("red_phosphorus_block") { BlockItem(ModBlocks.redPhosphorusBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val yellowcakeBlock: RegistryObject<Item> = ITEMS.register("yellowcake_block") { BlockItem(ModBlocks.yellowcakeBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val scrapBlock: RegistryObject<Item> = ITEMS.register("scrap_block") { object : BlockItem(ModBlocks.scrapBlock.get(), Properties().tab(CreativeTabs.Blocks)) {
-        override fun getBurnTime(itemStack: ItemStack?) = 4000
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 4000
     }}
     val electricalScrapBlock: RegistryObject<Item> = ITEMS.register("electrical_scrap_block") { BlockItem(ModBlocks.electricalScrapBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val insulatorRoll: RegistryObject<Item> = ITEMS.register("insulator_roll") { BlockItem(ModBlocks.insulatorRoll.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
@@ -129,10 +129,10 @@ object ModBlockItems {
     val trinititeOre: RegistryObject<Item> = ITEMS.register("trinitite_ore") { BlockItem(ModBlocks.trinitite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val redTrinititeOre: RegistryObject<Item> = ITEMS.register("red_trinitite_ore") { BlockItem(ModBlocks.redTrinitite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val charredLog: RegistryObject<Item> = ITEMS.register("charred_log") { object : BlockItem(ModBlocks.charredLog.get(), Properties().tab(CreativeTabs.Blocks)) {
-        override fun getBurnTime(itemStack: ItemStack?, recipeType: IRecipeType<*>?) = 300
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 300
     }}
     val charredPlanks: RegistryObject<Item> = ITEMS.register("charred_planks") { object : BlockItem(ModBlocks.charredPlanks.get(), Properties().tab(CreativeTabs.Blocks)) {
-        override fun getBurnTime(itemStack: ItemStack?, recipeType: IRecipeType<*>?) = 300
+        override fun getBurnTime(itemStack: ItemStack, recipeType: RecipeType<*>?) = 300
     }}
 
     val slakedSellafite: RegistryObject<Item> = ITEMS.register("slaked_sellafite") { BlockItem(ModBlocks.slakedSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }

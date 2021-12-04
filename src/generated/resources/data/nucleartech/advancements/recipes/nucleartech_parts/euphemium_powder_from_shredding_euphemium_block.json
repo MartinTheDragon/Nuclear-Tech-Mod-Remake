@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:euphemium_powder_from_shredding_euphemium_block"
+    ]
+  },
+  "criteria": {
+    "has_euphemium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:euphemium_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:euphemium_powder_from_shredding_euphemium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_euphemium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

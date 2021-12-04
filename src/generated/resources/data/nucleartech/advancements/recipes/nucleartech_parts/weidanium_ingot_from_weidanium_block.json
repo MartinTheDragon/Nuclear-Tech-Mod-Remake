@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:weidanium_block"
+            "items": [
+              "nucleartech:weidanium_block"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:aluminium_crystals"
+            "items": [
+              "nucleartech:aluminium_crystals"
+            ]
           }
         ]
       }

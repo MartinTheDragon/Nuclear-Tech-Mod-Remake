@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_powder_from_shredding_schrabidium_ore"
+    ]
+  },
+  "criteria": {
+    "has_schrabidium_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:schrabidium_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_powder_from_shredding_schrabidium_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schrabidium_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

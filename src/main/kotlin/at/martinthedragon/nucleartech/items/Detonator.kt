@@ -2,30 +2,30 @@ package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.explosions.IgnitableExplosive
-import net.minecraft.client.util.ITooltipFlag
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
-import net.minecraft.item.ItemUseContext
-import net.minecraft.util.ActionResult
-import net.minecraft.util.ActionResultType
-import net.minecraft.util.Hand
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.text.ITextComponent
-import net.minecraft.util.text.StringTextComponent
-import net.minecraft.util.text.TextFormatting
-import net.minecraft.util.text.TranslationTextComponent
-import net.minecraft.world.World
+import net.minecraft.ChatFormatting
+import net.minecraft.core.BlockPos
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
+import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.item.context.UseOnContext
+import net.minecraft.world.level.Level
 
 class Detonator(properties: Properties) : Item(properties) {
-    override fun useOn(context: ItemUseContext): ActionResultType {
+    override fun useOn(context: UseOnContext): InteractionResult {
         val player = context.player
         val world = context.level
 
         if (player != null && player.isSecondaryUseActive) {
             val pos = context.clickedPos
             val block = world.getBlockState(pos)
-            if (block.block !is IgnitableExplosive) return ActionResultType.FAIL
+            if (block.block !is IgnitableExplosive) return InteractionResult.FAIL
             if (!world.isClientSide) {
                 val detonatorTag = context.itemInHand.orCreateTag
                 detonatorTag.putInt("ExplosivePosX", pos.x)
@@ -33,23 +33,23 @@ class Detonator(properties: Properties) : Item(properties) {
                 detonatorTag.putInt("ExplosivePosZ", pos.z)
             }
             player.playSound(SoundEvents.randomBoop.get(), 2F, 1F)
-            if (world.isClientSide) player.displayClientMessage(TranslationTextComponent("$descriptionId.position_set").withStyle(TextFormatting.GREEN), true)
-            return ActionResultType.sidedSuccess(world.isClientSide)
+            if (world.isClientSide) player.displayClientMessage(TranslatableComponent("$descriptionId.position_set").withStyle(ChatFormatting.GREEN), true)
+            return InteractionResult.sidedSuccess(world.isClientSide)
         }
 
-        return ActionResultType.PASS
+        return InteractionResult.PASS
     }
 
-    override fun use(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
+    override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         player.playSound(SoundEvents.randomBleep.get(), 1F, 1F)
         val itemStack = player.getItemInHand(hand)
         if (!world.isClientSide) processUse(itemStack, world, player)
-        return ActionResult.sidedSuccess(itemStack, world.isClientSide)
+        return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide)
     }
 
-    private fun processUse(stack: ItemStack, world: World, player: PlayerEntity) {
+    private fun processUse(stack: ItemStack, world: Level, player: Player) {
         if (!isPositionSet(stack)) {
-            player.displayClientMessage(TranslationTextComponent("$descriptionId.error_position_not_set").withStyle(TextFormatting.RED), true)
+            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_set").withStyle(ChatFormatting.RED), true)
             return
         }
         val detonatorTag = stack.orCreateTag
@@ -58,35 +58,35 @@ class Detonator(properties: Properties) : Item(properties) {
         val posZ = detonatorTag.getInt("ExplosivePosZ")
         val pos = BlockPos(posX, posY, posZ)
         if (!world.isLoaded(pos)) { // TODO make configurable
-            player.displayClientMessage(TranslationTextComponent("$descriptionId.error_position_not_loaded").withStyle(TextFormatting.RED), true)
+            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_loaded").withStyle(ChatFormatting.RED), true)
             return
         }
         val block = world.getBlockState(pos).block
         if (block !is IgnitableExplosive) {
-            player.displayClientMessage(TranslationTextComponent("$descriptionId.error_not_explosive").withStyle(TextFormatting.RED), true)
+            player.displayClientMessage(TranslatableComponent("$descriptionId.error_not_explosive").withStyle(ChatFormatting.RED), true)
             return
         }
         val messageToSend = when (block.detonate(world, pos)) {
-            IgnitableExplosive.DetonationResult.Success -> TranslationTextComponent("$descriptionId.detonation_successful").withStyle(TextFormatting.GREEN)
-            IgnitableExplosive.DetonationResult.InvalidPosition -> TranslationTextComponent("$descriptionId.error_not_explosive").withStyle(TextFormatting.RED)
-            IgnitableExplosive.DetonationResult.InvalidTileEntity -> TranslationTextComponent("$descriptionId.error_invalid_tile_entity").withStyle(TextFormatting.RED)
-            IgnitableExplosive.DetonationResult.Incomplete -> TranslationTextComponent("$descriptionId.error_missing_components").withStyle(TextFormatting.RED)
-            IgnitableExplosive.DetonationResult.Prohibited -> TranslationTextComponent("$descriptionId.error_detonation_prohibited").withStyle(TextFormatting.RED)
-            IgnitableExplosive.DetonationResult.Unknown -> TranslationTextComponent("$descriptionId.error_unknown").withStyle(TextFormatting.RED)
+            IgnitableExplosive.DetonationResult.Success -> TranslatableComponent("$descriptionId.detonation_successful").withStyle(ChatFormatting.GREEN)
+            IgnitableExplosive.DetonationResult.InvalidPosition -> TranslatableComponent("$descriptionId.error_not_explosive").withStyle(ChatFormatting.RED)
+            IgnitableExplosive.DetonationResult.InvalidTileEntity -> TranslatableComponent("$descriptionId.error_invalid_tile_entity").withStyle(ChatFormatting.RED)
+            IgnitableExplosive.DetonationResult.Incomplete -> TranslatableComponent("$descriptionId.error_missing_components").withStyle(ChatFormatting.RED)
+            IgnitableExplosive.DetonationResult.Prohibited -> TranslatableComponent("$descriptionId.error_detonation_prohibited").withStyle(ChatFormatting.RED)
+            IgnitableExplosive.DetonationResult.Unknown -> TranslatableComponent("$descriptionId.error_unknown").withStyle(ChatFormatting.RED)
         }
         player.displayClientMessage(messageToSend, true)
     }
 
     private fun isPositionSet(stack: ItemStack): Boolean = stack.hasTag() && stack.orCreateTag.contains("ExplosivePosX")
 
-    override fun appendHoverText(stack: ItemStack, worldIn: World?, tooltip: MutableList<ITextComponent>, flagIn: ITooltipFlag) {
+    override fun appendHoverText(stack: ItemStack, worldIn: Level?, tooltip: MutableList<Component>, flagIn: TooltipFlag) {
         autoTooltip(stack, tooltip)
         tooltip += if (isPositionSet(stack)) {
             val tag = stack.orCreateTag
             val x = tag.getInt("ExplosivePosX")
             val y = tag.getInt("ExplosivePosY")
             val z = tag.getInt("ExplosivePosZ")
-            StringTextComponent("$x, $y, $z").withStyle(TextFormatting.GRAY)
-        } else TranslationTextComponent("$descriptionId.tooltip_no_position_set").withStyle(TextFormatting.DARK_RED)
+            TextComponent("$x, $y, $z").withStyle(ChatFormatting.GRAY)
+        } else TranslatableComponent("$descriptionId.tooltip_no_position_set").withStyle(ChatFormatting.DARK_RED)
     }
 }

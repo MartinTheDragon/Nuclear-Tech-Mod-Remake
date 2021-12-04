@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lead_powder_from_shredding_lead_crystals"
+    ]
+  },
+  "criteria": {
+    "has_lead_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:lead_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lead_powder_from_shredding_lead_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lead_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,62 +1,40 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.blocks.entities.FatManBlockEntity
 import at.martinthedragon.nucleartech.explosions.IgnitableExplosive
-import at.martinthedragon.nucleartech.tileentities.FatManTileEntity
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.HorizontalBlock
-import net.minecraft.block.material.PushReaction
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.entity.player.ServerPlayerEntity
-import net.minecraft.item.BlockItemUseContext
-import net.minecraft.item.ItemStack
-import net.minecraft.state.StateContainer
-import net.minecraft.util.ActionResultType
-import net.minecraft.util.Hand
-import net.minecraft.util.Mirror
-import net.minecraft.util.Rotation
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.BlockRayTraceResult
-import net.minecraft.world.IBlockReader
-import net.minecraft.world.World
-import net.minecraftforge.fml.network.NetworkHooks
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.phys.BlockHitResult
 
-class FatMan(properties: Properties) : Block(properties), IgnitableExplosive {
-    override fun createBlockStateDefinition(builder: StateContainer.Builder<Block, BlockState>) {
-        builder.add(HorizontalBlock.FACING)
+class FatMan(properties: Properties) : BaseEntityBlock(properties), IgnitableExplosive {
+    init { registerDefaultState(stateDefinition.any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH)) }
+
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(HorizontalDirectionalBlock.FACING) }
+    override fun getStateForPlacement(context: BlockPlaceContext): BlockState = defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.horizontalDirection.counterClockWise)
+    override fun getRenderShape(state: BlockState) = RenderShape.MODEL
+
+    override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<FatManBlockEntity>(level, pos, player)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<FatManBlockEntity>(level, pos, stack)
+
+    override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
+        dropTileEntityContents<FatManBlockEntity>(state, level, pos, newState)
+        @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 
-    override fun getStateForPlacement(context: BlockItemUseContext): BlockState =
-        defaultBlockState().setValue(HorizontalBlock.FACING, context.horizontalDirection.counterClockWise)
+    override fun rotate(state: BlockState, rotation: Rotation): BlockState = state.setValue(HorizontalDirectionalBlock.FACING, rotation.rotate(state.getValue(HorizontalDirectionalBlock.FACING)))
+    override fun mirror(state: BlockState, mirror: Mirror): BlockState = @Suppress("DEPRECATION") state.rotate(mirror.getRotation(state.getValue(HorizontalDirectionalBlock.FACING)))
 
-    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
-    override fun setPlacedBy(world: World, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) {
-        setTileEntityCustomName<FatManTileEntity>(world, pos, stack)
-    }
-    override fun onRemove(state: BlockState, world: World, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<FatManTileEntity>(state, world, pos, newState)
-        @Suppress("DEPRECATION")
-        super.onRemove(state, world, pos, newState, p_196243_5_)
-    }
-    override fun use(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockRayTraceResult): ActionResultType {
-        if (!world.isClientSide) {
-            val tileEntity = world.getBlockEntity(pos)
-            if (tileEntity is FatManTileEntity) NetworkHooks.openGui(player as ServerPlayerEntity, tileEntity, pos)
-        }
-        return ActionResultType.sidedSuccess(world.isClientSide)
-    }
-
-    override fun hasTileEntity(state: BlockState?) = true
-    override fun createTileEntity(state: BlockState?, world: IBlockReader?) = FatManTileEntity()
-
-    override fun rotate(state: BlockState, rotation: Rotation): BlockState =
-        state.setValue(HorizontalBlock.FACING, rotation.rotate(state.getValue(HorizontalBlock.FACING)))
-
-    @Suppress("DEPRECATION")
-    override fun mirror(state: BlockState, mirror: Mirror): BlockState =
-        state.rotate(mirror.getRotation(state.getValue(HorizontalBlock.FACING)))
+    override fun newBlockEntity(pos: BlockPos, state: BlockState) = FatManBlockEntity(pos, state)
 
     companion object {
         val requiredComponents = mapOf(

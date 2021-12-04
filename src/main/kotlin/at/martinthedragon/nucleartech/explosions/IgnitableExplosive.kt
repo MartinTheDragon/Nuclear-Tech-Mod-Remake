@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.explosions
 
-import at.martinthedragon.nucleartech.tileentities.BombTileEntity
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
+import at.martinthedragon.nucleartech.blocks.entities.BombBlockEntity
+import net.minecraft.core.BlockPos
+import net.minecraft.world.level.Level
 
 /**
- * Intended to be inherited by a [net.minecraft.block.Block] and makes the block able to be detonated by a detonator.
+ * Intended to be inherited by a [net.minecraft.world.level.block.Block] and makes the block able to be detonated by a detonator.
  */
 interface IgnitableExplosive {
     enum class DetonationResult {
@@ -13,7 +13,7 @@ interface IgnitableExplosive {
         Success,
         /** An explosive at the specified position cannot be found */
         InvalidPosition,
-        /** An unexpected different [net.minecraft.tileentity.TileEntity] is at the position, or there isn't one present */
+        /** An unexpected different [net.minecraft.world.level.block.entity.BlockEntity] is at the position, or there isn't one present */
         InvalidTileEntity,
         /** The explosive is missing components required for detonation */
         Incomplete,
@@ -24,21 +24,21 @@ interface IgnitableExplosive {
     }
 
     /**
-     * Detonates the explosive at the given [pos] in a [world] and returns a [DetonationResult].
+     * Detonates the explosive at the given [pos] in a [level] and returns a [DetonationResult].
      *
-     * Defaults to accessing a [net.minecraft.tileentity.TileEntity] at [pos] and checking if it implements
-     * [at.martinthedragon.nucleartech.tileentities.BombTileEntity], and if so, tries to detonate it.
+     * Defaults to accessing a [net.minecraft.world.level.block.entity.BlockEntity] at [pos] and checking if it implements
+     * [at.martinthedragon.nucleartech.entity.BombBlockEntity], and if so, tries to detonate it.
      */
-    fun detonate(world: World, pos: BlockPos): DetonationResult {
-        if (world.isClientSide) return DetonationResult.Unknown
-        val blockState = world.getBlockState(pos)
+    fun detonate(level: Level, pos: BlockPos): DetonationResult {
+        if (level.isClientSide) return DetonationResult.Unknown
+        val blockState = level.getBlockState(pos)
         return when {
             blockState.block !is IgnitableExplosive -> DetonationResult.InvalidPosition
-            !blockState.hasTileEntity() -> DetonationResult.InvalidTileEntity
+            !blockState.hasBlockEntity() -> DetonationResult.InvalidTileEntity
             else -> {
-                val tileEntity = world.getBlockEntity(pos) ?: return DetonationResult.InvalidTileEntity
+                val tileEntity = level.getBlockEntity(pos) ?: return DetonationResult.InvalidTileEntity
                 when {
-                    tileEntity !is BombTileEntity<*> -> DetonationResult.InvalidTileEntity
+                    tileEntity !is BombBlockEntity<*> -> DetonationResult.InvalidTileEntity
                     !tileEntity.isComplete() -> DetonationResult.Incomplete
                     !tileEntity.canDetonate() -> DetonationResult.Prohibited
                     tileEntity.detonate() -> DetonationResult.Success

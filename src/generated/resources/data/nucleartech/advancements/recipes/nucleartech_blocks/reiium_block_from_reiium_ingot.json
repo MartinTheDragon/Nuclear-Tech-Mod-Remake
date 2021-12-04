@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:reiium_ingot"
+            "items": [
+              "nucleartech:reiium_ingot"
+            ]
           }
         ]
       }

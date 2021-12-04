@@ -8,15 +8,16 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementRewards
-import net.minecraft.advancements.ICriterionInstance
-import net.minecraft.advancements.IRequirementsStrategy
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger
-import net.minecraft.data.IFinishedRecipe
-import net.minecraft.item.Item
-import net.minecraft.item.crafting.Ingredient
-import net.minecraft.tags.ITag
-import net.minecraft.util.IItemProvider
-import net.minecraft.util.ResourceLocation
+import net.minecraft.advancements.CriterionTriggerInstance
+import net.minecraft.advancements.RequirementsStrategy
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
+import net.minecraft.data.recipes.FinishedRecipe
+import net.minecraft.data.recipes.RecipeBuilder
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.tags.Tag
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.ItemLike
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
@@ -24,40 +25,35 @@ import java.util.function.Consumer
 * slightly modified copy of ShapedRecipeBuilder
 * for the BatteryRecipe, which sums up the energy of the previous batteries
 */
-class BatteryRecipeBuilder(p_i48261_1_: IItemProvider, p_i48261_2_: Int) {
-    private val result: Item
-    private val count: Int
+class BatteryRecipeBuilder(private val result: Item, val count: Int) : RecipeBuilder {
+    constructor(result: ItemLike, count: Int) : this(result.asItem(), count)
+
     private val rows: MutableList<String> = Lists.newArrayList()
     private val key: MutableMap<Char, Ingredient> = Maps.newLinkedHashMap()
     private val advancement = Advancement.Builder.advancement()
     private var group: String = ""
 
-    init {
-        result = p_i48261_1_.asItem()
-        count = p_i48261_2_
+    fun define(char: Char, tag: Tag<Item>): BatteryRecipeBuilder {
+        return this.define(char, Ingredient.of(tag))
     }
 
-    fun define(p_200469_1_: Char, p_200469_2_: ITag<Item>): BatteryRecipeBuilder {
-        return this.define(p_200469_1_, Ingredient.of(p_200469_2_))
+    fun define(char: Char, item: ItemLike): BatteryRecipeBuilder {
+        return this.define(char, Ingredient.of(item))
     }
 
-    fun define(p_200462_1_: Char, p_200462_2_: IItemProvider): BatteryRecipeBuilder {
-        return this.define(p_200462_1_, Ingredient.of(p_200462_2_))
-    }
-
-    fun define(p_200471_1_: Char, p_200471_2_: Ingredient): BatteryRecipeBuilder {
-        return if (key.containsKey(p_200471_1_)) {
-            throw IllegalArgumentException("Symbol '$p_200471_1_' is already defined!")
-        } else if (p_200471_1_ == ' ') {
+    fun define(char: Char, ingredient: Ingredient): BatteryRecipeBuilder {
+        return if (key.containsKey(char)) {
+            throw IllegalArgumentException("Symbol '$char' is already defined!")
+        } else if (char == ' ') {
             throw IllegalArgumentException("Symbol ' ' (whitespace) is reserved and cannot be defined")
         } else {
-            key[p_200471_1_] = p_200471_2_
+            key[char] = ingredient
             this
         }
     }
 
     fun pattern(p_200472_1_: String): BatteryRecipeBuilder {
-        return if (!rows.isEmpty() && p_200472_1_.length != rows[0].length) {
+        return if (rows.isNotEmpty() && p_200472_1_.length != rows[0].length) {
             throw IllegalArgumentException("Pattern must be the same width on every line!")
         } else {
             rows.add(p_200472_1_)
@@ -65,51 +61,24 @@ class BatteryRecipeBuilder(p_i48261_1_: IItemProvider, p_i48261_2_: Int) {
         }
     }
 
-    fun unlockedBy(p_200465_1_: String, p_200465_2_: ICriterionInstance): BatteryRecipeBuilder {
+    override fun unlockedBy(p_200465_1_: String, p_200465_2_: CriterionTriggerInstance): BatteryRecipeBuilder {
         advancement.addCriterion(p_200465_1_, p_200465_2_)
         return this
     }
 
-    fun group(p_200473_1_: String): BatteryRecipeBuilder {
-        group = p_200473_1_
+    override fun getResult() = result
+
+    override fun group(group: String?): BatteryRecipeBuilder {
+        this.group = group ?: ""
         return this
     }
 
-    fun save(p_200464_1_: Consumer<IFinishedRecipe>) {
-        this.save(
-            p_200464_1_,
-            ForgeRegistries.ITEMS.getKey(result)
-                ?: throw IllegalStateException("No item ${result.registryName} registered")
-        )
-    }
-
-    fun save(p_200466_1_: Consumer<IFinishedRecipe>, p_200466_2_: String) {
-        val resourcelocation = ForgeRegistries.ITEMS.getKey(result)
-            ?: throw IllegalStateException("No item ${result.registryName} registered")
-        check(ResourceLocation(p_200466_2_) != resourcelocation) { "Shaped Recipe $p_200466_2_ should remove its 'save' argument" }
-        this.save(p_200466_1_, ResourceLocation(p_200466_2_))
-    }
-
-    fun save(p_200467_1_: Consumer<IFinishedRecipe>, p_200467_2_: ResourceLocation) {
-        ensureValid(p_200467_2_)
+    override fun save(consumer: Consumer<FinishedRecipe>, name: ResourceLocation) {
+        ensureValid(name)
         advancement.parent(ResourceLocation("recipes/root"))
-            .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(p_200467_2_))
-            .rewards(AdvancementRewards.Builder.recipe(p_200467_2_)).requirements(IRequirementsStrategy.OR)
-        p_200467_1_.accept(
-            Result(
-                p_200467_2_,
-                result,
-                count,
-                group,
-                rows,
-                key,
-                advancement,
-                ResourceLocation(
-                    p_200467_2_.namespace,
-                    "recipes/" + result.itemCategory!!.recipeFolderName + "/" + p_200467_2_.path
-                )
-            )
-        )
+            .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name))
+            .rewards(AdvancementRewards.Builder.recipe(name)).requirements(RequirementsStrategy.OR)
+        consumer.accept(Result(name, result, count, group, rows, key, advancement, ResourceLocation(name.namespace, "recipes/" + result.itemCategory!!.recipeFolderName + "/" + name.path)))
     }
 
     private fun ensureValid(p_200463_1_: ResourceLocation) {
@@ -136,7 +105,7 @@ class BatteryRecipeBuilder(p_i48261_1_: IItemProvider, p_i48261_2_: Int) {
         private val key: Map<Char, Ingredient>,
         private val advancement: Advancement.Builder,
         private val advancementId: ResourceLocation
-    ) : IFinishedRecipe {
+    ) : FinishedRecipe {
         override fun serializeRecipeData(p_218610_1_: JsonObject) {
             if (this.group.isNotEmpty()) {
                 p_218610_1_.addProperty("group", this.group)
@@ -173,12 +142,12 @@ class BatteryRecipeBuilder(p_i48261_1_: IItemProvider, p_i48261_2_: Int) {
 
     companion object {
 
-        fun battery(p_200470_0_: IItemProvider): BatteryRecipeBuilder {
-            return battery(p_200470_0_, 1)
+        fun battery(item: ItemLike): BatteryRecipeBuilder {
+            return battery(item, 1)
         }
 
-        fun battery(p_200468_0_: IItemProvider, p_200468_1_: Int): BatteryRecipeBuilder {
-            return BatteryRecipeBuilder(p_200468_0_, p_200468_1_)
+        fun battery(item: ItemLike, count: Int): BatteryRecipeBuilder {
+            return BatteryRecipeBuilder(item, count)
         }
     }
 }

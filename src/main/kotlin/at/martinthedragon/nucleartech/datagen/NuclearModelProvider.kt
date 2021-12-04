@@ -20,11 +20,11 @@ class NuclearModelProvider(
     override fun getName(): String = "Nuclear Tech Mod Generic Models"
 
     override fun registerModels() {
-        getBuilder("nuke_mush")
+        getBuilder("mushroom_cloud")
             .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
-            .modelLocation(modLoc("models/other/nuke_cloud/mush.obj"))
+            .modelLocation(modLoc("models/other/mushroom_cloud/mush.obj"))
             .flipV(true).detectCullableFaces(false).end()
-            .texture("fireball_texture", modLoc("entity/nuke_cloud/nuke_cloud_fireball"))
+            .texture("fireball_texture", modLoc("entity/mushroom_cloud/fireball"))
     }
 
     companion object {

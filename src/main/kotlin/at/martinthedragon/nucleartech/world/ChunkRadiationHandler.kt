@@ -1,17 +1,17 @@
 package at.martinthedragon.nucleartech.world
 
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.IWorld
-import net.minecraft.world.World
+import net.minecraft.core.BlockPos
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.LevelAccessor
 import kotlin.math.max
 
 interface ChunkRadiationHandler {
-    fun getRadiation(world: IWorld, pos: BlockPos): Float
-    fun setRadiation(world: World, pos: BlockPos, radiation: Float)
-    fun incrementRadiation(world: World, pos: BlockPos, radiation: Float) {
+    fun getRadiation(world: LevelAccessor, pos: BlockPos): Float
+    fun setRadiation(world: Level, pos: BlockPos, radiation: Float)
+    fun incrementRadiation(world: Level, pos: BlockPos, radiation: Float) {
         setRadiation(world, pos, getRadiation(world, pos) + radiation)
     }
-    fun decrementRadiation(world: World, pos: BlockPos, radiation: Float) {
+    fun decrementRadiation(world: Level, pos: BlockPos, radiation: Float) {
         setRadiation(world, pos, max(getRadiation(world, pos) - radiation, 0F))
     }
 }

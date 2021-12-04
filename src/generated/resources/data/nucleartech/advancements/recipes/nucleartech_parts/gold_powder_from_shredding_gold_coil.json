@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gold_powder_from_shredding_gold_coil"
+    ]
+  },
+  "criteria": {
+    "has_gold_coil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:gold_coil"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gold_powder_from_shredding_gold_coil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_coil",
+      "has_the_recipe"
+    ]
+  ]
+}

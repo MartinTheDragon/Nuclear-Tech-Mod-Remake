@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt_powder_from_shredding_cobalt_powder"
+    ]
+  },
+  "criteria": {
+    "has_cobalt_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/cobalt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt_powder_from_shredding_cobalt_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobalt_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

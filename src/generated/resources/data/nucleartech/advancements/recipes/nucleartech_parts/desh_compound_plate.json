@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:desh_ingot"
+            "items": [
+              "nucleartech:desh_ingot"
+            ]
           }
         ]
       }

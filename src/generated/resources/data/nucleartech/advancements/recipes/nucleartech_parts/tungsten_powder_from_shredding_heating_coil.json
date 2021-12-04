@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tungsten_powder_from_shredding_heating_coil"
+    ]
+  },
+  "criteria": {
+    "has_heating_coil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:heating_coil"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tungsten_powder_from_shredding_heating_coil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heating_coil",
+      "has_the_recipe"
+    ]
+  ]
+}

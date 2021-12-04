@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:advanced_alloy_ingot"
+            "items": [
+              "nucleartech:advanced_alloy_ingot"
+            ]
           }
         ]
       }

@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "nucleartech:meteor_tungsten_ore"
+            "items": [
+              "nucleartech:meteor_tungsten_ore"
+            ]
           }
         ]
       }

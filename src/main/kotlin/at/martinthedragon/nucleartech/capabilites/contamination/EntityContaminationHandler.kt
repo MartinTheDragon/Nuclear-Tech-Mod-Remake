@@ -1,10 +1,10 @@
 package at.martinthedragon.nucleartech.capabilites.contamination
 
-import net.minecraft.nbt.CompoundNBT
+import net.minecraft.nbt.CompoundTag
 import net.minecraftforge.common.util.INBTSerializable
 
 /** Gets synced at [at.martinthedragon.nucleartech.hazards.EntityContaminationEffects] */
-open class EntityContaminationHandler : IContaminationHandlerModifiable, INBTSerializable<CompoundNBT> {
+open class EntityContaminationHandler : ContaminationHandler, INBTSerializable<CompoundTag> {
     protected var irradiationLevel = 0F
     protected var digammaLevel = 0F
     protected var asbestosLevel = 0
@@ -58,7 +58,7 @@ open class EntityContaminationHandler : IContaminationHandlerModifiable, INBTSer
     override fun getCumulativeRadiation(): Float = cumulativeRadiationValue
     override fun getRadPerSecond(): Float = radPerSecondValue
 
-    override fun serializeNBT(): CompoundNBT = CompoundNBT().apply {
+    override fun serializeNBT(): CompoundTag = CompoundTag().apply {
         putFloat("radiation", irradiationLevel)
         putFloat("digamma", digammaLevel)
         putInt("asbestos", asbestosLevel)
@@ -67,7 +67,7 @@ open class EntityContaminationHandler : IContaminationHandlerModifiable, INBTSer
         putInt("contagion", contagionValue)
     }
 
-    override fun deserializeNBT(nbt: CompoundNBT) {
+    override fun deserializeNBT(nbt: CompoundTag) {
         irradiationLevel = nbt.getFloat("radiation")
         digammaLevel = nbt.getFloat("digamma")
         asbestosLevel = nbt.getInt("asbestos")

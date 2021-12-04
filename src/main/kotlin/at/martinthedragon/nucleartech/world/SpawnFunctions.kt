@@ -1,12 +1,12 @@
 package at.martinthedragon.nucleartech.world
 
-import net.minecraft.entity.item.ExperienceOrbEntity
-import net.minecraft.util.math.vector.Vector3d
-import net.minecraft.world.World
+import net.minecraft.world.entity.ExperienceOrb
+import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 import kotlin.math.floor
 import kotlin.random.Random
 
-fun World.dropExperience(pos: Vector3d, amount: Float) {
+fun Level.dropExperience(pos: Vec3, amount: Float) {
     if (amount < 0F) throw IllegalArgumentException("Cannot drop anti-experience")
 
     var integerValue = floor(amount).toInt()
@@ -14,8 +14,8 @@ fun World.dropExperience(pos: Vector3d, amount: Float) {
     if (decimalValue != 0F && Random.nextFloat() < decimalValue) integerValue++
 
     while (integerValue > 0) {
-        val experienceDropped = ExperienceOrbEntity.getExperienceValue(integerValue)
+        val experienceDropped = ExperienceOrb.getExperienceValue(integerValue)
         integerValue -= experienceDropped
-        addFreshEntity(ExperienceOrbEntity(this, pos.x, pos.y, pos.z, experienceDropped))
+        addFreshEntity(ExperienceOrb(this, pos.x, pos.y, pos.z, experienceDropped))
     }
 }

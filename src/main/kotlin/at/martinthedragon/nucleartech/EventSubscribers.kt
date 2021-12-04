@@ -3,19 +3,19 @@ package at.martinthedragon.nucleartech
 import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationCapabilityProvider
 import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
 import at.martinthedragon.nucleartech.world.ChunkRadiation
-import net.minecraft.entity.Entity
-import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.SpawnReason
-import net.minecraft.util.ResourceLocation
-import net.minecraft.util.math.BlockPos
+import net.minecraft.core.BlockPos
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.event.entity.living.LivingEvent
 import net.minecraftforge.event.entity.living.LivingSpawnEvent
+import net.minecraftforge.event.server.ServerStoppedEvent
 import net.minecraftforge.eventbus.api.Event
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.event.server.FMLServerStoppedEvent
 import kotlin.math.roundToInt
 
 @Suppress("unused", "UNUSED_PARAMETER")
@@ -28,7 +28,7 @@ object EventSubscribers {
     }
 
     @SubscribeEvent @JvmStatic
-    fun onServerStopped(event: FMLServerStoppedEvent) {
+    fun onServerStopped(event: ServerStoppedEvent) {
         Radiation.irradiatedEntityList = emptyList()
     }
 
@@ -45,7 +45,7 @@ object EventSubscribers {
 
     @SubscribeEvent @JvmStatic
     fun onLivingSpawn(event: LivingSpawnEvent.CheckSpawn) {
-        if (EntityContaminationEffects.isRadiationImmune(event.entityLiving) || event.spawnReason != SpawnReason.NATURAL) return
+        if (EntityContaminationEffects.isRadiationImmune(event.entityLiving) || event.spawnReason != MobSpawnType.NATURAL) return
         val world = event.world
         val pos = BlockPos(event.x.roundToInt(), event.y.roundToInt(), event.z.roundToInt())
         if (ChunkRadiation.getRadiation(world, pos) > 2F) event.result = Event.Result.DENY

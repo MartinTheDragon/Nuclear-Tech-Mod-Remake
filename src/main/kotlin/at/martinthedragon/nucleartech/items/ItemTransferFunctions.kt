@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.items
 
-import net.minecraft.inventory.IInventory
-import net.minecraft.item.ItemStack
+import net.minecraft.world.Container
+import net.minecraft.world.item.ItemStack
 
-fun canTransferItem(from: ItemStack, to: ItemStack, inventory: IInventory? = null): Boolean = when {
+fun canTransferItem(from: ItemStack, to: ItemStack, inventory: Container? = null): Boolean = when {
     from.isEmpty -> false
     to.isEmpty -> true
     !to.sameItem(from) -> false
