@@ -8,6 +8,7 @@ import at.martinthedragon.nucleartech.entities.NuclearCreeper
 import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
+import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
+import net.minecraftforge.common.crafting.CraftingHelper
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -105,6 +107,8 @@ object RegistriesAndLifecycle {
     fun registerRecipeTypes(event: RegistryEvent.Register<RecipeSerializer<*>>) {
         // no forge registry for recipe types currently available
         RecipeTypes.getTypes().forEach { Registry.register(Registry.RECIPE_TYPE, it.toString(), it) }
+
+        CraftingHelper.register(StackedIngredient.NAME, StackedIngredient.Serializer)
     }
 
     @SubscribeEvent @JvmStatic

@@ -8,6 +8,7 @@ import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.EffectItem
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.screens.AnvilScreen
 import net.minecraft.data.DataGenerator
 
 class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.EN_US) {
@@ -165,6 +166,16 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(ModBlocks.siren, "Siren")
         addBlock(ModBlocks.safe, "Safe")
+        addBlock(ModBlocks.ironAnvil, "Iron Anvil")
+        addBlock(ModBlocks.leadAnvil, "Lead Anvil")
+        addBlock(ModBlocks.steelAnvil, "Steel Anvil")
+        addBlock(ModBlocks.meteoriteAnvil, "Meteorite Anvil")
+        addBlock(ModBlocks.starmetalAnvil, "Starmetal Anvil")
+        addBlock(ModBlocks.ferrouraniumAnvil, "Ferrouranium Anvil")
+        addBlock(ModBlocks.bismuthAnvil, "Bismuth Anvil")
+        addBlock(ModBlocks.schrabidateAnvil, "Ferric Schrabidate Anvil")
+        addBlock(ModBlocks.dineutroniumAnvil, "Dineutronium Anvil")
+        addBlock(ModBlocks.murkyAnvil, "Murky Anvil")
         addBlock(ModBlocks.steamPressBase, "Steam Press")
         addBlock(ModBlocks.steamPressFrame, "Steam Press")
         addBlock(ModBlocks.steamPressTop, "Steam Press")
@@ -795,7 +806,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("$detonatorDescriptionId.error_position_not_set", "Position has not been set!")
         add("$detonatorDescriptionId.error_position_not_loaded", "Target is currently not loaded in the world!")
         add("$detonatorDescriptionId.error_not_explosive", "Target is not a valid explosive!")
-        add("$detonatorDescriptionId.error_invalid_tile_entity", "Server Error: The target's TileEntity is invalid!")
+        add("$detonatorDescriptionId.error_invalid_tile_entity", "Server Error: The target's BlockEntity is invalid!")
         add("$detonatorDescriptionId.error_missing_components", "The explosive is missing components!")
         add("$detonatorDescriptionId.error_detonation_prohibited", "The detonation was prohibited!")
         add("$detonatorDescriptionId.error_unknown", "An unknown error occurred during the detonation")
@@ -831,6 +842,9 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addMenuType(MenuTypes.sirenMenu, "Siren")
         addMenuType(MenuTypes.safeMenu, "Safe")
+        addMenuType(MenuTypes.anvilMenu, "Anvil Tier %s")
+        add("${AnvilScreen.CONTAINER_TRANSLATION}.inputs", "Inputs:")
+        add("${AnvilScreen.CONTAINER_TRANSLATION}.outputs", "Outputs:")
         addMenuType(MenuTypes.steamPressMenu, "Steam Press")
         addMenuType(MenuTypes.blastFurnaceMenu, "Blast Furnace")
         addMenuType(MenuTypes.combustionGeneratorMenu, "Combustion Generator")
@@ -860,14 +874,17 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackEASAlarmScreech, "Siren running: EAS Alarm Screech")
         addSound(SoundEvents.sirenTrackAPCPass, "Siren running: APC Pass")
         addSound(SoundEvents.sirenTrackRazortrainHorn, "Siren running: Razortrain Horn")
+        addSound(SoundEvents.anvilFall, "Anvil clashes")
         addSound(SoundEvents.pressOperate, "Press stamps")
         addSound(SoundEvents.randomBleep, "Device bleeps")
         addSound(SoundEvents.randomBoop, "Device boops")
         addSound(SoundEvents.randomUnpack, "Item unpacked")
         add("subtitle.$MODID.geiger.click", "Geiger Counter clicks")
+        addSound(SoundEvents.miniNukeExplosion, "Mini nuke explodes")
 
         addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning", "%1\$s fell victim to acute radiation syndrome whilst fighting %2\$s")
         addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion", "%1\$s got nuked whilst fighting %2\$s")
+        addDamageSource(DamageSources.murkyAnvil, "%1\$s UNDEFINED", "%1\$s UNDEFINED whilst trying to escape %2\$s")
 
         add("geiger.title", "GEIGER COUNTER")
         add("geiger.chunkRadiation", "Current chunk radiation:")
@@ -875,6 +892,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("geiger.playerIrradiation", "Player irradiation:")
         add("geiger.playerResistance", "Player resistance:")
 
+        add("jei.$MODID.category.smithing", "Smithing")
+        add("jei.$MODID.category.smithing.tier", "Minimum Tier: %s")
+        add("jei.$MODID.category.constructing", "Constructing")
+        add("jei.$MODID.category.constructing.tier", "Minimum Tier: %s")
+        add("jei.$MODID.category.constructing.tier_range", "Tier Range: %s..%s")
         add("jei.$MODID.category.pressing", "Pressing")
         add("jei.$MODID.category.pressing.experience", "%s XP")
         add("jei.$MODID.category.blasting", "Blasting")

@@ -8,11 +8,14 @@ class GeneralConfig : ConfigBase {
     override val configSpec: ForgeConfigSpec
     override val configType = ModConfig.Type.SERVER
 
+    val enableBabyMode: ForgeConfigSpec.BooleanValue
     val enable528Mode: ForgeConfigSpec.BooleanValue
 
     init {
         ForgeConfigSpec.Builder().apply {
             comment("General Config. Synced from server to client.").push(fileName)
+
+            enableBabyMode = comment("Hello peer!").define("enableBabyMode", false)
 
             comment("528 Mode settings").push("528")
             enable528Mode = comment("The central toggle for 528 mode").define("enable528Mode", false)

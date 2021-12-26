@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:iron_anvil",
+    "nucleartech:lead_anvil",
+    "nucleartech:steel_anvil",
+    "nucleartech:meteorite_anvil",
+    "nucleartech:starmetal_anvil",
+    "nucleartech:ferrouranium_anvil",
+    "nucleartech:bismuth_anvil",
+    "nucleartech:schrabidate_anvil",
+    "nucleartech:dineutronium_anvil",
+    "nucleartech:murky_anvil"
+  ]
+}

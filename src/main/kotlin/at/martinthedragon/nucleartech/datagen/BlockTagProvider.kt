@@ -143,5 +143,11 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(NuclearTags.Blocks.SAND_OIL).add(ModBlocks.oilSand.get())
         tag(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK).add(ModBlocks.deadGrass.get(), ModBlocks.glowingMycelium.get())
         tag(NuclearTags.Blocks.GLOWING_MYCELIUM_SPREADABLE).addTag(Tags.Blocks.DIRT).add(ModBlocks.deadGrass.get(), Blocks.DIRT_PATH)
+        tag(NuclearTags.Blocks.ANVIL).add(
+            ModBlocks.ironAnvil.get(), ModBlocks.leadAnvil.get(), ModBlocks.steelAnvil.get(),
+            ModBlocks.meteoriteAnvil.get(), ModBlocks.starmetalAnvil.get(), ModBlocks.ferrouraniumAnvil.get(),
+            ModBlocks.bismuthAnvil.get(), ModBlocks.schrabidateAnvil.get(), ModBlocks.dineutroniumAnvil.get(),
+            ModBlocks.murkyAnvil.get()
+        )
     }
 }

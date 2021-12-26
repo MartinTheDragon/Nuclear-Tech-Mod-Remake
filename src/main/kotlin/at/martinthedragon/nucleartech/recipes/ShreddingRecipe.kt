@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.recipes
 
+import at.martinthedragon.nucleartech.ModBlocks
 import com.google.gson.JsonObject
+import net.minecraft.core.NonNullList
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.GsonHelper
@@ -19,22 +21,19 @@ class ShreddingRecipe(
     val result: ItemStack,
     val experience: Float
 ) : Recipe<Container> {
-    override fun matches(inventory: Container, world: Level): Boolean =
+    override fun matches(inventory: Container, level: Level): Boolean =
         (0..8).map { inventory.getItem(it) }.any { ingredient.test(it) }
 
     override fun assemble(inventory: Container): ItemStack = resultItem.copy()
 
-    override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
-
-    override fun getResultItem() = result
-
     override fun getId() = recipeID
-
-    override fun getSerializer() = RecipeSerializers.SHREDDING.get()
-
+    override fun getSerializer(): Serializer = RecipeSerializers.SHREDDING.get()
     override fun getType() = RecipeTypes.SHREDDING
-
     override fun isSpecial() = true
+    override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
+    override fun getToastSymbol() = ItemStack(ModBlocks.shredder.get())
+    override fun getIngredients(): NonNullList<Ingredient> = NonNullList.of(Ingredient.EMPTY, ingredient)
+    override fun getResultItem() = result
 
     class Serializer : ForgeRegistryEntry<RecipeSerializer<*>>(), RecipeSerializer<ShreddingRecipe> {
         override fun fromJson(id: ResourceLocation, json: JsonObject): ShreddingRecipe {

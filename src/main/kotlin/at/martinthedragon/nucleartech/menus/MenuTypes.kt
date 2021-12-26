@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject
 object MenuTypes {
     val safeMenu: RegistryObject<MenuType<SafeMenu>> = MENUS.register("safe") { IForgeMenuType.create(SafeMenu::fromNetwork) }
     val sirenMenu: RegistryObject<MenuType<SirenMenu>> = MENUS.register("siren") { IForgeMenuType.create(SirenMenu::fromNetwork) }
+    val anvilMenu: RegistryObject<MenuType<AnvilMenu>> = MENUS.register("anvil") { IForgeMenuType.create(AnvilMenu::fromNetwork) }
     val steamPressMenu: RegistryObject<MenuType<PressMenu>> = MENUS.register("steam_press") { IForgeMenuType.create(PressMenu::fromNetwork) }
     val blastFurnaceMenu: RegistryObject<MenuType<BlastFurnaceMenu>> = MENUS.register("blast_furnace") { IForgeMenuType.create(BlastFurnaceMenu::fromNetwork) }
     val combustionGeneratorMenu: RegistryObject<MenuType<CombustionGeneratorMenu>> = MENUS.register("combustion_generator") { IForgeMenuType.create(CombustionGeneratorMenu::fromNetwork) }

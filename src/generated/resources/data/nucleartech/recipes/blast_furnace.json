@@ -1,26 +1,44 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "blast_furnace",
-  "pattern": [
-    "T T",
-    "CHC",
-    "TFT"
-  ],
-  "key": {
-    "T": {
-      "tag": "forge:ingots/tungsten"
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "minecraft:stone_bricks"
+      },
+      "amount": 4
     },
-    "C": {
-      "item": "nucleartech:copper_panel"
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/iron"
+      },
+      "amount": 2
     },
-    "H": {
-      "item": "minecraft:hopper"
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/tungsten"
+      },
+      "amount": 4
     },
-    "F": {
-      "item": "minecraft:furnace"
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:copper_panel"
+      },
+      "amount": 2
     }
-  },
-  "result": {
-    "item": "nucleartech:blast_furnace"
-  }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:blast_furnace",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 1,
+  "tierUpper": -1
 }

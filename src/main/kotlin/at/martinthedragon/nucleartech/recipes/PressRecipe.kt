@@ -1,8 +1,10 @@
 package at.martinthedragon.nucleartech.recipes
 
+import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
+import net.minecraft.core.NonNullList
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
@@ -37,22 +39,19 @@ class PressRecipe(
     }
 
     // containerSize == 1 used for quickMoveStack
-    override fun matches(inventory: Container, world: Level): Boolean =
+    override fun matches(inventory: Container, level: Level): Boolean =
         ingredient.test(inventory.getItem(0)) && (inventory.containerSize == 1 || stampType.matches(inventory.getItem(1).item))
 
     override fun assemble(inventory: Container): ItemStack = resultItem.copy()
 
-    override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
-
-    override fun getResultItem() = result
-
     override fun getId() = recipeID
-
-    override fun getSerializer() = RecipeSerializers.PRESSING.get()
-
+    override fun getSerializer(): Serializer = RecipeSerializers.PRESSING.get()
     override fun getType() = RecipeTypes.PRESSING
-
     override fun isSpecial() = true
+    override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
+    override fun getToastSymbol() = ItemStack(ModBlocks.steamPressBase.get())
+    override fun getIngredients(): NonNullList<Ingredient> = NonNullList.of(Ingredient.EMPTY, ingredient)
+    override fun getResultItem() = result
 
     class Serializer : ForgeRegistryEntry<RecipeSerializer<*>>(), RecipeSerializer<PressRecipe> {
         override fun fromJson(id: ResourceLocation, jsonObject: JsonObject): PressRecipe {

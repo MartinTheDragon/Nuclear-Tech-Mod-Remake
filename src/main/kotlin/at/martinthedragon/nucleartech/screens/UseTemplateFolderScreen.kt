@@ -20,7 +20,6 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import java.util.*
 import kotlin.math.ceil
 import kotlin.math.min
 
@@ -216,8 +215,8 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
 
         val searchString = searchBox.value
         if (searchString.isBlank()) return
-        val searchTree = minecraft!!.getSearchTree(SEARCH_TREE)
-        searchResults.addAll(searchTree.search(searchString.lowercase(Locale.ROOT)).map(ItemStack::getItem))
+        val searchTree = minecraft!!.getSearchTree(searchTree)
+        searchResults.addAll(searchTree.search(searchString.lowercase(getMinecraft().languageManager.selected.javaLocale)).map(ItemStack::getItem))
         currentPage = 1
         val itemsCount = if (searchResults.isEmpty()) itemList.size else searchResults.size
         pagesCount = ceil(itemsCount.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
@@ -258,6 +257,6 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         const val GUI_HEIGHT = 229
         const val RECIPES_PER_PAGE = 35
         val TEMPLATE_FOLDER_GUI_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/gui/machine_template_folder.png")
-        val SEARCH_TREE = SearchRegistry.Key<ItemStack>()
+        val searchTree = SearchRegistry.Key<ItemStack>()
     }
 }

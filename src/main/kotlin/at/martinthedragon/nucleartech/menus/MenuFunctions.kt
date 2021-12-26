@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraftforge.fml.DistExecutor
 
-fun addPlayerInventory(
+inline fun addPlayerInventory(
     addSlot: (Slot) -> Slot,
     playerInventory: Container,
     xStart: Int,

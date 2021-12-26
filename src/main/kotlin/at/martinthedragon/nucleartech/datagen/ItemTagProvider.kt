@@ -80,6 +80,7 @@ class ItemTagProvider(
         copy(NuclearTags.Blocks.SAND_OIL, NuclearTags.Items.SAND_OIL)
         copy(Tags.Blocks.SAND, Tags.Items.SAND)
         copy(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK, NuclearTags.Items.GLOWING_MUSHROOM_GROW_BLOCK)
+        copy(NuclearTags.Blocks.ANVIL, NuclearTags.Items.ANVIL)
     }
 
     private fun ingotTags() {

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nucleartech:block/murky_anvil"
+    },
+    "facing=south": {
+      "model": "nucleartech:block/murky_anvil",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nucleartech:block/murky_anvil",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "nucleartech:block/murky_anvil",
+      "y": 90
+    }
+  }
+}

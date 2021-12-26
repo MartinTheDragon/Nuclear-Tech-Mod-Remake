@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.recipes
 
+import at.martinthedragon.nucleartech.ModBlocks
 import com.google.gson.JsonObject
+import net.minecraft.core.NonNullList
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.GsonHelper
@@ -20,25 +22,22 @@ class BlastingRecipe(
     val result: ItemStack,
     val experience: Float
 ) : Recipe<Container> {
-    override fun matches(tileEntity: Container, world: Level): Boolean = if (tileEntity.containerSize == 1)
-        ingredient1.test(tileEntity.getItem(0)) || ingredient2.test(tileEntity.getItem(1)) ||
-                ingredient1.test(tileEntity.getItem(1)) || ingredient2.test(tileEntity.getItem(0))
-    else ingredient1.test(tileEntity.getItem(0)) && ingredient2.test(tileEntity.getItem(1)) ||
-            ingredient1.test(tileEntity.getItem(1)) && ingredient2.test(tileEntity.getItem(0))
+    override fun matches(container: Container, level: Level): Boolean = if (container.containerSize == 1)
+        ingredient1.test(container.getItem(0)) || ingredient2.test(container.getItem(1)) ||
+                ingredient1.test(container.getItem(1)) || ingredient2.test(container.getItem(0))
+    else ingredient1.test(container.getItem(0)) && ingredient2.test(container.getItem(1)) ||
+            ingredient1.test(container.getItem(1)) && ingredient2.test(container.getItem(0))
 
-    override fun assemble(tileEntity: Container): ItemStack = resultItem.copy()
-
-    override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
-
-    override fun getResultItem() = result
+    override fun assemble(container: Container): ItemStack = resultItem.copy()
 
     override fun getId() = recipeID
-
-    override fun getSerializer() = RecipeSerializers.BLASTING.get()
-
+    override fun getSerializer(): Serializer = RecipeSerializers.BLASTING.get()
     override fun getType() = RecipeTypes.BLASTING
-
     override fun isSpecial() = true
+    override fun canCraftInDimensions(p_194133_1_: Int, p_194133_2_: Int) = true
+    override fun getToastSymbol() = ItemStack(ModBlocks.blastFurnace.get())
+    override fun getIngredients(): NonNullList<Ingredient> = NonNullList.of(Ingredient.EMPTY, ingredient1, ingredient2)
+    override fun getResultItem() = result
 
     class Serializer : ForgeRegistryEntry<RecipeSerializer<*>>(), RecipeSerializer<BlastingRecipe> {
         override fun fromJson(id: ResourceLocation, jsonObject: JsonObject): BlastingRecipe {

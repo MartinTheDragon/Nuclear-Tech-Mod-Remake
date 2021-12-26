@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "anvil_texture": "nucleartech:block/ferrouranium_anvil",
+    "particle": "nucleartech:block/ferrouranium_anvil"
+  },
+  "loader": "forge:obj",
+  "model": "nucleartech:models/block/anvil/anvil.obj",
+  "detectCullableFaces": false,
+  "flip-v": true
+}

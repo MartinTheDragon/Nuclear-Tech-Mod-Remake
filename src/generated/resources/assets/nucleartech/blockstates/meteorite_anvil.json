@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nucleartech:block/meteorite_anvil"
+    },
+    "facing=south": {
+      "model": "nucleartech:block/meteorite_anvil",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nucleartech:block/meteorite_anvil",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "nucleartech:block/meteorite_anvil",
+      "y": 90
+    }
+  }
+}

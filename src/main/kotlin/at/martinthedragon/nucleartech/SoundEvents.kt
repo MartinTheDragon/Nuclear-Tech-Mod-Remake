@@ -26,6 +26,7 @@ object SoundEvents {
     val sirenTrackEASAlarmScreech: RegistryObject<SoundEvent> = SOUNDS.register("siren.eas") { SoundEvent(modLoc("siren.eas")) }
     val sirenTrackAPCPass: RegistryObject<SoundEvent> = SOUNDS.register("siren.apc_pass") { SoundEvent(modLoc("siren.apc_pass")) }
     val sirenTrackRazortrainHorn: RegistryObject<SoundEvent> = SOUNDS.register("siren.razortrain_horn") { SoundEvent(modLoc("siren.razortrain_horn")) }
+    val anvilFall: RegistryObject<SoundEvent> = SOUNDS.register("anvil.fall") { SoundEvent(modLoc("anvil.fall")) }
     val pressOperate: RegistryObject<SoundEvent> = SOUNDS.register("press.operate") { SoundEvent(modLoc("press.operate")) }
     val randomBleep: RegistryObject<SoundEvent> = SOUNDS.register("random.bleep") { SoundEvent(modLoc("random.bleep")) }
     val randomBoop: RegistryObject<SoundEvent> = SOUNDS.register("random.boop") { SoundEvent(modLoc("random.boop")) }
@@ -36,6 +37,7 @@ object SoundEvents {
     val geiger4: RegistryObject<SoundEvent> = SOUNDS.register("geiger.geiger4") { SoundEvent(modLoc("geiger.geiger4")) }
     val geiger5: RegistryObject<SoundEvent> = SOUNDS.register("geiger.geiger5") { SoundEvent(modLoc("geiger.geiger5")) }
     val geiger6: RegistryObject<SoundEvent> = SOUNDS.register("geiger.geiger6") { SoundEvent(modLoc("geiger.geiger6")) }
+    val miniNukeExplosion: RegistryObject<SoundEvent> = SOUNDS.register("weapon.mini_nuke_explosion") { SoundEvent(modLoc("weapon.mini_nuke_explosion")) }
 
     private fun modLoc(location: String) = ResourceLocation(NuclearTech.MODID, location)
 }

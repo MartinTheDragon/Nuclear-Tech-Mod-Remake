@@ -189,7 +189,7 @@ class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseCon
                     }
                     else -> {
                         if (waterInput.count > 1) // if somehow there is more than one item in the input slot, drop the rest
-                            Containers.dropContents(level, pos, NonNullList.of(waterInput.copy().apply { count-- }))
+                            Containers.dropContents(level, pos, NonNullList.of(ItemStack.EMPTY, waterInput.copy().apply { count-- }))
                         items[1] = resultItem.copy()
                     }
                 }

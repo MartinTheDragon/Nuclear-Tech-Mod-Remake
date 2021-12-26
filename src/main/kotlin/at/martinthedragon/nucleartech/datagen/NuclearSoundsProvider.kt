@@ -35,6 +35,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.sirenTrackEASAlarmScreech, definition().with(sound(ntm("blocks/siren/eas")).attenuationDistance(ModItems.sirenTrackEASAlarmScreech.get().range)).subtitle(ntmSubtitle("siren.eas")))
         add(SoundEvents.sirenTrackAPCPass, definition().with(sound(ntm("blocks/siren/apc_pass")).attenuationDistance(ModItems.sirenTrackAPCPass.get().range)).subtitle(ntmSubtitle("siren.apc_pass")))
         add(SoundEvents.sirenTrackRazortrainHorn, definition().with(sound(ntm("blocks/siren/razortrain_horn")).attenuationDistance(ModItems.sirenTrackRazortrainHorn.get().range)).subtitle(ntmSubtitle("siren.razortrain_horn")))
+        add(SoundEvents.anvilFall, definition().with(sound(ntm("blocks/anvil_fall_berserk"))).subtitle(ntmSubtitle("anvil.fall")))
         add(SoundEvents.pressOperate, definition().with(sound(ntm("blocks/press/press_operate"))).subtitle(ntmSubtitle("press.operate")))
         add(SoundEvents.randomBleep, definition().with(sound(ntm("random/bleep"))).subtitle(ntmSubtitle("random.bleep")))
         add(SoundEvents.randomBoop, definition().with(sound(ntm("random/boop"))).subtitle(ntmSubtitle("random.boop")))
@@ -45,6 +46,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.geiger4, definition().with(sound(ntm("geiger/geiger4"))).subtitle(ntmSubtitle("geiger.click")))
         add(SoundEvents.geiger5, definition().with(sound(ntm("geiger/geiger5"))).subtitle(ntmSubtitle("geiger.click")))
         add(SoundEvents.geiger6, definition().with(sound(ntm("geiger/geiger6"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.miniNukeExplosion, definition().with(sound(ntm("weapon/mini_nuke_explosion"))).subtitle(ntmSubtitle("weapon.mini_nuke_explosion")))
     }
 
     private fun ntm(location: String) = ResourceLocation(NuclearTech.MODID, location)

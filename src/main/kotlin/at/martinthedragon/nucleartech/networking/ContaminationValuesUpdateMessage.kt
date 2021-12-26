@@ -18,7 +18,7 @@ class ContaminationValuesUpdateMessage(val data: CompoundTag?) : NetworkMessage<
         if (context.get().direction.receptionSide.isClient)
             context.get().enqueueWork {
                 if (data != null && Minecraft.getInstance().level != null && Minecraft.getInstance().player != null) try {
-                    val capability = Capabilities.getContamination(Minecraft.getInstance().player!!)
+                    val capability = Capabilities.getContamination(Minecraft.getInstance().player!!) ?: return@enqueueWork
                     if (capability !is EntityContaminationHandler) throw RuntimeException("Custom contamination handlers aren't supported yet")
                     capability.deserializeNBT(data)
                 } catch (ex: IOException) {

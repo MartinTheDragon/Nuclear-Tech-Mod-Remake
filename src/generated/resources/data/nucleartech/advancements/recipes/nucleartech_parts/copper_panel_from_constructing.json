@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:copper_panel_from_constructing"
+    ]
+  },
+  "criteria": {
+    "has_copper_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:plates/copper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:copper_panel_from_constructing"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

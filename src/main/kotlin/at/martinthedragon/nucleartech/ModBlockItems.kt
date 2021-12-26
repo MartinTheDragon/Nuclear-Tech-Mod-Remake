@@ -151,6 +151,17 @@ object ModBlockItems {
     val electricFurnace: RegistryObject<Item> = ITEMS.register("electric_furnace") { BlockItem(ModBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val shredder: RegistryObject<Item> = ITEMS.register("shredder") { BlockItem(ModBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
 
+    val ironAnvil: RegistryObject<Item> = ITEMS.register("iron_anvil") { BlockItem(ModBlocks.ironAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val leadAnvil: RegistryObject<Item> = ITEMS.register("lead_anvil") { BlockItem(ModBlocks.leadAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val steelAnvil: RegistryObject<Item> = ITEMS.register("steel_anvil") { BlockItem(ModBlocks.steelAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val meteoriteAnvil: RegistryObject<Item> = ITEMS.register("meteorite_anvil") { BlockItem(ModBlocks.meteoriteAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val starmetalAnvil: RegistryObject<Item> = ITEMS.register("starmetal_anvil") { BlockItem(ModBlocks.starmetalAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val ferrouraniumAnvil: RegistryObject<Item> = ITEMS.register("ferrouranium_anvil") { BlockItem(ModBlocks.ferrouraniumAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val bismuthAnvil: RegistryObject<Item> = ITEMS.register("bismuth_anvil") { BlockItem(ModBlocks.bismuthAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val schrabidateAnvil: RegistryObject<Item> = ITEMS.register("schrabidate_anvil") { BlockItem(ModBlocks.schrabidateAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val dineutroniumAnvil: RegistryObject<Item> = ITEMS.register("dineutronium_anvil") { BlockItem(ModBlocks.dineutroniumAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val murkyAnvil: RegistryObject<Item> = ITEMS.register("murky_anvil") { BlockItem(ModBlocks.murkyAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+
     val littleBoy: RegistryObject<Item> = ITEMS.register("little_boy") { BlockItem(ModBlocks.littleBoy.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
     val fatMan: RegistryObject<Item> = ITEMS.register("fat_man") { BlockItem(ModBlocks.fatMan.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
 

@@ -8,6 +8,7 @@ import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.items.BombKitItem
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
 import at.martinthedragon.nucleartech.screens.*
@@ -48,6 +49,7 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.combustionGeneratorMenu.get(), ::CombustionGeneratorScreen)
         MenuScreens.register(MenuTypes.electricFurnaceMenu.get(), ::ElectricFurnaceScreen)
         MenuScreens.register(MenuTypes.shredderMenu.get(), ::ShredderScreen)
+        MenuScreens.register(MenuTypes.anvilMenu.get(), ::AnvilScreen)
 
         MenuScreens.register(MenuTypes.littleBoyMenu.get(), ::LittleBoyScreen)
         MenuScreens.register(MenuTypes.fatManMenu.get(), ::FatManScreen)
@@ -57,11 +59,20 @@ object ClientRegistries {
     fun clientSetup(event: FMLClientSetupEvent) {
         NuclearTech.LOGGER.debug("Creating search trees")
         val templateFolderSearchTree = ReloadableSearchTree<ItemStack>({
-            it.getTooltipLines(null, TooltipFlag.Default.NORMAL).stream().map { tooltip ->
+            it.getTooltipLines(null, TooltipFlag.Default.NORMAL).map { tooltip ->
                 ChatFormatting.stripFormatting(tooltip.string)!!.trim()
-            }
+            }.stream()
         }) { Stream.of(ForgeRegistries.ITEMS.getKey(it.item)) }
-        Minecraft.getInstance().searchTreeManager.register(UseTemplateFolderScreen.SEARCH_TREE, templateFolderSearchTree)
+        val anvilConstructingRecipeSearchTree = ReloadableSearchTree<AnvilConstructingRecipe>({
+            it.results.map(AnvilConstructingRecipe.ConstructingResult::stack).flatMap { stack -> stack.getTooltipLines(null, TooltipFlag.Default.NORMAL).map { tooltip ->
+                ChatFormatting.stripFormatting(tooltip.string)!!.trim()
+            }}.stream()
+        }) { it.results.map(AnvilConstructingRecipe.ConstructingResult::stack).map { stack -> ForgeRegistries.ITEMS.getKey(stack.item) }.stream() }
+
+        Minecraft.getInstance().searchTreeManager.apply {
+            register(UseTemplateFolderScreen.searchTree, templateFolderSearchTree)
+            register(AnvilScreen.searchTree, anvilConstructingRecipeSearchTree)
+        }
 
         NuclearTech.LOGGER.debug("Setting rendering layers")
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.glowingMushroom.get(), RenderType.cutout())

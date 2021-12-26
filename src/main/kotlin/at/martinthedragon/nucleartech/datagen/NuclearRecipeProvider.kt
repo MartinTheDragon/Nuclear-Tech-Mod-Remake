@@ -6,6 +6,8 @@ import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.datagen.recipes.*
 import at.martinthedragon.nucleartech.recipes.PressRecipe
+import at.martinthedragon.nucleartech.recipes.StackedIngredient
+import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeProvider
@@ -15,6 +17,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.Tag
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
@@ -257,6 +260,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         templates(consumer)
         blocks(consumer)
         machines(consumer)
+        anvilSmithing(consumer)
+        anvilConstructing(consumer)
         consumables(consumer)
         misc(consumer)
     }
@@ -559,9 +564,21 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     private fun machines(consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(ModBlockItems.siren.get()).define('S', NuclearTags.Items.PLATES_STEEL).define('I', NuclearTags.Items.PLATES_INSULATOR).define('C', ModItems.enhancedCircuit.get()).define('R', Tags.Items.DUSTS_REDSTONE).pattern("SIS").pattern("ICI").pattern("SRS").group(ModBlockItems.siren.id.path).unlockedBy("has_${ModItems.enhancedCircuit.id.path}", has(ModItems.enhancedCircuit.get())).save(consumer, ModBlockItems.siren.id)
         ShapedRecipeBuilder.shaped(ModBlockItems.steamPress.get()).define('I', Tags.Items.INGOTS_IRON).define('F', Items.FURNACE).define('P', Items.PISTON).define('B', Tags.Items.STORAGE_BLOCKS_IRON).pattern("IFI").pattern("IPI").pattern("IBI").group(ModBlockItems.steamPress.id.path).unlockedBy("has_${Items.PISTON.registryName!!.path}", has(Items.PISTON)).save(consumer, ModBlockItems.steamPress.id)
-        ShapedRecipeBuilder.shaped(ModBlockItems.blastFurnace.get()).define('T', NuclearTags.Items.INGOTS_TUNGSTEN).define('C', ModItems.copperPanel.get()).define('H', Items.HOPPER).define('F', Items.FURNACE).pattern("T T").pattern("CHC").pattern("TFT").group(ModBlockItems.blastFurnace.id.path).unlockedBy("has_${ModItems.tungstenIngot.get()}", has(NuclearTags.Items.INGOTS_TUNGSTEN)).save(consumer, ModBlockItems.blastFurnace.id)
+//        ShapedRecipeBuilder.shaped(ModBlockItems.blastFurnace.get()).define('T', NuclearTags.Items.INGOTS_TUNGSTEN).define('C', ModItems.copperPanel.get()).define('H', Items.HOPPER).define('F', Items.FURNACE).pattern("T T").pattern("CHC").pattern("TFT").group(ModBlockItems.blastFurnace.id.path).unlockedBy("has_${ModItems.tungstenIngot.get()}", has(NuclearTags.Items.INGOTS_TUNGSTEN)).save(consumer, ModBlockItems.blastFurnace.id)
         ShapedRecipeBuilder.shaped(ModBlockItems.combustionGenerator.get()).define('S', NuclearTags.Items.INGOTS_STEEL).define('T', ModItems.steelTank.get()).define('C', ModItems.redCopperIngot.get()).define('F', Items.FURNACE).pattern("STS").pattern("SCS").pattern("SFS").group(ModBlockItems.combustionGenerator.id.path).unlockedBy("has_${ModItems.redCopperIngot.id.path}", has(ModItems.redCopperIngot.get())).save(consumer, ModBlockItems.combustionGenerator.id)
         ShapedRecipeBuilder.shaped(ModBlockItems.electricFurnace.get()).define('B', NuclearTags.Items.INGOTS_BERYLLIUM).define('C', ModItems.copperPanel.get()).define('F', Items.FURNACE).define('H', ModItems.heatingCoil.get()).pattern("BBB").pattern("CFC").pattern("HHH").group(ModBlockItems.electricFurnace.id.path).unlockedBy("has_${ModItems.berylliumIngot.id.path}", has(NuclearTags.Items.INGOTS_BERYLLIUM)).save(consumer, ModBlockItems.electricFurnace.id)
+    }
+
+    private fun anvilSmithing(consumer: Consumer<FinishedRecipe>) {
+        val baseAnvils = StackedIngredient.of(1, ModBlockItems.ironAnvil.get(), ModBlockItems.leadAnvil.get())
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.steelAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_STEEL)).unlockedBy("has_steel", has(NuclearTags.Items.INGOTS_STEEL)).save(consumer)
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.starmetalAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_STARMETAL)).unlockedBy("has_starmetal", has(NuclearTags.Items.INGOTS_STARMETAL)).save(consumer)
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.dineutroniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, ModItems.dineutroniumIngot.get())).unlockedBy("has_dineutronium", has(ModItems.dineutroniumIngot.get())).save(consumer)
+    }
+
+    private fun anvilConstructing(consumer: Consumer<FinishedRecipe>) {
+        AnvilConstructingRecipeBuilder().requires(StackedIngredient.of(4, NuclearTags.Items.PLATES_COPPER)).results(AnvilConstructingRecipe.ConstructingResult(ItemStack(ModItems.copperPanel.get()))).unlockedBy("has_copper_plate", has(NuclearTags.Items.PLATES_COPPER)).save(consumer, ResourceLocation(NuclearTech.MODID, "copper_panel_from_constructing"))
+        AnvilConstructingRecipeBuilder().requires(StackedIngredient.of(4, ItemTags.STONE_BRICKS), StackedIngredient.of(2, Tags.Items.INGOTS_IRON), StackedIngredient.of(4, NuclearTags.Items.INGOTS_TUNGSTEN), StackedIngredient.of(2, ModItems.copperPanel.get())).results(AnvilConstructingRecipe.ConstructingResult(ItemStack(ModBlockItems.blastFurnace.get()))).unlockedBy("has_tungsten", has(NuclearTags.Items.INGOTS_TUNGSTEN)).save(consumer)
     }
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {

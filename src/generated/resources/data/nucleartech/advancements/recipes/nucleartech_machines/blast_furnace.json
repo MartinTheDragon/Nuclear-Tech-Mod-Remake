@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_tungsten_ingot": {
+    "has_tungsten": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_tungsten_ingot",
+      "has_tungsten",
       "has_the_recipe"
     ]
   ]

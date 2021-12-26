@@ -8,6 +8,7 @@ import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.EffectItem
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.screens.AnvilScreen
 import net.minecraft.data.DataGenerator
 
 class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.DE_DE) {
@@ -161,6 +162,16 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(ModBlocks.siren, "Sirene")
         addBlock(ModBlocks.safe, "Panzerschrank")
+        addBlock(ModBlocks.ironAnvil, "Eisenamboss")
+        addBlock(ModBlocks.leadAnvil, "Bleiamboss")
+        addBlock(ModBlocks.steelAnvil, "Stahlamboss")
+        addBlock(ModBlocks.meteoriteAnvil, "Meteoritenamboss")
+        addBlock(ModBlocks.starmetalAnvil, "Starmetalamboss")
+        addBlock(ModBlocks.ferrouraniumAnvil, "Ferrouranamboss")
+        addBlock(ModBlocks.bismuthAnvil, "Bismutamboss")
+        addBlock(ModBlocks.schrabidateAnvil, "Eisenschrabidatamboss")
+        addBlock(ModBlocks.dineutroniumAnvil, "Dineutroniumamboss")
+        addBlock(ModBlocks.murkyAnvil, "Düsteramboss")
         addBlock(ModBlocks.steamPressBase, "Dampfpresse")
         addBlock(ModBlocks.steamPressFrame, "Dampfpresse")
         addBlock(ModBlocks.steamPressTop, "Dampfpresse")
@@ -791,7 +802,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("$detonatorDescriptionId.error_position_not_set", "Die Position wurde noch nicht gesetzt!")
         add("$detonatorDescriptionId.error_position_not_loaded", "Das Ziel ist momentan nicht in der Welt geladen!")
         add("$detonatorDescriptionId.error_not_explosive", "Das Ziel ist kein gültiger Sprengstoff!")
-        add("$detonatorDescriptionId.error_invalid_tile_entity", "Serverfehler: Die TileEntity des Ziels ist ungültig!")
+        add("$detonatorDescriptionId.error_invalid_tile_entity", "Serverfehler: Die BlockEntity des Ziels ist ungültig!")
         add("$detonatorDescriptionId.error_missing_components", "Der Sprengstoff ist unvollständig!")
         add("$detonatorDescriptionId.error_detonation_prohibited", "Die Sprengung wurde aufgehalten!")
         add("$detonatorDescriptionId.error_unknown", "Ein unbekannter Fehler ist während der Sprengung aufgetreten")
@@ -827,6 +838,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addMenuType(MenuTypes.sirenMenu, "Sirene")
         addMenuType(MenuTypes.safeMenu, "Panzerschrank")
+        addMenuType(MenuTypes.anvilMenu, "Stufe %s Amboss")
+        add("${AnvilScreen.CONTAINER_TRANSLATION}.inputs", "Benötigt:")
+        add("${AnvilScreen.CONTAINER_TRANSLATION}.outputs", "Ergibt:")
         addMenuType(MenuTypes.steamPressMenu, "Dampfpresse")
         addMenuType(MenuTypes.blastFurnaceMenu, "Hochofen")
         addMenuType(MenuTypes.combustionGeneratorMenu, "Verbrennungsgenerator")
@@ -856,14 +870,17 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackEASAlarmScreech, "Sirene läuft: EAS Alarm Screech")
         addSound(SoundEvents.sirenTrackAPCPass, "Sirene läuft: APC Pass")
         addSound(SoundEvents.sirenTrackRazortrainHorn, "Sirene läuft: Razortrain Horn")
+        addSound(SoundEvents.anvilFall, "Amboss klescht")
         addSound(SoundEvents.pressOperate, "Presse stampft")
         addSound(SoundEvents.randomBleep, "Gerät piepst")
         addSound(SoundEvents.randomBoop, "Gerät boopt")
         addSound(SoundEvents.randomUnpack, "Gegenstand ausgepackt")
         add("subtitle.$MODID.geiger.click", "Geigerzähler klickt")
+        addSound(SoundEvents.miniNukeExplosion, "Miniatombombe explodiert")
 
         addDamageSource(DamageSources.radiation, "%1\$s starb an Strahlenvergiftung", "%1\$s fiel während des Kampfes mit %2\$s der Strahlenkrankheit zum Opfer")
         addDamageSource(DamageSources.nuclearBlast, "%1\$s wurde von einer Atomexplosion weggeblasen", "%1\$s wurde während des Kampfes mit %2\$s atomisiert")
+        addDamageSource(DamageSources.murkyAnvil, "%1\$s UNDEFINIERT", "%1\$s UNDEFINIERT beim Versuch %2\$s zu entkommen")
 
         add("geiger.title", "GEIGERZÄHLER")
         add("geiger.chunkRadiation", "Chunk-Strahlung:")
@@ -871,6 +888,11 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("geiger.playerIrradiation", "Spieler-Verstrahlung:")
         add("geiger.playerResistance", "Strahlungsresistenz:")
 
+        add("jei.$MODID.category.smithing", "Schmiederezepte")
+        add("jei.$MODID.category.smithing.tier", "Mindeststufe: %s")
+        add("jei.$MODID.category.constructing", "Konstruktionsrezepe")
+        add("jei.$MODID.category.constructing.tier", "Mindeststufe: %s")
+        add("jei.$MODID.category.constructing.tier_range", "Stufenbereich: %s..%s")
         add("jei.$MODID.category.pressing", "Pressrezepte")
         add("jei.$MODID.category.pressing.experience", "%s EP")
         add("jei.$MODID.category.blasting", "Hochofenrezepte")

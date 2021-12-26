@@ -2,10 +2,12 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.blocks.Anvil
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.PipeBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraftforge.client.model.generators.BlockModelBuilder
@@ -174,6 +176,16 @@ class NuclearBlockStateProvider(
         simpleBlock(ModBlocks.sellafiteCorium.get())
         simpleBlock(ModBlocks.siren.get(), models().cubeColumn("siren", extend(blockTexture(ModBlocks.siren.get()), "_side"), blockTexture(ModBlocks.steelBlock.get())))
         horizontalBlock(ModBlocks.safe.get(), extend(blockTexture(ModBlocks.safe.get()), "_side"), extend(blockTexture(ModBlocks.safe.get()), "_front"), extend(blockTexture(ModBlocks.safe.get()), "_side"))
+        anvil(ModBlocks.ironAnvil.get())
+        anvil(ModBlocks.leadAnvil.get())
+        anvil(ModBlocks.steelAnvil.get())
+        anvil(ModBlocks.meteoriteAnvil.get())
+        anvil(ModBlocks.starmetalAnvil.get())
+        anvil(ModBlocks.ferrouraniumAnvil.get())
+        anvil(ModBlocks.bismuthAnvil.get())
+        anvil(ModBlocks.schrabidateAnvil.get())
+        anvil(ModBlocks.dineutroniumAnvil.get())
+        anvil(ModBlocks.murkyAnvil.get())
         simpleBlock(ModBlocks.steamPressBase.get(), models().getExistingFile(ModBlocks.steamPressBase.id))
         simpleBlock(ModBlocks.steamPressFrame.get(), models().getExistingFile(ModBlocks.steamPressFrame.id))
         simpleBlock(ModBlocks.steamPressTop.get(), models().getExistingFile(ModBlocks.steamPressTop.id))
@@ -328,6 +340,16 @@ class NuclearBlockStateProvider(
         copiedBlockItem(ModBlocks.sellafiteCorium.get())
         copiedBlockItem(ModBlocks.siren.get())
         copiedBlockItem(ModBlocks.safe.get())
+        copiedBlockItem(ModBlocks.ironAnvil.get())
+        copiedBlockItem(ModBlocks.leadAnvil.get())
+        copiedBlockItem(ModBlocks.steelAnvil.get())
+        copiedBlockItem(ModBlocks.meteoriteAnvil.get())
+        copiedBlockItem(ModBlocks.starmetalAnvil.get())
+        copiedBlockItem(ModBlocks.ferrouraniumAnvil.get())
+        copiedBlockItem(ModBlocks.bismuthAnvil.get())
+        copiedBlockItem(ModBlocks.schrabidateAnvil.get())
+        copiedBlockItem(ModBlocks.dineutroniumAnvil.get())
+        copiedBlockItem(ModBlocks.murkyAnvil.get())
         copiedBlockItem(ModBlocks.blastFurnace.get())
         copiedBlockItem(ModBlocks.combustionGenerator.get())
         copiedBlockItem(ModBlocks.electricFurnace.get())
@@ -390,5 +412,21 @@ class NuclearBlockStateProvider(
                         .rotationY((it.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180).toInt() % 360)
                         .build()
             }
+    }
+
+    private fun anvil(anvil: Anvil) {
+        getVariantBuilder(anvil).forAllStatesExcept({
+            ConfiguredModel.builder()
+                .modelFile(models().getBuilder(anvil.registryName!!.path)
+                    .customLoader { modelLoader, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
+                    .modelLocation(modLoc("models/block/anvil/anvil.obj"))
+                    .flipV(true).detectCullableFaces(false).end()
+                    .texture("anvil_texture", blockTexture(anvil))
+                    .texture("particle", blockTexture(anvil))
+                    .parent(blockTransformsModel))
+                .rotationY(((it.getValue(HorizontalDirectionalBlock.FACING).toYRot() + 180) % 360).toInt())
+                .build()
+        }, BlockStateProperties.WATERLOGGED)
+
     }
 }

@@ -174,6 +174,17 @@ object ModBlocks {
     val electricFurnace: RegistryObject<ElectricFurnace> = BLOCKS.register("electric_furnace") { ElectricFurnace(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
     val shredder: RegistryObject<Shredder> = BLOCKS.register("shredder") { Shredder(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 
+    val ironAnvil: RegistryObject<Anvil> = BLOCKS.register("iron_anvil") { Anvil(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val leadAnvil: RegistryObject<Anvil> = BLOCKS.register("lead_anvil") { Anvil(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val steelAnvil: RegistryObject<Anvil> = BLOCKS.register("steel_anvil") { Anvil(2, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val meteoriteAnvil: RegistryObject<Anvil> = BLOCKS.register("meteorite_anvil") { Anvil(3, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val starmetalAnvil: RegistryObject<Anvil> = BLOCKS.register("starmetal_anvil") { Anvil(3, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val ferrouraniumAnvil: RegistryObject<Anvil> = BLOCKS.register("ferrouranium_anvil") { Anvil(4, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val bismuthAnvil: RegistryObject<Anvil> = BLOCKS.register("bismuth_anvil") { Anvil(5, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val schrabidateAnvil: RegistryObject<Anvil> = BLOCKS.register("schrabidate_anvil") { Anvil(6, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val dineutroniumAnvil: RegistryObject<Anvil> = BLOCKS.register("dineutronium_anvil") { Anvil(7, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val murkyAnvil: RegistryObject<Anvil> = BLOCKS.register("murky_anvil") { Anvil(1916169, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+
     // Bombs
 
     val littleBoy: RegistryObject<LittleBoy> = BLOCKS.register("little_boy") { LittleBoy(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }

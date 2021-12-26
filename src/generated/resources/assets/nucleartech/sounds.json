@@ -181,6 +181,12 @@
       }
     ]
   },
+  "anvil.fall": {
+    "subtitle": "subtitle.nucleartech.anvil.fall",
+    "sounds": [
+      "nucleartech:blocks/anvil_fall_berserk"
+    ]
+  },
   "press.operate": {
     "subtitle": "subtitle.nucleartech.press.operate",
     "sounds": [
@@ -240,6 +246,12 @@
     "subtitle": "subtitle.nucleartech.geiger.click",
     "sounds": [
       "nucleartech:geiger/geiger6"
+    ]
+  },
+  "weapon.mini_nuke_explosion": {
+    "subtitle": "subtitle.nucleartech.weapon.mini_nuke_explosion",
+    "sounds": [
+      "nucleartech:weapon/mini_nuke_explosion"
     ]
   }
 }
