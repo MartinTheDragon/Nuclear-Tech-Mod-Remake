@@ -24,6 +24,7 @@ object NuclearPacketHandler {
 
     internal fun initialize() {
         registerMessage(CraftMachineTemplateMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(AnvilConstructMessage::decode, NetworkDirection.PLAY_TO_SERVER)
         registerMessage(SpawnNuclearExplosionMessage::decode, NetworkDirection.PLAY_TO_SERVER)
 
         registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)

@@ -1,0 +1,24 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/titanium"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:titanium_deco_block",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 1,
+  "tierUpper": -1,
+  "overlay": "CONSTRUCTING"
+}

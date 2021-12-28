@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:basic_circuit_anvil_recycling"
+    ]
+  },
+  "criteria": {
+    "has_basic_circuit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:basic_circuit"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:basic_circuit_anvil_recycling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_basic_circuit",
+      "has_the_recipe"
+    ]
+  ]
+}

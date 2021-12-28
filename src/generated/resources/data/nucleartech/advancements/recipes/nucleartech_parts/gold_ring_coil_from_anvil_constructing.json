@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gold_ring_coil_from_anvil_constructing"
+    ]
+  },
+  "criteria": {
+    "has_gold_coil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:gold_coil"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gold_ring_coil_from_anvil_constructing"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_coil",
+      "has_the_recipe"
+    ]
+  ]
+}

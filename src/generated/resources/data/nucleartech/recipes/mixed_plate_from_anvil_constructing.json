@@ -1,0 +1,37 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:advanced_alloy_plate"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:saturnite_plate"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/neutron_reflector"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:mixed_plate",
+        "count": 4
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 3,
+  "tierUpper": -1
+}

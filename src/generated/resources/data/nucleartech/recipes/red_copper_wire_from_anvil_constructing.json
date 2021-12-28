@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:red_copper_ingot"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:red_copper_wire",
+        "count": 8
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 4,
+  "tierUpper": -1
+}

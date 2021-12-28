@@ -64,9 +64,12 @@ object ClientRegistries {
             }.stream()
         }) { Stream.of(ForgeRegistries.ITEMS.getKey(it.item)) }
         val anvilConstructingRecipeSearchTree = ReloadableSearchTree<AnvilConstructingRecipe>({
-            it.results.map(AnvilConstructingRecipe.ConstructingResult::stack).flatMap { stack -> stack.getTooltipLines(null, TooltipFlag.Default.NORMAL).map { tooltip ->
-                ChatFormatting.stripFormatting(tooltip.string)!!.trim()
-            }}.stream()
+            val results = it.results.map(AnvilConstructingRecipe.ConstructingResult::stack).flatMap { stack -> stack.getTooltipLines(null, TooltipFlag.Default.NORMAL).map { tooltip -> ChatFormatting.stripFormatting(tooltip.string)!!.trim() }}
+
+            if (it.results.size > 1 && it.ingredientsList.size == 1) {
+                val recyclingSearch = results + it.ingredientsList.single().items.flatMap { stack -> stack.getTooltipLines(null, TooltipFlag.Default.NORMAL).map { tooltip -> ChatFormatting.stripFormatting(tooltip.string)!!.trim() }}
+                recyclingSearch.stream()
+            } else results.stream()
         }) { it.results.map(AnvilConstructingRecipe.ConstructingResult::stack).map { stack -> ForgeRegistries.ITEMS.getKey(stack.item) }.stream() }
 
         Minecraft.getInstance().searchTreeManager.apply {

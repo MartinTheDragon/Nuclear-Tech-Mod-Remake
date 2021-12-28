@@ -4,41 +4,34 @@
     {
       "type": "nucleartech:stacked",
       "item": {
-        "tag": "minecraft:stone_bricks"
+        "item": "nucleartech:desh_ingot"
       },
       "amount": 4
     },
     {
       "type": "nucleartech:stacked",
       "item": {
-        "tag": "forge:ingots/iron"
+        "tag": "forge:dusts/polymer"
       },
       "amount": 2
     },
     {
       "type": "nucleartech:stacked",
       "item": {
-        "tag": "forge:ingots/tungsten"
+        "item": "nucleartech:high_speed_steel_ingot"
       },
-      "amount": 4
-    },
-    {
-      "type": "nucleartech:stacked",
-      "item": {
-        "item": "nucleartech:copper_panel"
-      },
-      "amount": 2
+      "amount": 1
     }
   ],
   "results": [
     {
       "item": {
-        "item": "nucleartech:blast_furnace",
-        "count": 1
+        "item": "nucleartech:desh_compound_plate",
+        "count": 4
       },
       "chance": 1.0
     }
   ],
-  "tierLower": 1,
+  "tierLower": 3,
   "tierUpper": -1
 }

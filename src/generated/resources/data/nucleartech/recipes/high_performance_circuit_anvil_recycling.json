@@ -1,0 +1,58 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:high_performance_circuit"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:overclocked_circuit",
+        "count": 1
+      },
+      "chance": 1.0
+    },
+    {
+      "item": {
+        "item": "nucleartech:schrabidium_wire",
+        "count": 2
+      },
+      "chance": 1.0
+    },
+    {
+      "item": {
+        "item": "nucleartech:schrabidium_wire",
+        "count": 1
+      },
+      "chance": 0.5
+    },
+    {
+      "item": {
+        "item": "nucleartech:schrabidium_wire",
+        "count": 1
+      },
+      "chance": 0.25
+    },
+    {
+      "item": {
+        "item": "nucleartech:diamond_powder",
+        "count": 1
+      },
+      "chance": 0.25
+    },
+    {
+      "item": {
+        "item": "nucleartech:desh_ingot",
+        "count": 1
+      },
+      "chance": 0.5
+    }
+  ],
+  "tierLower": 6,
+  "tierUpper": -1
+}

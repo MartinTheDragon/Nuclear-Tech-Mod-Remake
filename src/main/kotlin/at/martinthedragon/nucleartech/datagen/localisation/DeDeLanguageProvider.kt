@@ -893,6 +893,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.constructing", "Konstruktionsrezepe")
         add("jei.$MODID.category.constructing.tier", "Mindeststufe: %s")
         add("jei.$MODID.category.constructing.tier_range", "Stufenbereich: %s..%s")
+        add("jei.$MODID.category.constructing.chance", "Wahrscheinlichkeit:")
         add("jei.$MODID.category.pressing", "Pressrezepte")
         add("jei.$MODID.category.pressing.experience", "%s EP")
         add("jei.$MODID.category.blasting", "Hochofenrezepte")

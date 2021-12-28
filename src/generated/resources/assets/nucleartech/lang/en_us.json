@@ -771,6 +771,7 @@
   "jei.nucleartech.category.blasting": "Blasting",
   "jei.nucleartech.category.blasting.experience": "%s XP",
   "jei.nucleartech.category.constructing": "Constructing",
+  "jei.nucleartech.category.constructing.chance": "Output chance:",
   "jei.nucleartech.category.constructing.tier": "Minimum Tier: %s",
   "jei.nucleartech.category.constructing.tier_range": "Tier Range: %s..%s",
   "jei.nucleartech.category.pressing": "Pressing",

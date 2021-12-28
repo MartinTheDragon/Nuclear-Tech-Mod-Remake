@@ -1,0 +1,37 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:dineutronium_ingot"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:spark_mix"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:desh_ingot"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:dineutronium_compound_plate",
+        "count": 4
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 7,
+  "tierUpper": -1
+}

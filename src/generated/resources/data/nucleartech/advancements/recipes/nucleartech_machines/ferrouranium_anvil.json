@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:ferrouranium_anvil"
+    ]
+  },
+  "criteria": {
+    "has_ferrouranium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:u238_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:ferrouranium_anvil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ferrouranium",
+      "has_the_recipe"
+    ]
+  ]
+}

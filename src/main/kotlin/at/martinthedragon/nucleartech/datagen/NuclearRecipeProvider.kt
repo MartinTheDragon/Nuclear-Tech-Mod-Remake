@@ -7,7 +7,6 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.datagen.recipes.*
 import at.martinthedragon.nucleartech.recipes.PressRecipe
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeProvider
@@ -24,6 +23,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.ItemLike
 import net.minecraftforge.common.Tags
 import java.util.function.Consumer
+import at.martinthedragon.nucleartech.datagen.recipes.AnvilConstructingRecipeBuilder as AnvilRecipeBuilder
+import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe.OverlayType as AnvilRecipeType
 
 @Suppress("SameParameterValue")
 class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator) {
@@ -573,12 +574,70 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         val baseAnvils = StackedIngredient.of(1, ModBlockItems.ironAnvil.get(), ModBlockItems.leadAnvil.get())
         AnvilSmithingRecipeBuilder(1, ModBlockItems.steelAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_STEEL)).unlockedBy("has_steel", has(NuclearTags.Items.INGOTS_STEEL)).save(consumer)
         AnvilSmithingRecipeBuilder(1, ModBlockItems.starmetalAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_STARMETAL)).unlockedBy("has_starmetal", has(NuclearTags.Items.INGOTS_STARMETAL)).save(consumer)
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.ferrouraniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, ModItems.u238Ingot.get())).unlockedBy("has_ferrouranium", has(ModItems.u238Ingot.get())).save(consumer)
         AnvilSmithingRecipeBuilder(1, ModBlockItems.dineutroniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, ModItems.dineutroniumIngot.get())).unlockedBy("has_dineutronium", has(ModItems.dineutroniumIngot.get())).save(consumer)
     }
 
     private fun anvilConstructing(consumer: Consumer<FinishedRecipe>) {
-        AnvilConstructingRecipeBuilder().requires(StackedIngredient.of(4, NuclearTags.Items.PLATES_COPPER)).results(AnvilConstructingRecipe.ConstructingResult(ItemStack(ModItems.copperPanel.get()))).unlockedBy("has_copper_plate", has(NuclearTags.Items.PLATES_COPPER)).save(consumer, ResourceLocation(NuclearTech.MODID, "copper_panel_from_constructing"))
-        AnvilConstructingRecipeBuilder().requires(StackedIngredient.of(4, ItemTags.STONE_BRICKS), StackedIngredient.of(2, Tags.Items.INGOTS_IRON), StackedIngredient.of(4, NuclearTags.Items.INGOTS_TUNGSTEN), StackedIngredient.of(2, ModItems.copperPanel.get())).results(AnvilConstructingRecipe.ConstructingResult(ItemStack(ModBlockItems.blastFurnace.get()))).unlockedBy("has_tungsten", has(NuclearTags.Items.INGOTS_TUNGSTEN)).save(consumer)
+        AnvilRecipeBuilder(3).requires(Tags.Items.INGOTS_IRON).results(ModItems.ironPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(Tags.Items.INGOTS_GOLD).results(ModItems.goldPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(NuclearTags.Items.INGOTS_TITANIUM).results(ModItems.titaniumPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(NuclearTags.Items.INGOTS_ALUMINIUM).results(ModItems.aluminiumPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(NuclearTags.Items.INGOTS_STEEL).results(ModItems.steelPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(NuclearTags.Items.INGOTS_LEAD).results(ModItems.leadPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(NuclearTags.Items.INGOTS_COPPER).results(ModItems.copperPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(ModItems.advancedAlloyIngot.get()).results(ModItems.advancedAlloyPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(ModItems.schrabidiumIngot.get()).results(ModItems.schrabidiumPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(ModItems.combineSteelIngot.get()).results(ModItems.combineSteelPlate.get()).save(consumer)
+        AnvilRecipeBuilder(3).requires(ModItems.saturniteIngot.get()).results(ModItems.saturnitePlate.get()).save(consumer)
+
+        AnvilRecipeBuilder(4).requires(NuclearTags.Items.INGOTS_ALUMINIUM).results(ItemStack(ModItems.aluminiumWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(NuclearTags.Items.INGOTS_COPPER).results(ItemStack(ModItems.copperWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(NuclearTags.Items.INGOTS_TUNGSTEN).results(ItemStack(ModItems.tungstenWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(ModItems.redCopperIngot.get()).results(ItemStack(ModItems.redCopperWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(Tags.Items.INGOTS_GOLD).results(ItemStack(ModItems.goldWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(ModItems.schrabidiumIngot.get()).results(ItemStack(ModItems.schrabidiumWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(ModItems.magnetizedTungstenIngot.get()).results(ItemStack(ModItems.highTemperatureSuperConductor.get(), 8)).save(consumer)
+
+        AnvilRecipeBuilder().requires(NuclearTags.Items.INGOTS_ALUMINIUM).results(ModBlockItems.aluminiumDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.INGOTS_BERYLLIUM).results(ModBlockItems.berylliumDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.INGOTS_LEAD).results(ModBlockItems.leadDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(ModItems.redCopperIngot.get()).results(ModBlockItems.redCopperDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.INGOTS_STEEL).results(ModBlockItems.steelDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.INGOTS_TITANIUM).results(ModBlockItems.titaniumDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.INGOTS_TUNGSTEN).results(ModBlockItems.tungstenDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+
+        AnvilRecipeBuilder().requires(4 to NuclearTags.Items.PLATES_COPPER).results(ModItems.copperPanel.get()).save(consumer)
+        AnvilRecipeBuilder().requires(2 to NuclearTags.Items.PLATES_STEEL).results(ModItems.smallSteelShell.get()).save(consumer) // TODO ?
+        AnvilRecipeBuilder().requires(2 to ModItems.copperCoil.get()).results(ModItems.ringCoil.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(2 to ModItems.superConductingCoil.get()).results(ModItems.superConductingRingCoil.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+        AnvilRecipeBuilder().requires(2 to ModItems.goldCoil.get()).results(ModItems.goldRingCoil.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
+
+        AnvilRecipeBuilder().requires(ModItems.copperCoil.get(), ModItems.ringCoil.get()).requires(2 to NuclearTags.Items.PLATES_IRON).results(ItemStack(ModItems.motor.get(), 2)).save(consumer)
+
+        AnvilRecipeBuilder().requires(4 to NuclearTags.Items.INGOTS_TUNGSTEN, 4 to ItemTags.STONE_BRICKS, 2 to Tags.Items.INGOTS_IRON).requires(2 to ModItems.copperPanel.get()).results(ModBlockItems.blastFurnace.get()).save(consumer)
+
+        AnvilRecipeBuilder(3).requires(2 to ModItems.advancedAlloyPlate.get(), 1 to ModItems.saturnitePlate.get()).requires(NuclearTags.Items.PLATES_NEUTRON_REFLECTOR).results(ItemStack(ModItems.mixedPlate.get(), 4)).save(consumer)
+        AnvilRecipeBuilder(3).requires(4 to ModItems.deshIngot.get()).requires(2 to NuclearTags.Items.DUSTS_POLYMER).requires(ModItems.highSpeedSteelIngot.get()).results(ItemStack(ModItems.deshCompoundPlate.get(), 4)).save(consumer)
+        AnvilRecipeBuilder(7).requires(4 to ModItems.dineutroniumIngot.get(), 2 to ModItems.sparkMix.get(), 1 to ModItems.deshIngot.get()).results(ItemStack(ModItems.dineutroniumCompoundPlate.get(), 4)).save(consumer)
+
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_COPPER).results(ModItems.point357MagnumCasing.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_COPPER).results(ModItems.point44MagnumCasing.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_COPPER).results(ModItems.smallCaliberCasing.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_COPPER).results(ModItems.largeCaliberCasing.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_COPPER).results(ModItems.buckshotCasing.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_IRON, Tags.Items.DUSTS_REDSTONE).results(ModItems.point357MagnumPrimer.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_IRON, Tags.Items.DUSTS_REDSTONE).results(ModItems.point44MagnumPrimer.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_IRON, Tags.Items.DUSTS_REDSTONE).results(ModItems.smallCaliberPrimer.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_IRON, Tags.Items.DUSTS_REDSTONE).results(ModItems.largeCaliberPrimer.get()).save(consumer)
+        AnvilRecipeBuilder().requires(NuclearTags.Items.PLATES_IRON, Tags.Items.DUSTS_REDSTONE).results(ModItems.buckshotPrimer.get()).save(consumer)
+
+        AnvilRecipeBuilder().requires(ModItems.basicCircuitAssembly.get()).results(ModItems.steelPlate.get(), ModItems.aluminiumWire.get(), Items.REDSTONE).save(consumer)
+        AnvilRecipeBuilder().requires(ModItems.basicCircuit.get()).results(ModItems.steelPlate.get() to 1F, ModItems.aluminiumWire.get() to .5F, Items.REDSTONE to .25F).save(consumer)
+        AnvilRecipeBuilder(2).requires(ModItems.enhancedCircuit.get()).results(ModItems.basicCircuit.get()).results(ItemStack(ModItems.copperWire.get(), 2)).results(ModItems.copperWire.get() to .5F, ModItems.copperWire.get() to .25F, ModItems.quartzPowder.get() to .25F, ModItems.copperPlate.get() to .5F).save(consumer)
+        AnvilRecipeBuilder(3).requires(ModItems.advancedCircuit.get()).results(ModItems.enhancedCircuit.get()).results(ItemStack(ModItems.redCopperWire.get(), 2)).results(ModItems.redCopperWire.get() to .5F, ModItems.redCopperWire.get() to .25F, ModItems.goldPowder.get() to .25F, ModItems.insulator.get() to .5F).save(consumer)
+        AnvilRecipeBuilder(4).requires(ModItems.overclockedCircuit.get()).results(ModItems.advancedCircuit.get()).results(ItemStack(ModItems.goldWire.get(), 2)).results(ModItems.goldWire.get() to .5F, ModItems.goldWire.get() to .25F, ModItems.lapisLazuliPowder.get() to .25F, ModItems.polymerIngot.get() to .5F).save(consumer)
+        AnvilRecipeBuilder(6).requires(ModItems.highPerformanceCircuit.get()).results(ModItems.overclockedCircuit.get()).results(ItemStack(ModItems.schrabidiumWire.get(), 2)).results(ModItems.schrabidiumWire.get() to .5F, ModItems.schrabidiumWire.get() to .25F, ModItems.diamondPowder.get() to .25F, ModItems.deshIngot.get() to .5F).save(consumer)
     }
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {

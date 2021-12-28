@@ -1,0 +1,37 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:basic_circuit_assembly"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:steel_plate",
+        "count": 1
+      },
+      "chance": 1.0
+    },
+    {
+      "item": {
+        "item": "nucleartech:aluminium_wire",
+        "count": 1
+      },
+      "chance": 1.0
+    },
+    {
+      "item": {
+        "item": "minecraft:redstone",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 1,
+  "tierUpper": -1
+}

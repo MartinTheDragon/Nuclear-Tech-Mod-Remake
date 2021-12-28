@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:magnetized_tungsten_ingot"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:high_temperature_super_conductor",
+        "count": 8
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 4,
+  "tierUpper": -1
+}

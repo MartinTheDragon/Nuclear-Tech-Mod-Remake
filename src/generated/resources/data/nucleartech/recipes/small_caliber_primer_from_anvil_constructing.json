@@ -1,0 +1,30 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/iron"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/redstone"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:small_caliber_primer",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 1,
+  "tierUpper": -1
+}

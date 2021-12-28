@@ -11,6 +11,8 @@ import com.google.gson.JsonParseException
 import com.google.gson.JsonSyntaxException
 import net.minecraft.core.NonNullList
 import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.TextComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.GsonHelper
 import net.minecraft.world.Container
@@ -46,7 +48,21 @@ class AnvilConstructingRecipe(
         OverlayType.RECYCLING -> ingredientsList[0].items[0].copy()
     }
 
-    class ConstructingResult(val stack: ItemStack, val chance: Float = 1F) {
+    fun getResultsChanceCollapsed(): List<ItemStack> = results
+        .map(ConstructingResult::stack)
+        .map(ItemStack::copy)
+        .run { if (isEmpty()) emptyList() else fold(mutableListOf(first())) { list, stack -> list.apply { if (!ItemStack.isSameItemSameTags(list.last(), stack)) add(stack) }}}
+
+    fun getTooltipChancesForOutputAt(index: Int): Collection<Component> {
+        val collapsedResults = getResultsChanceCollapsed()
+        if (!collapsedResults.indices.contains(index)) return emptyList()
+        val stack = collapsedResults[index]
+        val matching = results.filter { ItemStack.isSameItemSameTags(it.stack, stack) }
+        if (matching.all { it.chance == 1F }) return emptyList()
+        return matching.map { TextComponent("${it.stack.count}x ${it.chance * 100}%") }
+    }
+
+    data class ConstructingResult(val stack: ItemStack, val chance: Float = 1F) {
         fun toNetwork(buffer: FriendlyByteBuf) {
             buffer.writeItem(stack)
             buffer.writeFloat(chance)

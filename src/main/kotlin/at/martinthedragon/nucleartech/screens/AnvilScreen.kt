@@ -2,6 +2,8 @@ package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.menus.AnvilMenu
+import at.martinthedragon.nucleartech.networking.AnvilConstructMessage
+import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
@@ -12,6 +14,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.searchtree.SearchRegistry
@@ -109,13 +112,14 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
 
     private fun refreshSearchResults(string: String) {
         searchResults.clear()
+        currentPage = 1
         if (string.isBlank()) {
+            pagesCount = ceil(originalRecipeList.size.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
             updateButtonVisibility()
             return
         }
         val searchTree = getMinecraft().getSearchTree(searchTree)
-        searchResults.addAll(searchTree.search(string.lowercase(getMinecraft().languageManager.selected.javaLocale)))
-        currentPage = 1
+        searchResults.addAll(searchTree.search(string.lowercase(getMinecraft().languageManager.selected.javaLocale)).filter { it.isTierWithinBounds(tier) })
         val recipesCount = if (searchResults.isEmpty()) originalRecipeList.size else searchResults.size
         pagesCount = ceil(recipesCount.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
         updateButtonVisibility()
@@ -148,7 +152,8 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
     }
 
     private fun sendConstructPacket() {
-
+        val recipe = getSelectedRecipe() ?: return
+        NuclearPacketHandler.INSTANCE.sendToServer(AnvilConstructMessage(recipe.recipeID, Screen.hasShiftDown()))
     }
 
     override fun containerTick() {
@@ -258,14 +263,13 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
     private fun getSelectedRecipeToListFormatted(): List<Component> {
         val selectedRecipe = getSelectedRecipe() ?: return emptyList()
         val (available, missing) = partitionIngredients(selectedRecipe.ingredientsList)
-        val results = selectedRecipe.results.map(AnvilConstructingRecipe.ConstructingResult::stack)
         return buildList {
             add(TranslatableComponent("$CONTAINER_TRANSLATION.inputs").withStyle(ChatFormatting.YELLOW))
             addAll(missing.map { TextComponent("> ").append(it.withStyle(ChatFormatting.RED)).withStyle(ChatFormatting.RED) })
             addAll(available.map { TextComponent("> ").append(it.withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GREEN) })
             add(TextComponent.EMPTY)
             add(TranslatableComponent("$CONTAINER_TRANSLATION.outputs").withStyle(ChatFormatting.YELLOW))
-            addAll(results.map { TextComponent("> ${it.count}x ").append(it.hoverName) })
+            addAll(selectedRecipe.results.map { TextComponent("> ${it.stack.count}x ").append(it.stack.hoverName).apply { if (it.chance != 1F) append(" (${it.chance * 100}%)") }})
         }
     }
 

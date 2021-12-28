@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
+import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
@@ -9,35 +10,48 @@ import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementRewards
 import net.minecraft.advancements.CriterionTriggerInstance
 import net.minecraft.advancements.RequirementsStrategy
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
+import net.minecraft.advancements.critereon.*
 import net.minecraft.core.NonNullList
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeBuilder
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.tags.Tag
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.ItemLike
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
 class AnvilConstructingRecipeBuilder(val tierLower: Int = 1, val tierUpper: Int = -1) : RecipeBuilder {
-    private lateinit var ingredients: NonNullList<StackedIngredient>
-    private lateinit var output: Collection<AnvilConstructingRecipe.ConstructingResult>
+    private val ingredients: NonNullList<StackedIngredient> = NonNullList.create()
+    private val output = mutableListOf<AnvilConstructingRecipe.ConstructingResult>()
     private var overlay: AnvilConstructingRecipe.OverlayType? = null
     private val advancement = Advancement.Builder.advancement()
 
+    fun requires(vararg item: ItemLike) = requires(item.map { StackedIngredient.of(1, it) }).also { if (advancement.criteria.isEmpty()) unlockedBy("has_${item.first().asItem().registryName!!.path}", has(item.first())) }
+    fun requires(vararg tag: Tag<Item>) = requires(tag.map { StackedIngredient.of(1, it) }).also { if (advancement.criteria.isEmpty()) unlockedBy("has_primary_passed_tag", has(tag.first())) }
+    @JvmName("requiresItemPair")
+    fun requires(vararg requirements: Pair<Int, ItemLike>) = requires(requirements.map { (amount, item) -> StackedIngredient.of(amount, item) }).also { if (advancement.criteria.isEmpty()) unlockedBy("has_${requirements.first().second.asItem().registryName!!.path}", has(requirements.first().second)) }
+    @JvmName("requiresStackPair")
+    fun requires(vararg requirements: Pair<Int, ItemStack>) = requires(requirements.map { (amount, stack) -> StackedIngredient.of(amount, stack) }).also { if (advancement.criteria.isEmpty()) unlockedBy("has_${requirements.first().second.item.registryName!!.path}", has(requirements.first().second.item)) }
+    @JvmName("requiresTagPair")
+    fun requires(vararg requirements: Pair<Int, Tag<Item>>) = requires(requirements.map { (amount, tag) -> StackedIngredient.of(amount, tag) }).also { if (advancement.criteria.isEmpty()) unlockedBy("has_primary_passed_tag", has(requirements.first().second)) }
     fun requires(vararg requirements: StackedIngredient) = requires(requirements.toList())
-    fun requires(requirement: StackedIngredient) = requires(NonNullList.create<StackedIngredient>().apply { add(requirement) })
-    fun requires(requirements: Collection<StackedIngredient>) = requires(NonNullList.createWithCapacity<StackedIngredient?>(requirements.size).apply { addAll(requirements) })
-    fun requires(requirements: NonNullList<StackedIngredient>): AnvilConstructingRecipeBuilder {
-        if (this::ingredients.isInitialized) throw IllegalStateException("Required ingredients already specified")
-        ingredients = requirements
+    fun requires(requirements: Collection<StackedIngredient>): AnvilConstructingRecipeBuilder {
+        ingredients += requirements
         return this
     }
 
     fun results(vararg result: AnvilConstructingRecipe.ConstructingResult) = results(result.toList())
     fun results(result: AnvilConstructingRecipe.ConstructingResult) = results(listOf(result))
+    fun results(vararg result: ItemLike) = results(*result.map(::ItemStack).toTypedArray())
+    @JvmName("resultsItemPair")
+    fun results(vararg result: Pair<ItemLike, Float>): AnvilConstructingRecipeBuilder = results(*result.map { (item, chance) -> ItemStack(item) to chance }.toTypedArray())
+    fun results(vararg result: ItemStack) = results(result.map { AnvilConstructingRecipe.ConstructingResult(it, 1F) })
+    @JvmName("resultsStackPair")
+    fun results(vararg result: Pair<ItemStack, Float>) = results(result.map { (stack, chance) -> AnvilConstructingRecipe.ConstructingResult(stack, chance) })
     fun results(results: Collection<AnvilConstructingRecipe.ConstructingResult>): AnvilConstructingRecipeBuilder {
-        if (this::output.isInitialized) throw IllegalStateException("Results already specified")
-        output = results
+        output += results
         return this
     }
 
@@ -51,13 +65,20 @@ class AnvilConstructingRecipeBuilder(val tierLower: Int = 1, val tierUpper: Int 
         return this
     }
 
+    private fun has(item: ItemLike) = inventoryTrigger(ItemPredicate.Builder.item().of(item).build())
+    private fun has(tag: Tag<Item>) = inventoryTrigger(ItemPredicate.Builder.item().of(tag).build())
+    private fun inventoryTrigger(vararg requirements: ItemPredicate) = InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, requirements)
+
     override fun group(group: String?) = this
     override fun getResult(): Item = output.first().stack.item
+
+    override fun save(consumer: Consumer<FinishedRecipe>) = save(consumer, ResourceLocation(NuclearTech.MODID, if ((output.size > 1 && ingredients.size == 1) || overlay == AnvilConstructingRecipe.OverlayType.RECYCLING) "${RecipeBuilder.getDefaultRecipeId(ingredients.first().items.first().item).path}_anvil_recycling" else "${RecipeBuilder.getDefaultRecipeId(result).path}_from_anvil_constructing"))
+    override fun save(consumer: Consumer<FinishedRecipe>, name: String) = save(consumer, ResourceLocation(NuclearTech.MODID, "${name}_from_anvil_constructing"))
 
     override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
         advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
-        if (!this::ingredients.isInitialized || !this::output.isInitialized) throw IllegalStateException("Not enough data specified")
+        if (ingredients.isEmpty() || output.isEmpty()) throw IllegalStateException("Not enough data specified")
         consumer.accept(Result(recipeName, tierLower, tierUpper, ingredients, output, overlay, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }
 

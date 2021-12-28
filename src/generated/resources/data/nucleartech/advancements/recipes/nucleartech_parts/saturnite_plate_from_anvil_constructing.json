@@ -2,16 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:copper_panel_from_constructing"
+      "nucleartech:saturnite_plate_from_anvil_constructing"
     ]
   },
   "criteria": {
-    "has_copper_plate": {
+    "has_saturnite_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:plates/copper"
+            "items": [
+              "nucleartech:saturnite_ingot"
+            ]
           }
         ]
       }
@@ -19,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:copper_panel_from_constructing"
+        "recipe": "nucleartech:saturnite_plate_from_anvil_constructing"
       }
     }
   },
   "requirements": [
     [
-      "has_copper_plate",
+      "has_saturnite_ingot",
       "has_the_recipe"
     ]
   ]

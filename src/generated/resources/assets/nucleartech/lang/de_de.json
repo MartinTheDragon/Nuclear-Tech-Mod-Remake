@@ -771,6 +771,7 @@
   "jei.nucleartech.category.blasting": "Hochofenrezepte",
   "jei.nucleartech.category.blasting.experience": "%s EP",
   "jei.nucleartech.category.constructing": "Konstruktionsrezepe",
+  "jei.nucleartech.category.constructing.chance": "Wahrscheinlichkeit:",
   "jei.nucleartech.category.constructing.tier": "Mindeststufe: %s",
   "jei.nucleartech.category.constructing.tier_range": "Stufenbereich: %s..%s",
   "jei.nucleartech.category.pressing": "Pressrezepte",

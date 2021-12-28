@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lead_plate_from_anvil_constructing"
+    ]
+  },
+  "criteria": {
+    "has_primary_passed_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lead_plate_from_anvil_constructing"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_primary_passed_tag",
+      "has_the_recipe"
+    ]
+  ]
+}

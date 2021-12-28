@@ -2,16 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:blast_furnace"
+      "nucleartech:schrabidium_plate_from_anvil_constructing"
     ]
   },
   "criteria": {
-    "has_tungsten": {
+    "has_schrabidium_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/tungsten"
+            "items": [
+              "nucleartech:schrabidium_ingot"
+            ]
           }
         ]
       }
@@ -19,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:blast_furnace"
+        "recipe": "nucleartech:schrabidium_plate_from_anvil_constructing"
       }
     }
   },
   "requirements": [
     [
-      "has_tungsten",
+      "has_schrabidium_ingot",
       "has_the_recipe"
     ]
   ]

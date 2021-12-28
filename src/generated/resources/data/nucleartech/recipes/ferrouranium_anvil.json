@@ -1,0 +1,27 @@
+{
+  "type": "nucleartech:anvil_smithing",
+  "tier": 1,
+  "left": {
+    "type": "nucleartech:stacked",
+    "items": [
+      {
+        "item": "nucleartech:iron_anvil"
+      },
+      {
+        "item": "nucleartech:lead_anvil"
+      }
+    ],
+    "amount": 1
+  },
+  "right": {
+    "type": "nucleartech:stacked",
+    "item": {
+      "item": "nucleartech:u238_ingot"
+    },
+    "amount": 10
+  },
+  "result": {
+    "item": "nucleartech:ferrouranium_anvil",
+    "count": 1
+  }
+}

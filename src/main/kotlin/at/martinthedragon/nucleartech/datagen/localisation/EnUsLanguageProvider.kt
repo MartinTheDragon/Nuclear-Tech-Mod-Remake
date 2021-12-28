@@ -897,6 +897,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.constructing", "Constructing")
         add("jei.$MODID.category.constructing.tier", "Minimum Tier: %s")
         add("jei.$MODID.category.constructing.tier_range", "Tier Range: %s..%s")
+        add("jei.$MODID.category.constructing.chance", "Output chance:")
         add("jei.$MODID.category.pressing", "Pressing")
         add("jei.$MODID.category.pressing.experience", "%s XP")
         add("jei.$MODID.category.blasting", "Blasting")

@@ -9,15 +9,18 @@ import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.ingredients.IIngredients
 import mezz.jei.api.recipe.category.IRecipeCategory
+import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
+import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.resources.ResourceLocation
 
 class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructingRecipe> {
     private val background: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 0, 180, 64).build()
-    private val wrench: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 0, 14, 14).build()
-    private val recycle: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 194, 0, 9, 9).build()
-    private val hammer: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 203, 0, 10, 10).build()
+    private val arrow: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 0, 16, 16).build()
+    private val wrench: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 16, 16, 16).build()
+    private val recycle: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 32, 16, 16).build()
+    private val hammer: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 48, 16, 16).build()
     private val hideLeft: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 64, 72, 54).build()
     private val hideRight: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 108, 64, 72, 54).build()
 
@@ -29,7 +32,7 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
 
     override fun setIngredients(recipe: AnvilConstructingRecipe, ingredients: IIngredients) {
         ingredients.setInputIngredients(recipe.ingredients)
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.results.map(AnvilConstructingRecipe.ConstructingResult::stack))
+        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getResultsChanceCollapsed())
     }
 
     override fun setRecipe(recipeLayout: IRecipeLayout, recipe: AnvilConstructingRecipe, ingredients: IIngredients) {
@@ -43,6 +46,14 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
             AnvilConstructingRecipe.OverlayType.CONSTRUCTING, AnvilConstructingRecipe.OverlayType.SMITHING -> itemStacks.init(12, false, 108, 28)
         }
         itemStacks.set(ingredients)
+        itemStacks.addTooltipCallback { slotIndex, input, _, tooltip ->
+            if (input) return@addTooltipCallback
+            val chances = recipe.getTooltipChancesForOutputAt(slotIndex - 12)
+            if (chances.isEmpty()) return@addTooltipCallback
+            if (tooltip.isNotEmpty()) tooltip.add(TextComponent.EMPTY)
+            tooltip.add(TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.chance").withStyle(ChatFormatting.GOLD))
+            tooltip.addAll(chances)
+        }
     }
 
     override fun draw(recipe: AnvilConstructingRecipe, stack: PoseStack, mouseX: Double, mouseY: Double) {
@@ -56,10 +67,10 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
         val overlay = recipe.overlay
 
         when (overlay) {
-            AnvilConstructingRecipe.OverlayType.CONSTRUCTING -> wrench.draw(stack, 82, 12)
-            AnvilConstructingRecipe.OverlayType.RECYCLING -> recycle.draw(stack, 85, 15)
-            AnvilConstructingRecipe.OverlayType.SMITHING -> hammer.draw(stack, 84, 14)
-            else -> {}
+            AnvilConstructingRecipe.OverlayType.NONE -> arrow.draw(stack, 82, 20)
+            AnvilConstructingRecipe.OverlayType.CONSTRUCTING -> wrench.draw(stack, 82, 20)
+            AnvilConstructingRecipe.OverlayType.RECYCLING -> recycle.draw(stack, 82, 20)
+            AnvilConstructingRecipe.OverlayType.SMITHING -> hammer.draw(stack, 82, 20)
         }
 
         if (overlay == AnvilConstructingRecipe.OverlayType.RECYCLING || overlay == AnvilConstructingRecipe.OverlayType.SMITHING) hideLeft.draw(stack, 0, 10)

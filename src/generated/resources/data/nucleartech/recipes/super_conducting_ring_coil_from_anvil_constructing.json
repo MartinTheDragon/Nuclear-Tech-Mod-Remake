@@ -1,0 +1,24 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:super_conducting_coil"
+      },
+      "amount": 2
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:super_conducting_ring_coil",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 1,
+  "tierUpper": -1,
+  "overlay": "CONSTRUCTING"
+}
