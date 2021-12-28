@@ -16,7 +16,7 @@ import net.minecraft.world.item.crafting.Ingredient
 
 class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<TemplateFolderJeiRecipeCategory.TemplateFolderRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 112, 38)
-    private val icon = guiHelper.createDrawableIngredient(ItemStack(ModItems.machineTemplateFolder.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModItems.machineTemplateFolder.get()))
 
     override fun getUid() = UID
 

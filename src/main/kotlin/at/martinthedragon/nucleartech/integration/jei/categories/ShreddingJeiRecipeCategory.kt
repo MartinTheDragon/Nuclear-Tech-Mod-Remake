@@ -21,7 +21,7 @@ import net.minecraft.world.item.crafting.Ingredient
 
 class ShreddingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<ShreddingRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 111, 54)
-    private val icon = guiHelper.createDrawableIngredient(ItemStack(ModBlockItems.shredder.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.shredder.get()))
     private val arrow = guiHelper.drawableBuilder(GUI_RESOURCE, 16, 90, 22, 16).buildAnimated(ShredderBlockEntity.SHREDDING_TIME, IDrawableAnimated.StartDirection.LEFT, false)
     private val energyBar = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 16, 52).buildAnimated(ShredderBlockEntity.MAX_ENERGY / ShredderBlockEntity.ENERGY_CONSUMPTION_RATE / 10, IDrawableAnimated.StartDirection.TOP, true)
 

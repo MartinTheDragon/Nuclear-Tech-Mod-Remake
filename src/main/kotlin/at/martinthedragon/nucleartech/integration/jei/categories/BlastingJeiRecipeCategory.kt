@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack
 
 class BlastingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 72, 54)
-    private val icon = guiHelper.createDrawableIngredient(ItemStack(ModBlockItems.blastFurnace.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.blastFurnace.get()))
     private val blastArrow = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 22, 16).buildAnimated(400, IDrawableAnimated.StartDirection.LEFT, false)
 
     override fun getUid() = UID

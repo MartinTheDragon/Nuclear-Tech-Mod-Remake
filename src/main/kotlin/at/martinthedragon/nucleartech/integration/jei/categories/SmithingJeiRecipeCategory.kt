@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack
 
 class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
     private val background: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 0, 90, 27).setTextureSize(128, 128).build()
-    private val icon: IDrawable = guiHelper.createDrawableIngredient(ItemStack(ModBlockItems.ironAnvil.get()))
+    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.ironAnvil.get()))
 
     override fun getUid() = UID
     override fun getRecipeClass() = AnvilSmithingRecipe::class.java

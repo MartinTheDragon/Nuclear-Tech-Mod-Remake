@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.Ingredient
 
 class PressingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<PressRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 81, 54)
-    private val icon = guiHelper.createDrawableIngredient(ItemStack(ModBlockItems.steamPress.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.steamPress.get()))
     private val pressArrow = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 18, 16).buildAnimated(20, IDrawableAnimated.StartDirection.TOP, false)
 
     override fun getUid() = UID
