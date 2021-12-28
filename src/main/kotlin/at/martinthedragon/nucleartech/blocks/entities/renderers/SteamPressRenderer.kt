@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.blocks.entities.renderers
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.entities.SteamPressBlockEntity
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.model.geom.ModelPart
@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.client.resources.model.Material
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.InventoryMenu
 
 class SteamPressRenderer(context: BlockEntityRendererProvider.Context) : BlockEntityRenderer<SteamPressBlockEntity> {
@@ -41,7 +40,7 @@ class SteamPressRenderer(context: BlockEntityRendererProvider.Context) : BlockEn
     }
 
     companion object {
-        val PRESS_HEAD_MATERIAL = Material(InventoryMenu.BLOCK_ATLAS, ResourceLocation(NuclearTech.MODID, "block/steam_press/steam_press_head"))
+        val PRESS_HEAD_MATERIAL = Material(InventoryMenu.BLOCK_ATLAS, ntm("block/steam_press/steam_press_head"))
 
         fun createLayerDefinition(): LayerDefinition {
             val meshDefinition = MeshDefinition().apply {

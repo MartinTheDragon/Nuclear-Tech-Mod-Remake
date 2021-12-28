@@ -1,9 +1,6 @@
 package at.martinthedragon.nucleartech.integration.jei
 
-import at.martinthedragon.nucleartech.ModBlockItems
-import at.martinthedragon.nucleartech.ModItems
-import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.integration.jei.categories.*
 import at.martinthedragon.nucleartech.integration.jei.transfers.PressingRecipeTransferInfo
 import at.martinthedragon.nucleartech.menus.AnvilMenu
@@ -18,7 +15,6 @@ import mezz.jei.api.JeiPlugin
 import mezz.jei.api.constants.VanillaRecipeCategoryUid
 import mezz.jei.api.registration.*
 import net.minecraft.client.Minecraft
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
@@ -30,7 +26,7 @@ class JeiIntegration : IModPlugin {
         NuclearTech.LOGGER.info("Enabling JEI integration")
     }
 
-    override fun getPluginUid() = ResourceLocation(NuclearTech.MODID, NuclearTech.MODID)
+    override fun getPluginUid() = ntm(NuclearTech.MODID)
 
     override fun registerCategories(registration: IRecipeCategoryRegistration) {
         val guiHelper = registration.jeiHelpers.guiHelper

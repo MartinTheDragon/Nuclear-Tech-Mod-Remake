@@ -1,13 +1,12 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.menus.SafeMenu
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class SafeScreen(
@@ -15,7 +14,7 @@ class SafeScreen(
     playerInventory: Inventory,
     title: Component
 ) : AbstractContainerScreen<SafeMenu>(container, playerInventory, title) {
-    private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/safe.png")
+    private val texture = ntm("textures/gui/safe.png")
 
     init {
         imageWidth = 176

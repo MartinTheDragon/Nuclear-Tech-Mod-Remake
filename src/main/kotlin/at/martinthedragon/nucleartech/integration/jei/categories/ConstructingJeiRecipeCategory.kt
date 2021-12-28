@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
@@ -13,7 +14,6 @@ import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 
 class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructingRecipe> {
     private val background: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 0, 180, 64).build()
@@ -78,7 +78,7 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
     }
 
     companion object {
-        private val GUI_RESOURCE = ResourceLocation(NuclearTech.MODID, "textures/gui/jei_constructing.png")
-        val UID = ResourceLocation(NuclearTech.MODID, "constructing")
+        private val GUI_RESOURCE = ntm("textures/gui/jei_constructing.png")
+        val UID = ntm("constructing")
     }
 }

@@ -3,8 +3,8 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
+import at.martinthedragon.nucleartech.ntm
 import net.minecraft.data.DataGenerator
-import net.minecraft.resources.ResourceLocation
 import net.minecraftforge.common.data.ExistingFileHelper
 import net.minecraftforge.common.data.SoundDefinitionsProvider
 
@@ -49,6 +49,5 @@ class NuclearSoundsProvider(
         add(SoundEvents.miniNukeExplosion, definition().with(sound(ntm("weapon/mini_nuke_explosion"))).subtitle(ntmSubtitle("weapon.mini_nuke_explosion")))
     }
 
-    private fun ntm(location: String) = ResourceLocation(NuclearTech.MODID, location)
     private fun ntmSubtitle(subtitle: String) = "subtitle.${NuclearTech.MODID}.$subtitle"
 }

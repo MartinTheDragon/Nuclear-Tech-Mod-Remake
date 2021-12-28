@@ -11,7 +11,7 @@ import net.minecraftforge.common.Tags
 object NuclearTags {
     object Blocks {
         private fun tag(name: String): Tags.IOptionalNamedTag<Block> =
-            BlockTags.createOptional(ResourceLocation(NuclearTech.MODID, name))
+            BlockTags.createOptional(ntm(name))
         private fun forgeTag(name: String): Tags.IOptionalNamedTag<Block> =
             BlockTags.createOptional(ResourceLocation("forge", name))
 
@@ -66,7 +66,7 @@ object NuclearTags {
 
     object Items {
         private fun tag(name: String): Tags.IOptionalNamedTag<Item> =
-            ItemTags.createOptional(ResourceLocation(NuclearTech.MODID, name))
+            ItemTags.createOptional(ntm(name))
         private fun forgeTag(name: String): Tags.IOptionalNamedTag<Item> =
             ItemTags.createOptional(ResourceLocation("forge", name))
 

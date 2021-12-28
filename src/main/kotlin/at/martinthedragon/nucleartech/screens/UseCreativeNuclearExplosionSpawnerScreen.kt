@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.networking.SpawnNuclearExplosionMessage
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.brigadier.StringReader
@@ -18,7 +19,6 @@ import net.minecraft.commands.arguments.coordinates.Vec3Argument
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 
 class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclearExplosionSpawner.get().description) {
     private lateinit var strengthEdit: EditBox
@@ -164,7 +164,7 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(ModItems.creativeNuclear
     companion object {
         const val GUI_WIDTH = 176
         const val GUI_HEIGHT = 141
-        val GUI_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/gui/creative_nuclear_explosion_spawner.png")
+        val GUI_LOCATION = ntm("textures/gui/creative_nuclear_explosion_spawner.png")
         private val STRENGTH_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.strength")
         private val MUTED_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.muted")
         private val HAS_FALLOUT_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.has_fallout")

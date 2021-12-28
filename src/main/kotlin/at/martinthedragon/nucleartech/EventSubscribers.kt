@@ -4,7 +4,6 @@ import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationCap
 import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.core.BlockPos
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
@@ -35,7 +34,7 @@ object EventSubscribers {
     @SubscribeEvent @JvmStatic
     fun attachCapabilitiesEvent(event: AttachCapabilitiesEvent<Entity>) {
         if (event.`object` is LivingEntity)
-            event.addCapability(ResourceLocation(NuclearTech.MODID, "contamination"), ContaminationCapabilityProvider())
+            event.addCapability(ntm("contamination"), ContaminationCapabilityProvider())
     }
 
     @SubscribeEvent @JvmStatic

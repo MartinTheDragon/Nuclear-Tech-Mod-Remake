@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
+import at.martinthedragon.nucleartech.mc
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
@@ -53,7 +54,7 @@ class BlastingRecipeBuilder(private val result: Item, val experience: Float, val
 
     override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
-        advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
+        advancement.parent(mc("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
         if (!this::ingredient1.isInitialized || !this::ingredient2.isInitialized) throw IllegalStateException("Not enough ingredients specified for recipe $recipeName specified")
         consumer.accept(Result(recipeName, result, count, experience, ingredient1, ingredient2, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }

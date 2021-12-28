@@ -19,7 +19,6 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.ShaderInstance
 import net.minecraft.client.searchtree.ReloadableSearchTree
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
@@ -102,7 +101,7 @@ object ClientRegistries {
     fun registerTextureInAtlas(event: TextureStitchEvent.Pre) {
         if (event.atlas.location() == InventoryMenu.BLOCK_ATLAS) {
             NuclearTech.LOGGER.debug("Adding atlas textures")
-            event.addSprite(ResourceLocation(NuclearTech.MODID, "block/steam_press/steam_press_head"))
+            event.addSprite(ntm("block/steam_press/steam_press_head"))
         }
     }
 
@@ -118,7 +117,7 @@ object ClientRegistries {
 
     @SubscribeEvent @JvmStatic
     fun registerModels(event: ModelRegistryEvent) {
-        ForgeModelBakery.addSpecialModel(ResourceLocation(NuclearTech.MODID, "other/mushroom_cloud"))
+        ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))
     }
 
     @Mod.EventBusSubscriber(modid = NuclearTech.MODID, value = [Dist.CLIENT], bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -127,7 +126,7 @@ object ClientRegistries {
 
         @SubscribeEvent @JvmStatic
         fun registerShaders(event: RegisterShadersEvent) {
-            event.registerShader(ShaderInstance(event.resourceManager, ResourceLocation(NuclearTech.MODID, "rendertype_mushroom_cloud"), NuclearRenderTypes.VertexFormats.POSITION_COLOR_TEX_NORMAL)) { rendertypeMushroomCloudShader = it }
+            event.registerShader(ShaderInstance(event.resourceManager, ntm("rendertype_mushroom_cloud"), NuclearRenderTypes.VertexFormats.POSITION_COLOR_TEX_NORMAL)) { rendertypeMushroomCloudShader = it }
         }
     }
 }

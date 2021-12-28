@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.IRecipeLayout
 import mezz.jei.api.gui.drawable.IDrawable
@@ -10,7 +11,6 @@ import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.ingredients.IIngredients
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 
@@ -55,7 +55,7 @@ class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<T
     }
 
     companion object {
-        val GUI_RESOURCE = ResourceLocation(NuclearTech.MODID, "textures/gui/jei_template_folder.png")
-        val UID = ResourceLocation(NuclearTech.MODID, "template_folder_results")
+        val GUI_RESOURCE = ntm("textures/gui/jei_template_folder.png")
+        val UID = ntm("template_folder_results")
     }
 }

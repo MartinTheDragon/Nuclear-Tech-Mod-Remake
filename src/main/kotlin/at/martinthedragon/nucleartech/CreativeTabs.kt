@@ -1,6 +1,5 @@
 package at.martinthedragon.nucleartech
 
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -12,7 +11,7 @@ enum class CreativeTabs(val itemGroup: CreativeModeTab) {
     Templates(createItemGroup("templates", ModItems.machineTemplateFolder)),
     Blocks(createItemGroup("blocks", ModBlockItems.uraniumOre)),
     Machines(createItemGroup("machines", ModBlockItems.safe)), // TODO
-    Bombs(createItemGroup("bombs", ModBlockItems.fatMan).setBackgroundImage(ResourceLocation(NuclearTech.MODID, "textures/gui/creative_inventory/tab_nuke.png"))),
+    Bombs(createItemGroup("bombs", ModBlockItems.fatMan).setBackgroundImage(ntm("textures/gui/creative_inventory/tab_nuke.png"))),
     Consumables(createItemGroup("consumables", ModItems.oilDetector)),
     Miscellaneous(createItemGroup("miscellaneous", ModItems.nuclearCreeperSpawnEgg))
 }

@@ -3,12 +3,12 @@ package at.martinthedragon.nucleartech.rendering
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.Radiation
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiComponent
 import net.minecraft.client.renderer.GameRenderer
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.levelgen.SingleThreadedRandomSource
 import net.minecraft.world.level.levelgen.synth.SimplexNoise
 import net.minecraftforge.api.distmarker.Dist
@@ -38,7 +38,7 @@ object ClientRenderer {
         }
     }
 
-    private val GEIGER_OVERLAY = ResourceLocation(NuclearTech.MODID, "textures/gui/hud/geiger_hud_overlay.png")
+    private val GEIGER_OVERLAY = ntm("textures/gui/hud/geiger_hud_overlay.png")
     private var lastSurvey = 0L
     private var previousResult = 0F
     private var lastResult = 0F

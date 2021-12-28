@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
+import at.martinthedragon.nucleartech.mc
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
@@ -75,7 +76,7 @@ class BatteryRecipeBuilder(private val result: Item, val count: Int) : RecipeBui
 
     override fun save(consumer: Consumer<FinishedRecipe>, name: ResourceLocation) {
         ensureValid(name)
-        advancement.parent(ResourceLocation("recipes/root"))
+        advancement.parent(mc("recipes/root"))
             .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name))
             .rewards(AdvancementRewards.Builder.recipe(name)).requirements(RequirementsStrategy.OR)
         consumer.accept(Result(name, result, count, group, rows, key, advancement, ResourceLocation(name.namespace, "recipes/" + result.itemCategory!!.recipeFolderName + "/" + name.path)))

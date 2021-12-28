@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.menus.AnvilMenu
 import at.martinthedragon.nucleartech.networking.AnvilConstructMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
@@ -23,7 +24,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 import kotlin.math.ceil
 import kotlin.math.min
@@ -338,7 +338,7 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
         private const val GUI_WIDTH = 176
         private const val GUI_HEIGHT = 222
         private const val RECIPES_PER_PAGE = 10
-        private val TEXTURE = ResourceLocation(NuclearTech.MODID, "textures/gui/anvil.png")
+        private val TEXTURE = ntm("textures/gui/anvil.png")
         val searchTree = SearchRegistry.Key<AnvilConstructingRecipe>()
     }
 }

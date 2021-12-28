@@ -2,9 +2,9 @@ package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.searchtree.SearchRegistry
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -256,7 +255,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         const val GUI_WIDTH = 176
         const val GUI_HEIGHT = 229
         const val RECIPES_PER_PAGE = 35
-        val TEMPLATE_FOLDER_GUI_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/gui/machine_template_folder.png")
+        val TEMPLATE_FOLDER_GUI_LOCATION = ntm("textures/gui/machine_template_folder.png")
         val searchTree = SearchRegistry.Key<ItemStack>()
     }
 }

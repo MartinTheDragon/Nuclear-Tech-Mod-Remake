@@ -1,14 +1,13 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.entities.SteamPressBlockEntity
 import at.martinthedragon.nucleartech.menus.PressMenu
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class SteamPressScreen(
@@ -16,7 +15,7 @@ class SteamPressScreen(
     playerInventory: Inventory,
     title: Component
 ) : AbstractContainerScreen<PressMenu>(container, playerInventory, title) {
-    private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/steam_press.png")
+    private val texture = ntm("textures/gui/steam_press.png")
 
     init {
         imageWidth = 176

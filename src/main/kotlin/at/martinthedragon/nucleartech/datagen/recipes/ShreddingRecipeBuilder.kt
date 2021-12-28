@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
+import at.martinthedragon.nucleartech.mc
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
@@ -32,7 +33,7 @@ class ShreddingRecipeBuilder(private val result: Item, val experience: Float, va
 
     override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw throw IllegalStateException("No way of obtaining recipe $recipeName")
-        advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
+        advancement.parent(mc("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
         consumer.accept(Result(recipeName, result, count, experience, ingredient, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }
 

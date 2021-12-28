@@ -1,13 +1,12 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.menus.FatManMenu
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class FatManScreen(
@@ -15,7 +14,7 @@ class FatManScreen(
     playerInventory: Inventory,
     title: Component
 ) : AbstractContainerScreen<FatManMenu>(container, playerInventory, title) {
-    private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/fat_man.png")
+    private val texture = ntm("textures/gui/fat_man.png")
 
     override fun render(matrix: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrix)

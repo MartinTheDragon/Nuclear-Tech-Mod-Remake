@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.entities.renderers
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.entities.MushroomCloudEntity
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.ClientRenderer
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
 import at.martinthedragon.nucleartech.rendering.renderModelAlpha
@@ -18,17 +18,16 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.resources.ResourceLocation
 import net.minecraftforge.client.model.data.EmptyModelData
 import java.util.*
 import kotlin.math.*
 
 class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRenderer<MushroomCloudEntity>(context) {
-    private val textureFireball = ResourceLocation(NuclearTech.MODID, "textures/entity/mushroom_cloud/fireball.png")
-    private val textureBalefire = ResourceLocation(NuclearTech.MODID, "textures/entity/mushroom_cloud/balefire.png")
-    private val textureCloudlet = ResourceLocation(NuclearTech.MODID, "textures/entity/mushroom_cloud/cloudlet.png")
+    private val textureFireball = ntm("textures/entity/mushroom_cloud/fireball.png")
+    private val textureBalefire = ntm("textures/entity/mushroom_cloud/balefire.png")
+    private val textureCloudlet = ntm("textures/entity/mushroom_cloud/cloudlet.png")
 
-    private val mushModel = ResourceLocation(NuclearTech.MODID, "other/mushroom_cloud")
+    private val mushModel = ntm("other/mushroom_cloud")
 
     private val modelRenderer = Minecraft.getInstance().blockRenderer.modelRenderer
     private val modelManager = Minecraft.getInstance().modelManager

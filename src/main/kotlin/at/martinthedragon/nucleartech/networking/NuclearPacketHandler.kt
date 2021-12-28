@@ -1,8 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.resources.ResourceLocation
 import net.minecraftforge.network.NetworkDirection
 import net.minecraftforge.network.NetworkRegistry
 import net.minecraftforge.network.simple.SimpleChannel
@@ -14,7 +13,7 @@ object NuclearPacketHandler {
 
     @JvmField
     val INSTANCE: SimpleChannel = NetworkRegistry.newSimpleChannel(
-        ResourceLocation(NuclearTech.MODID, "main"),
+        ntm("main"),
         this::PROTOCOL_VERSION,
         PROTOCOL_VERSION::equals, // deny login if versions don't match and if channel is not present on endpoint
         PROTOCOL_VERSION::equals

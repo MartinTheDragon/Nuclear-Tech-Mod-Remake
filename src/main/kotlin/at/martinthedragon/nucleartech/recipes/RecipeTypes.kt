@@ -1,9 +1,8 @@
 package at.martinthedragon.nucleartech.recipes
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilSmithingRecipe
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.item.crafting.RecipeType
 
@@ -19,7 +18,7 @@ object RecipeTypes {
     val SHREDDING = create<ShreddingRecipe>("shredding")
 
     private fun <T : Recipe<*>> create(name: String): RecipeType<T> = object : RecipeType<T> {
-        private val registryName = ResourceLocation(NuclearTech.MODID, name)
+        private val registryName = ntm(name)
         override fun toString() = registryName.toString()
     }.also { recipeTypes += it }
 

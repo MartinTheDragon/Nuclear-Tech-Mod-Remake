@@ -1,15 +1,14 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.entities.BlastFurnaceBlockEntity
 import at.martinthedragon.nucleartech.menus.BlastFurnaceMenu
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class BlastFurnaceScreen(
@@ -55,6 +54,6 @@ class BlastFurnaceScreen(
     }
 
     companion object {
-        val TEXTURE = ResourceLocation(NuclearTech.MODID, "textures/gui/blast_furnace.png")
+        val TEXTURE = ntm("textures/gui/blast_furnace.png")
     }
 }

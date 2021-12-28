@@ -1,12 +1,11 @@
 package at.martinthedragon.nucleartech.recipes
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import com.google.gson.*
 import it.unimi.dsi.fastutil.ints.IntArrayList
 import it.unimi.dsi.fastutil.ints.IntComparators
 import it.unimi.dsi.fastutil.ints.IntList
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.Tag
 import net.minecraft.util.GsonHelper
 import net.minecraft.world.Container
@@ -82,7 +81,7 @@ class StackedIngredient private constructor(private val values: Sequence<Value>,
     }
 
     companion object {
-        val NAME = ResourceLocation(NuclearTech.MODID, "stacked")
+        val NAME = ntm("stacked")
         val EMPTY = StackedIngredient(emptySequence(), 0)
 
         fun fromValues(values: Sequence<Value>, amount: Int): StackedIngredient {

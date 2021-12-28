@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
+import at.martinthedragon.nucleartech.mc
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementRewards
@@ -53,7 +54,7 @@ class ExtendedCookingRecipeBuilder(
     override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
 
-        advancement.parent(ResourceLocation("recipes/root"))
+        advancement.parent(mc("recipes/root"))
             .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName))
             .rewards(AdvancementRewards.Builder.recipe(recipeName))
             .requirements(RequirementsStrategy.OR)

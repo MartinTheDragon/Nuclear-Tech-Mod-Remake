@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.entities.ShredderBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menus.ShredderMenu
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class ShredderScreen(
@@ -83,6 +82,6 @@ class ShredderScreen(
     }
 
     companion object {
-        val TEXTURE = ResourceLocation(NuclearTech.MODID, "textures/gui/shredder.png")
+        val TEXTURE = ntm("textures/gui/shredder.png")
     }
 }

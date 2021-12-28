@@ -1,18 +1,17 @@
 package at.martinthedragon.nucleartech.entities.renderers
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
 import at.martinthedragon.nucleartech.entities.renderers.layers.NuclearCreeperPowerLayer
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.model.CreeperModel
 import net.minecraft.client.model.geom.ModelLayers
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.MobRenderer
-import net.minecraft.resources.ResourceLocation
 import kotlin.math.sin
 
 class NuclearCreeperRenderer(context: EntityRendererProvider.Context) : MobRenderer<NuclearCreeper, CreeperModel<NuclearCreeper>>(context, CreeperModel(context.bakeLayer(ModelLayers.CREEPER)), .5F) {
-    private val NUCLEAR_CREEPER_LOCATION = ResourceLocation(NuclearTech.MODID, "textures/entity/nuclear_creeper/nuclear_creeper.png")
+    private val NUCLEAR_CREEPER_LOCATION = ntm("textures/entity/nuclear_creeper/nuclear_creeper.png")
 
     init {
         addLayer(NuclearCreeperPowerLayer(this, context.modelSet))

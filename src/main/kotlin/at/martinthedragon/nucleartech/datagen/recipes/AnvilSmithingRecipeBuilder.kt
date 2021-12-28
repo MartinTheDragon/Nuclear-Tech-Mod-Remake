@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
+import at.martinthedragon.nucleartech.mc
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import com.google.gson.JsonObject
@@ -51,7 +52,7 @@ class AnvilSmithingRecipeBuilder(private val tier: Int, private val result: Item
 
     override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
-        advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
+        advancement.parent(mc("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
         if (!this::left.isInitialized || !this::right.isInitialized) throw IllegalStateException("Not enough ingredients specified for recipe $recipeName")
         consumer.accept(Result(recipeName, tier, result, left, right, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.item.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }

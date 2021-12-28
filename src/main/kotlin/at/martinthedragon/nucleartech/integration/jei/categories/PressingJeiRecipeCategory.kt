@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.PressRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
@@ -13,7 +14,6 @@ import mezz.jei.api.ingredients.IIngredients
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 
@@ -61,7 +61,7 @@ class PressingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<PressRe
     }
 
     companion object {
-        val GUI_RESOURCE = ResourceLocation(NuclearTech.MODID, "textures/gui/jei_press.png")
-        val UID = ResourceLocation(NuclearTech.MODID, "pressing")
+        val GUI_RESOURCE = ntm("textures/gui/jei_press.png")
+        val UID = ntm("pressing")
     }
 }

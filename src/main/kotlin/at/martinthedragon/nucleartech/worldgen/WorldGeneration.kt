@@ -70,7 +70,7 @@ package at.martinthedragon.nucleartech.worldgen
 //        val HUGE_GLOWING_MUSHROOM = register("huge_glowing_mushroom", Features.HUGE_GLOWING_MUSHROOM.get().configured(HugeMushroomFeatureConfiguration(SimpleStateProvider(ModBlocks.glowingMushroomBlock.get().defaultBlockState()), SimpleStateProvider(ModBlocks.glowingMushroomStem.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 4)))
 //
 //        private fun <FC : FeatureConfiguration?> register(name: String, configuredFeature: ConfiguredFeature<FC, *>): ConfiguredFeature<FC, *> =
-//            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, ResourceLocation(NuclearTech.MODID, name), configuredFeature)
+//            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, ntm(name), configuredFeature)
 //    }
 //
 //    object CustomRuleTests {

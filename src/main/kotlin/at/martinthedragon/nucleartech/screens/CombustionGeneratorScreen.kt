@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.entities.CombustionGeneratorBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menus.CombustionGeneratorMenu
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.renderGuiFluid
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.level.material.Fluids
 
@@ -74,6 +73,6 @@ class CombustionGeneratorScreen(
     }
 
     companion object {
-        val TEXTURE = ResourceLocation(NuclearTech.MODID, "textures/gui/combustion_generator.png")
+        val TEXTURE = ntm("textures/gui/combustion_generator.png")
     }
 }

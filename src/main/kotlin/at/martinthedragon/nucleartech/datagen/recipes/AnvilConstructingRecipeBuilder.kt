@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.mc
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
@@ -72,12 +73,12 @@ class AnvilConstructingRecipeBuilder(val tierLower: Int = 1, val tierUpper: Int 
     override fun group(group: String?) = this
     override fun getResult(): Item = output.first().stack.item
 
-    override fun save(consumer: Consumer<FinishedRecipe>) = save(consumer, ResourceLocation(NuclearTech.MODID, if ((output.size > 1 && ingredients.size == 1) || overlay == AnvilConstructingRecipe.OverlayType.RECYCLING) "${RecipeBuilder.getDefaultRecipeId(ingredients.first().items.first().item).path}_anvil_recycling" else "${RecipeBuilder.getDefaultRecipeId(result).path}_from_anvil_constructing"))
-    override fun save(consumer: Consumer<FinishedRecipe>, name: String) = save(consumer, ResourceLocation(NuclearTech.MODID, "${name}_from_anvil_constructing"))
+    override fun save(consumer: Consumer<FinishedRecipe>) = save(consumer, ntm(if ((output.size > 1 && ingredients.size == 1) || overlay == AnvilConstructingRecipe.OverlayType.RECYCLING) "${RecipeBuilder.getDefaultRecipeId(ingredients.first().items.first().item).path}_anvil_recycling" else "${RecipeBuilder.getDefaultRecipeId(result).path}_from_anvil_constructing"))
+    override fun save(consumer: Consumer<FinishedRecipe>, name: String) = save(consumer, ntm("${name}_from_anvil_constructing"))
 
     override fun save(consumer: Consumer<FinishedRecipe>, recipeName: ResourceLocation) {
         if (advancement.criteria.isEmpty()) throw IllegalStateException("No way of obtaining recipe $recipeName")
-        advancement.parent(ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
+        advancement.parent(mc("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeName)).rewards(AdvancementRewards.Builder.recipe(recipeName)).requirements(RequirementsStrategy.OR)
         if (ingredients.isEmpty() || output.isEmpty()) throw IllegalStateException("Not enough data specified")
         consumer.accept(Result(recipeName, tierLower, tierUpper, ingredients, output, overlay, advancement, ResourceLocation(recipeName.namespace, "recipes/${result.itemCategory?.recipeFolderName}/${recipeName.path}")))
     }

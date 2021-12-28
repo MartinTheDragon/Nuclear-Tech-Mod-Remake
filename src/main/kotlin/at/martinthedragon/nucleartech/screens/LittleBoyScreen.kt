@@ -1,13 +1,12 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.menus.LittleBoyMenu
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 class LittleBoyScreen(
@@ -15,7 +14,7 @@ class LittleBoyScreen(
     playerInventory: Inventory,
     title: Component
 ) : AbstractContainerScreen<LittleBoyMenu>(container, playerInventory, title) {
-    private val texture = ResourceLocation(NuclearTech.MODID, "textures/gui/little_boy.png")
+    private val texture = ntm("textures/gui/little_boy.png")
 
     init {
         imageWidth = 176

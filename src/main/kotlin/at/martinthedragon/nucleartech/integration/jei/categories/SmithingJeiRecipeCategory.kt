@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilSmithingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
@@ -12,7 +13,6 @@ import mezz.jei.api.ingredients.IIngredients
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 
 class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
@@ -46,7 +46,7 @@ class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSm
     }
 
     companion object {
-        private val GUI_RESOURCE = ResourceLocation(NuclearTech.MODID, "textures/gui/jei_smithing.png")
-        val UID = ResourceLocation(NuclearTech.MODID, "smithing")
+        private val GUI_RESOURCE = ntm("textures/gui/jei_smithing.png")
+        val UID = ntm("smithing")
     }
 }
