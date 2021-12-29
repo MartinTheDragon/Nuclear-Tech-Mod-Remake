@@ -1,5 +1,7 @@
 package at.martinthedragon.nucleartech.capabilites.contamination
 
+import at.martinthedragon.nucleartech.capabilites.contamination.effects.ContaminationEffect
+
 interface ContaminationHandler {
     fun getIrradiation(): Float
     fun getDigamma(): Float
@@ -20,6 +22,8 @@ interface ContaminationHandler {
 
     fun setCumulativeRadiation(value: Float)
     fun setRadPerSecond(value: Float)
+
+    fun getContaminationEffects(): MutableCollection<ContaminationEffect>
 }
 
 fun ContaminationHandler.addIrradiation(amount: Float) =

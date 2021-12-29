@@ -1,6 +1,5 @@
 package at.martinthedragon.nucleartech.items
 
-import at.martinthedragon.nucleartech.Radiation
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
@@ -50,7 +49,7 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             if (radPerSecond > 25) intensity = intensity or (1 shl 5)
 
             // making use of short-circuiting
-            if ((likelihood == 1 || world.random.nextInt(likelihood) == 0) && intensity > 0) {
+            if ((likelihood == 1 || world.random.nextInt(likelihood) == 0)) {
                 val sound = when (Random.nextInt(intensity.countTrailingZeroBits(), intensity.countOneBits() + intensity.countTrailingZeroBits()) + 1) {
                     1 -> SoundEvents.geiger1
                     2 -> SoundEvents.geiger2
@@ -79,7 +78,7 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             // for that hbm approved decimal rounding
             val chunkRadiation = (ChunkRadiation.getRadiation(world, player.blockPosition()) * 10F).toInt() / 10F
             val environmentRadiation = (capability.getRadPerSecond() * 10F).toInt() / 10F
-            val playerIrradiation = (Radiation.getEntityIrradiation(player) * 10F).toInt() / 10F
+            val playerIrradiation = (capability.getIrradiation() * 10F).toInt() / 10F
             val playerResistance = (10_000.0 - EntityContaminationEffects.calculateRadiationMod(player) * 10_000.0).toInt() / 100.0
             // TODO coefficient
 

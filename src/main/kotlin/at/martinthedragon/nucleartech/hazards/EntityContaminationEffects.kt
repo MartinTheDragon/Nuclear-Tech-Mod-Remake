@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.hazards
 
+import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.capabilites.contamination.*
 import at.martinthedragon.nucleartech.config.NuclearConfig
@@ -8,12 +9,18 @@ import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessag
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.effect.MobEffectInstance
+import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.animal.Cat
+import net.minecraft.world.entity.animal.Cow
 import net.minecraft.world.entity.animal.MushroomCow
+import net.minecraft.world.entity.monster.Creeper
 import net.minecraft.world.entity.monster.Skeleton
 import net.minecraft.world.entity.monster.Zombie
+import net.minecraft.world.entity.npc.Villager
 import net.minecraft.world.entity.player.Player
 import net.minecraftforge.network.NetworkDirection
 import kotlin.math.pow
@@ -43,6 +50,10 @@ object EntityContaminationEffects {
         if (NuclearConfig.general.enable528Mode.get() && !entity.fireImmune() && entity.level.dimensionType().ultraWarm()) // 528 effect
             entity.setSecondsOnFire(5)
 
+        val effects = capability.getContaminationEffects()
+        for (effect in effects) effect.tick(entity)
+        effects.removeAll(effects.filter { it.shouldBeRemoved(entity) }.toSet())
+
         handleRadiation(entity, capability)
     }
 
@@ -59,6 +70,55 @@ object EntityContaminationEffects {
         }
         if (chunkRadiation > 0) {
             contaminate(entity, capability, HazardType.Radiation, ContaminationType.Creative, chunkRadiation / 20F)
+        }
+
+        val irradiation = capability.getIrradiation()
+
+        when {
+            entity is Creeper && irradiation >= 200 && !entity.isDeadOrDying -> if (world.random.nextInt(3) == 0) {
+                // TODO spawn nuclear creeper
+            } else entity.hurt(DamageSources.radiation, 100F)
+            entity is Cow && entity !is MushroomCow && irradiation >= 50 -> entity.convertTo(EntityType.MOOSHROOM, true)
+            entity is Villager && irradiation >= 500 -> entity.convertTo(EntityType.ZOMBIE, true)
+        }
+
+        if (irradiation > 2500) capability.setIrradiation(2500F)
+
+        if ((entity is Player && (entity.isCreative || entity.isSpectator)) || entity.isInvulnerable || entity.isInvulnerableTo(DamageSources.radiation) || isRadiationImmune(entity)) return
+
+        val random = world.random
+
+        when {
+            irradiation >= 1000 -> {
+                entity.hurt(DamageSources.radiation, 3.4028235e38F)
+                capability.setIrradiation(0F)
+            }
+            irradiation >= 800 -> {
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 5 * 20))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 * 20, 2))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, 2))
+                if (random.nextInt(500) == 0) entity.addEffect(MobEffectInstance(MobEffects.POISON, 3 * 20, 2))
+                if (random.nextInt(700) == 0) entity.addEffect(MobEffectInstance(MobEffects.WITHER, 3 * 20, 1))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.HUNGER, 5 * 20, 3))
+            }
+            irradiation >= 600 -> {
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 5 * 20))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 * 20, 2))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, 2))
+                if (random.nextInt(500) == 0) entity.addEffect(MobEffectInstance(MobEffects.POISON, 3 * 20, 1))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.HUNGER, 3 * 20, 3))
+            }
+            irradiation >= 400 -> {
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 5 * 20))
+                if (random.nextInt(500) == 0) entity.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20))
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.WEAKNESS, 5 * 20,1))
+                if (random.nextInt(500) == 0) entity.addEffect(MobEffectInstance(MobEffects.HUNGER, 3 * 20, 2))
+            }
+            irradiation >= 200 -> {
+                if (random.nextInt(300) == 0) entity.addEffect(MobEffectInstance(MobEffects.CONFUSION, 5 * 20))
+                if (random.nextInt(500) == 0) entity.addEffect(MobEffectInstance(MobEffects.WEAKNESS, 5 * 20))
+                if (random.nextInt(700) == 0) entity.addEffect(MobEffectInstance(MobEffects.HUNGER, 3 * 20, 2))
+            }
         }
 
         // TODO all the nice vomitting
@@ -91,8 +151,7 @@ object EntityContaminationEffects {
     }
 
     fun contaminate(entity: LivingEntity, hazardType: HazardType, contaminationType: ContaminationType, amount: Float): Boolean {
-        val capability = Capabilities.getContamination(entity)
-        if (capability !is ContaminationHandler) throw Error("LivingEntity ${entity.name} hasn't gotten a modifiable IIrradiationHandler")
+        val capability = Capabilities.getContamination(entity) ?: throw Error("LivingEntity ${entity.name} does not have a contamination capability attached")
         return contaminate(entity, capability, hazardType, contaminationType, amount)
     }
 

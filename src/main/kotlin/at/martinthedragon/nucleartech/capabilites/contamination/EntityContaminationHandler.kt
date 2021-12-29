@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.capabilites.contamination
 
+import at.martinthedragon.nucleartech.capabilites.contamination.effects.ContaminationEffect
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.ListTag
 import net.minecraftforge.common.util.INBTSerializable
 
 /** Gets synced at [at.martinthedragon.nucleartech.hazards.EntityContaminationEffects] */
@@ -14,6 +16,8 @@ open class EntityContaminationHandler : ContaminationHandler, INBTSerializable<C
 
     protected var cumulativeRadiationValue = 0F
     protected var radPerSecondValue = 0F
+
+    protected val contaminationEffectsList = mutableListOf<ContaminationEffect>()
 
     override fun setIrradiation(amount: Float) {
         irradiationLevel = amount
@@ -58,6 +62,8 @@ open class EntityContaminationHandler : ContaminationHandler, INBTSerializable<C
     override fun getCumulativeRadiation(): Float = cumulativeRadiationValue
     override fun getRadPerSecond(): Float = radPerSecondValue
 
+    override fun getContaminationEffects() = contaminationEffectsList
+
     override fun serializeNBT(): CompoundTag = CompoundTag().apply {
         putFloat("radiation", irradiationLevel)
         putFloat("digamma", digammaLevel)
@@ -65,15 +71,20 @@ open class EntityContaminationHandler : ContaminationHandler, INBTSerializable<C
         putInt("blacklung", blacklungLevel)
         putInt("bomb", bombTimerValue)
         putInt("contagion", contagionValue)
+        put("effects", ListTag().apply { for (effect in getContaminationEffects()) add(effect.save()) })
     }
 
     override fun deserializeNBT(nbt: CompoundTag) {
-        irradiationLevel = nbt.getFloat("radiation")
-        digammaLevel = nbt.getFloat("digamma")
-        asbestosLevel = nbt.getInt("asbestos")
-        blacklungLevel = nbt.getInt("blacklung")
-        bombTimerValue = nbt.getInt("bomb")
-        contagionValue = nbt.getInt("contagion")
+        with(nbt) {
+            irradiationLevel = getFloat("radiation")
+            digammaLevel = getFloat("digamma")
+            asbestosLevel = getInt("asbestos")
+            blacklungLevel = getInt("blacklung")
+            bombTimerValue = getInt("bomb")
+            contagionValue = getInt("contagion")
+            val effects = getList("effects", 10)
+            for (i in effects.indices) contaminationEffectsList += ContaminationEffect.deserialize(effects.getCompound(i))
+        }
         onLoad()
     }
 

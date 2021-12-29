@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.rendering
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.Radiation
+import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
@@ -33,7 +33,7 @@ object ClientRenderer {
             // TODO check for FSB armor
 
             if (player.inventory.hasAnyOf(setOf(ModItems.geigerCounter.get()))) {
-                renderGeigerHUD(event.matrixStack, Radiation.getEntityIrradiation(player))
+                Capabilities.getContamination(player)?.let { renderGeigerHUD(event.matrixStack, it.getIrradiation()) }
             }
         }
     }

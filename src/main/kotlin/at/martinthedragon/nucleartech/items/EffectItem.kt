@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.items
 
-import at.martinthedragon.nucleartech.Radiation
+import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
@@ -40,7 +40,7 @@ open class EffectItem(val effectTypes: List<EffectTypes>, properties: Properties
     ) {
         if (entity !is LivingEntity) return
         if (entity is Player && entity.isCreative) return
-        if (EffectTypes.Radioactive in effectTypes) Radiation.addEntityIrradiation(entity, radPerSecond * stack.count / 20f)
+        if (EffectTypes.Radioactive in effectTypes) EntityContaminationEffects.contaminate(entity, EntityContaminationEffects.HazardType.Radiation, EntityContaminationEffects.ContaminationType.Creative, radPerSecond * stack.count / 20f)
         if (EffectTypes.Blinding in effectTypes) entity.addEffect(MobEffectInstance(MobEffects.BLINDNESS, 100))
         if (EffectTypes.Hot in effectTypes) entity.setSecondsOnFire(5)
     }
