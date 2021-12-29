@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Spot something that doesn't seem quite right? Report it!
-title: "[BUG] <Descriptive title here>"
+title: "<Descriptive title here, like 'Clicking on x causes y'>"
 labels: bug
 assignees: MartinTheDragon
 
@@ -24,9 +24,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Software and mod environment info (please complete the following information):**
- - Mod Version: [e.g. 0.0.9.0]
+ - Mod Version: [e.g. 0.0.9.0, or the commit hash for custom builds]
  - Other mods installed: [e.g. OptiFine, Mekanism]
- - Forge version: [e.g. 1.16.5-36.2.0]
+ - Forge version: [e.g. 1.18.1-39.0.9]
 
 **Additional context**
 Add any other context about the problem here.

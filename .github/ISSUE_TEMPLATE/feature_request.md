@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Do you think that just this one feature is definitely missing? Try suggesting it!
-title: "[FEATURE] <Descriptive title here>"
+title: "<Descriptive title here, like 'Add x for y'>"
 labels: enhancement
 assignees: MartinTheDragon
 
