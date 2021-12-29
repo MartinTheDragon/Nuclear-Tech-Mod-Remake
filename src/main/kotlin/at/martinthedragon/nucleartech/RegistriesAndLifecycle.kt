@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationHandler
-import at.martinthedragon.nucleartech.datagen.*
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
 import at.martinthedragon.nucleartech.menus.MenuTypes
@@ -27,7 +26,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent
 import net.minecraftforge.registries.*
 
 @Suppress("unused")
@@ -78,29 +76,6 @@ object RegistriesAndLifecycle {
     @SubscribeEvent @JvmStatic
     fun createAttributes(event: EntityAttributeCreationEvent) {
         event.put(EntityTypes.nuclearCreeper.get(), NuclearCreeper.createAttributes())
-    }
-
-    @SubscribeEvent @JvmStatic
-    fun generateData(event: GatherDataEvent) {
-        val dataGenerator = event.generator
-        val existingFileHelper = event.existingFileHelper
-        if (event.includeServer()) {
-            val blockTagProvider = BlockTagProvider(dataGenerator, existingFileHelper)
-            dataGenerator.addProvider(blockTagProvider)
-            dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
-            dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
-            dataGenerator.addProvider(NuclearLootProvider(dataGenerator))
-        }
-
-        if (event.includeClient()) {
-            dataGenerator.addProvider(NuclearBlockStateProvider(dataGenerator, existingFileHelper))
-            dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
-            dataGenerator.addProvider(NuclearModelProvider(dataGenerator, existingFileHelper))
-            dataGenerator.addProvider(NuclearSoundsProvider(dataGenerator, existingFileHelper))
-
-            for (translation in NuclearLanguageProviders.getLanguageProviders(dataGenerator))
-                dataGenerator.addProvider(translation)
-        }
     }
 
     @SubscribeEvent @JvmStatic
