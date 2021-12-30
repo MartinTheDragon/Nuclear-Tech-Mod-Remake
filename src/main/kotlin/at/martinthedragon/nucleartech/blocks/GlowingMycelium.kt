@@ -2,16 +2,30 @@ package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.capabilites.Capabilities
+import at.martinthedragon.nucleartech.capabilites.contamination.addEffectFromSource
+import at.martinthedragon.nucleartech.capabilites.contamination.effects.RadiationEffect
+import at.martinthedragon.nucleartech.capabilites.contamination.hasEffectFromSource
+import at.martinthedragon.nucleartech.capabilites.contamination.modifyEffectFromSourceIf
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
 class GlowingMycelium(properties: Properties) : DeadGrass(properties) {
-    // TODO contamination effect
+    override fun stepOn(level: Level, pos: BlockPos, state: BlockState, entity: Entity) {
+        if (entity !is LivingEntity) return
+        val capability = Capabilities.getContamination(entity) ?: return
+        val sourceName = registryName!!.toString()
+        if (capability.hasEffectFromSource<RadiationEffect>(sourceName))
+            capability.modifyEffectFromSourceIf<RadiationEffect>(sourceName, { it.timeLeft < it.maxTime }) { it.timeLeft = it.maxTime }
+        else capability.addEffectFromSource(RadiationEffect(4F, 30 * 20, false, registryName!!.toString()))
+    }
 
     override fun randomTick(state: BlockState, level: ServerLevel, pos: BlockPos, random: Random) {
         @Suppress("DEPRECATION")

@@ -1,6 +1,9 @@
 package at.martinthedragon.nucleartech.capabilites.contamination
 
 import at.martinthedragon.nucleartech.capabilites.contamination.effects.ContaminationEffect
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 interface ContaminationHandler {
     fun getIrradiation(): Float
@@ -31,3 +34,31 @@ fun ContaminationHandler.addIrradiation(amount: Float) =
 
 fun ContaminationHandler.addDigamma(amount: Float) =
     setDigamma(getDigamma() + amount)
+
+fun ContaminationHandler.addEffect(effect: ContaminationEffect): Boolean = getContaminationEffects().add(effect)
+
+inline fun <reified T : ContaminationEffect> ContaminationHandler.addEffectFromSource(effect: T): Boolean =
+    if (effect.source == null || getContaminationEffects().none { it is T && it.source == effect.source }) addEffect(effect) else false
+
+@OptIn(ExperimentalContracts::class)
+inline fun <reified T : ContaminationEffect> ContaminationHandler.modifyEffectFromSourceIf(source: String, condition: (T) -> Boolean, action: (T) -> Unit): Boolean {
+    contract {
+        callsInPlace(condition, InvocationKind.UNKNOWN)
+        callsInPlace(action, InvocationKind.AT_MOST_ONCE)
+    }
+    val effect = getContaminationEffects().filterIsInstance<T>().filter { it.source == source }.firstOrNull(condition) ?: return false
+    action(effect)
+    return true
+}
+
+inline fun <reified T : ContaminationEffect> ContaminationHandler.replaceEffectFromSourceIf(effect: T, condition: (T) -> Boolean): Boolean {
+    if (getContaminationEffects().none { it is T }) return addEffect(effect)
+    val oldEffects = getContaminationEffects().filterIsInstance<T>().filter { it.source == effect.source }.filter(condition)
+    return if (oldEffects.isNotEmpty()) {
+        getContaminationEffects().removeAll(oldEffects.toSet())
+        addEffect(effect)
+    } else false
+}
+
+inline fun <reified T : ContaminationEffect> ContaminationHandler.hasEffectFromSource(source: String): Boolean =
+    getContaminationEffects().any { it is T && it.source == source }
