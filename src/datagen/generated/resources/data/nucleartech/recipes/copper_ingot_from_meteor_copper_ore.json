@@ -4,7 +4,7 @@
   "ingredient": {
     "item": "nucleartech:meteor_copper_ore"
   },
-  "result": "nucleartech:copper_ingot",
+  "result": "minecraft:copper_ingot",
   "experience": 1.5,
   "cookingtime": 200
 }

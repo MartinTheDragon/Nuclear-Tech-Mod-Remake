@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech.datagen.loot
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.ModItems
-import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.advancements.critereon.EnchantmentPredicate
 import net.minecraft.advancements.critereon.ItemPredicate
@@ -17,9 +16,7 @@ import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.entries.TagEntry
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
-import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay
 import net.minecraft.world.level.storage.loot.functions.LimitCount
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
@@ -30,62 +27,57 @@ import net.minecraftforge.registries.ForgeRegistries
 
 class BlockLoots : BlockLoot() {
     override fun addTables() {
-        dropSelf(ModBlocks.uraniumOre.get())
-        dropSelf(ModBlocks.scorchedUraniumOre.get())
-        dropSelf(ModBlocks.thoriumOre.get())
-        dropSelf(ModBlocks.titaniumOre.get())
-        add(ModBlocks.sulfurOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
-        }
-        add(ModBlocks.niterOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.niter.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
-        }
-        dropSelf(ModBlocks.copperOre.get())
-        dropSelf(ModBlocks.tungstenOre.get())
-        dropSelf(ModBlocks.aluminiumOre.get())
-        add(ModBlocks.fluoriteOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.fluorite.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
-        }
-        dropSelf(ModBlocks.berylliumOre.get())
-        dropSelf(ModBlocks.leadOre.get())
+        add(ModBlocks.uraniumOre.get()) { createOreDrop(it, ModItems.rawUranium.get()) }
+        add(ModBlocks.scorchedUraniumOre.get()) { createOreDrop(it, ModItems.rawUranium.get()) }
+        add(ModBlocks.thoriumOre.get()) { createOreDrop(it, ModItems.rawThorium.get()) }
+        add(ModBlocks.titaniumOre.get()) { createOreDrop(it, ModItems.rawTitanium.get()) }
+        add(ModBlocks.sulfurOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.niterOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.niter.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.tungstenOre.get()) { createOreDrop(it, ModItems.rawTungsten.get()) }
+        add(ModBlocks.aluminiumOre.get()) { createOreDrop(it, ModItems.rawAluminium.get()) }
+        add(ModBlocks.fluoriteOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.fluorite.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.berylliumOre.get()) { createOreDrop(it, ModItems.rawBeryllium.get()) }
+        add(ModBlocks.leadOre.get()) { createOreDrop(it, ModItems.rawLead.get()) }
         dropSelf(ModBlocks.oilDeposit.get())
         dropSelf(ModBlocks.emptyOilDeposit.get())
         dropSelf(ModBlocks.oilSand.get())
-        add(ModBlocks.ligniteOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.lignite.get()).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
-        }
-        dropSelf(ModBlocks.asbestosOre.get())
-        dropSelf(ModBlocks.schrabidiumOre.get())
-        dropSelf(ModBlocks.australianOre.get())
+        add(ModBlocks.ligniteOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.lignite.get()).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.asbestosOre.get()) { createOreDrop(it, ModItems.rawAsbestos.get()) }
+        add(ModBlocks.schrabidiumOre.get()) { createOreDrop(it, ModItems.rawSchrabidium.get()) }
+        add(ModBlocks.australianOre.get()) { createOreDrop(it, ModItems.rawAustralium.get()) }
         dropSelf(ModBlocks.weidite.get())
         dropSelf(ModBlocks.reiite.get())
         dropSelf(ModBlocks.brightblendeOre.get())
         dropSelf(ModBlocks.dellite.get())
         dropSelf(ModBlocks.dollarGreenMineral.get())
+        add(ModBlocks.rareEarthOre.get()) { createOreDrop(it, ModItems.rawRareEarth.get()) }
+        add(ModBlocks.cobaltOre.get()) { createOreDrop(it, ModItems.rawCobalt.get()) }
+        add(ModBlocks.deepslateUraniumOre.get()) { createOreDrop(it, ModItems.rawUranium.get()) }
+        add(ModBlocks.scorchedDeepslateUraniumOre.get()) { createOreDrop(it, ModItems.rawUranium.get()) }
+        add(ModBlocks.deepslateThoriumOre.get()) { createOreDrop(it, ModItems.rawThorium.get()) }
+        add(ModBlocks.deepslateTitaniumOre.get()) { createOreDrop(it, ModItems.rawTitanium.get()) }
+        add(ModBlocks.deepslateSulfurOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.deepslateNiterOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.niter.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.deepslateTungstenOre.get()) { createOreDrop(it, ModItems.rawTungsten.get()) }
+        add(ModBlocks.deepslateAluminiumOre.get()) { createOreDrop(it, ModItems.rawAluminium.get()) }
+        add(ModBlocks.deepslateFluoriteOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.fluorite.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(ModBlocks.deepslateBerylliumOre.get()) { createOreDrop(it, ModItems.rawBeryllium.get()) }
+        add(ModBlocks.deepslateLeadOre.get()) { createOreDrop(it, ModItems.rawLead.get()) }
+        add(ModBlocks.deepslateAsbestosOre.get()) { createOreDrop(it, ModItems.rawAsbestos.get()) }
+        add(ModBlocks.deepslateSchrabidiumOre.get()) { createOreDrop(it, ModItems.rawSchrabidium.get()) }
+        add(ModBlocks.deepslateAustralianOre.get()) { createOreDrop(it, ModItems.rawAustralium.get()) }
+        add(ModBlocks.deepslateRareEarthOre.get()) { createOreDrop(it, ModItems.rawRareEarth.get()) }
+        add(ModBlocks.deepslateCobaltOre.get()) { createOreDrop(it, ModItems.rawCobalt.get()) }
+
+        add(ModBlocks.netherUraniumOre.get()) { createOreDrop(it, ModItems.rawUranium.get()) }
+        add(ModBlocks.scorchedNetherUraniumOre.get()) { createOreDrop(it, ModItems.rawUranium.get()) }
+        add(ModBlocks.netherPlutoniumOre.get()) { createOreDrop(it, ModItems.rawPlutonium.get()) }
+        add(ModBlocks.netherTungstenOre.get()) { createOreDrop(it, ModItems.rawTungsten.get()) }
+        add(ModBlocks.netherSulfurOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
 
         val hasSilkTouchCondition = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))
         ))
         val hasNoSilkTouchCondition = hasSilkTouchCondition.invert()
-
-        add(ModBlocks.rareEarthOre.get()) {
-            LootTable.lootTable().withPool(LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1F))
-                .add(LootItem.lootTableItem(ModBlocks.rareEarthOre.get()))
-                .`when`(hasSilkTouchCondition)
-            ).withPool(LootPool.lootPool()
-                .setRolls(UniformGenerator.between(6F, 16F))
-                .add(TagEntry.expandTag(NuclearTags.Items.RARE_EARTH_FRAGMENTS).apply(ApplyExplosionDecay.explosionDecay()))
-                .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                .`when`(hasNoSilkTouchCondition))
-        }
-
-        dropSelf(ModBlocks.netherUraniumOre.get())
-        dropSelf(ModBlocks.scorchedNetherUraniumOre.get())
-        dropSelf(ModBlocks.netherPlutoniumOre.get())
-        dropSelf(ModBlocks.netherTungstenOre.get())
-        add(ModBlocks.netherSulfurOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
-        }
 
         add(ModBlocks.netherPhosphorusOre.get()) {
             LootTable.lootTable().withPool(LootPool.lootPool()
@@ -99,20 +91,18 @@ class BlockLoots : BlockLoot() {
             )
         }
 
-        dropSelf(ModBlocks.netherSchrabidiumOre.get())
+        add(ModBlocks.netherSchrabidiumOre.get()) { createOreDrop(it, ModItems.rawSchrabidium.get()) }
         dropSelf(ModBlocks.meteorUraniumOre.get())
         dropSelf(ModBlocks.meteorThoriumOre.get())
         dropSelf(ModBlocks.meteorTitaniumOre.get())
-        add(ModBlocks.meteorSulfurOre.get()) {
-            createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(6F, 12F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))))
-        }
+        add(ModBlocks.meteorSulfurOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(6F, 12F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
         dropSelf(ModBlocks.meteorCopperOre.get())
         dropSelf(ModBlocks.meteorTungstenOre.get())
         dropSelf(ModBlocks.meteorAluminiumOre.get())
         dropSelf(ModBlocks.meteorLeadOre.get())
-        dropSelf(ModBlocks.meteorLithiumOre.get())
-        dropSelf(ModBlocks.starmetalOre.get())
-        dropSelf(ModBlocks.trixite.get())
+        add(ModBlocks.meteorLithiumOre.get()) { createOreDrop(it, ModItems.rawLithium.get()) }
+        add(ModBlocks.starmetalOre.get()) { createOreDrop(it, ModItems.rawStarmetal.get()) }
+        add(ModBlocks.trixite.get()) { createOreDrop(it, ModItems.rawTrixite.get()) }
 
         dropSelf(ModBlocks.uraniumBlock.get())
         dropSelf(ModBlocks.u233Block.get())

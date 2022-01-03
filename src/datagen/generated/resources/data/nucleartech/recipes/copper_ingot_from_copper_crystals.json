@@ -5,7 +5,7 @@
     "item": "nucleartech:copper_crystals"
   },
   "result": {
-    "item": "nucleartech:copper_ingot",
+    "item": "minecraft:copper_ingot",
     "count": 2
   },
   "experience": 0.5,

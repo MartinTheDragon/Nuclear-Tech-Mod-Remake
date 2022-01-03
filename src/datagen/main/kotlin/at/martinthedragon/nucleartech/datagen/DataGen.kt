@@ -17,6 +17,7 @@ object DataGen {
             val blockTagProvider = BlockTagProvider(dataGenerator, existingFileHelper)
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
+            dataGenerator.addProvider(HarvestabilityProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
             dataGenerator.addProvider(NuclearLootProvider(dataGenerator))
         }

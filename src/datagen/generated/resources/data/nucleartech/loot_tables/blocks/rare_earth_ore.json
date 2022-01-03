@@ -6,71 +6,42 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "nucleartech:rare_earth_ore"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "enchantments": [
-              {
-                "enchantment": "minecraft:silk_touch",
-                "levels": {
-                  "min": 1
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "rolls": {
-        "type": "minecraft:uniform",
-        "min": 6.0,
-        "max": 16.0
-      },
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:tag",
-          "functions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "function": "minecraft:explosion_decay"
-            }
-          ],
-          "name": "nucleartech:rare_earth_fragments",
-          "expand": true
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:match_tool",
-            "predicate": {
-              "enchantments": [
+              "type": "minecraft:item",
+              "conditions": [
                 {
-                  "enchantment": "minecraft:silk_touch",
-                  "levels": {
-                    "min": 1
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
                   }
                 }
-              ]
+              ],
+              "name": "nucleartech:rare_earth_ore"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:ore_drops"
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "nucleartech:raw_rare_earth"
             }
-          }
-        }
-      ],
-      "functions": [
-        {
-          "function": "minecraft:apply_bonus",
-          "enchantment": "minecraft:fortune",
-          "formula": "minecraft:uniform_bonus_count",
-          "parameters": {
-            "bonusMultiplier": 1
-          }
+          ]
         }
       ]
     }

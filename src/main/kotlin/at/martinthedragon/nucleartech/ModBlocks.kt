@@ -3,11 +3,9 @@ package at.martinthedragon.nucleartech
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
 import net.minecraft.core.BlockPos
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.HugeMushroomBlock
-import net.minecraft.world.level.block.RotatedPillarBlock
-import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -18,41 +16,47 @@ import kotlin.random.Random
 import at.martinthedragon.nucleartech.hazards.items.HazardItemEffect.Companion as RadValue
 
 object ModBlocks {
-    val uraniumOre: RegistryObject<Block> = BLOCKS.register("uranium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
-    val scorchedUraniumOre: RegistryObject<Block> = BLOCKS.register("scorched_uranium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
-    val thoriumOre: RegistryObject<Block> = BLOCKS.register("thorium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
-    val titaniumOre: RegistryObject<Block> = BLOCKS.register("titanium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
-    val sulfurOre: RegistryObject<Block> = BLOCKS.register("sulfur_ore") { object : Block(Properties.of(STONE).strength(3F, 6F).requiresCorrectToolForDrops()) {
-        override fun getExpDrop(state: BlockState, world: LevelReader, pos: BlockPos, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(1, 3)
-    }}
-    val niterOre: RegistryObject<Block> = BLOCKS.register("niter_ore") { object : Block(Properties.of(STONE).strength(3F, 6F).requiresCorrectToolForDrops()){
-        override fun getExpDrop(state: BlockState?, world: LevelReader, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(2, 4)
-    }}
-    val copperOre: RegistryObject<Block> = BLOCKS.register("copper_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
-    val tungstenOre: RegistryObject<Block> = BLOCKS.register("tungsten_ore") { Block(Properties.of(STONE).strength(6F, 10F).requiresCorrectToolForDrops()) }
-    val aluminiumOre: RegistryObject<Block> = BLOCKS.register("aluminium_ore") { Block(Properties.of(STONE).strength(4F, 8F).requiresCorrectToolForDrops()) }
-    val fluoriteOre: RegistryObject<Block> = BLOCKS.register("fluorite_ore") { object : Block(Properties.of(STONE).strength(3F, 6F).requiresCorrectToolForDrops()) {
-        override fun getExpDrop(state: BlockState?, world: LevelReader, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(2, 4)
-    }}
-    val berylliumOre: RegistryObject<Block> = BLOCKS.register("beryllium_ore") { Block(Properties.of(STONE).strength(5F, 15F).requiresCorrectToolForDrops()) }
-    val leadOre: RegistryObject<Block> = BLOCKS.register("lead_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val uraniumOre: RegistryObject<Block> = BLOCKS.register("uranium_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val scorchedUraniumOre: RegistryObject<Block> = BLOCKS.register("scorched_uranium_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val thoriumOre: RegistryObject<Block> = BLOCKS.register("thorium_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val titaniumOre: RegistryObject<Block> = BLOCKS.register("titanium_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val sulfurOre: RegistryObject<Block> = BLOCKS.register("sulfur_ore") { OreBlock(Properties.of(STONE).strength(3F, 6F).requiresCorrectToolForDrops(), UniformInt.of(1, 2)) }
+    val niterOre: RegistryObject<Block> = BLOCKS.register("niter_ore") { OreBlock(Properties.of(STONE).strength(3F, 6F).requiresCorrectToolForDrops(), UniformInt.of(1, 2)) }
+    val tungstenOre: RegistryObject<Block> = BLOCKS.register("tungsten_ore") { OreBlock(Properties.of(STONE).strength(6F, 10F).requiresCorrectToolForDrops()) }
+    val aluminiumOre: RegistryObject<Block> = BLOCKS.register("aluminium_ore") { OreBlock(Properties.of(STONE).strength(4F, 8F).requiresCorrectToolForDrops()) }
+    val fluoriteOre: RegistryObject<Block> = BLOCKS.register("fluorite_ore") { OreBlock(Properties.of(STONE).strength(3F, 6F).requiresCorrectToolForDrops(), UniformInt.of(2, 3)) }
+    val berylliumOre: RegistryObject<Block> = BLOCKS.register("beryllium_ore") { OreBlock(Properties.of(STONE).strength(5F, 15F).requiresCorrectToolForDrops()) }
+    val leadOre: RegistryObject<Block> = BLOCKS.register("lead_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
     val oilDeposit: RegistryObject<Block> = BLOCKS.register("oil_deposit") { Block(Properties.of(STONE).strength(1F, 2F).requiresCorrectToolForDrops()) }
     val emptyOilDeposit: RegistryObject<Block> = BLOCKS.register("empty_oil_deposit") { Block(Properties.of(STONE).strength(1F, 1F).requiresCorrectToolForDrops()) }
     val oilSand: RegistryObject<Block> = BLOCKS.register("oil_sand") { Block(Properties.of(SAND).strength(1F).sound(SoundType.SAND)) }
-    val ligniteOre: RegistryObject<Block> = BLOCKS.register("lignite_ore") { object : Block(Properties.of(STONE).strength(3F).requiresCorrectToolForDrops()) {
-        override fun getExpDrop(state: BlockState?, world: LevelReader, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(0, 2)
-    }}
-    val asbestosOre: RegistryObject<Block> = BLOCKS.register("asbestos_ore") { Block(Properties.of(STONE).strength(3f).requiresCorrectToolForDrops()) }
-    val schrabidiumOre: RegistryObject<Block> = BLOCKS.register("schrabidium_ore") { Block(Properties.of(STONE).strength(20f, 50f).lightLevel { 3 }.hasPostProcess { _, _, _ -> true }.emissiveRendering { _, _, _ -> true }) }
-    val australianOre: RegistryObject<Block> = BLOCKS.register("australian_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val weidite: RegistryObject<Block> = BLOCKS.register("weidite") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val reiite: RegistryObject<Block> = BLOCKS.register("reiite") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val brightblendeOre: RegistryObject<Block> = BLOCKS.register("brightblende_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val dellite: RegistryObject<Block> = BLOCKS.register("dellite") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val dollarGreenMineral: RegistryObject<Block> = BLOCKS.register("dollar_green_mineral") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val rareEarthOre: RegistryObject<Block> = BLOCKS.register("rare_earth_ore") { object : Block(Properties.of(STONE).strength(4f, 3f).requiresCorrectToolForDrops()){
-        override fun getExpDrop(state: BlockState?, world: LevelReader, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(3, 7)
-    }}
+    val ligniteOre: RegistryObject<Block> = BLOCKS.register("lignite_ore") { OreBlock(Properties.of(STONE).strength(3F).requiresCorrectToolForDrops(), UniformInt.of(0, 1)) }
+    val asbestosOre: RegistryObject<Block> = BLOCKS.register("asbestos_ore") { OreBlock(Properties.of(STONE).strength(3F).requiresCorrectToolForDrops()) }
+    val schrabidiumOre: RegistryObject<Block> = BLOCKS.register("schrabidium_ore") { Block(Properties.of(STONE).strength(20F, 50F).lightLevel { 3 }.hasPostProcess { _, _, _ -> true }.emissiveRendering { _, _, _ -> true }) }
+    val australianOre: RegistryObject<Block> = BLOCKS.register("australian_ore") { OreBlock(Properties.of(STONE).strength(6F).requiresCorrectToolForDrops()) }
+    val weidite: RegistryObject<Block> = BLOCKS.register("weidite") { OreBlock(Properties.of(STONE).strength(6F).requiresCorrectToolForDrops()) }
+    val reiite: RegistryObject<Block> = BLOCKS.register("reiite") { OreBlock(Properties.of(STONE).strength(6F).requiresCorrectToolForDrops()) }
+    val brightblendeOre: RegistryObject<Block> = BLOCKS.register("brightblende_ore") { OreBlock(Properties.of(STONE).strength(6F).requiresCorrectToolForDrops()) }
+    val dellite: RegistryObject<Block> = BLOCKS.register("dellite") { OreBlock(Properties.of(STONE).strength(6F).requiresCorrectToolForDrops()) }
+    val dollarGreenMineral: RegistryObject<Block> = BLOCKS.register("dollar_green_mineral") { OreBlock(Properties.of(STONE).strength(6F).requiresCorrectToolForDrops()) }
+    val rareEarthOre: RegistryObject<Block> = BLOCKS.register("rare_earth_ore") { OreBlock(Properties.of(STONE).strength(4F, 3F).requiresCorrectToolForDrops(), UniformInt.of(3, 6)) }
+    val cobaltOre: RegistryObject<Block> = BLOCKS.register("cobalt_ore") { OreBlock(Properties.of(STONE).strength(3F).requiresCorrectToolForDrops()) }
+    val deepslateUraniumOre: RegistryObject<Block> = BLOCKS.register("deepslate_uranium_ore") { OreBlock(Properties.copy(uraniumOre.get()).color(MaterialColor.DEEPSLATE).strength(7.5F, 10F).sound(SoundType.DEEPSLATE)) }
+    val scorchedDeepslateUraniumOre: RegistryObject<Block> = BLOCKS.register("scorched_deepslate_uranium_ore") { OreBlock(Properties.copy(scorchedUraniumOre.get()).color(MaterialColor.DEEPSLATE).strength(7.5F, 10F).sound(SoundType.DEEPSLATE)) }
+    val deepslateThoriumOre: RegistryObject<Block> = BLOCKS.register("deepslate_thorium_ore") { OreBlock(Properties.copy(thoriumOre.get()).color(MaterialColor.DEEPSLATE).strength(7.5F, 10F).sound(SoundType.DEEPSLATE)) }
+    val deepslateTitaniumOre: RegistryObject<Block> = BLOCKS.register("deepslate_titanium_ore") { OreBlock(Properties.copy(titaniumOre.get()).color(MaterialColor.DEEPSLATE).strength(7.5F, 10F).sound(SoundType.DEEPSLATE)) }
+    val deepslateSulfurOre: RegistryObject<Block> = BLOCKS.register("deepslate_sulfur_ore") { OreBlock(Properties.copy(sulfurOre.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 6F).sound(SoundType.DEEPSLATE), UniformInt.of(1, 2)) }
+    val deepslateNiterOre: RegistryObject<Block> = BLOCKS.register("deepslate_niter_ore") { OreBlock(Properties.copy(niterOre.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 6F).sound(SoundType.DEEPSLATE), UniformInt.of(1, 2)) }
+    val deepslateTungstenOre: RegistryObject<Block> = BLOCKS.register("deepslate_tungsten_ore") { OreBlock(Properties.copy(tungstenOre.get()).color(MaterialColor.DEEPSLATE).strength(6F, 10F).sound(SoundType.DEEPSLATE)) }
+    val deepslateAluminiumOre: RegistryObject<Block> = BLOCKS.register("deepslate_aluminium_ore") { OreBlock(Properties.copy(aluminiumOre.get()).color(MaterialColor.DEEPSLATE).strength(6F, 8F).sound(SoundType.DEEPSLATE)) }
+    val deepslateFluoriteOre: RegistryObject<Block> = BLOCKS.register("deepslate_fluorite_ore") { OreBlock(Properties.copy(fluoriteOre.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 6F).sound(SoundType.DEEPSLATE), UniformInt.of(2, 3)) }
+    val deepslateBerylliumOre: RegistryObject<Block> = BLOCKS.register("deepslate_beryllium_ore") { OreBlock(Properties.copy(berylliumOre.get()).color(MaterialColor.DEEPSLATE).strength(7.5F, 15F).sound(SoundType.DEEPSLATE)) }
+    val deepslateLeadOre: RegistryObject<Block> = BLOCKS.register("deepslate_lead_ore") { OreBlock(Properties.copy(leadOre.get()).color(MaterialColor.DEEPSLATE).strength(7.5F, 10F).sound(SoundType.DEEPSLATE)) }
+    val deepslateAsbestosOre: RegistryObject<Block> = BLOCKS.register("deepslate_asbestos_ore") { OreBlock(Properties.copy(asbestosOre.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3F).sound(SoundType.DEEPSLATE)) }
+    val deepslateSchrabidiumOre: RegistryObject<Block> = BLOCKS.register("deepslate_schrabidium_ore") { Block(Properties.copy(schrabidiumOre.get()).color(MaterialColor.DEEPSLATE).strength(30F, 50F).sound(SoundType.DEEPSLATE)) }
+    val deepslateAustralianOre: RegistryObject<Block> = BLOCKS.register("deepslate_australian_ore") { OreBlock(Properties.copy(australianOre.get()).color(MaterialColor.DEEPSLATE).strength(9F, 6F).sound(SoundType.DEEPSLATE)) }
+    val deepslateRareEarthOre: RegistryObject<Block> = BLOCKS.register("deepslate_rare_earth_ore") { OreBlock(Properties.copy(rareEarthOre.get()).color(MaterialColor.DEEPSLATE).strength(6F, 3F).sound(SoundType.DEEPSLATE), UniformInt.of(3, 6)) }
+    val deepslateCobaltOre: RegistryObject<Block> = BLOCKS.register("deepslate_cobalt_ore") { OreBlock(Properties.copy(cobaltOre.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3F).sound(SoundType.DEEPSLATE)) }
     val netherUraniumOre: RegistryObject<Block> = BLOCKS.register("nether_uranium_ore") { Block(Properties.of(STONE).strength(3f).requiresCorrectToolForDrops()) }
     val scorchedNetherUraniumOre: RegistryObject<Block> = BLOCKS.register("scorched_nether_uranium_ore") { Block(Properties.of(STONE).strength(3F).requiresCorrectToolForDrops()) }
     val netherPlutoniumOre: RegistryObject<Block> = BLOCKS.register("nether_plutonium_ore") { Block(Properties.of(STONE).strength(3f).requiresCorrectToolForDrops()) }

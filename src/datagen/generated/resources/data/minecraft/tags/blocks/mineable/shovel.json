@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:oil_sand",
+    "nucleartech:white_phosphorus_block",
+    "nucleartech:red_phosphorus_block",
+    "nucleartech:yellowcake_block",
+    "nucleartech:scrap_block",
+    "nucleartech:dead_grass",
+    "nucleartech:glowing_mycelium",
+    "nucleartech:trinitite_ore",
+    "nucleartech:red_trinitite_ore"
+  ]
+}

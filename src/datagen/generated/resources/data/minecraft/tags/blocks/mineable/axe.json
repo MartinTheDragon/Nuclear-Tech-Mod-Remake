@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:insulator_roll",
+    "nucleartech:fiberglass_roll",
+    "nucleartech:hazmat_block",
+    "nucleartech:glowing_mushroom_block",
+    "nucleartech:glowing_mushroom_stem",
+    "nucleartech:charred_log",
+    "nucleartech:charred_planks"
+  ]
+}

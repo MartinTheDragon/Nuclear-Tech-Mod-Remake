@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "tag": "forge:ores/copper"
+    "tag": "minecraft:copper_ores"
   },
   "result": {
     "item": "nucleartech:copper_powder",

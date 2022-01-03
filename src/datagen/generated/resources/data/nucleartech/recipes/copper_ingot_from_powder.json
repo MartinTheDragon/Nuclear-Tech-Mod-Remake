@@ -4,7 +4,7 @@
   "ingredient": {
     "tag": "forge:dusts/copper"
   },
-  "result": "nucleartech:copper_ingot",
+  "result": "minecraft:copper_ingot",
   "experience": 0.1,
   "cookingtime": 200
 }

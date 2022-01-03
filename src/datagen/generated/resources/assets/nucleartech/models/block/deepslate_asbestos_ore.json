@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "nucleartech:block/deepslate_asbestos_ore"
+  }
+}

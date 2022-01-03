@@ -15,6 +15,22 @@ import net.minecraftforge.registries.RegistryObject
 
 @Suppress("unused")
 object ModItems {
+    val rawUranium: RegistryObject<Item> = ITEMS.register("raw_uranium") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), .25F) }
+    val rawThorium: RegistryObject<Item> = ITEMS.register("raw_thorium") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawPlutonium: RegistryObject<Item> = ITEMS.register("raw_plutonium") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 1F) }
+    val rawTitanium: RegistryObject<Item> = ITEMS.register("raw_titanium") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawTungsten: RegistryObject<Item> = ITEMS.register("raw_tungsten") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawAluminium: RegistryObject<Item> = ITEMS.register("raw_aluminium") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawBeryllium: RegistryObject<Item> = ITEMS.register("raw_beryllium") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawLead: RegistryObject<Item> = ITEMS.register("raw_lead") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawAsbestos: RegistryObject<Item> = ITEMS.register("raw_asbestos") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawSchrabidium: RegistryObject<Item> = ITEMS.register("raw_schrabidium") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive, EffectItem.EffectTypes.Blinding), Item.Properties().tab(CreativeTabs.Parts).rarity(Rarity.RARE), 4F) }
+    val rawAustralium: RegistryObject<Item> = ITEMS.register("raw_australium") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawRareEarth: RegistryObject<Item> = ITEMS.register("raw_rare_earth") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawCobalt: RegistryObject<Item> = ITEMS.register("raw_cobalt") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawLithium: RegistryObject<Item> = ITEMS.register("raw_lithium") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawStarmetal: RegistryObject<Item> = ITEMS.register("raw_starmetal") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
+    val rawTrixite: RegistryObject<Item> = ITEMS.register("raw_trixite") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 2F) }
     val uraniumIngot: RegistryObject<Item> = ITEMS.register("uranium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), .5f) }
     val u233Ingot: RegistryObject<Item> = ITEMS.register("u233_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 5f) }
     val u235Ingot: RegistryObject<Item> = ITEMS.register("u235_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 5f) }
@@ -27,7 +43,6 @@ object ModItems {
     val neptuniumIngot: RegistryObject<Item> = ITEMS.register("neptunium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 2.5f) }
     val poloniumIngot: RegistryObject<Item> = ITEMS.register("polonium_ingot") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Item.Properties().tab(CreativeTabs.Parts), 10f) }
     val titaniumIngot: RegistryObject<Item> = ITEMS.register("titanium_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
-    val copperIngot: RegistryObject<Item> = ITEMS.register("copper_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val redCopperIngot: RegistryObject<Item> = ITEMS.register("red_copper_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val advancedAlloyIngot: RegistryObject<Item> = ITEMS.register("advanced_alloy_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }
     val tungstenIngot: RegistryObject<Item> = ITEMS.register("tungsten_ingot") { Item(Item.Properties().tab(CreativeTabs.Parts)) }

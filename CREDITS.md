@@ -1,6 +1,6 @@
 # Credits
 
-This project is a rewrite and port for the 1.16.5 Minecraft™ version.
+This project is a rewrite and port for the 1.18.1 Minecraft™ version.
 The [original](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT) was created for the 1.7.10 Minecraft version by different people and contributors since 2014.
 
 Because this project is a complete rewrite (in a different language and version), most code contributions made to the original don't directly apply here.<br>
@@ -11,9 +11,11 @@ However, textures, models, sounds and other assets, or some algorithms, have mos
 
 ### Contributors on this project
 
-Nobody yet :(
+#### Assets
 
-Feel free to contribute!
+###### Textures
+
+- Pheo - Raw ore, deepslate, and new ore textures that fit 1.18
 
 ### Contributors on the original project
 
@@ -25,15 +27,16 @@ Feel free to contribute!
 - UFFR (fork with all sorts of features)
 - Pu-238 (Tom impact effects)
 - Bismarck (chinese localization)
-- FirzzleFrazzle (models)
+- Frooz (models)
 - Minecreep (models)
 - VT-6/24 (models, textures)
-- PheodoreKaczynski (textures, various machines)
-- Vær (fibrosis code)
+- Pheo (textures, various machines)
+- Vær (fibrosis, gas centrifuges)
 - Adam29 (liquid petroleum, ethanol)
 - Pashtet (russian localization)
 - Sten89 (models)
 - Pixelguru26 (textures)
+- TheBlueHat (textures)
 - impbk2002 (project settings)
 - OvermindDL1 (project settings)
 - TehTemmie (reacher radiation function)

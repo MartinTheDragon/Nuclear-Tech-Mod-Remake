@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.tags.ItemTagsProvider
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.Items
 import net.minecraftforge.common.Tags
 import net.minecraftforge.common.data.ExistingFileHelper
 
@@ -40,7 +41,6 @@ class ItemTagProvider(
         copy(NuclearTags.Blocks.ORES_TITANIUM, NuclearTags.Items.ORES_TITANIUM)
         copy(NuclearTags.Blocks.ORES_SULFUR, NuclearTags.Items.ORES_SULFUR)
         copy(NuclearTags.Blocks.ORES_NITER, NuclearTags.Items.ORES_NITER)
-        copy(NuclearTags.Blocks.ORES_COPPER, NuclearTags.Items.ORES_COPPER)
         copy(NuclearTags.Blocks.ORES_TUNGSTEN, NuclearTags.Items.ORES_TUNGSTEN)
         copy(NuclearTags.Blocks.ORES_ALUMINIUM, NuclearTags.Items.ORES_ALUMINIUM)
         copy(NuclearTags.Blocks.ORES_FLUORITE, NuclearTags.Items.ORES_FLUORITE)
@@ -134,7 +134,7 @@ class ItemTagProvider(
         tag(NuclearTags.Items.INGOTS_NEPTUNIUM).add(ModItems.neptuniumIngot.get())
         tag(NuclearTags.Items.INGOTS_POLONIUM).add(ModItems.poloniumIngot.get())
         tag(NuclearTags.Items.INGOTS_TITANIUM).add(ModItems.titaniumIngot.get())
-        tag(NuclearTags.Items.INGOTS_COPPER).add(ModItems.copperIngot.get())
+        tag(NuclearTags.Items.INGOTS_COPPER).add(Items.COPPER_INGOT)
         tag(NuclearTags.Items.INGOTS_TUNGSTEN).add(ModItems.tungstenIngot.get())
         tag(NuclearTags.Items.INGOTS_ALUMINIUM).add(ModItems.aluminiumIngot.get())
         tag(NuclearTags.Items.INGOTS_STEEL).add(ModItems.steelIngot.get())
