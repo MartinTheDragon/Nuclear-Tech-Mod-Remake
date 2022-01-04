@@ -24,7 +24,7 @@ class HugeGlowingMushroomFeature(codec: Codec<HugeMushroomFeatureConfiguration>)
         }
 
     override fun makeCap(
-        world: LevelAccessor,
+        level: LevelAccessor,
         random: Random,
         pos: BlockPos,
         height: Int,
@@ -46,42 +46,37 @@ class HugeGlowingMushroomFeature(codec: Codec<HugeMushroomFeatureConfiguration>)
                     val up = radius > getTreeRadiusForHeight(height, -1, maxRadius, currentHeight + 1)
 
                     mutablePos.setWithOffset(pos, radiusOffsetX, currentHeight, radiusOffsetZ)
-                    if (world.getBlockState(mutablePos).isSolidRender(world, mutablePos)) {
-                        setBlock(world, mutablePos, config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.UP, up).setValue(HugeMushroomBlock.DOWN, down).setValue(HugeMushroomBlock.WEST, negativeXSide).setValue(HugeMushroomBlock.EAST, positiveXSide).setValue(HugeMushroomBlock.NORTH, negativeZSide).setValue(HugeMushroomBlock.SOUTH, positiveZSide))
+                    if (!level.getBlockState(mutablePos).isSolidRender(level, mutablePos)) {
+                        setBlock(level, mutablePos, config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.UP, up).setValue(HugeMushroomBlock.DOWN, down).setValue(HugeMushroomBlock.WEST, negativeXSide).setValue(HugeMushroomBlock.EAST, positiveXSide).setValue(HugeMushroomBlock.NORTH, negativeZSide).setValue(HugeMushroomBlock.SOUTH, positiveZSide))
                     }
                 }
             }
         }
-        setBlock(world, mutablePos.setWithOffset(pos, 0, height, 0), config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.DOWN, false))
+        setBlock(level, mutablePos.setWithOffset(pos, 0, height, 0), config.capProvider.getState(random, pos).setValue(HugeMushroomBlock.DOWN, false))
     }
 
     override fun isValidPosition(
-        world: LevelAccessor,
+        level: LevelAccessor,
         pos: BlockPos,
         height: Int,
         mutablePos: BlockPos.MutableBlockPos,
         config: HugeMushroomFeatureConfiguration
     ): Boolean {
         val i = pos.y
-        return if (i >= 1 && i + height + 1 < 256) {
-            val block = world.getBlockState(pos.below())
-            if (!block.`is`(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)) {
-                false
-            } else {
+        return if (i >= level.minBuildHeight + 1 && i + height + 1 < level.maxBuildHeight) {
+            val block = level.getBlockState(pos.below())
+            if (!block.`is`(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)) false
+            else {
                 for (j in 0..height) {
                     val k = getTreeRadiusForHeight(height, -1, config.foliageRadius, j)
-                    for (l in -k..k) {
-                        for (i1 in -k..k) {
-                            val blockstate = world.getBlockState(mutablePos.setWithOffset(pos, l, j, i1))
-                            if (!blockstate.isAir && !blockstate.`is`(BlockTags.LEAVES)) return false
-                        }
+                    for (l in -k..k) for (i1 in -k..k) {
+                        val blockState = level.getBlockState(mutablePos.setWithOffset(pos, l, j, i1))
+                        if (!blockState.isAir && !blockState.`is`(BlockTags.LEAVES) && j != 0) return false // other things being around at height 0 is acceptable
                     }
                 }
                 true
             }
-        } else {
-            false
-        }
+        } else false
     }
 
     override fun getTreeHeight(random: Random): Int {

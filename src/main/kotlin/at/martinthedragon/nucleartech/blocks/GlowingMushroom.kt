@@ -3,14 +3,16 @@ package at.martinthedragon.nucleartech.blocks
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.config.NuclearConfig
+import at.martinthedragon.nucleartech.world.gen.WorldGen
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.MushroomBlock
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
+import java.util.function.Supplier
 
-class GlowingMushroom(properties: Properties) : MushroomBlock(properties, { null /* TODO */ }) {
+class GlowingMushroom(properties: Properties) : MushroomBlock(properties, Supplier { WorldGen.TreeFeatures.HUGE_GLOWING_MUSHROOM }) {
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean =
         world.getBlockState(pos.below()).`is`(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)
 

@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
 import at.martinthedragon.nucleartech.ntm
+import at.martinthedragon.nucleartech.world.gen.features.HugeGlowingMushroomFeature
 import at.martinthedragon.nucleartech.world.gen.features.OilBubbleFeature
 import net.minecraft.core.Registry
 import net.minecraft.data.BuiltinRegistries
@@ -11,13 +12,17 @@ import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.HugeMushroomBlock
 import net.minecraft.world.level.levelgen.GenerationStep
 import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
 import net.minecraft.world.level.levelgen.placement.*
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest
@@ -114,6 +119,7 @@ object WorldGen {
 
     object Features {
         val OIL_BUBBLE: RegistryObject<OilBubbleFeature> = FEATURES.register("oil_bubble") { OilBubbleFeature(NoneFeatureConfiguration.CODEC) }
+        val HUGE_GLOWING_MUSHROOM: RegistryObject<HugeGlowingMushroomFeature> = FEATURES.register("huge_glowing_mushroom") { HugeGlowingMushroomFeature(HugeMushroomFeatureConfiguration.CODEC) }
     }
 
     private object OreFeatures {
@@ -213,6 +219,11 @@ object WorldGen {
         fun orePlacement(first: PlacementModifier, second: PlacementModifier) = listOf(first, InSquarePlacement.spread(), second, BiomeFilter.biome())
         fun commonOrePlacement(count: Int, modifier: PlacementModifier) = orePlacement(CountPlacement.of(count), modifier)
         fun rareOrePlacement(rarity: Int, modifier: PlacementModifier) = orePlacement(RarityFilter.onAverageOnceEvery(rarity), modifier)
+    }
+
+
+    object TreeFeatures {
+        val HUGE_GLOWING_MUSHROOM = register("huge_glowing_mushroom", Features.HUGE_GLOWING_MUSHROOM.get().configured(HugeMushroomFeatureConfiguration(BlockStateProvider.simple(ModBlocks.glowingMushroomBlock.get()), BlockStateProvider.simple(ModBlocks.glowingMushroomStem.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 4)))
     }
 
     private fun <FC : FeatureConfiguration> register(name: String, feature: ConfiguredFeature<FC, *>): ConfiguredFeature<FC, *> = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, ntm(name), feature)
