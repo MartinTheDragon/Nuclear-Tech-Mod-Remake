@@ -7,6 +7,7 @@ modId="nucleartech"
 version="${file.jarVersion}"
 displayName="Nuclear Tech Mod"
 displayURL="https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake"
+updateJSONURL="https://martinthedragon.github.io/Nuclear-Tech-Mod-Remake/raw/update.json"
 credits="HbM: Did well..."
 authors="MartinTheDragon"
 description='''All the high quality nuclear bombs and machinery you can only find in this mod or in the older 1.7.10 version!
