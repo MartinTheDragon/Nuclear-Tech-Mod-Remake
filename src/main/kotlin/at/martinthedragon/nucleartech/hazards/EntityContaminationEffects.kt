@@ -162,6 +162,10 @@ object EntityContaminationEffects {
         contaminationType: ContaminationType,
         amount: Float
     ): Boolean {
+        if (amount < 0) {
+            decontaminate(capability, hazardType, -amount)
+            return true
+        }
         if (hazardType == HazardType.Radiation) capability.setCumulativeRadiation(capability.getCumulativeRadiation() + amount)
 
         if (entity is Player) {
@@ -184,4 +188,11 @@ object EntityContaminationEffects {
     fun calculateRadiationMod(entity: LivingEntity): Float = if (entity is Player) {
         10F.pow(-0F) // TODO hazmat
     } else 1F
+
+    fun decontaminate(capability: ContaminationHandler, hazardType: HazardType, amount: Float) {
+        when (hazardType) {
+            HazardType.Radiation -> capability.setIrradiation((capability.getIrradiation() - amount).coerceAtLeast(0F))
+            HazardType.Digamma -> capability.setDigamma((capability.getDigamma() - amount).coerceAtLeast(0F))
+        }
+    }
 }

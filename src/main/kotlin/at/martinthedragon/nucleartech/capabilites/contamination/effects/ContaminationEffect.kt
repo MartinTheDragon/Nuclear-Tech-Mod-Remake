@@ -51,8 +51,8 @@ class RadiationEffect : ContaminationEffect {
 
     constructor(startingRadiation: Float, maxTime: Int, ignoreArmor: Boolean, source: String? = null) {
         this.startingRadiation = startingRadiation
-        this.maxTime = maxTime
-        this.timeLeft = maxTime
+        this.maxTime = maxTime - 1
+        this.timeLeft = maxTime - 1
         this.ignoreArmor = ignoreArmor
         this.source = source
     }
@@ -60,7 +60,11 @@ class RadiationEffect : ContaminationEffect {
     override fun tick(entity: LivingEntity) {
         EntityContaminationEffects.contaminate(entity,
             EntityContaminationEffects.HazardType.Radiation,
-            if (ignoreArmor) EntityContaminationEffects.ContaminationType.Bypass else EntityContaminationEffects.ContaminationType.Creative,
+            when {
+                startingRadiation < 0 -> EntityContaminationEffects.ContaminationType.None
+                ignoreArmor -> EntityContaminationEffects.ContaminationType.Bypass
+                else -> EntityContaminationEffects.ContaminationType.Creative
+            },
             startingRadiation * 0.05F * (timeLeft.toFloat() / maxTime)
         )
         timeLeft--
@@ -83,5 +87,15 @@ class RadiationEffect : ContaminationEffect {
         maxTime = getInt("MaxTime")
         timeLeft = getInt("TimeLeft")
         ignoreArmor = getBoolean("IgnoreArmor")
+    }
+
+    companion object {
+        // total radiation = starting radiation * time (sec) / 2
+        // total radiation * 2 = starting radiation * time
+        // total radiation * 2 / time = starting radiation
+        fun createWithTotalRads(totalRads: Float, maxTime: Int, ignoreArmor: Boolean, source: String? = null): RadiationEffect {
+            val startingRadiation = totalRads * 2F / (maxTime.toFloat() * 0.05F)
+            return RadiationEffect(startingRadiation, maxTime, ignoreArmor, source)
+        }
     }
 }

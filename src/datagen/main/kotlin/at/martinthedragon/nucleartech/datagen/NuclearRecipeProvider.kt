@@ -639,6 +639,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(ModItems.oilDetector.get()).define('G', NuclearTags.Items.WIRES_GOLD).define('S', NuclearTags.Items.PLATES_STEEL).define('C', NuclearTags.Items.INGOTS_COPPER).define('A', ModItems.advancedCircuit.get()).pattern("G C").pattern("GAC").pattern("SSS").group(ModItems.oilDetector.id.path).unlockedBy("has_${ModItems.advancedCircuit.id.path}", has(ModItems.advancedCircuit.get())).save(consumer, ModItems.oilDetector.id)
+        ShapedRecipeBuilder.shaped(ModItems.ivBag.get(), 4).define('I', NuclearTags.Items.PLATES_INSULATOR).define('F', NuclearTags.Items.PLATES_IRON).pattern("I").pattern("F").pattern("I").unlockedBy("has_insulator", has(NuclearTags.Items.PLATES_INSULATOR)).save(consumer)
+        ShapelessRecipeBuilder.shapeless(ModItems.emptyExperienceBag.get()).requires(ModItems.ivBag.get()).requires(ModItems.enchantmentPowder.get()).unlockedBy("has_powder", has(ModItems.enchantmentPowder.get())).save(consumer)
+        ShapelessRecipeBuilder.shapeless(ModItems.radAway.get()).requires(ModItems.bloodBag.get()).requires(NuclearTags.Items.DUSTS_COAL).requires(Tags.Items.SEEDS_PUMPKIN).unlockedBy("has_blood_bag", has(ModItems.bloodBag.get())).save(consumer)
+        ShapelessRecipeBuilder.shapeless(ModItems.strongRadAway.get()).requires(ModItems.radAway.get()).requires(ModBlockItems.glowingMushroom.get()).unlockedBy("has_glowing_mushroom", has(ModBlockItems.glowingMushroom.get())).save(consumer)
+        // TODO elite radaway iodine
     }
 
     private fun misc(consumer: Consumer<FinishedRecipe>) {

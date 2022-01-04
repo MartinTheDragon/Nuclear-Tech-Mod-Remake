@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity
 import kotlin.random.Random
 
 object DamageSources {
+    val extractBlood: DamageSource = DamageSource("${NuclearTech.MODID}.extractBlood").bypassArmor().bypassMagic().setNoAggro()
     val radiation: DamageSource = DamageSource("${NuclearTech.MODID}.radiation").bypassArmor()
     val nuclearBlast: DamageSource = DamageSource("${NuclearTech.MODID}.nuclearBlast").setExplosion()
     val murkyAnvil: DamageSource = MurkyAnvilDamageSource("${NuclearTech.MODID}.murkyAnvil")

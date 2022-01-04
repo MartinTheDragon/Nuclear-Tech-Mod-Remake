@@ -111,21 +111,23 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
         }
 
         private fun getColorForRadValue(rad: Float): ChatFormatting = when {
+            rad < 0 -> ChatFormatting.DARK_GREEN
             rad == 0F -> ChatFormatting.GREEN
-            rad < 1F -> ChatFormatting.YELLOW
-            rad < 10F -> ChatFormatting.GOLD
-            rad < 100F -> ChatFormatting.RED
-            rad < 1000F -> ChatFormatting.DARK_RED
-            else -> ChatFormatting.DARK_GRAY
+            rad < 1 -> ChatFormatting.YELLOW
+            rad < 10 -> ChatFormatting.GOLD
+            rad < 100 -> ChatFormatting.RED
+            rad < 1000 -> ChatFormatting.DARK_RED
+            else -> ChatFormatting.DARK_PURPLE
         }
 
         private fun getColorForPlayerRadValue(rad: Float): ChatFormatting = when {
+            rad < 0 -> ChatFormatting.AQUA
             rad < 200 -> ChatFormatting.GREEN
             rad < 400 -> ChatFormatting.YELLOW
             rad < 600 -> ChatFormatting.GOLD
             rad < 800 -> ChatFormatting.RED
             rad < 1000 -> ChatFormatting.DARK_RED
-            else -> ChatFormatting.DARK_GRAY
+            else -> ChatFormatting.DARK_PURPLE
         }
     }
 }

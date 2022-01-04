@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:iv_bag"
+    },
+    {
+      "item": "nucleartech:enchantment_powder"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:empty_experience_bag"
+  }
+}

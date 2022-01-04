@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:blood_bag"
+    },
+    {
+      "tag": "forge:dusts/coal"
+    },
+    {
+      "tag": "forge:seeds/pumpkin"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:radaway"
+  }
+}

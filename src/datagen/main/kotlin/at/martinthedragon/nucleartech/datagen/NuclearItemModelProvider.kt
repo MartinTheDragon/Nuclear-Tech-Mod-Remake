@@ -545,6 +545,13 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.detonator.get())
         simpleItem(ModItems.oilDetector.get())
         simpleItem(ModItems.geigerCounter.get())
+        simpleItem(ModItems.ivBag.get())
+        simpleItem(ModItems.bloodBag.get())
+        simpleItem(ModItems.emptyExperienceBag.get())
+        simpleItem(ModItems.experienceBag.get())
+        simpleItem(ModItems.radAway.get())
+        simpleItem(ModItems.strongRadAway.get())
+        simpleItem(ModItems.eliteRadAway.get())
         simpleItem(ModItems.creativeNuclearExplosionSpawner.get())
 
         bombKitItem = getBuilder("template_bomb_kit").parent(generatedItem)

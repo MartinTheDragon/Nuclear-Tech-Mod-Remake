@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:radaway"
+    },
+    {
+      "item": "nucleartech:glowing_mushroom"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:strong_radaway"
+  }
+}

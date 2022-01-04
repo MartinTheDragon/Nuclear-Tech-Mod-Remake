@@ -570,6 +570,13 @@ object ModItems {
 
     val oilDetector: RegistryObject<OilDetector> = ITEMS.register("oil_detector") { OilDetector(Item.Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
     val geigerCounter: RegistryObject<GeigerCounterItem> = ITEMS.register("handheld_geiger_counter") { GeigerCounterItem(Item.Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
+    val ivBag: RegistryObject<EmptyIVBag> = ITEMS.register("iv_bag") { EmptyIVBag(Item.Properties().tab(CreativeTabs.Consumables)) }
+    val bloodBag: RegistryObject<BloodBag> = ITEMS.register("blood_bag") { BloodBag(Item.Properties().tab(CreativeTabs.Consumables)) }
+    val emptyExperienceBag: RegistryObject<EmptyExperienceBag> = ITEMS.register("empty_experience_bag") { EmptyExperienceBag(Item.Properties().tab(CreativeTabs.Consumables)) }
+    val experienceBag: RegistryObject<ExperienceBag> = ITEMS.register("experience_bag") { ExperienceBag(Item.Properties().tab(CreativeTabs.Consumables)) }
+    val radAway: RegistryObject<RadAway> = ITEMS.register("radaway") { RadAway(140F, 5 * 20, Item.Properties().tab(CreativeTabs.Consumables)) }
+    val strongRadAway: RegistryObject<RadAway> = ITEMS.register("strong_radaway") { RadAway(350F, 4 * 20, Item.Properties().tab(CreativeTabs.Consumables)) }
+    val eliteRadAway: RegistryObject<RadAway> = ITEMS.register("elite_radaway") { RadAway(1000F, 3 * 20, Item.Properties().tab(CreativeTabs.Consumables)) }
 
     // Miscellaneous
 

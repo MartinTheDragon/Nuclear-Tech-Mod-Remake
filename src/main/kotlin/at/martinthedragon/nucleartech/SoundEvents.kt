@@ -27,6 +27,8 @@ object SoundEvents {
     val sirenTrackRazortrainHorn: RegistryObject<SoundEvent> = SOUNDS.register("siren.razortrain_horn") { SoundEvent(modLoc("siren.razortrain_horn")) }
     val anvilFall: RegistryObject<SoundEvent> = SOUNDS.register("anvil.fall") { SoundEvent(modLoc("anvil.fall")) }
     val pressOperate: RegistryObject<SoundEvent> = SOUNDS.register("press.operate") { SoundEvent(modLoc("press.operate")) }
+    val inject: RegistryObject<SoundEvent> = SOUNDS.register("item.use.inject") { SoundEvent(modLoc("item.use.inject")) }
+    val emptyIVBag: RegistryObject<SoundEvent> = SOUNDS.register("item.use.radaway") { SoundEvent(modLoc("item.use.radaway")) }
     val randomBleep: RegistryObject<SoundEvent> = SOUNDS.register("random.bleep") { SoundEvent(modLoc("random.bleep")) }
     val randomBoop: RegistryObject<SoundEvent> = SOUNDS.register("random.boop") { SoundEvent(modLoc("random.boop")) }
     val randomUnpack: RegistryObject<SoundEvent> = SOUNDS.register("random.unpack") { SoundEvent(modLoc("random.unpack")) }

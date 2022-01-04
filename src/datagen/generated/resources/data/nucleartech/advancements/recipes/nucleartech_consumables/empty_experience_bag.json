@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:empty_experience_bag"
+    ]
+  },
+  "criteria": {
+    "has_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:enchantment_powder"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:empty_experience_bag"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder",
+      "has_the_recipe"
+    ]
+  ]
+}
