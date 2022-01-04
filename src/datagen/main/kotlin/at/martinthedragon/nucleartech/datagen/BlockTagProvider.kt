@@ -61,7 +61,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(NuclearTags.Blocks.ORES_FLUORITE).add(ModBlocks.fluoriteOre.get())
         tag(NuclearTags.Blocks.ORES_BERYLLIUM).add(ModBlocks.berylliumOre.get())
         tag(NuclearTags.Blocks.ORES_LEAD).add(ModBlocks.leadOre.get())
-        tag(NuclearTags.Blocks.ORES_OIL).add(ModBlocks.oilDeposit.get())
+        tag(NuclearTags.Blocks.ORES_OIL).add(ModBlocks.oilDeposit.get()).add(ModBlocks.deepslateOilDeposit.get())
         tag(NuclearTags.Blocks.ORES_LIGNITE).add(ModBlocks.ligniteOre.get())
         tag(NuclearTags.Blocks.ORES_ASBESTOS).add(ModBlocks.asbestosOre.get())
         tag(NuclearTags.Blocks.ORES_RARE_EARTH).add(ModBlocks.rareEarthOre.get())

@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.worldgen.features
+package at.martinthedragon.nucleartech.world.gen.features
 
 import at.martinthedragon.nucleartech.ModBlocks
 import com.mojang.serialization.Codec
@@ -25,8 +25,11 @@ class OilBubbleFeature(codec: Codec<NoneFeatureConfiguration>) : Feature<NoneFea
                     val zBorder = yBorder + zIteration * zIteration
                     if (zBorder < radiusSquaredHalved) {
                         val oilOrePos = BlockPos(x, y, z)
-                        if (context.level().getBlockState(oilOrePos).block in BlockTags.BASE_STONE_OVERWORLD) {
+                        val blockState = context.level().getBlockState(oilOrePos)
+                        if (blockState.`is`(BlockTags.STONE_ORE_REPLACEABLES)) {
                             setBlock(context.level(), oilOrePos, ModBlocks.oilDeposit.get().defaultBlockState())
+                        } else if (blockState.`is`(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) {
+                            setBlock(context.level(), oilOrePos, ModBlocks.deepslateOilDeposit.get().defaultBlockState())
                         }
                     }
                 }

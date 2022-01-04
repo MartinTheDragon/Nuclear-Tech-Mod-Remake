@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.worldgen.features
+package at.martinthedragon.nucleartech.world.gen.features
 
 import at.martinthedragon.nucleartech.NuclearTags
 import com.mojang.serialization.Codec

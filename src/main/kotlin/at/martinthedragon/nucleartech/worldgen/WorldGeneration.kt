@@ -3,8 +3,8 @@ package at.martinthedragon.nucleartech.worldgen
 //import at.martinthedragon.nucleartech.ModBlocks
 //import at.martinthedragon.nucleartech.NuclearTech
 //import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
-//import at.martinthedragon.nucleartech.worldgen.features.HugeGlowingMushroomFeature
-//import at.martinthedragon.nucleartech.worldgen.features.OilBubbleFeature
+//import at.martinthedragon.nucleartech.world.gen.features.HugeGlowingMushroomFeature
+//import at.martinthedragon.nucleartech.world.gen.features.OilBubbleFeature
 //import net.minecraft.core.Registry
 //import net.minecraft.data.BuiltinRegistries
 //import net.minecraft.data.worldgen.features.OreFeatures

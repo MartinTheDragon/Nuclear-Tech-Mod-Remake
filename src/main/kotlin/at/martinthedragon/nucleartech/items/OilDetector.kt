@@ -19,20 +19,18 @@ class OilDetector(properties: Properties) : Item(properties) {
         autoTooltip(stack, tooltip)
     }
 
-    override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
-        fun checkColumns(world: Level, playerPos: BlockPos, offsetX: Int, offsetZ: Int): Boolean {
+    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
+        fun checkColumns(level: Level, playerPos: BlockPos, offsetX: Int, offsetZ: Int): Boolean {
             val oilOreTag = NuclearTags.Blocks.ORES_OIL
-            for (i in 5..(playerPos.y + 15)) {
+            for (i in (level.dimensionType().minY())..(playerPos.y + 15)) {
                 val found = when {
-                    offsetX == 0 && offsetZ == 0 -> world.getBlockState(BlockPos(playerPos.x, i, playerPos.z)).`is`(oilOreTag)
-                    offsetX == 0 -> world.getBlockState(BlockPos(playerPos.x, i, playerPos.z + offsetZ)).`is`(oilOreTag) ||
-                            world.getBlockState(BlockPos(playerPos.x, i, playerPos.z - offsetZ)).`is`(oilOreTag)
-                    offsetZ == 0 -> world.getBlockState(BlockPos(playerPos.x + offsetX, i, playerPos.z)).`is`(oilOreTag) ||
-                            world.getBlockState(BlockPos(playerPos.x - offsetX, i, playerPos.z)).`is`(oilOreTag)
-                    else -> world.getBlockState(BlockPos(playerPos.x + offsetX, i, playerPos.z + offsetZ)).`is`(oilOreTag) ||
-                            world.getBlockState(BlockPos(playerPos.x - offsetX, i, playerPos.z + offsetZ)).`is`(oilOreTag) ||
-                            world.getBlockState(BlockPos(playerPos.x + offsetX, i, playerPos.z - offsetZ)).`is`(oilOreTag) ||
-                            world.getBlockState(BlockPos(playerPos.x - offsetX, i, playerPos.z - offsetZ)).`is`(oilOreTag)
+                    offsetX == 0 && offsetZ == 0 -> level.getBlockState(BlockPos(playerPos.x, i, playerPos.z)).`is`(oilOreTag)
+                    offsetX == 0 -> level.getBlockState(BlockPos(playerPos.x, i, playerPos.z + offsetZ)).`is`(oilOreTag) || level.getBlockState(BlockPos(playerPos.x, i, playerPos.z - offsetZ)).`is`(oilOreTag)
+                    offsetZ == 0 -> level.getBlockState(BlockPos(playerPos.x + offsetX, i, playerPos.z)).`is`(oilOreTag) || level.getBlockState(BlockPos(playerPos.x - offsetX, i, playerPos.z)).`is`(oilOreTag)
+                    else -> level.getBlockState(BlockPos(playerPos.x + offsetX, i, playerPos.z + offsetZ)).`is`(oilOreTag) ||
+                        level.getBlockState(BlockPos(playerPos.x - offsetX, i, playerPos.z + offsetZ)).`is`(oilOreTag) ||
+                        level.getBlockState(BlockPos(playerPos.x + offsetX, i, playerPos.z - offsetZ)).`is`(oilOreTag) ||
+                        level.getBlockState(BlockPos(playerPos.x - offsetX, i, playerPos.z - offsetZ)).`is`(oilOreTag)
                 }
 
                 if (found) return true
@@ -40,16 +38,16 @@ class OilDetector(properties: Properties) : Item(properties) {
             return false
         }
 
-        if (world.isClientSide) {
+        if (level.isClientSide) {
             val playerPosition = player.blockPosition()
-            if (checkColumns(world, playerPosition, 0, 0)) {
+            if (checkColumns(level, playerPosition, 0, 0)) {
                 player.displayClientMessage(TranslatableComponent("$descriptionId.below").withStyle(ChatFormatting.DARK_GREEN), true)
             } else if (
-                checkColumns(world, playerPosition, 5, 0) ||
-                checkColumns(world, playerPosition, 0, 5) ||
-                checkColumns(world, playerPosition, 10, 0) ||
-                checkColumns(world, playerPosition, 0, 10) ||
-                checkColumns(world, playerPosition, 5, 5)
+                checkColumns(level, playerPosition, 5, 0) ||
+                checkColumns(level, playerPosition, 0, 5) ||
+                checkColumns(level, playerPosition, 10, 0) ||
+                checkColumns(level, playerPosition, 0, 10) ||
+                checkColumns(level, playerPosition, 5, 5)
             ) {
                 player.displayClientMessage(TranslatableComponent("$descriptionId.near").withStyle(ChatFormatting.GOLD), true)
             } else {
@@ -60,6 +58,6 @@ class OilDetector(properties: Properties) : Item(properties) {
         player.playSound(SoundEvents.randomBleep.get(), 1F, 1F)
 
         val itemStack = player.getItemInHand(hand)
-        return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide)
+        return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide)
     }
 }

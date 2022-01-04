@@ -63,6 +63,8 @@ class BlockLoots : BlockLoot() {
         add(ModBlocks.deepslateFluoriteOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.fluorite.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
         add(ModBlocks.deepslateBerylliumOre.get()) { createOreDrop(it, ModItems.rawBeryllium.get()) }
         add(ModBlocks.deepslateLeadOre.get()) { createOreDrop(it, ModItems.rawLead.get()) }
+        dropSelf(ModBlocks.deepslateOilDeposit.get())
+        dropSelf(ModBlocks.emptyDeepslateOilDeposit.get())
         add(ModBlocks.deepslateAsbestosOre.get()) { createOreDrop(it, ModItems.rawAsbestos.get()) }
         add(ModBlocks.deepslateSchrabidiumOre.get()) { createOreDrop(it, ModItems.rawSchrabidium.get()) }
         add(ModBlocks.deepslateAustralianOre.get()) { createOreDrop(it, ModItems.rawAustralium.get()) }

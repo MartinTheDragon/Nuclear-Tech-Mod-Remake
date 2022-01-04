@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:oil_deposit"
+    "nucleartech:oil_deposit",
+    "nucleartech:deepslate_oil_deposit"
   ]
 }

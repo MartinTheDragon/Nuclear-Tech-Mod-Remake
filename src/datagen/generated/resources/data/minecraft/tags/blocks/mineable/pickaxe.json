@@ -57,6 +57,8 @@
     "nucleartech:lead_block",
     "nucleartech:oil_deposit",
     "nucleartech:empty_oil_deposit",
+    "nucleartech:deepslate_oil_deposit",
+    "nucleartech:empty_deepslate_oil_deposit",
     "nucleartech:lignite_ore",
     "nucleartech:asbestos_ore",
     "nucleartech:deepslate_asbestos_ore",

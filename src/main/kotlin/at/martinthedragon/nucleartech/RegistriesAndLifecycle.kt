@@ -8,6 +8,7 @@ import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
+import at.martinthedragon.nucleartech.world.gen.WorldGen
 import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
@@ -55,8 +56,8 @@ object RegistriesAndLifecycle {
         MenuTypes
         RECIPE_SERIALIZERS.register(modEventBus)
         RecipeSerializers
-//        FEATURES.register(modEventBus)
-//        WorldGeneration.Features
+        FEATURES.register(modEventBus)
+        WorldGen.Features
         SOUNDS.register(modEventBus)
         SoundEvents
     }

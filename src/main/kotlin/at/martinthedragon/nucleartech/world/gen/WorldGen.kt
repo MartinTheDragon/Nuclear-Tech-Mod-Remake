@@ -2,7 +2,9 @@ package at.martinthedragon.nucleartech.world.gen
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
 import at.martinthedragon.nucleartech.ntm
+import at.martinthedragon.nucleartech.world.gen.features.OilBubbleFeature
 import net.minecraft.core.Registry
 import net.minecraft.data.BuiltinRegistries
 import net.minecraft.data.worldgen.placement.PlacementUtils
@@ -14,6 +16,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration
 import net.minecraft.world.level.levelgen.placement.*
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest
@@ -23,6 +26,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.registries.RegistryObject
 import net.minecraft.data.worldgen.features.OreFeatures as VanillaOreFeatures
 
 @Suppress("unused")
@@ -76,6 +80,8 @@ object WorldGen {
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_RARE_EARTH_LARGE)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_RARE_EARTH_BURIED)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COBALT)
+
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.OIL_BUBBLE)
         }
 
         private fun addBadlandsOres(builder: BiomeGenerationSettingsBuilder) {
@@ -104,6 +110,10 @@ object WorldGen {
         private fun addEndOres(builder: BiomeGenerationSettingsBuilder) {
             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_TRIXITE_END)
         }
+    }
+
+    object Features {
+        val OIL_BUBBLE: RegistryObject<OilBubbleFeature> = FEATURES.register("oil_bubble") { OilBubbleFeature(NoneFeatureConfiguration.CODEC) }
     }
 
     private object OreFeatures {
@@ -158,6 +168,8 @@ object WorldGen {
         val ORE_NETHER_SULFUR = register("ore_nether_sulfur", Feature.ORE.configured(OreConfiguration(NETHERRACK, ModBlocks.netherSulfurOre.get().defaultBlockState(), 18)))
         val ORE_NETHER_PHOSPHORUS = register("ore_nether_phosphorus", Feature.ORE.configured(OreConfiguration(NETHERRACK, ModBlocks.netherPhosphorusOre.get().defaultBlockState(), 5)))
         val ORE_END_TRIXITE = register("ore_end_trixite", Feature.ORE.configured(OreConfiguration(END_STONE, ModBlocks.trixite.get().defaultBlockState(), 4, .1F)))
+
+        val OIL_BUBBLE = register("oil_bubble", Features.OIL_BUBBLE.get().configured(FeatureConfiguration.NONE))
     }
 
     private object OrePlacements {
@@ -195,6 +207,8 @@ object WorldGen {
         val ORE_SULFUR_NETHER = register("ore_sulfur_nether", OreFeatures.ORE_NETHER_SULFUR.placed(commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(10), VerticalAnchor.aboveBottom(74)))))
         val ORE_PHOSPHORUS_NETHER = register("ore_phosphorus_nether", OreFeatures.ORE_NETHER_PHOSPHORUS.placed(commonOrePlacement(16, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(54), VerticalAnchor.belowTop(10)))))
         val ORE_TRIXITE_END = register("ore_trixite_end", OreFeatures.ORE_END_TRIXITE.placed(commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(16), VerticalAnchor.absolute(80)))))
+
+        val OIL_BUBBLE = register("oil_bubble", OreFeatures.OIL_BUBBLE.placed(rareOrePlacement(25, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80)))))
 
         fun orePlacement(first: PlacementModifier, second: PlacementModifier) = listOf(first, InSquarePlacement.spread(), second, BiomeFilter.biome())
         fun commonOrePlacement(count: Int, modifier: PlacementModifier) = orePlacement(CountPlacement.of(count), modifier)

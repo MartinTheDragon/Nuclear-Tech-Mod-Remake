@@ -47,6 +47,8 @@ object ModBlockItems {
     val deepslateFluoriteOre: RegistryObject<Item> = ITEMS.register("deepslate_fluorite_ore") { BlockItem(ModBlocks.deepslateFluoriteOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val deepslateBerylliumOre: RegistryObject<Item> = ITEMS.register("deepslate_beryllium_ore") { BlockItem(ModBlocks.deepslateBerylliumOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val deepslateLeadOre: RegistryObject<Item> = ITEMS.register("deepslate_lead_ore") { BlockItem(ModBlocks.deepslateLeadOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val deepslateOilDeposit: RegistryObject<Item> = ITEMS.register("deepslate_oil_deposit") { AutoTooltippedBlockItem(ModBlocks.deepslateOilDeposit.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val emptyDeepslateOilDeposit: RegistryObject<Item> = ITEMS.register("empty_deepslate_oil_deposit") { BlockItem(ModBlocks.emptyDeepslateOilDeposit.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val deepslateAsbestosOre: RegistryObject<Item> = ITEMS.register("deepslate_asbestos_ore") { BlockItem(ModBlocks.deepslateAsbestosOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val deepslateSchrabidiumOre: RegistryObject<Item> = ITEMS.register("deepslate_schrabidium_ore") { BlockItem(ModBlocks.deepslateSchrabidiumOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val deepslateAustralianOre: RegistryObject<Item> = ITEMS.register("deepslate_australian_ore") { AutoTooltippedBlockItem(ModBlocks.deepslateAustralianOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
