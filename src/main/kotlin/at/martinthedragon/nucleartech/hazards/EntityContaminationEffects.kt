@@ -171,6 +171,7 @@ object EntityContaminationEffects {
         if (entity is Player) {
             // TODO check for armor
 
+            if (entity.isSpectator) return false
             if (entity.isCreative && contaminationType != ContaminationType.None && contaminationType != ContaminationType.Digamma2) return false
             if (entity.tickCount < 200) return false
         }
