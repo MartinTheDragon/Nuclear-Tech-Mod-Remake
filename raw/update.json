@@ -1,0 +1,9 @@
+{
+  "homepage": "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases",
+  "promos": {
+    "1.18.1-latest": "0.0.11.0"
+  },
+  "1.18.1": {
+    "0.0.11.0": "First 1.18 version\nSee changelog for more details on new features"
+  }
+}
