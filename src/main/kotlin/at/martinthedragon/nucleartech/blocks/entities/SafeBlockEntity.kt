@@ -30,8 +30,6 @@ class SafeBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainerB
 
     private var inventoryCapability: LazyOptional<IItemHandlerModifiable>? = null
 
-    override fun getUpdateTag(): CompoundTag = save(CompoundTag())
-
     override fun saveAdditional(nbt: CompoundTag) {
         super.saveAdditional(nbt)
         nbt.merge(inventory.serializeNBT())

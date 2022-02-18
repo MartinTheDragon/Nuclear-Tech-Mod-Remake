@@ -82,7 +82,7 @@ class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainer
 
     override fun getContainerSize(): Int = 1
 
-    override fun getUpdateTag(): CompoundTag = save(CompoundTag())
+    override fun getUpdateTag(): CompoundTag = saveWithoutMetadata()
 
     override fun saveAdditional(nbt: CompoundTag) {
         super.saveAdditional(nbt)
