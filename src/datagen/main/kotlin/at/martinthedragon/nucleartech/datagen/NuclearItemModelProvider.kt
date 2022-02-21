@@ -534,6 +534,7 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.sirenTrackEASAlarmScreech.get())
         simpleItem(ModItems.sirenTrackAPCPass.get())
         simpleItem(ModItems.sirenTrackRazortrainHorn.get())
+        simpleItem(ModItems.assemblyTemplate.get())
         simpleItem(ModItems.neutronShieldingLittleBoy.get())
         simpleItem(ModItems.subcriticalUraniumTarget.get())
         simpleItem(ModItems.uraniumProjectile.get())
@@ -567,6 +568,7 @@ class NuclearItemModelProvider(
         getBuilder(ModBlockItems.glowingMushroomBlock.id.path).parent(cubeAll).texture("all", blockTexture(ModBlocks.glowingMushroomBlock.get()))
         getBuilder(ModBlockItems.glowingMushroomStem.id.path).parent(cubeAll).texture("all", blockTexture(ModBlocks.glowingMushroomStem.get()))
         simpleItem(ModBlockItems.steamPress.get())
+        simpleItem(ModBlockItems.assemblerPlacer.get())
     }
 
     private val cubeAll = getExistingFile(mcLoc("block/cube_all"))

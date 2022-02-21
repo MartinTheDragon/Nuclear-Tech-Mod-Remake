@@ -143,6 +143,8 @@
     "nucleartech:schrabidate_anvil",
     "nucleartech:dineutronium_anvil",
     "nucleartech:murky_anvil",
+    "nucleartech:assembler",
+    "nucleartech:assembler_part",
     "nucleartech:little_boy",
     "nucleartech:fat_man"
   ]

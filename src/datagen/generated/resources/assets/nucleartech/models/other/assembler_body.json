@@ -1,0 +1,8 @@
+{
+  "textures": {
+    "texture": "nucleartech:block/assembler/assembler_body"
+  },
+  "loader": "forge:obj",
+  "model": "nucleartech:models/other/assembler/assembler_body.obj",
+  "flip-v": true
+}

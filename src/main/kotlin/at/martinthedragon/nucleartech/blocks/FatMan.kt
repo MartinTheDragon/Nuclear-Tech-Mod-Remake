@@ -24,10 +24,10 @@ class FatMan(properties: Properties) : BaseEntityBlock(properties), IgnitableExp
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<FatManBlockEntity>(level, pos, player)
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<FatManBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<FatManBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<FatManBlockEntity>(state, level, pos, newState)
+        dropBlockEntityContents<FatManBlockEntity>(state, level, pos, newState)
         @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 

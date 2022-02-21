@@ -11,5 +11,6 @@ object RecipeSerializers {
     val PRESSING: RegistryObject<PressRecipe.Serializer> = RECIPE_SERIALIZERS.register("pressing", PressRecipe::Serializer)
     val BLASTING: RegistryObject<BlastingRecipe.Serializer> = RECIPE_SERIALIZERS.register("blasting", BlastingRecipe::Serializer)
     val SHREDDING: RegistryObject<ShreddingRecipe.Serializer> = RECIPE_SERIALIZERS.register("shredding", ShreddingRecipe::Serializer)
+    val ASSEMBLY: RegistryObject<AssemblyRecipe.Serializer> = RECIPE_SERIALIZERS.register("assembly", AssemblyRecipe::Serializer)
     val BATTERY: RegistryObject<BatteryRecipe.Serializer> = RECIPE_SERIALIZERS.register("battery", BatteryRecipe::Serializer)
 }

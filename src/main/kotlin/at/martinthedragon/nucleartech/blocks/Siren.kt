@@ -24,7 +24,7 @@ class Siren(properties: Properties) : BaseEntityBlock(properties) {
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, handIn: InteractionHand, hit: BlockHitResult) = openMenu<SirenBlockEntity>(level, pos, player)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<SirenBlockEntity>(state, level, pos, newState)
+        dropBlockEntityContents<SirenBlockEntity>(state, level, pos, newState)
         @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 

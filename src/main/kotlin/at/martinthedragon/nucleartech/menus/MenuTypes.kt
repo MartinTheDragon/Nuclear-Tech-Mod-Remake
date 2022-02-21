@@ -14,6 +14,7 @@ object MenuTypes {
     val combustionGeneratorMenu: RegistryObject<MenuType<CombustionGeneratorMenu>> = MENUS.register("combustion_generator") { IForgeMenuType.create(CombustionGeneratorMenu::fromNetwork) }
     val electricFurnaceMenu: RegistryObject<MenuType<ElectricFurnaceMenu>> = MENUS.register("electric_furnace") { IForgeMenuType.create(ElectricFurnaceMenu::fromNetwork) }
     val shredderMenu: RegistryObject<MenuType<ShredderMenu>> = MENUS.register("shredder") { IForgeMenuType.create(ShredderMenu::fromNetwork) }
+    val assemblerMenu: RegistryObject<MenuType<AssemblerMenu>> = MENUS.register("assembler") { IForgeMenuType.create(AssemblerMenu::fromNetwork) }
     val littleBoyMenu: RegistryObject<MenuType<LittleBoyMenu>> = MENUS.register("little_boy") { IForgeMenuType.create(LittleBoyMenu::fromNetwork) }
     val fatManMenu: RegistryObject<MenuType<FatManMenu>> = MENUS.register("fat_man") { IForgeMenuType.create(FatManMenu::fromNetwork) }
 }

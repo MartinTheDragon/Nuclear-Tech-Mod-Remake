@@ -260,6 +260,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         machines(consumer)
         anvilSmithing(consumer)
         anvilConstructing(consumer)
+        assembly(consumer)
         consumables(consumer)
         misc(consumer)
     }
@@ -635,6 +636,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AnvilRecipeBuilder(3).requires(ModItems.advancedCircuit.get()).results(ModItems.enhancedCircuit.get()).results(ItemStack(ModItems.redCopperWire.get(), 2)).results(ModItems.redCopperWire.get() to .5F, ModItems.redCopperWire.get() to .25F, ModItems.goldPowder.get() to .25F, ModItems.insulator.get() to .5F).save(consumer)
         AnvilRecipeBuilder(4).requires(ModItems.overclockedCircuit.get()).results(ModItems.advancedCircuit.get()).results(ItemStack(ModItems.goldWire.get(), 2)).results(ModItems.goldWire.get() to .5F, ModItems.goldWire.get() to .25F, ModItems.lapisLazuliPowder.get() to .25F, ModItems.polymerIngot.get() to .5F).save(consumer)
         AnvilRecipeBuilder(6).requires(ModItems.highPerformanceCircuit.get()).results(ModItems.overclockedCircuit.get()).results(ItemStack(ModItems.schrabidiumWire.get(), 2)).results(ModItems.schrabidiumWire.get() to .5F, ModItems.schrabidiumWire.get() to .25F, ModItems.diamondPowder.get() to .25F, ModItems.deshIngot.get() to .5F).save(consumer)
+    }
+
+    private fun assembly(consumer: Consumer<FinishedRecipe>) {
+        AssemblyRecipeBuilder(ModItems.ironPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_IRON).save(consumer)
+        AssemblyRecipeBuilder(ModItems.goldPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_GOLD).save(consumer)
     }
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {

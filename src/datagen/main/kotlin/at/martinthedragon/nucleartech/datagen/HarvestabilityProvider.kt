@@ -71,6 +71,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             ModBlocks.electricFurnace.get(),
             ModBlocks.shredder.get(),
             ModBlocks.ironAnvil.get(), ModBlocks.leadAnvil.get(), ModBlocks.steelAnvil.get(), ModBlocks.meteoriteAnvil.get(), ModBlocks.starmetalAnvil.get(), ModBlocks.ferrouraniumAnvil.get(), ModBlocks.bismuthAnvil.get(), ModBlocks.schrabidateAnvil.get(), ModBlocks.dineutroniumAnvil.get(), ModBlocks.murkyAnvil.get(),
+            ModBlocks.assembler.get(), ModBlocks.assemblerPart.get(),
             ModBlocks.littleBoy.get(), ModBlocks.fatMan.get()
         )
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
@@ -126,6 +127,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             ModBlocks.shredder.get(),
             ModBlocks.ironAnvil.get(),
             ModBlocks.leadAnvil.get(),
+            ModBlocks.assembler.get(), ModBlocks.assemblerPart.get(),
         )
         tag(BlockTags.NEEDS_IRON_TOOL).add(
             ModBlocks.uraniumOre.get(), ModBlocks.deepslateUraniumOre.get(), ModBlocks.uraniumBlock.get(), ModBlocks.u233Block.get(), ModBlocks.u235Block.get(), ModBlocks.u238Block.get(), ModBlocks.uraniumFuelBlock.get(),

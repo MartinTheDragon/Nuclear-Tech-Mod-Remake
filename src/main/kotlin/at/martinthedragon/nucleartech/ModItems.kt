@@ -552,6 +552,8 @@ object ModItems {
     val sirenTrackAPCPass: RegistryObject<SirenTrack> = ITEMS.register("siren_track_apc_pass") { SirenTrack(SoundEvents.sirenTrackAPCPass, 50, false, 0x3437D3) }
     val sirenTrackRazortrainHorn: RegistryObject<SirenTrack> = ITEMS.register("siren_track_razortrain_horn") { SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
 
+    val assemblyTemplate: RegistryObject<AssemblyTemplate> = ITEMS.register("assembly_template") { AssemblyTemplate(Item.Properties().tab(CreativeTabs.Templates)) }
+
     // Bomb Items
 
     val neutronShieldingLittleBoy: RegistryObject<Item> = ITEMS.register("neutron_shielding_little_boy") { AutoTooltippedItem(Item.Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }

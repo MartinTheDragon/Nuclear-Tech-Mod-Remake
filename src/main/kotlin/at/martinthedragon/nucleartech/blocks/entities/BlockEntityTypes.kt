@@ -15,6 +15,8 @@ object BlockEntityTypes {
     val combustionGeneratorBlockEntityType: RegistryObject<BlockEntityType<CombustionGeneratorBlockEntity>> = BLOCK_ENTITIES.register("combustion_generator") { BlockEntityType.Builder.of(::CombustionGeneratorBlockEntity, ModBlocks.combustionGenerator.get()).build() }
     val electricFurnaceBlockEntityType: RegistryObject<BlockEntityType<ElectricFurnaceBlockEntity>> = BLOCK_ENTITIES.register("electric_furnace") { BlockEntityType.Builder.of(::ElectricFurnaceBlockEntity, ModBlocks.electricFurnace.get()).build() }
     val shredderBlockEntityType: RegistryObject<BlockEntityType<ShredderBlockEntity>> = BLOCK_ENTITIES.register("shredder") { BlockEntityType.Builder.of(::ShredderBlockEntity, ModBlocks.shredder.get()).build() }
+    val assemblerBlockEntityType: RegistryObject<BlockEntityType<AssemblerBlockEntity>> = BLOCK_ENTITIES.register("assembler") { BlockEntityType.Builder.of(::AssemblerBlockEntity, ModBlocks.assembler.get()).build() }
+    val assemblerPartBlockEntityType: RegistryObject<BlockEntityType<AssemblerBlockEntity.AssemblerPartBlockEntity>> = BLOCK_ENTITIES.register("assembler_part") { BlockEntityType.Builder.of(AssemblerBlockEntity::AssemblerPartBlockEntity, ModBlocks.assemblerPart.get()).build() }
     val littleBoyBlockEntityType: RegistryObject<BlockEntityType<LittleBoyBlockEntity>> = BLOCK_ENTITIES.register("little_boy") { BlockEntityType.Builder.of(::LittleBoyBlockEntity, ModBlocks.littleBoy.get()).build() }
     val fatManBlockEntityType: RegistryObject<BlockEntityType<FatManBlockEntity>> = BLOCK_ENTITIES.register("fat_man") { BlockEntityType.Builder.of(::FatManBlockEntity, ModBlocks.fatMan.get()).build() }
 

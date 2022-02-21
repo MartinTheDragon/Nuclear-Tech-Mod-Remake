@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.blocks.entities.renderers.AssemblerRenderer
 import at.martinthedragon.nucleartech.blocks.entities.renderers.SteamPressRenderer
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.renderers.MushroomCloudRenderer
@@ -49,6 +50,7 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.electricFurnaceMenu.get(), ::ElectricFurnaceScreen)
         MenuScreens.register(MenuTypes.shredderMenu.get(), ::ShredderScreen)
         MenuScreens.register(MenuTypes.anvilMenu.get(), ::AnvilScreen)
+        MenuScreens.register(MenuTypes.assemblerMenu.get(), ::AssemblerScreen)
 
         MenuScreens.register(MenuTypes.littleBoyMenu.get(), ::LittleBoyScreen)
         MenuScreens.register(MenuTypes.fatManMenu.get(), ::FatManScreen)
@@ -84,6 +86,7 @@ object ClientRegistries {
     fun registerEntityRenderers(event: EntityRenderersEvent.RegisterRenderers) {
         NuclearTech.LOGGER.debug("Registering BERs")
         event.registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
+        event.registerBlockEntityRenderer(BlockEntityTypes.assemblerBlockEntityType.get(), ::AssemblerRenderer)
 
         NuclearTech.LOGGER.debug("Registering Entity Renderers")
         event.registerEntityRenderer(EntityTypes.nukeExplosionEntity.get(), ::NoopRenderer)
@@ -117,6 +120,7 @@ object ClientRegistries {
 
     @SubscribeEvent @JvmStatic
     fun registerModels(event: ModelRegistryEvent) {
+        ForgeModelBakery.addSpecialModel(ntm("other/assembler"))
         ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))
     }
 

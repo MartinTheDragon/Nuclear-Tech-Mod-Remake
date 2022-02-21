@@ -179,6 +179,8 @@ object ModBlocks {
     val combustionGenerator: RegistryObject<CombustionGenerator> = BLOCKS.register("combustion_generator") { CombustionGenerator(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
     val electricFurnace: RegistryObject<ElectricFurnace> = BLOCKS.register("electric_furnace") { ElectricFurnace(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
     val shredder: RegistryObject<Shredder> = BLOCKS.register("shredder") { Shredder(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val assembler: RegistryObject<Assembler> = BLOCKS.register("assembler") { Assembler(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val assemblerPart: RegistryObject<Assembler.AssemblerPart> = BLOCKS.register("assembler_part", Assembler::AssemblerPart)
 
     val ironAnvil: RegistryObject<Anvil> = BLOCKS.register("iron_anvil") { Anvil(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
     val leadAnvil: RegistryObject<Anvil> = BLOCKS.register("lead_anvil") { Anvil(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }

@@ -50,6 +50,8 @@
     "nucleartech:electric_furnace",
     "nucleartech:shredder",
     "nucleartech:iron_anvil",
-    "nucleartech:lead_anvil"
+    "nucleartech:lead_anvil",
+    "nucleartech:assembler",
+    "nucleartech:assembler_part"
   ]
 }

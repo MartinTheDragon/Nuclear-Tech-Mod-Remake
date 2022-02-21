@@ -200,6 +200,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.combustionGenerator, "Verbrennungsgenerator")
         addBlock(ModBlocks.electricFurnace, "Elektrischer Ofen")
         addBlock(ModBlocks.shredder, "Brecher")
+        addBlock(ModBlocks.assembler, "Fertigungsmaschine")
+        addBlock(ModBlocks.assemblerPart, "Fertigungsmaschine")
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
@@ -812,6 +814,12 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackAPCPass, "APC Pass")
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        addItem(ModItems.assemblyTemplate, "Fertigungsvorlage: %s")
+        add("info.template.in", "Inputs:")
+        add("info.template.out", "Output:")
+        add("info.template.time", "Produktionszeit:")
+        add("info.template.seconds", "Sekunden")
+
         run {
             val usedInLittleBoy = "Wird gebraucht für:\nLittle Boy"
             addItem(ModItems.neutronShieldingLittleBoy, "Neutronenschild")
@@ -891,6 +899,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.combustionGeneratorMenu, "Verbrennungsgenerator")
         addMenuType(MenuTypes.electricFurnaceMenu, "Elektrischer Ofen")
         addMenuType(MenuTypes.shredderMenu, "Brecher")
+        addMenuType(MenuTypes.assemblerMenu, "Fertigungsmaschine")
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")

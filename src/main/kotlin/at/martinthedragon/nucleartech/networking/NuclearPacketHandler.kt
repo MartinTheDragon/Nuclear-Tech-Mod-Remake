@@ -26,6 +26,7 @@ object NuclearPacketHandler {
         registerMessage(AnvilConstructMessage::decode, NetworkDirection.PLAY_TO_SERVER)
         registerMessage(SpawnNuclearExplosionMessage::decode, NetworkDirection.PLAY_TO_SERVER)
 
+        registerMessage(AssemblerSyncMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
     }
 

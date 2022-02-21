@@ -23,10 +23,10 @@ class Safe(properties: Properties) : BaseEntityBlock(properties) {
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, handIn: InteractionHand, hit: BlockHitResult) = openMenu<SafeBlockEntity>(level, pos, player)
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<SafeBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, placer: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<SafeBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<SafeBlockEntity>(state, level, pos, newState)
+        dropBlockEntityContents<SafeBlockEntity>(state, level, pos, newState)
         @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 

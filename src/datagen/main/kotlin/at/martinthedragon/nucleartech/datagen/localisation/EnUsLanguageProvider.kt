@@ -204,6 +204,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.combustionGenerator, "Combustion Generator")
         addBlock(ModBlocks.electricFurnace, "Electric Furnace")
         addBlock(ModBlocks.shredder, "Shredder")
+        addBlock(ModBlocks.assembler, "Assembler")
+        addBlock(ModBlocks.assemblerPart, "Assembler")
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
@@ -816,6 +818,12 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackAPCPass, "APC Pass")
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        addItem(ModItems.assemblyTemplate, "Assembly Template: %s")
+        add("info.template.in", "Inputs:")
+        add("info.template.out", "Output:")
+        add("info.template.time", "Production Time:")
+        add("info.template.seconds", "Seconds")
+
         run {
             val usedInLittleBoy = "Used in:\nLittle Boy"
             addItem(ModItems.neutronShieldingLittleBoy, "Neutron Shielding")
@@ -895,6 +903,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.combustionGeneratorMenu, "Combustion Generator")
         addMenuType(MenuTypes.electricFurnaceMenu, "Electric Furnace")
         addMenuType(MenuTypes.shredderMenu, "Shredder")
+        addMenuType(MenuTypes.assemblerMenu, "Assembler")
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")

@@ -1,0 +1,37 @@
+{
+  "loader": "forge:composite",
+  "parts": {
+    "body": {
+      "textures": {
+        "texture": "nucleartech:block/assembler/assembler_body"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/assembler/assembler_body.obj",
+      "flip-v": true
+    },
+    "cog": {
+      "textures": {
+        "texture": "nucleartech:block/assembler/assembler_cog"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/assembler/assembler_cog.obj",
+      "flip-v": true
+    },
+    "slider": {
+      "textures": {
+        "texture": "nucleartech:block/assembler/assembler_slider"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/assembler/assembler_slider.obj",
+      "flip-v": true
+    },
+    "arm": {
+      "textures": {
+        "texture": "nucleartech:block/assembler/assembler_arm"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/assembler/assembler_arm.obj",
+      "flip-v": true
+    }
+  }
+}

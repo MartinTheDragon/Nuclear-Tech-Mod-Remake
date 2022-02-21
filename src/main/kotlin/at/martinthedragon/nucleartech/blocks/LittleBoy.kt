@@ -24,10 +24,10 @@ class LittleBoy(properties: Properties) : BaseEntityBlock(properties), Ignitable
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<LittleBoyBlockEntity>(level, pos, player)
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setTileEntityCustomName<LittleBoyBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<LittleBoyBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
-        dropTileEntityContents<LittleBoyBlockEntity>(state, level, pos, newState)
+        dropBlockEntityContents<LittleBoyBlockEntity>(state, level, pos, newState)
         @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_196243_5_)
     }
 
