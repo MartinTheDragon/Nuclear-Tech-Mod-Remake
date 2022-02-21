@@ -37,15 +37,13 @@ class AssemblyTemplate(properties: Properties) : Item(properties) {
         with(tooltips) {
             add(TranslatableComponent("info.template.out").withStyle(ChatFormatting.BOLD, ChatFormatting.GRAY))
             add(TextComponent("${resultItem.count}x ".prependIndent("  ")).append(resultItem.hoverName).withStyle(ChatFormatting.GRAY))
-            add(TextComponent.EMPTY)
             add(TranslatableComponent("info.template.in").withStyle(ChatFormatting.BOLD, ChatFormatting.GRAY))
             for (input in recipe.ingredientsList) add(TextComponent("${input.requiredAmount}x ".prependIndent("  ")).append(input.items.first().hoverName).withStyle(ChatFormatting.GRAY))
-            add(TextComponent.EMPTY)
             add(TranslatableComponent("info.template.time").withStyle(ChatFormatting.BOLD, ChatFormatting.GRAY))
-            add(TextComponent("${floor(recipe.duration / 20F * 100F) / 100F} ").append(TranslatableComponent("info.template.seconds")).withStyle(ChatFormatting.GRAY))
+            add(TextComponent("${floor(recipe.duration / 20F * 100F) / 100F} ".prependIndent("  ")).append(TranslatableComponent("info.template.seconds")).withStyle(ChatFormatting.GRAY))
         }
 
-        if (flag.isAdvanced) tooltips += TextComponent(recipe.id.toString())
+        if (flag.isAdvanced) tooltips += TextComponent(recipe.id.toString()).withStyle(ChatFormatting.ITALIC, ChatFormatting.BLUE)
     }
 
     companion object {
