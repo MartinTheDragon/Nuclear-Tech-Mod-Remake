@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.items.AssemblyTemplate
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.ntm
@@ -17,7 +18,6 @@ import net.minecraft.client.searchtree.SearchRegistry
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.tags.ItemTags
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import kotlin.math.ceil
 import kotlin.math.min
@@ -27,8 +27,10 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
     private lateinit var nextButton: Button
     private lateinit var templateButtons: List<Button>
     private lateinit var searchBox: EditBox
-    private val itemList = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS.name).values.toList<Item>()
-    private val searchResults: MutableList<Item> = mutableListOf()
+    private val itemList = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.FOLDER_STAMPS.name).values.map(::ItemStack) +
+        ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SIREN_TRACKS.name).values.map(::ItemStack) +
+        AssemblyTemplate.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
+    private val searchResults: MutableList<ItemStack> = mutableListOf()
     private var pagesCount = ceil(itemList.size.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
     private var currentPage = 1
 
@@ -105,7 +107,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
     private fun craftRecipe(index: Int) {
         val results = if (searchResults.isEmpty()) itemList else searchResults
         NuclearPacketHandler.INSTANCE.sendToServer(CraftMachineTemplateMessage(
-            results[(currentPage - 1) * RECIPES_PER_PAGE + index].defaultInstance
+            results[(currentPage - 1) * RECIPES_PER_PAGE + index]
         ))
     }
 
@@ -160,7 +162,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         for (i in templateButtons.indices) {
             val button = templateButtons[i]
             if (button.isHoveredOrFocused && button.visible) {
-                val itemStack = itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + i].defaultInstance
+                val itemStack = itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + i]
                 renderComponentTooltip(matrixStack, getTooltipFromItem(itemStack), mouseX, mouseY, font)
             }
         }
@@ -179,10 +181,10 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         searchBox.render(matrixStack, mouseX, mouseY, partialTicks)
     }
 
-    private fun renderButtonItem(item: Item, x: Int, y: Int) {
+    private fun renderButtonItem(item: ItemStack, x: Int, y: Int) {
         blitOffset = 100
         itemRenderer.blitOffset = 100F
-        itemRenderer.renderAndDecorateItem(item.defaultInstance, x, y)
+        itemRenderer.renderAndDecorateItem(item, x, y)
         itemRenderer.blitOffset = 0F
         blitOffset = 0
     }
@@ -215,7 +217,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         val searchString = searchBox.value
         if (searchString.isBlank()) return
         val searchTree = minecraft!!.getSearchTree(searchTree)
-        searchResults.addAll(searchTree.search(searchString.lowercase(getMinecraft().languageManager.selected.javaLocale)).map(ItemStack::getItem))
+        searchResults.addAll(searchTree.search(searchString.lowercase(getMinecraft().languageManager.selected.javaLocale)))
         currentPage = 1
         val itemsCount = if (searchResults.isEmpty()) itemList.size else searchResults.size
         pagesCount = ceil(itemsCount.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)

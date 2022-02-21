@@ -24,8 +24,7 @@ class AssemblyTemplate(properties: Properties) : Item(properties) {
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         val level = Minecraft.getInstance().level
         if (allowdedIn(tab) && level != null) {
-            for (recipe in level.recipeManager.getAllRecipesFor(RecipeTypes.ASSEMBLY))
-                items.add(ItemStack(ModItems.assemblyTemplate.get(), 1).apply { orCreateTag.putString("recipe", recipe.id.toString()) })
+            items.addAll(getAllTemplates(level.recipeManager))
         }
     }
 
@@ -49,5 +48,7 @@ class AssemblyTemplate(properties: Properties) : Item(properties) {
     companion object {
         fun getRecipeIDFromStack(stack: ItemStack) = if (stack.item is AssemblyTemplate) stack.tag?.getString("recipe")?.let { ResourceLocation(it) } else null
         fun getRecipeFromStack(stack: ItemStack, recipeManager: RecipeManager) = getRecipeIDFromStack(stack)?.let { recipeManager.byKey(it).orElse(null) as? AssemblyRecipe }
+        fun getAllTemplates(recipeManager: RecipeManager): List<ItemStack> = recipeManager.getAllRecipesFor(RecipeTypes.ASSEMBLY).map { ItemStack(ModItems.assemblyTemplate.get()).apply { orCreateTag.putString("recipe", it.id.toString()) } }
+        fun isValidTemplate(stack: ItemStack, recipeManager: RecipeManager) = getRecipeFromStack(stack, recipeManager) != null
     }
 }

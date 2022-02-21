@@ -622,6 +622,7 @@ class ItemTagProvider(
         tag(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
             .addTag(NuclearTags.Items.FOLDER_STAMPS)
             .addTag(NuclearTags.Items.SIREN_TRACKS)
+            .add(ModItems.assemblyTemplate.get())
     }
 
     private fun modifyVanillaTags() {

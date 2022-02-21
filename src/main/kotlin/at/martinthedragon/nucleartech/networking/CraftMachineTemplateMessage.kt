@@ -2,8 +2,12 @@ package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.items.AssemblyTemplate
+import at.martinthedragon.nucleartech.recipes.StackedIngredient
+import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -29,7 +33,7 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     !sender.inventory.offhand.first().sameItem(ModItems.machineTemplateFolder.get().defaultInstance)) {
                     return@enqueueWork // h4xx0r detected
                 }
-                
+
                 // check whether the player is creative or has the random necessary
                 if (!sender.isCreative) {
                     fun removeIfPossible(player: ServerPlayer, vararg items: Item?): Boolean {
@@ -45,6 +49,15 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     val pressStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.FOLDER_STAMPS.name)
                     val sirenTracks = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SIREN_TRACKS.name)
                     when (result.item) {
+                        is AssemblyTemplate -> {
+                            if (!AssemblyTemplate.isValidTemplate(result, sender.level.recipeManager)) return@enqueueWork
+
+                            // h
+                            val ingredients = listOf(StackedIngredient.of(1, Items.PAPER), StackedIngredient.of(1, Tags.Items.DYES))
+                            if (ingredients.containerSatisfiesRequirements(sender.inventory))
+                                ingredients.containerSatisfiesRequirements(sender.inventory, true)
+                            else return@enqueueWork
+                        }
                         in pressStamps -> {
                             val stoneStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STONE_STAMPS.name)
                             val ironStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.IRON_STAMPS.name)
@@ -73,11 +86,24 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     }
                 }
 
-                // if the player has no space left, drop the resulting item
-                var slot = sender.inventory.getSlotWithRemainingSpace(result)
-                if (slot == -1) slot = sender.inventory.freeSlot
-                if (slot != -1) sender.addItem(result)
-                else sender.drop(result, false, true)
+                val stack = result.copy()
+                val successful = sender.inventory.add(stack)
+                if (successful && stack.isEmpty) {
+                    stack.count = 1
+                    sender.drop(stack, false)?.makeFakeItem()
+                    sender.level.playSound(
+                        null, sender.x, sender.y, sender.z,
+                        net.minecraft.sounds.SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS,
+                        .2F, ((sender.random.nextFloat() - sender.random.nextFloat()) * .7F + 1F) * 2F
+                    )
+                    sender.inventoryMenu.broadcastChanges()
+                } else {
+                    val droppedStack = sender.drop(stack, false)
+                    if (droppedStack != null) {
+                        droppedStack.setNoPickUpDelay()
+                        droppedStack.owner = sender.uuid
+                    }
+                }
             }
         context.get().packetHandled = true
     }
