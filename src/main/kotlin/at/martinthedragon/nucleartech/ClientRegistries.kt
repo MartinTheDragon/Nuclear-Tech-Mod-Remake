@@ -16,9 +16,11 @@ import at.martinthedragon.nucleartech.screens.*
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.MenuScreens
+import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.ShaderInstance
+import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.client.searchtree.ReloadableSearchTree
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.inventory.MenuType
@@ -80,6 +82,11 @@ object ClientRegistries {
 
         NuclearTech.LOGGER.debug("Setting rendering layers")
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.glowingMushroom.get(), RenderType.cutout())
+
+        NuclearTech.LOGGER.debug("Registering item properties")
+        event.enqueueWork {
+            ItemProperties.register(ModItems.assemblyTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
+        }
     }
 
     @SubscribeEvent @JvmStatic

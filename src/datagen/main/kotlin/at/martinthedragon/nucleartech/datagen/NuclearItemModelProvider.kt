@@ -1,9 +1,6 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.ModBlockItems
-import at.martinthedragon.nucleartech.ModBlocks
-import at.martinthedragon.nucleartech.ModItems
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.items.BombKitItem
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
@@ -11,6 +8,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import net.minecraftforge.client.model.generators.ItemModelProvider
 import net.minecraftforge.client.model.generators.ModelFile
+import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile
 import net.minecraftforge.common.data.ExistingFileHelper
 
 class NuclearItemModelProvider(
@@ -534,7 +532,13 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.sirenTrackEASAlarmScreech.get())
         simpleItem(ModItems.sirenTrackAPCPass.get())
         simpleItem(ModItems.sirenTrackRazortrainHorn.get())
-        simpleItem(ModItems.assemblyTemplate.get())
+        getBuilder(ModItems.assemblyTemplate.id.path)
+            .parent(generatedItem)
+            .texture("layer0", itemTexture(ModItems.assemblyTemplate.get()))
+            .override()
+            .predicate(ntm("shift"), 1F)
+            .model(UncheckedModelFile("builtin/entity"))
+            .end()
         simpleItem(ModItems.neutronShieldingLittleBoy.get())
         simpleItem(ModItems.subcriticalUraniumTarget.get())
         simpleItem(ModItems.uraniumProjectile.get())

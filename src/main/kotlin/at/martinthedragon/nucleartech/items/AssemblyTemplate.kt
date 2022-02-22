@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.items
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.recipes.AssemblyRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
+import at.martinthedragon.nucleartech.rendering.CustomBEWLR
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.core.NonNullList
@@ -16,6 +17,8 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.crafting.RecipeManager
 import net.minecraft.world.level.Level
+import net.minecraftforge.client.IItemRenderProperties
+import java.util.function.Consumer
 import kotlin.math.floor
 
 class AssemblyTemplate(properties: Properties) : Item(properties) {
@@ -43,6 +46,12 @@ class AssemblyTemplate(properties: Properties) : Item(properties) {
         }
 
         if (flag.isAdvanced) tooltips += TextComponent(recipe.id.toString()).withStyle(ChatFormatting.ITALIC, ChatFormatting.BLUE)
+    }
+
+    override fun initializeClient(consumer: Consumer<IItemRenderProperties>) {
+        consumer.accept(object : IItemRenderProperties {
+            override fun getItemStackRenderer() = CustomBEWLR
+        })
     }
 
     companion object {

@@ -2,5 +2,13 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "nucleartech:item/assembly_template"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nucleartech:shift": 1.0
+      },
+      "model": "minecraft:builtin/entity"
+    }
+  ]
 }
