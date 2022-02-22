@@ -13,6 +13,7 @@ import at.martinthedragon.nucleartech.recipes.getItems
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.ChatFormatting
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
@@ -340,5 +341,16 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
         private const val RECIPES_PER_PAGE = 10
         private val TEXTURE = ntm("textures/gui/anvil.png")
         val searchTree = SearchRegistry.Key<AnvilConstructingRecipe>()
+
+        fun reloadSearchTree() {
+            NuclearTech.LOGGER.debug("Reloading Anvil Constructing Recipes search tree")
+            val anvilConstructingRecipeSearchTree = Minecraft.getInstance().getSearchTree(searchTree)
+            anvilConstructingRecipeSearchTree.clear()
+            val level = Minecraft.getInstance().level
+            if (level != null) {
+                level.recipeManager.getAllRecipesFor(RecipeTypes.CONSTRUCTING).forEach(anvilConstructingRecipeSearchTree::add)
+            } else NuclearTech.LOGGER.error("Anvil Constructing Recipes search tree reload failed")
+            anvilConstructingRecipeSearchTree.refresh()
+        }
     }
 }

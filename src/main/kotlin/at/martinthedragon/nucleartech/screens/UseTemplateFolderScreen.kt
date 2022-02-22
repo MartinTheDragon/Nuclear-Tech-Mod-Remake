@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.items.AssemblyTemplate
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -27,9 +28,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
     private lateinit var nextButton: Button
     private lateinit var templateButtons: List<Button>
     private lateinit var searchBox: EditBox
-    private val itemList = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.FOLDER_STAMPS.name).values.map(::ItemStack) +
-        ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SIREN_TRACKS.name).values.map(::ItemStack) +
-        AssemblyTemplate.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
+    private val itemList = getAllItems()
     private val searchResults: MutableList<ItemStack> = mutableListOf()
     private var pagesCount = ceil(itemList.size.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
     private var currentPage = 1
@@ -259,5 +258,19 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         const val RECIPES_PER_PAGE = 35
         val TEMPLATE_FOLDER_GUI_LOCATION = ntm("textures/gui/machine_template_folder.png")
         val searchTree = SearchRegistry.Key<ItemStack>()
+
+        fun getAllItems(): List<ItemStack> = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.FOLDER_STAMPS.name).values.map(::ItemStack) +
+            ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SIREN_TRACKS.name).values.map(::ItemStack) +
+            AssemblyTemplate.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
+
+        fun reloadSearchTree() {
+            NuclearTech.LOGGER.debug("Reloading Machine Template Folder search tree")
+            val templateFolderSearchTree = Minecraft.getInstance().getSearchTree(searchTree)
+            templateFolderSearchTree.clear()
+            val level = Minecraft.getInstance().level
+            if (level != null) getAllItems().forEach(templateFolderSearchTree::add)
+            else NuclearTech.LOGGER.error("Template Folder search tree reload failed")
+            templateFolderSearchTree.refresh()
+        }
     }
 }
