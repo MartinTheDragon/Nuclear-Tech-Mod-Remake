@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.entities.MushroomCloudEntity
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.ClientRenderer
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
+import at.martinthedragon.nucleartech.rendering.SpecialModels
 import at.martinthedragon.nucleartech.rendering.renderModelAlpha
 import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.systems.RenderSystem
@@ -15,10 +16,17 @@ import com.mojang.math.Vector3f
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.block.model.ItemOverrides
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraftforge.client.model.ForgeModelBakery
+import net.minecraftforge.client.model.SimpleModelState
+import net.minecraftforge.client.model.StandaloneModelConfiguration
 import net.minecraftforge.client.model.data.EmptyModelData
+import net.minecraftforge.client.model.obj.OBJLoader
+import net.minecraftforge.client.model.obj.OBJModel
+import net.minecraftforge.client.textures.UnitSprite
 import java.util.*
 import kotlin.math.*
 
@@ -27,10 +35,17 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
     private val textureBalefire = ntm("textures/entity/mushroom_cloud/balefire.png")
     private val textureCloudlet = ntm("textures/entity/mushroom_cloud/cloudlet.png")
 
-    private val mushModel = ntm("other/mushroom_cloud")
+    private val mushModel = ntm("models/other/mushroom_cloud/mush.obj")
+
+    init {
+        SpecialModels.registerBakedModel(mushModel) {
+            OBJLoader.INSTANCE
+                .loadModel(OBJModel.ModelSettings(it, false, false, true, true, null))
+                .bake(StandaloneModelConfiguration.create(mapOf("#fireball_texture" to textureFireball, "particle" to textureFireball)), ForgeModelBakery.instance(), UnitSprite.GETTER, SimpleModelState.IDENTITY, ItemOverrides.EMPTY, it)
+        }
+    }
 
     private val modelRenderer = Minecraft.getInstance().blockRenderer.modelRenderer
-    private val modelManager = Minecraft.getInstance().modelManager
 
     private val camera = Minecraft.getInstance().gameRenderer.mainCamera
 
@@ -91,7 +106,7 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
             green = 1F - (1F - .7F) * fade
             blue = 1F - (1F - .48F) * fade
         }
-        val model = modelManager.getModel(mushModel)
+        val model = SpecialModels.getBakedModel(mushModel)
         val solidBuffer = renderer.getBuffer(NuclearRenderTypes.mushroomCloudSolid)
         modelRenderer.renderModel(matrix.last(), solidBuffer, null, model, red, green, blue, light, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE)
         val texturedBuffer = renderer.getBuffer(NuclearRenderTypes.mushroomCloudTextured(getTextureLocation(entity), -progress * .035F))

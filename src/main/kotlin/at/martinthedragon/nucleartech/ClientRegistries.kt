@@ -12,6 +12,7 @@ import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
+import at.martinthedragon.nucleartech.rendering.SpecialModels
 import at.martinthedragon.nucleartech.screens.*
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -28,7 +29,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.*
-import net.minecraftforge.client.model.ForgeModelBakery
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -127,8 +127,13 @@ object ClientRegistries {
 
     @SubscribeEvent @JvmStatic
     fun registerModels(event: ModelRegistryEvent) {
-        ForgeModelBakery.addSpecialModel(ntm("other/assembler"))
-        ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))
+//        ForgeModelBakery.addSpecialModel(ntm("other/assembler"))
+//        ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun registerResourceReloadListeners(event: RegisterClientReloadListenersEvent) {
+        event.registerReloadListener(SpecialModels)
     }
 
     @Mod.EventBusSubscriber(modid = NuclearTech.MODID, value = [Dist.CLIENT], bus = Mod.EventBusSubscriber.Bus.MOD)
