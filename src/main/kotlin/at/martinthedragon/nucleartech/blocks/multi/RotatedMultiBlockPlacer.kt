@@ -8,13 +8,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 
 class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
-    constructor(direction: Direction) : this(when (direction) {
-        Direction.SOUTH -> Rotation.NONE
-        Direction.WEST -> Rotation.CLOCKWISE_90
-        Direction.NORTH -> Rotation.CLOCKWISE_180
-        Direction.EAST -> Rotation.COUNTERCLOCKWISE_90
-        Direction.UP, Direction.DOWN -> Rotation.NONE
-    })
+    constructor(direction: Direction) : this(getRotationFor(direction))
 
     private val structureMap = mutableMapOf<BlockPos, BlockState>()
 
@@ -44,5 +38,22 @@ class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
         }
         structureMap.clear()
         return true
+    }
+
+    companion object {
+        fun getRotationFor(direction: Direction) = when (direction) {
+            Direction.SOUTH -> Rotation.NONE
+            Direction.WEST -> Rotation.CLOCKWISE_90
+            Direction.NORTH -> Rotation.CLOCKWISE_180
+            Direction.EAST -> Rotation.COUNTERCLOCKWISE_90
+            Direction.UP, Direction.DOWN -> Rotation.NONE
+        }
+
+        fun invert(rotation: Rotation) = when (rotation) {
+            Rotation.NONE -> Rotation.NONE
+            Rotation.CLOCKWISE_90 -> Rotation.COUNTERCLOCKWISE_90
+            Rotation.CLOCKWISE_180 -> Rotation.CLOCKWISE_180
+            Rotation.COUNTERCLOCKWISE_90 -> Rotation.CLOCKWISE_90
+        }
     }
 }

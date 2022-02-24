@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
+import at.martinthedragon.nucleartech.blocks.multi.RotatedMultiBlockPlacer
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.items.AssemblyTemplate
@@ -13,6 +14,7 @@ import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.recipes.AssemblyRecipe
 import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.TranslatableComponent
@@ -26,6 +28,7 @@ import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.StackedContentsCompatible
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
@@ -186,7 +189,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
     private val inventoryCapability = LazyOptional.of(this::inventory)
     private val energyCapability = LazyOptional.of(this::energyStorage)
 
-    override fun <T : Any?> getCapability(cap: Capability<T>): LazyOptional<T> {
+    override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
         if (!remove) when (cap) {
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY -> return inventoryCapability.cast()
             CapabilityEnergy.ENERGY -> return energyCapability.cast()
@@ -200,9 +203,31 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
         energyCapability.invalidate()
     }
 
-    class AssemblerPartBlockEntity(pos: BlockPos, state: BlockState) : MultiBlockPart.MultiBlockPartBlockEntity(BlockEntityTypes.assemblerPartBlockEntityType.get(), pos, state)
+    class AssemblerPartBlockEntity(pos: BlockPos, state: BlockState) : MultiBlockPart.MultiBlockPartBlockEntity(BlockEntityTypes.assemblerPartBlockEntityType.get(), pos, state) {
+        override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
+            if (hasLevel()) {
+                val rotation = RotatedMultiBlockPlacer.invert(RotatedMultiBlockPlacer.getRotationFor(level!!.getBlockState(core).getValue(HorizontalDirectionalBlock.FACING)))
+                val relativePos = blockPos.subtract(core).rotate(rotation)
+                if (cap == CapabilityEnergy.ENERGY && relativePos in energyPorts.keys && side != null) {
+                    if (rotation.rotate(side) in energyPorts.getValue(relativePos)) {
+                        val coreEntity = level!!.getBlockEntity(core)
+                        if (coreEntity != null) return coreEntity.getCapability(CapabilityEnergy.ENERGY, side).cast()
+                    }
+                }
+            }
+
+            return super.getCapability(cap, side)
+        }
+    }
 
     companion object {
         const val MAX_ENERGY = 100_000
+
+        val energyPorts = mapOf(
+            BlockPos(0, 0, 1) to setOf(Direction.SOUTH),
+            BlockPos(-1, 0, 1) to setOf(Direction.SOUTH),
+            BlockPos(0, 0, -2) to setOf(Direction.NORTH),
+            BlockPos(-1, 0, -2) to setOf(Direction.NORTH)
+        )
     }
 }
