@@ -1,7 +1,9 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
+import at.martinthedragon.nucleartech.MaterialGroup
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
+import at.martinthedragon.nucleartech.isVanilla
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.HashCache
 import net.minecraft.sounds.SoundEvent
@@ -19,6 +21,7 @@ abstract class NuclearLanguageProvider(
     private val exceptionOnMissing: Boolean = true
 ) : LanguageProvider(dataGenerator, NuclearTech.MODID, locale) {
     protected val translations = mutableMapOf<String, String>()
+    protected val materialTranslations = mutableMapOf<MaterialGroup, String>()
 
     override fun getName() = "Nuclear Tech ${super.getName()}"
 
@@ -27,7 +30,49 @@ abstract class NuclearLanguageProvider(
         validate()
     }
 
+    final override fun addTranslations() {
+        translate()
+
+        for ((material, materialName) in materialTranslations) {
+            if (!material.isVanilla()) {
+                val ore = material.ore()
+                val deepOre = material.deepOre()
+                val block = material.block()
+                val raw = material.raw()
+                val ingot = material.ingot()
+                val nugget = material.nugget()
+
+                if (ore != null) addIfAbsent(ore.descriptionId, oreFormat.format(materialName))
+                if (deepOre != null) addIfAbsent(deepOre.descriptionId, deepOreFormat.format(materialName))
+                if (block != null) addIfAbsent(block.descriptionId, blockFormat.format(materialName))
+                if (raw != null) addIfAbsent(raw.descriptionId, rawFormat.format(materialName))
+                if (ingot != null) addIfAbsent(ingot.descriptionId, ingotFormat.format(materialName))
+                if (nugget != null) addIfAbsent(nugget.descriptionId, nuggetFormat.format(materialName))
+            }
+
+            val crystals = material.crystals()
+            val powder = material.powder()
+            val plate = material.plate()
+            val wire = material.wire()
+
+            if (crystals != null) addIfAbsent(crystals.descriptionId, crystalsFormat.format(materialName))
+            if (powder != null) addIfAbsent(powder.descriptionId, powderFormat.format(materialName))
+            if (plate != null) addIfAbsent(plate.descriptionId, plateFormat.format(materialName))
+            if (wire != null) addIfAbsent(wire.descriptionId, wireFormat.format(materialName))
+        }
+    }
+
+    abstract fun translate()
+
     protected open fun validate() {
+        if (!materialTranslations.keys.containsAll(NuclearLanguageProviders.materialTranslations.keys)) {
+            val missingTranslations = (NuclearLanguageProviders.materialTranslations - materialTranslations).values
+            val errorMessage = StringBuilder().appendLine("Missing material translations in locale $locale for the following groups:")
+            for (missing in missingTranslations) errorMessage.appendLine(missing)
+            if (exceptionOnMissing) throw IllegalStateException(errorMessage.toString())
+            else NuclearTech.LOGGER.error(errorMessage.toString())
+        }
+
         if (!translations.keys.containsAll(NuclearLanguageProviders.keys)) {
             val missingTranslations = NuclearLanguageProviders.keys subtract translations.keys
             val errorMessage = StringBuilder().appendLine("Missing translations in locale $locale for following keys:")
@@ -47,6 +92,14 @@ abstract class NuclearLanguageProvider(
     override fun add(key: String, value: String) {
         translations[key] = value
         super.add(key, value)
+    }
+
+    protected fun addIfAbsent(key: String, value: String) {
+        if (!translations.contains(key)) add(key, value)
+    }
+
+    protected fun addMaterial(materialGroup: MaterialGroup, name: String) {
+        materialTranslations += materialGroup to name
     }
 
     protected fun addBlockDesc(supplier: Supplier<out Block>, desc: String) {
@@ -71,11 +124,22 @@ abstract class NuclearLanguageProvider(
     }
 
     /** What to append to the spawn egg name */
-    abstract val spawnEggSuffix: String
+    protected abstract val spawnEggSuffix: String
     /** If `true`, prefixes the suffix instead */
-    open val spawnEggSuffixIsPrefix = false
+    protected open val spawnEggSuffixIsPrefix = false
     /** What to replace spaces with in the name of the entity for the spawn egg */
-    open val spawnEggEntityStringWordSeparator = ' '
+    protected open val spawnEggEntityStringWordSeparator = ' '
+
+    protected abstract val oreFormat: String
+    protected abstract val deepOreFormat: String
+    protected abstract val blockFormat: String
+    protected abstract val rawFormat: String
+    protected abstract val ingotFormat: String
+    protected abstract val nuggetFormat: String
+    protected abstract val crystalsFormat: String
+    protected abstract val powderFormat: String
+    protected abstract val plateFormat: String
+    protected abstract val wireFormat: String
 
     protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, name: String) {
 //        val spawnEgg = ForgeSpawnEggItem.fromEntityType(key.get()) ?: throw IllegalStateException("No spawn egg registered for entity $name")

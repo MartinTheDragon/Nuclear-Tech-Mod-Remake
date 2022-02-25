@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen
 
+import at.martinthedragon.nucleartech.MaterialGroup
 import at.martinthedragon.nucleartech.datagen.localisation.DeDeLanguageProvider
 import at.martinthedragon.nucleartech.datagen.localisation.EnUsLanguageProvider
 import net.minecraft.data.DataGenerator
@@ -7,6 +8,7 @@ import net.minecraftforge.common.data.LanguageProvider
 
 object NuclearLanguageProviders {
     lateinit var keys: Set<String>
+    lateinit var materialTranslations: Map<MaterialGroup, String>
 
     fun getLanguageProviders(dataGenerator: DataGenerator) = listOf<LanguageProvider>(
         EnUsLanguageProvider(dataGenerator), // ensure this runs first for data validation
