@@ -123,7 +123,6 @@ object NuclearTags {
         val INGOTS_NEPTUNIUM = forgeTag("ingots/neptunium")
         val INGOTS_POLONIUM = forgeTag("ingots/polonium")
         val INGOTS_TITANIUM = forgeTag("ingots/titanium")
-        val INGOTS_COPPER = forgeTag("ingots/copper")
         val INGOTS_TUNGSTEN = forgeTag("ingots/tungsten")
         val INGOTS_ALUMINIUM = forgeTag("ingots/aluminium")
         val INGOTS_STEEL = forgeTag("ingots/steel")

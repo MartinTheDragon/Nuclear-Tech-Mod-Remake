@@ -1,0 +1,17 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:magnetized_tungsten_ingot"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:high_temperature_super_conductor",
+    "count": 6
+  },
+  "duration": 20
+}

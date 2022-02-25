@@ -1,0 +1,17 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:combine_steel_ingot"
+      },
+      "amount": 3
+    }
+  ],
+  "result": {
+    "item": "nucleartech:combine_steel_plate",
+    "count": 2
+  },
+  "duration": 30
+}

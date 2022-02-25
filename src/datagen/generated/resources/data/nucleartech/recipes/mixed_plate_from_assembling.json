@@ -1,0 +1,31 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:advanced_alloy_plate"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/neutron_reflector"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:saturnite_plate"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:mixed_plate",
+    "count": 4
+  },
+  "duration": 50
+}

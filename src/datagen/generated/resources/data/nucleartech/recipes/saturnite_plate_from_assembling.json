@@ -1,0 +1,17 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:saturnite_ingot"
+      },
+      "amount": 3
+    }
+  ],
+  "result": {
+    "item": "nucleartech:saturnite_plate",
+    "count": 2
+  },
+  "duration": 30
+}

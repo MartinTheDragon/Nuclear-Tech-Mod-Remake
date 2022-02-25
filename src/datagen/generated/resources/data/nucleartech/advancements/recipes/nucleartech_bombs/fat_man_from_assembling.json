@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:fat_man_from_assembling"
+    ]
+  },
+  "criteria": {
+    "has_steel_sphere": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:steel_sphere"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:fat_man_from_assembling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_sphere",
+      "has_the_recipe"
+    ]
+  ]
+}

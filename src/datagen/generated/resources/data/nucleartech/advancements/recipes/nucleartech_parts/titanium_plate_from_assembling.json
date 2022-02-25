@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:titanium_plate_from_assembling"
+    ]
+  },
+  "criteria": {
+    "has_primary_passed_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/titanium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:titanium_plate_from_assembling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_primary_passed_tag",
+      "has_the_recipe"
+    ]
+  ]
+}

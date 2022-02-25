@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_plate_from_assembling"
+    ]
+  },
+  "criteria": {
+    "has_schrabidium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:schrabidium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_plate_from_assembling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schrabidium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

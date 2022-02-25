@@ -1,0 +1,17 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/copper"
+      },
+      "amount": 3
+    }
+  ],
+  "result": {
+    "item": "nucleartech:copper_plate",
+    "count": 2
+  },
+  "duration": 30
+}

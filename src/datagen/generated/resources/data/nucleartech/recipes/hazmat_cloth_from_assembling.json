@@ -1,0 +1,24 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/lead"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:string"
+      },
+      "amount": 8
+    }
+  ],
+  "result": {
+    "item": "nucleartech:hazmat_cloth",
+    "count": 4
+  },
+  "duration": 50
+}

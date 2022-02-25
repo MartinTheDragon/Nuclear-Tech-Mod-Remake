@@ -6,7 +6,6 @@ import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.tags.ItemTagsProvider
 import net.minecraft.tags.ItemTags
-import net.minecraft.world.item.Items
 import net.minecraftforge.common.Tags
 import net.minecraftforge.common.data.ExistingFileHelper
 
@@ -91,7 +90,6 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.INGOTS_NEPTUNIUM)
             .addTag(NuclearTags.Items.INGOTS_POLONIUM)
             .addTag(NuclearTags.Items.INGOTS_TITANIUM)
-            .addTag(NuclearTags.Items.INGOTS_COPPER)
             .addTag(NuclearTags.Items.INGOTS_TUNGSTEN)
             .addTag(NuclearTags.Items.INGOTS_ALUMINIUM)
             .addTag(NuclearTags.Items.INGOTS_STEEL)
@@ -134,7 +132,6 @@ class ItemTagProvider(
         tag(NuclearTags.Items.INGOTS_NEPTUNIUM).add(ModItems.neptuniumIngot.get())
         tag(NuclearTags.Items.INGOTS_POLONIUM).add(ModItems.poloniumIngot.get())
         tag(NuclearTags.Items.INGOTS_TITANIUM).add(ModItems.titaniumIngot.get())
-        tag(NuclearTags.Items.INGOTS_COPPER).add(Items.COPPER_INGOT)
         tag(NuclearTags.Items.INGOTS_TUNGSTEN).add(ModItems.tungstenIngot.get())
         tag(NuclearTags.Items.INGOTS_ALUMINIUM).add(ModItems.aluminiumIngot.get())
         tag(NuclearTags.Items.INGOTS_STEEL).add(ModItems.steelIngot.get())

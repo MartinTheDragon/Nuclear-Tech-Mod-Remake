@@ -1,0 +1,52 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_sphere"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:big_steel_shell"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:big_steel_grid_fins"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:military_grade_circuit_board_tier_2"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/copper"
+      },
+      "amount": 6
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dyes/yellow"
+      },
+      "amount": 6
+    }
+  ],
+  "result": {
+    "item": "nucleartech:fat_man",
+    "count": 1
+  },
+  "duration": 300
+}

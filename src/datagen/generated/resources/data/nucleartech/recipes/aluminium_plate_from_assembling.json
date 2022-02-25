@@ -1,0 +1,17 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/aluminium"
+      },
+      "amount": 3
+    }
+  ],
+  "result": {
+    "item": "nucleartech:aluminium_plate",
+    "count": 2
+  },
+  "duration": 30
+}

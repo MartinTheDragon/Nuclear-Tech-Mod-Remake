@@ -1,0 +1,17 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/tungsten"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:tungsten_wire",
+    "count": 6
+  },
+  "duration": 20
+}
