@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.capabilites.contamination.addEffect
 import at.martinthedragon.nucleartech.capabilites.contamination.effects.RadiationEffect
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -44,7 +45,7 @@ abstract class IVBag(properties: Properties) : Item(properties) {
 class EmptyIVBag(properties: Properties) : IVBag(properties) {
     override val bagUseSound = SoundEvents.inject
     override val cooldownItems = setOf(ModItems.ivBag)
-    override val cooldown = 20
+    override val cooldown: Int get() = NuclearConfig.general.emptyIVBagCooldown.get()
 
     override fun doBagUseAction(level: Level, player: Player, originalStack: ItemStack, hand: InteractionHand, originalStackEmptied: Boolean): InteractionResultHolder<ItemStack> {
         if (!player.abilities.instabuild) {
@@ -63,7 +64,7 @@ class EmptyIVBag(properties: Properties) : IVBag(properties) {
 class BloodBag(properties: Properties) : IVBag(properties) {
     override val bagUseSound = SoundEvents.emptyIVBag
     override val cooldownItems = setOf(ModItems.bloodBag)
-    override val cooldown = 40
+    override val cooldown: Int get() = NuclearConfig.general.bloodBagCooldown.get()
 
     override fun doBagUseAction(level: Level, player: Player, originalStack: ItemStack, hand: InteractionHand, originalStackEmptied: Boolean): InteractionResultHolder<ItemStack> {
         player.heal(5F)
@@ -74,7 +75,7 @@ class BloodBag(properties: Properties) : IVBag(properties) {
 class EmptyExperienceBag(properties: Properties) : IVBag(properties) {
     override val bagUseSound = SoundEvents.inject
     override val cooldownItems = setOf(ModItems.emptyExperienceBag)
-    override val cooldown = 0
+    override val cooldown: Int get() = NuclearConfig.general.emptyExperienceBagCooldown.get()
 
     override fun doBagUseAction(level: Level, player: Player, originalStack: ItemStack, hand: InteractionHand, originalStackEmptied: Boolean): InteractionResultHolder<ItemStack> {
         if (player.totalExperience >= 100) player.giveExperiencePoints(-100) else return InteractionResultHolder.fail(originalStack)
@@ -85,7 +86,7 @@ class EmptyExperienceBag(properties: Properties) : IVBag(properties) {
 class ExperienceBag(properties: Properties) : IVBag(properties) {
     override val bagUseSound = Supplier(VanillaSoundEvents::EXPERIENCE_ORB_PICKUP)
     override val cooldownItems = setOf(ModItems.experienceBag)
-    override val cooldown = 0
+    override val cooldown: Int get() = NuclearConfig.general.experienceBagCooldown.get()
 
     override fun doBagUseAction(level: Level, player: Player, originalStack: ItemStack, hand: InteractionHand, originalStackEmptied: Boolean): InteractionResultHolder<ItemStack> {
         player.giveExperiencePoints(100)
@@ -96,7 +97,7 @@ class ExperienceBag(properties: Properties) : IVBag(properties) {
 class RadAway(private val amount: Float, private val duration: Int, properties: Properties) : IVBag(properties) {
     override val bagUseSound = SoundEvents.emptyIVBag
     override val cooldownItems = setOf(ModItems.radAway, ModItems.strongRadAway, ModItems.eliteRadAway)
-    override val cooldown = 100
+    override val cooldown: Int get() = NuclearConfig.general.radAwayCooldown.get()
 
     override fun doBagUseAction(level: Level, player: Player, originalStack: ItemStack, hand: InteractionHand, originalStackEmptied: Boolean): InteractionResultHolder<ItemStack> {
         if (!level.isClientSide) {

@@ -8,12 +8,26 @@ class GeneralConfig : ConfigBase {
     override val configSpec: ForgeConfigSpec
     override val configType = ModConfig.Type.SERVER
 
+    val emptyIVBagCooldown: ForgeConfigSpec.IntValue
+    val bloodBagCooldown: ForgeConfigSpec.IntValue
+    val emptyExperienceBagCooldown: ForgeConfigSpec.IntValue
+    val experienceBagCooldown: ForgeConfigSpec.IntValue
+    val radAwayCooldown: ForgeConfigSpec.IntValue
+
     val enableBabyMode: ForgeConfigSpec.BooleanValue
     val enable528Mode: ForgeConfigSpec.BooleanValue
 
     init {
         ForgeConfigSpec.Builder().apply {
             comment("General Config. Synced from server to client.").push(fileName)
+
+            comment("IV Bag Cooldown Settings. All values in ticks.").push("iv_bags")
+            emptyIVBagCooldown = defineInRange("emptyIVBagCooldown", 20, 0, Int.MAX_VALUE)
+            bloodBagCooldown = defineInRange("bloodBagCooldown", 40, 0, Int.MAX_VALUE)
+            emptyExperienceBagCooldown = defineInRange("emptyExperienceBagCooldown", 0, 0, Int.MAX_VALUE)
+            experienceBagCooldown = defineInRange("experienceBagCooldown", 0, 0, Int.MAX_VALUE)
+            radAwayCooldown = defineInRange("radAwayCooldown", 100, 0, Int.MAX_VALUE)
+            pop()
 
             enableBabyMode = comment("Hello peer!").define("enableBabyMode", false)
 
