@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -13,6 +12,7 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
@@ -22,39 +22,48 @@ import net.minecraft.world.phys.Vec3
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.Tags
 import net.minecraftforge.network.NetworkHooks
-import kotlin.math.PI
+import kotlin.math.hypot
 
 class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: Level) : Entity(entityType, world) {
-    var revProgress = 0
-        private set
-    var radProgress = 0
-        private set
-
     override fun tick() {
+        if (!level.isClientSide && firstTick && chunksToProcess.isEmpty() && outerChunksToProcess.isEmpty()) gatherChunks()
+
         super.tick()
 
         if (!level.isClientSide) {
-            for (i in 0 until NuclearConfig.explosions.falloutSpeed.get()) {
-                val circumference = if (radProgress == 0) 1.0 else radProgress * PI * 4
-                val part = 360.0 / circumference
-                val vector = Vec3(radProgress * .5, 0.0, 0.0)
-                    .yRot((part * revProgress).toFloat())
-                val distance = radProgress * 100 / getScale() * .5
-
-                transformBlocks((x + vector.x).toInt(), (z + vector.z).toInt(), distance)
-
-                revProgress++
-
-                if (revProgress > circumference) {
-                    revProgress = 0
-                    radProgress++
+            if (chunksToProcess.isNotEmpty()) {
+                val chunkPos = chunksToProcess.removeLast()
+                for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
+                    transformBlocks(x, z, hypot((x - blockX).toFloat(), (z - blockZ).toFloat()) * 100.0 / getScale())
                 }
-
-                if (radProgress > getScale() * 2) remove(RemovalReason.DISCARDED)
-            }
+            } else if (outerChunksToProcess.isNotEmpty()) {
+                val chunkPos = outerChunksToProcess.removeLast()
+                for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
+                    val distance = hypot((x - blockX).toFloat(), (z - blockZ).toFloat())
+                    if (distance <= getScale()) transformBlocks(x, z, distance * 100.0 / getScale())
+                }
+            } else remove(RemovalReason.DISCARDED)
         }
 
         // TODO configurable fallout rain
+    }
+
+    private val chunksToProcess = mutableListOf<ChunkPos>()
+    private val outerChunksToProcess = mutableListOf<ChunkPos>()
+
+    private fun gatherChunks() {
+        val chunks = mutableSetOf<ChunkPos>()
+        val outerChunks = mutableSetOf<ChunkPos>()
+        val outerRange = getScale()
+        val adjustedMaxAngle = 20 * outerRange / 32
+        for (angle in 0..adjustedMaxAngle) outerChunks += ChunkPos(BlockPos(Vec3(outerRange.toDouble(), .0, .0).yRot(angle / (adjustedMaxAngle / 360F))).offset(blockPosition()))
+        for (distance in 0..outerRange step 8) for (angle in 0..adjustedMaxAngle) {
+            val chunkPos = ChunkPos(BlockPos(Vec3(distance.toDouble(), .0, .0).yRot(angle / (adjustedMaxAngle / 360F))).offset(blockPosition()))
+            if (chunkPos !in outerChunks) chunks += chunkPos
+        }
+
+        chunksToProcess.addAll(chunks.reversed())
+        outerChunksToProcess.addAll(outerChunks)
     }
 
     // TODO configurable transformations
@@ -88,15 +97,15 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: Level)
                 // FIXME drops tall flowers, e.g. peonies
                 block.block is IPlantable || block.block is BonemealableBlock -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
                 block.`is`(Tags.Blocks.SAND) -> {
-                    if (random.nextInt(60) == 0)
+                    if (random.nextInt(20) == 0)
                         level.setBlockAndUpdate(pos, if (block.`is`(Tags.Blocks.SAND_RED)) ModBlocks.redTrinitite.get().defaultBlockState() else ModBlocks.trinitite.get().defaultBlockState())
                     return
                 }
                 block.`is`(Blocks.CLAY) -> level.setBlockAndUpdate(pos, Blocks.TERRACOTTA.defaultBlockState()).also { return }
                 block.`is`(Tags.Blocks.ORES_COAL) -> {
                     val randomValue = random.nextInt(150)
-                    if (randomValue < 7) level.setBlockAndUpdate(pos, Blocks.DIAMOND_ORE.defaultBlockState())
-                    else if (randomValue < 10) level.setBlockAndUpdate(pos, Blocks.EMERALD_ORE.defaultBlockState())
+                    if (randomValue < 20) level.setBlockAndUpdate(pos, Blocks.DIAMOND_ORE.defaultBlockState())
+                    else if (randomValue < 30) level.setBlockAndUpdate(pos, Blocks.EMERALD_ORE.defaultBlockState())
                     return
                 }
                 block.`is`(Blocks.SNOW_BLOCK) || block.`is`(Blocks.SNOW) -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
@@ -125,14 +134,14 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: Level)
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
         setScale(nbt.getInt("Scale"))
-        revProgress = nbt.getInt("RevProgress")
-        radProgress = nbt.getInt("RadProgress")
+        chunksToProcess.addAll(nbt.getLongArray("Chunks").map(::ChunkPos))
+        outerChunksToProcess.addAll(nbt.getLongArray("OuterChunks").map(::ChunkPos))
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {
         nbt.putInt("Scale", getScale())
-        nbt.putInt("RevProgress", revProgress)
-        nbt.putInt("RadProgress", radProgress)
+        nbt.putLongArray("Chunks", chunksToProcess.map(ChunkPos::toLong))
+        nbt.putLongArray("OuterChunks", outerChunksToProcess.map(ChunkPos::toLong))
     }
 
     override fun getAddEntityPacket(): Packet<*> = NetworkHooks.getEntitySpawningPacket(this)

@@ -2,11 +2,15 @@ package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.core.BlockPos
+import net.minecraft.core.SectionPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.IntTag
 import net.minecraft.nbt.ListTag
+import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.chunk.LevelChunk
 import net.minecraft.world.phys.Vec3
 import kotlin.math.*
 
@@ -55,12 +59,12 @@ class NukeExplosionRay(
 
                     val fac = (100 - i.toDouble() / strength.toDouble() * 100) * 0.07
 
-                    val block = world.getBlockState(newBlockPos)
+                    val block = getBlockState(world, newBlockPos)
 
                     remaining -= if (block.material.isLiquid) 2.5F.pow(7.5F - fac.toFloat())
                     else block.getExplosionResistance(world, newBlockPos, null).pow(7.5F - fac.toFloat())
 
-                    if (remaining > 0 && !block.isAir) lastPos = newPos // this version of isAir will be removed in 1.17
+                    if (remaining > 0 && !block.isAir) lastPos = newPos
 
                     if (remaining <= 0 || i + 1 > length) {
                         if (tips.size < Int.MAX_VALUE - 100 && lastPos != null)
@@ -94,7 +98,7 @@ class NukeExplosionRay(
 
             val tip = tips.removeLast()
 
-            world.setBlockAndUpdate(BlockPos(tip), Blocks.AIR.defaultBlockState())
+            removeBlock(world, BlockPos(tip), true)
 
             val vector = Vec3(
                 tip.x - pos.x,
@@ -109,8 +113,8 @@ class NukeExplosionRay(
                 val currentPos = normalVector.multiply(distanceDouble, distanceDouble, distanceDouble)
                     .add(pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble())
                     .let { BlockPos(it.x.roundToInt(), it.y.roundToInt(), it.z.roundToInt()) }
-                if (!world.getBlockState(currentPos).isAir) {
-                    world.setBlock(currentPos, Blocks.AIR.defaultBlockState(), 0b10) // only sends the removed block. does not update neighbors
+                if (!getBlockState(world, currentPos).isAir) {
+                    removeBlock(world, currentPos)
                     destroyedBlocks++
                 }
                 processedBlocks++
@@ -145,6 +149,40 @@ class NukeExplosionRay(
         nbt.putBoolean("Initialized", initialized)
         nbt.putInt("Processed", processed)
         return nbt
+    }
+
+    private fun getBlockState(level: Level, pos: BlockPos): BlockState {
+        if (level.isOutsideBuildHeight(pos)) return Blocks.VOID_AIR.defaultBlockState()
+        val chunk = getChunk(level, SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z))
+        return chunk.getBlockState(pos)
+    }
+
+    private val changedPositions = mutableMapOf<BlockPos, BlockState>()
+    private val changedTips = mutableMapOf<BlockPos, BlockState>()
+
+    private fun removeBlock(level: Level, pos: BlockPos, tip: Boolean = false) {
+        if (level.isOutsideBuildHeight(pos)) return
+        val oldState = getChunk(level, SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z)).setBlockState(pos, Blocks.AIR.defaultBlockState(), false)
+        if (oldState != null) {
+            if (tip) changedTips += pos to oldState
+            else changedPositions += pos to oldState
+        }
+    }
+
+    fun updateAllBlocks(level: Level) {
+        for ((pos, oldState) in changedPositions) level.markAndNotifyBlock(pos, getChunk(level, SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z)), oldState, Blocks.AIR.defaultBlockState(), 0b10, 0)
+        for ((pos, oldState) in changedTips) level.markAndNotifyBlock(pos, getChunk(level, SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z)), oldState, Blocks.AIR.defaultBlockState(), 0b11, 512)
+        (changedPositions.keys + changedTips.keys) // update the lighting starting with the highest blocks
+            .groupBy { it.y }
+            .toSortedMap(Comparator.reverseOrder())
+            .forEach { (_, layerPositions) ->  layerPositions.forEach { level.chunkSource.lightEngine.checkBlock(it) }}
+    }
+
+    private val chunkCache = mutableMapOf<ChunkPos, LevelChunk>()
+
+    // has more caching
+    private fun getChunk(level: Level, x: Int, z: Int) = chunkCache.computeIfAbsent(ChunkPos(x, z)) {
+        level.getChunk(x, z)
     }
 
     companion object {

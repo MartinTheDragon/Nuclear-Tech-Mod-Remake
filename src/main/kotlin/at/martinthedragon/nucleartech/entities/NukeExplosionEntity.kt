@@ -53,7 +53,10 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Le
         when {
             !explosion!!.initialized -> explosion!!.collectTips(speed * 10)
             explosion!!.tipsCount > 0 -> explosion!!.processTips(NuclearConfig.explosions.explosionSpeed.get())
-            else -> remove(RemovalReason.DISCARDED)
+            else -> {
+                explosion!!.updateAllBlocks(level) // TODO make this go over multiple ticks
+                remove(RemovalReason.DISCARDED)
+            }
         }
     }
 
@@ -143,7 +146,7 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Le
                 val cloudEntityUUID = if (withVfx) MushroomCloudEntity.create(world, pos, strength * .0025F, isMuted = muted) else null
                 val explosionEntity = NukeExplosionEntity(EntityTypes.nukeExplosionEntity.get(), world).apply {
                     this@apply.strength = strength
-                    speed = ceil(100000F / strength).toInt()
+                    speed = ceil(125_000F / strength).toInt() // TODO make this configurable as well
                     length = strength / 2
                     this.hasFallout = hasFallout
                     this.extraFallout = extraFallout

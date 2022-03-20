@@ -25,7 +25,7 @@ class ExplosionsConfig : ConfigBase {
             pop()
 
             comment("Explosion behaviour settings").push("behaviour")
-            explosionSpeed = comment("The maximum amount of blocks destroyed by an explosion per tick").defineInRange("explosionSpeed", 2048, 1, 1_000_000_000)
+            explosionSpeed = comment("The maximum amount of blocks destroyed by an explosion per tick").defineInRange("explosionSpeed", 3072, 1, 1_000_000_000)
             falloutRange = comment("Modifies the range of the fallout area (value in percent)").defineInRange("falloutRange", 100.0, 0.0, 100_000.0)
             falloutSpeed = comment("The amount of block columns changed per tick by fallout after explosions").defineInRange("falloutSpeed", 256, 1, 1_000_000_000)
             pop()
