@@ -7,6 +7,10 @@ Everything is still subject to change, even the speed at which blocks get mined.
 
 But you can still test the current state of the mod by either building the mod yourself, or downloading one of the [occasional releases published on GitHub](https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases). Finding and reporting bugs is encouraged.
 
+### Discord
+
+[Join the newly opened Discord server](https://discord.gg/XDrARD2FaJ) dedicated to the 1.18 port. It is not affiliated with the official NTM Discord server.
+
 ### Credits
 
 For a (non-exhaustive) list of who worked on this project and the original, look at the [credits file](CREDITS.md).
