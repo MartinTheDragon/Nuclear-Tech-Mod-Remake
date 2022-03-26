@@ -2,7 +2,10 @@ package at.martinthedragon.nucleartech.hazards
 
 import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.capabilites.Capabilities
-import at.martinthedragon.nucleartech.capabilites.contamination.*
+import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationHandler
+import at.martinthedragon.nucleartech.capabilites.contamination.EntityContaminationHandler
+import at.martinthedragon.nucleartech.capabilites.contamination.addDigamma
+import at.martinthedragon.nucleartech.capabilites.contamination.addIrradiation
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
 import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessage
@@ -186,9 +189,7 @@ object EntityContaminationEffects {
         return true
     }
 
-    fun calculateRadiationMod(entity: LivingEntity): Float = if (entity is Player) {
-        10F.pow(-0F) // TODO hazmat
-    } else 1F
+    fun calculateRadiationMod(entity: LivingEntity): Float = if (entity is Player) 10F.pow(-HazmatValues.getPlayerResistance(entity)) else 1F
 
     fun decontaminate(capability: ContaminationHandler, hazardType: HazardType, amount: Float) {
         when (hazardType) {

@@ -14,7 +14,7 @@ interface BombBlockEntity<T> : Container
     val requiresComponentsToDetonate: Boolean get() = getRequiredDetonationComponents().isNotEmpty()
 
     /** Returns a Map of all required components */
-    fun getRequiredDetonationComponents(): Map<out Supplier<Item>, Int>
+    fun getRequiredDetonationComponents(): Map<out Supplier<out Item>, Int>
 
     /**
      * Returns `true` when all items are contained in the inventory.

@@ -110,10 +110,10 @@ data class VanillaGroup(
     val raw: Item? = null,
     val ingot: Item,
     val nugget: Item? = null,
-    val crystals: Supplier<Item>? = null,
-    val powder: Supplier<Item>? = null,
-    val plate: Supplier<Item>? = null,
-    val wire: Supplier<Item>? = null,
+    val crystals: Supplier<out Item>? = null,
+    val powder: Supplier<out Item>? = null,
+    val plate: Supplier<out Item>? = null,
+    val wire: Supplier<out Item>? = null,
 ) : MaterialGroup {
     override fun ore() = ore
     override fun deepOre() = deepOre
@@ -129,16 +129,16 @@ data class VanillaGroup(
 }
 
 data class ModGroup(
-    val ore: Supplier<BlockItem>? = null,
-    val deepOre: Supplier<BlockItem>? = null,
-    val block: Supplier<BlockItem>? = null,
-    val raw: Supplier<Item>? = null,
-    val ingot: Supplier<Item>? = null,
-    val nugget: Supplier<Item>? = null,
-    val crystals: Supplier<Item>? = null,
-    val powder: Supplier<Item>? = null,
-    val plate: Supplier<Item>? = null,
-    val wire: Supplier<Item>? = null,
+    val ore: Supplier<out BlockItem>? = null,
+    val deepOre: Supplier<out BlockItem>? = null,
+    val block: Supplier<out BlockItem>? = null,
+    val raw: Supplier<out Item>? = null,
+    val ingot: Supplier<out Item>? = null,
+    val nugget: Supplier<out Item>? = null,
+    val crystals: Supplier<out Item>? = null,
+    val powder: Supplier<out Item>? = null,
+    val plate: Supplier<out Item>? = null,
+    val wire: Supplier<out Item>? = null,
 ) : MaterialGroup {
     override fun ore() = ore?.get()
     override fun deepOre() = deepOre?.get()

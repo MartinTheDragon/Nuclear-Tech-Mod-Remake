@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.items
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
+import at.martinthedragon.nucleartech.hazards.HazmatValues
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.TextComponent
@@ -79,8 +80,8 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             val chunkRadiation = (ChunkRadiation.getRadiation(world, player.blockPosition()) * 10F).toInt() / 10F
             val environmentRadiation = (capability.getRadPerSecond() * 10F).toInt() / 10F
             val playerIrradiation = (capability.getIrradiation() * 10F).toInt() / 10F
-            val playerResistance = (10_000.0 - EntityContaminationEffects.calculateRadiationMod(player) * 10_000.0).toInt() / 100.0
-            // TODO coefficient
+            val playerResistance = (10_000F - EntityContaminationEffects.calculateRadiationMod(player) * 10_000F).toInt() / 100F
+            val playerResistanceCoefficient = (HazmatValues.getPlayerResistance(player) * 10_000F).toInt() / 100F
 
             player.displayClientMessage(
                 TextComponent("===== ☢ ")
@@ -105,7 +106,7 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             )
             player.displayClientMessage(
                 TranslatableComponent("geiger.playerResistance")
-                    .append(TextComponent(" $playerResistance%").withStyle(ChatFormatting.WHITE))
+                    .append(TextComponent(" $playerResistance% ($playerResistanceCoefficient)").withStyle(getColorForResistanceCoefficient(playerResistanceCoefficient)))
                     .withStyle(ChatFormatting.YELLOW), false
             )
         }
@@ -129,5 +130,7 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
             rad < 1000 -> ChatFormatting.DARK_RED
             else -> ChatFormatting.DARK_PURPLE
         }
+
+        private fun getColorForResistanceCoefficient(resistance: Float): ChatFormatting = if (resistance > 0) ChatFormatting.GREEN else ChatFormatting.WHITE
     }
 }

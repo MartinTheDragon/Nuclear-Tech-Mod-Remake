@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
 import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
@@ -13,6 +14,7 @@ import net.minecraft.core.Registry
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.RecipeSerializer
@@ -23,6 +25,7 @@ import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
 import net.minecraftforge.common.crafting.CraftingHelper
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
@@ -38,6 +41,7 @@ object RegistriesAndLifecycle {
     val ENTITIES: DeferredRegister<EntityType<*>> = DeferredRegister.create(ForgeRegistries.ENTITIES, NuclearTech.MODID)
     val MENUS: DeferredRegister<MenuType<*>> = DeferredRegister.create(ForgeRegistries.CONTAINERS, NuclearTech.MODID)
     val RECIPE_SERIALIZERS: DeferredRegister<RecipeSerializer<*>> = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, NuclearTech.MODID)
+    val ATTRIBUTES: DeferredRegister<Attribute> = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, NuclearTech.MODID)
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
     val SOUNDS: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NuclearTech.MODID)
 
@@ -48,6 +52,7 @@ object RegistriesAndLifecycle {
         ITEMS.register(modEventBus)
         ModBlockItems
         ModItems
+        NuclearArmorMaterials
         BLOCK_ENTITIES.register(modEventBus)
         BlockEntityTypes
         ENTITIES.register(modEventBus)
@@ -56,6 +61,8 @@ object RegistriesAndLifecycle {
         MenuTypes
         RECIPE_SERIALIZERS.register(modEventBus)
         RecipeSerializers
+        ATTRIBUTES.register(modEventBus)
+        Attributes
         FEATURES.register(modEventBus)
         WorldGen.Features
         SOUNDS.register(modEventBus)
@@ -77,6 +84,11 @@ object RegistriesAndLifecycle {
     @SubscribeEvent @JvmStatic
     fun createAttributes(event: EntityAttributeCreationEvent) {
         event.put(EntityTypes.nuclearCreeper.get(), NuclearCreeper.createAttributes())
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun modifyAttributes(event: EntityAttributeModificationEvent) {
+        for (type in event.types) event.add(type, Attributes.RADIATION_RESISTANCE.get())
     }
 
     @SubscribeEvent @JvmStatic

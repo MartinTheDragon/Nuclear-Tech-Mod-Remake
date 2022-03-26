@@ -9,6 +9,7 @@ import net.minecraft.data.HashCache
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
@@ -121,6 +122,10 @@ abstract class NuclearLanguageProvider(
     protected fun addDamageSource(key: DamageSource, message: String, killCreditMessage: String? = null) {
         add("death.attack.${key.msgId}", message)
         if (killCreditMessage != null) add("death.attack.${key.msgId}.player", killCreditMessage)
+    }
+
+    protected fun addAttribute(key: Supplier<out Attribute>, name: String) {
+        add("${key.get().registryName!!.namespace}.attribute.name.${key.get().registryName!!.path}", name)
     }
 
     /** What to append to the spawn egg name */

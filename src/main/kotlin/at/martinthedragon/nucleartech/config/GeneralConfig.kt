@@ -8,6 +8,8 @@ class GeneralConfig : ConfigBase {
     override val configSpec: ForgeConfigSpec
     override val configType = ModConfig.Type.SERVER
 
+    val mobsFullSetBonus: ForgeConfigSpec.BooleanValue
+
     val emptyIVBagCooldown: ForgeConfigSpec.IntValue
     val bloodBagCooldown: ForgeConfigSpec.IntValue
     val emptyExperienceBagCooldown: ForgeConfigSpec.IntValue
@@ -20,6 +22,8 @@ class GeneralConfig : ConfigBase {
     init {
         ForgeConfigSpec.Builder().apply {
             comment("General Config. Synced from server to client.").push(fileName)
+
+            mobsFullSetBonus = comment("Mobs get the full set bonus from armor").define("mobsFullSetBonus", true)
 
             comment("IV Bag Cooldown Settings. All values in ticks.").push("iv_bags")
             emptyIVBagCooldown = defineInRange("emptyIVBagCooldown", 20, 0, Int.MAX_VALUE)
