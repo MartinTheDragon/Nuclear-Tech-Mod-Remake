@@ -5,10 +5,11 @@ import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ntm
 import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.gui.IRecipeLayout
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.helpers.IGuiHelper
-import mezz.jei.api.ingredients.IIngredients
+import mezz.jei.api.recipe.IFocusGroup
+import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
@@ -28,18 +29,11 @@ class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<T
 
     override fun getIcon(): IDrawable = icon
 
-    override fun setIngredients(recipe: TemplateFolderRecipe, ingredients: IIngredients) {
-        ingredients.setInputIngredients(mutableListOf(Ingredient.of(recipe.folderItem), recipe.templateType.firstIngredient, recipe.templateType.secondIngredient))
-        ingredients.setOutputLists(VanillaTypes.ITEM, listOf(recipe.result.items.toList()))
-    }
-
-    override fun setRecipe(recipeLayout: IRecipeLayout, recipe: TemplateFolderRecipe, ingredients: IIngredients) {
-        val guiItemStacks = recipeLayout.itemStacks
-        guiItemStacks.init(0, true, 65, 0)
-        guiItemStacks.init(1, true, 0, 20)
-        guiItemStacks.init(2, true, 36, 20)
-        guiItemStacks.init(3, false, 94, 20)
-        guiItemStacks.set(ingredients)
+    override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: TemplateFolderRecipe, focuses: IFocusGroup) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 66, 1).addItemStack(recipe.folderItem)
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 21).addIngredients(recipe.templateType.firstIngredient)
+        builder.addSlot(RecipeIngredientRole.INPUT, 37, 21).addIngredients(recipe.templateType.secondIngredient)
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 21).addItemStacks(recipe.result.items.toList())
     }
 
     data class TemplateFolderRecipe(val folderItem: ItemStack, val templateType: TemplateType, val result: Ingredient) {

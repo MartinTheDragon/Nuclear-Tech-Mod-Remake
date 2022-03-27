@@ -1,12 +1,9 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.ModItems
-import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.items.AssemblyTemplate
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
-import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
@@ -18,8 +15,8 @@ import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.searchtree.SearchRegistry
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.ItemStack
+import net.minecraftforge.registries.ForgeRegistries
 import kotlin.math.ceil
 import kotlin.math.min
 
@@ -259,8 +256,8 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         val TEMPLATE_FOLDER_GUI_LOCATION = ntm("textures/gui/machine_template_folder.png")
         val searchTree = SearchRegistry.Key<ItemStack>()
 
-        fun getAllItems(): List<ItemStack> = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.FOLDER_STAMPS.name).values.map(::ItemStack) +
-            ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SIREN_TRACKS.name).values.map(::ItemStack) +
+        fun getAllItems(): List<ItemStack> = ForgeRegistries.ITEMS.getTagManager().getTag(NuclearTags.Items.FOLDER_STAMPS).map(::ItemStack) +
+            ForgeRegistries.ITEMS.getTagManager().getTag(NuclearTags.Items.SIREN_TRACKS).map(::ItemStack) +
             AssemblyTemplate.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
 
         fun reloadSearchTree() {

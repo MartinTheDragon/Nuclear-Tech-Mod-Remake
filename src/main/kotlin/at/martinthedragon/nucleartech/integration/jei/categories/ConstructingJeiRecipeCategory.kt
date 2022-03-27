@@ -4,11 +4,11 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
-import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.gui.IRecipeLayout
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.helpers.IGuiHelper
-import mezz.jei.api.ingredients.IIngredients
+import mezz.jei.api.recipe.IFocusGroup
+import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
@@ -30,29 +30,31 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
     override fun getBackground() = background
     override fun getIcon() = hammer
 
-    override fun setIngredients(recipe: AnvilConstructingRecipe, ingredients: IIngredients) {
-        ingredients.setInputIngredients(recipe.ingredients)
-        ingredients.setOutputs(VanillaTypes.ITEM, recipe.getResultsChanceCollapsed())
-    }
-
-    override fun setRecipe(recipeLayout: IRecipeLayout, recipe: AnvilConstructingRecipe, ingredients: IIngredients) {
-        val itemStacks = recipeLayout.itemStacks
+    override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: AnvilConstructingRecipe, focuses: IFocusGroup) {
         when (recipe.overlay) {
-            AnvilConstructingRecipe.OverlayType.NONE, AnvilConstructingRecipe.OverlayType.CONSTRUCTING -> for (y in 0 until 3) for (x in 0 until 4) itemStacks.init(y * 4 + x, true, x * 18, 10 + y * 18)
-            AnvilConstructingRecipe.OverlayType.RECYCLING, AnvilConstructingRecipe.OverlayType.SMITHING -> itemStacks.init(0, true, 54, 28)
+            AnvilConstructingRecipe.OverlayType.NONE, AnvilConstructingRecipe.OverlayType.CONSTRUCTING -> {
+                for (y in 0 until 3) for (x in 0 until 4) builder.addSlot(RecipeIngredientRole.INPUT, 1 + x * 18, 11 + y * 18).apply {
+                    val index = y * 4 + x
+                    if (index <= recipe.ingredientsList.lastIndex) addIngredients(recipe.ingredientsList[index])
+                }
+            }
+            AnvilConstructingRecipe.OverlayType.RECYCLING, AnvilConstructingRecipe.OverlayType.SMITHING -> builder.addSlot(RecipeIngredientRole.INPUT, 55, 29).addIngredients(recipe.ingredientsList[0])
         }
         when (recipe.overlay) {
-            AnvilConstructingRecipe.OverlayType.NONE, AnvilConstructingRecipe.OverlayType.RECYCLING -> for (y in 0 until 3) for (x in 0 until 4) itemStacks.init(12 + y * 4 + x, false, 108 + x * 18, 10 + y * 18)
-            AnvilConstructingRecipe.OverlayType.CONSTRUCTING, AnvilConstructingRecipe.OverlayType.SMITHING -> itemStacks.init(12, false, 108, 28)
-        }
-        itemStacks.set(ingredients)
-        itemStacks.addTooltipCallback { slotIndex, input, _, tooltip ->
-            if (input) return@addTooltipCallback
-            val chances = recipe.getTooltipChancesForOutputAt(slotIndex - 12)
-            if (chances.isEmpty()) return@addTooltipCallback
-            if (tooltip.isNotEmpty()) tooltip.add(TextComponent.EMPTY)
-            tooltip.add(TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.chance").withStyle(ChatFormatting.GOLD))
-            tooltip.addAll(chances)
+            AnvilConstructingRecipe.OverlayType.NONE, AnvilConstructingRecipe.OverlayType.RECYCLING -> {
+                for (y in 0 until 3) for (x in 0 until 4)builder.addSlot(RecipeIngredientRole.OUTPUT, 109 + x * 18, 11 + y * 18).apply {
+                    val index = y * 4 + x
+                    val results = recipe.getResultsChanceCollapsed()
+                    if (index <= results.lastIndex) addItemStack(results[index])
+                }.addTooltipCallback { _, tooltip ->
+                    val chances = recipe.getTooltipChancesForOutputAt(y * 4 + x)
+                    if (chances.isEmpty()) return@addTooltipCallback
+                    if (tooltip.isNotEmpty()) tooltip.add(TextComponent.EMPTY)
+                    tooltip.add(TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.chance").withStyle(ChatFormatting.GOLD))
+                    tooltip.addAll(chances)
+                }
+            }
+            AnvilConstructingRecipe.OverlayType.CONSTRUCTING, AnvilConstructingRecipe.OverlayType.SMITHING -> builder.addSlot(RecipeIngredientRole.OUTPUT, 109, 29).addItemStacks(recipe.getResultsChanceCollapsed())
         }
     }
 

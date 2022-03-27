@@ -8,11 +8,12 @@ import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.ShreddingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.gui.IRecipeLayout
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.gui.drawable.IDrawableAnimated
 import mezz.jei.api.helpers.IGuiHelper
-import mezz.jei.api.ingredients.IIngredients
+import mezz.jei.api.recipe.IFocusGroup
+import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
@@ -35,19 +36,12 @@ class ShreddingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Shredd
 
     override fun getIcon(): IDrawable = icon
 
-    override fun setIngredients(recipe: ShreddingRecipe, ingredients: IIngredients) {
+    override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ShreddingRecipe, focuses: IFocusGroup) {
         val shredderBlades = Ingredient.of(NuclearTags.Items.SHREDDER_BLADES)
-        ingredients.setInputIngredients(listOf(recipe.ingredient, shredderBlades, shredderBlades))
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.result)
-    }
-
-    override fun setRecipe(recipeLayout: IRecipeLayout, recipe: ShreddingRecipe, ingredients: IIngredients) {
-        val guiItemStacks = recipeLayout.itemStacks
-        guiItemStacks.init(0, true, 23, 18)
-        guiItemStacks.init(10, true, 48, 0)
-        guiItemStacks.init(11, true, 48, 36)
-        guiItemStacks.init(12, false, 73, 19)
-        guiItemStacks.set(ingredients)
+        builder.addSlot(RecipeIngredientRole.INPUT, 24, 19).addIngredients(recipe.ingredient)
+        builder.addSlot(RecipeIngredientRole.INPUT, 49, 1).addIngredients(shredderBlades)
+        builder.addSlot(RecipeIngredientRole.INPUT, 49, 37).addIngredients(shredderBlades)
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 74, 20).addItemStack(recipe.resultItem)
     }
 
     override fun draw(recipe: ShreddingRecipe, matrixStack: PoseStack, mouseX: Double, mouseY: Double) {

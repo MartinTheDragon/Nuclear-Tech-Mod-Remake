@@ -5,7 +5,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.menus.PressMenu
-import at.martinthedragon.nucleartech.recipes.PressRecipe
+import at.martinthedragon.nucleartech.recipes.PressingRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
 import net.minecraft.core.BlockPos
@@ -15,7 +15,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundSource
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -76,7 +75,7 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
         }
 
         override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-            if (slot == 1) return stack.item in ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STAMPS.name)
+            if (slot == 1) return stack.`is`(NuclearTags.Items.STAMPS)
             if (slot == 2) return ForgeHooks.getBurnTime(stack, null) > 0
             return true
         }
@@ -160,7 +159,7 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
 
     override fun getExperienceToDrop(player: Player?): Float =
         recipesUsed.object2IntEntrySet().mapNotNull { (recipeID, amount) ->
-            (level!!.recipeManager.byKey(recipeID).orElse(null) as? PressRecipe)?.experience?.times(amount)
+            (level!!.recipeManager.byKey(recipeID).orElse(null) as? PressingRecipe)?.experience?.times(amount)
         }.sum()
 
     override fun getRecipesToAward(player: Player): List<Recipe<*>> =

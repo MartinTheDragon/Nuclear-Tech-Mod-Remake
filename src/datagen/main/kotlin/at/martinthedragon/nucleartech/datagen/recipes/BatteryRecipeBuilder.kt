@@ -15,7 +15,7 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeBuilder
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.Tag
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
@@ -34,7 +34,7 @@ class BatteryRecipeBuilder(private val result: Item, val count: Int) : RecipeBui
     private val advancement = Advancement.Builder.advancement()
     private var group: String = ""
 
-    fun define(char: Char, tag: Tag<Item>): BatteryRecipeBuilder {
+    fun define(char: Char, tag: TagKey<Item>): BatteryRecipeBuilder {
         return this.define(char, Ingredient.of(tag))
     }
 

@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
 import at.martinthedragon.nucleartech.mc
-import at.martinthedragon.nucleartech.recipes.PressRecipe
+import at.martinthedragon.nucleartech.recipes.PressingRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import com.google.gson.JsonObject
 import net.minecraft.advancements.Advancement
@@ -12,20 +12,20 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeBuilder
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.Tag
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 
-class PressRecipeBuilder(private val result: Item, val stampType: PressRecipe.StampType, val experience: Float, val count: Int = 1) : RecipeBuilder {
-    constructor(result: ItemLike, stampType: PressRecipe.StampType, experience: Float, count: Int = 1) : this(result.asItem(), stampType, experience, count)
+class PressRecipeBuilder(private val result: Item, val stampType: PressingRecipe.StampType, val experience: Float, val count: Int = 1) : RecipeBuilder {
+    constructor(result: ItemLike, stampType: PressingRecipe.StampType, experience: Float, count: Int = 1) : this(result.asItem(), stampType, experience, count)
 
     private lateinit var ingredient: Ingredient
     private val advancement = Advancement.Builder.advancement()
 
-    fun requires(tag: Tag<Item>): PressRecipeBuilder = requires(Ingredient.of(tag))
+    fun requires(tag: TagKey<Item>): PressRecipeBuilder = requires(Ingredient.of(tag))
 
     fun requires(item: ItemLike): PressRecipeBuilder = requires(Ingredient.of(item))
 
@@ -55,7 +55,7 @@ class PressRecipeBuilder(private val result: Item, val stampType: PressRecipe.St
         private val result: Item,
         private val count: Int,
         private val experience: Float,
-        private val stampType: PressRecipe.StampType,
+        private val stampType: PressingRecipe.StampType,
         private val ingredient: Ingredient,
         private val advancement: Advancement.Builder,
         private val advancementID: ResourceLocation

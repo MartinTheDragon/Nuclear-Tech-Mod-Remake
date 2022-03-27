@@ -5,7 +5,7 @@ import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.datagen.recipes.*
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.PressRecipe
+import at.martinthedragon.nucleartech.recipes.PressingRecipe
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.recipes.FinishedRecipe
@@ -13,7 +13,7 @@ import net.minecraft.data.recipes.RecipeProvider
 import net.minecraft.data.recipes.ShapedRecipeBuilder
 import net.minecraft.data.recipes.ShapelessRecipeBuilder
 import net.minecraft.tags.ItemTags
-import net.minecraft.tags.Tag
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -296,7 +296,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         wirePressRecipe(ModItems.magnetizedTungstenIngot.get(), ModItems.highTemperatureSuperConductor.get(), .1F, consumer)
         wirePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumWire.get(), .5F, consumer)
 
-        pressRecipe(ModItems.basicCircuitAssembly.get(), PressRecipe.StampType.CIRCUIT, ModItems.basicCircuit.get(), 1, .75F, consumer)
+        pressRecipe(ModItems.basicCircuitAssembly.get(), PressingRecipe.StampType.CIRCUIT, ModItems.basicCircuit.get(), 1, .75F, consumer)
     }
 
     private fun blastFurnaceRecipes(consumer: Consumer<FinishedRecipe>) {
@@ -526,7 +526,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         BatteryRecipeBuilder.battery(ModItems.twentyFourFoldRedstonePowerCell.get()).define('W', NuclearTags.Items.WIRES_ALUMINIUM).define('P', NuclearTags.Items.PLATES_ALUMINIUM).define('B', ModItems.sixfoldRedstonePowerCell.get()).pattern("BWB").pattern("WPW").pattern("BWB").unlockedBy("has_battery", has(ModItems.sixfoldRedstonePowerCell.get())).save(consumer, ModItems.twentyFourFoldRedstonePowerCell.id)
         BatteryRecipeBuilder.battery(ModItems.advancedBattery.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('S', NuclearTags.Items.DUSTS_SULFUR).define('L', NuclearTags.Items.DUSTS_LEAD).pattern(" W ").pattern("PSP").pattern("PLP").unlockedBy("has_sulfur", has(NuclearTags.Items.DUSTS_SULFUR)).save(consumer, ModItems.advancedBattery.id)
         BatteryRecipeBuilder.battery(ModItems.advancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.advancedBattery.get()).pattern("WBW").pattern("PBP").pattern("WBW").unlockedBy("has_battery", has(ModItems.advancedBattery.get())).save(consumer, ModItems.advancedPowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.quadrupleAdvancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.quadrupleAdvancedPowerCell.get()).pattern("BWB").pattern("WPW").pattern("BWB").unlockedBy("has_battery", has(ModItems.advancedPowerCell.get())).save(consumer, ModItems.quadrupleAdvancedPowerCell.id)
+        BatteryRecipeBuilder.battery(ModItems.quadrupleAdvancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.advancedPowerCell.get()).pattern("BWB").pattern("WPW").pattern("BWB").unlockedBy("has_battery", has(ModItems.advancedPowerCell.get())).save(consumer, ModItems.quadrupleAdvancedPowerCell.id)
         BatteryRecipeBuilder.battery(ModItems.twelveFoldAdvancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.quadrupleAdvancedPowerCell.get()).pattern("WPW").pattern("BBB").pattern("WPW").unlockedBy("has_battery", has(ModItems.quadrupleAdvancedPowerCell.get())).save(consumer, ModItems.twelveFoldAdvancedPowerCell.id)
         BatteryRecipeBuilder.battery(ModItems.lithiumBattery.get()).define('W', NuclearTags.Items.WIRES_GOLD).define('P', NuclearTags.Items.PLATES_TITANIUM).define('L', NuclearTags.Items.DUSTS_LITHIUM).define('C', NuclearTags.Items.DUSTS_COBALT).pattern("W W").pattern("PLP").pattern("PCP").unlockedBy("has_lithium", has(NuclearTags.Items.DUSTS_LITHIUM)).save(consumer, ModItems.lithiumBattery.id)
         BatteryRecipeBuilder.battery(ModItems.lithiumPowerCell.get()).define('W', NuclearTags.Items.WIRES_GOLD).define('P', NuclearTags.Items.PLATES_TITANIUM).define('B', ModItems.lithiumBattery.get()).pattern("WBW").pattern("PBP").pattern("WBW").unlockedBy("has_battery", has(ModItems.lithiumBattery.get())).save(consumer, ModItems.lithiumPowerCell.id)
@@ -677,7 +677,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     // so we can also use tags when declaring a shapeless recipe requiring multiple random of one type
-    private fun ShapelessRecipeBuilder.requires(itemTag: Tag<Item>, count: Int): ShapelessRecipeBuilder {
+    private fun ShapelessRecipeBuilder.requires(itemTag: TagKey<Item>, count: Int): ShapelessRecipeBuilder {
         for (i in 0 until count) requires(itemTag)
         return this
     }
@@ -687,7 +687,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     // we need the ingredient name because tags haven't been bound yet at this point
-    private fun ingotFromBlock(result: ItemLike, ingredient: Tag<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
+    private fun ingotFromBlock(result: ItemLike, ingredient: TagKey<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
         ShapelessRecipeBuilder.shapeless(result, 9).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_$ingredientName"))
     }
 
@@ -695,7 +695,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_nuggets"))
     }
 
-    private fun ingotFromNuggets(result: ItemLike, ingredient: Tag<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
+    private fun ingotFromNuggets(result: ItemLike, ingredient: TagKey<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_nuggets"))
     }
 
@@ -704,7 +704,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = RecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_blasting_${ingredient.asItem().registryName!!.path}"))
     }
 
-    private fun ingotFromOre(ingredient: Tag<Item>, result: ItemLike, experience: Float, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
+    private fun ingotFromOre(ingredient: TagKey<Item>, result: ItemLike, experience: Float, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_$ingredientName"))
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = RecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_blasting_$ingredientName"))
     }
@@ -718,7 +718,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_powder"))
     }
 
-    private fun ingotFromPowder(ingredient: Tag<Item>, result: ItemLike, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
+    private fun ingotFromPowder(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_powder"))
     }
 
@@ -730,47 +730,47 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
     }
 
-    private fun blockFromIngots(result: ItemLike, ingredient: Tag<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
+    private fun blockFromIngots(result: ItemLike, ingredient: TagKey<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_$ingredientName"))
     }
 
-    private fun pressRecipe(ingredient: ItemLike, stampType: PressRecipe.StampType, result: ItemLike, count: Int, experience: Float, consumer: Consumer<FinishedRecipe>) {
+    private fun pressRecipe(ingredient: ItemLike, stampType: PressingRecipe.StampType, result: ItemLike, count: Int, experience: Float, consumer: Consumer<FinishedRecipe>) {
         PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_pressing_${ingredient.asItem().registryName!!.path}"))
     }
 
-    private fun pressRecipe(ingredient: Tag<Item>, stampType: PressRecipe.StampType, result: ItemLike, count: Int, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
+    private fun pressRecipe(ingredient: TagKey<Item>, stampType: PressingRecipe.StampType, result: ItemLike, count: Int, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
         PressRecipeBuilder(result, stampType, experience, count).requires(ingredient).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_pressing_$ingredientName"))
     }
 
     private fun flatPressRecipe(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressRecipe.StampType.FLAT, result, 1, experience, consumer)
+        pressRecipe(ingredient, PressingRecipe.StampType.FLAT, result, 1, experience, consumer)
     }
 
-    private fun flatPressRecipe(ingredient: Tag<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressRecipe.StampType.FLAT, result, 1, ingredientName, experience, consumer)
+    private fun flatPressRecipe(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
+        pressRecipe(ingredient, PressingRecipe.StampType.FLAT, result, 1, ingredientName, experience, consumer)
     }
 
     private fun platePressRecipe(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressRecipe.StampType.PLATE, result, 1, experience, consumer)
+        pressRecipe(ingredient, PressingRecipe.StampType.PLATE, result, 1, experience, consumer)
     }
 
-    private fun platePressRecipe(ingredient: Tag<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressRecipe.StampType.PLATE, result, 1, ingredientName, experience, consumer)
+    private fun platePressRecipe(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
+        pressRecipe(ingredient, PressingRecipe.StampType.PLATE, result, 1, ingredientName, experience, consumer)
     }
 
     private fun wirePressRecipe(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressRecipe.StampType.WIRE, result, 8, experience, consumer)
+        pressRecipe(ingredient, PressingRecipe.StampType.WIRE, result, 8, experience, consumer)
     }
 
-    private fun wirePressRecipe(ingredient: Tag<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressRecipe.StampType.WIRE, result, 8, ingredientName, experience, consumer)
+    private fun wirePressRecipe(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
+        pressRecipe(ingredient, PressingRecipe.StampType.WIRE, result, 8, ingredientName, experience, consumer)
     }
 
     private fun pressStamp(material: ItemLike, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(result).define('R', Tags.Items.DUSTS_REDSTONE).define('B', Tags.Items.INGOTS_BRICK).define('M', material).pattern(" R ").pattern("BBB").pattern("MMM").group("press_stamp_blanks").unlockedBy("has_${material.asItem().registryName!!.path}", has(material)).save(consumer, result.asItem().registryName!!)
     }
 
-    private fun pressStamp(material: Tag<Item>, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
+    private fun pressStamp(material: TagKey<Item>, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(result).define('R', Tags.Items.DUSTS_REDSTONE).define('B', Tags.Items.INGOTS_BRICK).define('M', material).pattern(" R ").pattern("BBB").pattern("MMM").group("press_stamp_blanks").unlockedBy("has_material_tag", has(material)).save(consumer, result.asItem().registryName!!)
     }
 
@@ -779,7 +779,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapedRecipeBuilder.shaped(result).define('M', secondaryMaterial).define('B', result).pattern("MBM").group(result.asItem().registryName!!.path).unlockedBy("has_${result.asItem().registryName!!.path}", has(result)).save(consumer, ntm("repairing_${result.asItem().registryName!!.path}"))
     }
 
-    private fun shredderBlade(primaryMaterial: Tag<Item>, secondaryMaterial: Tag<Item>, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
+    private fun shredderBlade(primaryMaterial: TagKey<Item>, secondaryMaterial: TagKey<Item>, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(result).define('#', primaryMaterial).define('+', secondaryMaterial).pattern(" + ").pattern("+#+").pattern(" + ").group(result.asItem().registryName!!.path).unlockedBy("has_material", has(primaryMaterial)).save(consumer, result.asItem().registryName!!)
         ShapedRecipeBuilder.shaped(result).define('M', secondaryMaterial).define('B', result).pattern("MBM").group(result.asItem().registryName!!.path).unlockedBy("has_${result.asItem().registryName!!.path}", has(result)).save(consumer, ntm("repairing_${result.asItem().registryName!!.path}"))
     }
@@ -788,15 +788,15 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_${ingredient1.asItem().registryName!!.path}", has(ingredient1)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient1.asItem().registryName!!.path}_and_${ingredient2.asItem().registryName!!.path}"))
     }
 
-    private fun blastingRecipe(ingredient1: Tag<Item>, ingredient2: Tag<Item>, result: ItemLike, experience: Float, count: Int, ingredientName1: String, ingredientName2: String, consumer: Consumer<FinishedRecipe>) {
+    private fun blastingRecipe(ingredient1: TagKey<Item>, ingredient2: TagKey<Item>, result: ItemLike, experience: Float, count: Int, ingredientName1: String, ingredientName2: String, consumer: Consumer<FinishedRecipe>) {
         BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_$ingredientName1", has(ingredient1)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredientName1}_and_${ingredientName2}"))
     }
 
-    private fun blastingRecipe(ingredient1: Tag<Item>, ingredient2: ItemLike, result: ItemLike, experience: Float, count: Int, ingredientName1: String, consumer: Consumer<FinishedRecipe>) {
+    private fun blastingRecipe(ingredient1: TagKey<Item>, ingredient2: ItemLike, result: ItemLike, experience: Float, count: Int, ingredientName1: String, consumer: Consumer<FinishedRecipe>) {
         BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_$ingredientName1", has(ingredient1)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredientName1}_and_${ingredient2.asItem().registryName!!.path}"))
     }
 
-    private fun blastingRecipe(ingredient1: ItemLike, ingredient2: Tag<Item>, result: ItemLike, experience: Float, count: Int, ingredientName2: String, consumer: Consumer<FinishedRecipe>) {
+    private fun blastingRecipe(ingredient1: ItemLike, ingredient2: TagKey<Item>, result: ItemLike, experience: Float, count: Int, ingredientName2: String, consumer: Consumer<FinishedRecipe>) {
         BlastingRecipeBuilder(result, experience, count).requiresFirst(ingredient1).requiresSecond(ingredient2).unlockedBy("has_${ingredient1.asItem().registryName!!.path}", has(ingredient1)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient1.asItem().registryName!!.path}_and_${ingredientName2}"))
     }
 
@@ -804,7 +804,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShreddingRecipeBuilder(result, experience, count, Ingredient.of(ingredient)).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_shredding_${ingredient.asItem().registryName!!.path}"))
     }
 
-    private fun shreddingRecipe(ingredient: Tag<Item>, result: ItemLike, experience: Float, count: Int, consumer: Consumer<FinishedRecipe>, ingredientName: String) {
+    private fun shreddingRecipe(ingredient: TagKey<Item>, result: ItemLike, experience: Float, count: Int, consumer: Consumer<FinishedRecipe>, ingredientName: String) {
         ShreddingRecipeBuilder(result, experience, count, Ingredient.of(ingredient)).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_shredding_$ingredientName"))
     }
 }

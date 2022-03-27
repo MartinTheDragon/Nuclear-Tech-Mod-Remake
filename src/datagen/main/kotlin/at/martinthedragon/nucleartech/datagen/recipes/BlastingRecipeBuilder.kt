@@ -11,7 +11,7 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeBuilder
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.Tag
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
@@ -25,7 +25,7 @@ class BlastingRecipeBuilder(private val result: Item, val experience: Float, val
     private lateinit var ingredient2: Ingredient
     private val advancement = Advancement.Builder.advancement()
 
-    fun requiresFirst(tag: Tag<Item>): BlastingRecipeBuilder = requiresFirst(Ingredient.of(tag))
+    fun requiresFirst(tag: TagKey<Item>): BlastingRecipeBuilder = requiresFirst(Ingredient.of(tag))
 
     fun requiresFirst(item: ItemLike): BlastingRecipeBuilder = requiresFirst(Ingredient.of(item))
 
@@ -34,7 +34,7 @@ class BlastingRecipeBuilder(private val result: Item, val experience: Float, val
         return this
     }
 
-    fun requiresSecond(tag: Tag<Item>): BlastingRecipeBuilder = requiresSecond(Ingredient.of(tag))
+    fun requiresSecond(tag: TagKey<Item>): BlastingRecipeBuilder = requiresSecond(Ingredient.of(tag))
 
     fun requiresSecond(item: ItemLike): BlastingRecipeBuilder = requiresSecond(Ingredient.of(item))
 

@@ -3,17 +3,20 @@ package at.martinthedragon.nucleartech
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.ItemTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
-import net.minecraftforge.common.Tags
+import net.minecraftforge.registries.IForgeRegistry
+import net.minecraftforge.registries.IForgeRegistryEntry
+import net.minecraftforge.registries.tags.ITagManager
 
 // look up forge tags here: https://github.com/Dente222/Minecraft-Forge-Tag-List
 object NuclearTags {
     object Blocks {
-        private fun tag(name: String): Tags.IOptionalNamedTag<Block> =
-            BlockTags.createOptional(ntm(name))
-        private fun forgeTag(name: String): Tags.IOptionalNamedTag<Block> =
-            BlockTags.createOptional(ResourceLocation("forge", name))
+        private fun tag(name: String): TagKey<Block> =
+            BlockTags.create(ntm(name))
+        private fun forgeTag(name: String): TagKey<Block> =
+            BlockTags.create(ResourceLocation("forge", name))
 
         val ORES_URANIUM = forgeTag("ores/uranium")
         val ORES_THORIUM = forgeTag("ores/thorium")
@@ -64,10 +67,10 @@ object NuclearTags {
     }
 
     object Items {
-        private fun tag(name: String): Tags.IOptionalNamedTag<Item> =
-            ItemTags.createOptional(ntm(name))
-        private fun forgeTag(name: String): Tags.IOptionalNamedTag<Item> =
-            ItemTags.createOptional(ResourceLocation("forge", name))
+        private fun tag(name: String): TagKey<Item> =
+            ItemTags.create(ntm(name))
+        private fun forgeTag(name: String): TagKey<Item> =
+            ItemTags.create(ResourceLocation("forge", name))
 
         // blocks
         val ORES_URANIUM = forgeTag("ores/uranium")
@@ -302,3 +305,5 @@ object NuclearTags {
         val SHREDDER_BLADES = tag("shredder_blades")
     }
 }
+
+fun <V : IForgeRegistryEntry<V>> IForgeRegistry<V>.getTagManager(): ITagManager<V> = tags() ?: throw IllegalStateException("No tag manager bound")

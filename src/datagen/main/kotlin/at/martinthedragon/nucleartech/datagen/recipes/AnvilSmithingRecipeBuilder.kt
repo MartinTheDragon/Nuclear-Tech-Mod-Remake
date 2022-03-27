@@ -12,7 +12,7 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeBuilder
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.Tag
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
@@ -28,14 +28,14 @@ class AnvilSmithingRecipeBuilder(private val tier: Int, private val result: Item
     private lateinit var right: StackedIngredient
     private val advancement = Advancement.Builder.advancement()
 
-    fun requiresFirst(tag: Tag<Item>, amount: Int): AnvilSmithingRecipeBuilder = requiresFirst(StackedIngredient.of(amount, tag))
+    fun requiresFirst(tag: TagKey<Item>, amount: Int): AnvilSmithingRecipeBuilder = requiresFirst(StackedIngredient.of(amount, tag))
     fun requiresFirst(itemLike: ItemLike, amount: Int): AnvilSmithingRecipeBuilder = requiresFirst(StackedIngredient.of(amount, itemLike))
     fun requiresFirst(ingredient: StackedIngredient): AnvilSmithingRecipeBuilder {
         left = ingredient
         return this
     }
 
-    fun requiresSecond(tag: Tag<Item>, amount: Int): AnvilSmithingRecipeBuilder = requiresSecond(StackedIngredient.of(amount, tag))
+    fun requiresSecond(tag: TagKey<Item>, amount: Int): AnvilSmithingRecipeBuilder = requiresSecond(StackedIngredient.of(amount, tag))
     fun requiresSecond(itemLike: ItemLike, amount: Int): AnvilSmithingRecipeBuilder = requiresSecond(StackedIngredient.of(amount, itemLike))
     fun requiresSecond(ingredient: StackedIngredient): AnvilSmithingRecipeBuilder {
         right = ingredient

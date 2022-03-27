@@ -2,11 +2,12 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
+import com.mojang.logging.LogUtils
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+
 
 @Mod(NuclearTech.MODID)
 class NuclearTech {
@@ -18,7 +19,7 @@ class NuclearTech {
 
     companion object {
         const val MODID = "nucleartech"
-        val LOGGER: Logger = LogManager.getLogger()
+        val LOGGER: Logger = LogUtils.getLogger()
     }
 
     @Suppress("unused", "SpellCheckingInspection")

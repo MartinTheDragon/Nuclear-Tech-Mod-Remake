@@ -13,7 +13,7 @@
       "tag": "forge:plates/copper"
     },
     "B": {
-      "item": "nucleartech:quadruple_advanced_power_cell"
+      "item": "nucleartech:advanced_power_cell"
     }
   },
   "result": {

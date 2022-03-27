@@ -11,7 +11,6 @@ import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.world.gen.WorldGen
 import net.minecraft.core.Registry
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attribute
@@ -30,7 +29,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
-import net.minecraftforge.registries.*
+import net.minecraftforge.registries.DeferredRegister
+import net.minecraftforge.registries.ForgeRegistries
 
 @Suppress("unused")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -69,12 +69,6 @@ object RegistriesAndLifecycle {
         SoundEvents
     }
 
-    // using kotlin's strong type system
-    // automatically uses the correct registry for the field
-    inline fun <reified T : ForgeRegistryEntry<T>> retrieve(resourceLocation: ResourceLocation): RegistryObject<T> {
-        return RegistryObject.of(resourceLocation, RegistryManager.ACTIVE.getRegistry(T::class.java))
-    }
-
     @Suppress("UNUSED_PARAMETER")
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
@@ -91,6 +85,7 @@ object RegistriesAndLifecycle {
         for (type in event.types) event.add(type, Attributes.RADIATION_RESISTANCE.get())
     }
 
+    @Suppress("UNUSED_PARAMETER")
     @SubscribeEvent @JvmStatic
     fun registerRecipeTypes(event: RegistryEvent.Register<RecipeSerializer<*>>) {
         // no forge registry for recipe types currently available

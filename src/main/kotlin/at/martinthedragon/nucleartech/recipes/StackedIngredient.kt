@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList
 import it.unimi.dsi.fastutil.ints.IntComparators
 import it.unimi.dsi.fastutil.ints.IntList
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.tags.Tag
+import net.minecraft.tags.TagKey
 import net.minecraft.util.GsonHelper
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.StackedContents
@@ -95,7 +95,7 @@ class StackedIngredient private constructor(private val values: Sequence<Value>,
         fun of(amount: Int, vararg itemLike: ItemLike) = of(amount, itemLike.map(::ItemStack))
         fun of(amount: Int, vararg itemAmountPairs: Pair<ItemLike, Int>) = of(amount, itemAmountPairs.map { (item, amount) -> ItemStack(item, amount) })
         fun of(amount: Int, vararg stacks: ItemStack) = of(amount, stacks.asSequence())
-        fun of(amount: Int, tag: Tag<Item>) = fromValues(sequenceOf(TagValue(tag)), amount)
+        fun of(amount: Int, tag: TagKey<Item>) = fromValues(sequenceOf(TagValue(tag)), amount)
     }
 }
 

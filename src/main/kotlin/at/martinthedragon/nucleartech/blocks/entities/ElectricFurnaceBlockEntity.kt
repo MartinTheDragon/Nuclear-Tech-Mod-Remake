@@ -149,7 +149,7 @@ class ElectricFurnaceBlockEntity(pos: BlockPos, state: BlockState) : BaseContain
 
         if (wasCooking != isCooking) {
             contentChanged = true
-            level!!.setBlockAndUpdate(worldPosition, level!!.getBlockState(worldPosition).setValue(BlockStateProperties.LIT, isCooking))
+            level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(BlockStateProperties.LIT, isCooking))
         }
 
         if (contentChanged) setChanged()

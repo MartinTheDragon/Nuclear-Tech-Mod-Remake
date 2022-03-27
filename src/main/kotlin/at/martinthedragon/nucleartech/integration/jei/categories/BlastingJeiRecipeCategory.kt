@@ -6,11 +6,12 @@ import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.BlastingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.gui.IRecipeLayout
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.gui.drawable.IDrawableAnimated
 import mezz.jei.api.helpers.IGuiHelper
-import mezz.jei.api.ingredients.IIngredients
+import mezz.jei.api.recipe.IFocusGroup
+import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
@@ -31,17 +32,10 @@ class BlastingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Blastin
 
     override fun getIcon(): IDrawable = icon
 
-    override fun setIngredients(p0: BlastingRecipe, p1: IIngredients) {
-        p1.setInputIngredients(listOf(p0.ingredient1, p0.ingredient2))
-        p1.setOutput(VanillaTypes.ITEM, p0.result)
-    }
-
-    override fun setRecipe(p0: IRecipeLayout, p1: BlastingRecipe, p2: IIngredients) {
-        val guiItemStacks = p0.itemStacks
-        guiItemStacks.init(0, true, 0, 0)
-        guiItemStacks.init(1, true, 0, 36)
-        guiItemStacks.init(3, false, 54, 18)
-        guiItemStacks.set(p2)
+    override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: BlastingRecipe, focuses: IFocusGroup) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(recipe.ingredient1)
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 37).addIngredients(recipe.ingredient2)
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 19).addItemStack(recipe.resultItem)
     }
 
     override fun draw(recipe: BlastingRecipe, matrixStack: PoseStack, mouseX: Double, mouseY: Double) {

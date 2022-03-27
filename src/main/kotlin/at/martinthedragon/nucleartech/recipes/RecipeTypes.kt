@@ -12,7 +12,7 @@ object RecipeTypes {
     // NOTE: all recipes need to have the isSpecial() = true override, so the recipe book does not issue a warning
     val SMITHING = create<AnvilSmithingRecipe>("anvil_smithing")
     val CONSTRUCTING = create<AnvilConstructingRecipe>("anvil_constructing")
-    val PRESSING = create<PressRecipe>("pressing")
+    val PRESSING = create<PressingRecipe>("pressing")
     val BLASTING = create<BlastingRecipe>("blasting")
     val SHREDDING = create<ShreddingRecipe>("shredding")
     val ASSEMBLY = create<AssemblyRecipe>("assembly")

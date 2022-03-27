@@ -6,10 +6,11 @@ import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilSmithingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
-import mezz.jei.api.gui.IRecipeLayout
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.helpers.IGuiHelper
-import mezz.jei.api.ingredients.IIngredients
+import mezz.jei.api.recipe.IFocusGroup
+import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
@@ -25,17 +26,10 @@ class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSm
     override fun getBackground() = background
     override fun getIcon() = icon
 
-    override fun setIngredients(recipe: AnvilSmithingRecipe, ingredients: IIngredients) {
-        ingredients.setInputIngredients(listOf(recipe.ingredient1, recipe.ingredient2))
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.result)
-    }
-
-    override fun setRecipe(recipeLayout: IRecipeLayout, recipe: AnvilSmithingRecipe, ingredients: IIngredients) {
-        val itemStacks = recipeLayout.itemStacks
-        itemStacks.init(0, true, 0, 9)
-        itemStacks.init(1, true, 36, 9)
-        itemStacks.init(2, false, 72, 9)
-        itemStacks.set(ingredients)
+    override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: AnvilSmithingRecipe, focuses: IFocusGroup) {
+        builder.addSlot(RecipeIngredientRole.INPUT, 1, 10).addIngredients(recipe.ingredient1)
+        builder.addSlot(RecipeIngredientRole.INPUT, 37, 10).addIngredients(recipe.ingredient2)
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 10).addItemStack(recipe.resultItem)
     }
 
     override fun draw(recipe: AnvilSmithingRecipe, stack: PoseStack, mouseX: Double, mouseY: Double) {

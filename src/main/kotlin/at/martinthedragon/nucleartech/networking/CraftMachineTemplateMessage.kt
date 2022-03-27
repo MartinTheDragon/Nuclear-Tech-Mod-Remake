@@ -8,12 +8,12 @@ import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundSource
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraftforge.common.Tags
 import net.minecraftforge.network.NetworkEvent
+import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Supplier
 
 class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftMachineTemplateMessage> {
@@ -26,7 +26,8 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
             context.get().enqueueWork {
                 val sender = context.get().sender ?: return@enqueueWork
 
-                val folderResults = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS.name)
+                val tagManager = ForgeRegistries.ITEMS.tags() ?: throw IllegalStateException("No tag manager bound to items")
+                val folderResults = tagManager.getTag(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
                 if (result.item !in folderResults) return@enqueueWork
 
                 if (!sender.inventory.getSelected().sameItem(ModItems.machineTemplateFolder.get().defaultInstance) &&
@@ -46,8 +47,8 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                         return true
                     }
 
-                    val pressStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.FOLDER_STAMPS.name)
-                    val sirenTracks = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SIREN_TRACKS.name)
+                    val pressStamps = tagManager.getTag(NuclearTags.Items.FOLDER_STAMPS)
+                    val sirenTracks = tagManager.getTag(NuclearTags.Items.SIREN_TRACKS)
                     when (result.item) {
                         is AssemblyTemplate -> {
                             if (!AssemblyTemplate.isValidTemplate(result, sender.level.recipeManager)) return@enqueueWork
@@ -59,12 +60,12 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                             else return@enqueueWork
                         }
                         in pressStamps -> {
-                            val stoneStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STONE_STAMPS.name)
-                            val ironStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.IRON_STAMPS.name)
-                            val steelStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STEEL_STAMPS.name)
-                            val titaniumStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.TITANIUM_STAMPS.name)
-                            val obsidianStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.OBSIDIAN_STAMPS.name)
-                            val schrabidiumStamps = ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.SCHRABIDIUM_STAMPS.name)
+                            val stoneStamps = tagManager.getTag(NuclearTags.Items.STONE_STAMPS)
+                            val ironStamps = tagManager.getTag(NuclearTags.Items.IRON_STAMPS)
+                            val steelStamps = tagManager.getTag(NuclearTags.Items.STEEL_STAMPS)
+                            val titaniumStamps = tagManager.getTag(NuclearTags.Items.TITANIUM_STAMPS)
+                            val obsidianStamps = tagManager.getTag(NuclearTags.Items.OBSIDIAN_STAMPS)
+                            val schrabidiumStamps = tagManager.getTag(NuclearTags.Items.SCHRABIDIUM_STAMPS)
                             when (result.item) {
                                 in stoneStamps -> if (!removeIfPossible(sender, ModItems.stoneFlatStamp.get())) return@enqueueWork
                                 in ironStamps -> if (!removeIfPossible(sender, ModItems.ironFlatStamp.get())) return@enqueueWork
@@ -76,12 +77,12 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                             }
                         }
                         in sirenTracks -> if (!removeIfPossible(sender,
-                                sender.inventory.items.firstOrNull { it.item in NuclearTags.Items.PLATES_INSULATOR }?.item,
-                                sender.inventory.items.firstOrNull { it.item in NuclearTags.Items.PLATES_STEEL }?.item
+                                sender.inventory.items.firstOrNull { it.`is`(NuclearTags.Items.PLATES_INSULATOR) }?.item,
+                                sender.inventory.items.firstOrNull { it.`is`(NuclearTags.Items.PLATES_STEEL) }?.item
                             )) { return@enqueueWork }
                         else -> if (!removeIfPossible(sender,
                                 Items.PAPER,
-                                sender.inventory.items.firstOrNull { it.item in Tags.Items.DYES }?.item
+                                sender.inventory.items.firstOrNull { it.`is`(Tags.Items.DYES) }?.item
                             )) { return@enqueueWork }
                     }
                 }

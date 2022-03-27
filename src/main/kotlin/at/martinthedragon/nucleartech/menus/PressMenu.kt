@@ -5,7 +5,6 @@ import at.martinthedragon.nucleartech.blocks.entities.SteamPressBlockEntity
 import at.martinthedragon.nucleartech.menus.slots.ExperienceResultSlot
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.tags.ItemTags
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -48,7 +47,7 @@ class PressMenu(
                 var successful = false
                 when {
                     canPress(itemStack) && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
-                    itemStack.item in ItemTags.getAllTags().getTagOrEmpty(NuclearTags.Items.STAMPS.name) && moveItemStackTo(itemStack, 1, 2, false) -> successful = true
+                    itemStack.`is`(NuclearTags.Items.STAMPS) && moveItemStackTo(itemStack, 1, 2, false) -> successful = true
                     AbstractFurnaceBlockEntity.isFuel(itemStack) && moveItemStackTo(itemStack, 2, 3, false) -> successful = true
                 }
                 if (!successful && !tryMoveInPlayerInventory(index, 4, itemStack)) return ItemStack.EMPTY

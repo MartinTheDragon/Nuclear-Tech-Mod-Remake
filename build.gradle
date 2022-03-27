@@ -13,7 +13,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'kotlin'
 // apply plugin: 'eclipse'
 
-version = "$minecraft_version-$mod_version" as Object
+if (project.hasProperty("release")) version = "$minecraft_version-$mod_version" as Object
+else version = "$minecraft_version-$mod_version-snapshot${new Date().format("yyyyMMdd'T'HHmmss")}" as Object
 group = 'at.martinthedragon'
 archivesBaseName = "$modid"
 
@@ -136,12 +137,15 @@ jar {
     duplicatesStrategy(DuplicatesStrategy.INCLUDE)
     //noinspection GroovyAssignabilityCheck
     manifest {
+        def version
+        if (project.hasProperty("release")) version = mod_version
+        else version = "$mod_version-snapshot${new Date().format("yyyyMMdd'T'HHmmss")}"
         attributes([
             "Specification-Title": "Nuclear Tech Mod",
             "Specification-Vendor": "MartinTheDragon",
             "Specification-Version": "$mod_version",
             "Implementation-Title": project.name,
-            "Implementation-Version": "$mod_version",
+            "Implementation-Version": version,
             "Implementation-Vendor" :"MartinTheDragon",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
@@ -156,7 +160,12 @@ jar {
 
 jar.finalizedBy('reobfJar')
 
-def kotlinCompilerArgs = ["-Xopt-in=kotlin.RequiresOptIn", "-Xjvm-default=all"]
+// opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
+// jvm-default=all - Generates defaults in interfaces for Java users
+// no-call-assertions - Disables not-null assertions on Platform types (when calling Java code)
+// no-param-assertions - Disables not-null assertions on method parameters given by Java code
+// use-fast-jar-file-system - Uses an experimental implementation for faster compilation
+def kotlinCompilerArgs = ["-Xopt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
 
 compileKotlin {
     kotlinOptions {

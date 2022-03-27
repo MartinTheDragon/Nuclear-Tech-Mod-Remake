@@ -8,7 +8,7 @@ import net.minecraftforge.registries.RegistryObject
 object RecipeSerializers {
     val SMITHING: RegistryObject<AnvilSmithingRecipe.Serializer> = RECIPE_SERIALIZERS.register("anvil_smithing", AnvilSmithingRecipe::Serializer)
     val CONSTRUCTING: RegistryObject<AnvilConstructingRecipe.Serializer> = RECIPE_SERIALIZERS.register("anvil_constructing", AnvilConstructingRecipe::Serializer)
-    val PRESSING: RegistryObject<PressRecipe.Serializer> = RECIPE_SERIALIZERS.register("pressing", PressRecipe::Serializer)
+    val PRESSING: RegistryObject<PressingRecipe.Serializer> = RECIPE_SERIALIZERS.register("pressing", PressingRecipe::Serializer)
     val BLASTING: RegistryObject<BlastingRecipe.Serializer> = RECIPE_SERIALIZERS.register("blasting", BlastingRecipe::Serializer)
     val SHREDDING: RegistryObject<ShreddingRecipe.Serializer> = RECIPE_SERIALIZERS.register("shredding", ShreddingRecipe::Serializer)
     val ASSEMBLY: RegistryObject<AssemblyRecipe.Serializer> = RECIPE_SERIALIZERS.register("assembly", AssemblyRecipe::Serializer)
