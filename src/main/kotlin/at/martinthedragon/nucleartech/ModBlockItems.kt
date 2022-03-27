@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
-import at.martinthedragon.nucleartech.blocks.Assembler
+import at.martinthedragon.nucleartech.blocks.AssemblerBlock
 import at.martinthedragon.nucleartech.items.AutoTooltippedBlockItem
 import at.martinthedragon.nucleartech.items.MultiBlockPlacerItem
 import net.minecraft.world.item.BlockItem
@@ -170,7 +170,7 @@ object ModBlockItems {
     val combustionGenerator: RegistryObject<BlockItem> = ITEMS.register("combustion_generator") { BlockItem(ModBlocks.combustionGenerator.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val electricFurnace: RegistryObject<BlockItem> = ITEMS.register("electric_furnace") { BlockItem(ModBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val shredder: RegistryObject<BlockItem> = ITEMS.register("shredder") { BlockItem(ModBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
-    val assemblerPlacer: RegistryObject<MultiBlockPlacerItem> = ITEMS.register("assembler") { MultiBlockPlacerItem(ModBlocks.assembler.get(), Assembler::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val assemblerPlacer: RegistryObject<MultiBlockPlacerItem> = ITEMS.register("assembler") { MultiBlockPlacerItem(ModBlocks.assembler.get(), AssemblerBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
 
     val ironAnvil: RegistryObject<BlockItem> = ITEMS.register("iron_anvil") { BlockItem(ModBlocks.ironAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val leadAnvil: RegistryObject<BlockItem> = ITEMS.register("lead_anvil") { BlockItem(ModBlocks.leadAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }

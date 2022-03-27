@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.menus
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.blocks.entities.SirenBlockEntity
-import at.martinthedragon.nucleartech.items.SirenTrack
+import at.martinthedragon.nucleartech.items.SirenTrackItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -31,7 +31,7 @@ class SirenMenu(windowId: Int, playerInventory: Inventory, val tileEntity: Siren
             returnStack = itemStack.copy()
             if (index != 0) {
                 var successful = false
-                if (itemStack.item is SirenTrack && moveItemStackTo(itemStack, 0, 1, false)) successful = true
+                if (itemStack.item is SirenTrackItem && moveItemStackTo(itemStack, 0, 1, false)) successful = true
                 if (!successful && !tryMoveInPlayerInventory(index, 1, itemStack)) return ItemStack.EMPTY
             } else if (!moveItemStackTo(itemStack, 1, slots.size, false)) return ItemStack.EMPTY
 

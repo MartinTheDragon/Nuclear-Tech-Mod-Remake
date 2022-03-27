@@ -2,9 +2,9 @@ package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.blocks.LittleBoy
+import at.martinthedragon.nucleartech.blocks.LittleBoyBlock
 import at.martinthedragon.nucleartech.config.NuclearConfig
-import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosion
 import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.menus.LittleBoyMenu
 import net.minecraft.core.BlockPos
@@ -113,13 +113,13 @@ class LittleBoyBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
     private fun itemInSlotIs(slot: Int, item: Item) : Boolean =
         getItem(slot).let { it.item == item && !it.isEmpty }
 
-    override fun getRequiredDetonationComponents() = LittleBoy.requiredComponents
+    override fun getRequiredDetonationComponents() = LittleBoyBlock.requiredComponents
 
     override fun detonate(): Boolean = if (level != null && !level!!.isClientSide) {
         setRemoved()
         level!!.removeBlock(worldPosition, false)
         level!!.playSound(null, worldPosition, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1F, level!!.random.nextFloat() * .1F + .9F)
-        NukeExplosionEntity.create(
+        NukeExplosion.create(
             level!!,
             blockPos.toVec3Middle(),
             NuclearConfig.explosions.littleBoyStrength.get()

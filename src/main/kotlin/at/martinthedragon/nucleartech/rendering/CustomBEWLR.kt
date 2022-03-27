@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.rendering
 
-import at.martinthedragon.nucleartech.items.AssemblyTemplate
+import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
@@ -17,10 +17,10 @@ object CustomBEWLR : BlockEntityWithoutLevelRenderer(Minecraft.getInstance().blo
         So if shift is held down, a special model gets rendered which returns true for BakedModel#isCustomRenderer. This makes the ItemRenderer use our CustomBEWLR specified in Item#initializeClient,
         with which we can do all kinds of things with rendering.
          */
-        if (stack.item is AssemblyTemplate) {
+        if (stack.item is AssemblyTemplateItem) {
             val level = Minecraft.getInstance().level
             if (level != null) {
-                val recipe = AssemblyTemplate.getRecipeFromStack(stack, level.recipeManager)
+                val recipe = AssemblyTemplateItem.getRecipeFromStack(stack, level.recipeManager)
                 if (recipe != null) {
                     if (!stack.isEmpty) {
                         matrix.translate(.5, .5, .5)

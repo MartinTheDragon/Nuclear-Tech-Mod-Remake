@@ -677,9 +677,9 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         add("energy.$MODID", "Energy")
 
-        addEntityType(EntityTypes.nukeExplosionEntity, "Nuclear Explosion")
-        addEntityType(EntityTypes.nukeCloudEntity, "Mushroom Cloud")
-        addEntityType(EntityTypes.falloutRainEntity, "Fallout Rain")
+        addEntityType(EntityTypes.nuclearExplosion, "Nuclear Explosion")
+        addEntityType(EntityTypes.mushroomCloud, "Mushroom Cloud")
+        addEntityType(EntityTypes.falloutRain, "Fallout Rain")
         addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuclear Creeper")
 
         addMenuType(MenuTypes.sirenMenu, "Siren")

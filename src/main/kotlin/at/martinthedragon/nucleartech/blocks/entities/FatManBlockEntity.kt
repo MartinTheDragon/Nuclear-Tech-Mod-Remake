@@ -2,9 +2,9 @@ package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.blocks.FatMan
+import at.martinthedragon.nucleartech.blocks.FatManBlock
 import at.martinthedragon.nucleartech.config.NuclearConfig
-import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosion
 import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.menus.FatManMenu
 import net.minecraft.core.BlockPos
@@ -71,13 +71,13 @@ class FatManBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEn
         ContainerHelper.saveAllItems(nbt, items)
     }
 
-    override fun getRequiredDetonationComponents() = FatMan.requiredComponents
+    override fun getRequiredDetonationComponents() = FatManBlock.requiredComponents
 
     override fun detonate(): Boolean = if (level != null && !level!!.isClientSide) {
         setRemoved()
         level!!.removeBlock(worldPosition, false)
         level!!.playSound(null, worldPosition, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1F, level!!.random.nextFloat() * .1F + .9F)
-        NukeExplosionEntity.create(
+        NukeExplosion.create(
             level!!,
             blockPos.toVec3Middle(),
             NuclearConfig.explosions.fatManStrength.get()

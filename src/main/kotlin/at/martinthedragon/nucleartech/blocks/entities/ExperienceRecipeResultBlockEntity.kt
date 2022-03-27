@@ -4,13 +4,13 @@ import at.martinthedragon.nucleartech.world.dropExperience
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.crafting.Recipe
 
-interface ExperienceRecipeResultTileEntity {
+interface ExperienceRecipeResultBlockEntity {
     fun getExperienceToDrop(player: Player?): Float
     fun getRecipesToAward(player: Player): List<Recipe<*>>
     fun clearUsedRecipes()
 }
 
-fun ExperienceRecipeResultTileEntity.dropExperienceAndAwardRecipes(player: Player) {
+fun ExperienceRecipeResultBlockEntity.dropExperienceAndAwardRecipes(player: Player) {
     player.awardRecipes(getRecipesToAward(player))
     player.level.dropExperience(player.position(), getExperienceToDrop(player))
     clearUsedRecipes()

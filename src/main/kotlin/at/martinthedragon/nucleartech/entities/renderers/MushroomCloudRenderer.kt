@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.entities.renderers
 
-import at.martinthedragon.nucleartech.entities.MushroomCloudEntity
+import at.martinthedragon.nucleartech.entities.MushroomCloud
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.ClientRenderer
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
@@ -30,7 +30,7 @@ import net.minecraftforge.client.textures.UnitSprite
 import java.util.*
 import kotlin.math.*
 
-class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRenderer<MushroomCloudEntity>(context) {
+class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRenderer<MushroomCloud>(context) {
     private val textureFireball = ntm("textures/entity/mushroom_cloud/fireball.png")
     private val textureBalefire = ntm("textures/entity/mushroom_cloud/balefire.png")
     private val textureCloudlet = ntm("textures/entity/mushroom_cloud/cloudlet.png")
@@ -49,11 +49,11 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
 
     private val camera = Minecraft.getInstance().gameRenderer.mainCamera
 
-    override fun getTextureLocation(entity: MushroomCloudEntity) =
+    override fun getTextureLocation(entity: MushroomCloud) =
         if (entity.isBalefire) textureBalefire else textureFireball
 
     override fun render(
-        entity: MushroomCloudEntity,
+        entity: MushroomCloud,
         yaw: Float,
         partialTicks: Float,
         matrix: PoseStack,
@@ -74,7 +74,7 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
     }
 
     private fun renderMush(
-        entity: MushroomCloudEntity,
+        entity: MushroomCloud,
         matrix: PoseStack,
         partialTicks: Float,
         renderer: MultiBufferSource,
@@ -118,7 +118,7 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
 
     // FIXME things with transparency show behind the cloudlets (mushroom cloud, entities, ...)
     @Suppress("DEPRECATION")
-    private fun renderCloudlets(entity: MushroomCloudEntity, matrix: PoseStack, partialTicks: Float) {
+    private fun renderCloudlets(entity: MushroomCloud, matrix: PoseStack, partialTicks: Float) {
         if (entity.cloudlets.isEmpty()) return
 
         Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer()
@@ -196,7 +196,7 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
         Minecraft.getInstance().gameRenderer.lightTexture().turnOffLightLayer()
     }
 
-    private fun renderFlash(entity: MushroomCloudEntity, matrix: PoseStack, partialTicks: Float, renderer: MultiBufferSource) {
+    private fun renderFlash(entity: MushroomCloud, matrix: PoseStack, partialTicks: Float, renderer: MultiBufferSource) {
         if (entity.age >= 60) return
 
         var intensity = (entity.age + partialTicks) / 60.0
@@ -230,7 +230,7 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
         matrix.popPose()
     }
 
-    private fun shakeCamera(entity: MushroomCloudEntity) { // TODO shake intensity depending on distance
+    private fun shakeCamera(entity: MushroomCloud) { // TODO shake intensity depending on distance
         val distance = sqrt(entity.distanceToSqr(camera.position))
         val distanceToShockwave = distance - entity.age * 2
         if (distanceToShockwave > -5 && distanceToShockwave < 5)

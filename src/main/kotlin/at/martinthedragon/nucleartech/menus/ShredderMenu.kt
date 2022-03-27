@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.menus
 
 import at.martinthedragon.nucleartech.blocks.entities.ShredderBlockEntity
-import at.martinthedragon.nucleartech.items.ShredderBlade
+import at.martinthedragon.nucleartech.items.ShredderBladeItem
 import at.martinthedragon.nucleartech.menus.slots.ExperienceResultSlot
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
@@ -49,7 +49,7 @@ class ShredderMenu(
                 var successful = false
                 when {
                     itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 9, 10, false) -> successful = true
-                    itemStack.item is ShredderBlade && moveItemStackTo(itemStack, 10, 12, false) -> successful = true
+                    itemStack.item is ShredderBladeItem && moveItemStackTo(itemStack, 10, 12, false) -> successful = true
                     moveItemStackTo(itemStack, 0, 9, false) -> successful = true
                 }
                 if (!successful && !tryMoveInPlayerInventory(index, 30, itemStack)) return ItemStack.EMPTY
@@ -77,7 +77,7 @@ class ShredderMenu(
 
     private fun computeBladeState(slotIndex: Int): Int {
         val shredderBlade = items[slotIndex]
-        if (shredderBlade.item !is ShredderBlade) return 0
+        if (shredderBlade.item !is ShredderBladeItem) return 0
         return when {
             !shredderBlade.isDamageableItem -> 1
             shredderBlade.damageValue < shredderBlade.maxDamage / 2 -> 1

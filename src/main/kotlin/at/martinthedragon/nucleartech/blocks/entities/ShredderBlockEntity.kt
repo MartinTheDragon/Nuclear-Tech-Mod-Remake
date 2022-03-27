@@ -4,7 +4,7 @@ import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
-import at.martinthedragon.nucleartech.items.ShredderBlade
+import at.martinthedragon.nucleartech.items.ShredderBladeItem
 import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.menus.ShredderMenu
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
@@ -36,7 +36,7 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.ItemStackHandler
 
 class ShredderBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.shredderBlockEntityType.get(), pos, state),
-    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultTileEntity
+    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultBlockEntity
 {
     private var shreddingProgress = 0
     private val isShredding: Boolean
@@ -71,7 +71,7 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlock
         override fun isItemValid(slot: Int, stack: ItemStack): Boolean =
             when (slot) {
                 9 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
-                10, 11 -> stack.item is ShredderBlade
+                10, 11 -> stack.item is ShredderBladeItem
                 else -> true
             }
     }
@@ -159,7 +159,7 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlock
             energy > 0 &&
             (10..11).all {
                 val itemStack = items[it]
-                itemStack.item is ShredderBlade && (itemStack.damageValue < itemStack.maxDamage || !itemStack.isDamageableItem)
+                itemStack.item is ShredderBladeItem && (itemStack.damageValue < itemStack.maxDamage || !itemStack.isDamageableItem)
             }
         ) {
             val recipes: Map<Int, Recipe<*>> = (0..8) // find matching recipes

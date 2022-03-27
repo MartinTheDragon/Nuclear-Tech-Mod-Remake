@@ -38,7 +38,7 @@ import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 import net.minecraftforge.network.NetworkHooks
 
-class Anvil(val tier: Int, properties: Properties) : FallingBlock(properties), SimpleWaterloggedBlock {
+class AnvilBlock(val tier: Int, properties: Properties) : FallingBlock(properties), SimpleWaterloggedBlock {
     init { registerDefaultState(stateDefinition.any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH).setValue(BlockStateProperties.WATERLOGGED, false)) }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(HorizontalDirectionalBlock.FACING).add(BlockStateProperties.WATERLOGGED) }
@@ -143,7 +143,7 @@ class Anvil(val tier: Int, properties: Properties) : FallingBlock(properties), S
         private val EAST_SHAPE = Shapes.or(LEG_X, STEM_CONNECTOR_EAST, MAIN_BODY_0_EAST, MAIN_BODY_1_EAST, MAIN_BODY_2_EAST, STEP_EAST, HORN_0_EAST, HORN_1_EAST)
         private val WEST_SHAPE = Shapes.or(LEG_X, STEM_CONNECTOR_WEST, MAIN_BODY_0_WEST, MAIN_BODY_1_WEST, MAIN_BODY_2_WEST, STEP_WEST, HORN_0_WEST, HORN_1_WEST)
 
-        fun getAnvilByTier(tier: Int): Anvil = when (tier) {
+        fun getAnvilByTier(tier: Int): AnvilBlock = when (tier) {
             in Int.MIN_VALUE..1 -> ModBlocks.ironAnvil.get()
             2 -> ModBlocks.steelAnvil.get()
             3 -> ModBlocks.meteoriteAnvil.get()

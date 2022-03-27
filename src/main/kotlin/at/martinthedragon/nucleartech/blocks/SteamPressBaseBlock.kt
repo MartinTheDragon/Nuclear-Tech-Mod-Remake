@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-class SteamPressBase(properties: Properties) : Block(properties) {
+class SteamPressBaseBlock(properties: Properties) : Block(properties) {
     override fun getShape(state: BlockState, blocks: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape = baseShape
     override fun getInteractionShape(state: BlockState, blocks: BlockGetter, pos: BlockPos): VoxelShape = baseShape
     override fun isPathfindable(state: BlockState, blocks: BlockGetter, pos: BlockPos, type: PathComputationType) = false

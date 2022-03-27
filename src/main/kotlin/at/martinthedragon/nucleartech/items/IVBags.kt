@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level
 import java.util.function.Supplier
 import net.minecraft.sounds.SoundEvents as VanillaSoundEvents
 
-abstract class IVBag(properties: Properties) : Item(properties) {
+abstract class IVBagItem(properties: Properties) : Item(properties) {
     protected abstract val bagUseSound: Supplier<out SoundEvent>
     protected abstract val cooldownItems: Set<Supplier<out Item>>
     protected abstract val cooldown: Int
@@ -42,7 +42,7 @@ abstract class IVBag(properties: Properties) : Item(properties) {
         }
 }
 
-class EmptyIVBag(properties: Properties) : IVBag(properties) {
+class EmptyIVBagItem(properties: Properties) : IVBagItem(properties) {
     override val bagUseSound = SoundEvents.inject
     override val cooldownItems = setOf(ModItems.ivBag)
     override val cooldown: Int get() = NuclearConfig.general.emptyIVBagCooldown.get()
@@ -61,7 +61,7 @@ class EmptyIVBag(properties: Properties) : IVBag(properties) {
     }
 }
 
-class BloodBag(properties: Properties) : IVBag(properties) {
+class BloodBagItem(properties: Properties) : IVBagItem(properties) {
     override val bagUseSound = SoundEvents.emptyIVBag
     override val cooldownItems = setOf(ModItems.bloodBag)
     override val cooldown: Int get() = NuclearConfig.general.bloodBagCooldown.get()
@@ -72,7 +72,7 @@ class BloodBag(properties: Properties) : IVBag(properties) {
     }
 }
 
-class EmptyExperienceBag(properties: Properties) : IVBag(properties) {
+class EmptyExperienceBagItem(properties: Properties) : IVBagItem(properties) {
     override val bagUseSound = SoundEvents.inject
     override val cooldownItems = setOf(ModItems.emptyExperienceBag)
     override val cooldown: Int get() = NuclearConfig.general.emptyExperienceBagCooldown.get()
@@ -83,7 +83,7 @@ class EmptyExperienceBag(properties: Properties) : IVBag(properties) {
     }
 }
 
-class ExperienceBag(properties: Properties) : IVBag(properties) {
+class ExperienceBagItem(properties: Properties) : IVBagItem(properties) {
     override val bagUseSound = Supplier(VanillaSoundEvents::EXPERIENCE_ORB_PICKUP)
     override val cooldownItems = setOf(ModItems.experienceBag)
     override val cooldown: Int get() = NuclearConfig.general.experienceBagCooldown.get()
@@ -94,7 +94,7 @@ class ExperienceBag(properties: Properties) : IVBag(properties) {
     }
 }
 
-class RadAway(private val amount: Float, private val duration: Int, properties: Properties) : IVBag(properties) {
+class RadAwayItem(private val amount: Float, private val duration: Int, properties: Properties) : IVBagItem(properties) {
     override val bagUseSound = SoundEvents.emptyIVBag
     override val cooldownItems = setOf(ModItems.radAway, ModItems.strongRadAway, ModItems.eliteRadAway)
     override val cooldown: Int get() = NuclearConfig.general.radAwayCooldown.get()

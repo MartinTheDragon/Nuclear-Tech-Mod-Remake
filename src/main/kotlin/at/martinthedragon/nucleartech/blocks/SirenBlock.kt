@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.phys.BlockHitResult
 
-class Siren(properties: Properties) : BaseEntityBlock(properties) {
+class SirenBlock(properties: Properties) : BaseEntityBlock(properties) {
     init { registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.POWERED, false)) }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(BlockStateProperties.POWERED) }

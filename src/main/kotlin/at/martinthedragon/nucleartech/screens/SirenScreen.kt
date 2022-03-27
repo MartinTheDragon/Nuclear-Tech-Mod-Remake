@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.items.SirenTrack
+import at.martinthedragon.nucleartech.items.SirenTrackItem
 import at.martinthedragon.nucleartech.menus.SirenMenu
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
@@ -39,7 +39,7 @@ class SirenScreen(
         if (!invMaybe.isPresent) return
         else inv = invMaybe.orElseThrow(::Error)
         val sirenTrack = inv.getStackInSlot(0).item
-        if (sirenTrack is SirenTrack) {
+        if (sirenTrack is SirenTrackItem) {
             val trackName = sirenTrack.trackName
             val trackType = sirenTrack.trackType
             val trackRange = sirenTrack.trackRange

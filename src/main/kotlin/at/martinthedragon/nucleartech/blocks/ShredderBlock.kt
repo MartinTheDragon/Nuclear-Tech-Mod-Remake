@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.Vec3
 
-class Shredder(properties: Properties) : BaseEntityBlock(properties) {
+class ShredderBlock(properties: Properties) : BaseEntityBlock(properties) {
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<ShredderBlockEntity>(level, pos, player)

@@ -15,9 +15,9 @@ import net.minecraftforge.network.NetworkHooks
 import java.util.*
 import kotlin.math.PI
 
-class MushroomCloudEntity(entityType: EntityType<MushroomCloudEntity>, world: Level) : Entity(entityType, world) {
+class MushroomCloud(entityType: EntityType<MushroomCloud>, world: Level) : Entity(entityType, world) {
     var age: Int = 0
-    
+
     var maxAge: Int
         get() = entityData.get(MAX_AGE)
         set(value) { entityData.set(MAX_AGE, value) }
@@ -110,14 +110,14 @@ class MushroomCloudEntity(entityType: EntityType<MushroomCloudEntity>, world: Le
     data class Cloudlet(val posX: Double, val posY: Double, val posZ: Double, val age: Int)
 
     companion object {
-        private val AGE = SynchedEntityData.defineId(MushroomCloudEntity::class.java, EntityDataSerializers.INT)
-        private val MAX_AGE = SynchedEntityData.defineId(MushroomCloudEntity::class.java, EntityDataSerializers.INT)
-        private val SCALE = SynchedEntityData.defineId(MushroomCloudEntity::class.java, EntityDataSerializers.FLOAT)
-        private val IS_BALEFIRE = SynchedEntityData.defineId(MushroomCloudEntity::class.java, EntityDataSerializers.BOOLEAN)
-        private val IS_MUTED = SynchedEntityData.defineId(MushroomCloudEntity::class.java, EntityDataSerializers.BOOLEAN)
+        private val AGE = SynchedEntityData.defineId(MushroomCloud::class.java, EntityDataSerializers.INT)
+        private val MAX_AGE = SynchedEntityData.defineId(MushroomCloud::class.java, EntityDataSerializers.INT)
+        private val SCALE = SynchedEntityData.defineId(MushroomCloud::class.java, EntityDataSerializers.FLOAT)
+        private val IS_BALEFIRE = SynchedEntityData.defineId(MushroomCloud::class.java, EntityDataSerializers.BOOLEAN)
+        private val IS_MUTED = SynchedEntityData.defineId(MushroomCloud::class.java, EntityDataSerializers.BOOLEAN)
 
         fun create(world: Level, pos: Vec3, scale: Float, timeout: Int = 20_000, isBalefire: Boolean = false, isMuted: Boolean = false): UUID? = if (world.isClientSide) null else {
-            val cloudEntity = MushroomCloudEntity(EntityTypes.nukeCloudEntity.get(), world).apply {
+            val cloudEntity = MushroomCloud(EntityTypes.mushroomCloud.get(), world).apply {
                 this.maxAge = timeout
                 this.scale = scale
                 this.isBalefire = isBalefire

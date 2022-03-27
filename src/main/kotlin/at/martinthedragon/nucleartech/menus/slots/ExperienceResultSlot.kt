@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.menus.slots
 
-import at.martinthedragon.nucleartech.blocks.entities.ExperienceRecipeResultTileEntity
+import at.martinthedragon.nucleartech.blocks.entities.ExperienceRecipeResultBlockEntity
 import at.martinthedragon.nucleartech.blocks.entities.dropExperienceAndAwardRecipes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
@@ -9,7 +9,7 @@ import net.minecraftforge.items.SlotItemHandler
 import kotlin.math.min
 
 open class ExperienceResultSlot(
-    val tileEntity: ExperienceRecipeResultTileEntity,
+    val tileEntity: ExperienceRecipeResultBlockEntity,
     val player: Player,
     inventory: IItemHandler,
     index: Int,

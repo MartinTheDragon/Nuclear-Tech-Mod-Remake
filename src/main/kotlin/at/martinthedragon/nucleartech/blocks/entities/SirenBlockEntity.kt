@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.blocks.entities
 
-import at.martinthedragon.nucleartech.items.SirenTrack
+import at.martinthedragon.nucleartech.items.SirenTrackItem
 import at.martinthedragon.nucleartech.menus.SirenMenu
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.sounds.SimpleSoundInstance
@@ -26,7 +26,7 @@ import net.minecraftforge.items.ItemStackHandler
 class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainerBlockEntity(BlockEntityTypes.sirenBlockEntityType.get(), pos, state) {
     private var items = NonNullList.withSize(1, ItemStack.EMPTY)
     private val inventory = object : ItemStackHandler(items) {
-        override fun isItemValid(slot: Int, stack: ItemStack) = stack.item is SirenTrack
+        override fun isItemValid(slot: Int, stack: ItemStack) = stack.item is SirenTrackItem
 
         override fun onContentsChanged(slot: Int) {
             if (blockState.getValue(BlockStateProperties.POWERED)) {
@@ -45,7 +45,7 @@ class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainer
 
             val item = inventory.getStackInSlot(0).item
 
-            if (item is SirenTrack) {
+            if (item is SirenTrackItem) {
                 val sound = SimpleSoundInstance(
                         item.soundSupplier.get().location,
                         SoundSource.BLOCKS,

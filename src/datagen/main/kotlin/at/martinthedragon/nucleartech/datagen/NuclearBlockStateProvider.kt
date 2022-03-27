@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.blocks.Anvil
+import at.martinthedragon.nucleartech.blocks.AnvilBlock
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
@@ -452,7 +452,7 @@ class NuclearBlockStateProvider(
             }
     }
 
-    private fun anvil(anvil: Anvil) {
+    private fun anvil(anvil: AnvilBlock) {
         getVariantBuilder(anvil).forAllStatesExcept({
             ConfiguredModel.builder()
                 .modelFile(models().getBuilder(anvil.registryName!!.path)

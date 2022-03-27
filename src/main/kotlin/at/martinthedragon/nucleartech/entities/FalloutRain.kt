@@ -24,7 +24,7 @@ import net.minecraftforge.common.Tags
 import net.minecraftforge.network.NetworkHooks
 import kotlin.math.hypot
 
-class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: Level) : Entity(entityType, world) {
+class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(entityType, world) {
     override fun tick() {
         if (!level.isClientSide && firstTick && chunksToProcess.isEmpty() && outerChunksToProcess.isEmpty()) gatherChunks()
 
@@ -151,6 +151,6 @@ class FalloutRainEntity(entityType: EntityType<FalloutRainEntity>, world: Level)
     fun setScale(scale: Int) = entityData.set(SCALE, scale)
 
     companion object {
-        private val SCALE: EntityDataAccessor<Int> = SynchedEntityData.defineId(FalloutRainEntity::class.java, EntityDataSerializers.INT)
+        private val SCALE: EntityDataAccessor<Int> = SynchedEntityData.defineId(FalloutRain::class.java, EntityDataSerializers.INT)
     }
 }

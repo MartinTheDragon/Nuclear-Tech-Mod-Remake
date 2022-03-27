@@ -96,9 +96,9 @@ object ClientRegistries {
         event.registerBlockEntityRenderer(BlockEntityTypes.assemblerBlockEntityType.get(), ::AssemblerRenderer)
 
         NuclearTech.LOGGER.debug("Registering Entity Renderers")
-        event.registerEntityRenderer(EntityTypes.nukeExplosionEntity.get(), ::NoopRenderer)
-        event.registerEntityRenderer(EntityTypes.nukeCloudEntity.get(), ::MushroomCloudRenderer)
-        event.registerEntityRenderer(EntityTypes.falloutRainEntity.get(), ::NoopRenderer)
+        event.registerEntityRenderer(EntityTypes.nuclearExplosion.get(), ::NoopRenderer)
+        event.registerEntityRenderer(EntityTypes.mushroomCloud.get(), ::MushroomCloudRenderer)
+        event.registerEntityRenderer(EntityTypes.falloutRain.get(), ::NoopRenderer)
         event.registerEntityRenderer(EntityTypes.nuclearCreeper.get(), ::NuclearCreeperRenderer)
     }
 

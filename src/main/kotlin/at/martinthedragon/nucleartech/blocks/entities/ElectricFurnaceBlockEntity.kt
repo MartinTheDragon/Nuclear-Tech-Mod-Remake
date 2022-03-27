@@ -36,7 +36,7 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 class ElectricFurnaceBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.electricFurnaceBlockEntityType.get(), pos, state),
-    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultTileEntity
+    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultBlockEntity
 {
     private var cookingProgress = 0
     private val isCooking: Boolean

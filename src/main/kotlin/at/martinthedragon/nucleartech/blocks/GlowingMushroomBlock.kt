@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 import java.util.function.Supplier
 
-class GlowingMushroom(properties: Properties) : MushroomBlock(properties, Supplier { WorldGen.TreeFeatures.HUGE_GLOWING_MUSHROOM }) {
+class GlowingMushroomBlock(properties: Properties) : MushroomBlock(properties, Supplier { WorldGen.TreeFeatures.HUGE_GLOWING_MUSHROOM }) {
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean =
         world.getBlockState(pos.below()).`is`(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)
 

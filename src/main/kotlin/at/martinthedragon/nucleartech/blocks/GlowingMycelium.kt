@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
-class GlowingMycelium(properties: Properties) : DeadGrass(properties) {
+class GlowingMycelium(properties: Properties) : DeadGrassBlock(properties) {
     override fun stepOn(level: Level, pos: BlockPos, state: BlockState, entity: Entity) {
         if (entity !is LivingEntity) return
         val capability = Capabilities.getContamination(entity) ?: return

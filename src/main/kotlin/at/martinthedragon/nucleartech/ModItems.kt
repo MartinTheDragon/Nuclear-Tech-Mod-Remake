@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
-import at.martinthedragon.nucleartech.blocks.FatMan
-import at.martinthedragon.nucleartech.blocks.LittleBoy
+import at.martinthedragon.nucleartech.blocks.FatManBlock
+import at.martinthedragon.nucleartech.blocks.LittleBoyBlock
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.items.*
 import net.minecraft.world.effect.MobEffectInstance
@@ -490,7 +490,7 @@ object ModItems {
     val sparkSolidSpaceTimeCrystal = ITEMS.registerK("spark_solid_space_time_crystal") { BatteryItem(4_000_000_000_000L, 800_000_000, 800_000_000, Properties().tab(CreativeTabs.Items)) }
     val sparkLudicrousPhysicsDefyingEnergyStorageUnit = ITEMS.registerK("spark_ludicrous_physics_defying_energy_storage_unit") { BatteryItem(400_000_000_000_000L, 800_000_000, 800_000_000, Properties().tab(CreativeTabs.Items)) }
     // TODO electronium cube
-    val infiniteBattery = ITEMS.registerK("infinite_battery") { BatteryOfInfinity(Properties().tab(CreativeTabs.Items)) }
+    val infiniteBattery = ITEMS.registerK("infinite_battery") { BatteryOfInfinityItem(Properties().tab(CreativeTabs.Items)) }
     val singleUseBattery = ITEMS.registerK("single_use_battery") { BatteryItem(6_000, 0, 400, Properties().tab(CreativeTabs.Items)) }
     val largeSingleUseBattery = ITEMS.registerK("large_single_use_battery") { BatteryItem(14_000, 0, 400, Properties().tab(CreativeTabs.Items)) }
     val potatoBattery = ITEMS.registerK("potato_battery") { BatteryItem(400, 0, 400, Properties().tab(CreativeTabs.Items)) }
@@ -522,43 +522,43 @@ object ModItems {
     val schrabidiumPlateStamp = ITEMS.registerK("schrabidium_plate_stamp") { Item(Properties().durability(3000).tab(CreativeTabs.Items)) }
     val schrabidiumWireStamp = ITEMS.registerK("schrabidium_wire_stamp") { Item(Properties().durability(3000).tab(CreativeTabs.Items)) }
     val schrabidiumCircuitStamp = ITEMS.registerK("schrabidium_circuit_stamp") { Item(Properties().durability(3000).tab(CreativeTabs.Items)) }
-    val aluminiumShredderBlade = ITEMS.registerK("aluminium_shredder_blade") { ShredderBlade(Properties().durability(20).tab(CreativeTabs.Items)) }
-    val goldShredderBlade = ITEMS.registerK("gold_shredder_blade") { ShredderBlade(Properties().durability(30).tab(CreativeTabs.Items)) }
-    val ironShredderBlade = ITEMS.registerK("iron_shredder_blade") { ShredderBlade(Properties().durability(100).tab(CreativeTabs.Items)) }
-    val steelShredderBlade = ITEMS.registerK("steel_shredder_blade") { ShredderBlade(Properties().durability(200).tab(CreativeTabs.Items)) }
-    val titaniumShredderBlade = ITEMS.registerK("titanium_shredder_blade") { ShredderBlade(Properties().durability(350).tab(CreativeTabs.Items)) }
-    val advancedAlloyShredderBlade = ITEMS.registerK("advanced_alloy_shredder_blade") { ShredderBlade(Properties().durability(700).tab(CreativeTabs.Items)) }
-    val combineSteelShredderBlade = ITEMS.registerK("combine_steel_shredder_blade") { ShredderBlade(Properties().durability(1500).tab(CreativeTabs.Items)) }
-    val schrabidiumShredderBlade = ITEMS.registerK("schrabidium_shredder_blade") { ShredderBlade(Properties().durability(2000).tab(CreativeTabs.Items)) }
-    val deshShredderBlade = ITEMS.registerK("desh_shredder_blade") { ShredderBlade(Properties().stacksTo(1).tab(CreativeTabs.Items)) }
+    val aluminiumShredderBlade = ITEMS.registerK("aluminium_shredder_blade") { ShredderBladeItem(Properties().durability(20).tab(CreativeTabs.Items)) }
+    val goldShredderBlade = ITEMS.registerK("gold_shredder_blade") { ShredderBladeItem(Properties().durability(30).tab(CreativeTabs.Items)) }
+    val ironShredderBlade = ITEMS.registerK("iron_shredder_blade") { ShredderBladeItem(Properties().durability(100).tab(CreativeTabs.Items)) }
+    val steelShredderBlade = ITEMS.registerK("steel_shredder_blade") { ShredderBladeItem(Properties().durability(200).tab(CreativeTabs.Items)) }
+    val titaniumShredderBlade = ITEMS.registerK("titanium_shredder_blade") { ShredderBladeItem(Properties().durability(350).tab(CreativeTabs.Items)) }
+    val advancedAlloyShredderBlade = ITEMS.registerK("advanced_alloy_shredder_blade") { ShredderBladeItem(Properties().durability(700).tab(CreativeTabs.Items)) }
+    val combineSteelShredderBlade = ITEMS.registerK("combine_steel_shredder_blade") { ShredderBladeItem(Properties().durability(1500).tab(CreativeTabs.Items)) }
+    val schrabidiumShredderBlade = ITEMS.registerK("schrabidium_shredder_blade") { ShredderBladeItem(Properties().durability(2000).tab(CreativeTabs.Items)) }
+    val deshShredderBlade = ITEMS.registerK("desh_shredder_blade") { ShredderBladeItem(Properties().stacksTo(1).tab(CreativeTabs.Items)) }
 
     // Templates
 
-    val machineTemplateFolder = ITEMS.registerK("machine_template_folder") { TemplateFolder() }
+    val machineTemplateFolder = ITEMS.registerK("machine_template_folder") { TemplateFolderItem() }
 
     // Siren Tracks
-    val sirenTrackHatchSiren = ITEMS.registerK("siren_track_hatch_siren") { SirenTrack(SoundEvents.sirenTrackHatchSiren, 250, true, 0x334077) }
-    val sirenTrackAutopilotDisconnected = ITEMS.registerK("siren_track_autopilot_disconnected") { SirenTrack(SoundEvents.sirenTrackAutopilotDisconnected, 50, true, 0xB5B5B5) }
-    val sirenTrackAMSSiren = ITEMS.registerK("siren_track_ams_siren") { SirenTrack(SoundEvents.sirenTrackAMSSiren, 100, true, 0xE5BB52) }
-    val sirenTrackBlastDoorAlarm = ITEMS.registerK("siren_track_blast_door_alarm") { SirenTrack(SoundEvents.sirenTrackBlastDoorAlarm, 50, true, 0xB20000) }
-    val sirenTrackAPCSiren = ITEMS.registerK("siren_track_apc_siren") { SirenTrack(SoundEvents.sirenTrackAPCSiren, 100, true, 0x3666A0) }
-    val sirenTrackKlaxon = ITEMS.registerK("siren_track_klaxon") { SirenTrack(SoundEvents.sirenTrackKlaxon, 50, true, 0x808080) }
-    val sirenTrackVaultDoorAlarm = ITEMS.registerK("siren_track_vault_door_alarm") { SirenTrack(SoundEvents.sirenTrackVaultDoorAlarm, 50, true, 0x8C810B) }
-    val sirenTrackSecurityAlert = ITEMS.registerK("siren_track_security_alert") { SirenTrack(SoundEvents.sirenTrackSecurityAlert, 50, true, 0x76818E) }
-    val sirenTrackStandardSiren = ITEMS.registerK("siren_track_standard_siren") { SirenTrack(SoundEvents.sirenTrackStandardSiren, 250, true, 0x660000) }
-    val sirenTrackClassicSiren = ITEMS.registerK("siren_track_classic_siren") { SirenTrack(SoundEvents.sirenTrackClassicSiren, 250, true, 0xC0CFE8) }
-    val sirenTrackBankAlarm = ITEMS.registerK("siren_track_bank_alarm") { SirenTrack(SoundEvents.sirenTrackBankAlarm, 100, true, 0x3684E2) }
-    val sirenTrackBeepSiren = ITEMS.registerK("siren_track_beep_siren") { SirenTrack(SoundEvents.sirenTrackBeepSiren, 100, true, 0xD3D3D3) }
-    val sirenTrackContainerAlarm = ITEMS.registerK("siren_track_container_alarm") { SirenTrack(SoundEvents.sirenTrackContainerAlarm, 100, true, 0xE0BA9F) }
-    val sirenTrackSweepSiren = ITEMS.registerK("siren_track_sweep_siren") { SirenTrack(SoundEvents.sirenTrackSweepSiren, 500, true, 0xEDEA5A) }
-    val sirenTrackMissileSiloSiren = ITEMS.registerK("siren_track_missile_silo_siren") { SirenTrack(SoundEvents.sirenTrackMissileSiloSiren, 500, true, 0xABAB9A) }
-    val sirenTrackAirRaidSiren = ITEMS.registerK("siren_track_air_raid_siren") { SirenTrack(SoundEvents.sirenTrackAirRaidSiren, 1000, false, 0xDF3795) }
-    val sirenTrackNostromoSelfDestruct = ITEMS.registerK("siren_track_nostromo_self_destruct") { SirenTrack(SoundEvents.sirenTrackNostromoSelfDestruct, 100, true, 0x5DD800) }
-    val sirenTrackEASAlarmScreech = ITEMS.registerK("siren_track_eas_alarm_screech") { SirenTrack(SoundEvents.sirenTrackEASAlarmScreech, 50, true, 0xB3A8C1) }
-    val sirenTrackAPCPass = ITEMS.registerK("siren_track_apc_pass") { SirenTrack(SoundEvents.sirenTrackAPCPass, 50, false, 0x3437D3) }
-    val sirenTrackRazortrainHorn = ITEMS.registerK("siren_track_razortrain_horn") { SirenTrack(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
+    val sirenTrackHatchSiren = ITEMS.registerK("siren_track_hatch_siren") { SirenTrackItem(SoundEvents.sirenTrackHatchSiren, 250, true, 0x334077) }
+    val sirenTrackAutopilotDisconnected = ITEMS.registerK("siren_track_autopilot_disconnected") { SirenTrackItem(SoundEvents.sirenTrackAutopilotDisconnected, 50, true, 0xB5B5B5) }
+    val sirenTrackAMSSiren = ITEMS.registerK("siren_track_ams_siren") { SirenTrackItem(SoundEvents.sirenTrackAMSSiren, 100, true, 0xE5BB52) }
+    val sirenTrackBlastDoorAlarm = ITEMS.registerK("siren_track_blast_door_alarm") { SirenTrackItem(SoundEvents.sirenTrackBlastDoorAlarm, 50, true, 0xB20000) }
+    val sirenTrackAPCSiren = ITEMS.registerK("siren_track_apc_siren") { SirenTrackItem(SoundEvents.sirenTrackAPCSiren, 100, true, 0x3666A0) }
+    val sirenTrackKlaxon = ITEMS.registerK("siren_track_klaxon") { SirenTrackItem(SoundEvents.sirenTrackKlaxon, 50, true, 0x808080) }
+    val sirenTrackVaultDoorAlarm = ITEMS.registerK("siren_track_vault_door_alarm") { SirenTrackItem(SoundEvents.sirenTrackVaultDoorAlarm, 50, true, 0x8C810B) }
+    val sirenTrackSecurityAlert = ITEMS.registerK("siren_track_security_alert") { SirenTrackItem(SoundEvents.sirenTrackSecurityAlert, 50, true, 0x76818E) }
+    val sirenTrackStandardSiren = ITEMS.registerK("siren_track_standard_siren") { SirenTrackItem(SoundEvents.sirenTrackStandardSiren, 250, true, 0x660000) }
+    val sirenTrackClassicSiren = ITEMS.registerK("siren_track_classic_siren") { SirenTrackItem(SoundEvents.sirenTrackClassicSiren, 250, true, 0xC0CFE8) }
+    val sirenTrackBankAlarm = ITEMS.registerK("siren_track_bank_alarm") { SirenTrackItem(SoundEvents.sirenTrackBankAlarm, 100, true, 0x3684E2) }
+    val sirenTrackBeepSiren = ITEMS.registerK("siren_track_beep_siren") { SirenTrackItem(SoundEvents.sirenTrackBeepSiren, 100, true, 0xD3D3D3) }
+    val sirenTrackContainerAlarm = ITEMS.registerK("siren_track_container_alarm") { SirenTrackItem(SoundEvents.sirenTrackContainerAlarm, 100, true, 0xE0BA9F) }
+    val sirenTrackSweepSiren = ITEMS.registerK("siren_track_sweep_siren") { SirenTrackItem(SoundEvents.sirenTrackSweepSiren, 500, true, 0xEDEA5A) }
+    val sirenTrackMissileSiloSiren = ITEMS.registerK("siren_track_missile_silo_siren") { SirenTrackItem(SoundEvents.sirenTrackMissileSiloSiren, 500, true, 0xABAB9A) }
+    val sirenTrackAirRaidSiren = ITEMS.registerK("siren_track_air_raid_siren") { SirenTrackItem(SoundEvents.sirenTrackAirRaidSiren, 1000, false, 0xDF3795) }
+    val sirenTrackNostromoSelfDestruct = ITEMS.registerK("siren_track_nostromo_self_destruct") { SirenTrackItem(SoundEvents.sirenTrackNostromoSelfDestruct, 100, true, 0x5DD800) }
+    val sirenTrackEASAlarmScreech = ITEMS.registerK("siren_track_eas_alarm_screech") { SirenTrackItem(SoundEvents.sirenTrackEASAlarmScreech, 50, true, 0xB3A8C1) }
+    val sirenTrackAPCPass = ITEMS.registerK("siren_track_apc_pass") { SirenTrackItem(SoundEvents.sirenTrackAPCPass, 50, false, 0x3437D3) }
+    val sirenTrackRazortrainHorn = ITEMS.registerK("siren_track_razortrain_horn") { SirenTrackItem(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
 
-    val assemblyTemplate = ITEMS.registerK("assembly_template") { AssemblyTemplate(Properties().tab(CreativeTabs.Templates)) }
+    val assemblyTemplate = ITEMS.registerK("assembly_template") { AssemblyTemplateItem(Properties().tab(CreativeTabs.Templates)) }
 
     // Bomb Items
 
@@ -570,21 +570,21 @@ object ModItems {
     val bundleOfImplosionPropellant = ITEMS.registerK("bundle_of_implosion_propellant") { AutoTooltippedItem(Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
     val bombIgniterFatMan = ITEMS.registerK("bomb_igniter_fat_man") { AutoTooltippedItem(Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
     val plutoniumCore = ITEMS.registerK("plutonium_core") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Properties().tab(CreativeTabs.Bombs).stacksTo(1), 5F) }
-    val detonator = ITEMS.registerK("detonator") { Detonator(Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
-    val littleBoyKit = ITEMS.registerK("little_boy_kit") { BombKitItem(mapOf(ModBlockItems.littleBoy to 1) + LittleBoy.requiredComponents, 0x0026FF, Properties().tab(CreativeTabs.Bombs)) }
-    val fatManKit = ITEMS.registerK("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatMan.requiredComponents, 0xFFD800, Properties().tab(CreativeTabs.Bombs)) }
+    val detonator = ITEMS.registerK("detonator") { DetonatorItem(Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
+    val littleBoyKit = ITEMS.registerK("little_boy_kit") { BombKitItem(mapOf(ModBlockItems.littleBoy to 1) + LittleBoyBlock.requiredComponents, 0x0026FF, Properties().tab(CreativeTabs.Bombs)) }
+    val fatManKit = ITEMS.registerK("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatManBlock.requiredComponents, 0xFFD800, Properties().tab(CreativeTabs.Bombs)) }
 
     // Consumables and Gear
 
-    val oilDetector = ITEMS.registerK("oil_detector") { OilDetector(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
+    val oilDetector = ITEMS.registerK("oil_detector") { OilDetectorItem(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
     val geigerCounter = ITEMS.registerK("handheld_geiger_counter") { GeigerCounterItem(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
-    val ivBag = ITEMS.registerK("iv_bag") { EmptyIVBag(Properties().tab(CreativeTabs.Consumables)) }
-    val bloodBag = ITEMS.registerK("blood_bag") { BloodBag(Properties().tab(CreativeTabs.Consumables)) }
-    val emptyExperienceBag = ITEMS.registerK("empty_experience_bag") { EmptyExperienceBag(Properties().tab(CreativeTabs.Consumables)) }
-    val experienceBag = ITEMS.registerK("experience_bag") { ExperienceBag(Properties().tab(CreativeTabs.Consumables)) }
-    val radAway = ITEMS.registerK("radaway") { RadAway(140F, 5 * 20, Properties().tab(CreativeTabs.Consumables)) }
-    val strongRadAway = ITEMS.registerK("strong_radaway") { RadAway(350F, 4 * 20, Properties().tab(CreativeTabs.Consumables)) }
-    val eliteRadAway = ITEMS.registerK("elite_radaway") { RadAway(1000F, 3 * 20, Properties().tab(CreativeTabs.Consumables)) }
+    val ivBag = ITEMS.registerK("iv_bag") { EmptyIVBagItem(Properties().tab(CreativeTabs.Consumables)) }
+    val bloodBag = ITEMS.registerK("blood_bag") { BloodBagItem(Properties().tab(CreativeTabs.Consumables)) }
+    val emptyExperienceBag = ITEMS.registerK("empty_experience_bag") { EmptyExperienceBagItem(Properties().tab(CreativeTabs.Consumables)) }
+    val experienceBag = ITEMS.registerK("experience_bag") { ExperienceBagItem(Properties().tab(CreativeTabs.Consumables)) }
+    val radAway = ITEMS.registerK("radaway") { RadAwayItem(140F, 5 * 20, Properties().tab(CreativeTabs.Consumables)) }
+    val strongRadAway = ITEMS.registerK("strong_radaway") { RadAwayItem(350F, 4 * 20, Properties().tab(CreativeTabs.Consumables)) }
+    val eliteRadAway = ITEMS.registerK("elite_radaway") { RadAwayItem(1000F, 3 * 20, Properties().tab(CreativeTabs.Consumables)) }
 
     val titaniumHelmet = ITEMS.registerK("titanium_helmet") { FullSetBonusArmorItem(NuclearArmorMaterials.titanium, EquipmentSlot.HEAD, FullSetBonusArmorItem.FullSetBonus(damageMod = .85F), Properties().tab(CreativeTabs.Consumables)) }
     val titaniumChestplate = ITEMS.registerK("titanium_chestplate") { FullSetBonusArmorItem(NuclearArmorMaterials.titanium, EquipmentSlot.CHEST, FullSetBonusArmorItem.FullSetBonus.copyFrom(titaniumHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
@@ -625,7 +625,7 @@ object ModItems {
 
     // Hidden
 
-    val creativeNuclearExplosionSpawner = ITEMS.registerK("creative_nuclear_explosion_spawner") { CreativeNuclearExplosionSpawner(Properties().stacksTo(1)) }
+    val creativeNuclearExplosionSpawner = ITEMS.registerK("creative_nuclear_explosion_spawner") { CreativeNuclearExplosionSpawnerItem(Properties().stacksTo(1)) }
 
     private fun Properties.tab(tab: CreativeTabs): Properties = tab(tab.itemGroup)
 

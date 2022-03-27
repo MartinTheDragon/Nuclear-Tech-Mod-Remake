@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.items
 
-import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosion
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.Util
 import net.minecraft.client.Minecraft
@@ -12,14 +12,14 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 // more like destructive
-class CreativeNuclearExplosionSpawner(properties: Properties) : Item(properties) {
+class CreativeNuclearExplosionSpawnerItem(properties: Properties) : Item(properties) {
     override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val item = player.getItemInHand(hand)
 
         if (player.isShiftKeyDown) { // quick detonation
             if (!world.isClientSide) {
                 if (player.canUseGameMasterBlocks()) {
-                    NukeExplosionEntity.create(world, player.position(), 200)
+                    NukeExplosion.create(world, player.position(), 200)
                 } else {
                     player.sendMessage(UseCreativeNuclearExplosionSpawnerScreen.ERR_INSUFFICIENT_PERMISSION, Util.NIL_UUID)
                     return InteractionResultHolder.pass(item)

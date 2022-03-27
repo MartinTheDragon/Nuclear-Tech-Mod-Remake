@@ -21,7 +21,7 @@ import net.minecraftforge.client.IItemRenderProperties
 import java.util.function.Consumer
 import kotlin.math.floor
 
-class AssemblyTemplate(properties: Properties) : Item(properties) {
+class AssemblyTemplateItem(properties: Properties) : Item(properties) {
     override fun getName(stack: ItemStack): Component = TranslatableComponent(getDescriptionId(stack), Minecraft.getInstance().level?.let { getRecipeFromStack(stack, it.recipeManager)?.resultItem?.hoverName } ?: "N/A")
 
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
@@ -55,7 +55,7 @@ class AssemblyTemplate(properties: Properties) : Item(properties) {
     }
 
     companion object {
-        fun getRecipeIDFromStack(stack: ItemStack) = if (stack.item is AssemblyTemplate) stack.tag?.getString("recipe")?.let { ResourceLocation(it) } else null
+        fun getRecipeIDFromStack(stack: ItemStack) = if (stack.item is AssemblyTemplateItem) stack.tag?.getString("recipe")?.let { ResourceLocation(it) } else null
         fun getRecipeFromStack(stack: ItemStack, recipeManager: RecipeManager) = getRecipeIDFromStack(stack)?.let { recipeManager.byKey(it).orElse(null) as? AssemblyRecipe }
         fun getAllTemplates(recipeManager: RecipeManager): List<ItemStack> = recipeManager.getAllRecipesFor(RecipeTypes.ASSEMBLY).map { ItemStack(ModItems.assemblyTemplate.get()).apply { orCreateTag.putString("recipe", it.id.toString()) } }
         fun isValidTemplate(stack: ItemStack, recipeManager: RecipeManager) = getRecipeFromStack(stack, recipeManager) != null

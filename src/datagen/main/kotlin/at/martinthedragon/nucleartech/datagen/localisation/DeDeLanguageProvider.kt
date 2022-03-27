@@ -704,9 +704,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         add("energy.$MODID", "Energie")
 
-        addEntityType(EntityTypes.nukeExplosionEntity, "Nukleare Explosion")
-        addEntityType(EntityTypes.nukeCloudEntity, "Atompilz")
-        addEntityType(EntityTypes.falloutRainEntity, "Fallout-Regen")
+        addEntityType(EntityTypes.nuclearExplosion, "Nukleare Explosion")
+        addEntityType(EntityTypes.mushroomCloud, "Atompilz")
+        addEntityType(EntityTypes.falloutRain, "Fallout-Regen")
         addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuklearer Creeper")
 
         addMenuType(MenuTypes.sirenMenu, "Sirene")

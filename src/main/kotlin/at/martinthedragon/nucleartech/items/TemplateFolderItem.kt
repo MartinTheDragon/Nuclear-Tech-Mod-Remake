@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-class TemplateFolder : AutoTooltippedItem(Properties().stacksTo(1).tab(CreativeTabs.Templates.itemGroup)) {
+class TemplateFolderItem : AutoTooltippedItem(Properties().stacksTo(1).tab(CreativeTabs.Templates.itemGroup)) {
     override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val itemStack = player.getItemInHand(hand)
 

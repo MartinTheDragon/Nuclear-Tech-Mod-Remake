@@ -20,7 +20,7 @@ import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.pow
 
-class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Level) : Entity(entityType, world) {
+class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entity(entityType, world) {
     var strength = 0
     var speed = 0
     var length = 0
@@ -63,12 +63,12 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Le
     override fun remove(reason: RemovalReason) {
         super.remove(reason)
         if (nukeCloudEntityUUID != null) {
-            ((level as? ServerLevel)?.getEntity(nukeCloudEntityUUID!!) as? MushroomCloudEntity)?.finish()
+            ((level as? ServerLevel)?.getEntity(nukeCloudEntityUUID!!) as? MushroomCloud)?.finish()
         }
         if (hasFallout) {
-            val fallout = FalloutRainEntity(EntityTypes.falloutRainEntity.get(), level)
-            fallout.moveTo(this@NukeExplosionEntity.position())
-            fallout.setScale(((this@NukeExplosionEntity.length * 1.8 + extraFallout) * NuclearConfig.explosions.falloutRange.get() / 100.0).toInt())
+            val fallout = FalloutRain(EntityTypes.falloutRain.get(), level)
+            fallout.moveTo(this@NukeExplosion.position())
+            fallout.setScale(((this@NukeExplosion.length * 1.8 + extraFallout) * NuclearConfig.explosions.falloutRange.get() / 100.0).toInt())
             level.addFreshEntity(fallout)
         }
     }
@@ -143,8 +143,8 @@ class NukeExplosionEntity(entityType: EntityType<NukeExplosionEntity>, world: Le
         ): Boolean {
             return if (world.isClientSide) false
             else {
-                val cloudEntityUUID = if (withVfx) MushroomCloudEntity.create(world, pos, strength * .0025F, isMuted = muted) else null
-                val explosionEntity = NukeExplosionEntity(EntityTypes.nukeExplosionEntity.get(), world).apply {
+                val cloudEntityUUID = if (withVfx) MushroomCloud.create(world, pos, strength * .0025F, isMuted = muted) else null
+                val explosionEntity = NukeExplosion(EntityTypes.nuclearExplosion.get(), world).apply {
                     this@apply.strength = strength
                     speed = ceil(125_000F / strength).toInt() // TODO make this configurable as well
                     length = strength / 2

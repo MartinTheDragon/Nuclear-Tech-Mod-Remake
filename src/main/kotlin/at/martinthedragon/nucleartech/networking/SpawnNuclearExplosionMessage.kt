@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.entities.NukeExplosionEntity
+import at.martinthedragon.nucleartech.entities.NukeExplosion
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.Util
 import net.minecraft.network.FriendlyByteBuf
@@ -33,7 +33,7 @@ class SpawnNuclearExplosionMessage(
                     sender.sendMessage(UseCreativeNuclearExplosionSpawnerScreen.ERR_INSUFFICIENT_PERMISSION, Util.NIL_UUID)
                     return@enqueueWork
                 }
-                NukeExplosionEntity.create(sender.getLevel(), position, strength, hasFallout, extraFallout, muted)
+                NukeExplosion.create(sender.getLevel(), position, strength, hasFallout, extraFallout, muted)
             }
         context.get().packetHandled = true
     }

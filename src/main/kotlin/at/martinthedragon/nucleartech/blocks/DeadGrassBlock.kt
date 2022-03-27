@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.lighting.LayerLightEngine
 import java.util.*
 
-open class DeadGrass(properties: Properties) : Block(properties) {
+open class DeadGrassBlock(properties: Properties) : Block(properties) {
     protected fun canExist(state: BlockState, levelReader: LevelReader, pos: BlockPos): Boolean {
         val abovePos = pos.above()
         val aboveState = levelReader.getBlockState(abovePos)

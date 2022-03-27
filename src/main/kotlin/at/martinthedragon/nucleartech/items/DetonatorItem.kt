@@ -17,7 +17,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.Level
 
-class Detonator(properties: Properties) : Item(properties) {
+class DetonatorItem(properties: Properties) : Item(properties) {
     override fun useOn(context: UseOnContext): InteractionResult {
         val player = context.player
         val world = context.level

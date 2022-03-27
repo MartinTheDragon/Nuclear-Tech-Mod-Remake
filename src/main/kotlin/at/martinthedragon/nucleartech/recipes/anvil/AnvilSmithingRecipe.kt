@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.recipes.anvil
 
-import at.martinthedragon.nucleartech.blocks.Anvil
+import at.martinthedragon.nucleartech.blocks.AnvilBlock
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
@@ -56,7 +56,7 @@ open class AnvilSmithingRecipe(
     override fun getType() = RecipeTypes.SMITHING
     override fun isSpecial() = true
     override fun canCraftInDimensions(p_43999_: Int, p_44000_: Int) = true
-    override fun getToastSymbol() = ItemStack(Anvil.getAnvilByTier(tier))
+    override fun getToastSymbol() = ItemStack(AnvilBlock.getAnvilByTier(tier))
     override fun getIngredients(): NonNullList<Ingredient> = NonNullList.of(Ingredient.EMPTY, ingredient1, ingredient2)
     override fun getResultItem() = result
 

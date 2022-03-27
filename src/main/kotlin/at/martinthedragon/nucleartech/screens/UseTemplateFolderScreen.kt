@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.screens
 
 import at.martinthedragon.nucleartech.*
-import at.martinthedragon.nucleartech.items.AssemblyTemplate
+import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import com.mojang.blaze3d.systems.RenderSystem
@@ -258,7 +258,7 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
 
         fun getAllItems(): List<ItemStack> = ForgeRegistries.ITEMS.getTagManager().getTag(NuclearTags.Items.FOLDER_STAMPS).map(::ItemStack) +
             ForgeRegistries.ITEMS.getTagManager().getTag(NuclearTags.Items.SIREN_TRACKS).map(::ItemStack) +
-            AssemblyTemplate.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
+            AssemblyTemplateItem.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
 
         fun reloadSearchTree() {
             NuclearTech.LOGGER.debug("Reloading Machine Template Folder search tree")

@@ -14,7 +14,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import java.util.function.Supplier
 
-class SirenTrack(val soundSupplier: Supplier<SoundEvent>, val range: Int, val loop: Boolean, val color: Int) :
+class SirenTrackItem(val soundSupplier: Supplier<SoundEvent>, val range: Int, val loop: Boolean, val color: Int) :
     Item(Properties().stacksTo(1).rarity(Rarity.UNCOMMON).tab(CreativeTabs.Templates.itemGroup))
 {
     // lazy is used here because otherwise the descriptionId gets created too early and becomes item.minecraft.air

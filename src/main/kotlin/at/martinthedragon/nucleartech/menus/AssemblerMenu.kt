@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.menus
 
 import at.martinthedragon.nucleartech.blocks.entities.AssemblerBlockEntity
-import at.martinthedragon.nucleartech.items.AssemblyTemplate
+import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -44,7 +44,7 @@ class AssemblerMenu(
                 var successful = false
                 when {
                     itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
-                    itemStack.item is AssemblyTemplate && moveItemStackTo(itemStack, 4, 5, false) -> successful = true
+                    itemStack.item is AssemblyTemplateItem && moveItemStackTo(itemStack, 4, 5, false) -> successful = true
                     moveItemStackTo(itemStack, 5, 17, false) -> successful = true
                 }
                 if (!successful && !tryMoveInPlayerInventory(index, 18, itemStack)) return ItemStack.EMPTY

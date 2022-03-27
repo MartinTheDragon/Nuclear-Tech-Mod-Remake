@@ -34,7 +34,7 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.ItemStackHandler
 
 class BlastFurnaceBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.blastFurnaceBlockEntityType.get(), pos, state),
-    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultTileEntity
+    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultBlockEntity
 {
     private var litTime = 0
     private val isLit: Boolean

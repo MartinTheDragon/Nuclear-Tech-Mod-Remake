@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.items.AssemblyTemplate
+import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
@@ -50,8 +50,8 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     val pressStamps = tagManager.getTag(NuclearTags.Items.FOLDER_STAMPS)
                     val sirenTracks = tagManager.getTag(NuclearTags.Items.SIREN_TRACKS)
                     when (result.item) {
-                        is AssemblyTemplate -> {
-                            if (!AssemblyTemplate.isValidTemplate(result, sender.level.recipeManager)) return@enqueueWork
+                        is AssemblyTemplateItem -> {
+                            if (!AssemblyTemplateItem.isValidTemplate(result, sender.level.recipeManager)) return@enqueueWork
 
                             // h
                             val ingredients = listOf(StackedIngredient.of(1, Items.PAPER), StackedIngredient.of(1, Tags.Items.DYES))

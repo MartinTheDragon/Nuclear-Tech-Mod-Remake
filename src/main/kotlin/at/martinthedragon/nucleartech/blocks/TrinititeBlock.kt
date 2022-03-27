@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import java.util.*
 
-class Trinitite(properties: Properties) : Block(properties) {
+class TrinititeBlock(properties: Properties) : Block(properties) {
     // TODO radiation effects
     // TODO automatic rad cleanup
 

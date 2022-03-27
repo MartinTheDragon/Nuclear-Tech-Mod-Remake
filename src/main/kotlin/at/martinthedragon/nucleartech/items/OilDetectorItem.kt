@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class OilDetector(properties: Properties) : Item(properties) {
+class OilDetectorItem(properties: Properties) : Item(properties) {
     override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, flag: TooltipFlag) {
         autoTooltip(stack, tooltip)
     }

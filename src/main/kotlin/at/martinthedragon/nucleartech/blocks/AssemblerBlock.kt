@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.BlockHitResult
 
-class Assembler(properties: Properties) : BaseEntityBlock(properties) {
+class AssemblerBlock(properties: Properties) : BaseEntityBlock(properties) {
     init { registerDefaultState(stateDefinition.any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH)) }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(HorizontalDirectionalBlock.FACING) }

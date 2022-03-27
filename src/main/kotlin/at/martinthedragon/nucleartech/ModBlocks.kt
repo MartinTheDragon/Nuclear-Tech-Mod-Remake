@@ -2,6 +2,8 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
+import at.martinthedragon.nucleartech.blocks.AnvilBlock
+import at.martinthedragon.nucleartech.blocks.BlastFurnaceBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.LevelReader
@@ -148,13 +150,13 @@ object ModBlocks {
     val asbestosRoof: RegistryObject<Block> = BLOCKS.register("asbestos_roof") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val hazmatBlock: RegistryObject<Block> = BLOCKS.register("hazmat_block") { Block(Properties.of(WOOL).strength(6f).sound(SoundType.WOOL)) }
 
-    val glowingMushroom: RegistryObject<GlowingMushroom> = BLOCKS.register("glowing_mushroom") { GlowingMushroom(Properties.of(PLANT, MaterialColor.COLOR_GREEN).noCollission().randomTicks().instabreak().lightLevel { 7 }.hasPostProcess { _, _, _, -> true }.sound(SoundType.GRASS)) }
+    val glowingMushroom: RegistryObject<GlowingMushroomBlock> = BLOCKS.register("glowing_mushroom") { GlowingMushroomBlock(Properties.of(PLANT, MaterialColor.COLOR_GREEN).noCollission().randomTicks().instabreak().lightLevel { 7 }.hasPostProcess { _, _, _, -> true }.sound(SoundType.GRASS)) }
     val glowingMushroomBlock: RegistryObject<HugeMushroomBlock> = BLOCKS.register("glowing_mushroom_block") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 15 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }
     val glowingMushroomStem: RegistryObject<HugeMushroomBlock> = BLOCKS.register("glowing_mushroom_stem") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 12 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }
-    val deadGrass: RegistryObject<DeadGrass> = BLOCKS.register("dead_grass") { DeadGrass(Properties.of(GRASS, MaterialColor.COLOR_BROWN).strength(.6F).randomTicks().sound(SoundType.GRASS)) }
+    val deadGrass: RegistryObject<DeadGrassBlock> = BLOCKS.register("dead_grass") { DeadGrassBlock(Properties.of(GRASS, MaterialColor.COLOR_BROWN).strength(.6F).randomTicks().sound(SoundType.GRASS)) }
     val glowingMycelium: RegistryObject<GlowingMycelium> = BLOCKS.register("glowing_mycelium") { GlowingMycelium(Properties.of(GRASS, MaterialColor.COLOR_LIGHT_GREEN).strength(.6F).randomTicks().lightLevel { 15 }.hasPostProcess { _, _, _, -> true }.sound(SoundType.GRASS)) }
-    val trinitite: RegistryObject<Trinitite> = BLOCKS.register("trinitite_ore") { Trinitite(Properties.of(SAND, MaterialColor.COLOR_GREEN).strength(.5F, 2.5F).sound(SoundType.SAND)) }
-    val redTrinitite: RegistryObject<Trinitite> = BLOCKS.register("red_trinitite_ore") { Trinitite(Properties.of(SAND, MaterialColor.COLOR_GREEN).strength(.5F, 2.5F).sound(SoundType.SAND)) }
+    val trinitite: RegistryObject<TrinititeBlock> = BLOCKS.register("trinitite_ore") { TrinititeBlock(Properties.of(SAND, MaterialColor.COLOR_GREEN).strength(.5F, 2.5F).sound(SoundType.SAND)) }
+    val redTrinitite: RegistryObject<TrinititeBlock> = BLOCKS.register("red_trinitite_ore") { TrinititeBlock(Properties.of(SAND, MaterialColor.COLOR_GREEN).strength(.5F, 2.5F).sound(SoundType.SAND)) }
     val charredLog: RegistryObject<RotatedPillarBlock> = BLOCKS.register("charred_log") { RotatedPillarBlock(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(5F, 2.5F).sound(SoundType.WOOD)) }
     val charredPlanks: RegistryObject<Block> = BLOCKS.register("charred_planks") { Block(Properties.of(WOOD, MaterialColor.COLOR_BLACK).strength(.5F, 2.5F).sound(SoundType.WOOD)) }
 
@@ -168,35 +170,35 @@ object ModBlocks {
 
     // Machines
 
-    val siren: RegistryObject<Block> = BLOCKS.register("siren") { Siren(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val safe: RegistryObject<Block> = BLOCKS.register("safe") { Safe(Properties.of(METAL).strength(25f, 1200f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val siren: RegistryObject<Block> = BLOCKS.register("siren") { SirenBlock(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val safe: RegistryObject<Block> = BLOCKS.register("safe") { SafeBlock(Properties.of(METAL).strength(25f, 1200f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 
-    val steamPressBase: RegistryObject<Block> = BLOCKS.register("steam_press_base") { SteamPressBase(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val steamPressFrame: RegistryObject<Block> = BLOCKS.register("steam_press_frame") { SteamPressFrame(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val steamPressTop: RegistryObject<Block> = BLOCKS.register("steam_press_top") { SteamPressTop(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val steamPressBase: RegistryObject<Block> = BLOCKS.register("steam_press_base") { SteamPressBaseBlock(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val steamPressFrame: RegistryObject<Block> = BLOCKS.register("steam_press_frame") { SteamPressFrameBlock(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val steamPressTop: RegistryObject<Block> = BLOCKS.register("steam_press_top") { SteamPressTopBlock(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 
-    val blastFurnace: RegistryObject<BlastFurnace> = BLOCKS.register("blast_furnace") { BlastFurnace(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
-    val combustionGenerator: RegistryObject<CombustionGenerator> = BLOCKS.register("combustion_generator") { CombustionGenerator(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
-    val electricFurnace: RegistryObject<ElectricFurnace> = BLOCKS.register("electric_furnace") { ElectricFurnace(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
-    val shredder: RegistryObject<Shredder> = BLOCKS.register("shredder") { Shredder(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val assembler: RegistryObject<Assembler> = BLOCKS.register("assembler") { Assembler(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
-    val assemblerPart: RegistryObject<Assembler.AssemblerPart> = BLOCKS.register("assembler_part", Assembler::AssemblerPart)
+    val blastFurnace: RegistryObject<BlastFurnaceBlock> = BLOCKS.register("blast_furnace") { BlastFurnaceBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
+    val combustionGenerator: RegistryObject<CombustionGeneratorBlock> = BLOCKS.register("combustion_generator") { CombustionGeneratorBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
+    val electricFurnace: RegistryObject<ElectricFurnaceBlock> = BLOCKS.register("electric_furnace") { ElectricFurnaceBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
+    val shredder: RegistryObject<ShredderBlock> = BLOCKS.register("shredder") { ShredderBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val assembler: RegistryObject<AssemblerBlock> = BLOCKS.register("assembler") { AssemblerBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val assemblerPart: RegistryObject<AssemblerBlock.AssemblerPart> = BLOCKS.register("assembler_part", AssemblerBlock::AssemblerPart)
 
-    val ironAnvil: RegistryObject<Anvil> = BLOCKS.register("iron_anvil") { Anvil(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val leadAnvil: RegistryObject<Anvil> = BLOCKS.register("lead_anvil") { Anvil(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val steelAnvil: RegistryObject<Anvil> = BLOCKS.register("steel_anvil") { Anvil(2, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val meteoriteAnvil: RegistryObject<Anvil> = BLOCKS.register("meteorite_anvil") { Anvil(3, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val starmetalAnvil: RegistryObject<Anvil> = BLOCKS.register("starmetal_anvil") { Anvil(3, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val ferrouraniumAnvil: RegistryObject<Anvil> = BLOCKS.register("ferrouranium_anvil") { Anvil(4, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val bismuthAnvil: RegistryObject<Anvil> = BLOCKS.register("bismuth_anvil") { Anvil(5, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val schrabidateAnvil: RegistryObject<Anvil> = BLOCKS.register("schrabidate_anvil") { Anvil(6, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val dineutroniumAnvil: RegistryObject<Anvil> = BLOCKS.register("dineutronium_anvil") { Anvil(7, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
-    val murkyAnvil: RegistryObject<Anvil> = BLOCKS.register("murky_anvil") { Anvil(1916169, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val ironAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("iron_anvil") { AnvilBlock(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val leadAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("lead_anvil") { AnvilBlock(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val steelAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("steel_anvil") { AnvilBlock(2, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val meteoriteAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("meteorite_anvil") { AnvilBlock(3, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val starmetalAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("starmetal_anvil") { AnvilBlock(3, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val ferrouraniumAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("ferrouranium_anvil") { AnvilBlock(4, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val bismuthAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("bismuth_anvil") { AnvilBlock(5, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val schrabidateAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("schrabidate_anvil") { AnvilBlock(6, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val dineutroniumAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("dineutronium_anvil") { AnvilBlock(7, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+    val murkyAnvil: RegistryObject<AnvilBlock> = BLOCKS.register("murky_anvil") { AnvilBlock(1916169, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
 
     // Bombs
 
-    val littleBoy: RegistryObject<LittleBoy> = BLOCKS.register("little_boy") { LittleBoy(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
-    val fatMan: RegistryObject<FatMan> = BLOCKS.register("fat_man") { FatMan(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val littleBoy: RegistryObject<LittleBoyBlock> = BLOCKS.register("little_boy") { LittleBoyBlock(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val fatMan: RegistryObject<FatManBlock> = BLOCKS.register("fat_man") { FatManBlock(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
 
     private fun getLightLevelLit13(state: BlockState) = if (state.getValue(BlockStateProperties.LIT)) 13 else 0
 }

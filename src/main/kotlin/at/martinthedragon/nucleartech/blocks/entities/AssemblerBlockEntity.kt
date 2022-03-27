@@ -5,7 +5,7 @@ import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.blocks.multi.RotatedMultiBlockPlacer
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
-import at.martinthedragon.nucleartech.items.AssemblyTemplate
+import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.menus.AssemblerMenu
@@ -83,7 +83,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
         override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
             0 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
             in 1..3 -> false // TODO
-            4 -> stack.item is AssemblyTemplate
+            4 -> stack.item is AssemblyTemplateItem
             else -> true
         }
     }
@@ -145,7 +145,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
         val energyItem = items[0]
         if (!energyItem.isEmpty) transferEnergy(energyItem, energyStorage)
 
-        val id = AssemblyTemplate.getRecipeIDFromStack(items[4])
+        val id = AssemblyTemplateItem.getRecipeIDFromStack(items[4])
         recipeID = id
         val recipe = id?.let { level.recipeManager.byKey(it).orElse(null) as? AssemblyRecipe }
         if (recipe != null) {
