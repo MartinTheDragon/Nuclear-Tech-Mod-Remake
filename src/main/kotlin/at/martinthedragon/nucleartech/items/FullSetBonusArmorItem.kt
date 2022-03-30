@@ -65,7 +65,7 @@ open class FullSetBonusArmorItem(material: ArmorMaterial, slot: EquipmentSlot, v
         if (!hasFSB(entity)) return
 
         with(bonus) {
-            if (damageThreshold >= event.amount && !event.source.isBypassArmor) event.isCanceled = true
+            if (damageThreshold >= event.amount && !event.source.isBypassInvul) event.isCanceled = true
             if (fireproof && event.source.isFire) {
                 entity.clearFire()
                 event.isCanceled = true
@@ -79,14 +79,14 @@ open class FullSetBonusArmorItem(material: ArmorMaterial, slot: EquipmentSlot, v
         if (getSlot().index != 2) return
 
         val entity = event.entityLiving
-        if (event.source.isBypassArmor || !hasFSB(entity)) return
+        if (event.source.isBypassInvul || !hasFSB(entity)) return
 
         with(bonus) {
             val source = event.source
             val overflow = max(0F, event.amount - protectionYield)
 
             event.amount = min(event.amount, protectionYield)
-            if (!source.isBypassArmor) event.amount -= damageThreshold
+            if (!source.isBypassInvul) event.amount -= damageThreshold
             event.amount *= damageMod
             if (resistances.contains(source)) event.amount *= resistances.getValue(source)
             if (source.isExplosion) event.amount *= blastProtection
