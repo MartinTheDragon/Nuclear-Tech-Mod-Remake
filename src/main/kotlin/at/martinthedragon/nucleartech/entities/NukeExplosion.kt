@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.DamageSources
+import at.martinthedragon.nucleartech.api.explosions.NuclearExplosionFactory
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.nbt.CompoundTag
@@ -100,7 +101,7 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
 
     override fun getAddEntityPacket(): Packet<*> = NetworkHooks.getEntitySpawningPacket(this)
 
-    companion object {
+    companion object : NuclearExplosionFactory {
         fun dealDamage(world: Level, pos: Vec3, radius: Double, maxDamage: Float = 250F) {
             val entities = world.getEntities(null,
                 AABB(pos.x, pos.y, pos.z, pos.x, pos.y, pos.z).inflate(radius, radius, radius),
@@ -132,29 +133,19 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
             else -> true
         }
 
-        fun create(
-            world: Level,
-            pos: Vec3,
-            strength: Int,
-            hasFallout: Boolean = true,
-            extraFallout: Int = 0,
-            muted: Boolean = false,
-            withVfx: Boolean = true
-        ): Boolean {
-            return if (world.isClientSide) false
-            else {
-                val cloudEntityUUID = if (withVfx) MushroomCloud.create(world, pos, strength * .0025F, isMuted = muted) else null
-                val explosionEntity = NukeExplosion(EntityTypes.nuclearExplosion.get(), world).apply {
-                    this@apply.strength = strength
-                    speed = ceil(125_000F / strength).toInt() // TODO make this configurable as well
-                    length = strength / 2
-                    this.hasFallout = hasFallout
-                    this.extraFallout = extraFallout
-                    nukeCloudEntityUUID = cloudEntityUUID
-                    moveTo(pos)
-                }
-                world.addFreshEntity(explosionEntity)
+        override fun create(level: Level, pos: Vec3, strength: Int, hasFallout: Boolean, extraFallout: Int, muted: Boolean, withVfx: Boolean): Boolean = if (level.isClientSide) false
+        else {
+            val cloudEntityUUID = if (withVfx) MushroomCloud.create(level, pos, strength * .0025F, isMuted = muted) else null
+            val explosionEntity = NukeExplosion(EntityTypes.nuclearExplosion.get(), level).apply {
+                this@apply.strength = strength
+                speed = ceil(125_000F / strength).toInt() // TODO make this configurable as well
+                length = strength / 2
+                this.hasFallout = hasFallout
+                this.extraFallout = extraFallout
+                nukeCloudEntityUUID = cloudEntityUUID
+                moveTo(pos)
             }
+            level.addFreshEntity(explosionEntity)
         }
     }
 }

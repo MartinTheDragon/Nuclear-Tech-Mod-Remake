@@ -14,7 +14,7 @@ public interface IgnitableExplosive {
         /** An explosive at the specified position cannot be found */
         InvalidPosition,
         /** An unexpected different [net.minecraft.world.level.block.entity.BlockEntity] is at the position, or there isn't one present */
-        InvalidTileEntity,
+        InvalidBlockEntity,
         /** The explosive is missing components required for detonation */
         Incomplete,
         /** The explosive did not detonate because of some internal logic */
@@ -34,11 +34,11 @@ public interface IgnitableExplosive {
         val blockState = level.getBlockState(pos)
         return when {
             blockState.block !is IgnitableExplosive -> DetonationResult.InvalidPosition
-            !blockState.hasBlockEntity() -> DetonationResult.InvalidTileEntity
+            !blockState.hasBlockEntity() -> DetonationResult.InvalidBlockEntity
             else -> {
-                val tileEntity = level.getBlockEntity(pos) ?: return DetonationResult.InvalidTileEntity
+                val tileEntity = level.getBlockEntity(pos) ?: return DetonationResult.InvalidBlockEntity
                 when {
-                    tileEntity !is BombBlockEntity<*> -> DetonationResult.InvalidTileEntity
+                    tileEntity !is BombBlockEntity<*> -> DetonationResult.InvalidBlockEntity
                     !tileEntity.isComplete() -> DetonationResult.Incomplete
                     !tileEntity.canDetonate() -> DetonationResult.Prohibited
                     tileEntity.detonate() -> DetonationResult.Success

@@ -48,6 +48,11 @@ public interface BombBlockEntity<T> : Container
      */
     public fun canDetonate(): Boolean = isComplete()
 
-    /** Detonates the explosive and returns whether it was successful */
+    /**
+     * Detonates the explosive and returns whether it was successful
+     *
+     * Logic for removing the block, playing sounds and spawning the explosions should be handled here.
+     * While not strictly necessary, it is recommended to check for server-side.
+     */
     public fun detonate(): Boolean
 }

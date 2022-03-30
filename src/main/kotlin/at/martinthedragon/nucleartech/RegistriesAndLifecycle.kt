@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
 import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.plugins.PluginEvents
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
@@ -73,6 +74,7 @@ object RegistriesAndLifecycle {
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
+        PluginEvents.init()
     }
 
     @SubscribeEvent @JvmStatic

@@ -5,7 +5,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.api.blocks.entities.BombBlockEntity
 import at.martinthedragon.nucleartech.blocks.LittleBoyBlock
 import at.martinthedragon.nucleartech.config.NuclearConfig
-import at.martinthedragon.nucleartech.entities.NukeExplosion
+import at.martinthedragon.nucleartech.explosions.Explosions
 import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.menus.LittleBoyMenu
 import net.minecraft.core.BlockPos
@@ -120,11 +120,7 @@ class LittleBoyBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
         setRemoved()
         level!!.removeBlock(worldPosition, false)
         level!!.playSound(null, worldPosition, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1F, level!!.random.nextFloat() * .1F + .9F)
-        NukeExplosion.create(
-            level!!,
-            blockPos.toVec3Middle(),
-            NuclearConfig.explosions.littleBoyStrength.get()
-        )
+        Explosions.getBuiltinDefault().create(level!!, blockPos.toVec3Middle(), NuclearConfig.explosions.littleBoyStrength.get())
     } else false
 
     private val inventoryCapability = LazyOptional.of(this::inventory)

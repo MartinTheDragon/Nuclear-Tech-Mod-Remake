@@ -69,7 +69,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
         val messageToSend = when (block.detonate(world, pos)) {
             IgnitableExplosive.DetonationResult.Success -> TranslatableComponent("$descriptionId.detonation_successful").withStyle(ChatFormatting.GREEN)
             IgnitableExplosive.DetonationResult.InvalidPosition -> TranslatableComponent("$descriptionId.error_not_explosive").withStyle(ChatFormatting.RED)
-            IgnitableExplosive.DetonationResult.InvalidTileEntity -> TranslatableComponent("$descriptionId.error_invalid_tile_entity").withStyle(ChatFormatting.RED)
+            IgnitableExplosive.DetonationResult.InvalidBlockEntity -> TranslatableComponent("$descriptionId.error_invalid_tile_entity").withStyle(ChatFormatting.RED)
             IgnitableExplosive.DetonationResult.Incomplete -> TranslatableComponent("$descriptionId.error_missing_components").withStyle(ChatFormatting.RED)
             IgnitableExplosive.DetonationResult.Prohibited -> TranslatableComponent("$descriptionId.error_detonation_prohibited").withStyle(ChatFormatting.RED)
             IgnitableExplosive.DetonationResult.Unknown -> TranslatableComponent("$descriptionId.error_unknown").withStyle(ChatFormatting.RED)
