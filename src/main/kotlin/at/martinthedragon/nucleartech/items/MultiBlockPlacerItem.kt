@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.items
 
-import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPlacer
+import at.martinthedragon.nucleartech.api.blocks.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.blocks.multi.RotatedMultiBlockPlacer
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.context.BlockPlaceContext

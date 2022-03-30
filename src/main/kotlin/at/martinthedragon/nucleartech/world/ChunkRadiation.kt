@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.world
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.api.world.ChunkRadiationHandler
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel

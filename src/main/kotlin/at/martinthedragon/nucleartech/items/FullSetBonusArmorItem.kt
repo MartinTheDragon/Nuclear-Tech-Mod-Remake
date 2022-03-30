@@ -1,6 +1,10 @@
 package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.api.items.AttackHandler
+import at.martinthedragon.nucleartech.api.items.DamageHandler
+import at.martinthedragon.nucleartech.api.items.FallHandler
+import at.martinthedragon.nucleartech.api.items.TickingArmor
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.Component

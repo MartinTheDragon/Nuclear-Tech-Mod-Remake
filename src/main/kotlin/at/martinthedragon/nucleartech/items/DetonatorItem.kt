@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.explosions.IgnitableExplosive
+import at.martinthedragon.nucleartech.api.explosions.IgnitableExplosive
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component

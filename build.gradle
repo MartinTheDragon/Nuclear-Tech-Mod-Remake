@@ -9,6 +9,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "maven-publish"
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'kotlin'
 // apply plugin: 'eclipse'
@@ -23,11 +27,18 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
 sourceSets {
+    api {
+        resources.srcDirs = []
+    }
     main {
         resources {
             include '**/**'
             srcDirs += 'src/datagen/generated/resources'
             exclude '.cache'
+        }
+        kotlin {
+            compileClasspath += api.output
+            runtimeClasspath += api.output
         }
     }
     datagen {
@@ -49,31 +60,31 @@ minecraft {
     // "REGISTRYDUMP": For getting the contents of all registries.
     runs {
         client {
-            workingDirectory project.file('run')
+            workingDirectory file("run")
 
             property 'forge.logging.console.level', 'debug'
 
             mods {
                 nucleartech {
-                    source sourceSets.main
+                    sources((SourceSet[]) [sourceSets.main, sourceSets.api])
                 }
             }
         }
 
         server {
-            workingDirectory project.file('run')
+            workingDirectory file("run")
 
             property 'forge.logging.console.level', 'debug'
 
             mods {
                 nucleartech {
-                    source sourceSets.main
+                    sources((SourceSet[]) [sourceSets.main, sourceSets.api])
                 }
             }
         }
 
         data {
-            workingDirectory project.file('run')
+            workingDirectory file("run")
 
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
@@ -118,6 +129,7 @@ configurations {
     library // workaround for IDE runtime
     implementation.extendsFrom library
 
+    apiImplementation.extendsFrom(implementation)
     datagenImplementation.extendsFrom(implementation)
     datagenCompileOnly.extendsFrom(compileOnly)
     datagenRuntimeOnly.extendsFrom(runtimeOnly)
@@ -132,33 +144,59 @@ dependencies {
     datagenCompileOnly sourceSets.main.output
 }
 
-jar {
-    dependsOn(classes)
-    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
-    //noinspection GroovyAssignabilityCheck
-    manifest {
-        def version
-        if (project.hasProperty("release")) version = mod_version
-        else version = "$mod_version-snapshot${new Date().format("yyyyMMdd'T'HHmmss")}"
-        attributes([
-            "Specification-Title": "Nuclear Tech Mod",
-            "Specification-Vendor": "MartinTheDragon",
-            "Specification-Version": "$mod_version",
-            "Implementation-Title": project.name,
-            "Implementation-Version": version,
-            "Implementation-Vendor" :"MartinTheDragon",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-    configurations {
-        shaded.extendsFrom library
-    }
-    from {
-        configurations.shaded.collect() { it.isDirectory() ? it : zipTree(it) }
-    }
+def manifestAttributes() {
+    def version
+    if (project.hasProperty("release")) version = mod_version
+    else version = "$mod_version-snapshot${new Date().format("yyyyMMdd'T'HHmmss")}"
+    return [
+        "Specification-Title": "Nuclear Tech Mod",
+        "Specification-Vendor": "MartinTheDragon",
+        "Specification-Version": "$mod_version",
+        "Implementation-Title": project.name,
+        "Implementation-Version": version,
+        "Implementation-Vendor" :"MartinTheDragon",
+        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ]
 }
 
-jar.finalizedBy('reobfJar')
+jar {
+    dependsOn(classes)
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE) // is this bad? i dunno
+
+    from([sourceSets.api.output, sourceSets.main.output])
+
+    configurations {shaded.extendsFrom library}
+    from { configurations.shaded.collect() { it.isDirectory() ? it : zipTree(it) }}
+
+    manifest.attributes(manifestAttributes())
+    afterEvaluate { finalizedBy reobfJar }
+}
+
+// you have no idea how much pain and headaches getting this to work caused me
+task sourcesJar(type: Jar, dependsOn: [classes, apiClasses]) {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    archiveClassifier.set("sources")
+    from([sourceSets.api.kotlin, sourceSets.main.kotlin])
+    manifest.attributes(manifestAttributes())
+}
+
+task apiJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    archiveClassifier.set("api")
+    from sourceSets.api.output
+    manifest.attributes(manifestAttributes())
+    afterEvaluate { finalizedBy reobfApiJar }
+}
+
+artifacts {
+    archives apiJar
+    archives jar
+}
+
+reobf {
+    apiJar { classpath.from(sourceSets.api.compileClasspath) }
+    jar { classpath.from(sourceSets.main.compileClasspath) }
+}
 
 // opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
 // jvm-default=all - Generates defaults in interfaces for Java users
@@ -173,9 +211,91 @@ compileKotlin {
         freeCompilerArgs += kotlinCompilerArgs
     }
 }
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs += kotlinCompilerArgs
+
+compileApiKotlin {
+    kotlinOptions.freeCompilerArgs += kotlinCompilerArgs + ["-Xexplicit-api=strict"]
+}
+
+// how shitty of an IDE plugin can you make for a language?
+// i hate this
+// i'm slowly becoming insane
+publishing {
+    publications {
+        //noinspection GroovyAssignabilityCheck
+        maven(MavenPublication) {
+            //noinspection GroovyAssignabilityCheck
+            from components.java
+            //noinspection GroovyAssignabilityCheck
+            artifacts = [apiJar, jar, sourcesJar]
+            //noinspection GroovyAssignabilityCheck
+            artifactId = project.archivesBaseName
+            pom {
+                //noinspection GroovyAssignabilityCheck
+                name = "NuclearTechMod"
+                //noinspection GroovyAssignabilityCheck
+                packaging = "jar"
+                //noinspection GroovyAssignabilityCheck
+                description = "A Minecraft mod about nuclear machinery, bombs and other random things"
+                //noinspection GroovyAssignabilityCheck
+                url = "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake"
+                issueManagement {
+                    //noinspection GroovyAssignabilityCheck
+                    system = "github"
+                    //noinspection GroovyAssignabilityCheck
+                    url = "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/issues"
+                }
+                licenses {
+                    license {
+                        //noinspection GroovyAssignabilityCheck
+                        name = "GPLv3"
+                        //noinspection GroovyAssignabilityCheck
+                        distribution = "repo"
+                        //noinspection GroovyAssignabilityCheck
+                        url = "https://www.gnu.org/licenses/gpl-3.0"
+                    }
+                }
+                developers {
+                    developer {
+                        //noinspection GroovyAssignabilityCheck
+                        id = "MartinTheDragon"
+                        //noinspection GroovyAssignabilityCheck
+                        name = "Martin Alexander Prommegger"
+                    }
+                }
+                scm {
+                    //noinspection GroovyAssignabilityCheck
+                    connection = "scm:git:git://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake.git"
+                    //noinspection GroovyAssignabilityCheck
+                    url = "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake"
+                }
+                // hacky way of modifying the dependencies, because the Gradle developers thought their bad and complicated solution was good enough: https://github.com/gradle/gradle/issues/10861
+                withXml {
+                    def allDependencies = it.asNode().dependencies.'*'
+
+                    // forge is always present
+                    allDependencies.findAll {
+                        it.artifactId.text() == "forge" && it.groupId.text() == "net.minecraftforge"
+                    }.forEach() { it.parent().remove(it) }
+
+                    // if the dependency is mapped, it means in our case that it's a mod we have integration for, which is optional
+                    allDependencies.findAll {
+                        it.version.text().contains("_mapped_")
+                    }.each {
+                        it.version.each { version ->
+                            def versionString = version.text()
+                            version.setValue(versionString.substring(0, versionString.indexOf("_mapped_")))
+                        }
+                        it.appendNode("optional", true)
+                    }
+                }
+            }
+        }
     }
+}
+
+// boo hoo, the class cannot be "applied" to withType, even though IT HAS A CLASS AS A PARAMETER
+// WHY ARE INTELLIJ GROOVY INSPECTIONS SO EXTREMELY BAD
+//noinspection GroovyAssignabilityCheck
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false // disable this, it causes more trouble than it's worth, because gradle apparently cannot follow the xml modifications we made for publishing
 }

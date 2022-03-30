@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.api.blocks.entities.BombBlockEntity
 import at.martinthedragon.nucleartech.blocks.FatManBlock
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.entities.NukeExplosion

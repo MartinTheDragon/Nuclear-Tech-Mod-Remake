@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.api.explosions.IgnitableExplosive
 import at.martinthedragon.nucleartech.blocks.entities.LittleBoyBlockEntity
-import at.martinthedragon.nucleartech.explosions.IgnitableExplosive
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionHand

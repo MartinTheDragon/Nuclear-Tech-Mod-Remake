@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.blocks
 
+import at.martinthedragon.nucleartech.api.blocks.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
-import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.blocks.multi.RotatedMultiBlockPlacer
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction

@@ -1,12 +1,12 @@
 package at.martinthedragon.nucleartech
 
+import at.martinthedragon.nucleartech.api.items.AttackHandler
+import at.martinthedragon.nucleartech.api.items.DamageHandler
+import at.martinthedragon.nucleartech.api.items.FallHandler
+import at.martinthedragon.nucleartech.api.items.TickingArmor
 import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationCapabilityProvider
 import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazards.HazmatValues
-import at.martinthedragon.nucleartech.items.AttackHandler
-import at.martinthedragon.nucleartech.items.DamageHandler
-import at.martinthedragon.nucleartech.items.FallHandler
-import at.martinthedragon.nucleartech.items.TickingArmor
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity

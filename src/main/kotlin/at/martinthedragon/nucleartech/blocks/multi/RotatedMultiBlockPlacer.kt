@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.blocks.multi
 
+import at.martinthedragon.nucleartech.api.blocks.multi.MultiBlockPlacer
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.LevelAccessor

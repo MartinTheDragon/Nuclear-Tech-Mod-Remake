@@ -1,27 +1,30 @@
-package at.martinthedragon.nucleartech.blocks.entities
+package at.martinthedragon.nucleartech.api.blocks.entities
 
 import net.minecraft.world.Container
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.entity.BlockEntity
 import java.util.function.Supplier
 
-// Type-argument T is just used here to make sure the interface gets implemented by an actual TileEntity
-interface BombBlockEntity<T> : Container
+/**
+ * Implement this in a [BlockEntity] and provide it in your [at.martinthedragon.nucleartech.api.explosions.IgnitableExplosive]
+ */
+// Type-argument T is just used here to make sure the interface gets implemented by an actual BlockEntity
+public interface BombBlockEntity<T> : Container
         where T : BlockEntity,
               T : Container,
               T : BombBlockEntity<T>
 {
-    val requiresComponentsToDetonate: Boolean get() = getRequiredDetonationComponents().isNotEmpty()
+    public val requiresComponentsToDetonate: Boolean get() = getRequiredDetonationComponents().isNotEmpty()
 
     /** Returns a Map of all required components */
-    fun getRequiredDetonationComponents(): Map<out Supplier<out Item>, Int>
+    public fun getRequiredDetonationComponents(): Map<out Supplier<out Item>, Int>
 
     /**
      * Returns `true` when all items are contained in the inventory.
      *
      * @exception[NullPointerException] When called before items are registered.
      */
-    fun isComplete(): Boolean {
+    public fun isComplete(): Boolean {
         return when {
             !requiresComponentsToDetonate -> true
             isEmpty -> false
@@ -43,8 +46,8 @@ interface BombBlockEntity<T> : Container
      *
      * Can be used to implement extra checks
      */
-    fun canDetonate() = isComplete()
+    public fun canDetonate(): Boolean = isComplete()
 
     /** Detonates the explosive and returns whether it was successful */
-    fun detonate(): Boolean
+    public fun detonate(): Boolean
 }
