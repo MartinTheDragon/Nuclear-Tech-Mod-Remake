@@ -36,18 +36,14 @@ sourceSets {
             srcDirs += 'src/datagen/generated/resources'
             exclude '.cache'
         }
-        kotlin {
-            compileClasspath += api.output
-            runtimeClasspath += api.output
-        }
+        compileClasspath += api.output
+        runtimeClasspath += api.output
     }
     datagen {
         java.srcDirs = ['src/datagen/main/java'] // so java doesn't create a new folder outside
         kotlin.srcDirs = ['src/datagen/main/kotlin']
-        kotlin {
-            compileClasspath += project.sourceSets.main.output
-        }
         resources.srcDirs = ['src/datagen/main/resources']
+        compileClasspath += api.output + main.output
     }
 }
 
@@ -94,7 +90,7 @@ minecraft {
 
             mods {
                 nucleartech {
-                    sources((SourceSet[]) [sourceSets.main, sourceSets.datagen])
+                    sources((SourceSet[]) [sourceSets.main, sourceSets.api, sourceSets.datagen])
                 }
             }
         }
@@ -198,11 +194,15 @@ reobf {
     jar { classpath.from(sourceSets.main.compileClasspath) }
 }
 
-// opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
-// jvm-default=all - Generates defaults in interfaces for Java users
-// no-call-assertions - Disables not-null assertions on Platform types (when calling Java code)
-// no-param-assertions - Disables not-null assertions on method parameters given by Java code
-// use-fast-jar-file-system - Uses an experimental implementation for faster compilation
+/*
+opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
+jvm-default=all - Generates defaults in interfaces for Java users
+no-call-assertions - Disables not-null assertions on Platform types (when calling Java code)
+no-param-assertions - Disables not-null assertions on method parameters given by Java code
+use-fast-jar-file-system - Uses an experimental implementation for faster compilation
+
+extended-compiler-checks - Gives some more information about things
+*/
 def kotlinCompilerArgs = ["-Xopt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
 
 compileKotlin {
@@ -213,7 +213,24 @@ compileKotlin {
 }
 
 compileApiKotlin {
-    kotlinOptions.freeCompilerArgs += kotlinCompilerArgs + ["-Xexplicit-api=strict"]
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += kotlinCompilerArgs + ["-Xexplicit-api=strict"]
+    }
+}
+
+compileDatagenKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += kotlinCompilerArgs
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += kotlinCompilerArgs
+    }
 }
 
 // how shitty of an IDE plugin can you make for a language?
