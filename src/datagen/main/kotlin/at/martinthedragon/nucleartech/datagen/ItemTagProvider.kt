@@ -60,7 +60,6 @@ class ItemTagProvider(
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_TITANIUM, NuclearTags.Items.STORAGE_BLOCKS_TITANIUM)
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_SULFUR, NuclearTags.Items.STORAGE_BLOCKS_SULFUR)
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_NITER, NuclearTags.Items.STORAGE_BLOCKS_NITER)
-        copy(NuclearTags.Blocks.STORAGE_BLOCKS_COPPER, NuclearTags.Items.STORAGE_BLOCKS_COPPER)
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_TUNGSTEN, NuclearTags.Items.STORAGE_BLOCKS_TUNGSTEN)
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_ALUMINIUM, NuclearTags.Items.STORAGE_BLOCKS_ALUMINIUM)
         copy(NuclearTags.Blocks.STORAGE_BLOCKS_FLUORITE, NuclearTags.Items.STORAGE_BLOCKS_FLUORITE)

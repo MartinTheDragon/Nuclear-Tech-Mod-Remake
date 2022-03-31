@@ -92,7 +92,6 @@ object ModBlockItems {
     val titaniumBlock: RegistryObject<BlockItem> = ITEMS.register("titanium_block") { BlockItem(ModBlocks.titaniumBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val sulfurBlock: RegistryObject<BlockItem> = ITEMS.register("sulfur_block") { BlockItem(ModBlocks.sulfurBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val niterBlock: RegistryObject<BlockItem> = ITEMS.register("niter_block") { BlockItem(ModBlocks.niterBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
-    val copperBlock: RegistryObject<BlockItem> = ITEMS.register("copper_block") { BlockItem(ModBlocks.copperBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val redCopperBlock: RegistryObject<BlockItem> = ITEMS.register("red_copper_block") { BlockItem(ModBlocks.redCopperBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val advancedAlloyBlock: RegistryObject<BlockItem> = ITEMS.register("advanced_alloy_block") { BlockItem(ModBlocks.advancedAlloyBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val tungstenBlock: RegistryObject<BlockItem> = ITEMS.register("tungsten_block") { BlockItem(ModBlocks.tungstenBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }

@@ -103,7 +103,6 @@ object ModBlocks {
     val titaniumBlock: RegistryObject<Block> = BLOCKS.register("titanium_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val sulfurBlock: RegistryObject<Block> = BLOCKS.register("sulfur_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val niterBlock: RegistryObject<Block> = BLOCKS.register("niter_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val copperBlock: RegistryObject<Block> = BLOCKS.register("copper_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val redCopperBlock: RegistryObject<Block> = BLOCKS.register("red_copper_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val advancedAlloyBlock: RegistryObject<Block> = BLOCKS.register("advanced_alloy_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val tungstenBlock: RegistryObject<Block> = BLOCKS.register("tungsten_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }

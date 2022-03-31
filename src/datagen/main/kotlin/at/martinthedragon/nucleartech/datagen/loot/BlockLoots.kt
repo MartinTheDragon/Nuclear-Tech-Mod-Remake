@@ -123,7 +123,6 @@ class BlockLoots : BlockLoot() {
         dropSelf(ModBlocks.titaniumBlock.get())
         dropSelf(ModBlocks.sulfurBlock.get())
         dropSelf(ModBlocks.niterBlock.get())
-        dropSelf(ModBlocks.copperBlock.get())
         dropSelf(ModBlocks.redCopperBlock.get())
         dropSelf(ModBlocks.advancedAlloyBlock.get())
         dropSelf(ModBlocks.tungstenBlock.get())
