@@ -203,7 +203,7 @@ use-fast-jar-file-system - Uses an experimental implementation for faster compil
 
 extended-compiler-checks - Gives some more information about things
 */
-def kotlinCompilerArgs = ["-Xopt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
+def kotlinCompilerArgs = ["-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
 
 compileKotlin {
     kotlinOptions {
