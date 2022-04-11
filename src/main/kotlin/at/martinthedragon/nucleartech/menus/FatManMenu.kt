@@ -56,6 +56,6 @@ class FatManMenu(
 
     companion object {
         fun fromNetwork(windowID: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            FatManMenu(windowID, playerInventory, getTileEntityForContainer(buffer))
+            FatManMenu(windowID, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

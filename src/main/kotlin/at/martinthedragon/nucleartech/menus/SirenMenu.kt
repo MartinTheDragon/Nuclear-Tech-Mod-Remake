@@ -52,6 +52,6 @@ class SirenMenu(windowId: Int, playerInventory: Inventory, val tileEntity: Siren
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            SirenMenu(windowId, playerInventory, getTileEntityForContainer(buffer))
+            SirenMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

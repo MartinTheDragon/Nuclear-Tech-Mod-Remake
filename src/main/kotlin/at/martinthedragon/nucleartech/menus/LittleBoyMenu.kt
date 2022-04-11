@@ -52,6 +52,6 @@ class LittleBoyMenu(
 
     companion object {
         fun fromNetwork(windowID: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            LittleBoyMenu(windowID, playerInventory, getTileEntityForContainer(buffer))
+            LittleBoyMenu(windowID, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

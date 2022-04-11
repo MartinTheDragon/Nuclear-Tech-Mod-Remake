@@ -52,6 +52,6 @@ class SafeMenu(windowId: Int, playerInventory: Inventory, val tileEntity: SafeBl
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            SafeMenu(windowId, playerInventory, getTileEntityForContainer(buffer))
+            SafeMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

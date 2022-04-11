@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraftforge.fml.DistExecutor
+import net.minecraftforge.fml.DistExecutor.SafeSupplier
 
 inline fun addPlayerInventory(
     addSlot: (Slot) -> Slot,
@@ -42,11 +43,19 @@ fun AbstractContainerMenu.tryMoveInPlayerInventory(index: Int, inventoryStart: I
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <T : BlockEntity> getTileEntityForContainer(buffer: FriendlyByteBuf): T {
-    return DistExecutor.safeRunForDist({ DistExecutor.SafeSupplier {
-        val pos = buffer.readBlockPos()
-        Minecraft.getInstance().level?.getBlockEntity(pos) ?: throw IllegalStateException("Invalid tile entity position sent from server: $pos")
-    }}) {
+fun <T : BlockEntity> getBlockEntityForContainer(buffer: FriendlyByteBuf): T = DistExecutor.safeRunForDist({ ClientBlockEntityGetter(buffer) }) { ServerBlockEntityGetter() }
+
+private class ServerBlockEntityGetter : SafeSupplier<Nothing> {
+    override fun get(): Nothing {
         throw IllegalAccessException("Cannot call function on server")
-    } as? T ?: throw IllegalStateException("Cannot open container on wrong tile entity")
+    }
+}
+
+private class ClientBlockEntityGetter<out T : BlockEntity>(private val buffer: FriendlyByteBuf) : SafeSupplier<@UnsafeVariance T> {
+    @Suppress("UNCHECKED_CAST")
+    override fun get(): T {
+        val pos = buffer.readBlockPos()
+        return (Minecraft.getInstance().level?.getBlockEntity(pos) ?: throw IllegalStateException("Invalid block entity position sent from server: $pos"))
+            as? T ?: throw IllegalStateException("Cannot open container on wrong block entity")
+    }
 }

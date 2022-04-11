@@ -76,6 +76,6 @@ class CombustionGeneratorMenu(
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            CombustionGeneratorMenu(windowId, playerInventory, getTileEntityForContainer(buffer))
+            CombustionGeneratorMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

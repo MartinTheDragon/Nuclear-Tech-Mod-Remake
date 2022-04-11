@@ -82,6 +82,6 @@ class PressMenu(
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            PressMenu(windowId, playerInventory, getTileEntityForContainer(buffer))
+            PressMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

@@ -68,6 +68,6 @@ class AssemblerMenu(
 
     companion object {
         fun fromNetwork(windowID: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            AssemblerMenu(windowID, playerInventory, getTileEntityForContainer(buffer))
+            AssemblerMenu(windowID, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

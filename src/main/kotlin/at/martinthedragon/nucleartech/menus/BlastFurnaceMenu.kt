@@ -74,6 +74,6 @@ class BlastFurnaceMenu(
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            BlastFurnaceMenu(windowId, playerInventory, getTileEntityForContainer(buffer))
+            BlastFurnaceMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

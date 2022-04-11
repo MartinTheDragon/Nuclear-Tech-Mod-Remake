@@ -71,6 +71,6 @@ class ElectricFurnaceMenu(
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            ElectricFurnaceMenu(windowId, playerInventory, getTileEntityForContainer(buffer))
+            ElectricFurnaceMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
     }
 }

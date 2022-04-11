@@ -88,6 +88,6 @@ class ShredderMenu(
 
     companion object {
         fun fromNetwork(windowID: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
-            ShredderMenu(windowID, playerInventory, getTileEntityForContainer(buffer))
+            ShredderMenu(windowID, playerInventory, getBlockEntityForContainer(buffer))
     }
 }
