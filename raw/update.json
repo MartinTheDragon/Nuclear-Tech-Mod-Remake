@@ -1,7 +1,11 @@
 {
   "homepage": "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases",
   "promos": {
+    "1.18.2-latest": "0.0.12.0",
     "1.18.1-latest": "0.0.11.0"
+  },
+  "1.18.2": {
+    "0.0.12.0": "Added the Assembler and improved explosion algorithms\nSee changelog for more details"
   },
   "1.18.1": {
     "0.0.11.0": "First 1.18 version\nSee changelog for more details on new features"
