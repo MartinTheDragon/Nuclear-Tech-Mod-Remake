@@ -34,7 +34,7 @@ open class FullSetBonusArmorItem(material: ArmorMaterial, slot: EquipmentSlot, v
 
     override fun appendHoverText(stack: ItemStack, level: Level?, tooltip: MutableList<Component>, flag: TooltipFlag) {
         tooltip.apply {
-            add(ntmTranslation("armor.full_set_bonus").gold())
+            val originalCount = tooltip.size
             with(bonus) {
                 for (effect in effects) add(TranslatableComponent(effect.descriptionId).aqua().prependIntent())
                 for (resistance in resistances)
@@ -55,6 +55,7 @@ open class FullSetBonusArmorItem(material: ArmorMaterial, slot: EquipmentSlot, v
                 if (dashCount > 0) add(ntmTranslation("armor.dash_count", dashCount).aqua().prependIntent())
                 if (protectionYield != 100F) add(ntmTranslation("armor.protection_yield", protectionYield).blue().prependIntent())
             }
+            if (tooltip.size > originalCount) add(originalCount, ntmTranslation("armor.full_set_bonus").gold())
         }
     }
 
@@ -150,6 +151,8 @@ open class FullSetBonusArmorItem(material: ArmorMaterial, slot: EquipmentSlot, v
         val effects: Collection<MobEffectInstance> = emptyList()
     ) {
         companion object {
+            val EMPTY = FullSetBonus()
+
             fun copyFrom(armorFSB: FullSetBonusArmorItem) = armorFSB.bonus.copy()
         }
     }

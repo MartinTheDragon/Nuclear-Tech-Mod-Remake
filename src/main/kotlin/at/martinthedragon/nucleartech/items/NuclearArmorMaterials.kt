@@ -10,6 +10,9 @@ import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.crafting.Ingredient
 
 object NuclearArmorMaterials {
+    val hazmat: ArmorMaterial = Material(name("hazmat"), 60, intArrayOf(2, 5, 4, 1), 5, SoundEvents.ARMOR_EQUIP_LEATHER, 0F, 0F, lazy { Ingredient.of(ModItems.hazmatCloth.get()) })
+    val advancedHazmat: ArmorMaterial = Material(name("advanced_hazmat"), 60, intArrayOf(2, 5, 4, 1), 5, SoundEvents.ARMOR_EQUIP_LEATHER, 0F, 0F, lazy { Ingredient.of(ModItems.advancedHazmatCloth.get()) })
+    val reinforcedHazmat: ArmorMaterial = Material(name("reinforced_hazmat"), 60, intArrayOf(2, 5, 4, 1), 5, SoundEvents.ARMOR_EQUIP_LEATHER, 0F, 0F, lazy { Ingredient.of(ModItems.leadReinforcedHazmatCloth.get()) })
     val titanium: ArmorMaterial = Material(name("titanium"), 25, intArrayOf(3, 8, 6, 3), 9, SoundEvents.ARMOR_EQUIP_IRON, .5F, 0F, lazy { Ingredient.of(NuclearTags.Items.INGOTS_TITANIUM) })
     val steel: ArmorMaterial = Material(name("steel"), 20, intArrayOf(2, 6, 5, 2), 5, SoundEvents.ARMOR_EQUIP_IRON, .25F, 0F, lazy { Ingredient.of(NuclearTags.Items.INGOTS_STEEL) })
     val advancedAlloy: ArmorMaterial = Material(name("advanced_alloy"), 40, intArrayOf(3, 8, 6, 3), 9, SoundEvents.ARMOR_EQUIP_IRON, 1F, 0F, lazy { Ingredient.of(ModItems.advancedAlloyIngot.get()) })

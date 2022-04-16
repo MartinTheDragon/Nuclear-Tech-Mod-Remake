@@ -5,10 +5,14 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.capabilites.Capabilities
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
+import com.mojang.blaze3d.vertex.DefaultVertexFormat
 import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.blaze3d.vertex.Tesselator
+import com.mojang.blaze3d.vertex.VertexFormat
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiComponent
 import net.minecraft.client.renderer.GameRenderer
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.levelgen.SingleThreadedRandomSource
 import net.minecraft.world.level.levelgen.synth.SimplexNoise
 import net.minecraftforge.api.distmarker.Dist
@@ -81,6 +85,27 @@ object ClientRenderer {
         }
 
         matrixStack.popPose()
+    }
+
+    // ForgeIngameGui#renderTextureOverlay
+    fun renderTextureOverlay(texture: ResourceLocation, alpha: Float, width: Int, height: Int) {
+        RenderSystem.disableDepthTest()
+        RenderSystem.depthMask(false)
+        RenderSystem.defaultBlendFunc()
+        RenderSystem.setShader(GameRenderer::getPositionTexShader)
+        RenderSystem.setShaderColor(1F, 1F, 1F, alpha)
+        RenderSystem.setShaderTexture(0, texture)
+        val tesselator = Tesselator.getInstance()
+        val bufferbuilder = tesselator.builder
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX)
+        bufferbuilder.vertex(0.0, height.toDouble(), -90.0).uv(0F, 1F).endVertex()
+        bufferbuilder.vertex(width.toDouble(), height.toDouble(), -90.0).uv(1F, 1F).endVertex()
+        bufferbuilder.vertex(width.toDouble(), 0.0, -90.0).uv(1F, 0F).endVertex()
+        bufferbuilder.vertex(0.0, 0.0, -90.0).uv(0F, 0F).endVertex()
+        tesselator.end()
+        RenderSystem.depthMask(true)
+        RenderSystem.enableDepthTest()
+        RenderSystem.setShaderColor(1F, 1F, 1F, 1F)
     }
 
     @Mod.EventBusSubscriber(Dist.CLIENT, modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)

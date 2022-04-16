@@ -571,8 +571,8 @@ object ModItems {
     val bombIgniterFatMan = ITEMS.registerK("bomb_igniter_fat_man") { AutoTooltippedItem(Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
     val plutoniumCore = ITEMS.registerK("plutonium_core") { EffectItem(listOf(EffectItem.EffectTypes.Radioactive), Properties().tab(CreativeTabs.Bombs).stacksTo(1), 5F) }
     val detonator = ITEMS.registerK("detonator") { DetonatorItem(Properties().tab(CreativeTabs.Bombs).stacksTo(1)) }
-    val littleBoyKit = ITEMS.registerK("little_boy_kit") { BombKitItem(mapOf(ModBlockItems.littleBoy to 1) + LittleBoyBlock.requiredComponents, 0x0026FF, Properties().tab(CreativeTabs.Bombs)) }
-    val fatManKit = ITEMS.registerK("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatManBlock.requiredComponents, 0xFFD800, Properties().tab(CreativeTabs.Bombs)) }
+    val littleBoyKit = ITEMS.registerK("little_boy_kit") { BombKitItem(mapOf(ModBlockItems.littleBoy to 1) + LittleBoyBlock.requiredComponents, 0, 0x0026FF, Properties().tab(CreativeTabs.Bombs)) }
+    val fatManKit = ITEMS.registerK("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatManBlock.requiredComponents, 0, 0xFFD800, Properties().tab(CreativeTabs.Bombs)) }
 
     // Consumables and Gear
 
@@ -586,6 +586,18 @@ object ModItems {
     val strongRadAway = ITEMS.registerK("strong_radaway") { RadAwayItem(350F, 4 * 20, Properties().tab(CreativeTabs.Consumables)) }
     val eliteRadAway = ITEMS.registerK("elite_radaway") { RadAwayItem(1000F, 3 * 20, Properties().tab(CreativeTabs.Consumables)) }
 
+    val hazmatHelmet = ITEMS.registerK("hazmat_helmet") { HazmatMaskItem(NuclearArmorMaterials.hazmat, EquipmentSlot.HEAD, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val hazmatChestplate = ITEMS.registerK("hazmat_chestplate") { FullSetBonusArmorItem(NuclearArmorMaterials.hazmat, EquipmentSlot.CHEST, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val hazmatLeggings = ITEMS.registerK("hazmat_leggings") { FullSetBonusArmorItem(NuclearArmorMaterials.hazmat, EquipmentSlot.LEGS, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val hazmatBoots = ITEMS.registerK("hazmat_boots") { FullSetBonusArmorItem(NuclearArmorMaterials.hazmat, EquipmentSlot.FEET, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val advancedHazmatHelmet = ITEMS.registerK("advanced_hazmat_helmet") { HazmatMaskItem(NuclearArmorMaterials.advancedHazmat, EquipmentSlot.HEAD, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val advancedHazmatChestplate = ITEMS.registerK("advanced_hazmat_chestplate") { FullSetBonusArmorItem(NuclearArmorMaterials.advancedHazmat, EquipmentSlot.CHEST, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val advancedHazmatLeggings = ITEMS.registerK("advanced_hazmat_leggings") { FullSetBonusArmorItem(NuclearArmorMaterials.advancedHazmat, EquipmentSlot.LEGS, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val advancedHazmatBoots = ITEMS.registerK("advanced_hazmat_boots") { FullSetBonusArmorItem(NuclearArmorMaterials.advancedHazmat, EquipmentSlot.FEET, FullSetBonusArmorItem.FullSetBonus.EMPTY, Properties().tab(CreativeTabs.Consumables)) }
+    val reinforcedHazmatHelmet = ITEMS.registerK("reinforced_hazmat_helmet") { HazmatMaskItem(NuclearArmorMaterials.reinforcedHazmat, EquipmentSlot.HEAD, FullSetBonusArmorItem.FullSetBonus(fireproof = true), Properties().tab(CreativeTabs.Consumables)) }
+    val reinforcedHazmatChestplate = ITEMS.registerK("reinforced_hazmat_chestplate") { FullSetBonusArmorItem(NuclearArmorMaterials.reinforcedHazmat, EquipmentSlot.CHEST, FullSetBonusArmorItem.FullSetBonus.copyFrom(reinforcedHazmatHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
+    val reinforcedHazmatLeggings = ITEMS.registerK("reinforced_hazmat_leggings") { FullSetBonusArmorItem(NuclearArmorMaterials.reinforcedHazmat, EquipmentSlot.LEGS, FullSetBonusArmorItem.FullSetBonus.copyFrom(reinforcedHazmatHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
+    val reinforcedHazmatBoots = ITEMS.registerK("reinforced_hazmat_boots") { FullSetBonusArmorItem(NuclearArmorMaterials.reinforcedHazmat, EquipmentSlot.FEET, FullSetBonusArmorItem.FullSetBonus.copyFrom(reinforcedHazmatHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
     val titaniumHelmet = ITEMS.registerK("titanium_helmet") { FullSetBonusArmorItem(NuclearArmorMaterials.titanium, EquipmentSlot.HEAD, FullSetBonusArmorItem.FullSetBonus(damageMod = .85F), Properties().tab(CreativeTabs.Consumables)) }
     val titaniumChestplate = ITEMS.registerK("titanium_chestplate") { FullSetBonusArmorItem(NuclearArmorMaterials.titanium, EquipmentSlot.CHEST, FullSetBonusArmorItem.FullSetBonus.copyFrom(titaniumHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
     val titaniumLeggings = ITEMS.registerK("titanium_leggings") { FullSetBonusArmorItem(NuclearArmorMaterials.titanium, EquipmentSlot.LEGS, FullSetBonusArmorItem.FullSetBonus.copyFrom(titaniumHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
