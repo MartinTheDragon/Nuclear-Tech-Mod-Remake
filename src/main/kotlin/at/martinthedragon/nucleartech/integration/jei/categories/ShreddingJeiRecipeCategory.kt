@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.entities.ShredderBlockEntity
+import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.ShreddingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
@@ -11,6 +12,7 @@ import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.gui.drawable.IDrawableAnimated
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
@@ -22,18 +24,15 @@ import net.minecraft.world.item.crafting.Ingredient
 
 class ShreddingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<ShreddingRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 111, 54)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.shredder.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.shredder.get()))
     private val arrow = guiHelper.drawableBuilder(GUI_RESOURCE, 16, 90, 22, 16).buildAnimated(ShredderBlockEntity.SHREDDING_TIME, IDrawableAnimated.StartDirection.LEFT, false)
     private val energyBar = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 16, 52).buildAnimated(ShredderBlockEntity.MAX_ENERGY / ShredderBlockEntity.ENERGY_CONSUMPTION_RATE / 10, IDrawableAnimated.StartDirection.TOP, true)
 
     override fun getUid() = UID
-
     override fun getRecipeClass() = ShreddingRecipe::class.java
-
+    override fun getRecipeType() = NuclearRecipeTypes.SHREDDING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.shredding")
-
     override fun getBackground(): IDrawable = background
-
     override fun getIcon(): IDrawable = icon
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: ShreddingRecipe, focuses: IFocusGroup) {
@@ -44,7 +43,7 @@ class ShreddingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Shredd
         builder.addSlot(RecipeIngredientRole.OUTPUT, 74, 20).addItemStack(recipe.resultItem)
     }
 
-    override fun draw(recipe: ShreddingRecipe, matrixStack: PoseStack, mouseX: Double, mouseY: Double) {
+    override fun draw(recipe: ShreddingRecipe, recipeSlotsView: IRecipeSlotsView, matrixStack: PoseStack, mouseX: Double, mouseY: Double) {
         arrow.draw(matrixStack, 46, 20)
         energyBar.draw(matrixStack, 1, 1)
         drawExperience(recipe, matrixStack)

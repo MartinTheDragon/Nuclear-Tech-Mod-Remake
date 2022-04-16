@@ -2,12 +2,14 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilSmithingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
@@ -18,10 +20,11 @@ import net.minecraft.world.item.ItemStack
 
 class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
     private val background: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 0, 90, 27).setTextureSize(128, 128).build()
-    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.ironAnvil.get()))
+    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.ironAnvil.get()))
 
     override fun getUid() = UID
     override fun getRecipeClass() = AnvilSmithingRecipe::class.java
+    override fun getRecipeType() = NuclearRecipeTypes.SMITHING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.smithing")
     override fun getBackground() = background
     override fun getIcon() = icon
@@ -32,7 +35,7 @@ class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSm
         builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 10).addItemStack(recipe.resultItem)
     }
 
-    override fun draw(recipe: AnvilSmithingRecipe, stack: PoseStack, mouseX: Double, mouseY: Double) {
+    override fun draw(recipe: AnvilSmithingRecipe, recipeSlotsView: IRecipeSlotsView, stack: PoseStack, mouseX: Double, mouseY: Double) {
         val tierString = TranslatableComponent("jei.${NuclearTech.MODID}.category.smithing.tier", recipe.tier)
         val fontRenderer = Minecraft.getInstance().font
         val stringWidth = fontRenderer.width(tierString)

@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.integration.jei.transfers
 
+import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.integration.jei.categories.PressingJeiRecipeCategory
 import at.martinthedragon.nucleartech.menus.PressMenu
 import at.martinthedragon.nucleartech.recipes.PressingRecipe
@@ -11,6 +12,7 @@ class PressingRecipeTransferInfo : IRecipeTransferInfo<PressMenu, PressingRecipe
     override fun getContainerClass(): Class<PressMenu> = PressMenu::class.java
     override fun getRecipeClass(): Class<PressingRecipe> = PressingRecipe::class.java
     override fun getRecipeCategoryUid(): ResourceLocation = PressingJeiRecipeCategory.UID
+    override fun getRecipeType() = NuclearRecipeTypes.PRESSING
     override fun canHandle(container: PressMenu, recipe: PressingRecipe) = true
     override fun getRecipeSlots(container: PressMenu, recipe: PressingRecipe): MutableList<Slot> = MutableList(2) { container.slots[it] }
     override fun getInventorySlots(container: PressMenu, recipe: PressingRecipe): MutableList<Slot> = MutableList(36) { container.slots[it + 4] }

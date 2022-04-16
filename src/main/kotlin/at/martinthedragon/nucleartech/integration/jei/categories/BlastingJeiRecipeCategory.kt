@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.ModBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.BlastingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
@@ -9,6 +10,7 @@ import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
 import mezz.jei.api.gui.drawable.IDrawableAnimated
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
@@ -19,17 +21,14 @@ import net.minecraft.world.item.ItemStack
 
 class BlastingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 72, 54)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModBlockItems.blastFurnace.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.blastFurnace.get()))
     private val blastArrow = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 22, 16).buildAnimated(400, IDrawableAnimated.StartDirection.LEFT, false)
 
     override fun getUid() = UID
-
     override fun getRecipeClass(): Class<out BlastingRecipe> = BlastingRecipe::class.java
-
+    override fun getRecipeType() = NuclearRecipeTypes.BLASTING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.blasting")
-
     override fun getBackground(): IDrawable = background
-
     override fun getIcon(): IDrawable = icon
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: BlastingRecipe, focuses: IFocusGroup) {
@@ -38,7 +37,7 @@ class BlastingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Blastin
         builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 19).addItemStack(recipe.resultItem)
     }
 
-    override fun draw(recipe: BlastingRecipe, matrixStack: PoseStack, mouseX: Double, mouseY: Double) {
+    override fun draw(recipe: BlastingRecipe, recipeSlotsView: IRecipeSlotsView, matrixStack: PoseStack, mouseX: Double, mouseY: Double) {
         blastArrow.draw(matrixStack, 23, 19)
         drawExperience(recipe, matrixStack)
     }

@@ -12,8 +12,8 @@ import net.minecraft.resources.ResourceLocation
 class BatteryCraftingJeiRecipeCategory(val recipe: BatteryRecipe) : ICraftingCategoryExtension {
     override fun setRecipe(builder: IRecipeLayoutBuilder, craftingGridHelper: ICraftingGridHelper, focuses: IFocusGroup) {
         val inputs = recipe.ingredients.map { it.items.toList() }
-        craftingGridHelper.setInputs(builder, VanillaTypes.ITEM, inputs, width, height)
-        craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM, listOf(recipe.resultItem))
+        craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, inputs, width, height)
+        craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, listOf(recipe.resultItem))
     }
 
     override fun getRegistryName(): ResourceLocation = recipe.id

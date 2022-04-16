@@ -52,7 +52,6 @@ class JeiIntegration : IModPlugin {
         if (!templateFolderOutputs.isEmpty) {
             val machineTemplateFolder = ItemStack(ModItems.machineTemplateFolder.get())
             // unnecessarily long automation logic follows, but seems to be working nonetheless
-            @OptIn(ExperimentalStdlibApi::class)
             registration.addRecipes(NuclearRecipeTypes.FOLDER_RESULTS, buildList(TemplateFolderJeiRecipeCategory.TemplateFolderRecipe.TemplateType.values().size) {
                 add(TemplateFolderJeiRecipeCategory.TemplateFolderRecipe(machineTemplateFolder, TemplateFolderJeiRecipeCategory.TemplateFolderRecipe.TemplateType.StoneStamp, Ingredient.of(*tagManager.getTag(NuclearTags.Items.STONE_STAMPS).toMutableList().apply { remove(ModItems.stoneFlatStamp.get()) }.toTypedArray())))
                 add(TemplateFolderJeiRecipeCategory.TemplateFolderRecipe(machineTemplateFolder, TemplateFolderJeiRecipeCategory.TemplateFolderRecipe.TemplateType.IronStamp, Ingredient.of(*tagManager.getTag(NuclearTags.Items.IRON_STAMPS).toMutableList().apply { remove(ModItems.ironFlatStamp.get()) }.toTypedArray())))

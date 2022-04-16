@@ -1,11 +1,13 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView
 import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
@@ -26,6 +28,7 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
 
     override fun getUid() = UID
     override fun getRecipeClass() = AnvilConstructingRecipe::class.java
+    override fun getRecipeType() = NuclearRecipeTypes.CONSTRUCTING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing")
     override fun getBackground() = background
     override fun getIcon() = hammer
@@ -58,7 +61,7 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
         }
     }
 
-    override fun draw(recipe: AnvilConstructingRecipe, stack: PoseStack, mouseX: Double, mouseY: Double) {
+    override fun draw(recipe: AnvilConstructingRecipe, recipeSlotsView: IRecipeSlotsView, stack: PoseStack, mouseX: Double, mouseY: Double) {
         val tierString =
             if (recipe.tierUpper == -1 || recipe.tierLower == recipe.tierUpper) TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.tier", recipe.tierLower)
             else TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.tier_range", recipe.tierLower, recipe.tierUpper)

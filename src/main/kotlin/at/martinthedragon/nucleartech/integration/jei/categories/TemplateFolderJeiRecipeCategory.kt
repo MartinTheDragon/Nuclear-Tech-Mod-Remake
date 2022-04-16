@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -17,16 +18,13 @@ import net.minecraft.world.item.crafting.Ingredient
 
 class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<TemplateFolderJeiRecipeCategory.TemplateFolderRecipe> {
     private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 112, 38)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, ItemStack(ModItems.machineTemplateFolder.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModItems.machineTemplateFolder.get()))
 
     override fun getUid() = UID
-
     override fun getRecipeClass() = TemplateFolderRecipe::class.java
-
+    override fun getRecipeType() = NuclearRecipeTypes.FOLDER_RESULTS
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.template_folder_results")
-
     override fun getBackground(): IDrawable = background
-
     override fun getIcon(): IDrawable = icon
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: TemplateFolderRecipe, focuses: IFocusGroup) {
