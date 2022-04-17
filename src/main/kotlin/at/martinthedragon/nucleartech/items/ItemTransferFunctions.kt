@@ -32,7 +32,7 @@ inline fun transferItemsBetweenItemHandlers(first: IItemHandler, second: IItemHa
             if (remaining <= 0) return
             val remainingCount = to.insertItem(destinationSlot, impostorStack, true).count
             if (remainingCount < originalCount) {
-                remaining -= originalCount - to.insertItem(destinationSlot, from.extractItem(originSlot, remaining, false), false).count
+                remaining -= originalCount - to.insertItem(destinationSlot, from.extractItem(originSlot, originalCount - remainingCount, false), false).count
             }
         }
     }
