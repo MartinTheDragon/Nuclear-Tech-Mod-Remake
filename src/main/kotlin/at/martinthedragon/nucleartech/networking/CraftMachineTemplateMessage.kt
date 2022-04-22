@@ -3,11 +3,11 @@ package at.martinthedragon.nucleartech.networking
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.items.giveItemToInventory
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.sounds.SoundSource
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -87,24 +87,7 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     }
                 }
 
-                val stack = result.copy()
-                val successful = sender.inventory.add(stack)
-                if (successful && stack.isEmpty) {
-                    stack.count = 1
-                    sender.drop(stack, false)?.makeFakeItem()
-                    sender.level.playSound(
-                        null, sender.x, sender.y, sender.z,
-                        net.minecraft.sounds.SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS,
-                        .2F, ((sender.random.nextFloat() - sender.random.nextFloat()) * .7F + 1F) * 2F
-                    )
-                    sender.inventoryMenu.broadcastChanges()
-                } else {
-                    val droppedStack = sender.drop(stack, false)
-                    if (droppedStack != null) {
-                        droppedStack.setNoPickUpDelay()
-                        droppedStack.owner = sender.uuid
-                    }
-                }
+                giveItemToInventory(sender, result.copy())
             }
         context.get().packetHandled = true
     }

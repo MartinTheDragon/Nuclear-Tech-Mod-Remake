@@ -1,8 +1,12 @@
 package at.martinthedragon.nucleartech.items
 
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.Container
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.ItemLike
 import net.minecraftforge.items.IItemHandler
+import kotlin.math.min
 
 fun canTransferItem(from: ItemStack, to: ItemStack, inventory: Container? = null): Boolean = when {
     from.isEmpty -> false
@@ -34,6 +38,42 @@ inline fun transferItemsBetweenItemHandlers(first: IItemHandler, second: IItemHa
             if (remainingCount < originalCount) {
                 remaining -= originalCount - to.insertItem(destinationSlot, from.extractItem(originSlot, originalCount - remainingCount, false), false).count
             }
+        }
+    }
+}
+
+// from give command, use server-side only
+fun giveItemToInventory(player: Player, item: ItemLike, amount: Int) {
+    var amountLeft = amount
+    while (true) {
+        if (amountLeft <= 0) break
+
+        @Suppress("DEPRECATION")
+        val possibleAmount = min(item.asItem().maxStackSize, amountLeft)
+        val newStack = ItemStack(item, possibleAmount)
+        giveItemToInventory(player, newStack)
+
+        amountLeft -= possibleAmount
+    }
+}
+
+fun giveItemToInventory(player: Player, stack: ItemStack) {
+    val successful = player.inventory.add(stack)
+    if (successful && stack.isEmpty) {
+        stack.count = 1
+        player.drop(stack, false)?.makeFakeItem()
+        // cannot use player.playSound here because we already checked for server
+        player.level.playSound(
+            null, player.x, player.y, player.z,
+            net.minecraft.sounds.SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS,
+            .2F, ((player.random.nextFloat() - player.random.nextFloat()) * .7F + 1F) * 2F
+        )
+        player.inventoryMenu.broadcastChanges()
+    } else {
+        val droppedStack = player.drop(stack, false)
+        if (droppedStack != null) {
+            droppedStack.setNoPickUpDelay()
+            droppedStack.owner = player.uuid
         }
     }
 }
