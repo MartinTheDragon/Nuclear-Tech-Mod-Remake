@@ -44,7 +44,7 @@ import net.minecraftforge.items.ItemStackHandler
 import net.minecraftforge.network.PacketDistributor
 
 class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state),
-    TickingServerBlockEntity, StackedContentsCompatible
+    TickingServerBlockEntity, TickingClientBlockEntity, StackedContentsCompatible
 {
     private val relativeRotation by lazy { RotatedMultiBlockPlacer.invert(RotatedMultiBlockPlacer.getRotationFor(level!!.getBlockState(blockPos).getValue(HorizontalDirectionalBlock.FACING))) }
 
@@ -142,6 +142,16 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
 
     override fun fillStackedContents(stacks: StackedContents) {
         for (itemStack in items) stacks.accountStack(itemStack)
+    }
+
+    var renderTick: Int = 0
+        private set
+
+    override fun clientTick(level: Level, pos: BlockPos, state: BlockState) {
+        if (isProgressing) {
+            renderTick++
+            if (renderTick >= 1800) renderTick = 0
+        } else renderTick = 0
     }
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {

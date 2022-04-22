@@ -24,3 +24,13 @@ fun <T> createClientTicker()
     BlockEntityTicker<T> { level, pos, state, blockEntity ->
         blockEntity.clientTick(level, pos, state)
     }
+
+fun <T, X> createSidedTickerChecked(isClient: Boolean, type: BlockEntityType<T>, expectedType: BlockEntityType<X>): BlockEntityTicker<T>?
+    where T : BlockEntity,
+          X : BlockEntity,
+          X : TickingClientBlockEntity,
+          X : TickingServerBlockEntity =
+    if (type == expectedType)
+        if (isClient) createClientTickerChecked(type, expectedType) as BlockEntityTicker<T>
+        else createServerTickerChecked(type, expectedType) as BlockEntityTicker<T>
+    else null

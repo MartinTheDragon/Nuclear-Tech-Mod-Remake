@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.api.blocks.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.blocks.entities.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
+import at.martinthedragon.nucleartech.blocks.entities.createSidedTickerChecked
 import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -48,7 +49,7 @@ class AssemblerBlock(properties: Properties) : BaseEntityBlock(properties) {
     override fun mirror(state: BlockState, mirror: Mirror) = state
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState) = AssemblerBlockEntity(pos, state)
-    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.assemblerBlockEntityType.get())
+    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = createSidedTickerChecked(level.isClientSide, type, BlockEntityTypes.assemblerBlockEntityType.get())
 
     class AssemblerPart : MultiBlockPart(ModBlocks.assembler.get()) {
         init { registerDefaultState(stateDefinition.any().setValue(PORT_MODE, Mode.NONE)) }
