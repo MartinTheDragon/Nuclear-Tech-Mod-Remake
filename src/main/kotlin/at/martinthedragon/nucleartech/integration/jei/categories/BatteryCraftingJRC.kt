@@ -9,7 +9,7 @@ import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategor
 import net.minecraft.resources.ResourceLocation
 
 // TODO show off different energy levels to clarify that the resulting item retains the energy
-class BatteryCraftingJeiRecipeCategory(val recipe: BatteryRecipe) : ICraftingCategoryExtension {
+class BatteryCraftingJRC(val recipe: BatteryRecipe) : ICraftingCategoryExtension {
     override fun setRecipe(builder: IRecipeLayoutBuilder, craftingGridHelper: ICraftingGridHelper, focuses: IFocusGroup) {
         val inputs = recipe.ingredients.map { it.items.toList() }
         craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, inputs, width, height)

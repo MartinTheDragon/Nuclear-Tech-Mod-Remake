@@ -18,11 +18,12 @@ import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 
-class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
-    private val background: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 0, 90, 27).setTextureSize(128, 128).build()
+class SmithingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
+    private val texture = ntm("textures/gui/jei_smithing.png")
+    private val background: IDrawable = guiHelper.drawableBuilder(texture, 0, 0, 90, 27).setTextureSize(128, 128).build()
     private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.ironAnvil.get()))
 
-    override fun getUid() = UID
+    override fun getUid() = ntm("smithing")
     override fun getRecipeClass() = AnvilSmithingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.SMITHING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.smithing")
@@ -42,8 +43,4 @@ class SmithingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSm
         fontRenderer.draw(stack, tierString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)
     }
 
-    companion object {
-        private val GUI_RESOURCE = ntm("textures/gui/jei_smithing.png")
-        val UID = ntm("smithing")
-    }
 }

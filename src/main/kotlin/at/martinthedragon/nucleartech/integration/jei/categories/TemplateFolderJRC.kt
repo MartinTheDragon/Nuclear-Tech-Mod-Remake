@@ -16,11 +16,12 @@ import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 
-class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<TemplateFolderJeiRecipeCategory.TemplateFolderRecipe> {
-    private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 112, 38)
+class TemplateFolderJRC(guiHelper: IGuiHelper) : IRecipeCategory<TemplateFolderJRC.TemplateFolderRecipe> {
+    private val texture = ntm("textures/gui/jei_template_folder.png")
+    private val background = guiHelper.createDrawable(texture, 0, 0, 112, 38)
     private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModItems.machineTemplateFolder.get()))
 
-    override fun getUid() = UID
+    override fun getUid() = ntm("template_folder_results")
     override fun getRecipeClass() = TemplateFolderRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.FOLDER_RESULTS
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.template_folder_results")
@@ -28,7 +29,7 @@ class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<T
     override fun getIcon(): IDrawable = icon
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: TemplateFolderRecipe, focuses: IFocusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 66, 1).addItemStack(recipe.folderItem)
+        builder.addSlot(RecipeIngredientRole.CATALYST, 66, 1).addItemStack(recipe.folderItem)
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 21).addIngredients(recipe.templateType.firstIngredient)
         builder.addSlot(RecipeIngredientRole.INPUT, 37, 21).addIngredients(recipe.templateType.secondIngredient)
         builder.addSlot(RecipeIngredientRole.OUTPUT, 95, 21).addItemStacks(recipe.result.items.toList())
@@ -44,10 +45,5 @@ class TemplateFolderJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<T
             SchrabidiumStamp(Ingredient.of(ModItems.schrabidiumFlatStamp.get()), Ingredient.EMPTY),
             SirenTrack(Ingredient.of(NuclearTags.Items.PLATES_INSULATOR), Ingredient.of(NuclearTags.Items.PLATES_STEEL)),
         }
-    }
-
-    companion object {
-        val GUI_RESOURCE = ntm("textures/gui/jei_template_folder.png")
-        val UID = ntm("template_folder_results")
     }
 }

@@ -19,16 +19,18 @@ import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 
-class BlastingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
-    private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 72, 54)
+class BlastingJRC(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
+    private val texture = ntm("textures/gui/jei_blast_furnace.png")
+    private val background = guiHelper.createDrawable(texture, 0, 0, 72, 54)
     private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.blastFurnace.get()))
-    private val blastArrow = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 22, 16).buildAnimated(400, IDrawableAnimated.StartDirection.LEFT, false)
+    private val blastArrow = guiHelper.drawableBuilder(texture, 0, 54, 22, 16).buildAnimated(400, IDrawableAnimated.StartDirection.LEFT, false)
 
-    override fun getUid() = UID
+    override fun getUid() = ntm("blasting")
     override fun getRecipeClass(): Class<out BlastingRecipe> = BlastingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.BLASTING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.blasting")
     override fun getBackground(): IDrawable = background
+
     override fun getIcon(): IDrawable = icon
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: BlastingRecipe, focuses: IFocusGroup) {
@@ -50,10 +52,5 @@ class BlastingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Blastin
             val stringWidth = fontRenderer.width(experienceString)
             fontRenderer.draw(matrixStack, experienceString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)
         }
-    }
-
-    companion object {
-        val GUI_RESOURCE = ntm("textures/gui/jei_blast_furnace.png")
-        val UID = ntm("blasting")
     }
 }

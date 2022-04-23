@@ -20,12 +20,13 @@ import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 
-class PressingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<PressingRecipe> {
-    private val background = guiHelper.createDrawable(GUI_RESOURCE, 0, 0, 81, 54)
+class PressingJRC(guiHelper: IGuiHelper) : IRecipeCategory<PressingRecipe> {
+    private val texture = ntm("textures/gui/jei_press.png")
+    private val background = guiHelper.createDrawable(texture, 0, 0, 81, 54)
     private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.steamPress.get()))
-    private val pressArrow = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 54, 18, 16).buildAnimated(20, IDrawableAnimated.StartDirection.TOP, false)
+    private val pressArrow = guiHelper.drawableBuilder(texture, 0, 54, 18, 16).buildAnimated(20, IDrawableAnimated.StartDirection.TOP, false)
 
-    override fun getUid() = UID
+    override fun getUid() = ntm("pressing")
     override fun getRecipeClass(): Class<out PressingRecipe> = PressingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.PRESSING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.pressing")
@@ -34,7 +35,7 @@ class PressingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Pressin
 
     override fun setRecipe(builder: IRecipeLayoutBuilder, recipe: PressingRecipe, focuses: IFocusGroup) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 37).addIngredients(recipe.ingredient)
-        builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(Ingredient.of(recipe.stampType.tag))
+        builder.addSlot(RecipeIngredientRole.CATALYST, 1, 1).addIngredients(Ingredient.of(recipe.stampType.tag))
         builder.addSlot(RecipeIngredientRole.OUTPUT, 64, 19).addItemStack(recipe.resultItem)
     }
 
@@ -51,10 +52,5 @@ class PressingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Pressin
             val stringWidth = fontRenderer.width(experienceString)
             fontRenderer.draw(matrixStack, experienceString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)
         }
-    }
-
-    companion object {
-        val GUI_RESOURCE = ntm("textures/gui/jei_press.png")
-        val UID = ntm("pressing")
     }
 }

@@ -17,16 +17,17 @@ import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.network.chat.TranslatableComponent
 
-class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructingRecipe> {
-    private val background: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 0, 180, 64).build()
-    private val arrow: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 0, 16, 16).build()
-    private val wrench: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 16, 16, 16).build()
-    private val recycle: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 32, 16, 16).build()
-    private val hammer: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 180, 48, 16, 16).build()
-    private val hideLeft: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 0, 64, 72, 54).build()
-    private val hideRight: IDrawable = guiHelper.drawableBuilder(GUI_RESOURCE, 108, 64, 72, 54).build()
+class ConstructingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructingRecipe> {
+    private val texture = ntm("textures/gui/jei_constructing.png")
+    private val background: IDrawable = guiHelper.drawableBuilder(texture, 0, 0, 180, 64).build()
+    private val arrow: IDrawable = guiHelper.drawableBuilder(texture, 180, 0, 16, 16).build()
+    private val wrench: IDrawable = guiHelper.drawableBuilder(texture, 180, 16, 16, 16).build()
+    private val recycle: IDrawable = guiHelper.drawableBuilder(texture, 180, 32, 16, 16).build()
+    private val hammer: IDrawable = guiHelper.drawableBuilder(texture, 180, 48, 16, 16).build()
+    private val hideLeft: IDrawable = guiHelper.drawableBuilder(texture, 0, 64, 72, 54).build()
+    private val hideRight: IDrawable = guiHelper.drawableBuilder(texture, 108, 64, 72, 54).build()
 
-    override fun getUid() = UID
+    override fun getUid() = ntm("constructing")
     override fun getRecipeClass() = AnvilConstructingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.CONSTRUCTING
     override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing")
@@ -45,7 +46,7 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
         }
         when (recipe.overlay) {
             AnvilConstructingRecipe.OverlayType.NONE, AnvilConstructingRecipe.OverlayType.RECYCLING -> {
-                for (y in 0 until 3) for (x in 0 until 4)builder.addSlot(RecipeIngredientRole.OUTPUT, 109 + x * 18, 11 + y * 18).apply {
+                for (y in 0 until 3) for (x in 0 until 4) builder.addSlot(RecipeIngredientRole.OUTPUT, 109 + x * 18, 11 + y * 18).apply {
                     val index = y * 4 + x
                     val results = recipe.getResultsChanceCollapsed()
                     if (index <= results.lastIndex) addItemStack(results[index])
@@ -80,10 +81,5 @@ class ConstructingJeiRecipeCategory(guiHelper: IGuiHelper) : IRecipeCategory<Anv
 
         if (overlay == AnvilConstructingRecipe.OverlayType.RECYCLING || overlay == AnvilConstructingRecipe.OverlayType.SMITHING) hideLeft.draw(stack, 0, 10)
         if (overlay == AnvilConstructingRecipe.OverlayType.CONSTRUCTING || overlay == AnvilConstructingRecipe.OverlayType.SMITHING) hideRight.draw(stack, 108, 10)
-    }
-
-    companion object {
-        private val GUI_RESOURCE = ntm("textures/gui/jei_constructing.png")
-        val UID = ntm("constructing")
     }
 }

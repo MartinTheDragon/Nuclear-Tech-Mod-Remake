@@ -59,5 +59,6 @@ class AssemblyTemplateItem(properties: Properties) : Item(properties) {
         fun getRecipeFromStack(stack: ItemStack, recipeManager: RecipeManager) = getRecipeIDFromStack(stack)?.let { recipeManager.byKey(it).orElse(null) as? AssemblyRecipe }
         fun getAllTemplates(recipeManager: RecipeManager): List<ItemStack> = recipeManager.getAllRecipesFor(RecipeTypes.ASSEMBLY).map { ItemStack(ModItems.assemblyTemplate.get()).apply { orCreateTag.putString("recipe", it.id.toString()) } }
         fun isValidTemplate(stack: ItemStack, recipeManager: RecipeManager) = getRecipeFromStack(stack, recipeManager) != null
+        fun createWithID(id: ResourceLocation) = ItemStack(ModItems.assemblyTemplate.get(), 1).apply { orCreateTag.putString("recipe", id.toString()) }
     }
 }
