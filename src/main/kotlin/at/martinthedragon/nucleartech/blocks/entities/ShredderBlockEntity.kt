@@ -18,6 +18,8 @@ import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -146,9 +148,9 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlock
         recipesUsed.clear()
     }
 
-    override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
-        if (level.isClientSide) return
+    private var soundCycle = 0
 
+    override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         val wasShredding = isShredding
         var contentsChanged = false
 
@@ -205,6 +207,10 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlock
             ) {
                 shreddingProgress++
             }
+
+            // TODO creates sound artifacts, perhaps replace with a loop?
+            if (soundCycle++ == 0) level.playSound(null, blockPos, SoundEvents.MINECART_RIDING, SoundSource.BLOCKS, 1F, .75F)
+            if (soundCycle >= 50) soundCycle = 0
         } else if (isShredding) shreddingProgress = (shreddingProgress - 2).coerceAtLeast(0)
 
         if (wasShredding != isShredding) {
