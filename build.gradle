@@ -203,13 +203,14 @@ reobf {
 /*
 opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
 jvm-default=all - Generates defaults in interfaces for Java users
+lambdas=indy - Uses invokedynamic for lambdas instead of generating explicit classes
 no-call-assertions - Disables not-null assertions on Platform types (when calling Java code)
 no-param-assertions - Disables not-null assertions on method parameters given by Java code
 use-fast-jar-file-system - Uses an experimental implementation for faster compilation
 
 extended-compiler-checks - Gives some more information about things
 */
-def kotlinCompilerArgs = ["-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
+def kotlinCompilerArgs = ["-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xlambdas=indy", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
 
 compileKotlin {
     kotlinOptions {
