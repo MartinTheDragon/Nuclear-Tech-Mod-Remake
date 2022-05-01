@@ -783,6 +783,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.blasting.experience", "%s XP")
         add("jei.$MODID.category.template_folder_results", "Template Folder")
         add("jei.$MODID.category.shredding", "Shredding")
+        add("jei.$MODID.category.assembling", "Assembling")
     }
 
     private fun addMaterials() {

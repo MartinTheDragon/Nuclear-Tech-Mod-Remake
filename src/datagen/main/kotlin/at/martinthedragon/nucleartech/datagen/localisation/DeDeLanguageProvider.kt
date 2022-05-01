@@ -810,6 +810,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.blasting.experience", "%s EP")
         add("jei.$MODID.category.template_folder_results", "Vorlagen-Zeichenmappe")
         add("jei.$MODID.category.shredding", "Zerkleinerungsrezepte")
+        add("jei.$MODID.category.assembling", "Maschienenanfertigungsrezepte")
     }
 
     private fun addMaterials() {
