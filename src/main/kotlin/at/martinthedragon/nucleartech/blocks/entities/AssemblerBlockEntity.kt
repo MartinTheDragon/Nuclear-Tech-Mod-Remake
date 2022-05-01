@@ -48,7 +48,7 @@ import net.minecraftforge.items.ItemStackHandler
 import net.minecraftforge.network.PacketDistributor
 
 class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state),
-    TickingServerBlockEntity, TickingClientBlockEntity, StackedContentsCompatible
+    TickingBlockEntity, StackedContentsCompatible, SoundLoopBlockEntity
 {
     private val relativeRotation by lazy { RotatedMultiBlockPlacer.invert(RotatedMultiBlockPlacer.getRotationFor(level!!.getBlockState(blockPos).getValue(HorizontalDirectionalBlock.FACING))) }
 
@@ -151,8 +151,15 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
     var renderTick: Int = 0
         private set
 
+    override val soundPos: BlockPos get() = blockPos
+    override val shouldPlaySoundLoop get() = isProgressing && !isRemoved
+    override val soundLoopEvent = SoundEvents.assemblerOperate.get()
+    override val soundLoopStateMachine = SoundLoopBlockEntity.SoundStateMachine(this)
+
     override fun clientTick(level: Level, pos: BlockPos, state: BlockState) {
-        if (isProgressing) {
+        super.clientTick(level, pos, state)
+
+        if (isProgressing && !isRemoved) {
             renderTick++
             if (renderTick >= 1800) renderTick = 0
         } else renderTick = 0
@@ -204,6 +211,11 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
             val message = AssemblerSyncMessage(blockPos, recipeID, isProgressing || canProgress)
             NuclearPacketHandler.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with { level!!.getChunkAt(blockPos) }, message)
         }
+    }
+
+    override fun setRemoved() {
+        super.setRemoved()
+        soundLoopStateMachine.tick()
     }
 
     private val inputInventory = AccessLimitedInputItemHandler(inventory, 5..16)

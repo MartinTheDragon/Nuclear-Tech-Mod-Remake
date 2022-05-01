@@ -758,6 +758,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackRazortrainHorn, "Sirene läuft: Razortrain Horn")
         addSound(SoundEvents.anvilFall, "Amboss klescht")
         addSound(SoundEvents.pressOperate, "Presse stampft")
+        addSound(SoundEvents.assemblerOperate, "Fertigungsmaschine arbeitet")
         addSound(SoundEvents.inject, "Nadel injiziert")
         addSound(SoundEvents.emptyIVBag, "Flüssigkeit infusioniert")
         addSound(SoundEvents.randomBleep, "Gerät piepst")

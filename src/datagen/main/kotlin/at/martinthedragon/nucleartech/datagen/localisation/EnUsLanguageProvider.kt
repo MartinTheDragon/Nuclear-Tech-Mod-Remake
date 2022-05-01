@@ -731,6 +731,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackRazortrainHorn, "Siren running: Razortrain Horn")
         addSound(SoundEvents.anvilFall, "Anvil clashes")
         addSound(SoundEvents.pressOperate, "Press stamps")
+        addSound(SoundEvents.assemblerOperate, "Assembler whirs")
         addSound(SoundEvents.inject, "Needle injected")
         addSound(SoundEvents.emptyIVBag, "Liquid infused")
         addSound(SoundEvents.randomBleep, "Device bleeps")

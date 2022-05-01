@@ -37,6 +37,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.sirenTrackRazortrainHorn, definition().with(sound(ntm("block/siren/razortrain_horn")).attenuationDistance(ModItems.sirenTrackRazortrainHorn.get().range)).subtitle(ntmSubtitle("siren.razortrain_horn")))
         add(SoundEvents.anvilFall, definition().with(sound(ntm("block/anvil_fall_berserk"))).subtitle(ntmSubtitle("anvil.fall")))
         add(SoundEvents.pressOperate, definition().with(sound(ntm("block/press/press_operate"))).subtitle(ntmSubtitle("press.operate")))
+        add(SoundEvents.assemblerOperate, definition().with(sound(ntm("block/assembler/assembler_operate"))).subtitle(ntmSubtitle("assembler.operate")))
         add(SoundEvents.inject, definition().with(sound(ntm("item/use/inject"))).subtitle(ntmSubtitle("item.use.inject")))
         add(SoundEvents.emptyIVBag, definition().with(sound(ntm("item/use/radaway"))).subtitle(ntmSubtitle("item.use.radaway")))
         add(SoundEvents.randomBleep, definition().with(sound(ntm("random/bleep"))).subtitle(ntmSubtitle("random.bleep")))

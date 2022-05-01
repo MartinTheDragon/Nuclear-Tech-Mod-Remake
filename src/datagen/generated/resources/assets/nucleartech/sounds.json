@@ -193,6 +193,12 @@
       "nucleartech:block/press/press_operate"
     ]
   },
+  "assembler.operate": {
+    "subtitle": "subtitle.nucleartech.assembler.operate",
+    "sounds": [
+      "nucleartech:block/assembler/assembler_operate"
+    ]
+  },
   "item.use.inject": {
     "subtitle": "subtitle.nucleartech.item.use.inject",
     "sounds": [

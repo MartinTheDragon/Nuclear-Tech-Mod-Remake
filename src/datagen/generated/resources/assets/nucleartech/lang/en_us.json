@@ -885,6 +885,7 @@
   "nucleartech.armor.vats": "Enemy HUD",
   "nucleartech.attribute.name.generic.radiation_resistance": "Radiation Resistance",
   "subtitle.nucleartech.anvil.fall": "Anvil clashes",
+  "subtitle.nucleartech.assembler.operate": "Assembler whirs",
   "subtitle.nucleartech.geiger.click": "Geiger Counter clicks",
   "subtitle.nucleartech.item.use.inject": "Needle injected",
   "subtitle.nucleartech.item.use.radaway": "Liquid infused",
