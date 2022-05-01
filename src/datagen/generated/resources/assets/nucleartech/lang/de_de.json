@@ -854,6 +854,7 @@
   "itemGroup.nucleartech_miscellaneous": "NTM Verschiedenes",
   "itemGroup.nucleartech_parts": "NTM Ressourcen und Bauteile",
   "itemGroup.nucleartech_templates": "NTM Fertigungsvorlagen",
+  "jei.nucleartech.category.assembling": "Maschienenanfertigungsrezepte",
   "jei.nucleartech.category.blasting": "Hochofenrezepte",
   "jei.nucleartech.category.blasting.experience": "%s EP",
   "jei.nucleartech.category.constructing": "Konstruktionsrezepe",

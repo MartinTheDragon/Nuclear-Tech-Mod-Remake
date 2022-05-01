@@ -854,6 +854,7 @@
   "itemGroup.nucleartech_miscellaneous": "NTM Miscellaneous Items",
   "itemGroup.nucleartech_parts": "NTM Resources and Parts",
   "itemGroup.nucleartech_templates": "NTM Templates",
+  "jei.nucleartech.category.assembling": "Assembling",
   "jei.nucleartech.category.blasting": "Blasting",
   "jei.nucleartech.category.blasting.experience": "%s XP",
   "jei.nucleartech.category.constructing": "Constructing",
