@@ -37,9 +37,9 @@ open class BatteryItem(
 
     override fun canApplyAtEnchantingTable(stack: ItemStack?, enchantment: Enchantment?) = false
 
-    override fun isBarVisible(stack: ItemStack?) = true
+    override fun isBarVisible(stack: ItemStack) = true
 
-    override fun getBarColor(stack: ItemStack?) = Mth.color(0, 255, 100)
+    override fun getBarColor(stack: ItemStack) = Mth.color(0, 255, 100)
 
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         if (allowdedIn(tab)) {

@@ -15,7 +15,7 @@ import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.energy.EnergyStorage
 
 class BatteryOfInfinityItem(properties: Properties) : BatteryItem(0, 0, 0, properties) {
-    override fun isBarVisible(stack: ItemStack?) = false
+    override fun isBarVisible(stack: ItemStack) = false
 
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         if (allowdedIn(tab)) items.add(ItemStack(this))
