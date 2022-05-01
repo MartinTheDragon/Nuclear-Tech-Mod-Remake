@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.api.world.dropExperience
 import at.martinthedragon.nucleartech.blocks.entities.SteamPressBlockEntity
-import at.martinthedragon.nucleartech.world.dropExperience
 import net.minecraft.core.BlockPos
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand

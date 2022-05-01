@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.api.blocks.entities.ExperienceRecipeResultBlockEntity
+import at.martinthedragon.nucleartech.api.blocks.entities.TickingServerBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.items.canTransferItem

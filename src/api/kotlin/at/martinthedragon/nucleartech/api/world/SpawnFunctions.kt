@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.world
+package at.martinthedragon.nucleartech.api.world
 
 import net.minecraft.world.entity.ExperienceOrb
 import net.minecraft.world.level.Level
@@ -6,7 +6,7 @@ import net.minecraft.world.phys.Vec3
 import kotlin.math.floor
 import kotlin.random.Random
 
-fun Level.dropExperience(pos: Vec3, amount: Float) {
+public fun Level.dropExperience(pos: Vec3, amount: Float) {
     if (amount < 0F) throw IllegalArgumentException("Cannot drop anti-experience")
 
     var integerValue = floor(amount).toInt()

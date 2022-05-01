@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.menus
 
+import at.martinthedragon.nucleartech.api.menus.slots.ExperienceResultSlot
 import at.martinthedragon.nucleartech.blocks.entities.ShredderBlockEntity
 import at.martinthedragon.nucleartech.items.ShredderBladeItem
-import at.martinthedragon.nucleartech.menus.slots.ExperienceResultSlot
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player

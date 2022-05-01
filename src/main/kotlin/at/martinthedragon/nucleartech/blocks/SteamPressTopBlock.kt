@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.api.blocks.entities.createServerTickerChecked
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.blocks.entities.SteamPressBlockEntity
-import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
 import net.minecraft.core.BlockPos
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player

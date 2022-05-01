@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.api.blocks.entities.ExperienceRecipeResultBlockEntity
+import at.martinthedragon.nucleartech.api.blocks.entities.TickingServerBlockEntity
 import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.menus.BlastFurnaceMenu
 import at.martinthedragon.nucleartech.recipes.BlastingRecipe

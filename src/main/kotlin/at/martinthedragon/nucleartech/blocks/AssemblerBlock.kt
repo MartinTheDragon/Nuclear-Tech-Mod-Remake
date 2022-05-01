@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.api.blocks.entities.createServerTickerChecked
+import at.martinthedragon.nucleartech.api.blocks.entities.createSidedTickerChecked
 import at.martinthedragon.nucleartech.api.blocks.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.blocks.entities.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
-import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
-import at.martinthedragon.nucleartech.blocks.entities.createSidedTickerChecked
 import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction

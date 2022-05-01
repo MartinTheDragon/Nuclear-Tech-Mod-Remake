@@ -1,23 +1,23 @@
-package at.martinthedragon.nucleartech.menus.slots
+package at.martinthedragon.nucleartech.api.menus.slots
 
-import at.martinthedragon.nucleartech.blocks.entities.ExperienceRecipeResultBlockEntity
-import at.martinthedragon.nucleartech.blocks.entities.dropExperienceAndAwardRecipes
+import at.martinthedragon.nucleartech.api.blocks.entities.ExperienceRecipeResultBlockEntity
+import at.martinthedragon.nucleartech.api.blocks.entities.dropExperienceAndAwardRecipes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.SlotItemHandler
 import kotlin.math.min
 
-open class ExperienceResultSlot(
-    val tileEntity: ExperienceRecipeResultBlockEntity,
-    val player: Player,
+public open class ExperienceResultSlot(
+    public val tileEntity: ExperienceRecipeResultBlockEntity,
+    public val player: Player,
     inventory: IItemHandler,
     index: Int,
     xPosition: Int, yPosition: Int
 ) : SlotItemHandler(inventory, index, xPosition, yPosition) {
-    var removeCount = 0
+    private var removeCount = 0
 
-    final override fun mayPlace(stack: ItemStack) = false
+    final override fun mayPlace(stack: ItemStack): Boolean = false
 
     override fun remove(amount: Int): ItemStack {
         if (hasItem()) removeCount += min(amount, item.count)

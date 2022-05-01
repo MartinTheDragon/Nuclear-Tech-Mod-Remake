@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.menus
 
+import at.martinthedragon.nucleartech.api.menus.slots.ExperienceResultSlot
 import at.martinthedragon.nucleartech.blocks.entities.BlastFurnaceBlockEntity
-import at.martinthedragon.nucleartech.menus.slots.ExperienceResultSlot
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.SimpleContainer

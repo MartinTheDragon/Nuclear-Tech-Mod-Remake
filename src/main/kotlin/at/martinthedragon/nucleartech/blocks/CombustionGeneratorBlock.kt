@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.blocks
 
+import at.martinthedragon.nucleartech.api.blocks.entities.createServerTickerChecked
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.blocks.entities.CombustionGeneratorBlockEntity
-import at.martinthedragon.nucleartech.blocks.entities.createServerTickerChecked
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
