@@ -49,7 +49,7 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
 
         dealDamage(level, position(), (length * 2).toDouble())
 
-        if (explosion == null) explosion = NukeExplosionRay(level, blockPosition(), strength, length)
+        if (explosion == null) explosion = NukeExplosionRay(level, position(), strength, length)
 
         when {
             !explosion!!.initialized -> explosion!!.collectTips(speed * 10)

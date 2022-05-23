@@ -1,10 +1,11 @@
 package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.math.toBlockPos
 import net.minecraft.core.BlockPos
 import net.minecraft.core.SectionPos
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.IntTag
+import net.minecraft.nbt.DoubleTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
@@ -16,71 +17,78 @@ import kotlin.math.*
 
 class NukeExplosionRay(
     val world: Level,
-    val pos: BlockPos,
+    val pos: Vec3,
     val strength: Int,
     val length: Int
 ) {
     private val tips = mutableListOf<Vec3>()
-    val tipsCount: Int
-        get() = tips.size
-    private var startY = 0
-    private var startCircumference = 0
+    val tipsCount: Int get() = tips.size
     var initialized = false
         private set
     private var processed = 0
 
+    private val generalisedSpiralPointMax = (2.5 * PI * strength * strength).toInt()
+    private var currentSpiralPoint = 1
+    private var currentSpiralPointX = PI
+    private var currentSpiralPointY = 0.0
+
+    private fun generateSpiralPointUp() {
+        if (currentSpiralPoint < generalisedSpiralPointMax) {
+            val x = currentSpiralPoint++ / (generalisedSpiralPointMax - 1.0) * 2 - 1
+            currentSpiralPointX = acos(x)
+
+            val y = currentSpiralPointY + 3.6 / sqrt(generalisedSpiralPointMax.toDouble()) / sqrt(1 - x * x)
+            currentSpiralPointY = y % (PI * 2)
+        } else {
+            currentSpiralPointX = 0.0
+            currentSpiralPointY = 0.0
+        }
+    }
+
+
+    private fun getSpherical2Cartesian(): Vec3 {
+        val sinX = sin(currentSpiralPointX)
+        val dx = sinX * cos(currentSpiralPointY)
+        val dy = cos(currentSpiralPointX)
+        val dz = sinX * sin(currentSpiralPointY)
+        return Vec3(dx, dy, dz)
+    }
+
     fun collectTips(count: Int) {
         var amountProcessed = 0
-        val bow = strength * PI
-        val bowCount = ceil(bow).toInt()
 
-        for (v in startY..bowCount) {
-            val part = PI / bow
-            val rot = part * -v
-            val height = Vec3(0.0, -strength.toDouble(), 0.0).zRot(rot.toFloat())
-            val y = height.y
-            val sectionRad = sqrt(strength.toFloat().pow(2F) - y.toFloat().pow(2F))
-            val circumference = 2 * PI * sectionRad
+        while (currentSpiralPoint < generalisedSpiralPointMax) {
+            generateSpiralPointUp()
+            val vec = getSpherical2Cartesian()
+            var remaining = strength.toFloat()
+            var lastPos: Vec3? = null
 
-            for (r in startCircumference..circumference.toInt()) {
-                val vec = Vec3(sectionRad.toDouble(), y, 0.0).normalize().yRot((360 / circumference * r).toFloat())
-                var remaining = strength.toFloat()
-                var lastPos: Vec3? = null
+            for (i in 0 until strength) {
+                if (i > length) break
 
-                for (i in 0 until strength) {
-                    if (i > length) break
-                    val newPos = Vec3(
-                        pos.x + vec.x * i,
-                        pos.y + vec.y * i,
-                        pos.z + vec.z * i
-                    )
+                val newPos = Vec3(
+                    pos.x + vec.x * i,
+                    pos.y + vec.y * i,
+                    pos.z + vec.z * i
+                )
+                val newBlockPos = BlockPos(newPos)
 
-                    val newBlockPos = BlockPos(newPos)
+                val fac = (100 - i.toDouble() / strength.toDouble() * 100) * 0.07
 
-                    val fac = (100 - i.toDouble() / strength.toDouble() * 100) * 0.07
+                val block = getBlockState(world, newBlockPos)
 
-                    val block = getBlockState(world, newBlockPos)
+                remaining -= if (block.material.isLiquid) 2.5F.pow(7.5F - fac.toFloat())
+                else block.getExplosionResistance(world, newBlockPos, null).pow(7.5F - fac.toFloat())
 
-                    remaining -= if (block.material.isLiquid) 2.5F.pow(7.5F - fac.toFloat())
-                    else block.getExplosionResistance(world, newBlockPos, null).pow(7.5F - fac.toFloat())
+                if (remaining > 0 && !block.isAir) lastPos = newPos
 
-                    if (remaining > 0 && !block.isAir) lastPos = newPos
-
-                    if (remaining <= 0 || i + 1 > length) {
-                        if (tips.size < Int.MAX_VALUE - 100 && lastPos != null)
-                            tips += lastPos
-                        break
-                    }
-                }
-
-                amountProcessed++
-
-                if (amountProcessed >= count) {
-                    startY = v
-                    startCircumference++
-                    return
+                if (remaining <= 0 || i + 1 > length) {
+                    if (tips.size < Int.MAX_VALUE - 100 && lastPos != null)
+                        tips += lastPos
+                    break
                 }
             }
+            if (++amountProcessed >= count) return
         }
         initialized = true // ready to process
     }
@@ -106,13 +114,11 @@ class NukeExplosionRay(
                 tip.z - pos.z
             )
 
-            val normalVector = vector.normalize()
+            val unitVector = vector.normalize()
 
             for (distance in 0..vector.length().toInt()) {
                 val distanceDouble = distance.toDouble()
-                val currentPos = normalVector.multiply(distanceDouble, distanceDouble, distanceDouble)
-                    .add(pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble())
-                    .let { BlockPos(it.x.roundToInt(), it.y.roundToInt(), it.z.roundToInt()) }
+                val currentPos = unitVector.multiply(distanceDouble, distanceDouble, distanceDouble).add(pos).toBlockPos()
                 if (!getBlockState(world, currentPos).isAir) {
                     removeBlock(world, currentPos)
                     destroyedBlocks++
@@ -128,9 +134,9 @@ class NukeExplosionRay(
     fun serialize(): CompoundTag {
         val nbt = CompoundTag()
         val posNbt = ListTag()
-        posNbt.add(IntTag.valueOf(pos.x))
-        posNbt.add(IntTag.valueOf(pos.y))
-        posNbt.add(IntTag.valueOf(pos.z))
+        posNbt.add(DoubleTag.valueOf(pos.x))
+        posNbt.add(DoubleTag.valueOf(pos.y))
+        posNbt.add(DoubleTag.valueOf(pos.z))
         nbt.put("Pos", posNbt)
         nbt.putInt("Strength", strength)
         nbt.putInt("Length", length)
@@ -144,10 +150,11 @@ class NukeExplosionRay(
         tipsData.putLongArray("TipsDataZ", tipsDataZ)
         nbt.put("ExplosionData", tipsData)
 
-        nbt.putInt("StartY", startY)
-        nbt.putInt("StartCircumference", startCircumference)
         nbt.putBoolean("Initialized", initialized)
         nbt.putInt("Processed", processed)
+        nbt.putInt("CurrentSpiralPoint", currentSpiralPoint)
+        nbt.putDouble("CurrentSpiralPointX", currentSpiralPointX)
+        nbt.putDouble("CurrentSpiralPointY", currentSpiralPointY)
         return nbt
     }
 
@@ -187,10 +194,10 @@ class NukeExplosionRay(
 
     companion object {
         fun deserialize(world: Level, nbt: CompoundTag): NukeExplosionRay {
-            val posNbt = nbt.getList("Pos", 3)
+            val posNbt = nbt.getList("Pos", 6)
             val explosion = NukeExplosionRay(
                 world,
-                BlockPos(posNbt.getInt(0), posNbt.getInt(1), posNbt.getInt(2)),
+                Vec3(posNbt.getDouble(0), posNbt.getDouble(1), posNbt.getDouble(2)),
                 nbt.getInt("Strength"), nbt.getInt("Length")
             )
 
@@ -209,10 +216,11 @@ class NukeExplosionRay(
                 explosion.tips.add(Vec3(x, y , z))
             }
             explosion.apply {
-                startY = nbt.getInt("StartY")
-                startCircumference = nbt.getInt("StartCircumference")
                 initialized = nbt.getBoolean("Initialized")
                 processed = nbt.getInt("Processed")
+                currentSpiralPoint = nbt.getInt("CurrentSpiralPoint")
+                currentSpiralPointX = nbt.getDouble("CurrentSpiralPointX")
+                currentSpiralPointY = nbt.getDouble("CurrentSpiralPointY")
             }
             return explosion
         }
