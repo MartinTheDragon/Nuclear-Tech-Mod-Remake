@@ -72,6 +72,10 @@ minecraft {
 
             property 'forge.logging.console.level', 'debug'
 
+            // you'll have to use JetBrains Runtime to get anything out of this
+            // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
+            jvmArgs("-XX:+AllowEnhancedClassRedefinition", "-XX:HotswapAgent=fatjar", "-Xlog:redefine+class*=info")
+
             mods {
                 nucleartech {
                     sources((SourceSet[]) [sourceSets.main, sourceSets.api])
@@ -83,6 +87,10 @@ minecraft {
             workingDirectory file("run")
 
             property 'forge.logging.console.level', 'debug'
+
+            // you'll have to use JetBrains Runtime to get anything out of this
+            // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
+            jvmArgs("-XX:+AllowEnhancedClassRedefinition", "-XX:HotswapAgent=fatjar", "-Xlog:redefine+class*=info")
 
             mods {
                 nucleartech {
