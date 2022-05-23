@@ -1,0 +1,44 @@
+// https://gist.github.com/ronaldstevanus/b4fab9802b2b0979db97f45cb6207caf
+
+/**
+ * Load all local properties defined on local.properties files in all projects (root and sub projects).
+ * How to use:
+ * - add apply from: 'properties-reader.gradle' on the root project's build.gradle
+ * - get the values by calling project.localProperties.get("property name")
+ * - check property existence by calling project.localProperties.contains("property name")
+ */
+
+def LOCAL_PROPERTIES_FILENAME = "local.properties"
+
+def getFile = { dir, filename ->
+    File file = new File("$dir$File.separator$filename")
+    file?.exists() ? file : null
+}
+
+def getPropertyFile = { dir ->
+    return getFile(dir, LOCAL_PROPERTIES_FILENAME)
+}
+
+def getLocalProperties = { dir ->
+    def file = getPropertyFile(dir)
+    if (!file) {
+        return null
+    }
+
+    Properties properties = new Properties()
+    properties.load(file.newInputStream())
+    return properties
+}
+
+project.ext.localProperties = getLocalProperties(rootDir)
+
+allprojects {
+    beforeEvaluate { project ->
+        def properties = getLocalProperties(project.projectDir)
+        if (properties) {
+            rootProject.ext.localProperties.putAll(p)
+        }
+
+        project.ext.localProperties = rootProject.ext.localProperties
+    }
+}

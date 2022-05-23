@@ -136,6 +136,13 @@ object ClientRegistries {
         event.registerReloadListener(SpecialModels)
     }
 
+    // uncomment, compile a snapshot, put it in the mods folder of your logged-in minecraft instance, start it and see the console log
+//    @SubscribeEvent @JvmStatic
+//    fun grabAuthToken(event: FMLClientSetupEvent) {
+//        println("AUTH_TOKEN ${Minecraft.getInstance().user.accessToken}")
+//        println("UUID ${Minecraft.getInstance().user.uuid}")
+//    }
+
     @Mod.EventBusSubscriber(modid = NuclearTech.MODID, value = [Dist.CLIENT], bus = Mod.EventBusSubscriber.Bus.MOD)
     object Shaders {
         lateinit var rendertypeMushroomCloudShader: ShaderInstance private set
