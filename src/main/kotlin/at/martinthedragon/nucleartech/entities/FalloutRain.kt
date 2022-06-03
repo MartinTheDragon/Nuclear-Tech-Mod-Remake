@@ -55,10 +55,11 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
         val chunks = mutableSetOf<ChunkPos>()
         val outerChunks = mutableSetOf<ChunkPos>()
         val outerRange = getScale()
-        val adjustedMaxAngle = 20 * outerRange / 32
-        for (angle in 0..adjustedMaxAngle) outerChunks += ChunkPos(BlockPos(Vec3(outerRange.toDouble(), .0, .0).yRot(angle / (adjustedMaxAngle / 360F))).offset(blockPosition()))
-        for (distance in 0..outerRange step 8) for (angle in 0..adjustedMaxAngle) {
-            val chunkPos = ChunkPos(BlockPos(Vec3(distance.toDouble(), .0, .0).yRot(angle / (adjustedMaxAngle / 360F))).offset(blockPosition()))
+        val adjustedMaxAngle = 24 * outerRange / 32
+        // multiply by 2 for more precision
+        for (angle in 0..adjustedMaxAngle * 2) outerChunks += ChunkPos(BlockPos(Vec3(outerRange.toDouble(), .0, .0).yRot(angle * .5F / (adjustedMaxAngle / 360F))).offset(blockPosition()))
+        for (distance in 0..outerRange step 8) for (angle in 0..adjustedMaxAngle * 2) {
+            val chunkPos = ChunkPos(BlockPos(Vec3(distance.toDouble(), .0, .0).yRot(angle * .5F / (adjustedMaxAngle / 360F))).offset(blockPosition()))
             if (chunkPos !in outerChunks) chunks += chunkPos
         }
 
