@@ -8,6 +8,7 @@ object NuclearConfig {
     val configDirectory = FMLPaths.getOrCreateGameRelativePath(FMLPaths.CONFIGDIR.get().resolve(NuclearTech.MODID), NuclearTech.MODID)
     val general = GeneralConfig()
     val explosions = ExplosionsConfig()
+    val fallout = FalloutConfig()
     val radiation = RadiationConfig()
     val world = WorldConfig()
 
@@ -15,6 +16,7 @@ object NuclearConfig {
         container.apply {
             addConfig(NuclearModConfig(this, general))
             addConfig(NuclearModConfig(this, explosions))
+            addConfig(NuclearModConfig(this, fallout))
             addConfig(NuclearModConfig(this, radiation))
             addConfig(NuclearModConfig(this, world))
         }

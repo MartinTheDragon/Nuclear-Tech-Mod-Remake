@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.entities
 
-import at.martinthedragon.nucleartech.ModBlocks
-import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.config.FalloutConfig
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -9,18 +9,14 @@ import net.minecraft.network.protocol.Packet
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.BlockTags
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BonemealableBlock
-import net.minecraft.world.level.block.RotatedPillarBlock
-import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.Vec3
+import net.minecraftforge.common.IForgeShearable
 import net.minecraftforge.common.IPlantable
-import net.minecraftforge.common.Tags
 import net.minecraftforge.network.NetworkHooks
 import kotlin.math.hypot
 
@@ -34,13 +30,13 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
             if (chunksToProcess.isNotEmpty()) {
                 val chunkPos = chunksToProcess.removeLast()
                 for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
-                    transformBlocks(x, z, hypot((x - blockX).toFloat(), (z - blockZ).toFloat()) * 100.0 / getScale())
+                    transformBlocks(x, z, hypot((x - blockX).toFloat(), (z - blockZ).toFloat()) / getScale())
                 }
             } else if (outerChunksToProcess.isNotEmpty()) {
                 val chunkPos = outerChunksToProcess.removeLast()
                 for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
                     val distance = hypot((x - blockX).toFloat(), (z - blockZ).toFloat())
-                    if (distance <= getScale()) transformBlocks(x, z, distance * 100.0 / getScale())
+                    if (distance <= getScale()) transformBlocks(x, z, distance / getScale())
                 }
             } else remove(RemovalReason.DISCARDED)
         }
@@ -67,8 +63,10 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
         outerChunksToProcess.addAll(outerChunks)
     }
 
-    // TODO configurable transformations
-    private fun transformBlocks(x: Int, z: Int, distance: Double) {
+    private val transformations = FalloutConfig.FalloutTransformation.loadFromConfig()
+    private val collectiveMaxTransformationDepth = transformations.maxOf(FalloutConfig.FalloutTransformation::transformationDepth)
+
+    private fun transformBlocks(x: Int, z: Int, distance: Float) {
         var depth = 0
         for (y in 255 downTo 0) {
             val pos = BlockPos(x, y, z)
@@ -78,54 +76,16 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
 
             // TODO place fallout
 
-            if (block.isFlammable(level, pos, Direction.UP) && random.nextInt(5) == 0)
-                level.setBlockAndUpdate(pos.above(), Blocks.FIRE.defaultBlockState())
-
-            when {
-                block.`is`(BlockTags.LEAVES) -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
-                block.`is`(Tags.Blocks.STONE) -> {
-                    depth++
-                    when {
-                        distance < 5 -> level.setBlockAndUpdate(pos, ModBlocks.hotSellafite.get().defaultBlockState())
-                        distance < 15 -> level.setBlockAndUpdate(pos, ModBlocks.sellafite.get().defaultBlockState())
-                        distance < 75 -> level.setBlockAndUpdate(pos, ModBlocks.slakedSellafite.get().defaultBlockState())
-                        else -> return
-                    }
-                    if (depth > 2) return
-                }
-                block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> level.setBlockAndUpdate(pos, ModBlocks.deadGrass.get().defaultBlockState()).also { return }
-                block.`is`(Blocks.MYCELIUM) -> level.setBlockAndUpdate(pos, ModBlocks.glowingMycelium.get().defaultBlockState()).also { return }
-                // FIXME drops tall flowers, e.g. peonies
-                block.block is IPlantable || block.block is BonemealableBlock -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
-                block.`is`(Tags.Blocks.SAND) -> {
-                    if (random.nextInt(20) == 0)
-                        level.setBlockAndUpdate(pos, if (block.`is`(Tags.Blocks.SAND_RED)) ModBlocks.redTrinitite.get().defaultBlockState() else ModBlocks.trinitite.get().defaultBlockState())
-                    return
-                }
-                block.`is`(Blocks.CLAY) -> level.setBlockAndUpdate(pos, Blocks.TERRACOTTA.defaultBlockState()).also { return }
-                block.`is`(Tags.Blocks.ORES_COAL) -> {
-                    val randomValue = random.nextInt(150)
-                    if (randomValue < 20) level.setBlockAndUpdate(pos, Blocks.DIAMOND_ORE.defaultBlockState())
-                    else if (randomValue < 30) level.setBlockAndUpdate(pos, Blocks.EMERALD_ORE.defaultBlockState())
-                    return
-                }
-                block.`is`(Blocks.SNOW_BLOCK) || block.`is`(Blocks.SNOW) -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
-                block.`is`(BlockTags.LOGS_THAT_BURN) -> level.setBlockAndUpdate(pos, ModBlocks.charredLog.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, block.getOptionalValue(RotatedPillarBlock.AXIS).orElse(Direction.Axis.Y)))
-                block.`is`(Blocks.RED_MUSHROOM_BLOCK) || block.`is`(Blocks.BROWN_MUSHROOM_BLOCK) -> level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
-                block.`is`(Blocks.MUSHROOM_STEM) -> level.setBlockAndUpdate(pos, ModBlocks.charredLog.get().defaultBlockState())
-                block.material == Material.WOOD && block.isSolidRender(level, pos) && !block.`is`(ModBlocks.charredLog.get()) -> level.setBlockAndUpdate(pos, ModBlocks.charredPlanks.get().defaultBlockState())
-                block.`is`(NuclearTags.Blocks.ORES_URANIUM) && !block.`is`(ModBlocks.scorchedUraniumOre.get()) -> {
-                    if (random.nextInt(100) == 0) level.setBlockAndUpdate(pos, ModBlocks.schrabidiumOre.get().defaultBlockState())
-                    else level.setBlockAndUpdate(pos, ModBlocks.scorchedUraniumOre.get().defaultBlockState())
-                    return
-                }
-                block.`is`(ModBlocks.netherUraniumOre.get()) -> {
-                    if (random.nextInt(100) == 0) level.setBlockAndUpdate(pos, ModBlocks.netherSchrabidiumOre.get().defaultBlockState())
-                    else level.setBlockAndUpdate(pos, ModBlocks.scorchedNetherUraniumOre.get().defaultBlockState())
-                    return
-                }
-                block.isSolidRender(level, pos) -> return
+            if (NuclearConfig.fallout.removePlants.get() && (block.block is IPlantable || block.block is IForgeShearable)) {
+                level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState())
+                continue
             }
+            if (NuclearConfig.fallout.burnFlammables.get() && random.nextInt(5) == 0 && block.isFlammable(level, pos, Direction.UP)) level.setBlockAndUpdate(pos.above(), Blocks.FIRE.defaultBlockState())
+
+            if (transformations.firstOrNull { it.shouldTransform(block, distance, depth) }?.also { it.transform(block).let { newBlock -> level.setBlockAndUpdate(pos, newBlock) }}?.let { it.transformationDepth < 0 } == true) continue
+
+            if (block.isSolidRender(level, pos)) depth++
+            if (depth >= collectiveMaxTransformationDepth) return
         }
     }
 
