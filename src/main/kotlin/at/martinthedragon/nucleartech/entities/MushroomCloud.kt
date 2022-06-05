@@ -43,7 +43,7 @@ class MushroomCloud(entityType: EntityType<MushroomCloud>, world: Level) : Entit
 
     // called by the explosion entity
     fun finish() {
-        maxAge = age
+        maxAge = age + 50
     }
 
     override fun tick() {

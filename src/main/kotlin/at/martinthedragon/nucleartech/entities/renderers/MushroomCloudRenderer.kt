@@ -93,7 +93,10 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
         matrix.translate(0.0, -26.0 + height, 0.0)
         matrix.scale(width, 1F, width)
 
-        val fade = (progress * .0075F).coerceIn(0F, 1F)
+        val fade = if (Minecraft.useShaderTransparency())
+            ((progress * .0075F).coerceIn(0F, 1F) - ((50 - (entity.maxAge - (entity.age + partialTicks))) * .02F).coerceIn(0F, 1F)).coerceIn(0F, 1F)
+        else (progress * .0075F).coerceIn(0F, 1F)
+
         val red: Float
         val green: Float
         val blue: Float
@@ -107,8 +110,8 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
             blue = 1F - (1F - .48F) * fade
         }
         val model = SpecialModels.getBakedModel(mushModel)
-        val solidBuffer = renderer.getBuffer(NuclearRenderTypes.mushroomCloudSolid)
-        modelRenderer.renderModel(matrix.last(), solidBuffer, null, model, red, green, blue, light, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE)
+        val solidBuffer = renderer.getBuffer(if (Minecraft.useShaderTransparency()) NuclearRenderTypes.mushroomCloudTransparent else NuclearRenderTypes.mushroomCloudSolid)
+        modelRenderer.renderModelAlpha(matrix.last(), solidBuffer, null, model, red, green, blue, fade, light, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE)
         val texturedBuffer = renderer.getBuffer(NuclearRenderTypes.mushroomCloudTextured(getTextureLocation(entity), -progress * .035F))
         modelRenderer.renderModelAlpha(matrix.last(), texturedBuffer, null, model, 1F, 1F, 1F, fade * .875F, light, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE)
 
