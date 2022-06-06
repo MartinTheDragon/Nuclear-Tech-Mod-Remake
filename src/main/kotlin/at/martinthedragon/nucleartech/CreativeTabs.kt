@@ -12,6 +12,7 @@ enum class CreativeTabs(val itemGroup: CreativeModeTab) {
     Blocks(createItemGroup("blocks", ModBlockItems.uraniumOre)),
     Machines(createItemGroup("machines", ModBlockItems.safe)), // TODO
     Bombs(createItemGroup("bombs", ModBlockItems.fatMan).setBackgroundImage(ntm("textures/gui/creative_inventory/tab_nuke.png"))),
+    Rocketry(createItemGroup("rocketry", ModItems.nuclearMissile)),
     Consumables(createItemGroup("consumables", ModItems.oilDetector)),
     Miscellaneous(createItemGroup("miscellaneous", ModItems.nuclearCreeperSpawnEgg))
 }

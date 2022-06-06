@@ -19,12 +19,22 @@ object SpecialModels : ResourceManagerReloadListener {
     }
 
     fun getModel(id: ResourceLocation) = modelCache.computeIfAbsent(id, modelFunctions.getValue(id))
+    fun hasModel(id: ResourceLocation) = modelFunctions.containsKey(id)
+    fun getOrRegisterModel(id: ResourceLocation, modelFunction: (ResourceLocation) -> SimpleRenderable): SimpleRenderable {
+        if (!hasModel(id)) registerModel(id, modelFunction)
+        return getModel(id)
+    }
 
     fun registerBakedModel(id: ResourceLocation, bakedModelFunction: (ResourceLocation) -> BakedModel) {
         bakedModelFunctions[id] = bakedModelFunction
     }
 
     fun getBakedModel(id: ResourceLocation) = bakedModelCache.computeIfAbsent(id, bakedModelFunctions.getValue(id))
+    fun hasBakedModel(id: ResourceLocation) = bakedModelFunctions.containsKey(id)
+    fun getOrRegisterBakedModel(id: ResourceLocation, bakedModelFunction: (ResourceLocation) -> BakedModel): BakedModel {
+        if (!hasBakedModel(id)) registerBakedModel(id, bakedModelFunction)
+        return getBakedModel(id)
+    }
 
     override fun onResourceManagerReload(manager: ResourceManager) {
         modelCache.clear()

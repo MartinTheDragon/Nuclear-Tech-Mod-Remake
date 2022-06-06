@@ -6,12 +6,15 @@ import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
 import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.particles.ModParticles
 import at.martinthedragon.nucleartech.plugins.PluginEvents
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
+import at.martinthedragon.nucleartech.world.ChunkLoadingValidationCallback
 import at.martinthedragon.nucleartech.world.gen.WorldGen
 import net.minecraft.core.Registry
+import net.minecraft.core.particles.ParticleType
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attribute
@@ -23,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
 import net.minecraftforge.common.crafting.CraftingHelper
+import net.minecraftforge.common.world.ForgeChunkManager
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent
@@ -32,6 +36,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
+import net.minecraftforge.registries.IForgeRegistryEntry
+import net.minecraftforge.registries.RegistryObject
 
 @Suppress("unused")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -45,6 +51,7 @@ object RegistriesAndLifecycle {
     val ATTRIBUTES: DeferredRegister<Attribute> = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, NuclearTech.MODID)
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
     val SOUNDS: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NuclearTech.MODID)
+    val PARTICLES: DeferredRegister<ParticleType<*>> = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, NuclearTech.MODID)
 
     init {
         val modEventBus = FMLJavaModLoadingContext.get().modEventBus
@@ -68,6 +75,8 @@ object RegistriesAndLifecycle {
         WorldGen.Features
         SOUNDS.register(modEventBus)
         SoundEvents
+        PARTICLES.register(modEventBus)
+        ModParticles
     }
 
     @Suppress("UNUSED_PARAMETER")
@@ -75,6 +84,9 @@ object RegistriesAndLifecycle {
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
         PluginEvents.init()
+        event.enqueueWork {
+            ForgeChunkManager.setForcedChunkLoadingCallback(NuclearTech.MODID, ChunkLoadingValidationCallback)
+        }
     }
 
     @SubscribeEvent @JvmStatic
@@ -101,3 +113,5 @@ object RegistriesAndLifecycle {
         event.register(ContaminationHandler::class.java)
     }
 }
+
+fun <T : IForgeRegistryEntry<T>, R : T> DeferredRegister<T>.registerK(name: String, sup: () -> R): RegistryObject<R> = register(name, sup)

@@ -28,6 +28,7 @@ object SoundEvents {
     val anvilFall = register("anvil.fall")
     val pressOperate = register("press.operate")
     val assemblerOperate = register("assembler.operate")
+    val debris = register("block.debris")
     val inject = register("item.use.inject")
     val emptyIVBag = register("item.use.radaway")
     val randomBleep = register("random.bleep")
@@ -39,6 +40,7 @@ object SoundEvents {
     val geiger4 = register("geiger.geiger4")
     val geiger5 = register("geiger.geiger5")
     val geiger6 = register("geiger.geiger6")
+    val missileTakeoff = register("weapon.missile_takeoff")
     val miniNukeExplosion = register("weapon.mini_nuke_explosion")
 
     private fun register(name: String): RegistryObject<SoundEvent> = SOUNDS.register(name) { SoundEvent(ntm(name)) }

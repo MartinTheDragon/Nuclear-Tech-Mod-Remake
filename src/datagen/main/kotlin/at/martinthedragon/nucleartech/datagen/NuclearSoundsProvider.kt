@@ -38,6 +38,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.anvilFall, definition().with(sound(ntm("block/anvil_fall_berserk"))).subtitle(ntmSubtitle("anvil.fall")))
         add(SoundEvents.pressOperate, definition().with(sound(ntm("block/press/press_operate"))).subtitle(ntmSubtitle("press.operate")))
         add(SoundEvents.assemblerOperate, definition().with(sound(ntm("block/assembler/assembler_operate"))).subtitle(ntmSubtitle("assembler.operate")))
+        add(SoundEvents.debris, definition().with(sound(ntm("block/debris1")), sound(ntm("block/debris2")), sound(ntm("block/debris3"))).subtitle(ntmSubtitle("block.debris")))
         add(SoundEvents.inject, definition().with(sound(ntm("item/use/inject"))).subtitle(ntmSubtitle("item.use.inject")))
         add(SoundEvents.emptyIVBag, definition().with(sound(ntm("item/use/radaway"))).subtitle(ntmSubtitle("item.use.radaway")))
         add(SoundEvents.randomBleep, definition().with(sound(ntm("random/bleep"))).subtitle(ntmSubtitle("random.bleep")))
@@ -49,6 +50,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.geiger4, definition().with(sound(ntm("geiger/geiger4"))).subtitle(ntmSubtitle("geiger.click")))
         add(SoundEvents.geiger5, definition().with(sound(ntm("geiger/geiger5"))).subtitle(ntmSubtitle("geiger.click")))
         add(SoundEvents.geiger6, definition().with(sound(ntm("geiger/geiger6"))).subtitle(ntmSubtitle("geiger.click")))
+        add(SoundEvents.missileTakeoff, definition().with(sound(ntm("weapon/missile_takeoff"))).subtitle(ntmSubtitle("weapon.missile_takeoff")))
         add(SoundEvents.miniNukeExplosion, definition().with(sound(ntm("weapon/mini_nuke_explosion"))).subtitle(ntmSubtitle("weapon.mini_nuke_explosion")))
     }
 

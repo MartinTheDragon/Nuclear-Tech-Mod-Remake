@@ -23,8 +23,11 @@ abstract class MultiBlockPart(val core: Block) : BaseEntityBlock(Properties.of(M
     override fun getCloneItemStack(state: BlockState, target: HitResult, world: BlockGetter, pos: BlockPos, player: Player) = ItemStack(core)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_60519_: Boolean) {
-        val blockEntity = level.getBlockEntity(pos)
-        if (blockEntity is MultiBlockPartBlockEntity && level.getBlockState(blockEntity.core).`is`(core)) level.destroyBlock(blockEntity.core, true)
+        if (!state.`is`(newState.block)) {
+            val blockEntity = level.getBlockEntity(pos)
+            if (blockEntity is MultiBlockPartBlockEntity && level.getBlockState(blockEntity.core).`is`(core))
+                level.destroyBlock(blockEntity.core, true)
+        }
         @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_60519_)
     }
 

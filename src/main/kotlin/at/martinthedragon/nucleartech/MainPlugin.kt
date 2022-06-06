@@ -2,9 +2,13 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.api.ModPlugin
 import at.martinthedragon.nucleartech.api.NuclearTechPlugin
+import at.martinthedragon.nucleartech.api.explosions.NuclearExplosionMk4Params
 import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration
+import at.martinthedragon.nucleartech.api.explosions.ExplosionLargeParams
+import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration.Defaults as DefaultExplosionAlgorithms
 import at.martinthedragon.nucleartech.api.hazards.radiation.HazmatRegistry
 import at.martinthedragon.nucleartech.entities.NukeExplosion
+import at.martinthedragon.nucleartech.explosions.ExplosionLarge
 import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ArmorMaterials as VanillaArmorMaterials
@@ -15,7 +19,8 @@ class MainPlugin : ModPlugin {
     override val id = ResourceLocation(NuclearTech.MODID, NuclearTech.MODID)
 
     override fun registerExplosions(explosions: ExplosionAlgorithmRegistration) {
-        explosions.register(ntm("nuclear_explosion_mk4"), NukeExplosion.Companion)
+        explosions.register(DefaultExplosionAlgorithms.MK4, NuclearExplosionMk4Params::class.java, NukeExplosion.Companion)
+        explosions.register(DefaultExplosionAlgorithms.EXPLOSION_LARGE, ExplosionLargeParams::class.java, ExplosionLarge)
     }
 
     override fun registerHazmatValues(hazmat: HazmatRegistry): Unit = with(hazmat) {

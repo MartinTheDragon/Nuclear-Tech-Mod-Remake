@@ -33,7 +33,7 @@ import kotlin.math.*
 class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRenderer<MushroomCloud>(context) {
     private val textureFireball = ntm("textures/entity/mushroom_cloud/fireball.png")
     private val textureBalefire = ntm("textures/entity/mushroom_cloud/balefire.png")
-    private val textureCloudlet = ntm("textures/entity/mushroom_cloud/cloudlet.png")
+    private val textureCloudlet = ntm("textures/particle/smoke.png")
 
     private val mushModel = ntm("models/other/mushroom_cloud/mush.obj")
 

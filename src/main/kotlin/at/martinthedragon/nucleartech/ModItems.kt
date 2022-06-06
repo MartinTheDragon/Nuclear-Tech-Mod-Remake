@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
 import at.martinthedragon.nucleartech.blocks.FatManBlock
 import at.martinthedragon.nucleartech.blocks.LittleBoyBlock
 import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.entities.missiles.*
 import at.martinthedragon.nucleartech.items.*
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -15,8 +16,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.crafting.RecipeType
 import net.minecraftforge.common.ForgeSpawnEggItem
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.IForgeRegistryEntry
 import net.minecraftforge.registries.RegistryObject
 
 @Suppress("unused")
@@ -574,6 +573,23 @@ object ModItems {
     val littleBoyKit = ITEMS.registerK("little_boy_kit") { BombKitItem(mapOf(ModBlockItems.littleBoy to 1) + LittleBoyBlock.requiredComponents, 0, 0x0026FF, Properties().tab(CreativeTabs.Bombs)) }
     val fatManKit = ITEMS.registerK("fat_man_kit") { BombKitItem(mapOf(ModBlockItems.fatMan to 1) + FatManBlock.requiredComponents, 0, 0xFFD800, Properties().tab(CreativeTabs.Bombs)) }
 
+    // Rocketry: Missiles and Satellites
+
+    val designator = ITEMS.registerK("designator") { DesignatorItem(Properties().tab(CreativeTabs.Rocketry).stacksTo(1)) }
+    val heMissile = ITEMS.registerK("he_missile") { MissileItem(::HEMissile, Properties().tab(CreativeTabs.Rocketry)) }
+    val incendiaryMissile = ITEMS.registerK("incendiary_missile") { MissileItem(::IncendiaryMissile, Properties().tab(CreativeTabs.Rocketry)) }
+    val clusterMissile = ITEMS.registerK("cluster_missile") { MissileItem(::ClusterMissile, Properties().tab(CreativeTabs.Rocketry)) }
+    val bunkerBusterMissile = ITEMS.registerK("bunker_buster_missile") { MissileItem(::BunkerBusterMissile, Properties().tab(CreativeTabs.Rocketry)) }
+    val strongMissile = ITEMS.registerK("strong_missile") { MissileItem(::StrongHEMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_STRONG, renderScale = 1.5F) }
+    val strongIncendiaryMissile = ITEMS.registerK("strong_incendiary_missile") { MissileItem(::StrongIncendiaryMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_STRONG, renderScale = 1.5F) }
+    val strongClusterMissile = ITEMS.registerK("strong_cluster_missile") { MissileItem(::StrongClusterMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_STRONG, renderScale = 1.5F) }
+    val strongBunkerBusterMissile = ITEMS.registerK("strong_bunker_buster_missile") { MissileItem(::StrongBunkerBusterMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_STRONG, renderScale = 1.5F) }
+    val burstMissile = ITEMS.registerK("burst_missile") { MissileItem(::BurstMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
+    val infernoMissile = ITEMS.registerK("inferno_missile") { MissileItem(::InfernoMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
+    val rainMissile = ITEMS.registerK("rain_missile") { MissileItem(::RainMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
+    val drillMissile = ITEMS.registerK("drill_missile") { MissileItem(::DrillMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
+    val nuclearMissile = ITEMS.registerK("nuclear_missile") { MissileItem(::NuclearMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.missileModel("missile_nuclear"), renderScale = 1.5F) }
+
     // Consumables and Gear
 
     val oilDetector = ITEMS.registerK("oil_detector") { OilDetectorItem(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
@@ -642,5 +658,4 @@ object ModItems {
     private fun Properties.tab(tab: CreativeTabs): Properties = tab(tab.itemGroup)
 
     // waaay faster code analysis
-    private fun <T : IForgeRegistryEntry<T>, R : T> DeferredRegister<T>.registerK(name: String, sup: () -> R): RegistryObject<R> = register(name, sup)
 }

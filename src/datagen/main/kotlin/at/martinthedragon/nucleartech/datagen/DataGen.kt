@@ -27,6 +27,7 @@ object DataGen {
             dataGenerator.addProvider(NuclearItemModelProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearModelProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearSoundsProvider(dataGenerator, existingFileHelper))
+            dataGenerator.addProvider(NuclearParticleProvider(dataGenerator, existingFileHelper))
 
             for (translation in NuclearLanguageProviders.getLanguageProviders(dataGenerator))
                 dataGenerator.addProvider(translation)

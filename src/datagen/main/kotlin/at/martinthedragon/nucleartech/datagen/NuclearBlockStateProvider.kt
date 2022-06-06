@@ -236,6 +236,8 @@ class NuclearBlockStateProvider(
             .transform(ModelBuilder.Perspective.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.5F).end()
             .end()
         )
+        simpleBlock(ModBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad"))
+        simpleBlock(ModBlocks.launchPadPart.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad"))
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.scorchedUraniumOre.get())

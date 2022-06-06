@@ -10,6 +10,7 @@ class ExplosionsConfig : ConfigBase {
 
     val littleBoyStrength: ForgeConfigSpec.IntValue
     val fatManStrength: ForgeConfigSpec.IntValue
+    val missileStrength: ForgeConfigSpec.IntValue
 
     val explosionSpeed: ForgeConfigSpec.IntValue
     val falloutRange: ForgeConfigSpec.DoubleValue
@@ -22,6 +23,7 @@ class ExplosionsConfig : ConfigBase {
             comment("Bomb explosion settings").push("bombs")
             littleBoyStrength = comment("Strength value of the Little Boy").defineInRange("littleBoyStrength", 240, 0, 1_000)
             fatManStrength = comment("Strength value of the Fat Man").defineInRange("fatManStrength", 350, 0, 1_000)
+            missileStrength = comment("Strength value of nuclear missiles").defineInRange("missileStrength", 200, 0, 1_000)
             pop()
 
             comment("Explosion behaviour settings").push("behaviour")

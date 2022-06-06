@@ -26,6 +26,7 @@ import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.SimpleContainer
@@ -125,6 +126,8 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
         progress = tag.getInt("Progress")
         recipeID = if (tag.contains("Recipe", 8)) ResourceLocation(tag.getString("Recipe")) else null
     }
+
+    override fun getUpdatePacket(): ClientboundBlockEntityDataPacket = ClientboundBlockEntityDataPacket.create(this)
 
     override fun clearContent() { items.clear() }
     override fun getContainerSize() = items.size

@@ -16,6 +16,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("itemGroup.${MODID}_blocks", "NTM Erze und Blöcke")
         add("itemGroup.${MODID}_machines", "NTM Maschinen")
         add("itemGroup.${MODID}_bombs", "NTM Bomben")
+        add("itemGroup.${MODID}_rocketry", "NTM Raketen und Satelliten")
         add("itemGroup.${MODID}_consumables", "NTM Verbrauchsgüter")
         add("itemGroup.${MODID}_miscellaneous", "NTM Verschiedenes")
 
@@ -144,6 +145,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
+
+        addBlock(ModBlocks.launchPad, "Raketenabschussrampe")
+        addBlock(ModBlocks.launchPadPart, "Raketenabschussrampe")
 
         addItem(ModItems.rawRareEarth, "Rohe Seltene Erde")
         addItem(ModItems.rawTrixite, "Rohes Trixit")
@@ -638,8 +642,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.detonator, "Fernzünder")
         addItemDesc(ModItems.detonator, "Shift-Rechtsklick auf einen Sprengstoff um die Position zu setzen,\nRechtsklick um zu sprengen!")
         val detonatorDescriptionId = ModItems.detonator.get().descriptionId
-        add("$detonatorDescriptionId.tooltip_no_position_set", "Keine Position gesetzt!")
-        add("$detonatorDescriptionId.position_set", "Position gesetzt!")
         add("$detonatorDescriptionId.error_position_not_set", "Die Position wurde noch nicht gesetzt!")
         add("$detonatorDescriptionId.error_position_not_loaded", "Das Ziel ist momentan nicht in der Welt geladen!")
         add("$detonatorDescriptionId.error_not_explosive", "Das Ziel ist kein gültiger Sprengstoff!")
@@ -650,6 +652,22 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("$detonatorDescriptionId.detonation_successful", "Sprengung!")
         addItem(ModItems.littleBoyKit, "Little Boy Kit")
         addItem(ModItems.fatManKit, "Fat Man Kit")
+
+        addItem(ModItems.designator, "Kurzdistanz Zielmarkierer")
+        add("${ModItems.designator.get().descriptionId}.target_coordinates", "Zielkoordinaten: %s %s %s")
+        addItem(ModItems.heMissile, "HE Rakete")
+        addItem(ModItems.incendiaryMissile, "Brandrakete")
+        addItem(ModItems.clusterMissile, "Streurakete")
+        addItem(ModItems.bunkerBusterMissile, "Bunkerbrechende Rakete")
+        addItem(ModItems.strongMissile, "Starke HE Rakete")
+        addItem(ModItems.strongIncendiaryMissile, "Starke Brandrakete")
+        addItem(ModItems.strongClusterMissile, "Starke Streurakete")
+        addItem(ModItems.strongBunkerBusterMissile, "Verbesserte Bunkerbrechende Rakete")
+        addItem(ModItems.burstMissile, "Berstrakete")
+        addItem(ModItems.infernoMissile, "Inferno Rakete G.R.N. Mk.II")
+        addItem(ModItems.rainMissile, "Schüttbombenregen")
+        addItem(ModItems.drillMissile, "Der Betonbrecher")
+        addItem(ModItems.nuclearMissile, "Atomrakete")
 
         addItem(ModItems.oilDetector, "Ölvorkommen-Detektor")
         addItemDesc(ModItems.oilDetector, "Rechtsklick um nach Öl zu suchen.\nDetektor findet nur größere Vorkommen.")
@@ -721,6 +739,22 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.falloutRain, "Fallout-Regen")
         addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuklearer Creeper")
 
+        addEntityType(EntityTypes.missileHE, "HE Rakete")
+        addEntityType(EntityTypes.missileIncendiary, "Brandrakete")
+        addEntityType(EntityTypes.missileCluster, "Streurakete")
+        addEntityType(EntityTypes.missileBunkerBuster, "Bunkerbrechende Rakete")
+        addEntityType(EntityTypes.missileHEStrong, "Starke HE Rakete")
+        addEntityType(EntityTypes.missileIncendiaryStrong, "Starke Brandrakete")
+        addEntityType(EntityTypes.missileClusterStrong, "Starke Streurakete")
+        addEntityType(EntityTypes.missileBunkerBusterStrong, "Verbesserte Bunkerbrechende Rakete")
+        addEntityType(EntityTypes.missileBurst, "Berstrakete")
+        addEntityType(EntityTypes.missileInferno, "Inferno Rakete G.R.N. Mk.II")
+        addEntityType(EntityTypes.missileRain, "Schüttbombenregen")
+        addEntityType(EntityTypes.missileDrill, "Der Betonbrecher")
+        addEntityType(EntityTypes.missileNuclear, "Atomrakete")
+
+        addEntityType(EntityTypes.clusterFragment, "Schüttbombe")
+
         addMenuType(MenuTypes.sirenMenu, "Sirene")
         addMenuType(MenuTypes.safeMenu, "Panzerschrank")
         addMenuType(MenuTypes.anvilMenu, "Stufe %s Amboss")
@@ -735,6 +769,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")
+
+        addMenuType(MenuTypes.launchPadMenu, "Raketenabschussrampe")
 
         addSound(SoundEvents.sirenTrackHatchSiren, "Sirene läuft: Hatch Siren")
         addSound(SoundEvents.sirenTrackAutopilotDisconnected, "Sirene läuft: Autopilot Disconnected")
@@ -759,12 +795,14 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.anvilFall, "Amboss klescht")
         addSound(SoundEvents.pressOperate, "Presse stampft")
         addSound(SoundEvents.assemblerOperate, "Fertigungsmaschine arbeitet")
+        addSound(SoundEvents.debris, "Trümmer schlagen ein")
         addSound(SoundEvents.inject, "Nadel injiziert")
         addSound(SoundEvents.emptyIVBag, "Flüssigkeit infusioniert")
         addSound(SoundEvents.randomBleep, "Gerät piepst")
         addSound(SoundEvents.randomBoop, "Gerät boopt")
         addSound(SoundEvents.randomUnpack, "Gegenstand ausgepackt")
         add("subtitle.$MODID.geiger.click", "Geigerzähler klickt")
+        addSound(SoundEvents.missileTakeoff, "Rakete hebt ab")
         addSound(SoundEvents.miniNukeExplosion, "Miniatombombe explodiert")
 
         addDamageSource(DamageSources.extractBlood, "%1\$s hat zu viel Lebensessenz extrahiert", "%1\$s hat versucht, schön-verpackten Lebenssaft für %2\$s zu hinterlassen")
@@ -797,6 +835,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(ntmTranslationString("armor.gravity"), "Schwerkraftsmodifikator: %s")
         add(ntmTranslationString("armor.dash_count"), "Gibt %s Dashes")
         add(ntmTranslationString("armor.protection_yield"), "Schützt für Schaden <%s")
+
+        add(ntmTranslationString("item.position_set"), "Position gesetzt!")
+        add(ntmTranslationString("item.no_position_set"), "Keine Position gesetzt!")
 
         add("jei.$MODID.category.smithing", "Schmiederezepte")
         add("jei.$MODID.category.smithing.tier", "Mindeststufe: %s")

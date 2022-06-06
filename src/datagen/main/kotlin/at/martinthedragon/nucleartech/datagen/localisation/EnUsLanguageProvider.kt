@@ -21,6 +21,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("itemGroup.${MODID}_blocks", "NTM Ores and Blocks")
         add("itemGroup.${MODID}_machines", "NTM Machines")
         add("itemGroup.${MODID}_bombs", "NTM Bombs")
+        add("itemGroup.${MODID}_rocketry", "NTM Missiles and Satellites")
         add("itemGroup.${MODID}_consumables", "NTM Consumables and Gear")
         add("itemGroup.${MODID}_miscellaneous", "NTM Miscellaneous Items")
 
@@ -140,6 +141,9 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
+
+        addBlock(ModBlocks.launchPad, "Missile Launch Pad")
+        addBlock(ModBlocks.launchPadPart, "Missile Launch Pad")
 
         addItem(ModItems.rawRareEarth, "Raw Rare Earth")
         addItem(ModItems.rawTrixite, "Raw Trixite")
@@ -611,8 +615,6 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.detonator, "Detonator")
         addItemDesc(ModItems.detonator, "Shift-right-click an explosive to set the position,\nright-click to detonate!")
         val detonatorDescriptionId = ModItems.detonator.get().descriptionId
-        add("$detonatorDescriptionId.tooltip_no_position_set", "No position set!")
-        add("$detonatorDescriptionId.position_set", "Position set!")
         add("$detonatorDescriptionId.error_position_not_set", "Position has not been set!")
         add("$detonatorDescriptionId.error_position_not_loaded", "Target is currently not loaded in the world!")
         add("$detonatorDescriptionId.error_not_explosive", "Target is not a valid explosive!")
@@ -623,6 +625,22 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("$detonatorDescriptionId.detonation_successful", "Detonated!")
         addItem(ModItems.littleBoyKit, "Little Boy Kit")
         addItem(ModItems.fatManKit, "Fat Man Kit")
+
+        addItem(ModItems.designator, "Short Range Target Designator")
+        add("${ModItems.designator.get().descriptionId}.target_coordinates", "Target Coordinates: %s %s %s")
+        addItem(ModItems.heMissile, "High Explosive Missile")
+        addItem(ModItems.incendiaryMissile, "Incendiary Missile")
+        addItem(ModItems.clusterMissile, "Cluster Missile")
+        addItem(ModItems.bunkerBusterMissile, "Bunker Buster")
+        addItem(ModItems.strongMissile, "Strong High Explosive Missile")
+        addItem(ModItems.strongIncendiaryMissile, "Strong Incendiary Missile")
+        addItem(ModItems.strongClusterMissile, "Strong Cluster Missile")
+        addItem(ModItems.strongBunkerBusterMissile, "Enhanced Bunker Buster")
+        addItem(ModItems.burstMissile, "Burst Missile")
+        addItem(ModItems.infernoMissile, "Inferno Missile G.R.N. Mk.II")
+        addItem(ModItems.rainMissile, "Bomblet Rain")
+        addItem(ModItems.drillMissile, "The Concrete Cracker")
+        addItem(ModItems.nuclearMissile, "Nuclear Missile")
 
         addItem(ModItems.oilDetector, "Oil Reservoir Detector")
         addItemDesc(ModItems.oilDetector, "Right-click to scan for oil.\nDetector will only find large deposits.")
@@ -694,6 +712,22 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.falloutRain, "Fallout Rain")
         addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuclear Creeper")
 
+        addEntityType(EntityTypes.missileHE, "High Explosive Missile")
+        addEntityType(EntityTypes.missileIncendiary, "Incendiary Missile")
+        addEntityType(EntityTypes.missileCluster, "Cluster Missile")
+        addEntityType(EntityTypes.missileBunkerBuster, "Bunker Buster")
+        addEntityType(EntityTypes.missileHEStrong, "Strong High Explosive Missile")
+        addEntityType(EntityTypes.missileIncendiaryStrong, "Strong Incendiary Missile")
+        addEntityType(EntityTypes.missileClusterStrong, "Strong Cluster Missile")
+        addEntityType(EntityTypes.missileBunkerBusterStrong, "Enhanced Bunker Buster")
+        addEntityType(EntityTypes.missileBurst, "Burst Missile")
+        addEntityType(EntityTypes.missileInferno, "Inferno Missile G.R.N. Mk.II")
+        addEntityType(EntityTypes.missileRain, "Bomblet Rain")
+        addEntityType(EntityTypes.missileDrill, "The Concrete Cracker")
+        addEntityType(EntityTypes.missileNuclear, "Nuclear Missile")
+
+        addEntityType(EntityTypes.clusterFragment, "Bomblet")
+
         addMenuType(MenuTypes.sirenMenu, "Siren")
         addMenuType(MenuTypes.safeMenu, "Safe")
         addMenuType(MenuTypes.anvilMenu, "Anvil Tier %s")
@@ -708,6 +742,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")
+
+        addMenuType(MenuTypes.launchPadMenu, "Missile Launch Pad")
 
         addSound(SoundEvents.sirenTrackHatchSiren, "Siren running: Hatch Siren")
         addSound(SoundEvents.sirenTrackAutopilotDisconnected, "Siren running: Autopilot Disconnected")
@@ -732,12 +768,14 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.anvilFall, "Anvil clashes")
         addSound(SoundEvents.pressOperate, "Press stamps")
         addSound(SoundEvents.assemblerOperate, "Assembler whirs")
+        addSound(SoundEvents.debris, "Debris hit the ground")
         addSound(SoundEvents.inject, "Needle injected")
         addSound(SoundEvents.emptyIVBag, "Liquid infused")
         addSound(SoundEvents.randomBleep, "Device bleeps")
         addSound(SoundEvents.randomBoop, "Device boops")
         addSound(SoundEvents.randomUnpack, "Item unpacked")
         add("subtitle.$MODID.geiger.click", "Geiger Counter clicks")
+        addSound(SoundEvents.missileTakeoff, "Missile takes off")
         addSound(SoundEvents.miniNukeExplosion, "Mini nuke explodes")
 
         addDamageSource(DamageSources.extractBlood, "%1\$s extracted too much life essence", "%1\$s tried to leave neatly-packaged life juice for %2\$s")
@@ -770,6 +808,9 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(ntmTranslationString("armor.gravity"), "Gravity modifier of %s")
         add(ntmTranslationString("armor.dash_count"), "Grants %s dashes")
         add(ntmTranslationString("armor.protection_yield"), "Protection applies to damage <%s")
+
+        add(ntmTranslationString("item.position_set"), "Position set!")
+        add(ntmTranslationString("item.no_position_set"), "No position set!")
 
         add("jei.$MODID.category.smithing", "Smithing")
         add("jei.$MODID.category.smithing.tier", "Minimum Tier: %s")

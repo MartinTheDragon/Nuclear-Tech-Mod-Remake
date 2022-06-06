@@ -1,5 +1,7 @@
 package at.martinthedragon.nucleartech.items
 
+import at.martinthedragon.nucleartech.api.explosions.NuclearExplosionMk4Params
+import at.martinthedragon.nucleartech.api.explosions.createAndStart
 import at.martinthedragon.nucleartech.entities.NukeExplosion
 import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.Util
@@ -19,7 +21,7 @@ class CreativeNuclearExplosionSpawnerItem(properties: Properties) : Item(propert
         if (player.isShiftKeyDown) { // quick detonation
             if (!world.isClientSide) {
                 if (player.canUseGameMasterBlocks()) {
-                    NukeExplosion.create(world, player.position(), 200)
+                    NukeExplosion.createAndStart(world, player.position(), 200F, NuclearExplosionMk4Params())
                 } else {
                     player.sendMessage(UseCreativeNuclearExplosionSpawnerScreen.ERR_INSUFFICIENT_PERMISSION, Util.NIL_UUID)
                     return InteractionResultHolder.pass(item)

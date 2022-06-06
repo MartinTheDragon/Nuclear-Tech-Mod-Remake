@@ -8,5 +8,5 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-# Just give it a texture so it doesn't mess with the texture coordinates
+
 map_Kd #fireball_texture

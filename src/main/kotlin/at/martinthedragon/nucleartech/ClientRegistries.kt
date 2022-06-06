@@ -2,13 +2,19 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.blocks.entities.renderers.AssemblerRenderer
+import at.martinthedragon.nucleartech.blocks.entities.renderers.LaunchPadRenderer
 import at.martinthedragon.nucleartech.blocks.entities.renderers.SteamPressRenderer
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.renderers.MushroomCloudRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
+import at.martinthedragon.nucleartech.entities.renderers.SimpleMissileRenderer
 import at.martinthedragon.nucleartech.items.BombKitItem
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.particles.ContrailParticle
+import at.martinthedragon.nucleartech.particles.ModParticles
+import at.martinthedragon.nucleartech.particles.RubbleParticle
+import at.martinthedragon.nucleartech.particles.SmokeParticle
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
@@ -21,6 +27,7 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.ShaderInstance
+import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.client.searchtree.ReloadableSearchTree
 import net.minecraft.world.inventory.InventoryMenu
@@ -53,9 +60,9 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.shredderMenu.get(), ::ShredderScreen)
         MenuScreens.register(MenuTypes.anvilMenu.get(), ::AnvilScreen)
         MenuScreens.register(MenuTypes.assemblerMenu.get(), ::AssemblerScreen)
-
         MenuScreens.register(MenuTypes.littleBoyMenu.get(), ::LittleBoyScreen)
         MenuScreens.register(MenuTypes.fatManMenu.get(), ::FatManScreen)
+        MenuScreens.register(MenuTypes.launchPadMenu.get(), ::LaunchPadScreen)
     }
 
     @SubscribeEvent @JvmStatic
@@ -92,19 +99,43 @@ object ClientRegistries {
     @SubscribeEvent @JvmStatic
     fun registerEntityRenderers(event: EntityRenderersEvent.RegisterRenderers) {
         NuclearTech.LOGGER.debug("Registering BERs")
-        event.registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
-        event.registerBlockEntityRenderer(BlockEntityTypes.assemblerBlockEntityType.get(), ::AssemblerRenderer)
+        with(event) {
+            registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.assemblerBlockEntityType.get(), ::AssemblerRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.launchPadBlockEntityType.get(), ::LaunchPadRenderer)
+        }
 
         NuclearTech.LOGGER.debug("Registering Entity Renderers")
-        event.registerEntityRenderer(EntityTypes.nuclearExplosion.get(), ::NoopRenderer)
-        event.registerEntityRenderer(EntityTypes.mushroomCloud.get(), ::MushroomCloudRenderer)
-        event.registerEntityRenderer(EntityTypes.falloutRain.get(), ::NoopRenderer)
-        event.registerEntityRenderer(EntityTypes.nuclearCreeper.get(), ::NuclearCreeperRenderer)
+        with(event) {
+            registerEntityRenderer(EntityTypes.nuclearExplosion.get(), ::NoopRenderer)
+            registerEntityRenderer(EntityTypes.mushroomCloud.get(), ::MushroomCloudRenderer)
+            registerEntityRenderer(EntityTypes.falloutRain.get(), ::NoopRenderer)
+            registerEntityRenderer(EntityTypes.nuclearCreeper.get(), ::NuclearCreeperRenderer)
+
+            registerEntityRenderer(EntityTypes.missileHE.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileIncendiary.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileCluster.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileBunkerBuster.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileHEStrong.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileIncendiaryStrong.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileClusterStrong.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileBunkerBusterStrong.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileBurst.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileInferno.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileRain.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileDrill.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileNuclear.get(), ::SimpleMissileRenderer)
+
+            registerEntityRenderer(EntityTypes.clusterFragment.get(), ::ThrownItemRenderer)
+        }
     }
 
     @SubscribeEvent @JvmStatic
     fun registerLayerDefinitions(event: EntityRenderersEvent.RegisterLayerDefinitions) {
-        event.registerLayerDefinition(NuclearModelLayers.STEAM_PRESS, SteamPressRenderer::createLayerDefinition)
+        with(event) {
+            registerLayerDefinition(NuclearModelLayers.RUBBLE, RubbleParticle.RubbleModel::createLayerDefinition)
+            registerLayerDefinition(NuclearModelLayers.STEAM_PRESS, SteamPressRenderer::createLayerDefinition)
+        }
     }
 
     @SubscribeEvent @JvmStatic
@@ -134,6 +165,15 @@ object ClientRegistries {
     @SubscribeEvent @JvmStatic
     fun registerResourceReloadListeners(event: RegisterClientReloadListenersEvent) {
         event.registerReloadListener(SpecialModels)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun registerParticleProviders(event: ParticleFactoryRegisterEvent) {
+        with(Minecraft.getInstance().particleEngine) {
+            register(ModParticles.CONTRAIL.get(), ContrailParticle::Provider)
+            register(ModParticles.RUBBLE.get(), RubbleParticle.Provider())
+            register(ModParticles.SMOKE.get(), SmokeParticle::Provider)
+        }
     }
 
     // uncomment, compile a snapshot, put it in the mods folder of your logged-in minecraft instance, start it and see the console log

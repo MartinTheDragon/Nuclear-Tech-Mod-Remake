@@ -190,8 +190,8 @@ class BlockLoots : BlockLoot() {
         dropSelf(ModBlocks.safe.get())
 
         dropSelf(ModBlocks.steamPressBase.get())
-        add(ModBlocks.steamPressFrame.get()) { noDrop() }
-        add(ModBlocks.steamPressTop.get()) { noDrop() }
+        add(ModBlocks.steamPressFrame.get(), noDrop())
+        add(ModBlocks.steamPressTop.get(), noDrop())
         dropSelf(ModBlocks.blastFurnace.get())
         dropSelf(ModBlocks.combustionGenerator.get())
         dropSelf(ModBlocks.electricFurnace.get())
@@ -207,10 +207,13 @@ class BlockLoots : BlockLoot() {
         dropSelf(ModBlocks.dineutroniumAnvil.get())
         dropSelf(ModBlocks.murkyAnvil.get())
         dropSelf(ModBlocks.assembler.get())
-        add(ModBlocks.assemblerPart.get()) { noDrop() }
+        add(ModBlocks.assemblerPart.get(), noDrop())
 
         dropSelf(ModBlocks.littleBoy.get())
         dropSelf(ModBlocks.fatMan.get())
+
+        dropSelf(ModBlocks.launchPad.get())
+        add(ModBlocks.launchPadPart.get(), noDrop())
     }
 
     // automatically await a loot table for all blocks registered by this mod

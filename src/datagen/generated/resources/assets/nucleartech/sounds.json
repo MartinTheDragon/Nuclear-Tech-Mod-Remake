@@ -199,6 +199,14 @@
       "nucleartech:block/assembler/assembler_operate"
     ]
   },
+  "block.debris": {
+    "subtitle": "subtitle.nucleartech.block.debris",
+    "sounds": [
+      "nucleartech:block/debris1",
+      "nucleartech:block/debris2",
+      "nucleartech:block/debris3"
+    ]
+  },
   "item.use.inject": {
     "subtitle": "subtitle.nucleartech.item.use.inject",
     "sounds": [
@@ -264,6 +272,12 @@
     "subtitle": "subtitle.nucleartech.geiger.click",
     "sounds": [
       "nucleartech:geiger/geiger6"
+    ]
+  },
+  "weapon.missile_takeoff": {
+    "subtitle": "subtitle.nucleartech.weapon.missile_takeoff",
+    "sounds": [
+      "nucleartech:weapon/missile_takeoff"
     ]
   },
   "weapon.mini_nuke_explosion": {

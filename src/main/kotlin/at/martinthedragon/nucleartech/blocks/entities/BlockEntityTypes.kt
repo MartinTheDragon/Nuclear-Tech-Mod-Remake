@@ -19,6 +19,8 @@ object BlockEntityTypes {
     val assemblerPartBlockEntityType: RegistryObject<BlockEntityType<AssemblerBlockEntity.AssemblerPartBlockEntity>> = BLOCK_ENTITIES.register("assembler_part") { BlockEntityType.Builder.of(AssemblerBlockEntity::AssemblerPartBlockEntity, ModBlocks.assemblerPart.get()).build() }
     val littleBoyBlockEntityType: RegistryObject<BlockEntityType<LittleBoyBlockEntity>> = BLOCK_ENTITIES.register("little_boy") { BlockEntityType.Builder.of(::LittleBoyBlockEntity, ModBlocks.littleBoy.get()).build() }
     val fatManBlockEntityType: RegistryObject<BlockEntityType<FatManBlockEntity>> = BLOCK_ENTITIES.register("fat_man") { BlockEntityType.Builder.of(::FatManBlockEntity, ModBlocks.fatMan.get()).build() }
+    val launchPadBlockEntityType: RegistryObject<BlockEntityType<LaunchPadBlockEntity>> = BLOCK_ENTITIES.register("launch_pad") { BlockEntityType.Builder.of(::LaunchPadBlockEntity, ModBlocks.launchPad.get()).build() }
+    val launchPadPartBlockEntityType: RegistryObject<BlockEntityType<LaunchPadBlockEntity.LaunchPadPartBlockEntity>> = BLOCK_ENTITIES.register("launch_pad_part") { BlockEntityType.Builder.of(LaunchPadBlockEntity::LaunchPadPartBlockEntity, ModBlocks.launchPadPart.get()).build() }
 
     private fun <T : BlockEntity> BlockEntityType.Builder<T>.build() = build(null)
 }

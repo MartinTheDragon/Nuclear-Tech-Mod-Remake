@@ -1,8 +1,7 @@
 package at.martinthedragon.nucleartech.items
 
-import at.martinthedragon.nucleartech.SoundEvents
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.api.explosions.IgnitableExplosive
-import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
@@ -33,7 +32,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
                 detonatorTag.putInt("ExplosivePosZ", pos.z)
             }
             player.playSound(SoundEvents.randomBoop.get(), 2F, 1F)
-            if (world.isClientSide) player.displayClientMessage(TranslatableComponent("$descriptionId.position_set").withStyle(ChatFormatting.GREEN), true)
+            if (world.isClientSide) player.displayClientMessage(ntmTranslation("item.position_set").green(), true)
             return InteractionResult.sidedSuccess(world.isClientSide)
         }
 
@@ -49,7 +48,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
 
     private fun processUse(stack: ItemStack, world: Level, player: Player) {
         if (!isPositionSet(stack)) {
-            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_set").withStyle(ChatFormatting.RED), true)
+            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_set").red(), true)
             return
         }
         val detonatorTag = stack.orCreateTag
@@ -58,21 +57,21 @@ class DetonatorItem(properties: Properties) : Item(properties) {
         val posZ = detonatorTag.getInt("ExplosivePosZ")
         val pos = BlockPos(posX, posY, posZ)
         if (!world.isLoaded(pos)) { // TODO make configurable
-            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_loaded").withStyle(ChatFormatting.RED), true)
+            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_loaded").red(), true)
             return
         }
         val block = world.getBlockState(pos).block
         if (block !is IgnitableExplosive) {
-            player.displayClientMessage(TranslatableComponent("$descriptionId.error_not_explosive").withStyle(ChatFormatting.RED), true)
+            player.displayClientMessage(TranslatableComponent("$descriptionId.error_not_explosive").red(), true)
             return
         }
         val messageToSend = when (block.detonate(world, pos)) {
-            IgnitableExplosive.DetonationResult.Success -> TranslatableComponent("$descriptionId.detonation_successful").withStyle(ChatFormatting.GREEN)
-            IgnitableExplosive.DetonationResult.InvalidPosition -> TranslatableComponent("$descriptionId.error_not_explosive").withStyle(ChatFormatting.RED)
-            IgnitableExplosive.DetonationResult.InvalidBlockEntity -> TranslatableComponent("$descriptionId.error_invalid_tile_entity").withStyle(ChatFormatting.RED)
-            IgnitableExplosive.DetonationResult.Incomplete -> TranslatableComponent("$descriptionId.error_missing_components").withStyle(ChatFormatting.RED)
-            IgnitableExplosive.DetonationResult.Prohibited -> TranslatableComponent("$descriptionId.error_detonation_prohibited").withStyle(ChatFormatting.RED)
-            IgnitableExplosive.DetonationResult.Unknown -> TranslatableComponent("$descriptionId.error_unknown").withStyle(ChatFormatting.RED)
+            IgnitableExplosive.DetonationResult.Success -> TranslatableComponent("$descriptionId.detonation_successful").green()
+            IgnitableExplosive.DetonationResult.InvalidPosition -> TranslatableComponent("$descriptionId.error_not_explosive").red()
+            IgnitableExplosive.DetonationResult.InvalidBlockEntity -> TranslatableComponent("$descriptionId.error_invalid_tile_entity").red()
+            IgnitableExplosive.DetonationResult.Incomplete -> TranslatableComponent("$descriptionId.error_missing_components").red()
+            IgnitableExplosive.DetonationResult.Prohibited -> TranslatableComponent("$descriptionId.error_detonation_prohibited").red()
+            IgnitableExplosive.DetonationResult.Unknown -> TranslatableComponent("$descriptionId.error_unknown").red()
         }
         player.displayClientMessage(messageToSend, true)
     }
@@ -86,7 +85,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
             val x = tag.getInt("ExplosivePosX")
             val y = tag.getInt("ExplosivePosY")
             val z = tag.getInt("ExplosivePosZ")
-            TextComponent("$x, $y, $z").withStyle(ChatFormatting.GRAY)
-        } else TranslatableComponent("$descriptionId.tooltip_no_position_set").withStyle(ChatFormatting.DARK_RED)
+            TextComponent("$x, $y, $z").gray()
+        } else ntmTranslation("item.no_position_set").darkRed()
     }
 }
