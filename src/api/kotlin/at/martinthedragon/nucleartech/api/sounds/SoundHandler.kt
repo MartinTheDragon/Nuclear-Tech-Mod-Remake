@@ -13,11 +13,11 @@ import kotlin.math.max
 public object SoundHandler {
     private val soundMap = Long2ObjectOpenHashMap<SoundInstance>()
 
-    public fun playBlockEntitySoundEvent(pos: BlockPos, event: SoundEvent, source: SoundSource, volume: Float, pitch: Float): SoundInstance? {
+    public fun playBlockEntitySoundEvent(pos: BlockPos, event: SoundEvent, source: SoundSource, volume: Float, pitch: Float, loop: Boolean = true): SoundInstance? {
         var instance: SoundInstance? = soundMap[pos.asLong()]
         if (instance.isActive()) return instance
 
-        instance = MachineSoundInstance(event, source, pos)
+        instance = MachineSoundInstance(event, source, pos, loop)
 
         if (!instance.isClientPlayerInRange()) return null
         Minecraft.getInstance().soundManager.play(instance)

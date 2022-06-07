@@ -9,12 +9,12 @@ import net.minecraftforge.client.ForgeHooksClient
 import kotlin.random.Random
 
 // somewhat a reconstruction of mekanism's implementation. it's just so good :p
-public class MachineSoundInstance(sound: SoundEvent, source: SoundSource, pos: BlockPos) : AbstractTickableSoundInstance(sound, source) {
+public class MachineSoundInstance(sound: SoundEvent, source: SoundSource, pos: BlockPos, loop: Boolean) : AbstractTickableSoundInstance(sound, source) {
     init {
         x = pos.x + .5
         y = pos.y + .5
         z = pos.z + .5
-        looping = true
+        looping = loop
         delay = 0
     }
 

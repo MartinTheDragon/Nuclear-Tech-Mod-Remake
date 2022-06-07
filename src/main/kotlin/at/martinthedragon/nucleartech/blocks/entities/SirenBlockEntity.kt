@@ -2,16 +2,14 @@ package at.martinthedragon.nucleartech.blocks.entities
 
 import at.martinthedragon.nucleartech.items.SirenTrackItem
 import at.martinthedragon.nucleartech.menus.SirenMenu
-import net.minecraft.client.Minecraft
-import net.minecraft.client.resources.sounds.SimpleSoundInstance
-import net.minecraft.client.resources.sounds.SoundInstance
+import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
+import at.martinthedragon.nucleartech.networking.SirenMessage
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TranslatableComponent
-import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity
@@ -22,6 +20,7 @@ import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.ItemStackHandler
+import net.minecraftforge.network.PacketDistributor
 
 class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainerBlockEntity(BlockEntityTypes.sirenBlockEntityType.get(), pos, state) {
     private var items = NonNullList.withSize(1, ItemStack.EMPTY)
@@ -40,38 +39,19 @@ class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainer
     private var inventoryCapability: LazyOptional<IItemHandlerModifiable>? = null
 
     fun startPlaying() {
-        if (!level!!.isClientSide) {
-            stopPlaying()
-
-            val item = inventory.getStackInSlot(0).item
-
-            if (item is SirenTrackItem) {
-                val sound = SimpleSoundInstance(
-                        item.soundSupplier.get().location,
-                        SoundSource.BLOCKS,
-                        item.range.toFloat(),
-                        1f,
-                        item.loop,
-                        0,
-                        SoundInstance.Attenuation.LINEAR,
-                        blockPos.x + .5,
-                        blockPos.y + .5,
-                        blockPos.z + .5,
-                        false
-                )
-                mapSoundPositions[blockPos] = sound
-                Minecraft.getInstance().soundManager.play(sound)
-            }
-        }
+        if (!level!!.isClientSide)
+            NuclearPacketHandler.INSTANCE.send(
+                PacketDistributor.DIMENSION.with { level!!.dimension() },
+                SirenMessage(blockPos, inventory.getStackInSlot(0))
+            )
     }
 
     fun stopPlaying() {
         if (!level!!.isClientSide) {
-            val sound = mapSoundPositions[blockPos]
-            if (sound != null) {
-                Minecraft.getInstance().soundManager.stop(sound)
-                mapSoundPositions.remove(blockPos)
-            }
+            NuclearPacketHandler.INSTANCE.send(
+                PacketDistributor.DIMENSION.with { level!!.dimension() },
+                SirenMessage(blockPos, ItemStack.EMPTY)
+            )
         }
     }
 
@@ -118,9 +98,5 @@ class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainer
 
     override fun setItems(newItems: NonNullList<ItemStack>) {
         items = newItems
-    }
-
-    companion object {
-        private val mapSoundPositions = mutableMapOf<BlockPos, SoundInstance>()
     }
 }
