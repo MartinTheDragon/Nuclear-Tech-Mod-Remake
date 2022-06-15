@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "APG",
+    " L "
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:dusts/coal"
+    },
+    "A": {
+      "item": "nucleartech:advanced_alloy_powder"
+    },
+    "G": {
+      "tag": "forge:dusts/gold"
+    },
+    "L": {
+      "tag": "forge:dusts/lapis"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "nucleartech:polaroid"
+  }
+}

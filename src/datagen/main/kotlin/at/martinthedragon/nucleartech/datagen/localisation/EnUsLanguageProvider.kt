@@ -693,6 +693,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.schrabidiumLeggings, "Schrabidium Leggings")
         addItem(ModItems.schrabidiumBoots, "Schrabidium Boots")
 
+        addItem(ModItems.polaroid, "The Polaroid")
+
         addItem(ModItems.creativeNuclearExplosionSpawner, "Nuclear Explosion Spawner")
         add("creative_nuclear_explosion_spawner.$MODID.strength", "Strength")
         add("creative_nuclear_explosion_spawner.$MODID.muted", "Muted")

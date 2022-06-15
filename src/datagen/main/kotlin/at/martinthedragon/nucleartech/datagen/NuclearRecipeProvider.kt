@@ -669,6 +669,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapelessRecipeBuilder.shapeless(ModItems.radAway.get()).requires(ModItems.bloodBag.get()).requires(NuclearTags.Items.DUSTS_COAL).requires(Tags.Items.SEEDS_PUMPKIN).unlockedBy("has_blood_bag", has(ModItems.bloodBag.get())).save(consumer)
         ShapelessRecipeBuilder.shapeless(ModItems.strongRadAway.get()).requires(ModItems.radAway.get()).requires(ModBlockItems.glowingMushroom.get()).unlockedBy("has_glowing_mushroom", has(ModBlockItems.glowingMushroom.get())).save(consumer)
         // TODO elite radaway iodine
+        ShapedRecipeBuilder.shaped(ModItems.polaroid.get()).define('C', NuclearTags.Items.DUSTS_COAL).define('A', ModItems.advancedAlloyPowder.get()).define('G', NuclearTags.Items.DUSTS_GOLD).define('L', NuclearTags.Items.DUSTS_LAPIS).define('P', Items.PAPER).pattern(" C ").pattern("APG").pattern(" L ").unlockedBy("has_advanced_alloy", has(ModItems.advancedAlloyPowder.get())).save(consumer)
     }
 
     private fun misc(consumer: Consumer<FinishedRecipe>) {

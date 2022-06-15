@@ -720,6 +720,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.schrabidiumLeggings, "Schrabidiumbeinschutz")
         addItem(ModItems.schrabidiumBoots, "Schrabidiumstiefel")
 
+        addItem(ModItems.polaroid, "Das Polaroid")
+
         addItem(ModItems.creativeNuclearExplosionSpawner, "Atomexplosionserzeuger")
         add("creative_nuclear_explosion_spawner.$MODID.strength", "Stärke")
         add("creative_nuclear_explosion_spawner.$MODID.muted", "Stumm")

@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.datagen.model.RandomModelBuilder
 import at.martinthedragon.nucleartech.items.BombKitItem
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
@@ -606,6 +607,12 @@ class NuclearItemModelProvider(
         simpleItem(ModItems.schrabidiumChestplate.get())
         simpleItem(ModItems.schrabidiumLeggings.get())
         simpleItem(ModItems.schrabidiumBoots.get())
+        getBuilder(ModItems.polaroid.id.path)
+            .customLoader(::RandomModelBuilder)
+            .idSupplier(ModItems.polaroid.id)
+            .apply {
+                for (i in 1..18) randomModel(nested().parent(generatedItem).texture("layer0", modLoc("$ITEM_FOLDER/polaroid_$i")))
+            }.end()
         simpleItem(ModItems.creativeNuclearExplosionSpawner.get())
 
         bombKitItem = getBuilder("template_bomb_kit").parent(generatedItem)

@@ -10,7 +10,9 @@ import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.entities.renderers.SimpleMissileRenderer
 import at.martinthedragon.nucleartech.items.BombKitItem
+import at.martinthedragon.nucleartech.items.setIdSupplier
 import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.model.RandomModelLoader
 import at.martinthedragon.nucleartech.particles.ContrailParticle
 import at.martinthedragon.nucleartech.particles.ModParticles
 import at.martinthedragon.nucleartech.particles.RubbleParticle
@@ -36,6 +38,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.*
+import net.minecraftforge.client.model.ModelLoaderRegistry
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -158,6 +161,12 @@ object ClientRegistries {
 
     @SubscribeEvent @JvmStatic
     fun registerModels(event: ModelRegistryEvent) {
+        NuclearTech.LOGGER.debug("Registering custom model loaders")
+        ModelLoaderRegistry.registerLoader(ntm("random"), RandomModelLoader)
+
+        NuclearTech.LOGGER.debug("Registering random model id suppliers")
+        RandomModelLoader.setIdSupplier(ModItems.polaroid)
+
 //        ForgeModelBakery.addSpecialModel(ntm("other/assembler"))
 //        ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))
     }

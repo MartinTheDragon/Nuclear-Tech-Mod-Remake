@@ -1,0 +1,114 @@
+{
+  "loader": "nucleartech:random",
+  "id_supplier": "nucleartech:polaroid",
+  "models": [
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_1"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_2"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_3"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_4"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_5"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_6"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_7"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_8"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_9"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_10"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_11"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_12"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_13"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_14"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_15"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_16"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_17"
+      }
+    },
+    {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "nucleartech:item/polaroid_18"
+      }
+    }
+  ]
+}

@@ -19,6 +19,9 @@ class NuclearTech {
     companion object {
         const val MODID = "nucleartech"
         val LOGGER: Logger = LogUtils.getLogger()
+
+        val polaroidID: Int get() = ModItems.polaroid.get().id + 1
+        val polaroidBroken: Boolean get() = polaroidID == 11
     }
 
     @Suppress("unused", "SpellCheckingInspection")

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:polaroid"
+    ]
+  },
+  "criteria": {
+    "has_advanced_alloy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:advanced_alloy_powder"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:polaroid"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_advanced_alloy",
+      "has_the_recipe"
+    ]
+  ]
+}

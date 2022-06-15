@@ -647,6 +647,8 @@ object ModItems {
     val schrabidiumLeggings = ITEMS.registerK("schrabidium_leggings") { FullSetBonusArmorItem(NuclearArmorMaterials.schrabidium, EquipmentSlot.LEGS, FullSetBonusArmorItem.FullSetBonus.copyFrom(schrabidiumHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
     val schrabidiumBoots = ITEMS.registerK("schrabidium_boots") { FullSetBonusArmorItem(NuclearArmorMaterials.schrabidium, EquipmentSlot.FEET, FullSetBonusArmorItem.FullSetBonus.copyFrom(schrabidiumHelmet.get()), Properties().tab(CreativeTabs.Consumables)) }
 
+    val polaroid = ITEMS.registerK("polaroid") { PolaroidItem(Properties().tab(CreativeTabs.Consumables)) }
+
     // Miscellaneous
 
     val nuclearCreeperSpawnEgg = ITEMS.registerK("nuclear_creeper_spawn_egg") { ForgeSpawnEggItem(EntityTypes.nuclearCreeper, 0x1E3E2E, 0x66B300, Properties().tab(CreativeTabs.Miscellaneous)) }
