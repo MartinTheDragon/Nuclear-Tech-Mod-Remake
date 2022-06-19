@@ -6,7 +6,6 @@ import at.martinthedragon.nucleartech.items.ShredderBladeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
@@ -16,11 +15,11 @@ import net.minecraftforge.items.SlotItemHandler
 
 class ShredderMenu(
     windowID: Int,
-    val playerInventory: Inventory,
-    val tileEntity: ShredderBlockEntity,
+    playerInventory: Inventory,
+    blockEntity: ShredderBlockEntity,
     val data: ContainerData = SimpleContainerData(2)
-) : AbstractContainerMenu(MenuTypes.shredderMenu.get(), windowID) {
-    private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
+) : NTechContainerMenu(MenuTypes.shredderMenu.get(), windowID, playerInventory, blockEntity) {
+    private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {
         for (i in 0 until 3)
@@ -31,7 +30,7 @@ class ShredderMenu(
         addSlot(SlotItemHandler(inv, 11, 80, 108))
         for (i in 0 until 6)
             for (j in 0 until 3)
-                addSlot(ExperienceResultSlot(tileEntity, playerInventory.player, inv, j + i * 3 + 12, 116 + j * 18, 18 + i * 18))
+                addSlot(ExperienceResultSlot(blockEntity, playerInventory.player, inv, j + i * 3 + 12, 116 + j * 18, 18 + i * 18))
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
         addDataSlots(data)
     }
@@ -64,8 +63,6 @@ class ShredderMenu(
         }
         return returnStack
     }
-
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
 
     fun getShreddingProgress() = data[0]
 

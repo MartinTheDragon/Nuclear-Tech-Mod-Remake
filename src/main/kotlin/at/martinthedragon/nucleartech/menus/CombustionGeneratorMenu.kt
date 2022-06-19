@@ -4,7 +4,6 @@ import at.martinthedragon.nucleartech.blocks.entities.CombustionGeneratorBlockEn
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
@@ -17,11 +16,11 @@ import net.minecraftforge.items.SlotItemHandler
 
 class CombustionGeneratorMenu(
     windowId: Int,
-    val playerInventory: Inventory,
-    val tileEntity: CombustionGeneratorBlockEntity,
+    playerInventory: Inventory,
+    blockEntity: CombustionGeneratorBlockEntity,
     val data: ContainerData = SimpleContainerData(4)
-) : AbstractContainerMenu(MenuTypes.combustionGeneratorMenu.get(), windowId) {
-    private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
+) : NTechContainerMenu(MenuTypes.combustionGeneratorMenu.get(), windowId, playerInventory, blockEntity) {
+    private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {
         addSlot(SlotItemHandler(inv, 0, 80, 53))
@@ -59,8 +58,6 @@ class CombustionGeneratorMenu(
         }
         return returnStack
     }
-
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
 
     fun getBurnTime() = data[0]
 

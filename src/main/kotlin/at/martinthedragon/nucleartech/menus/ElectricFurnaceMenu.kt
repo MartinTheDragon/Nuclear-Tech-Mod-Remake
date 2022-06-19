@@ -6,7 +6,6 @@ import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
@@ -17,17 +16,17 @@ import net.minecraftforge.items.SlotItemHandler
 
 class ElectricFurnaceMenu(
     windowId: Int,
-    val playerInventory: Inventory,
-    val tileEntity: ElectricFurnaceBlockEntity,
+    playerInventory: Inventory,
+    blockEntity: ElectricFurnaceBlockEntity,
     val data: ContainerData = SimpleContainerData(2)
-) : AbstractContainerMenu(MenuTypes.electricFurnaceMenu.get(), windowId) {
-    private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
+) : NTechContainerMenu(MenuTypes.electricFurnaceMenu.get(), windowId, playerInventory, blockEntity) {
+    private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
     private val level = playerInventory.player.level
 
     init {
         addSlot(SlotItemHandler(inv, 0, 56, 17))
         addSlot(SlotItemHandler(inv, 1, 56, 53))
-        addSlot(ExperienceResultSlot(tileEntity, playerInventory.player, inv, 2, 116, 35))
+        addSlot(ExperienceResultSlot(blockEntity, playerInventory.player, inv, 2, 116, 35))
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
         addDataSlots(data)
     }
@@ -62,8 +61,6 @@ class ElectricFurnaceMenu(
 
     private fun canCook(itemStack: ItemStack) =
         level.recipeManager.getRecipeFor(RecipeType.SMELTING, SimpleContainer(itemStack), level).isPresent
-
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
 
     fun getCookingProgress() = data[0]
 
