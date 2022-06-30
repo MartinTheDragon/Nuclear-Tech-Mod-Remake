@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:iron_crystals"
+    "#forge:crystals/iron"
   ]
 }

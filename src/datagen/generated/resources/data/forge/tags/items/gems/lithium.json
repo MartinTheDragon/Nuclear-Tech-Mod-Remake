@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:lithium_crystals"
+    "#forge:crystals/lithium"
   ]
 }

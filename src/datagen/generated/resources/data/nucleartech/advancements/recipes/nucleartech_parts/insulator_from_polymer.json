@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:insulator_from_polymer"
+    ]
+  },
+  "criteria": {
+    "has_polymer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/polymer"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:insulator_from_polymer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polymer",
+      "has_the_recipe"
+    ]
+  ]
+}

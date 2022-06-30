@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:niter_from_smelting_niter_crystals"
+    ]
+  },
+  "criteria": {
+    "has_niter_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/salpeter"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:niter_from_smelting_niter_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_niter_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

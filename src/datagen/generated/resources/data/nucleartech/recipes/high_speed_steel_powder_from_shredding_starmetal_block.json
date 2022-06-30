@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:storage_blocks/starmetal"
+  },
+  "result": {
+    "item": "nucleartech:high_speed_steel_powder",
+    "count": 36
+  },
+  "experience": 20.0
+}

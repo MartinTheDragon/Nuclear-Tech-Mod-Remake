@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.api
 
 import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration
-import at.martinthedragon.nucleartech.api.hazards.radiation.HazmatRegistry
+import at.martinthedragon.nucleartech.api.hazard.radiation.HazmatRegistry
 import net.minecraft.resources.ResourceLocation
 
 /** Implementations must be annotated with [NuclearTechPlugin] and have a single constructor with no arguments for NTM to detect them. */

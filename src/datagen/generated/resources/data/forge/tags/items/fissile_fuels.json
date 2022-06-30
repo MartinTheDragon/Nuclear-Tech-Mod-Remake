@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "#forge:fissile_fuels/uranium",
-    "#forge:fissile_fuels/thorium",
-    "#forge:fissile_fuels/plutonium",
     "#forge:fissile_fuels/mox",
-    "nucleartech:schrabidium_fuel_ingot",
+    "#forge:fissile_fuels/plutonium",
+    "#forge:fissile_fuels/schrabidium",
+    "#forge:fissile_fuels/thorium",
+    "#forge:fissile_fuels/uranium",
     "nucleartech:high_enriched_schrabidium_fuel_ingot",
     "nucleartech:low_enriched_schrabidium_fuel_ingot"
   ]

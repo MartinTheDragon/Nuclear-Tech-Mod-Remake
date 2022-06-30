@@ -3,6 +3,8 @@
   "values": [
     "nucleartech:uranium_ore",
     "nucleartech:scorched_uranium_ore",
+    "nucleartech:deepslate_uranium_ore",
+    "nucleartech:scorched_deepslate_uranium_ore",
     "nucleartech:nether_uranium_ore",
     "nucleartech:scorched_nether_uranium_ore"
   ]

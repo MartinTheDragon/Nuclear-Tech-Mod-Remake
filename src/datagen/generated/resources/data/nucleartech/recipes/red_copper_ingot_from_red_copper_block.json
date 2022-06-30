@@ -3,7 +3,7 @@
   "group": "red_copper_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:red_copper_block"
+      "tag": "forge:storage_blocks/red_copper"
     }
   ],
   "result": {

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:sulfur_ore"
+    "nucleartech:sulfur_ore",
+    "nucleartech:deepslate_sulfur_ore",
+    "nucleartech:nether_sulfur_ore"
   ]
 }

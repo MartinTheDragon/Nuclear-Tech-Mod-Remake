@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:reiium_nugget"
+    ]
+  },
+  "criteria": {
+    "has_reiium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/reiium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:reiium_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_reiium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

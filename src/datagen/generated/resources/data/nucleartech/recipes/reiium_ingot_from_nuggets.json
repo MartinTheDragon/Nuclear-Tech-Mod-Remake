@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "reiium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/reiium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:reiium_ingot"
+  }
+}

@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "red_phosphorus",
   "ingredient": {
-    "item": "nucleartech:nether_phosphorus_ore"
+    "tag": "forge:ores/phosphorus"
   },
   "result": "nucleartech:red_phosphorus",
   "experience": 0.5,

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:advanced_battery_primary"
+    ]
+  },
+  "criteria": {
+    "has_canonical": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/sulfur"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:advanced_battery_primary"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_canonical",
+      "has_the_recipe"
+    ]
+  ]
+}

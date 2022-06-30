@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:insulator_from_fiberglass"
+    ]
+  },
+  "criteria": {
+    "has_fiberglass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/fiberglass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:insulator_from_fiberglass"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fiberglass",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:verticium_ingot"
-            ]
+            "tag": "forge:ingots/verticium"
           }
         ]
       }

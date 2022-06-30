@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:red_copper_ingot_from_smelting_red_copper_powder"
+    ]
+  },
+  "criteria": {
+    "has_red_copper_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/red_copper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:red_copper_ingot_from_smelting_red_copper_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_copper_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

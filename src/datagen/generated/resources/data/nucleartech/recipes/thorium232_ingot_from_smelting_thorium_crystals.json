@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "thorium232_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/thorium"
+  },
+  "result": {
+    "item": "nucleartech:thorium232_ingot",
+    "count": 2
+  },
+  "experience": 2.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium240_ingot_from_pu240_block"
+    ]
+  },
+  "criteria": {
+    "has_pu240_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:pu240_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium240_ingot_from_pu240_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pu240_block",
+      "has_the_recipe"
+    ]
+  ]
+}

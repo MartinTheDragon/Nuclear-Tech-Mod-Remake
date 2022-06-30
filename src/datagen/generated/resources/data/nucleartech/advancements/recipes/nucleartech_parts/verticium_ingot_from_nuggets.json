@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:verticium_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_verticium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/verticium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:verticium_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_verticium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

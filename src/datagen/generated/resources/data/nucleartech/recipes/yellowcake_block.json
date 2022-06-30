@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "yellowcake_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:yellow_cake_uranium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:yellowcake_block"
+  }
+}

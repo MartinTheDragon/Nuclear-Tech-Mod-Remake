@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "asbestos_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/asbestos"
+    }
+  },
+  "result": {
+    "item": "nucleartech:asbestos_block"
+  }
+}

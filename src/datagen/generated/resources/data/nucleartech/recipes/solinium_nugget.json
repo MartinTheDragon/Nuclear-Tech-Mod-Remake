@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "solinium_nugget",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/solinium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:solinium_nugget",
+    "count": 9
+  }
+}

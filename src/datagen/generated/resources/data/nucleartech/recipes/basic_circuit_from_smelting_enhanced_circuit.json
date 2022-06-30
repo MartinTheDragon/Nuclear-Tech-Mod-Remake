@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "nucleartech:enhanced_circuit"
+  },
+  "result": "nucleartech:basic_circuit",
+  "experience": 0.0,
+  "cookingtime": 200
+}

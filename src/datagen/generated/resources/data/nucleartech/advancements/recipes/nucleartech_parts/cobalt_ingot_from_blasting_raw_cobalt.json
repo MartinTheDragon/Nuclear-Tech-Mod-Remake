@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt_ingot_from_blasting_raw_cobalt"
+    ]
+  },
+  "criteria": {
+    "has_raw_cobalt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/cobalt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt_ingot_from_blasting_raw_cobalt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_cobalt",
+      "has_the_recipe"
+    ]
+  ]
+}

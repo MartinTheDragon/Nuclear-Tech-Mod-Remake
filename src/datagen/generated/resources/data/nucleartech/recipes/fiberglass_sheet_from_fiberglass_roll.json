@@ -3,7 +3,7 @@
   "group": "fiberglass_sheet",
   "ingredients": [
     {
-      "item": "nucleartech:fiberglass_roll"
+      "tag": "forge:storage_blocks/fiberglass"
     }
   ],
   "result": {

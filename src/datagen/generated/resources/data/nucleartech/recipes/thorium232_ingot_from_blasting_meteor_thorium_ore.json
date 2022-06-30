@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "group": "thorium232_ingot",
+  "ingredient": {
+    "item": "nucleartech:meteor_thorium_ore"
+  },
+  "result": {
+    "item": "nucleartech:thorium232_ingot",
+    "count": 3
+  },
+  "experience": 3.0,
+  "cookingtime": 100
+}

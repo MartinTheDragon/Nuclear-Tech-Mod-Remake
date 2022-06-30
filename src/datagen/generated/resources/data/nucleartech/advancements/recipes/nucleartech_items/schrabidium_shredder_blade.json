@@ -6,14 +6,12 @@
     ]
   },
   "criteria": {
-    "has_schrabidium_ingot": {
+    "has_material": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:schrabidium_ingot"
-            ]
+            "tag": "forge:ingots/schrabidium"
           }
         ]
       }
@@ -27,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_schrabidium_ingot",
+      "has_material",
       "has_the_recipe"
     ]
   ]

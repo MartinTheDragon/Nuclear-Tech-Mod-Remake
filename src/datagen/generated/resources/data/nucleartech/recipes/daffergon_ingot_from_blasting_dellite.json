@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "daffergon_ingot",
   "ingredient": {
-    "item": "nucleartech:dellite"
+    "tag": "forge:ores/daffergon"
   },
   "result": "nucleartech:daffergon_ingot",
   "experience": 1.25,

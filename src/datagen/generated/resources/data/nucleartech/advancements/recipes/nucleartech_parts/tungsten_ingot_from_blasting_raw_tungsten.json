@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tungsten_ingot_from_blasting_raw_tungsten"
+    ]
+  },
+  "criteria": {
+    "has_raw_tungsten": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/tungsten"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tungsten_ingot_from_blasting_raw_tungsten"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_tungsten",
+      "has_the_recipe"
+    ]
+  ]
+}

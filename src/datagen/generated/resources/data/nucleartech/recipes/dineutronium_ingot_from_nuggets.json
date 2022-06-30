@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dineutronium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/dineutronium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:dineutronium_ingot"
+  }
+}

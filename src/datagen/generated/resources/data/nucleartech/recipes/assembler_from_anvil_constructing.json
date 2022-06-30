@@ -1,0 +1,51 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:glass/colorless"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/steel"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/copper"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:motor"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:basic_circuit"
+      },
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:assembler",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 2,
+  "tierUpper": -1
+}

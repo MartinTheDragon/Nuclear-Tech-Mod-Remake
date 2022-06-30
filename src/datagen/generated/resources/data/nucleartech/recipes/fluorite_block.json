@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "fluorite_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:dusts/fluorite"
+    }
+  },
+  "result": {
+    "item": "nucleartech:fluorite_block"
+  }
+}

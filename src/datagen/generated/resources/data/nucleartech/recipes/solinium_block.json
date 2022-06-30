@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "solinium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/solinium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:solinium_block"
+  }
+}

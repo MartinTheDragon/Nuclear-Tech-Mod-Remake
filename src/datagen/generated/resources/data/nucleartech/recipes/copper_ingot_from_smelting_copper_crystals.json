@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "copper_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/copper"
+  },
+  "result": {
+    "item": "minecraft:copper_ingot",
+    "count": 2
+  },
+  "experience": 0.7,
+  "cookingtime": 200
+}

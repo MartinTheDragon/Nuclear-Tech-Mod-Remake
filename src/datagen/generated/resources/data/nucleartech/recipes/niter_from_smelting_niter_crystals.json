@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "niter",
+  "ingredient": {
+    "tag": "forge:crystals/salpeter"
+  },
+  "result": {
+    "item": "nucleartech:niter",
+    "count": 6
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

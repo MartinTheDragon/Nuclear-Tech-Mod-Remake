@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:redstone_from_smelting_redstone_crystals"
+    ]
+  },
+  "criteria": {
+    "has_redstone_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/redstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:redstone_from_smelting_redstone_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_redstone_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

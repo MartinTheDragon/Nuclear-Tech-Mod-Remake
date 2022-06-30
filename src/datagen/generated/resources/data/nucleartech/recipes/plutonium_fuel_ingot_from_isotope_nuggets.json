@@ -3,31 +3,31 @@
   "group": "plutonium_fuel_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:pu238_nugget"
+      "item": "nucleartech:plutonium238_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu240_nugget"
+      "item": "nucleartech:plutonium240_nugget"
     },
     {
-      "item": "nucleartech:pu240_nugget"
+      "item": "nucleartech:plutonium240_nugget"
     },
     {
-      "item": "nucleartech:pu240_nugget"
+      "item": "nucleartech:plutonium240_nugget"
     }
   ],
   "result": {

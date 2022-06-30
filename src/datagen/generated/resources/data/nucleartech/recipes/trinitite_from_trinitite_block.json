@@ -3,7 +3,7 @@
   "group": "trinitite",
   "ingredients": [
     {
-      "item": "nucleartech:trinitite_block"
+      "tag": "forge:storage_blocks/trinitite"
     }
   ],
   "result": {

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:fluorite_ore"
+    "nucleartech:fluorite_ore",
+    "nucleartech:deepslate_fluorite_ore"
   ]
 }

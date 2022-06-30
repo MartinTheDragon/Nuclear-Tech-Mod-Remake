@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ingots/tungsten"
+  },
+  "result": {
+    "item": "nucleartech:tungsten_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

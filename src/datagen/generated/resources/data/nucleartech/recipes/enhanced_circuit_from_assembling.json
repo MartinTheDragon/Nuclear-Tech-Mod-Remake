@@ -1,0 +1,38 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:basic_circuit"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/copper"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/quartz"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/copper"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:enhanced_circuit",
+    "count": 1
+  },
+  "duration": 100
+}

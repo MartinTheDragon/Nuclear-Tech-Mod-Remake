@@ -8,7 +8,7 @@
   ],
   "key": {
     "#": {
-      "item": "nucleartech:uranium_fuel_nugget"
+      "tag": "forge:nuggets/uranium_fuel"
     }
   },
   "result": {

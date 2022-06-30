@@ -1,0 +1,38 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:enhanced_circuit"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/red_copper"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/gold"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/insulator"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:advanced_circuit",
+    "count": 1
+  },
+  "duration": 150
+}

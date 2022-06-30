@@ -4,7 +4,10 @@
   "ingredient": {
     "item": "nucleartech:meteor_uranium_ore"
   },
-  "result": "nucleartech:uranium_ingot",
+  "result": {
+    "item": "nucleartech:uranium_ingot",
+    "count": 3
+  },
   "experience": 1.5,
   "cookingtime": 100
 }

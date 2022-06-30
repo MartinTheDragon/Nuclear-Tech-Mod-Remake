@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:nether_phosphorus_ore",
+    "nucleartech:nether_plutonium_ore",
+    "nucleartech:nether_schrabidium_ore",
+    "nucleartech:nether_sulfur_ore",
+    "nucleartech:nether_tungsten_ore",
+    "nucleartech:nether_uranium_ore",
+    "nucleartech:scorched_nether_uranium_ore"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:asbestos_sheet_from_smelting_asbestos_powder"
+    ]
+  },
+  "criteria": {
+    "has_asbestos_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/asbestos"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:asbestos_sheet_from_smelting_asbestos_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_asbestos_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

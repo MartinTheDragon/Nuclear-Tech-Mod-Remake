@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:desh_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_desh_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/desh"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:desh_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_desh_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

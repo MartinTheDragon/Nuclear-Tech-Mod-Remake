@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:euphemium_block"
+    "tag": "forge:storage_blocks/euphemium"
   },
   "result": {
     "item": "nucleartech:euphemium_powder",

@@ -3,7 +3,7 @@
   "group": "euphemium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:euphemium_block"
+      "tag": "forge:storage_blocks/euphemium"
     }
   ],
   "result": {

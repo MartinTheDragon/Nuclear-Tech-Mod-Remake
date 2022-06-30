@@ -1,0 +1,26 @@
+{
+  "type": "nucleartech:battery",
+  "group": "lithium_battery",
+  "pattern": [
+    "W W",
+    "PXP",
+    "PYP"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/gold"
+    },
+    "P": {
+      "tag": "forge:plates/titanium"
+    },
+    "X": {
+      "tag": "forge:dusts/lithium"
+    },
+    "Y": {
+      "tag": "forge:dusts/cobalt"
+    }
+  },
+  "result": {
+    "item": "nucleartech:lithium_battery"
+  }
+}

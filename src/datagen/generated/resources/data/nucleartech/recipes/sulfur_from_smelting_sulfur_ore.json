@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "sulfur",
+  "ingredient": {
+    "tag": "forge:ores/sulfur"
+  },
+  "result": "nucleartech:sulfur",
+  "experience": 0.2,
+  "cookingtime": 200
+}

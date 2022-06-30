@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:polymer_powder"
+    "#forge:dusts/teflon"
   ]
 }

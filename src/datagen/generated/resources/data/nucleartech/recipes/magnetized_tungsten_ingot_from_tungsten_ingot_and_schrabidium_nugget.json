@@ -4,7 +4,7 @@
     "tag": "forge:ingots/tungsten"
   },
   "second_ingredient": {
-    "item": "nucleartech:schrabidium_nugget"
+    "tag": "forge:nuggets/schrabidium"
   },
   "result": {
     "item": "nucleartech:magnetized_tungsten_ingot",

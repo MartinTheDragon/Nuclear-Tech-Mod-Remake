@@ -3,7 +3,7 @@
   "group": "thorium_fuel_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:thorium_fuel_block"
+      "tag": "forge:storage_blocks/thorium_fuel"
     }
   ],
   "result": {

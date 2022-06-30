@@ -4,7 +4,10 @@
   "ingredient": {
     "item": "nucleartech:meteor_lithium_ore"
   },
-  "result": "nucleartech:lithium_cube",
-  "experience": 2.5,
+  "result": {
+    "item": "nucleartech:lithium_cube",
+    "count": 3
+  },
+  "experience": 0.9,
   "cookingtime": 100
 }

@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:red_phosphorus_crystals"
+    "#forge:crystals/phosphorus"
   ]
 }

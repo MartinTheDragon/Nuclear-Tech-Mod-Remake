@@ -15,7 +15,7 @@ import net.minecraft.world.level.material.Material.*
 import net.minecraft.world.level.material.MaterialColor
 import net.minecraftforge.registries.RegistryObject
 import kotlin.random.Random
-import at.martinthedragon.nucleartech.hazards.items.HazardItemEffect.Companion as RadValue
+import at.martinthedragon.nucleartech.hazard.items.HazardItemEffect.Companion as RadValue
 
 object ModBlocks {
     val uraniumOre = BLOCKS.registerK("uranium_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }

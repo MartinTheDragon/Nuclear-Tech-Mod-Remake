@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "unobtainium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/unobtainium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:unobtainium_block"
+  }
+}

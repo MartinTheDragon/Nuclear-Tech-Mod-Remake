@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:thorium_crystals"
+    "tag": "forge:crystals/thorium"
   },
   "result": {
     "item": "nucleartech:thorium_powder",

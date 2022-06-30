@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:blasting",
   "first_ingredient": {
-    "item": "nucleartech:saturnite_ingot"
+    "tag": "forge:ingots/saturnite"
   },
   "second_ingredient": {
     "tag": "forge:dusts/meteorite"

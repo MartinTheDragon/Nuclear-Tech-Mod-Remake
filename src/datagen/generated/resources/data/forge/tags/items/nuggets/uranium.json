@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:uranium_nugget",
-    "nucleartech:u233_nugget",
-    "nucleartech:u235_nugget",
-    "nucleartech:u238_nugget",
-    "nucleartech:uranium_fuel_nugget"
+    "nucleartech:uranium_nugget"
   ]
 }

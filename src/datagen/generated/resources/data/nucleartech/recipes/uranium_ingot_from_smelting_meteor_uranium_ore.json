@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "uranium_ingot",
+  "ingredient": {
+    "item": "nucleartech:meteor_uranium_ore"
+  },
+  "result": {
+    "item": "nucleartech:uranium_ingot",
+    "count": 3
+  },
+  "experience": 3.0,
+  "cookingtime": 200
+}

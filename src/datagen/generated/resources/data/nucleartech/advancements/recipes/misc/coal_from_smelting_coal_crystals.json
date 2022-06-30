@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:coal_from_smelting_coal_crystals"
+    ]
+  },
+  "criteria": {
+    "has_coal_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/coal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:coal_from_smelting_coal_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_coal_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

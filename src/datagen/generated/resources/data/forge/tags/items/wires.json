@@ -3,9 +3,11 @@
   "values": [
     "#forge:wires/aluminium",
     "#forge:wires/copper",
-    "#forge:wires/tungsten",
-    "#forge:wires/super_conductor",
     "#forge:wires/gold",
-    "nucleartech:red_copper_wire"
+    "#forge:wires/magnetized_tungsten",
+    "#forge:wires/red_copper",
+    "#forge:wires/schrabidium",
+    "#forge:wires/super_conductor",
+    "#forge:wires/tungsten"
   ]
 }

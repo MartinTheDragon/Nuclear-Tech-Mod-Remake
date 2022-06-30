@@ -1,11 +1,11 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:tungsten_crystals"
+    "tag": "forge:crystals/tungsten"
   },
   "result": {
     "item": "nucleartech:tungsten_powder",
     "count": 3
   },
-  "experience": 0.4
+  "experience": 0.375
 }

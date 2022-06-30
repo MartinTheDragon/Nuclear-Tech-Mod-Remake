@@ -121,7 +121,7 @@ minecraft.runs.all {
     lazyToken("minecraft_classpath") {
         configurations.library.copyRecursive().resolve()
             .collect { it.absolutePath }
-            .findAll { !it.contains("org.jetbrains\\annotations\\13.0") } // somewhat inelegantly remove duplicate
+            .findAll { !it.contains("org.jetbrains\\annotations\\13.0") && !it.contains("org.jetbrains/annotations/13.0") } // somewhat inelegantly remove duplicate
             .join(File.pathSeparator)
     }
 }

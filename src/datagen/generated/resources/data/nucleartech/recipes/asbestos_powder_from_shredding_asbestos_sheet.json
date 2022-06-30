@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:asbestos_sheet"
+    "tag": "forge:ingots/asbestos"
   },
   "result": {
     "item": "nucleartech:asbestos_powder",

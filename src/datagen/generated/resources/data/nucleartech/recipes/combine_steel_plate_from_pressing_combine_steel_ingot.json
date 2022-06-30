@@ -1,12 +1,12 @@
 {
   "type": "nucleartech:pressing",
   "ingredient": {
-    "item": "nucleartech:combine_steel_ingot"
+    "tag": "forge:ingots/combine_steel"
   },
   "stamp_type": "PLATE",
   "result": {
     "item": "nucleartech:combine_steel_plate",
     "count": 1
   },
-  "experience": 0.1
+  "experience": 0.2
 }

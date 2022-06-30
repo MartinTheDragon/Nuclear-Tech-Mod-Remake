@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:starmetal_ingot_from_smelting_raw_starmetal"
+    ]
+  },
+  "criteria": {
+    "has_raw_starmetal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/starmetal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:starmetal_ingot_from_smelting_raw_starmetal"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_starmetal",
+      "has_the_recipe"
+    ]
+  ]
+}

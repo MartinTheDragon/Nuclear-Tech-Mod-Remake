@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:titanium_crystals"
-            ]
+            "tag": "forge:crystals/titanium"
           }
         ]
       }

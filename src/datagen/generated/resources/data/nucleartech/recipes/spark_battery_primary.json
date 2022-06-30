@@ -1,0 +1,26 @@
+{
+  "type": "nucleartech:battery",
+  "group": "spark_battery",
+  "pattern": [
+    " W ",
+    "PXP",
+    "PYP"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/magnetized_tungsten"
+    },
+    "P": {
+      "item": "nucleartech:dineutronium_compound_plate"
+    },
+    "X": {
+      "item": "nucleartech:spark_mix"
+    },
+    "Y": {
+      "item": "nucleartech:spark_mix"
+    }
+  },
+  "result": {
+    "item": "nucleartech:spark_battery"
+  }
+}

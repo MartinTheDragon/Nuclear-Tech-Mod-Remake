@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "uranium_fuel_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/uranium_fuel"
+    }
+  },
+  "result": {
+    "item": "nucleartech:uranium_fuel_block"
+  }
+}

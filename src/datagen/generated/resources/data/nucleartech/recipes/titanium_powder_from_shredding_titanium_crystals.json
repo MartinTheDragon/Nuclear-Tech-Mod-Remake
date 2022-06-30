@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:titanium_crystals"
+    "tag": "forge:crystals/titanium"
   },
   "result": {
     "item": "nucleartech:titanium_powder",

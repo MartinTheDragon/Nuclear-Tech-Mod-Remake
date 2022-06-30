@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:emerald_from_smelting_emerald_powder"
+    ]
+  },
+  "criteria": {
+    "has_emerald_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/emerald"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:emerald_from_smelting_emerald_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_emerald_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

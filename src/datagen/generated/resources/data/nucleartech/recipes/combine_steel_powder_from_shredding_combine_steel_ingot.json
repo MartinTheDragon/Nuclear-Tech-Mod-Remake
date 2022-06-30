@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:combine_steel_ingot"
+    "tag": "forge:ingots/combine_steel"
   },
   "result": {
     "item": "nucleartech:combine_steel_powder",

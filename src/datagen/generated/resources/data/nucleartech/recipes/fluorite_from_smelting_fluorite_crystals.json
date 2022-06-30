@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "fluorite",
+  "ingredient": {
+    "tag": "forge:crystals/fluorite"
+  },
+  "result": {
+    "item": "nucleartech:fluorite",
+    "count": 6
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:titanium_ore"
+    "nucleartech:titanium_ore",
+    "nucleartech:deepslate_titanium_ore"
   ]
 }

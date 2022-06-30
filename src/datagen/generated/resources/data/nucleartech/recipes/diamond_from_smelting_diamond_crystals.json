@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "diamond",
+  "ingredient": {
+    "tag": "forge:crystals/diamond"
+  },
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 2
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

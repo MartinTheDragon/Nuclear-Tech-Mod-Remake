@@ -3,7 +3,7 @@
   "group": "plutonium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:plutonium_block"
+      "tag": "forge:storage_blocks/plutonium"
     }
   ],
   "result": {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:aluminium_ingot_from_smelting_raw_aluminium"
+    ]
+  },
+  "criteria": {
+    "has_raw_aluminium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/aluminium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:aluminium_ingot_from_smelting_raw_aluminium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_aluminium",
+      "has_the_recipe"
+    ]
+  ]
+}

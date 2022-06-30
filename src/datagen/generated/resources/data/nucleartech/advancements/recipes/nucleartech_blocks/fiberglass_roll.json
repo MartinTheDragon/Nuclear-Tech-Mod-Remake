@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:fiberglass_roll"
+    ]
+  },
+  "criteria": {
+    "has_fiberglass_sheet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/fiberglass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:fiberglass_roll"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fiberglass_sheet",
+      "has_the_recipe"
+    ]
+  ]
+}

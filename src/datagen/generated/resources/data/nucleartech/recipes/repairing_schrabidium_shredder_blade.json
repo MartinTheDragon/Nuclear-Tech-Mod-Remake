@@ -6,7 +6,7 @@
   ],
   "key": {
     "M": {
-      "item": "nucleartech:schrabidium_plate"
+      "tag": "forge:plates/schrabidium"
     },
     "B": {
       "item": "nucleartech:schrabidium_shredder_blade"

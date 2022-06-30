@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "titanium_ingot",
+  "ingredient": {
+    "item": "nucleartech:meteor_titanium_ore"
+  },
+  "result": {
+    "item": "nucleartech:titanium_ingot",
+    "count": 3
+  },
+  "experience": 2.4,
+  "cookingtime": 200
+}

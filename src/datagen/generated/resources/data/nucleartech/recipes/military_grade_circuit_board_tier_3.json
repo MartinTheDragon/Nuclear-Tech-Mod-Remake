@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CDC"
+  ],
+  "key": {
+    "C": {
+      "item": "nucleartech:advanced_circuit"
+    },
+    "D": {
+      "tag": "forge:dusts/gold"
+    }
+  },
+  "result": {
+    "item": "nucleartech:military_grade_circuit_board_tier_3"
+  }
+}

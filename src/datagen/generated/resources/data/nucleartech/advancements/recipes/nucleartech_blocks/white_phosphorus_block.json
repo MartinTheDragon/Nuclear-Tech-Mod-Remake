@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:white_phosphorus_block"
+    ]
+  },
+  "criteria": {
+    "has_white_phosphorus_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/phosphorus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:white_phosphorus_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_white_phosphorus_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

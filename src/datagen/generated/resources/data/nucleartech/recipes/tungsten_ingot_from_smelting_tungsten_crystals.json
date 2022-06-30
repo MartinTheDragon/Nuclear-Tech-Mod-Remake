@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "tungsten_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/tungsten"
+  },
+  "result": {
+    "item": "nucleartech:tungsten_ingot",
+    "count": 2
+  },
+  "experience": 0.75,
+  "cookingtime": 200
+}

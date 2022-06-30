@@ -46,7 +46,7 @@
               }
             }
           ],
-          "name": "nucleartech:u233_nugget"
+          "name": "nucleartech:uranium233_nugget"
         },
         {
           "type": "minecraft:item",
@@ -69,7 +69,7 @@
               }
             }
           ],
-          "name": "nucleartech:pu238_nugget"
+          "name": "nucleartech:plutonium238_nugget"
         },
         {
           "type": "minecraft:item",
@@ -92,7 +92,7 @@
               }
             }
           ],
-          "name": "nucleartech:pu239_nugget"
+          "name": "nucleartech:plutonium239_nugget"
         },
         {
           "type": "minecraft:item",

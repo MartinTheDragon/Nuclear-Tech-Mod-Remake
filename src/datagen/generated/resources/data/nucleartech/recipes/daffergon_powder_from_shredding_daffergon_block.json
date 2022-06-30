@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:daffergon_block"
+    "tag": "forge:storage_blocks/daffergon"
   },
   "result": {
     "item": "nucleartech:daffergon_powder",

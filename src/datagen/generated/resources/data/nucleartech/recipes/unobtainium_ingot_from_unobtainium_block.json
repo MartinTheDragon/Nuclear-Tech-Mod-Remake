@@ -3,7 +3,7 @@
   "group": "unobtainium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:unobtainium_block"
+      "tag": "forge:storage_blocks/unobtainium"
     }
   ],
   "result": {

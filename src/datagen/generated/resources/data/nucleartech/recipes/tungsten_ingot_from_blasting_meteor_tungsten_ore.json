@@ -4,7 +4,10 @@
   "ingredient": {
     "item": "nucleartech:meteor_tungsten_ore"
   },
-  "result": "nucleartech:tungsten_ingot",
+  "result": {
+    "item": "nucleartech:tungsten_ingot",
+    "count": 3
+  },
   "experience": 1.125,
   "cookingtime": 100
 }

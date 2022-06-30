@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "euphemium_nugget",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/euphemium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:euphemium_nugget",
+    "count": 9
+  }
+}

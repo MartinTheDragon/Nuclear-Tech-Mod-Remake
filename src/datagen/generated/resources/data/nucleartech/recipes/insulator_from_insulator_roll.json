@@ -3,7 +3,7 @@
   "group": "insulator",
   "ingredients": [
     {
-      "item": "nucleartech:insulator_roll"
+      "tag": "forge:storage_blocks/insulator"
     }
   ],
   "result": {

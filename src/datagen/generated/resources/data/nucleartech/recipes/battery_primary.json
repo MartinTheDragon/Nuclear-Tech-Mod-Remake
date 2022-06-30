@@ -1,0 +1,26 @@
+{
+  "type": "nucleartech:battery",
+  "group": "battery",
+  "pattern": [
+    " W ",
+    "PXP",
+    "PYP"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/aluminium"
+    },
+    "P": {
+      "tag": "forge:plates/aluminium"
+    },
+    "X": {
+      "tag": "forge:dusts/redstone"
+    },
+    "Y": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "nucleartech:battery"
+  }
+}

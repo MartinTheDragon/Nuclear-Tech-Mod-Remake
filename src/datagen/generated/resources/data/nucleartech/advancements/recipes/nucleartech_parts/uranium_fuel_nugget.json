@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium_fuel_nugget"
+    ]
+  },
+  "criteria": {
+    "has_uranium_fuel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/uranium_fuel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium_fuel_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium_fuel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

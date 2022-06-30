@@ -16,7 +16,7 @@
   "right": {
     "type": "nucleartech:stacked",
     "item": {
-      "item": "nucleartech:u238_ingot"
+      "item": "nucleartech:uranium238_ingot"
     },
     "amount": 10
   },

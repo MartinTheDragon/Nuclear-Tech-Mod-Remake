@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:red_phosphorus_from_smelting_red_phosphorus_crystals"
+    ]
+  },
+  "criteria": {
+    "has_red_phosphorus_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/phosphorus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:red_phosphorus_from_smelting_red_phosphorus_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_phosphorus_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

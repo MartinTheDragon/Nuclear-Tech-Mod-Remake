@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt_ingot_from_smelting_cobalt_ore"
+    ]
+  },
+  "criteria": {
+    "has_cobalt_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ores/cobalt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt_ingot_from_smelting_cobalt_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobalt_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

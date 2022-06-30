@@ -1,11 +1,11 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:starmetal_ore"
+    "tag": "forge:ores/starmetal"
   },
   "result": {
     "item": "nucleartech:high_speed_steel_powder",
     "count": 4
   },
-  "experience": 5.0
+  "experience": 2.0
 }

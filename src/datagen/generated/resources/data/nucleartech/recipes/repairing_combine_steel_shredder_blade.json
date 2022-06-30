@@ -6,7 +6,7 @@
   ],
   "key": {
     "M": {
-      "item": "nucleartech:combine_steel_plate"
+      "tag": "forge:plates/combine_steel"
     },
     "B": {
       "item": "nucleartech:combine_steel_shredder_blade"

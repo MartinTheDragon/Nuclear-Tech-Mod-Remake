@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:scrap_block",
-    "nucleartech:electrical_scrap_block"
+    "nucleartech:scrap_block"
   ]
 }

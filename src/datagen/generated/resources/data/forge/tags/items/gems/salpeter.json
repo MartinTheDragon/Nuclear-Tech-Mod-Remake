@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:niter_crystals"
+    "#forge:crystals/salpeter"
   ]
 }

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:rare_earth_ore"
+    "nucleartech:rare_earth_ore",
+    "nucleartech:deepslate_rare_earth_ore"
   ]
 }

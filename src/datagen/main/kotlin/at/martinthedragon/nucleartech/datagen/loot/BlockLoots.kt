@@ -42,7 +42,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(ModBlocks.emptyOilDeposit.get())
         dropSelf(ModBlocks.oilSand.get())
         add(ModBlocks.ligniteOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(ModItems.lignite.get()).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
-        add(ModBlocks.asbestosOre.get()) { createOreDrop(it, ModItems.rawAsbestos.get()) }
+        add(ModBlocks.asbestosOre.get()) { createOreDrop(it, ModItems.asbestosSheet.get()) }
         add(ModBlocks.schrabidiumOre.get()) { createOreDrop(it, ModItems.rawSchrabidium.get()) }
         add(ModBlocks.australianOre.get()) { createOreDrop(it, ModItems.rawAustralium.get()) }
         dropSelf(ModBlocks.weidite.get())
@@ -65,7 +65,7 @@ class BlockLoots : BlockLoot() {
         add(ModBlocks.deepslateLeadOre.get()) { createOreDrop(it, ModItems.rawLead.get()) }
         dropSelf(ModBlocks.deepslateOilDeposit.get())
         dropSelf(ModBlocks.emptyDeepslateOilDeposit.get())
-        add(ModBlocks.deepslateAsbestosOre.get()) { createOreDrop(it, ModItems.rawAsbestos.get()) }
+        add(ModBlocks.deepslateAsbestosOre.get()) { createOreDrop(it, ModItems.asbestosSheet.get()) }
         add(ModBlocks.deepslateSchrabidiumOre.get()) { createOreDrop(it, ModItems.rawSchrabidium.get()) }
         add(ModBlocks.deepslateAustralianOre.get()) { createOreDrop(it, ModItems.rawAustralium.get()) }
         add(ModBlocks.deepslateRareEarthOre.get()) { createOreDrop(it, ModItems.rawRareEarth.get()) }

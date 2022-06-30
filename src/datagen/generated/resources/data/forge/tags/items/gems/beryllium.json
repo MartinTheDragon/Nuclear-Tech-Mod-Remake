@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:beryllium_crystals"
+    "#forge:crystals/beryllium"
   ]
 }

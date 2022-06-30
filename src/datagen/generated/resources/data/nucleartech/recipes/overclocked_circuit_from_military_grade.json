@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:military_grade_circuit_board_tier_4"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:overclocked_circuit",
+    "count": 2
+  }
+}

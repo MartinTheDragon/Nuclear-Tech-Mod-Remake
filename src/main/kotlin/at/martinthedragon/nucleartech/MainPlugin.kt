@@ -6,7 +6,7 @@ import at.martinthedragon.nucleartech.api.explosions.NuclearExplosionMk4Params
 import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration
 import at.martinthedragon.nucleartech.api.explosions.ExplosionLargeParams
 import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration.Defaults as DefaultExplosionAlgorithms
-import at.martinthedragon.nucleartech.api.hazards.radiation.HazmatRegistry
+import at.martinthedragon.nucleartech.api.hazard.radiation.HazmatRegistry
 import at.martinthedragon.nucleartech.entities.NukeExplosion
 import at.martinthedragon.nucleartech.explosions.ExplosionLarge
 import at.martinthedragon.nucleartech.items.NuclearArmorMaterials

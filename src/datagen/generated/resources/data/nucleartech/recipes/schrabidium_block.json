@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "schrabidium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/schrabidium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_block"
+  }
+}

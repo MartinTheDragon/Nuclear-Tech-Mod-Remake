@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "trinitite",
+  "ingredient": {
+    "tag": "forge:ores/trinitite"
+  },
+  "result": "nucleartech:trinitite",
+  "experience": 0.3,
+  "cookingtime": 200
+}

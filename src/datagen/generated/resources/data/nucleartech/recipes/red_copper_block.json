@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "red_copper_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/red_copper"
+    }
+  },
+  "result": {
+    "item": "nucleartech:red_copper_block"
+  }
+}

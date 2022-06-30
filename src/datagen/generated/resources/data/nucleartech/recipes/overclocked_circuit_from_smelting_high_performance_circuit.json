@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "nucleartech:high_performance_circuit"
+  },
+  "result": "nucleartech:overclocked_circuit",
+  "experience": 0.0,
+  "cookingtime": 200
+}

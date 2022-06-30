@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:diamond_crystals"
+    "tag": "forge:crystals/diamond"
   },
   "result": {
     "item": "nucleartech:diamond_powder",

@@ -1,0 +1,26 @@
+{
+  "type": "nucleartech:battery",
+  "group": "schrabidium_battery",
+  "pattern": [
+    " W ",
+    "PXP",
+    "PYP"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/schrabidium"
+    },
+    "P": {
+      "tag": "forge:plates/schrabidium"
+    },
+    "X": {
+      "tag": "forge:dusts/neptunium"
+    },
+    "Y": {
+      "tag": "forge:dusts/schrabidium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_battery"
+  }
+}

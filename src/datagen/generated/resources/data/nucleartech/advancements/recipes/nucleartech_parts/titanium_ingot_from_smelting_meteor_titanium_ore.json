@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:titanium_ingot_from_smelting_meteor_titanium_ore"
+    ]
+  },
+  "criteria": {
+    "has_meteor_titanium_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:meteor_titanium_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:titanium_ingot_from_smelting_meteor_titanium_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_meteor_titanium_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

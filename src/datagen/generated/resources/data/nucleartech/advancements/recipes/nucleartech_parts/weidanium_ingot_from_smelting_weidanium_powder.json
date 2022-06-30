@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:weidanium_ingot_from_smelting_weidanium_powder"
+    ]
+  },
+  "criteria": {
+    "has_weidanium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/weidanium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:weidanium_ingot_from_smelting_weidanium_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_weidanium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

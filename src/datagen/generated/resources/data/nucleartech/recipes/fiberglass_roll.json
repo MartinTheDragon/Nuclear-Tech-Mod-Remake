@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "fiberglass_roll",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/fiberglass"
+    }
+  },
+  "result": {
+    "item": "nucleartech:fiberglass_roll"
+  }
+}

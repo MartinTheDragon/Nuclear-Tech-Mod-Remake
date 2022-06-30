@@ -3,7 +3,7 @@
   "group": "weidanium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:weidanium_block"
+      "tag": "forge:storage_blocks/weidanium"
     }
   ],
   "result": {

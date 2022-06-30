@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:asbestos_block"
+    ]
+  },
+  "criteria": {
+    "has_asbestos_sheet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/asbestos"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:asbestos_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_asbestos_sheet",
+      "has_the_recipe"
+    ]
+  ]
+}

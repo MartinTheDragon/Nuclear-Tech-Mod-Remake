@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:red_phosphorus_from_smelting_nether_phosphorus_ore"
+    ]
+  },
+  "criteria": {
+    "has_nether_phosphorus_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ores/phosphorus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:red_phosphorus_from_smelting_nether_phosphorus_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nether_phosphorus_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

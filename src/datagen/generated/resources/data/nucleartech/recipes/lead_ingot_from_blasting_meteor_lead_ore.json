@@ -4,7 +4,10 @@
   "ingredient": {
     "item": "nucleartech:meteor_lead_ore"
   },
-  "result": "nucleartech:lead_ingot",
+  "result": {
+    "item": "nucleartech:lead_ingot",
+    "count": 3
+  },
   "experience": 0.9,
   "cookingtime": 100
 }

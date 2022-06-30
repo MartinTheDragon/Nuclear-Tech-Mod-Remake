@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.items
 
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.capabilites.Capabilities
-import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
-import at.martinthedragon.nucleartech.hazards.HazmatValues
+import at.martinthedragon.nucleartech.capability.Capabilities
+import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
+import at.martinthedragon.nucleartech.hazard.HazmatValues
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.TextComponent

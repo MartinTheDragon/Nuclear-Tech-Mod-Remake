@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "insulator",
+  "pattern": [
+    "SWS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:string"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "nucleartech:insulator",
+    "count": 4
+  }
+}

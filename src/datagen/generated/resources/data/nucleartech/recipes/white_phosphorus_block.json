@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "white_phosphorus_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/phosphorus"
+    }
+  },
+  "result": {
+    "item": "nucleartech:white_phosphorus_block"
+  }
+}

@@ -3,7 +3,7 @@
   "group": "verticium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:verticium_block"
+      "tag": "forge:storage_blocks/verticium"
     }
   ],
   "result": {

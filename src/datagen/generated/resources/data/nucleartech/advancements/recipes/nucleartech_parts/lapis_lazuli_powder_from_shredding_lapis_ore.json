@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lapis_lazuli_powder_from_shredding_lapis_ore"
+    ]
+  },
+  "criteria": {
+    "has_lapis_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ores/lapis"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lapis_lazuli_powder_from_shredding_lapis_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lapis_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ores/cobalt"
+  },
+  "result": {
+    "item": "nucleartech:cobalt_powder",
+    "count": 2
+  },
+  "experience": 0.45
+}

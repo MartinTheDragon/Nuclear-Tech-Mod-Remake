@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:battery",
+  "group": "twelvefold_advanced_power_cell",
+  "pattern": [
+    "WPW",
+    "BBB",
+    "WPW"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/red_copper"
+    },
+    "P": {
+      "tag": "forge:plates/copper"
+    },
+    "B": {
+      "item": "nucleartech:advanced_power_cell"
+    }
+  },
+  "result": {
+    "item": "nucleartech:twelvefold_advanced_power_cell"
+  }
+}

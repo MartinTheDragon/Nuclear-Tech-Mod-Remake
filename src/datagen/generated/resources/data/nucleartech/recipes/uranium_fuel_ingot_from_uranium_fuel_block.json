@@ -3,7 +3,7 @@
   "group": "uranium_fuel_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:uranium_fuel_block"
+      "tag": "forge:storage_blocks/uranium_fuel"
     }
   ],
   "result": {

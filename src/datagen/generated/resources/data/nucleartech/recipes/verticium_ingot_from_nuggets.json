@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "verticium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/verticium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:verticium_ingot"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:australium_block"
+    "tag": "forge:storage_blocks/australium"
   },
   "result": {
     "item": "nucleartech:australium_powder",

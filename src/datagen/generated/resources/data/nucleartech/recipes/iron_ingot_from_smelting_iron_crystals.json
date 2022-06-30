@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "iron_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/iron"
+  },
+  "result": {
+    "item": "minecraft:iron_ingot",
+    "count": 2
+  },
+  "experience": 0.7,
+  "cookingtime": 200
+}

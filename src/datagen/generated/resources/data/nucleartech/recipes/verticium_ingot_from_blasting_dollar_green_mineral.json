@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "verticium_ingot",
   "ingredient": {
-    "item": "nucleartech:dollar_green_mineral"
+    "tag": "forge:ores/verticium"
   },
   "result": "nucleartech:verticium_ingot",
   "experience": 1.25,

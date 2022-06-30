@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "uranium235_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:uranium235_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:uranium235_ingot"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:battery",
+  "group": "twenty_four_fold_redstone_power_cell",
+  "pattern": [
+    "BWB",
+    "WPW",
+    "BWB"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/aluminium"
+    },
+    "P": {
+      "tag": "forge:plates/aluminium"
+    },
+    "B": {
+      "item": "nucleartech:battery"
+    }
+  },
+  "result": {
+    "item": "nucleartech:twenty_four_fold_redstone_power_cell"
+  }
+}

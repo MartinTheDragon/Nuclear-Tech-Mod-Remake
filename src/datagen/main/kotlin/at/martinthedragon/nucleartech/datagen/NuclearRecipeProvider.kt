@@ -1,12 +1,12 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.ModBlockItems
-import at.martinthedragon.nucleartech.ModItems
-import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.recipes.*
-import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.PressingRecipe
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
+import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap
+import net.minecraft.advancements.critereon.InventoryChangeTrigger
+import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeProvider
@@ -21,6 +21,7 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.ItemLike
 import net.minecraftforge.common.Tags
+import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 import at.martinthedragon.nucleartech.datagen.recipes.AnvilConstructingRecipeBuilder as AnvilRecipeBuilder
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe.OverlayType as AnvilRecipeType
@@ -30,6 +31,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     override fun getName(): String = "Nuclear Tech Mod Recipes"
 
     override fun buildCraftingRecipes(consumer: Consumer<FinishedRecipe>) {
+        setExperienceYields()
+
         ShapelessRecipeBuilder.shapeless(ModItems.schrabidiumFuelIngot.get()).requires(ModItems.schrabidiumNugget.get(), 3).requires(NuclearTags.Items.NUGGETS_NEPTUNIUM, 3).requires(NuclearTags.Items.NUGGETS_BERYLLIUM, 3).group("schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(ModItems.schrabidiumNugget.get())).save(consumer, ntm("schrabidium_fuel_ingot_from_isotope_nuggets"))
         ShapelessRecipeBuilder.shapeless(ModItems.highEnrichedSchrabidiumFuelIngot.get()).requires(ModItems.schrabidiumNugget.get(), 5).requires(NuclearTags.Items.NUGGETS_NEPTUNIUM, 2).requires(NuclearTags.Items.NUGGETS_BERYLLIUM, 2).group("high_enriched_schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(ModItems.schrabidiumNugget.get())).save(consumer, ntm("high_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"))
         ShapelessRecipeBuilder.shapeless(ModItems.lowEnrichedSchrabidiumFuelIngot.get()).requires(ModItems.schrabidiumNugget.get()).requires(NuclearTags.Items.NUGGETS_NEPTUNIUM, 4).requires(NuclearTags.Items.NUGGETS_BERYLLIUM, 4).group("low_enriched_schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(ModItems.schrabidiumNugget.get())).save(consumer, ntm("low_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"))
@@ -39,106 +42,86 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapelessRecipeBuilder.shapeless(ModItems.uraniumFuelIngot.get()).requires(ModItems.u238Nugget.get(), 6).requires(ModItems.u233Nugget.get(), 3).group("uranium_fuel_ingot").unlockedBy("has_u238_nugget", has(ModItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_ingot_from_isotope_nuggets_u233"))
         ShapelessRecipeBuilder.shapeless(ModItems.uraniumFuelIngot.get()).requires(ModItems.u238Nugget.get(), 6).requires(ModItems.u235Nugget.get(), 3).group("uranium_fuel_ingot").unlockedBy("has_u238_nugget", has(ModItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_ingot_from_isotope_nuggets_u235"))
 
-        // blocks to ingots
-        ingotFromBlock(ModItems.uraniumIngot.get(), ModBlockItems.uraniumBlock.get(), consumer)
-        ingotFromBlock(ModItems.u233Ingot.get(), ModBlockItems.u233Block.get(), consumer)
-        ingotFromBlock(ModItems.u235Ingot.get(), ModBlockItems.u235Block.get(), consumer)
-        ingotFromBlock(ModItems.u238Ingot.get(), ModBlockItems.u238Block.get(), consumer)
-        ingotFromBlock(ModItems.uraniumFuelIngot.get(), ModBlockItems.uraniumFuelBlock.get(), consumer)
-        ingotFromBlock(ModItems.neptuniumIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_NEPTUNIUM, "neptunium_block", consumer)
-        ingotFromBlock(ModItems.moxFuelIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_MOX, "mox_fuel_block", consumer)
-        ingotFromBlock(ModItems.plutoniumIngot.get(), ModBlockItems.plutoniumBlock.get(), consumer)
-        ingotFromBlock(ModItems.pu238Ingot.get(), ModBlockItems.pu238Block.get(), consumer)
-        ingotFromBlock(ModItems.pu239Ingot.get(), ModBlockItems.pu239Block.get(), consumer)
-        ingotFromBlock(ModItems.pu240Ingot.get(), ModBlockItems.pu240Block.get(), consumer)
-        ingotFromBlock(ModItems.plutoniumFuelIngot.get(), ModBlockItems.plutoniumFuelBlock.get(), consumer)
-        ingotFromBlock(ModItems.th232Ingot.get(), NuclearTags.Items.STORAGE_BLOCKS_THORIUM, "thorium_block", consumer)
-        ingotFromBlock(ModItems.thoriumFuelIngot.get(), ModBlockItems.thoriumFuelBlock.get(), consumer)
-        ingotFromBlock(ModItems.titaniumIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_TITANIUM, "titanium_block", consumer)
-        ingotFromBlock(ModItems.sulfur.get(), NuclearTags.Items.STORAGE_BLOCKS_SULFUR, "sulfur_block", consumer)
-        ingotFromBlock(ModItems.niter.get(), NuclearTags.Items.STORAGE_BLOCKS_NITER, "niter_block", consumer)
-        ingotFromBlock(ModItems.redCopperIngot.get(), ModBlockItems.redCopperBlock.get(), consumer)
-        ingotFromBlock(ModItems.advancedAlloyIngot.get(), ModBlockItems.advancedAlloyBlock.get(), consumer)
-        ingotFromBlock(ModItems.tungstenIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_TUNGSTEN, "tungsten_block", consumer)
-        ingotFromBlock(ModItems.aluminiumIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_ALUMINIUM, "aluminium_block", consumer)
-        ingotFromBlock(ModItems.fluorite.get(), NuclearTags.Items.STORAGE_BLOCKS_FLUORITE, "fluorite_block", consumer)
-        ingotFromBlock(ModItems.berylliumIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_BERYLLIUM, "beryllium_block", consumer)
-        ingotFromBlock(ModItems.cobaltIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_COBALT, "cobalt_block", consumer)
-        ingotFromBlock(ModItems.steelIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_STEEL, "steel_block", consumer)
-        ingotFromBlock(ModItems.leadIngot.get(), NuclearTags.Items.STORAGE_BLOCKS_LEAD, "lead_block", consumer)
-        ingotFromBlock(ModItems.lithiumCube.get(), NuclearTags.Items.STORAGE_BLOCKS_LITHIUM, "lithium_block", consumer)
-        ingotFromBlock(ModItems.whitePhosphorusIngot.get(), ModBlockItems.whitePhosphorusBlock.get(), consumer)
-        ingotFromBlock(ModItems.redPhosphorus.get(), ModBlockItems.redPhosphorusBlock.get(), consumer)
-        ingotFromBlock(ModItems.yellowcake.get(), NuclearTags.Items.STORAGE_BLOCKS_YELLOWCAKE, "yellowcake_block", consumer)
-        ingotFromBlock(ModItems.insulator.get(), ModBlockItems.insulatorRoll.get(), consumer)
-        ingotFromBlock(ModItems.fiberglassSheet.get(), ModBlockItems.fiberglassRoll.get(), consumer)
-        ingotFromBlock(ModItems.asbestosSheet.get(), NuclearTags.Items.STORAGE_BLOCK_ASBESTOS, "asbestos_block", consumer)
-        ingotFromBlock(ModItems.trinitite.get(), ModBlockItems.trinititeBlock.get(), consumer)
-        ingotFromBlock(ModItems.nuclearWaste.get(), NuclearTags.Items.STORAGE_BLOCK_NUCLEAR_WASTE, "nuclear_waste_block", consumer)
-        ingotFromBlock(ModItems.schrabidiumIngot.get(), ModBlockItems.schrabidiumBlock.get(), consumer)
-        ingotFromBlock(ModItems.soliniumIngot.get(), ModBlockItems.soliniumBlock.get(), consumer)
-        ingotFromBlock(ModItems.schrabidiumFuelIngot.get(), ModBlockItems.schrabidiumFuelBlock.get(), consumer)
-        ingotFromBlock(ModItems.euphemiumIngot.get(), ModBlockItems.euphemiumBlock.get(), consumer)
-        ingotFromBlock(ModItems.magnetizedTungstenIngot.get(), ModBlockItems.magnetizedTungstenBlock.get(), consumer)
-        ingotFromBlock(ModItems.combineSteelIngot.get(), ModBlockItems.combineSteelBlock.get(), consumer)
-        ingotFromBlock(ModItems.deshIngot.get(), ModBlockItems.deshReinforcedBlock.get(), consumer)
-        ingotFromBlock(ModItems.starmetalIngot.get(), ModBlockItems.starmetalBlock.get(), consumer)
-        ingotFromBlock(ModItems.australiumIngot.get(), ModBlockItems.australiumBlock.get(), consumer)
-        ingotFromBlock(ModItems.weidaniumIngot.get(), ModBlockItems.weidaniumBlock.get(), consumer)
-        ingotFromBlock(ModItems.reiiumIngot.get(), ModBlockItems.reiiumBlock.get(), consumer)
-        ingotFromBlock(ModItems.unobtainiumIngot.get(), ModBlockItems.unobtainiumBlock.get(), consumer)
-        ingotFromBlock(ModItems.daffergonIngot.get(), ModBlockItems.daffergonBlock.get(), consumer)
-        ingotFromBlock(ModItems.verticiumIngot.get(), ModBlockItems.verticiumBlock.get(), consumer)
+        // TODO a lot of repeating stuff here. maybe this could be simplified?
+        RuleBasedRecipeBuilder.create {
+            forModTagsAndMaterials()
+            addRule { tagGroup -> // blocks to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (blockTag, blockItem) = tagGroup.blockTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(blockTag, blockItem) ?: return@addRule null
+                ShapelessRecipeBuilder.shapeless(ingot, 9).requires(ingredient).group(getItemName(ingot)).unlockedBy(getHasName(blockTag, blockItem), condition) to ntm(getConversionRecipeName(ingot, blockTag, blockItem))
+            }
+            addRule { tagGroup -> // ingots to blocks
+                val block = tagGroup.materialGroup.block() ?: return@addRule null
+                val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
+                ShapedRecipeBuilder.shaped(block).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(block)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm(getItemName(block))
+            }
+            addRule { tagGroup -> // nuggets to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (nuggetTag, nuggetItem) = tagGroup.nuggetTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(nuggetTag, nuggetItem) ?: return@addRule null
+                ShapedRecipeBuilder.shaped(ingot).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(ingot)).unlockedBy(getHasName(nuggetTag, nuggetItem), condition) to ntm("${getItemName(ingot)}_from_nuggets")
+            }
+            addRule { tagGroup -> // ingots to nuggets
+                val nugget = tagGroup.materialGroup.nugget() ?: return@addRule null
+                val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
+                ShapedRecipeBuilder.shaped(nugget, 9).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(nugget)).unlockedBy(getHasName(ingotTag, ingotItem), condition)to ntm(getItemName(nugget))
+            }
+            addRule { tagGroup -> // smelting ores to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (oreTag, oreItem) = tagGroup.oreTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(oreTag, oreItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup)
+                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(oreTag, oreItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(oreTag, oreItem)}")
+            }
+            addRule { tagGroup -> // blasting ores to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (oreTag, oreItem) = tagGroup.oreTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(oreTag, oreItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup)
+                ExtendedCookingRecipeBuilder(ingredient, experience / 2F, 100, ingot, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(ingot)).unlockedBy(getHasName(oreTag, oreItem), condition) to ntm("${getItemName(ingot)}_from_blasting_${getItemName(oreTag, oreItem)}")
+            }
+            addRule { tagGroup -> // smelting raw ores to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (rawTag, rawItem) = tagGroup.rawTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(rawTag, rawItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup)
+                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(rawTag, rawItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(rawTag, rawItem)}")
+            }
+            addRule { tagGroup -> // blasting raw ores to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (rawTag, rawItem) = tagGroup.rawTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(rawTag, rawItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup)
+                ExtendedCookingRecipeBuilder(ingredient, experience / 2F, 100, ingot, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(ingot)).unlockedBy(getHasName(rawTag, rawItem), condition) to ntm("${getItemName(ingot)}_from_blasting_${getItemName(rawTag, rawItem)}")
+            }
+        }.build(consumer)
 
-        //nuggets to ingots
-        ingotFromNuggets(ModItems.uraniumIngot.get(), ModItems.uraniumNugget.get(), consumer)
-        ingotFromNuggets(ModItems.berylliumIngot.get(), NuclearTags.Items.NUGGETS_BERYLLIUM, "beryllium_nugget", consumer)
-        ingotFromNuggets(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.schrabidiumFuelIngot.get(), ModItems.schrabidiumFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.highEnrichedSchrabidiumFuelIngot.get(), ModItems.highEnrichedSchrabidiumFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.lowEnrichedSchrabidiumFuelIngot.get(), ModItems.lowEnrichedSchrabidiumFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.soliniumIngot.get(), ModItems.soliniumNugget.get(), consumer)
-        ingotFromNuggets(ModItems.leadIngot.get(), NuclearTags.Items.NUGGETS_LEAD, "lead_nugget", consumer)
-        ingotFromNuggets(ModItems.moxFuelIngot.get(), ModItems.moxFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.neptuniumIngot.get(), NuclearTags.Items.NUGGETS_NEPTUNIUM, "neptunium_nugget", consumer)
-        ingotFromNuggets(ModItems.plutoniumIngot.get(), ModItems.plutoniumNugget.get(), consumer)
-        ingotFromNuggets(ModItems.plutoniumFuelIngot.get(), ModItems.plutoniumFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.poloniumIngot.get(), ModItems.poloniumNugget.get(), consumer)
-        ingotFromNuggets(ModItems.pu238Ingot.get(), ModItems.pu238Nugget.get(), consumer)
-        ingotFromNuggets(ModItems.pu239Ingot.get(), ModItems.pu239Nugget.get(), consumer)
-        ingotFromNuggets(ModItems.pu240Ingot.get(), ModItems.pu240Nugget.get(), consumer)
-        ingotFromNuggets(ModItems.th232Ingot.get(), NuclearTags.Items.NUGGETS_THORIUM, "thorium_nugget", consumer)
-        ingotFromNuggets(ModItems.thoriumFuelIngot.get(), ModItems.thoriumFuelNugget.get(), consumer)
-        ingotFromNuggets(ModItems.u233Ingot.get(), ModItems.u233Nugget.get(), consumer)
-        ingotFromNuggets(ModItems.u235Ingot.get(), ModItems.u235Nugget.get(), consumer)
-        ingotFromNuggets(ModItems.u238Ingot.get(), ModItems.u238Nugget.get(), consumer)
-        ingotFromNuggets(ModItems.uraniumFuelIngot.get(), ModItems.uraniumFuelNugget.get(), consumer)
+        RuleBasedRecipeBuilder.create {
+            forAllTagsAndMaterials().excluding(TagGroups.coal) // coal powder turns to coke
+            addRule { tagGroup -> // powders to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (powderTag, powderItem) = tagGroup.powderTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(powderTag, powderItem) ?: return@addRule null
+                ExtendedCookingRecipeBuilder(ingredient, .1F, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(powderTag, powderItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(powderTag, powderItem)}")
+            }
+        }.build(consumer)
 
-        // ores to ingots
-        ingotFromOre(NuclearTags.Items.ORES_URANIUM, ModItems.uraniumIngot.get(), 1F, "uranium_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_THORIUM, ModItems.th232Ingot.get(), 2F, "thorium_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_TITANIUM, ModItems.titaniumIngot.get(), .8F, "titanium_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_SULFUR, ModItems.sulfur.get(), .2F, "sulfur_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_NITER, ModItems.niter.get(), .2F, "niter_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_TUNGSTEN, ModItems.tungstenIngot.get(), .75F, "tungsten_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_ALUMINIUM, ModItems.aluminiumIngot.get(), .6F, "aluminium_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_FLUORITE, ModItems.fluorite.get(), .2F, "fluorite_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_BERYLLIUM, ModItems.berylliumIngot.get(), .75F, "beryllium_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_LEAD, ModItems.leadIngot.get(), .6F, "lead_ore", consumer)
-        ingotFromOre(NuclearTags.Items.ORES_LIGNITE, ModItems.lignite.get(), .05F, "lignite_ore", consumer)
-        ingotFromOre(ModBlockItems.schrabidiumOre.get(), ModItems.schrabidiumIngot.get(), 50F, consumer)
-        ingotFromOre(ModBlockItems.australianOre.get(), ModItems.australiumIngot.get(), 2.5F, consumer)
-        ingotFromOre(ModBlockItems.weidite.get(), ModItems.weidaniumIngot.get(), 2.5F, consumer)
-        ingotFromOre(ModBlockItems.reiite.get(), ModItems.reiiumIngot.get(), 2.5F, consumer)
-        ingotFromOre(ModBlockItems.brightblendeOre.get(), ModItems.unobtainiumIngot.get(), 2.5F, consumer)
-        ingotFromOre(ModBlockItems.dellite.get(), ModItems.daffergonIngot.get(), 2.5F, consumer)
-        ingotFromOre(ModBlockItems.dollarGreenMineral.get(), ModItems.verticiumIngot.get(), 2.5F, consumer)
-        ingotFromOre(ModBlockItems.rareEarthOre.get(), ModItems.deshMix.get(), 3F, consumer)
-        ingotFromOre(NuclearTags.Items.ORES_PLUTONIUM, ModItems.plutoniumIngot.get(), 3F, "plutonium_ore", consumer)
-        ingotFromOre(ModBlockItems.netherTungstenOre.get(), ModItems.tungstenIngot.get(), 1.5F, consumer)
-        ingotFromOre(ModBlockItems.netherSulfurOre.get(), ModItems.sulfur.get(), .4F, consumer)
-        ingotFromOre(ModBlockItems.netherPhosphorusOre.get(), ModItems.redPhosphorus.get(), 1F, consumer)
-        ingotFromOre(ModBlockItems.netherSchrabidiumOre.get(), ModItems.schrabidiumIngot.get(), 100F, consumer)
+        RuleBasedRecipeBuilder.create {
+            forAllTagsAndMaterials()
+            addRule { tagGroup -> // crystals to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (crystalsTag, crystalsItem) = tagGroup.crystalsTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(crystalsTag, crystalsItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup)
+                val count = if (tagGroup.materialGroup.ingotIsPowder) 6 else 2
+                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot, count).group(getItemName(ingot)).unlockedBy(getHasName(crystalsTag, crystalsItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(crystalsTag, crystalsItem)}")
+            }
+        }.build(consumer)
+
+        // meteor ores to ingots
         ingotFromMeteorOre(ModBlockItems.meteorUraniumOre.get(), ModItems.uraniumIngot.get(), 3F, consumer)
         ingotFromMeteorOre(ModBlockItems.meteorThoriumOre.get(), ModItems.th232Ingot.get(), 6f, consumer)
         ingotFromMeteorOre(ModBlockItems.meteorTitaniumOre.get(), ModItems.titaniumIngot.get(), 2.4F, consumer)
@@ -147,104 +130,10 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromMeteorOre(ModBlockItems.meteorTungstenOre.get(), ModItems.tungstenIngot.get(), 2.25F, consumer)
         ingotFromMeteorOre(ModBlockItems.meteorAluminiumOre.get(), ModItems.aluminiumIngot.get(), 1.8F, consumer)
         ingotFromMeteorOre(ModBlockItems.meteorLeadOre.get(), ModItems.leadIngot.get(), 1.8F, consumer)
-        ingotFromOre(ModBlockItems.meteorLithiumOre.get(), ModItems.lithiumCube.get(), 5F, consumer)
-        ingotFromOre(ModBlockItems.starmetalOre.get(), ModItems.starmetalIngot.get(), 10F, consumer)
-
-        // powder to ingots
-        ingotFromPowder(NuclearTags.Items.DUSTS_URANIUM, ModItems.uraniumIngot.get(), "uranium_powder", consumer)
-        ingotFromPowder(ModItems.advancedAlloyPowder.get(), ModItems.advancedAlloyIngot.get(), consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_ALUMINIUM, ModItems.aluminiumIngot.get(), "aluminium_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_BERYLLIUM, ModItems.berylliumIngot.get(), "beryllium_powder", consumer)
-        ingotFromPowder(ModItems.combineSteelPowder.get(), ModItems.combineSteelIngot.get(), consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_COPPER, Items.COPPER_INGOT, "copper_powder", consumer)
-        ingotFromPowder(ModItems.highSpeedSteelPowder.get(), ModItems.highSpeedSteelIngot.get(), consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_LEAD, ModItems.leadIngot.get(), "lead_powder", consumer)
-        ingotFromPowder(ModItems.magnetizedTungstenPowder.get(), ModItems.magnetizedTungstenIngot.get(), consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_NEPTUNIUM, ModItems.neptuniumIngot.get(), "neptunium_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_PLUTONIUM, ModItems.plutoniumIngot.get(), "plutonium_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_POLONIUM, ModItems.poloniumIngot.get(), "polonium_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_POLYMER, ModItems.polymerIngot.get(), "polymer_powder", consumer)
-        ingotFromPowder(ModItems.redCopperPowder.get(), ModItems.redCopperIngot.get(), consumer)
-        ingotFromPowder(ModItems.schrabidiumPowder.get(), ModItems.schrabidiumIngot.get(), consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_STEEL, ModItems.steelIngot.get(), "steel_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_THORIUM, ModItems.th232Ingot.get(), "thorium_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_TITANIUM, ModItems.titaniumIngot.get(), "titanium_powder", consumer)
-        ingotFromPowder(NuclearTags.Items.DUSTS_TUNGSTEN, ModItems.tungstenIngot.get(), "tungsten_powder", consumer)
+        ingotFromMeteorOre(ModBlockItems.meteorLithiumOre.get(), ModItems.lithiumCube.get(), 1.8F, consumer)
 
         // crystals to ingots
-        ingotFromCrystals(ModItems.ironCrystals.get(), Items.IRON_INGOT, .7F, consumer)
-        ingotFromCrystals(ModItems.goldCrystals.get(), Items.GOLD_INGOT, 1F, consumer)
-        ingotFromCrystals(ModItems.redstoneCrystals.get(), Items.REDSTONE, .7F, consumer, 6)
-        ingotFromCrystals(ModItems.diamondCrystals.get(), Items.DIAMOND, 1F, consumer)
-        ingotFromCrystals(ModItems.uraniumCrystals.get(), ModItems.uraniumIngot.get(), 1F, consumer)
-        ingotFromCrystals(ModItems.thoriumCrystals.get(), ModItems.th232Ingot.get(), 2F, consumer)
-        ingotFromCrystals(ModItems.plutoniumCrystals.get(), ModItems.plutoniumIngot.get(), 1.5F, consumer)
-        ingotFromCrystals(ModItems.titaniumCrystals.get(), ModItems.titaniumIngot.get(), .8F, consumer)
-        ingotFromCrystals(ModItems.sulfurCrystals.get(), ModItems.sulfur.get(), .2F, consumer, 6)
-        ingotFromCrystals(ModItems.niterCrystals.get(), ModItems.niter.get(), .2F, consumer, 6)
-        ingotFromCrystals(ModItems.copperCrystals.get(), Items.COPPER_INGOT, .5F, consumer)
-        ingotFromCrystals(ModItems.tungstenCrystals.get(), ModItems.tungstenIngot.get(), .75F, consumer)
-        ingotFromCrystals(ModItems.aluminiumCrystals.get(), ModItems.aluminiumIngot.get(), .6F, consumer)
-        ingotFromCrystals(ModItems.fluoriteCrystals.get(), ModItems.fluorite.get(), .2F, consumer, 6)
-        ingotFromCrystals(ModItems.berylliumCrystals.get(), ModItems.berylliumIngot.get(), .75F, consumer)
-        ingotFromCrystals(ModItems.leadCrystals.get(), ModItems.leadIngot.get(), .6F, consumer)
-        ingotFromCrystals(ModItems.schraraniumCrystals.get(), ModItems.schrabidiumNugget.get(), 5F, consumer)
-        ingotFromCrystals(ModItems.schrabidiumCrystals.get(), ModItems.schrabidiumIngot.get(), 50F, consumer)
-        ingotFromCrystals(ModItems.rareEarthCrystals.get(), ModItems.deshMix.get(), 3F, consumer)
-        ingotFromCrystals(ModItems.redPhosphorusCrystals.get(), ModItems.redPhosphorus.get(), 1F, consumer, 6)
-        ingotFromCrystals(ModItems.lithiumCrystals.get(), ModItems.lithiumCube.get(), 2F, consumer)
-        ingotFromCrystals(ModItems.starmetalCrystals.get(), ModItems.starmetalIngot.get(), 10F, consumer)
         ingotFromCrystals(ModItems.trixiteCrystals.get(), ModItems.plutoniumIngot.get(), 3F, consumer, 4)
-
-        // ingots to blocks
-        blockFromIngots(ModBlockItems.uraniumBlock.get(), ModItems.uraniumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.u233Block.get(), ModItems.u233Ingot.get(), consumer)
-        blockFromIngots(ModBlockItems.u235Block.get(), ModItems.u235Ingot.get(), consumer)
-        blockFromIngots(ModBlockItems.u238Block.get(), ModItems.u238Ingot.get(), consumer)
-        blockFromIngots(ModBlockItems.uraniumFuelBlock.get(), ModItems.uraniumFuelIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.neptuniumBlock.get(), NuclearTags.Items.INGOTS_NEPTUNIUM, "neptunium_ingot", consumer)
-        blockFromIngots(ModBlockItems.moxFuelBlock.get(), ModItems.moxFuelIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.plutoniumBlock.get(), ModItems.plutoniumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.pu238Block.get(), ModItems.pu238Ingot.get(), consumer)
-        blockFromIngots(ModBlockItems.pu239Block.get(), ModItems.pu239Ingot.get(), consumer)
-        blockFromIngots(ModBlockItems.pu240Block.get(), ModItems.pu240Ingot.get(), consumer)
-        blockFromIngots(ModBlockItems.plutoniumFuelBlock.get(), ModItems.plutoniumFuelIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.thoriumBlock.get(), NuclearTags.Items.INGOTS_THORIUM, "thorium_ingot", consumer)
-        blockFromIngots(ModBlockItems.thoriumFuelBlock.get(), ModItems.thoriumFuelIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.titaniumBlock.get(), NuclearTags.Items.INGOTS_TITANIUM, "titanium_ingot", consumer)
-        blockFromIngots(ModBlockItems.sulfurBlock.get(), NuclearTags.Items.DUSTS_SULFUR, "sulfur", consumer)
-        blockFromIngots(ModBlockItems.niterBlock.get(), NuclearTags.Items.DUSTS_NITER, "niter", consumer)
-        blockFromIngots(ModBlockItems.redCopperBlock.get(), ModItems.redCopperIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.advancedAlloyBlock.get(), ModItems.advancedAlloyIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.tungstenBlock.get(), NuclearTags.Items.INGOTS_TUNGSTEN, "tungsten_ingot", consumer)
-        blockFromIngots(ModBlockItems.aluminiumBlock.get(), NuclearTags.Items.INGOTS_ALUMINIUM, "aluminium_ingot", consumer)
-        blockFromIngots(ModBlockItems.fluoriteBlock.get(), NuclearTags.Items.DUSTS_FLUORITE, "fluorite", consumer)
-        blockFromIngots(ModBlockItems.berylliumBlock.get(), NuclearTags.Items.INGOTS_BERYLLIUM, "beryllium_ingot", consumer)
-        blockFromIngots(ModBlockItems.cobaltBlock.get(), NuclearTags.Items.INGOTS_COBALT, "cobalt_ingot", consumer)
-        blockFromIngots(ModBlockItems.steelBlock.get(), NuclearTags.Items.INGOTS_STEEL, "steel_ingot", consumer)
-        blockFromIngots(ModBlockItems.leadBlock.get(), NuclearTags.Items.INGOTS_LEAD, "lead_ingot", consumer)
-        blockFromIngots(ModBlockItems.lithiumBlock.get(), NuclearTags.Items.INGOTS_LITHIUM, "lithium_cube", consumer)
-        blockFromIngots(ModBlockItems.whitePhosphorusBlock.get(), ModItems.whitePhosphorusIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.redPhosphorusBlock.get(), ModItems.redPhosphorus.get(), consumer)
-        blockFromIngots(ModBlockItems.yellowcakeBlock.get(), ModItems.yellowcake.get(), consumer)
-        blockFromIngots(ModBlockItems.scrapBlock.get(), NuclearTags.Items.DUSTS_DUST, "dust", consumer)
-        blockFromIngots(ModBlockItems.trinititeBlock.get(), ModItems.trinitite.get(), consumer)
-        blockFromIngots(ModBlockItems.nuclearWasteBlock.get(), NuclearTags.Items.COLD_WASTES, "nuclear_wastes_any", consumer)
-        blockFromIngots(ModBlockItems.nuclearWasteBlock.get(), ModItems.nuclearWaste.get(), consumer)
-        blockFromIngots(ModBlockItems.schrabidiumBlock.get(), ModItems.schrabidiumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.soliniumBlock.get(), ModItems.soliniumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.schrabidiumFuelBlock.get(), ModItems.schrabidiumFuelIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.euphemiumBlock.get(), ModItems.euphemiumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.magnetizedTungstenBlock.get(), ModItems.magnetizedTungstenIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.combineSteelBlock.get(), ModItems.combineSteelIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.deshReinforcedBlock.get(), ModItems.deshIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.starmetalBlock.get(), ModItems.starmetalIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.australiumBlock.get(), ModItems.australiumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.weidaniumBlock.get(), ModItems.weidaniumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.reiiumBlock.get(), ModItems.reiiumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.unobtainiumBlock.get(), ModItems.unobtainiumIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.daffergonBlock.get(), ModItems.daffergonIngot.get(), consumer)
-        blockFromIngots(ModBlockItems.verticiumBlock.get(), ModItems.verticiumIngot.get(), consumer)
 
         ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.combineScrapMetal.get()), .5F, 200, ModItems.combineSteelIngot.get()).group("combine_steel_ingot").unlockedBy("has_combine_steel_scrap_metal", has(ModItems.combineScrapMetal.get())).save(consumer, ntm("combine_steel_ingot_from_combine_steel_scrap_metal"))
 
@@ -265,35 +154,30 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun pressRecipes(consumer: Consumer<FinishedRecipe>) {
+        RuleBasedRecipeBuilder.create {
+            forAllTagsAndMaterials()
+            addRule { tagGroup ->
+                val plate = tagGroup.materialGroup.plate() ?: return@addRule null
+                val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
+                PressRecipeBuilder(plate, PressingRecipe.StampType.PLATE, .2F).requires(ingredient).group(getItemName(plate)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(plate)}_from_pressing_${getItemName(ingotTag, ingotItem)}")
+            }
+            addRule { tagGroup ->
+                val wire = tagGroup.materialGroup.wire() ?: return@addRule null
+                val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
+                PressRecipeBuilder(wire, PressingRecipe.StampType.WIRE, .2F, 8).requires(ingredient).group(getItemName(wire)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(wire)}_from_pressing_${getItemName(ingotTag, ingotItem)}")
+            }
+        }.build(consumer)
+
         flatPressRecipe(NuclearTags.Items.BIOMASS, ModItems.compressedBiomass.get(), "biomass", .1F, consumer)
         flatPressRecipe(NuclearTags.Items.DUSTS_COAL, Items.COAL, "coal_powder", .2F, consumer)
         flatPressRecipe(NuclearTags.Items.DUSTS_LAPIS, Items.LAPIS_LAZULI, "lapis_powder", .2F, consumer)
         flatPressRecipe(NuclearTags.Items.DUSTS_DIAMOND, Items.DIAMOND, "diamond_powder", .2F, consumer)
         flatPressRecipe(NuclearTags.Items.DUSTS_EMERALD, Items.EMERALD, "emerald_powder", .2F, consumer)
         flatPressRecipe(NuclearTags.Items.DUSTS_QUARTZ, Items.QUARTZ, "quartz_powder", .2F, consumer)
-        flatPressRecipe(ModItems.lignitePowder.get(), ModItems.ligniteBriquette.get(), .1F, consumer)
+        flatPressRecipe(NuclearTags.Items.DUSTS_LIGNITE, ModItems.ligniteBriquette.get(), "lignite_powder", .1F, consumer)
         flatPressRecipe(ModItems.denseCoalCluster.get(), Items.DIAMOND, 2F, consumer)
-
-        platePressRecipe(Tags.Items.INGOTS_IRON, ModItems.ironPlate.get(), "iron_ingot", .1F, consumer)
-        platePressRecipe(Tags.Items.INGOTS_GOLD, ModItems.goldPlate.get(), "gold_ingot", .1F, consumer)
-        platePressRecipe(NuclearTags.Items.INGOTS_STEEL, ModItems.steelPlate.get(), "steel_ingot", .1F, consumer)
-        platePressRecipe(Tags.Items.INGOTS_COPPER, ModItems.copperPlate.get(), "copper_ingot", .1F, consumer)
-        platePressRecipe(NuclearTags.Items.INGOTS_TITANIUM, ModItems.titaniumPlate.get(), "titanium_ingot", .1F, consumer)
-        platePressRecipe(NuclearTags.Items.INGOTS_ALUMINIUM, ModItems.aluminiumPlate.get(), "aluminium_ingot", .1F, consumer)
-        platePressRecipe(NuclearTags.Items.INGOTS_LEAD, ModItems.leadPlate.get(), "lead_ingot", .1F, consumer)
-        platePressRecipe(ModItems.advancedAlloyIngot.get(), ModItems.advancedAlloyPlate.get(), .1F, consumer)
-        platePressRecipe(ModItems.combineSteelIngot.get(), ModItems.combineSteelPlate.get(), .1F, consumer)
-        platePressRecipe(ModItems.saturniteIngot.get(), ModItems.saturnitePlate.get(), .2F, consumer)
-        platePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumPlate.get(), .5F, consumer)
-
-        wirePressRecipe(Tags.Items.INGOTS_GOLD, ModItems.goldWire.get(), "gold_ingot", .1F, consumer)
-        wirePressRecipe(Tags.Items.INGOTS_COPPER, ModItems.copperWire.get(), "copper_ingot", .1F, consumer)
-        wirePressRecipe(ModItems.redCopperIngot.get(), ModItems.redCopperWire.get(), .1F, consumer)
-        wirePressRecipe(ModItems.advancedAlloyIngot.get(), ModItems.superConductor.get(), .1F, consumer)
-        wirePressRecipe(NuclearTags.Items.INGOTS_ALUMINIUM, ModItems.aluminiumWire.get(), "aluminium_ingot", .1F, consumer)
-        wirePressRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.tungstenWire.get(), "tungsten_ingot", .1F, consumer)
-        wirePressRecipe(ModItems.magnetizedTungstenIngot.get(), ModItems.highTemperatureSuperConductor.get(), .1F, consumer)
-        wirePressRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumWire.get(), .5F, consumer)
 
         pressRecipe(ModItems.basicCircuitAssembly.get(), PressingRecipe.StampType.CIRCUIT, ModItems.basicCircuit.get(), 1, .75F, consumer)
     }
@@ -301,15 +185,15 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     private fun blastFurnaceRecipes(consumer: Consumer<FinishedRecipe>) {
         blastingRecipe(Tags.Items.INGOTS_IRON, Items.COAL, ModItems.steelIngot.get(), .25F, 2, "iron_ingot", consumer)
         blastingRecipe(Tags.Items.INGOTS_COPPER, Tags.Items.DUSTS_REDSTONE, ModItems.redCopperIngot.get(), .25F, 2, "copper_ingot", "redstone", consumer)
-        blastingRecipe(ModItems.redCopperIngot.get(), NuclearTags.Items.INGOTS_STEEL, ModItems.advancedAlloyIngot.get(), .5F, 2, "steel_ingot", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_RED_COPPER, NuclearTags.Items.INGOTS_STEEL, ModItems.advancedAlloyIngot.get(), .5F, 2, "red_copper_ingot", "steel_ingot",consumer)
         blastingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, Items.COAL, ModItems.neutronReflector.get(), .5F, 2, "tungsten_ingot", consumer)
         blastingRecipe(NuclearTags.Items.INGOTS_LEAD, Tags.Items.INGOTS_COPPER, ModItems.neutronReflector.get(), .25F, 4, "lead_ingot", "copper_ingot", consumer)
         blastingRecipe(NuclearTags.Items.PLATES_LEAD, NuclearTags.Items.PLATES_COPPER, ModItems.neutronReflector.get(), .5F, 1, "lead_plate", "copper_plate", consumer)
         blastingRecipe(NuclearTags.Items.INGOTS_STEEL, NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.highSpeedSteelIngot.get(), .5F, 2, "steel_ingot", "tungsten_ingot", consumer)
         blastingRecipe(NuclearTags.Items.INGOTS_STEEL, NuclearTags.Items.INGOTS_COBALT, ModItems.highSpeedSteelIngot.get(), 1F, 2, "steel_ingot", "cobalt_ingot", consumer)
         blastingRecipe(ModItems.mixedPlate.get(), NuclearTags.Items.PLATES_GOLD, ModItems.paAAlloyPlate.get(), 2F, 2, "gold_plate", consumer)
-        blastingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.schrabidiumNugget.get(), ModItems.magnetizedTungstenIngot.get(), 2F, 1, "tungsten_ingot", consumer)
-        blastingRecipe(ModItems.saturniteIngot.get(), NuclearTags.Items.DUSTS_METEORITE, ModItems.starmetalIngot.get(), 2F, 2, "meteorite_dust", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, NuclearTags.Items.NUGGETS_SCHRABIDIUM, ModItems.magnetizedTungstenIngot.get(), 2F, 1, "tungsten_ingot", "schrabidium_nugget", consumer)
+        blastingRecipe(NuclearTags.Items.INGOTS_SATURNITE, NuclearTags.Items.DUSTS_METEORITE, ModItems.starmetalIngot.get(), 2F, 2, "saturnite_ingot", "meteorite_dust", consumer)
     }
 
     private fun shreddingRecipes(consumer: Consumer<FinishedRecipe>) {
@@ -317,142 +201,63 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         shreddingRecipe(Tags.Items.SAND, ModItems.dust.get(), .1F, 2, consumer, "sand")
         shreddingRecipe(NuclearTags.Items.SCRAP, ModItems.dust.get(), .25F, 1, consumer, "scrap")
 
-        shreddingRecipe(Tags.Items.ORES_COAL, ModItems.coalPowder.get(), 0.1F, 6, consumer, "coal_ore")
-        shreddingRecipe(Tags.Items.ORES_IRON, ModItems.ironPowder.get(), .35F, 2, consumer, "iron_ore")
-        shreddingRecipe(Tags.Items.ORES_GOLD, ModItems.goldPowder.get(), .5F, 2, consumer, "gold_ore")
-        shreddingRecipe(Tags.Items.ORES_REDSTONE, Items.REDSTONE, .35F, 6, consumer, "redstone_ore")
-        shreddingRecipe(Tags.Items.ORES_DIAMOND, ModItems.diamondPowder.get(), .5F, 2, consumer, "diamond_powder") // TODO diamond gravel
-        shreddingRecipe(Tags.Items.ORES_EMERALD, ModItems.emeraldPowder.get(), .5F, 2, consumer, "emerald_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_URANIUM, ModItems.uraniumPowder.get(), .5F, 2, consumer, "uranium_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_THORIUM, ModItems.thoriumPowder.get(), 1F, 2, consumer, "thorium_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_PLUTONIUM, ModItems.plutoniumPowder.get(), 1.5F, 2, consumer, "plutonium_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_TITANIUM, ModItems.titaniumPowder.get(), .4F, 2, consumer, "titanium_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_SULFUR, ModItems.sulfur.get(), .1F, 6, consumer, "sulfur_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_NITER, ModItems.niter.get(), .1F, 6, consumer, "niter_ore")
-        shreddingRecipe(ItemTags.COPPER_ORES, ModItems.copperPowder.get(), .25F, 2, consumer, "copper_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_TUNGSTEN, ModItems.tungstenPowder.get(), .4F, 2, consumer, "tungsten_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_ALUMINIUM, ModItems.aluminiumPowder.get(), .3F, 2, consumer, "aluminium_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_FLUORITE, ModItems.fluorite.get(), .1F, 6, consumer, "fluorite_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_BERYLLIUM, ModItems.berylliumPowder.get(), .4F, 2, consumer, "beryllium_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_LEAD, ModItems.leadPowder.get(), .3F, 2, consumer, "lead_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_LIGNITE, ModItems.lignitePowder.get(), .05F, 2, consumer, "lignite_ore")
-        shreddingRecipe(NuclearTags.Items.ORES_ASBESTOS, ModItems.asbestosPowder.get(), .4F, 2, consumer, "asbestos_ore")
-        shreddingRecipe(ModBlockItems.schrabidiumOre.get(), ModItems.schrabidiumPowder.get(), 25F, 2, consumer)
-        shreddingRecipe(ModBlockItems.australianOre.get(), ModItems.australiumPowder.get(), 1.25F, 2, consumer)
-        shreddingRecipe(ModBlockItems.weidite.get(), ModItems.weidaniumPowder.get(), 1.25F, 2, consumer)
-        shreddingRecipe(ModBlockItems.reiite.get(), ModItems.reiiumPowder.get(), 1.25F, 2, consumer)
-        shreddingRecipe(ModBlockItems.brightblendeOre.get(), ModItems.unobtainiumPowder.get(), 1.25F, 2, consumer)
-        shreddingRecipe(ModBlockItems.dellite.get(), ModItems.daffergonPowder.get(), 1.25F, 2, consumer)
-        shreddingRecipe(ModBlockItems.dollarGreenMineral.get(), ModItems.verticiumPowder.get(), 1.25F, 2, consumer)
+        RuleBasedRecipeBuilder.create {
+            forAllTagsAndMaterials().excluding(TagGroups.diamond, TagGroups.starmetal)
+            addRule { tagGroup ->
+                val powder = tagGroup.materialGroup.powder() ?: return@addRule null
+                val (oreTag, oreItem) = tagGroup.oreTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(oreTag, oreItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup) / 2F
+                val count = if (tagGroup.materialGroup.ingotIsPowder) 6 else 2
+                ShreddingRecipeBuilder(powder, experience, count, ingredient).group(getItemName(powder)).unlockedBy(getHasName(oreTag, oreItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(oreTag, oreItem)}")
+            }
+        }.build(consumer)
+
+        RuleBasedRecipeBuilder.create {
+            forAllTagsAndMaterials().excluding(TagGroups.starmetal)
+            addRule { tagGroup ->
+                val powder = tagGroup.materialGroup.powder() ?: return@addRule null
+                val (crystalsTag, crystalsItem) = tagGroup.crystalsTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(crystalsTag, crystalsItem) ?: return@addRule null
+                val experience = experienceLookupTable.getFloat(tagGroup) / 2F
+                val count = if (tagGroup.materialGroup.ingotIsPowder) 9 else 3
+                ShreddingRecipeBuilder(powder, experience, count, ingredient).group(getItemName(powder)).unlockedBy(getHasName(crystalsTag, crystalsItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(crystalsTag, crystalsItem)}")
+            }
+            addRule { tagGroup ->
+                val powder = tagGroup.materialGroup.powder() ?: return@addRule null
+                val (blockTag, blockItem) = tagGroup.blockTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(blockTag, blockItem) ?: return@addRule null
+                ShreddingRecipeBuilder(powder, 0F, 9, ingredient).group(getItemName(powder)).unlockedBy(getHasName(blockTag, blockItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(blockTag, blockItem)}")
+            }
+            addRule { tagGroup ->
+                if (tagGroup.materialGroup.ingotIsPowder) return@addRule null
+                val powder = tagGroup.materialGroup.powder() ?: return@addRule null
+                val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
+                ShreddingRecipeBuilder(powder, 0F, 1, ingredient).group(getItemName(powder)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(ingotTag, ingotItem)}")
+            }
+        }.build(consumer)
+
+        // ores to powder
+        shreddingRecipe(Tags.Items.ORES_DIAMOND, ModItems.diamondPowder.get(), .5F, 2, consumer, "diamond_ore") // TODO diamond gravel
         shreddingRecipe(ModBlockItems.rareEarthOre.get(), ModItems.deshMix.get(), 1.5F, 1, consumer)
-        shreddingRecipe(ModBlockItems.starmetalOre.get(), ModItems.highSpeedSteelPowder.get(), 5F, 4, consumer)
+        shreddingRecipe(NuclearTags.Items.ORES_STARMETAL, ModItems.highSpeedSteelPowder.get(), 2F, 4, consumer, "starmetal_ore")
         shreddingRecipe(ModBlockItems.trixite.get(), ModItems.plutoniumPowder.get(), 1.5F, 4, consumer)
-        shreddingRecipe(ModBlockItems.meteorLithiumOre.get(), ModItems.lithiumPowder.get(), 2.5F, 2, consumer)
+        shreddingRecipe(ModBlockItems.meteorLithiumOre.get(), ModItems.lithiumPowder.get(), 1F, 2, consumer)
 
-        shreddingRecipe(ModItems.ironCrystals.get(), ModItems.ironPowder.get(), .35F, 3, consumer)
-        shreddingRecipe(ModItems.goldCrystals.get(), ModItems.goldPowder.get(), .5F, 3, consumer)
-        shreddingRecipe(ModItems.redstoneCrystals.get(), Items.REDSTONE, .35F, 8, consumer)
-        shreddingRecipe(ModItems.diamondCrystals.get(), ModItems.diamondPowder.get(), .5F, 3, consumer)
-        shreddingRecipe(ModItems.uraniumCrystals.get(), ModItems.uraniumPowder.get(), .5F, 3, consumer)
-        shreddingRecipe(ModItems.thoriumCrystals.get(), ModItems.thoriumPowder.get(), 1F, 3, consumer)
-        shreddingRecipe(ModItems.plutoniumCrystals.get(), ModItems.plutoniumPowder.get(), 1.5F, 3, consumer)
-        shreddingRecipe(ModItems.titaniumCrystals.get(), ModItems.titaniumPowder.get(), .4F, 3, consumer)
-        shreddingRecipe(ModItems.sulfurCrystals.get(), ModItems.sulfur.get(), .1F, 8, consumer)
-        shreddingRecipe(ModItems.niterCrystals.get(), ModItems.niter.get(), .1F, 8, consumer)
-        shreddingRecipe(ModItems.copperCrystals.get(), ModItems.copperPowder.get(), .25F, 3, consumer)
-        shreddingRecipe(ModItems.tungstenCrystals.get(), ModItems.tungstenPowder.get(), .4F, 3, consumer)
-        shreddingRecipe(ModItems.aluminiumCrystals.get(), ModItems.aluminiumPowder.get(), .3F, 3, consumer)
-        shreddingRecipe(ModItems.fluoriteCrystals.get(), ModItems.fluorite.get(), .1F, 8, consumer)
-        shreddingRecipe(ModItems.berylliumCrystals.get(), ModItems.berylliumPowder.get(), .4F, 3, consumer)
-        shreddingRecipe(ModItems.leadCrystals.get(), ModItems.leadPowder.get(), .3F, 3, consumer)
-        shreddingRecipe(ModItems.schraraniumCrystals.get(), ModItems.schrabidiumNugget.get(), 5F, 2, consumer)
-        shreddingRecipe(ModItems.schrabidiumCrystals.get(), ModItems.schrabidiumPowder.get(), 25F, 3, consumer)
-        shreddingRecipe(ModItems.rareEarthCrystals.get(), ModItems.deshMix.get(), 1.5F, 2, consumer)
-        shreddingRecipe(ModItems.redPhosphorusCrystals.get(), ModItems.redPhosphorus.get(), .5F, 8, consumer)
-        shreddingRecipe(ModItems.lithiumCrystals.get(), ModItems.lithiumPowder.get(), 2.5F, 3, consumer)
-        shreddingRecipe(ModItems.starmetalCrystals.get(), ModItems.highSpeedSteelPowder.get(), 5F, 6, consumer)
-        shreddingRecipe(ModItems.trixiteCrystals.get(), ModItems.plutoniumPowder.get(), 1.5F, 6, consumer)
+        // crystals to powder
+        shreddingRecipe(ModItems.rareEarthCrystals.get(), ModItems.deshMix.get(), 1F, 2, consumer)
+        shreddingRecipe(NuclearTags.Items.CRYSTALS_STARMETAL, ModItems.highSpeedSteelPowder.get(), 3F, 9, consumer, "starmetal_crystals")
+        shreddingRecipe(ModItems.trixiteCrystals.get(), ModItems.plutoniumPowder.get(), 1.5F, 9, consumer)
 
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_COAL, ModItems.coalPowder.get(), 0F, 9, consumer, "coal_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_LAPIS, ModItems.lapisLazuliPowder.get(), 0F, 9, consumer, "lapis_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_REDSTONE, Items.REDSTONE, 0F, 9, consumer, "redstone_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_IRON, ModItems.ironPowder.get(), 0F, 9, consumer, "iron_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_GOLD, ModItems.goldPowder.get(), 0F, 9, consumer, "gold_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_DIAMOND, ModItems.diamondPowder.get(), 0F, 9, consumer, "diamond_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_EMERALD, ModItems.emeraldPowder.get(), 0F, 9, consumer, "emerald_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_URANIUM, ModItems.uraniumPowder.get(), 0F, 9, consumer, "uranium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_NEPTUNIUM, ModItems.neptuniumPowder.get(), 0F, 9, consumer, "neptunium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_PLUTONIUM, ModItems.plutoniumPowder.get(), 0F, 9, consumer, "plutonium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_THORIUM, ModItems.thoriumPowder.get(), 0F, 9, consumer, "thorium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_TITANIUM, ModItems.titaniumPowder.get(), 0F, 9, consumer, "titanium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_SULFUR, ModItems.sulfur.get(), 0F, 9, consumer, "sulfur_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_NITER, ModItems.niter.get(), 0F, 9, consumer, "niter_block")
-        shreddingRecipe(Tags.Items.STORAGE_BLOCKS_COPPER, ModItems.copperPowder.get(), 0F, 9, consumer, "copper_block")
-        shreddingRecipe(ModBlockItems.redCopperBlock.get(), ModItems.redCopperPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.advancedAlloyBlock.get(), ModItems.advancedAlloyPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_TUNGSTEN, ModItems.tungstenPowder.get(), 0F, 9, consumer, "tungsten_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_ALUMINIUM, ModItems.aluminiumPowder.get(), 0F, 9, consumer, "tungsten_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_FLUORITE, ModItems.fluorite.get(), 0F, 9, consumer, "fluorite_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_BERYLLIUM, ModItems.berylliumPowder.get(), 0F, 9, consumer, "beryllium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_COBALT, ModItems.cobaltPowder.get(), 0F, 9, consumer, "cobalt_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_STEEL, ModItems.steelPowder.get(), 0F, 9, consumer, "steel_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_LEAD, ModItems.leadPowder.get(), 0F, 9, consumer, "lead_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_LITHIUM, ModItems.lithiumPowder.get(), 0F, 9, consumer, "lithium_block")
-        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_YELLOWCAKE, ModItems.yellowcake.get(), 0F, 9, consumer, "yellowcake_block")
-        shreddingRecipe(ModBlockItems.schrabidiumBlock.get(), ModItems.schrabidiumPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.euphemiumBlock.get(), ModItems.euphemiumPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.magnetizedTungstenBlock.get(), ModItems.magnetizedTungstenPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.combineSteelBlock.get(), ModItems.combineSteelPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.deshReinforcedBlock.get(), ModItems.deshPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.australiumBlock.get(), ModItems.australiumPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.weidaniumBlock.get(), ModItems.weidaniumPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.reiiumBlock.get(), ModItems.reiiumPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.unobtainiumBlock.get(), ModItems.unobtainiumPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.daffergonBlock.get(), ModItems.daffergonPowder.get(), 0F, 9, consumer)
-        shreddingRecipe(ModBlockItems.verticiumBlock.get(), ModItems.verticiumPowder.get(), 0F, 9, consumer)
+        // blocks to powder
+        shreddingRecipe(NuclearTags.Items.STORAGE_BLOCKS_STARMETAL, ModItems.highSpeedSteelPowder.get(), 20F, 36, consumer, "starmetal_block")
         shreddingRecipe(Items.GLOWSTONE, Items.GLOWSTONE_DUST, 0F, 4, consumer)
 
-        shreddingRecipe(Items.COAL, ModItems.coalPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(Tags.Items.INGOTS_IRON, ModItems.ironPowder.get(), 0F, 1, consumer, "iron_ingot")
-        shreddingRecipe(Tags.Items.INGOTS_GOLD, ModItems.goldPowder.get(), 0F, 1, consumer, "gold_ingot")
-        shreddingRecipe(Tags.Items.GEMS_LAPIS, ModItems.lapisLazuliPowder.get(), 0F, 1, consumer, "lapis_lazuli")
-        shreddingRecipe(Tags.Items.GEMS_DIAMOND, ModItems.diamondPowder.get(), 0F, 1, consumer, "diamond")
-        shreddingRecipe(Tags.Items.GEMS_EMERALD, ModItems.emeraldPowder.get(), 0F, 9, consumer, "emerald")
-        shreddingRecipe(NuclearTags.Items.INGOTS_URANIUM, ModItems.uraniumPowder.get(), 0F, 1, consumer, "uranium_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_THORIUM, ModItems.thoriumPowder.get(), 0F, 1, consumer, "thorium_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_PLUTONIUM, ModItems.plutoniumPowder.get(), 0F, 1, consumer, "plutonium_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_NEPTUNIUM, ModItems.neptuniumPowder.get(), 0F, 1, consumer, "neptunium_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_POLONIUM, ModItems.poloniumPowder.get(), 0F, 1, consumer, "polonium_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_TITANIUM, ModItems.titaniumPowder.get(), 0F, 1, consumer, "titanium_ingot")
-        shreddingRecipe(Tags.Items.INGOTS_COPPER, ModItems.copperPowder.get(), 0F, 1, consumer, "copper_ingot")
-        shreddingRecipe(ModItems.redCopperIngot.get(), ModItems.redCopperPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.advancedAlloyIngot.get(), ModItems.advancedAlloyPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(NuclearTags.Items.INGOTS_TUNGSTEN, ModItems.tungstenIngot.get(), 0F, 1, consumer, "tungsten_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_ALUMINIUM, ModItems.aluminiumPowder.get(), 0F, 1, consumer, "aluminium_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_STEEL, ModItems.steelPowder.get(), 0F, 1, consumer, "steel_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_LEAD, ModItems.leadPowder.get(), 0F, 1, consumer, "lead_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_BERYLLIUM, ModItems.berylliumPowder.get(), 0F, 1, consumer, "beryllium_powder")
-        shreddingRecipe(NuclearTags.Items.INGOTS_COBALT, ModItems.cobaltPowder.get(), 0F, 1, consumer, "cobalt_powder")
-        shreddingRecipe(ModItems.highSpeedSteelPowder.get(), ModItems.highSpeedSteelPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(NuclearTags.Items.INGOTS_POLYMER, ModItems.polymerPowder.get(), 0F, 1, consumer, "polymer_ingot")
-        shreddingRecipe(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.magnetizedTungstenIngot.get(), ModItems.magnetizedTungstenPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.combineSteelIngot.get(), ModItems.combineSteelPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.australiumIngot.get(), ModItems.australiumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.weidaniumIngot.get(), ModItems.weidaniumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.reiiumIngot.get(), ModItems.reiiumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.unobtainiumIngot.get(), ModItems.unobtainiumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.daffergonIngot.get(), ModItems.daffergonPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.verticiumIngot.get(), ModItems.verticiumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(NuclearTags.Items.INGOTS_LANTHANUM, ModItems.lanthanumPowder.get(), 0F, 1, consumer, "lanthanum_ingot")
-        shreddingRecipe(NuclearTags.Items.INGOTS_ACTINIUM, ModItems.actiniumPowder.get(), 0F, 1, consumer, "actinium_ingot")
-        shreddingRecipe(ModItems.deshIngot.get(), ModItems.deshPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.euphemiumIngot.get(), ModItems.euphemiumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.dineutroniumIngot.get(), ModItems.dineutroniumPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(NuclearTags.Items.INGOTS_LITHIUM, ModItems.lithiumPowder.get(), 0F, 1, consumer, "lithium_cube")
-        shreddingRecipe(ModItems.asbestosSheet.get(), ModItems.asbestosPowder.get(), 0F, 1, consumer)
-        shreddingRecipe(ModItems.lignite.get(), ModItems.lignitePowder.get(), 0F, 1, consumer)
+        // ingots to powder
+        shreddingRecipe(NuclearTags.Items.INGOTS_STARMETAL, ModItems.highSpeedSteelPowder.get(), 1F, 1, consumer, "starmetal_ingot")
 
+        // fragments to powder
         shreddingRecipe(NuclearTags.Items.GEMS_NEODYMIUM, ModItems.tinyNeodymiumPowder.get(), 0F, 1, consumer, "neodymium_fragment")
         shreddingRecipe(NuclearTags.Items.GEMS_COBALT, ModItems.tinyCobaltPowder.get(), 0F, 1, consumer, "cobalt_fragment")
         shreddingRecipe(NuclearTags.Items.GEMS_NIOBIUM, ModItems.tinyNiobiumPowder.get(), 0F, 1, consumer, "niobium_fragment")
@@ -461,6 +266,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         shreddingRecipe(NuclearTags.Items.GEMS_ACTINIUM, ModItems.tinyActiniumPowder.get(), 0F, 1, consumer, "actinium_fragment")
         shreddingRecipe(ModItems.meteoriteFragment.get(), ModItems.tinyMeteoritePowder.get(), 0F, 1, consumer)
 
+        // coils to powder
         shreddingRecipe(ModItems.copperCoil.get(), ModItems.redCopperPowder.get(), .1F, 1, consumer)
         shreddingRecipe(ModItems.superConductingCoil.get(), ModItems.advancedAlloyPowder.get(), .1F, 1, consumer)
         shreddingRecipe(ModItems.goldCoil.get(), ModItems.goldPowder.get(), .1F, 1, consumer)
@@ -469,6 +275,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         shreddingRecipe(ModItems.goldRingCoil.get(), ModItems.goldPowder.get(), .1F, 2, consumer)
         shreddingRecipe(ModItems.heatingCoil.get(), ModItems.tungstenPowder.get(), .1F, 1, consumer)
 
+        // quartz to powder
         shreddingRecipe(Tags.Items.STORAGE_BLOCKS_QUARTZ, ModItems.quartzPowder.get(), 0F, 4, consumer, "quartz_block")
         shreddingRecipe(Items.QUARTZ_BRICKS, ModItems.quartzPowder.get(), 0F, 4, consumer)
         shreddingRecipe(Items.QUARTZ_PILLAR, ModItems.quartzPowder.get(), 0F, 4, consumer)
@@ -512,41 +319,64 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     private fun parts(consumer: Consumer<FinishedRecipe>) {
         ingotFromPowder(NuclearTags.Items.DUSTS_COAL, ModItems.coke.get(), "coal_powder", consumer)
         ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.ligniteBriquette.get()), .1F, 200, ModItems.coke.get()).group(ModItems.coke.id.path).unlockedBy("has_${ModItems.ligniteBriquette.id.path}", has(ModItems.ligniteBriquette.get())).save(consumer, ModItems.coke.id)
-        ShapedRecipeBuilder.shaped(ModItems.deshCompoundPlate.get()).define('P', NuclearTags.Items.DUSTS_POLYMER).define('D', ModItems.deshIngot.get()).define('S', ModItems.highSpeedSteelIngot.get()).pattern("PDP").pattern("DSD").pattern("PDP").group(ModItems.deshCompoundPlate.id.path).unlockedBy("has_${ModItems.deshIngot.id.path}", has(ModItems.deshIngot.get())).save(consumer, ModItems.deshCompoundPlate.id)
         ShapedRecipeBuilder.shaped(ModItems.copperPanel.get()).define('C', NuclearTags.Items.PLATES_COPPER).pattern("CCC").pattern("CCC").group(ModItems.copperPanel.id.path).unlockedBy("has${ModItems.copperPlate.id.path}", has(NuclearTags.Items.PLATES_COPPER)).save(consumer, ModItems.copperPanel.id)
+        //region Circuits
+        ShapedRecipeBuilder.shaped(ModItems.basicCircuitAssembly.get()).define('W', NuclearTags.Items.WIRES_ALUMINIUM).define('R', Tags.Items.DUSTS_REDSTONE).define('P', NuclearTags.Items.PLATES_STEEL).pattern("W").pattern("R").pattern("P").unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer)
+        AssemblyRecipeBuilder(ModItems.enhancedCircuit.get(), 1, 100).requires(ModItems.basicCircuit.get()).requires(4 to NuclearTags.Items.WIRES_COPPER, 1 to NuclearTags.Items.DUSTS_QUARTZ, 1 to NuclearTags.Items.PLATES_COPPER).save(consumer)
+        AssemblyRecipeBuilder(ModItems.advancedCircuit.get(), 1, 150).requires(ModItems.enhancedCircuit.get()).requires(4 to NuclearTags.Items.WIRES_RED_COPPER, 1 to NuclearTags.Items.DUSTS_GOLD, 1 to NuclearTags.Items.PLATES_INSULATOR).save(consumer)
+        ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.enhancedCircuit.get()), 0F, 200, ModItems.basicCircuit.get()).unlockedBy("has_circuit", has(ModItems.enhancedCircuit.get())).save(consumer, ntm("${getItemName(ModItems.basicCircuit.get())}_from_smelting_${getItemName(ModItems.enhancedCircuit.get())}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.advancedCircuit.get()), 0F, 200, ModItems.enhancedCircuit.get()).unlockedBy("has_circuit", has(ModItems.advancedCircuit.get())).save(consumer, ntm("${getItemName(ModItems.enhancedCircuit.get())}_from_smelting_${getItemName(ModItems.advancedCircuit.get())}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.overclockedCircuit.get()), 0F, 200, ModItems.advancedCircuit.get()).unlockedBy("has_circuit", has(ModItems.overclockedCircuit.get())).save(consumer, ntm("${getItemName(ModItems.advancedCircuit.get())}_from_smelting_${getItemName(ModItems.overclockedCircuit.get())}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ModItems.highPerformanceCircuit.get()), 0F, 200, ModItems.overclockedCircuit.get()).unlockedBy("has_circuit", has(ModItems.highPerformanceCircuit.get())).save(consumer, ntm("${getItemName(ModItems.overclockedCircuit.get())}_from_smelting_${getItemName(ModItems.highPerformanceCircuit.get())}"))
+        ShapedRecipeBuilder.shaped(ModItems.militaryGradeCircuitBoardTier1.get()).define('C', ModItems.basicCircuit.get()).define('D', Tags.Items.DUSTS_REDSTONE).pattern("CDC").unlockedBy("has_circuit", has(ModItems.basicCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(ModItems.militaryGradeCircuitBoardTier2.get()).define('C', ModItems.enhancedCircuit.get()).define('D', NuclearTags.Items.DUSTS_QUARTZ).pattern("CDC").unlockedBy("has_circuit", has(ModItems.enhancedCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(ModItems.militaryGradeCircuitBoardTier3.get()).define('C', ModItems.advancedCircuit.get()).define('D', NuclearTags.Items.DUSTS_GOLD).pattern("CDC").unlockedBy("has_circuit", has(ModItems.advancedCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(ModItems.militaryGradeCircuitBoardTier4.get()).define('C', ModItems.overclockedCircuit.get()).define('D', NuclearTags.Items.DUSTS_LAPIS).pattern("CDC").unlockedBy("has_circuit", has(ModItems.overclockedCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(ModItems.militaryGradeCircuitBoardTier5.get()).define('C', ModItems.highPerformanceCircuit.get()).define('D', NuclearTags.Items.DUSTS_DIAMOND).pattern("CDC").unlockedBy("has_circuit", has(ModItems.highPerformanceCircuit.get())).save(consumer)
+        ShapelessRecipeBuilder.shapeless(ModItems.basicCircuit.get(), 2).requires(ModItems.militaryGradeCircuitBoardTier1.get()).unlockedBy("has_military_circuit", has(ModItems.militaryGradeCircuitBoardTier1.get())).save(consumer, ntm("${getItemName(ModItems.basicCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(ModItems.enhancedCircuit.get(), 2).requires(ModItems.militaryGradeCircuitBoardTier2.get()).unlockedBy("has_military_circuit", has(ModItems.militaryGradeCircuitBoardTier2.get())).save(consumer, ntm("${getItemName(ModItems.enhancedCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(ModItems.advancedCircuit.get(), 2).requires(ModItems.militaryGradeCircuitBoardTier3.get()).unlockedBy("has_military_circuit", has(ModItems.militaryGradeCircuitBoardTier3.get())).save(consumer, ntm("${getItemName(ModItems.advancedCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(ModItems.overclockedCircuit.get(), 2).requires(ModItems.militaryGradeCircuitBoardTier4.get()).unlockedBy("has_military_circuit", has(ModItems.militaryGradeCircuitBoardTier4.get())).save(consumer, ntm("${getItemName(ModItems.overclockedCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(ModItems.highPerformanceCircuit.get(), 2).requires(ModItems.militaryGradeCircuitBoardTier5.get()).unlockedBy("has_military_circuit", has(ModItems.militaryGradeCircuitBoardTier5.get())).save(consumer, ntm("${getItemName(ModItems.highPerformanceCircuit.get())}_from_military_grade"))
+        //endregion
+        ShapedRecipeBuilder.shaped(ModItems.deshCompoundPlate.get()).define('P', NuclearTags.Items.DUSTS_POLYMER).define('D', ModItems.deshIngot.get()).define('S', ModItems.highSpeedSteelIngot.get()).pattern("PDP").pattern("DSD").pattern("PDP").group(ModItems.deshCompoundPlate.id.path).unlockedBy("has_${ModItems.deshIngot.id.path}", has(ModItems.deshIngot.get())).save(consumer, ModItems.deshCompoundPlate.id)
         ShapedRecipeBuilder.shaped(ModItems.heatingCoil.get()).define('T', NuclearTags.Items.WIRES_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("TTT").pattern("TIT").pattern("TTT").group(ModItems.heatingCoil.id.path).unlockedBy("has_${ModItems.tungstenWire.get()}", has(NuclearTags.Items.WIRES_TUNGSTEN)).save(consumer, ModItems.heatingCoil.id)
+        //region Insulator
+        ShapedRecipeBuilder.shaped(ModItems.insulator.get(), 4).define('S', Tags.Items.STRING).define('W', ItemTags.WOOL).pattern("SWS").group(getItemName(ModItems.insulator.get())).unlockedBy("has_wool", has(ItemTags.WOOL)).save(consumer, ntm("insulator_from_wool"))
+        ShapelessRecipeBuilder.shapeless(ModItems.insulator.get(), 4).requires(Tags.Items.INGOTS_BRICK, 2).group(getItemName(ModItems.insulator.get())).unlockedBy("has_brick", has(Tags.Items.INGOTS_BRICK)).save(consumer, ntm("insulator_from_bricks"))
+        ShapelessRecipeBuilder.shapeless(ModItems.insulator.get(), 8).requires(NuclearTags.Items.INGOTS_POLYMER, 2).group(getItemName(ModItems.insulator.get())).unlockedBy("has_polymer", has(NuclearTags.Items.INGOTS_POLYMER)).save(consumer, ntm("insulator_from_polymer"))
+        ShapelessRecipeBuilder.shapeless(ModItems.insulator.get(), 16).requires(NuclearTags.Items.INGOTS_ASBESTOS, 2).group(getItemName(ModItems.insulator.get())).unlockedBy("has_yummy", has(NuclearTags.Items.INGOTS_ASBESTOS)).save(consumer, ntm("insulator_from_asbestos"))
+        ShapelessRecipeBuilder.shapeless(ModItems.insulator.get(), 16).requires(NuclearTags.Items.INGOTS_FIBERGLASS, 2).group(getItemName(ModItems.insulator.get())).unlockedBy("has_fiberglass", has(NuclearTags.Items.INGOTS_FIBERGLASS)).save(consumer, ntm("insulator_from_fiberglass"))
+        //endregion
         ShapedRecipeBuilder.shaped(ModItems.steelTank.get(), 2).define('S', NuclearTags.Items.PLATES_STEEL).define('T', NuclearTags.Items.PLATES_TITANIUM).pattern("STS").pattern("S S").pattern("STS").group(ModItems.steelTank.id.path).unlockedBy("has_${ModItems.steelPlate.id.path}", has(NuclearTags.Items.PLATES_STEEL)).save(consumer, ModItems.steelTank.id)
     }
 
     private fun machineItems(consumer: Consumer<FinishedRecipe>) {
-        BatteryRecipeBuilder.battery(ModItems.battery.get()).define('W', NuclearTags.Items.WIRES_ALUMINIUM).define('P', NuclearTags.Items.PLATES_ALUMINIUM).define('R', Tags.Items.DUSTS_REDSTONE).pattern(" W ").pattern("PRP").pattern("PRP").unlockedBy("has_aluminium_ingot", has(NuclearTags.Items.INGOTS_ALUMINIUM)).save(consumer, ModItems.battery.id)
-        BatteryRecipeBuilder.battery(ModItems.redstonePowerCell.get()).define('W', NuclearTags.Items.WIRES_ALUMINIUM).define('P', NuclearTags.Items.PLATES_ALUMINIUM).define('B', ModItems.battery.get()).pattern("WBW").pattern("PBP").pattern("WBW").unlockedBy("has_battery", has(ModItems.battery.get())).save(consumer, ModItems.redstonePowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.sixfoldRedstonePowerCell.get()).define('W', NuclearTags.Items.WIRES_ALUMINIUM).define('P', NuclearTags.Items.PLATES_ALUMINIUM).define('B', ModItems.redstonePowerCell.get()).pattern("BBB").pattern("WPW").pattern("BBB").unlockedBy("has_battery", has(ModItems.redstonePowerCell.get())).save(consumer, ModItems.sixfoldRedstonePowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.twentyFourFoldRedstonePowerCell.get()).define('W', NuclearTags.Items.WIRES_ALUMINIUM).define('P', NuclearTags.Items.PLATES_ALUMINIUM).define('B', ModItems.sixfoldRedstonePowerCell.get()).pattern("BWB").pattern("WPW").pattern("BWB").unlockedBy("has_battery", has(ModItems.sixfoldRedstonePowerCell.get())).save(consumer, ModItems.twentyFourFoldRedstonePowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.advancedBattery.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('S', NuclearTags.Items.DUSTS_SULFUR).define('L', NuclearTags.Items.DUSTS_LEAD).pattern(" W ").pattern("PSP").pattern("PLP").unlockedBy("has_sulfur", has(NuclearTags.Items.DUSTS_SULFUR)).save(consumer, ModItems.advancedBattery.id)
-        BatteryRecipeBuilder.battery(ModItems.advancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.advancedBattery.get()).pattern("WBW").pattern("PBP").pattern("WBW").unlockedBy("has_battery", has(ModItems.advancedBattery.get())).save(consumer, ModItems.advancedPowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.quadrupleAdvancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.advancedPowerCell.get()).pattern("BWB").pattern("WPW").pattern("BWB").unlockedBy("has_battery", has(ModItems.advancedPowerCell.get())).save(consumer, ModItems.quadrupleAdvancedPowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.twelveFoldAdvancedPowerCell.get()).define('W', ModItems.redCopperWire.get()).define('P', NuclearTags.Items.PLATES_COPPER).define('B', ModItems.quadrupleAdvancedPowerCell.get()).pattern("WPW").pattern("BBB").pattern("WPW").unlockedBy("has_battery", has(ModItems.quadrupleAdvancedPowerCell.get())).save(consumer, ModItems.twelveFoldAdvancedPowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.lithiumBattery.get()).define('W', NuclearTags.Items.WIRES_GOLD).define('P', NuclearTags.Items.PLATES_TITANIUM).define('L', NuclearTags.Items.DUSTS_LITHIUM).define('C', NuclearTags.Items.DUSTS_COBALT).pattern("W W").pattern("PLP").pattern("PCP").unlockedBy("has_lithium", has(NuclearTags.Items.DUSTS_LITHIUM)).save(consumer, ModItems.lithiumBattery.id)
-        BatteryRecipeBuilder.battery(ModItems.lithiumPowerCell.get()).define('W', NuclearTags.Items.WIRES_GOLD).define('P', NuclearTags.Items.PLATES_TITANIUM).define('B', ModItems.lithiumBattery.get()).pattern("WBW").pattern("PBP").pattern("WBW").unlockedBy("has_battery", has(ModItems.lithiumBattery.get())).save(consumer, ModItems.lithiumPowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.tripleLithiumPowerCell.get()).define('W', NuclearTags.Items.WIRES_GOLD).define('P', NuclearTags.Items.PLATES_TITANIUM).define('B', ModItems.lithiumPowerCell.get()).pattern("WPW").pattern("BBB").pattern("WPW").unlockedBy("has_battery", has(ModItems.lithiumPowerCell.get())).save(consumer, ModItems.tripleLithiumPowerCell.id)
-        BatteryRecipeBuilder.battery(ModItems.sixfoldLithiumPowerCell.get()).define('W', NuclearTags.Items.WIRES_GOLD).define('P', NuclearTags.Items.PLATES_TITANIUM).define('B', ModItems.tripleLithiumPowerCell.get()).pattern("WPW").pattern("BWB").pattern("WPW").unlockedBy("has_battery", has(ModItems.tripleLithiumPowerCell.get())).save(consumer, ModItems.sixfoldLithiumPowerCell.id)
+        with (NuclearTags.Items) {
+            with(BatteryRecipeBuilder) {
+                battery(consumer, ModItems.battery.get(), WIRES_ALUMINIUM, PLATES_ALUMINIUM, Tags.Items.DUSTS_REDSTONE, extra = arrayOf(ModItems.redstonePowerCell.get() to arrayOf("WBW", "PBP", "WBW"), ModItems.sixfoldRedstonePowerCell.get() to arrayOf("BBB", "WPW", "BBB"), ModItems.twentyFourFoldRedstonePowerCell.get() to arrayOf("BWB", "WPW", "BWB")))
+                battery(consumer, ModItems.advancedBattery.get(), WIRES_RED_COPPER, PLATES_COPPER, DUSTS_SULFUR, DUSTS_LEAD, extra = arrayOf(ModItems.advancedPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), ModItems.quadrupleAdvancedPowerCell.get() to arrayOf("BWB", "WPW", "BWB"), ModItems.twelveFoldAdvancedPowerCell.get() to arrayOf("WPW", "BBB", "WPW")))
+                battery(consumer, ModItems.lithiumBattery.get(), WIRES_GOLD, PLATES_TITANIUM, DUSTS_LITHIUM, DUSTS_COBALT, arrayOf("W W", "PXP", "PYP"), extra = arrayOf(ModItems.lithiumPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), ModItems.tripleLithiumPowerCell.get() to arrayOf("WPW", "BBB", "WPW"), ModItems.sixfoldLithiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW")))
+                battery(consumer, ModItems.schrabidiumBattery.get(), WIRES_SCHRABIDIUM, PLATES_SCHRABIDIUM, DUSTS_NEPTUNIUM, DUSTS_SCHRABIDIUM, extra = arrayOf(ModItems.schrabidiumPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), ModItems.doubleSchrabidiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW"), ModItems.quadrupleSchrabidiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW")))
+                battery(consumer, ModItems.sparkBattery.get(), Ingredient.of(WIRES_MAGNETIZED_TUNGSTEN), Ingredient.of(ModItems.dineutroniumCompoundPlate.get()), Ingredient.of(ModItems.sparkMix.get()), criterion = has(ModItems.sparkMix.get()), extra = arrayOf(ModItems.sparkPowerCell.get() to arrayOf("BBW", "BBP", "BBW"), ModItems.sparkArcaneCarBattery.get() to arrayOf(" WW", "PBB", "BBB")))
+            }
+        }
 
         pressStamp(Tags.Items.STONE, ModItems.stoneFlatStamp.get(), consumer)
         pressStamp(Tags.Items.INGOTS_IRON, ModItems.ironFlatStamp.get(), consumer)
         pressStamp(NuclearTags.Items.INGOTS_STEEL, ModItems.steelFlatStamp.get(), consumer)
         pressStamp(NuclearTags.Items.INGOTS_TITANIUM, ModItems.titaniumFlatStamp.get(), consumer)
         pressStamp(Tags.Items.OBSIDIAN, ModItems.obsidianFlatStamp.get(), consumer)
-        pressStamp(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumFlatStamp.get(), consumer)
+        pressStamp(NuclearTags.Items.INGOTS_SCHRABIDIUM, ModItems.schrabidiumFlatStamp.get(), consumer)
         shredderBlade(NuclearTags.Items.INGOTS_ALUMINIUM, NuclearTags.Items.PLATES_ALUMINIUM, ModItems.aluminiumShredderBlade.get(), consumer)
         shredderBlade(Tags.Items.INGOTS_GOLD, NuclearTags.Items.PLATES_GOLD, ModItems.goldShredderBlade.get(), consumer)
         shredderBlade(Tags.Items.INGOTS_IRON, NuclearTags.Items.PLATES_IRON, ModItems.ironShredderBlade.get(), consumer)
         shredderBlade(NuclearTags.Items.INGOTS_STEEL, NuclearTags.Items.PLATES_STEEL, ModItems.steelShredderBlade.get(), consumer)
         shredderBlade(NuclearTags.Items.INGOTS_TITANIUM, NuclearTags.Items.PLATES_TITANIUM, ModItems.titaniumShredderBlade.get(), consumer)
         shredderBlade(ModItems.advancedAlloyIngot.get(), ModItems.advancedAlloyPlate.get(), ModItems.advancedAlloyShredderBlade.get(), consumer)
-        shredderBlade(ModItems.combineSteelIngot.get(), ModItems.combineSteelPlate.get(), ModItems.combineSteelShredderBlade.get(), consumer)
-        shredderBlade(ModItems.schrabidiumIngot.get(), ModItems.schrabidiumPlate.get(), ModItems.schrabidiumShredderBlade.get(), consumer)
-        ShapedRecipeBuilder.shaped(ModItems.deshShredderBlade.get()).define('B', ModItems.combineSteelShredderBlade.get()).define('D', ModItems.deshCompoundPlate.get()).define('S', ModItems.schrabidiumNugget.get()).pattern("SDS").pattern("DBD").pattern("SDS").group(ModItems.deshShredderBlade.id.path).unlockedBy("has_${ModItems.deshIngot.id.path}", has(ModItems.deshIngot.get())).save(consumer, ModItems.deshShredderBlade.id)
+        shredderBlade(NuclearTags.Items.INGOTS_COMBINE_STEEL, NuclearTags.Items.PLATES_COMBINE_STEEL, ModItems.combineSteelShredderBlade.get(), consumer)
+        shredderBlade(NuclearTags.Items.INGOTS_SCHRABIDIUM, NuclearTags.Items.PLATES_SCHRABIDIUM, ModItems.schrabidiumShredderBlade.get(), consumer)
+        ShapedRecipeBuilder.shaped(ModItems.deshShredderBlade.get()).define('B', ModItems.combineSteelShredderBlade.get()).define('D', ModItems.deshCompoundPlate.get()).define('S', NuclearTags.Items.NUGGETS_SCHRABIDIUM).pattern("SDS").pattern("DBD").pattern("SDS").group(ModItems.deshShredderBlade.id.path).unlockedBy("has_${ModItems.deshIngot.id.path}", has(ModItems.deshIngot.get())).save(consumer, ModItems.deshShredderBlade.id)
     }
 
     private fun templates(consumer: Consumer<FinishedRecipe>) {
@@ -613,6 +443,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AnvilRecipeBuilder().requires(ModItems.copperCoil.get(), ModItems.ringCoil.get()).requires(2 to NuclearTags.Items.PLATES_IRON).results(ItemStack(ModItems.motor.get(), 2)).save(consumer)
 
         AnvilRecipeBuilder().requires(4 to NuclearTags.Items.INGOTS_TUNGSTEN, 4 to ItemTags.STONE_BRICKS, 2 to Tags.Items.INGOTS_IRON).requires(2 to ModItems.copperPanel.get()).results(ModBlockItems.blastFurnace.get()).save(consumer)
+        AnvilRecipeBuilder(2).requires(4 to Tags.Items.GLASS_COLORLESS, 8 to NuclearTags.Items.INGOTS_STEEL, 8 to Tags.Items.INGOTS_COPPER).requires(2 to ModItems.motor.get(), 1 to ModItems.basicCircuit.get()).results(ModBlockItems.assemblerPlacer.get()).save(consumer)
 
         AnvilRecipeBuilder(3).requires(2 to ModItems.advancedAlloyPlate.get(), 1 to ModItems.saturnitePlate.get()).requires(NuclearTags.Items.PLATES_NEUTRON_REFLECTOR).results(ItemStack(ModItems.mixedPlate.get(), 4)).save(consumer)
         AnvilRecipeBuilder(3).requires(4 to ModItems.deshIngot.get()).requires(2 to NuclearTags.Items.DUSTS_POLYMER).requires(ModItems.highSpeedSteelIngot.get()).results(ItemStack(ModItems.deshCompoundPlate.get(), 4)).save(consumer)
@@ -676,46 +507,15 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapedRecipeBuilder.shaped(Items.TORCH, 8).define('C', NuclearTags.Items.COKE).define('S', Tags.Items.RODS_WOODEN).pattern("C").pattern("S").group(Items.TORCH.registryName!!.path).unlockedBy("has_coke", has(NuclearTags.Items.COKE)).save(consumer, ntm("torch_from_coke"))
     }
 
-    // so we can also use tags when declaring a shapeless recipe requiring multiple random of one type
+    // so we can also use tags when declaring a shapeless recipe with multiple required items of the same type
     private fun ShapelessRecipeBuilder.requires(itemTag: TagKey<Item>, count: Int): ShapelessRecipeBuilder {
         for (i in 0 until count) requires(itemTag)
         return this
     }
 
-    private fun ingotFromBlock(result: ItemLike, ingredient: ItemLike, consumer: Consumer<FinishedRecipe>) {
-        ShapelessRecipeBuilder.shapeless(result, 9).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
-    }
-
-    // we need the ingredient name because tags haven't been bound yet at this point
-    private fun ingotFromBlock(result: ItemLike, ingredient: TagKey<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
-        ShapelessRecipeBuilder.shapeless(result, 9).requires(ingredient).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_$ingredientName"))
-    }
-
-    private fun ingotFromNuggets(result: ItemLike, ingredient: ItemLike, consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_nuggets"))
-    }
-
-    private fun ingotFromNuggets(result: ItemLike, ingredient: TagKey<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_nuggets"))
-    }
-
-    private fun ingotFromOre(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = RecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_blasting_${ingredient.asItem().registryName!!.path}"))
-    }
-
-    private fun ingotFromOre(ingredient: TagKey<Item>, result: ItemLike, experience: Float, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_$ingredientName"))
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = RecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_blasting_$ingredientName"))
-    }
-
     private fun ingotFromMeteorOre(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, serializer = RecipeSerializer.BLASTING_RECIPE).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_blasting_${ingredient.asItem().registryName!!.path}"))
-    }
-
-    private fun ingotFromPowder(ingredient: ItemLike, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_powder"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result, 3).group(getItemName(result)).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, ntm("${getItemName(result)}_from_smelting_${getItemName(ingredient)}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, 3, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(result)).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, ntm("${getItemName(result)}_from_blasting_${getItemName(ingredient)}"))
     }
 
     private fun ingotFromPowder(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
@@ -724,14 +524,6 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun ingotFromCrystals(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>, resultCount: Int = 2) {
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience, 200, result, resultCount).group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
-    }
-
-    private fun blockFromIngots(result: ItemLike, ingredient: ItemLike, consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredient.asItem().registryName!!.path}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_${ingredient.asItem().registryName!!.path}"))
-    }
-
-    private fun blockFromIngots(result: ItemLike, ingredient: TagKey<Item>, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(result).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(result.asItem().registryName!!.path).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_$ingredientName"))
     }
 
     private fun pressRecipe(ingredient: ItemLike, stampType: PressingRecipe.StampType, result: ItemLike, count: Int, experience: Float, consumer: Consumer<FinishedRecipe>) {
@@ -748,22 +540,6 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun flatPressRecipe(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
         pressRecipe(ingredient, PressingRecipe.StampType.FLAT, result, 1, ingredientName, experience, consumer)
-    }
-
-    private fun platePressRecipe(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressingRecipe.StampType.PLATE, result, 1, experience, consumer)
-    }
-
-    private fun platePressRecipe(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressingRecipe.StampType.PLATE, result, 1, ingredientName, experience, consumer)
-    }
-
-    private fun wirePressRecipe(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressingRecipe.StampType.WIRE, result, 8, experience, consumer)
-    }
-
-    private fun wirePressRecipe(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, experience: Float, consumer: Consumer<FinishedRecipe>) {
-        pressRecipe(ingredient, PressingRecipe.StampType.WIRE, result, 8, ingredientName, experience, consumer)
     }
 
     private fun pressStamp(material: ItemLike, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
@@ -807,4 +583,77 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     private fun shreddingRecipe(ingredient: TagKey<Item>, result: ItemLike, experience: Float, count: Int, consumer: Consumer<FinishedRecipe>, ingredientName: String) {
         ShreddingRecipeBuilder(result, experience, count, Ingredient.of(ingredient)).unlockedBy("has_${ingredientName}", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_shredding_$ingredientName"))
     }
+
+    private val experienceLookupTable = Object2FloatOpenHashMap<TagGroup>().apply { defaultReturnValue(0F) }
+
+    private fun setExperienceYields() {
+        with(TagGroups) {
+            experienceLookupTable.putAll(arrayOf(
+                coal to 0.1F,
+                iron to 0.7F,
+                gold to 1F,
+                copper to 0.7F,
+                redstone to 0.7F,
+                emerald to 1F,
+                lazuli to 0.2F,
+                diamond to 1F,
+                aluminium to 0.6F,
+                asbestos to 0.8F,
+                australium to 2.5F,
+                beryllium to 0.75F,
+                cobalt to 0.9F,
+                daffergon to 2.5F,
+                fluorite to 0.2F,
+                lead to 0.6F,
+                lignite to 0.1F,
+                lithium to 5F,
+                naturalPlutonium to 3F,
+                naturalUranium to 1F,
+                niter to 0.2F,
+                redPhosphorus to 1F,
+                reiium to 2.5F,
+                schrabidium to 50F,
+                starmetal to 10F,
+                sulfur to 0.2F,
+                thorium to 2F,
+                titanium to 0.8F,
+                trinitite to 0.3F,
+                tungsten to 0.75F,
+                unobtainium to 2.5F,
+                verticium to 2.5F,
+                weidanium to 2.5F,
+            ))
+        }
+
+        // TODO this structure is also present inside the language providers. maybe extract it?
+        val groupsThatShouldBePresent = TagGroups.getAllTagGroups().filter { it.ore != null || it.materialGroup.ore() != null }
+        if (!experienceLookupTable.keys.containsAll(groupsThatShouldBePresent)) {
+            val missingTagGroups = groupsThatShouldBePresent subtract experienceLookupTable.keys
+            val warningMessage = StringBuilder().appendLine("Missing experience yields for following tag groups containing ores:")
+            missingTagGroups.forEach(warningMessage::appendLine)
+            NuclearTech.LOGGER.warn(warningMessage.toString())
+        }
+        if (!groupsThatShouldBePresent.containsAll(experienceLookupTable.keys)) {
+            val extraTagGroups = experienceLookupTable.keys subtract groupsThatShouldBePresent.toSet()
+            val warningMessage = StringBuilder().appendLine("Extra experience yields for tag groups that don't contain ores:")
+            extraTagGroups.forEach(warningMessage::appendLine)
+            NuclearTech.LOGGER.warn(warningMessage.toString())
+        }
+    }
+
+    private fun getHasName(tag: TagKey<Item>?, item: Item?) = "has_${getItemName(tag, item)}"
+
+    private fun getConversionRecipeName(result: Item, inputTag: TagKey<Item>?, inputItem: Item?) = "${getItemName(result)}_from_${getItemName(inputTag, inputItem)}"
+
+    // FIXME this is kinda unnecessary since the tags aren't bound anyway
+    private fun getItemName(tag: TagKey<Item>?, item: Item?) =
+        tag?.let {
+            val tagManager = ForgeRegistries.ITEMS.getTagManager()
+            if (!tagManager.isKnownTagName(it)) return@let null
+            tagManager.getTag(it).firstOrNull()?.registryName?.path
+        } ?: item?.registryName?.path ?: throw IllegalStateException("Could not find an applicable name for tag '$tag' or item '$item'")
+
+    private fun ingredientAndConditionOf(tag: TagKey<Item>?, item: Item?) =
+        tag?.let { Ingredient.of(it) to InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(it).build()) } ?:
+        item?.let { Ingredient.of(it) to InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(it).build()) }
 }

@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:plutonium_block"
-            ]
+            "tag": "forge:storage_blocks/plutonium"
           }
         ]
       }

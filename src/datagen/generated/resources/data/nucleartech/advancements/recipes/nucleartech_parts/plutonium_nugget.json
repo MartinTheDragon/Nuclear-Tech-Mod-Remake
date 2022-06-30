@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium_nugget"
+    ]
+  },
+  "criteria": {
+    "has_plutonium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/plutonium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plutonium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

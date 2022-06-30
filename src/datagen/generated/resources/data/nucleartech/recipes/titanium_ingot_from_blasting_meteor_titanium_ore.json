@@ -4,7 +4,10 @@
   "ingredient": {
     "item": "nucleartech:meteor_titanium_ore"
   },
-  "result": "nucleartech:titanium_ingot",
+  "result": {
+    "item": "nucleartech:titanium_ingot",
+    "count": 3
+  },
   "experience": 1.2,
   "cookingtime": 100
 }

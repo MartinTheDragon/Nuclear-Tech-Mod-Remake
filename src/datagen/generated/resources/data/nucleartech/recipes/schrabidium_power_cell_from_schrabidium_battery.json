@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:battery",
+  "group": "schrabidium_power_cell",
+  "pattern": [
+    "WBW",
+    "PBP",
+    "WBW"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/schrabidium"
+    },
+    "P": {
+      "tag": "forge:plates/schrabidium"
+    },
+    "B": {
+      "item": "nucleartech:schrabidium_battery"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_power_cell"
+  }
+}

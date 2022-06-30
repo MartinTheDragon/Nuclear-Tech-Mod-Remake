@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "insulator",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/brick"
+    },
+    {
+      "tag": "forge:ingots/brick"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:insulator",
+    "count": 4
+  }
+}

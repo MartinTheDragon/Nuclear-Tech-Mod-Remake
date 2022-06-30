@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "uranium_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/uranium"
+  },
+  "result": {
+    "item": "nucleartech:uranium_ingot",
+    "count": 2
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

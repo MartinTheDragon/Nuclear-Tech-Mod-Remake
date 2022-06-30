@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:schrabidium_ore"
+    "tag": "forge:ores/schrabidium"
   },
   "result": {
     "item": "nucleartech:schrabidium_powder",

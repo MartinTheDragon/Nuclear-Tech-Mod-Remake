@@ -1,9 +1,10 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
-import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationHandler
+import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.hazard.HazardRegistry
 import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
 import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.particles.ModParticles
@@ -84,6 +85,7 @@ object RegistriesAndLifecycle {
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
         PluginEvents.init()
+        HazardRegistry.registerItems()
         event.enqueueWork {
             ForgeChunkManager.setForcedChunkLoadingCallback(NuclearTech.MODID, ChunkLoadingValidationCallback)
         }

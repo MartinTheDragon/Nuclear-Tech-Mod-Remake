@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:asbestos_ore"
+    "nucleartech:asbestos_ore",
+    "nucleartech:deepslate_asbestos_ore"
   ]
 }

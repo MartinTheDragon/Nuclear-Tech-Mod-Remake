@@ -3,7 +3,6 @@ package at.martinthedragon.nucleartech.datagen.localisation
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entities.EntityTypes
-import at.martinthedragon.nucleartech.items.EffectItem
 import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.screens.AnvilScreen
 import net.minecraft.data.DataGenerator
@@ -24,10 +23,6 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("itemGroup.${MODID}_rocketry", "NTM Missiles and Satellites")
         add("itemGroup.${MODID}_consumables", "NTM Consumables and Gear")
         add("itemGroup.${MODID}_miscellaneous", "NTM Miscellaneous Items")
-
-        add(EffectItem.EffectTypes.Radioactive.effectInfo.string, "[Radioactive]")
-        add(EffectItem.EffectTypes.Blinding.effectInfo.string, "[Blinding]")
-        add(EffectItem.EffectTypes.Hot.effectInfo.string, "[Pyrophoric / Hot]")
 
         addMaterials()
 
@@ -813,6 +808,15 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         add(ntmTranslationString("item.position_set"), "Position set!")
         add(ntmTranslationString("item.no_position_set"), "No position set!")
+
+        add(ntmTranslationString("hazard.asbestos"), "[Asbestos]")
+        add(ntmTranslationString("hazard.blinding"), "[Blinding]")
+        add(ntmTranslationString("hazard.coal"), "[Coal]")
+        add(ntmTranslationString("hazard.digamma"), "[Digamma]")
+        add(ntmTranslationString("hazard.explosive"), "[Flammable / Explosive]")
+        add(ntmTranslationString("hazard.heat"), "[Pyrophoric / Hot]")
+        add(ntmTranslationString("hazard.hydroreactive"), "[Hydroreactive]")
+        add(ntmTranslationString("hazard.radiation"), "[Radioactive]")
 
         add("jei.$MODID.category.smithing", "Smithing")
         add("jei.$MODID.category.smithing.tier", "Minimum Tier: %s")

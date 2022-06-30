@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_reinforced_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/desh"
+    }
+  },
+  "result": {
+    "item": "nucleartech:desh_reinforced_block"
+  }
+}

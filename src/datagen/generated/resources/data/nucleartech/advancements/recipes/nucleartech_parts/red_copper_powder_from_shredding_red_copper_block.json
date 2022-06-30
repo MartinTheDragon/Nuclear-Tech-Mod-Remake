@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:red_copper_block"
-            ]
+            "tag": "forge:storage_blocks/red_copper"
           }
         ]
       }
