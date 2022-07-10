@@ -291,11 +291,11 @@ publishing {
                 licenses {
                     license {
                         //noinspection GroovyAssignabilityCheck
-                        name = "GPLv3"
+                        name = "LGPLv3"
                         //noinspection GroovyAssignabilityCheck
                         distribution = "repo"
                         //noinspection GroovyAssignabilityCheck
-                        url = "https://www.gnu.org/licenses/gpl-3.0"
+                        url = "https://www.gnu.org/licenses/lgpl-3.0"
                     }
                 }
                 developers {

@@ -17,7 +17,7 @@ For a (non-exhaustive) list of who worked on this project and the original, look
 
 ### License
 
-This project is licensed under GNU General Public License v3. You should be able to find a copy next to this file called 'LICENSE'.
-If not, you can find it online here: <https://www.gnu.org/licenses/gpl-3.0>
+This project is licensed under the GNU Lesser General Public License v3. You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 Make sure usages and modifications comply with the license, and with the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula).

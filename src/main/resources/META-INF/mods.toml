@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[39,)"
-license="GPL v3.0"
+license="LGPL v3.0"
 issueTrackerURL="https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/issues"
 [[mods]]
 modId="nucleartech"
