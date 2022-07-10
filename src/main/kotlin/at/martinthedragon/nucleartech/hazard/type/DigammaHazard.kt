@@ -17,7 +17,9 @@ import kotlin.math.floor
 
 class DigammaHazard : HazardType {
     override fun tick(target: LivingEntity, itemStack: ItemStack, level: Float) {
-        Capabilities.getContamination(target)?.addDigamma(level / 20F * itemStack.count)
+        if (!target.level.isClientSide) {
+            Capabilities.getContamination(target)?.addDigamma(level / 20F * itemStack.count)
+        }
     }
 
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {}

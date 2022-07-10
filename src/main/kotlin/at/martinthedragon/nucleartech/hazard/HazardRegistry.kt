@@ -91,12 +91,20 @@ object HazardRegistry {
             register(Tags.Items.GUNPOWDER, DEFAULT_EXPLOSIVE_DATA)
             register(Items.TNT, HazardData(EXPLOSIVE, 4F))
             register(Items.PUMPKIN_PIE, DEFAULT_EXPLOSIVE_DATA)
+            register(ModItems.propellantLittleBoy, HazardData(EXPLOSIVE, 2F))
 
             register(NuclearTags.Items.DUSTS_CORDITE, HazardData(EXPLOSIVE, 2F))
             register(NuclearTags.Items.DUSTS_BALLISTITE, DEFAULT_EXPLOSIVE_DATA)
 
+            register(TagGroups.lithium, DEFAULT_HYDROREACTIVE_DATA)
+
             register(NuclearTags.Items.DUSTS_COAL, HazardData(COAL, powder))
             register(NuclearTags.Items.DUSTS_LIGNITE, HazardData(COAL, powder))
+
+            register(TagGroups.asbestos, DEFAULT_ASBESTOS_DATA)
+
+            register(TagGroups.whitePhosphorus, HazardData(HEAT, 5F))
+            register(TagGroups.redPhosphorus, HazardData(HEAT, 2F))
 
             register(TagGroups.naturalUranium, HazardData(RADIATION, U))
             register(Materials.uranium233, HazardData(RADIATION, U233))
@@ -105,16 +113,21 @@ object HazardRegistry {
             register(TagGroups.uraniumFuel, HazardData(RADIATION, UF))
             register(TagGroups.thorium, HazardData(RADIATION, Th232))
             register(TagGroups.naturalPlutonium, HazardData(RADIATION, Pu))
-            register(Materials.plutonium238, HazardData(RADIATION, Pu238))
+            register(Materials.plutonium238, HazardData(RADIATION, Pu238).addEntry(HEAT, 3F))
             register(Materials.plutonium239, HazardData(RADIATION, Pu239))
             register(Materials.plutonium240, HazardData(RADIATION, Pu240))
             register(TagGroups.plutoniumFuel, HazardData(RADIATION, PuF))
             register(TagGroups.neptunium, HazardData(RADIATION, Np237))
-            register(TagGroups.polonium, HazardData(RADIATION, Po210).addEntry(HEAT))
+            register(TagGroups.polonium, HazardData(RADIATION, Po210).addEntry(HEAT, 3F))
             register(TagGroups.schrabidium, HazardData(RADIATION, Sa326).addEntry(BLINDING))
             register(TagGroups.solinium, HazardData(RADIATION, Sa327).addEntry(BLINDING))
             register(TagGroups.schrabidiumFuel, HazardData(RADIATION, SaF).addEntry(BLINDING))
             register(TagGroups.schraranium, HazardData(RADIATION, Sr).addEntry(BLINDING))
+
+            register(NuclearTags.Items.ORES_URANIUM, HazardData.EMPTY)
+            register(NuclearTags.Items.ORES_THORIUM, HazardData.EMPTY)
+            register(NuclearTags.Items.RAW_MATERIALS_URANIUM, HazardData.EMPTY)
+            register(NuclearTags.Items.RAW_MATERIALS_THORIUM, HazardData.EMPTY)
 
             register(ModBlockItems.slakedSellafite, HazardData(RADIATION, .5F))
             register(ModBlockItems.sellafite, HazardData(RADIATION, 1F))
@@ -129,35 +142,35 @@ object HazardRegistry {
     private fun register(supplier: Supplier<out Item>, data: HazardData) = HazardSystem.register(supplier.get(), data)
 
     private fun register(tagGroup: TagGroup, data: HazardData) = with(HazardSystem) {
-        tagGroup.ore?.let { register(it, modifyRadiationEntry(data, ore)) } ?: run {
-            tagGroup.materialGroup.ore()?.let { register(it, modifyRadiationEntry(data, ore)) }
-            tagGroup.materialGroup.deepOre()?.let { register(it, modifyRadiationEntry(data, ore)) }
+        tagGroup.ore?.let { register(it, modifyEntries(data, ore)) } ?: run {
+            tagGroup.materialGroup.ore()?.let { register(it, modifyEntries(data, ore)) }
+            tagGroup.materialGroup.deepOre()?.let { register(it, modifyEntries(data, ore)) }
         }
-        tagGroup.block?.let { register(it, modifyRadiationEntry(data, block)) } ?: tagGroup.materialGroup.block()?.let { register(it, modifyRadiationEntry(data, block)) }
-        tagGroup.raw?.let { register(it, modifyRadiationEntry(data, raw)) } ?: tagGroup.materialGroup.raw()?.let { register(it, modifyRadiationEntry(data, raw)) }
-        tagGroup.ingot?.let { register(it, modifyRadiationEntry(data, ingot)) } ?: tagGroup.materialGroup.ingot()?.let { register(it, modifyRadiationEntry(data, ingot)) }
-        tagGroup.nugget?.let { register(it, modifyRadiationEntry(data, nugget)) } ?: tagGroup.materialGroup.nugget()?.let { register(it, modifyRadiationEntry(data, nugget)) }
-        tagGroup.crystals?.let { register(it, modifyRadiationEntry(data, crystal)) } ?: tagGroup.materialGroup.crystals()?.let { register(it, modifyRadiationEntry(data, crystal)) }
-        tagGroup.powder?.let { register(it, modifyRadiationEntry(data, powder)) } ?: tagGroup.materialGroup.powder()?.let { register(it, modifyRadiationEntry(data, powder)) }
-        tagGroup.plate?.let { register(it, modifyRadiationEntry(data, plate)) } ?: tagGroup.materialGroup.plate()?.let { register(it, modifyRadiationEntry(data, plate)) }
-        tagGroup.wire?.let { register(it, modifyRadiationEntry(data, wire)) } ?: tagGroup.materialGroup.wire()?.let { register(it, modifyRadiationEntry(data, wire)) }
+        tagGroup.block?.let { register(it, modifyEntries(data, block)) } ?: tagGroup.materialGroup.block()?.let { register(it, modifyEntries(data, block)) }
+        tagGroup.raw?.let { register(it, modifyEntries(data, raw)) } ?: tagGroup.materialGroup.raw()?.let { register(it, modifyEntries(data, raw)) }
+        tagGroup.ingot?.let { register(it, modifyEntries(data, ingot)) } ?: tagGroup.materialGroup.ingot()?.let { register(it, modifyEntries(data, ingot)) }
+        tagGroup.nugget?.let { register(it, modifyEntries(data, nugget)) } ?: tagGroup.materialGroup.nugget()?.let { register(it, modifyEntries(data, nugget)) }
+        tagGroup.crystals?.let { register(it, modifyEntries(data, crystal)) } ?: tagGroup.materialGroup.crystals()?.let { register(it, modifyEntries(data, crystal)) }
+        tagGroup.powder?.let { register(it, modifyEntries(data, powder)) } ?: tagGroup.materialGroup.powder()?.let { register(it, modifyEntries(data, powder)) }
+        tagGroup.plate?.let { register(it, modifyEntries(data, plate)) } ?: tagGroup.materialGroup.plate()?.let { register(it, modifyEntries(data, plate)) }
+        tagGroup.wire?.let { register(it, modifyEntries(data, wire)) } ?: tagGroup.materialGroup.wire()?.let { register(it, modifyEntries(data, wire)) }
         return@with
     }
 
     private fun register(materialGroup: MaterialGroup, data: HazardData) = with(HazardSystem) {
-        materialGroup.ore()?.let { register(it, modifyRadiationEntry(data, ore)) }
-        materialGroup.deepOre()?.let { register(it, modifyRadiationEntry(data, ore)) }
-        materialGroup.block()?.let { register(it, modifyRadiationEntry(data, block)) }
-        materialGroup.raw()?.let { register(it, modifyRadiationEntry(data, raw)) }
-        materialGroup.ingot()?.let { register(it, modifyRadiationEntry(data, ingot)) }
-        materialGroup.nugget()?.let { register(it, modifyRadiationEntry(data, nugget)) }
-        materialGroup.crystals()?.let { register(it, modifyRadiationEntry(data, crystal)) }
-        materialGroup.powder()?.let { register(it, modifyRadiationEntry(data, powder)) }
-        materialGroup.plate()?.let { register(it, modifyRadiationEntry(data, plate)) }
-        materialGroup.wire()?.let { register(it, modifyRadiationEntry(data, wire)) }
+        materialGroup.ore()?.let { register(it, modifyEntries(data, ore)) }
+        materialGroup.deepOre()?.let { register(it, modifyEntries(data, ore)) }
+        materialGroup.block()?.let { register(it, modifyEntries(data, block)) }
+        materialGroup.raw()?.let { register(it, modifyEntries(data, raw)) }
+        materialGroup.ingot()?.let { register(it, modifyEntries(data, ingot)) }
+        materialGroup.nugget()?.let { register(it, modifyEntries(data, nugget)) }
+        materialGroup.crystals()?.let { register(it, modifyEntries(data, crystal)) }
+        materialGroup.powder()?.let { register(it, modifyEntries(data, powder)) }
+        materialGroup.plate()?.let { register(it, modifyEntries(data, plate)) }
+        materialGroup.wire()?.let { register(it, modifyEntries(data, wire)) }
         return@with
     }
 
-    private fun modifyRadiationEntry(data: HazardData, multiplier: Float) =
-        HazardData().addEntries(data.getEntries().map { if (it.hazard is RadiationHazard) it.copy(level = it.level * multiplier) else it })
+    private fun modifyEntries(data: HazardData, multiplier: Float) =
+        HazardData().addEntries(data.getEntries().map { it.copy(level = it.level * multiplier) })
 }

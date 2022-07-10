@@ -3,12 +3,17 @@ package at.martinthedragon.nucleartech.hazard
 import at.martinthedragon.nucleartech.recipes.getItems
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
+import net.minecraft.server.TickTask
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
+import net.minecraftforge.common.util.LogicalSidedProvider
+import net.minecraftforge.fml.LogicalSide
 import java.util.stream.Collectors
 
 object HazardSystem {
@@ -23,6 +28,34 @@ object HazardSystem {
     fun applyHazards(stack: ItemStack, target: LivingEntity) {
         for (hazard in getHazardsForStack(stack))
             hazard.applyHazard(stack, target)
+    }
+
+    fun applyWorldHazards(itemEntity: ItemEntity) {
+        for (hazard in getHazardsForStack(itemEntity.item))
+            hazard.applyWorldHazard(itemEntity)
+    }
+
+    private val itemEntities = mutableListOf<ItemEntity>()
+
+    fun trackItemEntity(itemEntity: ItemEntity) {
+        val stack = itemEntity.item
+        if (itemEntity.level.isClientSide && stack.`is`(Items.AIR)) { // basically loops for each tick until the item gets synced
+            val executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT)
+            executor.tell(TickTask(0) { trackItemEntity(itemEntity) })
+            return
+        }
+
+        if (getHazardsForStack(stack).isNotEmpty()) {
+            itemEntities += itemEntity
+        }
+    }
+
+    fun stopTrackingItemEntity(itemEntity: ItemEntity) {
+        itemEntities -= itemEntity
+    }
+
+    fun tickWorldHazards() {
+        itemEntities.toList().forEach(this::applyWorldHazards)
     }
 
     fun addHoverText(stack: ItemStack, player: Player?, tooltip: MutableList<Component>, flag: TooltipFlag) {
@@ -58,7 +91,7 @@ object HazardSystem {
     private val itemMap = mutableMapOf<Item, HazardData>().withDefault { HazardData.EMPTY }
 
     fun getHazardsForStack(stack: ItemStack): List<HazardData.HazardEntry> {
-        val tagData = stack.tags.map { tagMap.getValue(it) }.collect(Collectors.toList()).filterNot { it == HazardData.EMPTY }
+        val tagData = stack.tags.map { tagMap.getValue(it) }.collect(Collectors.toList())
         val itemData = itemMap.getValue(stack.item)
         return (tagData + itemData).filterNot { it === HazardData.EMPTY }.flatMap(HazardData::getEntries)
     }

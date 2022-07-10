@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech.hazard.type
 
 import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.addBlackLung
-import at.martinthedragon.nucleartech.capability.contamination.addIrradiation
 import at.martinthedragon.nucleartech.darkGray
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.ntmTranslation
@@ -20,7 +19,9 @@ class CoalHazard : HazardType {
 
         // TODO protection
 
-        Capabilities.getContamination(target)?.addBlackLung(min(level.toInt(), 10))
+        if (!target.level.isClientSide) {
+            Capabilities.getContamination(target)?.addBlackLung(min(level.toInt(), 10))
+        }
     }
 
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {}

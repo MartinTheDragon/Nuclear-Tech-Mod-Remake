@@ -10,21 +10,22 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Explosion
+import kotlin.math.ln
 
 class HydroreactiveHazard : HazardType {
     override fun tick(target: LivingEntity, itemStack: ItemStack, level: Float) {
         // TODO config
 
-        if (target.isInWater) {
+        if (!target.level.isClientSide && target.isInWater) {
+            target.level.explode(null, target.x, target.y, target.z, level * (ln(itemStack.count.toFloat()) + 1), false, Explosion.BlockInteraction.BREAK)
             itemStack.count = 0
-            target.level.explode(null, target.x, target.y, target.z, level, false, Explosion.BlockInteraction.BREAK)
         }
     }
 
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {
-        if (itemEntity.isInWaterOrRain) {
+        if (!itemEntity.level.isClientSide && itemEntity.isInWaterOrRain) {
             itemEntity.discard()
-            itemEntity.level.explode(null, itemEntity.x, itemEntity.y, itemEntity.z, level, false, Explosion.BlockInteraction.BREAK)
+            itemEntity.level.explode(null, itemEntity.x, itemEntity.y, itemEntity.z, level * (ln(itemEntity.item.count.toFloat()) + 1), false, Explosion.BlockInteraction.BREAK)
         }
     }
 

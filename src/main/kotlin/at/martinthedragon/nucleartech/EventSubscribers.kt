@@ -13,11 +13,16 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.ItemAttributeModifierEvent
+import net.minecraftforge.event.TickEvent
+import net.minecraftforge.event.entity.EntityJoinWorldEvent
+import net.minecraftforge.event.entity.EntityLeaveWorldEvent
 import net.minecraftforge.event.entity.living.*
 import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent
 import net.minecraftforge.eventbus.api.Event
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import kotlin.math.roundToInt
@@ -29,6 +34,29 @@ object EventSubscribers {
     fun attachCapabilitiesEvent(event: AttachCapabilitiesEvent<Entity>) {
         if (event.`object` is LivingEntity)
             event.addCapability(ntm("contamination"), ContaminationCapabilityProvider())
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    @JvmStatic
+    fun trackItemEntityHazardSystem(event: EntityJoinWorldEvent) {
+        val entity = event.entity
+        if (entity is ItemEntity) HazardSystem.trackItemEntity(entity)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun stopTrackingItemEntityHazardSystem(event: EntityLeaveWorldEvent) {
+        val entity = event.entity
+        if (entity is ItemEntity) HazardSystem.stopTrackingItemEntity(entity)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun tickHazardSystem(event: TickEvent.WorldTickEvent) {
+        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards()
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun tickHazardSystemClient(event: TickEvent.ClientTickEvent) {
+        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards()
     }
 
     @SubscribeEvent @JvmStatic

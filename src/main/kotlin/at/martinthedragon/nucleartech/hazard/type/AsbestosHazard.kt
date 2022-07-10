@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech.hazard.type
 
 import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.addAsbestos
-import at.martinthedragon.nucleartech.capability.contamination.addIrradiation
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.ntmTranslation
 import at.martinthedragon.nucleartech.white
@@ -20,7 +19,9 @@ class AsbestosHazard : HazardType {
 
         // TODO asbestos protection
 
-        Capabilities.getContamination(target)?.addAsbestos(min(level.toInt(), 10))
+        if (!target.level.isClientSide) {
+            Capabilities.getContamination(target)?.addAsbestos(min(level.toInt(), 10))
+        }
     }
 
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {}

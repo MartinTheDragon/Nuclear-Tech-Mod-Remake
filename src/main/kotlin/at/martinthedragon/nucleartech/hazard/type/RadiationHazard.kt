@@ -17,13 +17,15 @@ import kotlin.math.floor
 
 class RadiationHazard : HazardType {
     override fun tick(target: LivingEntity, itemStack: ItemStack, level: Float) {
-        if (level <= 0) return
+        if (level <= 0 || target.level.isClientSide) return
 
         val radiation = level / 20F * itemStack.count // TODO reacher
         EntityContaminationEffects.contaminate(target, EntityContaminationEffects.HazardType.Radiation, EntityContaminationEffects.ContaminationType.Creative, radiation)
     }
 
-    override fun tickDropped(itemEntity: ItemEntity, level: Float) {}
+    override fun tickDropped(itemEntity: ItemEntity, level: Float) {
+        // TODO direct hit radiation
+    }
 
     override fun appendHoverText(itemStack: ItemStack, level: Float, modifiers: List<HazardModifier>, player: Player?, tooltip: MutableList<Component>, flag: TooltipFlag) {
         val radiation = modifiers.evaluateAllModifiers(itemStack, player, level)

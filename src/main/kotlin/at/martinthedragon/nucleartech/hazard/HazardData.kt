@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.hazard.modifier.evaluateAllModifiers
 import at.martinthedragon.nucleartech.hazard.type.HazardType
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.item.ItemStack
 
 class HazardData() {
@@ -40,6 +41,10 @@ class HazardData() {
 
         fun applyHazard(itemStack: ItemStack, target: LivingEntity) {
             hazard.tick(target, itemStack, mods.evaluateAllModifiers(itemStack, target, level))
+        }
+
+        fun applyWorldHazard(itemEntity: ItemEntity) {
+            hazard.tickDropped(itemEntity, mods.evaluateAllModifiers(itemEntity.item, null, level))
         }
 
         fun getMods(): List<HazardModifier> = mods
