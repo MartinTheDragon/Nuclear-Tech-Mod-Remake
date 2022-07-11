@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_ingot_from_blasting_raw_schrabidium"
+    ]
+  },
+  "criteria": {
+    "has_raw_schrabidium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/schrabidium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_ingot_from_blasting_raw_schrabidium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_schrabidium",
+      "has_the_recipe"
+    ]
+  ]
+}

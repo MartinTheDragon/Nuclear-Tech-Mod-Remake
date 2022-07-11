@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:euphemium_block"
+    ]
+  },
+  "criteria": {
+    "has_euphemium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/euphemium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:euphemium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_euphemium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

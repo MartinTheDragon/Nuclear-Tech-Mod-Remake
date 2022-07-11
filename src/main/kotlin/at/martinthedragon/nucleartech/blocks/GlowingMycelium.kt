@@ -2,11 +2,11 @@ package at.martinthedragon.nucleartech.blocks
 
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.capabilites.Capabilities
-import at.martinthedragon.nucleartech.capabilites.contamination.addEffectFromSource
-import at.martinthedragon.nucleartech.capabilites.contamination.effects.RadiationEffect
-import at.martinthedragon.nucleartech.capabilites.contamination.hasEffectFromSource
-import at.martinthedragon.nucleartech.capabilites.contamination.modifyEffectFromSourceIf
+import at.martinthedragon.nucleartech.capability.Capabilities
+import at.martinthedragon.nucleartech.capability.contamination.addEffectFromSource
+import at.martinthedragon.nucleartech.capability.contamination.effects.RadiationEffect
+import at.martinthedragon.nucleartech.capability.contamination.hasEffectFromSource
+import at.martinthedragon.nucleartech.capability.contamination.modifyEffectFromSourceIf
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.ParticleTypes

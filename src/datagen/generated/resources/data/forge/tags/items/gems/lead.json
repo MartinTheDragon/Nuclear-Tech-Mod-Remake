@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:lead_crystals"
+    "#forge:crystals/lead"
   ]
 }

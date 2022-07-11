@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:unobtainium_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_unobtainium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/unobtainium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:unobtainium_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_unobtainium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:desh_reinforced_block"
+    "tag": "forge:storage_blocks/desh"
   },
   "result": {
     "item": "nucleartech:desh_powder",

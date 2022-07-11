@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_cobalt_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:cobalt_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobalt_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

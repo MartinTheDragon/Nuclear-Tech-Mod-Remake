@@ -3,7 +3,7 @@
   "group": "daffergon_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:daffergon_block"
+      "tag": "forge:storage_blocks/daffergon"
     }
   ],
   "result": {

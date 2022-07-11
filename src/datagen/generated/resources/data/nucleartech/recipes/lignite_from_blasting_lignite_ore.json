@@ -5,6 +5,6 @@
     "tag": "forge:ores/lignite"
   },
   "result": "nucleartech:lignite",
-  "experience": 0.025,
+  "experience": 0.05,
   "cookingtime": 100
 }

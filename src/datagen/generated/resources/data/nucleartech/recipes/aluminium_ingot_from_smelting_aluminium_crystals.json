@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "aluminium_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/aluminium"
+  },
+  "result": {
+    "item": "nucleartech:aluminium_ingot",
+    "count": 2
+  },
+  "experience": 0.6,
+  "cookingtime": 200
+}

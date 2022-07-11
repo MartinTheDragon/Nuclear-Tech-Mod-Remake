@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium_ingot_from_smelting_raw_uranium"
+    ]
+  },
+  "criteria": {
+    "has_raw_uranium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/uranium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium_ingot_from_smelting_raw_uranium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_uranium",
+      "has_the_recipe"
+    ]
+  ]
+}

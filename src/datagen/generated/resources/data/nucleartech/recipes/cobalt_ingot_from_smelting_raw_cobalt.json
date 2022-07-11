@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "cobalt_ingot",
+  "ingredient": {
+    "tag": "forge:raw_materials/cobalt"
+  },
+  "result": "nucleartech:cobalt_ingot",
+  "experience": 0.9,
+  "cookingtime": 200
+}

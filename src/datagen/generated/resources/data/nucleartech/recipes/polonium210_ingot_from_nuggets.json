@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "polonium210_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/polonium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:polonium210_ingot"
+  }
+}

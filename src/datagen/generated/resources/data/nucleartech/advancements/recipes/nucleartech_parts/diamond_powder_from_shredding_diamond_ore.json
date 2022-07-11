@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:diamond_powder_from_shredding_diamond_ore"
+    ]
+  },
+  "criteria": {
+    "has_diamond_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ores/diamond"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:diamond_powder_from_shredding_diamond_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

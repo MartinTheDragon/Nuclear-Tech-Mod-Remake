@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:reiium_block"
+    "tag": "forge:storage_blocks/reiium"
   },
   "result": {
     "item": "nucleartech:reiium_powder",

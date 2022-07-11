@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:diamond_crystals"
+    "#forge:crystals/diamond"
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "daffergon_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/daffergon"
+    }
+  },
+  "result": {
+    "item": "nucleartech:daffergon_ingot"
+  }
+}

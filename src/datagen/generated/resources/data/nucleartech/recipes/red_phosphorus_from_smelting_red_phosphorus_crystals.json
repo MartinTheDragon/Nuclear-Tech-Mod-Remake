@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "red_phosphorus",
+  "ingredient": {
+    "tag": "forge:crystals/phosphorus"
+  },
+  "result": {
+    "item": "nucleartech:red_phosphorus",
+    "count": 6
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

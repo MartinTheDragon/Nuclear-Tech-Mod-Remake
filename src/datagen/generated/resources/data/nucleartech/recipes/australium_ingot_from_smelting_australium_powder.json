@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "australium_ingot",
+  "ingredient": {
+    "tag": "forge:dusts/australium"
+  },
+  "result": "nucleartech:australium_ingot",
+  "experience": 0.1,
+  "cookingtime": 200
+}

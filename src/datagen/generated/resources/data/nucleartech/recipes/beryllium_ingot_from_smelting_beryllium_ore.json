@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "beryllium_ingot",
+  "ingredient": {
+    "tag": "forge:ores/beryllium"
+  },
+  "result": "nucleartech:beryllium_ingot",
+  "experience": 0.75,
+  "cookingtime": 200
+}

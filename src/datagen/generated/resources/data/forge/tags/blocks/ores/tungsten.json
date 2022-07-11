@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:tungsten_ore"
+    "nucleartech:tungsten_ore",
+    "nucleartech:deepslate_tungsten_ore",
+    "nucleartech:nether_tungsten_ore"
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:magnetized_tungsten_ingot_from_smelting_magnetized_tungsten_powder"
+    ]
+  },
+  "criteria": {
+    "has_magnetized_tungsten_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/magnetized_tungsten"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:magnetized_tungsten_ingot_from_smelting_magnetized_tungsten_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magnetized_tungsten_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

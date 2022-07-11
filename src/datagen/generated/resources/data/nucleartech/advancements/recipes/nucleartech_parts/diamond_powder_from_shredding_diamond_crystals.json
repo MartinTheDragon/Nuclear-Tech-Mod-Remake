@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:diamond_crystals"
-            ]
+            "tag": "forge:crystals/diamond"
           }
         ]
       }

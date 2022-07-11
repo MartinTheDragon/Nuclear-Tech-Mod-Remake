@@ -3,31 +3,31 @@
   "group": "mox_fuel_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:u235_nugget"
+      "item": "nucleartech:uranium235_nugget"
     },
     {
-      "item": "nucleartech:u235_nugget"
+      "item": "nucleartech:uranium235_nugget"
     },
     {
-      "item": "nucleartech:u235_nugget"
+      "item": "nucleartech:uranium235_nugget"
     },
     {
-      "item": "nucleartech:pu238_nugget"
+      "item": "nucleartech:plutonium238_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:pu239_nugget"
+      "item": "nucleartech:plutonium239_nugget"
     },
     {
-      "item": "nucleartech:u238_nugget"
+      "item": "nucleartech:uranium238_nugget"
     },
     {
-      "item": "nucleartech:u238_nugget"
+      "item": "nucleartech:uranium238_nugget"
     }
   ],
   "result": {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:thorium_fuel_nugget"
+    ]
+  },
+  "criteria": {
+    "has_thorium_fuel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/thorium_fuel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:thorium_fuel_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium_fuel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

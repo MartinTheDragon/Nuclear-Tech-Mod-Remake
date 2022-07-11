@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:asbestos_sheet"
-            ]
+            "tag": "forge:ingots/asbestos"
           }
         ]
       }

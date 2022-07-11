@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tantalium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:tantalium_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:tantalium_ingot"
+  }
+}

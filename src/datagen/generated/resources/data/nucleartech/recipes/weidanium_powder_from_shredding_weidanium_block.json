@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:weidanium_block"
+    "tag": "forge:storage_blocks/weidanium"
   },
   "result": {
     "item": "nucleartech:weidanium_powder",

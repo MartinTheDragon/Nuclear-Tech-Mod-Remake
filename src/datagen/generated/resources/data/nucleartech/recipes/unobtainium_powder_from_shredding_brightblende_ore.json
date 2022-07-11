@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:brightblende_ore"
+    "tag": "forge:ores/unobtainium"
   },
   "result": {
     "item": "nucleartech:unobtainium_powder",

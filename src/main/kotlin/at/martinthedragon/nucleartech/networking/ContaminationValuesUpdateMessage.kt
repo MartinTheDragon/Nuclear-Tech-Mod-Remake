@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.capabilites.Capabilities
-import at.martinthedragon.nucleartech.capabilites.contamination.EntityContaminationHandler
+import at.martinthedragon.nucleartech.capability.Capabilities
+import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.FriendlyByteBuf

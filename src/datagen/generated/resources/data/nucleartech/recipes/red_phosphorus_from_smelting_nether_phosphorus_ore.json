@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "red_phosphorus",
+  "ingredient": {
+    "tag": "forge:ores/phosphorus"
+  },
+  "result": "nucleartech:red_phosphorus",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:polonium_powder_from_shredding_polonium210_ingot"
+    ]
+  },
+  "criteria": {
+    "has_polonium210_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/polonium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:polonium_powder_from_shredding_polonium210_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_polonium210_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

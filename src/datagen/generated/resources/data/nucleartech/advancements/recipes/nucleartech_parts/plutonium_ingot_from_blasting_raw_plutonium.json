@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium_ingot_from_blasting_raw_plutonium"
+    ]
+  },
+  "criteria": {
+    "has_raw_plutonium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/plutonium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium_ingot_from_blasting_raw_plutonium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_plutonium",
+      "has_the_recipe"
+    ]
+  ]
+}

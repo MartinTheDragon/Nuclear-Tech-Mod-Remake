@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "australium_ingot",
   "ingredient": {
-    "item": "nucleartech:australian_ore"
+    "tag": "forge:ores/australium"
   },
   "result": "nucleartech:australium_ingot",
   "experience": 1.25,

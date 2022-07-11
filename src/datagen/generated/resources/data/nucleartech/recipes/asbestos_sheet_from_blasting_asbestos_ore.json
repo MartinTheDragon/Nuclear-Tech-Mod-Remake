@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "asbestos_sheet",
+  "ingredient": {
+    "tag": "forge:ores/asbestos"
+  },
+  "result": "nucleartech:asbestos_sheet",
+  "experience": 0.4,
+  "cookingtime": 100
+}

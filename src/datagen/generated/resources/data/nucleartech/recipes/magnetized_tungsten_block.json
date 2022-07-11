@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "magnetized_tungsten_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/magnetized_tungsten"
+    }
+  },
+  "result": {
+    "item": "nucleartech:magnetized_tungsten_block"
+  }
+}

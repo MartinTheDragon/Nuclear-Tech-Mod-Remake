@@ -1,11 +1,11 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:beryllium_crystals"
+    "tag": "forge:crystals/beryllium"
   },
   "result": {
     "item": "nucleartech:beryllium_powder",
     "count": 3
   },
-  "experience": 0.4
+  "experience": 0.375
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "schraranium_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/schraranium"
+  },
+  "result": {
+    "item": "nucleartech:schraranium_ingot",
+    "count": 2
+  },
+  "experience": 0.0,
+  "cookingtime": 200
+}

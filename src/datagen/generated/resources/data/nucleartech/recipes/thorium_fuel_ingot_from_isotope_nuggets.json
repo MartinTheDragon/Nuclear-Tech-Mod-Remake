@@ -3,13 +3,13 @@
   "group": "thorium_fuel_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:u233_nugget"
+      "item": "nucleartech:uranium233_nugget"
     },
     {
-      "item": "nucleartech:u233_nugget"
+      "item": "nucleartech:uranium233_nugget"
     },
     {
-      "item": "nucleartech:u233_nugget"
+      "item": "nucleartech:uranium233_nugget"
     },
     {
       "tag": "forge:nuggets/thorium"

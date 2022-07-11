@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "lithium_cube",
+  "ingredient": {
+    "tag": "forge:raw_materials/lithium"
+  },
+  "result": "nucleartech:lithium_cube",
+  "experience": 5.0,
+  "cookingtime": 200
+}

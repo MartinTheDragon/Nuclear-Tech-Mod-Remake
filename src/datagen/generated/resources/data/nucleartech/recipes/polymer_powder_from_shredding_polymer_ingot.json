@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "tag": "forge:ingots/polymer"
+    "tag": "forge:ingots/teflon"
   },
   "result": {
     "item": "nucleartech:polymer_powder",

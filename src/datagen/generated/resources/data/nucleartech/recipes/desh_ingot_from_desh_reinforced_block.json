@@ -3,7 +3,7 @@
   "group": "desh_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:desh_reinforced_block"
+      "tag": "forge:storage_blocks/desh"
     }
   ],
   "result": {

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:lead_ore"
+    "nucleartech:lead_ore",
+    "nucleartech:deepslate_lead_ore"
   ]
 }

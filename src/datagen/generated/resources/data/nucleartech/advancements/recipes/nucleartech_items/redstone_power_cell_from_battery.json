@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:redstone_power_cell_from_battery"
+    ]
+  },
+  "criteria": {
+    "has_canonical": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/redstone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:redstone_power_cell_from_battery"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_canonical",
+      "has_the_recipe"
+    ]
+  ]
+}

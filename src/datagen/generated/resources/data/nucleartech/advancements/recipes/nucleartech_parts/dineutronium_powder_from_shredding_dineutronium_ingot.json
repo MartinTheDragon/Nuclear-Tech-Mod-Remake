@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:dineutronium_ingot"
-            ]
+            "tag": "forge:ingots/dineutronium"
           }
         ]
       }

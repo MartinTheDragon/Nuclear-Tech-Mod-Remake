@@ -8,10 +8,10 @@
   ],
   "key": {
     "#": {
-      "item": "nucleartech:schrabidium_ingot"
+      "tag": "forge:ingots/schrabidium"
     },
     "+": {
-      "item": "nucleartech:schrabidium_plate"
+      "tag": "forge:plates/schrabidium"
     }
   },
   "result": {

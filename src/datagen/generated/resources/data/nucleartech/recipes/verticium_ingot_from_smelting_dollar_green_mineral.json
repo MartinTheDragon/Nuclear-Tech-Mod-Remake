@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "verticium_ingot",
+  "ingredient": {
+    "tag": "forge:ores/verticium"
+  },
+  "result": "nucleartech:verticium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

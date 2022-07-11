@@ -14,7 +14,7 @@
       "tag": "forge:ingots/brick"
     },
     "M": {
-      "item": "nucleartech:schrabidium_ingot"
+      "tag": "forge:ingots/schrabidium"
     }
   },
   "result": {

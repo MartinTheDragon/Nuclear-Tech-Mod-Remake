@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "reiium_ingot",
   "ingredient": {
-    "item": "nucleartech:reiite"
+    "tag": "forge:ores/reiium"
   },
   "result": "nucleartech:reiium_ingot",
   "experience": 1.25,

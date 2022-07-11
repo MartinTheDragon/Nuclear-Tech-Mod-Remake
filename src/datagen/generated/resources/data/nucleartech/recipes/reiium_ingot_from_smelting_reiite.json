@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "reiium_ingot",
+  "ingredient": {
+    "tag": "forge:ores/reiium"
+  },
+  "result": "nucleartech:reiium_ingot",
+  "experience": 2.5,
+  "cookingtime": 200
+}

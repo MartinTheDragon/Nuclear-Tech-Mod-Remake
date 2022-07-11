@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:super_conductor",
-    "nucleartech:high_temperature_super_conductor"
+    "nucleartech:super_conductor"
   ]
 }

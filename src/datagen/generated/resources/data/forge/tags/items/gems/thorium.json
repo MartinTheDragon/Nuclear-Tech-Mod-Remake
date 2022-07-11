@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:thorium_crystals"
+    "#forge:crystals/thorium"
   ]
 }

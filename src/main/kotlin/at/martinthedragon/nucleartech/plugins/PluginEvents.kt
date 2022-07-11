@@ -3,7 +3,7 @@ package at.martinthedragon.nucleartech.plugins
 import at.martinthedragon.nucleartech.api.ModPlugin
 import at.martinthedragon.nucleartech.api.NuclearTechRuntime
 import at.martinthedragon.nucleartech.explosions.Explosions
-import at.martinthedragon.nucleartech.hazards.HazmatValues
+import at.martinthedragon.nucleartech.hazard.HazmatValues
 import com.mojang.logging.LogUtils
 
 object PluginEvents {

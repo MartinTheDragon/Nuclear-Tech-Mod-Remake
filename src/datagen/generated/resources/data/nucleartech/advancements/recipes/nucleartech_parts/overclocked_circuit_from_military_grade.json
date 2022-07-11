@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:overclocked_circuit_from_military_grade"
+    ]
+  },
+  "criteria": {
+    "has_military_circuit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:military_grade_circuit_board_tier_4"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:overclocked_circuit_from_military_grade"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_military_circuit",
+      "has_the_recipe"
+    ]
+  ]
+}

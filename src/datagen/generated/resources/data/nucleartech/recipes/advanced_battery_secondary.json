@@ -1,0 +1,26 @@
+{
+  "type": "nucleartech:battery",
+  "group": "advanced_battery",
+  "pattern": [
+    " W ",
+    "PYP",
+    "PXP"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/red_copper"
+    },
+    "P": {
+      "tag": "forge:plates/copper"
+    },
+    "X": {
+      "tag": "forge:dusts/sulfur"
+    },
+    "Y": {
+      "tag": "forge:dusts/lead"
+    }
+  },
+  "result": {
+    "item": "nucleartech:advanced_battery"
+  }
+}

@@ -1,7 +1,9 @@
 package at.martinthedragon.nucleartech.datagen.recipes
 
 import at.martinthedragon.nucleartech.mc
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
+import com.google.common.collect.HashMultimap
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
 import com.google.common.collect.Sets
@@ -11,6 +13,8 @@ import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementRewards
 import net.minecraft.advancements.CriterionTriggerInstance
 import net.minecraft.advancements.RequirementsStrategy
+import net.minecraft.advancements.critereon.InventoryChangeTrigger
+import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.data.recipes.RecipeBuilder
@@ -142,7 +146,6 @@ class BatteryRecipeBuilder(private val result: Item, val count: Int) : RecipeBui
     }
 
     companion object {
-
         fun battery(item: ItemLike): BatteryRecipeBuilder {
             return battery(item, 1)
         }
@@ -150,5 +153,36 @@ class BatteryRecipeBuilder(private val result: Item, val count: Int) : RecipeBui
         fun battery(item: ItemLike, count: Int): BatteryRecipeBuilder {
             return BatteryRecipeBuilder(item, count)
         }
+
+        fun battery(consumer: Consumer<FinishedRecipe>, result: ItemLike, wire: Ingredient, plate: Ingredient, dust1: Ingredient, dust2: Ingredient = dust1, pattern: Array<String> = arrayOf(" W ", "PXP", "PYP"), criterion: CriterionTriggerInstance, vararg extra: Pair<ItemLike, Array<String>> = emptyArray()) {
+            battery(result).define('W', wire).define('P', plate).define('X', dust1).define('Y', dust2).apply { for (patternString in pattern) pattern(patternString) }.group(getItemName(result)).unlockedBy("has_canonical", criterion).save(consumer, ntm("${getItemName(result)}_primary"))
+            if (dust1 != dust2) battery(result).define('W', wire).define('P', plate).define('X', dust1).define('Y', dust2).apply { for (patternString in pattern) pattern(if (patternString.contains('X')) patternString.replace('X', 'Y') else patternString.replace('Y', 'X')) }.group(getItemName(result)).unlockedBy("has_canonical", criterion).save(consumer, ntm("${getItemName(result)}_secondary"))
+
+            if (extra.isNotEmpty()) {
+                val multimap = HashMultimap.create<ItemLike, Array<String>>(extra.size, 1)
+                for ((extraResult, extraPattern) in extra) multimap.put(extraResult, extraPattern)
+
+                var battery = result
+                for ((extraResult, patterns) in multimap.asMap()) {
+                    for ((index, extraPattern) in patterns.withIndex()) {
+                        battery(extraResult)
+                            .apply { if (extraPattern.any { it.contains('W') }) define('W', wire) }
+                            .apply { if (extraPattern.any { it.contains('P') }) define('P', plate) }
+                            .apply { if (extraPattern.any { it.contains('X') }) define('X', dust1) }
+                            .apply { if (extraPattern.any { it.contains('Y') }) define('Y', dust2) }
+                            .apply { if (extraPattern.any { it.contains('B') }) define('B', battery) }
+                            .apply { for (patternString in extraPattern) pattern(patternString) }
+                            .group(getItemName(extraResult)).unlockedBy("has_canonical", criterion)
+                            .save(consumer, ntm("${getItemName(extraResult)}_from_${getItemName(battery)}${ if (patterns.size > 1) "_${index + 1}" else "" }"))
+                    }
+                    battery = extraResult
+                }
+            }
+        }
+
+        fun battery(consumer: Consumer<FinishedRecipe>, result: ItemLike, wire: TagKey<Item>, plate: TagKey<Item>, dust1: TagKey<Item>, dust2: TagKey<Item> = dust1, pattern: Array<String> = arrayOf(" W ", "PXP", "PYP"), criterion: CriterionTriggerInstance = InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(dust1).build()), vararg extra: Pair<ItemLike, Array<String>> = emptyArray()): Unit =
+            battery(consumer, result, Ingredient.of(wire), Ingredient.of(plate), Ingredient.of(dust1), Ingredient.of(dust2), pattern, criterion, *extra)
+
+        private fun getItemName(item: ItemLike) = item.asItem().registryName!!.path
     }
 }

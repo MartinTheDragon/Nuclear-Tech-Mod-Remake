@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lithium_cube_from_blasting_raw_lithium"
+    ]
+  },
+  "criteria": {
+    "has_raw_lithium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/lithium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lithium_cube_from_blasting_raw_lithium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_lithium",
+      "has_the_recipe"
+    ]
+  ]
+}

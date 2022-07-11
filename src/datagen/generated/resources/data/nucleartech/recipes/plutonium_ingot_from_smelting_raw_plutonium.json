@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "plutonium_ingot",
+  "ingredient": {
+    "tag": "forge:raw_materials/plutonium"
+  },
+  "result": "nucleartech:plutonium_ingot",
+  "experience": 3.0,
+  "cookingtime": 200
+}

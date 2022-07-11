@@ -3,7 +3,7 @@
   "group": "reiium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:reiium_block"
+      "tag": "forge:storage_blocks/reiium"
     }
   ],
   "result": {

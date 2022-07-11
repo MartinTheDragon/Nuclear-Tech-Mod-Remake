@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "sulfur",
+  "ingredient": {
+    "tag": "forge:crystals/sulfur"
+  },
+  "result": {
+    "item": "nucleartech:sulfur",
+    "count": 6
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

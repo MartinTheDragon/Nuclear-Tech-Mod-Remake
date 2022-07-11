@@ -4,19 +4,25 @@ import at.martinthedragon.nucleartech.api.items.AttackHandler
 import at.martinthedragon.nucleartech.api.items.DamageHandler
 import at.martinthedragon.nucleartech.api.items.FallHandler
 import at.martinthedragon.nucleartech.api.items.TickingArmor
-import at.martinthedragon.nucleartech.capabilites.contamination.ContaminationCapabilityProvider
-import at.martinthedragon.nucleartech.hazards.EntityContaminationEffects
-import at.martinthedragon.nucleartech.hazards.HazmatValues
+import at.martinthedragon.nucleartech.capability.contamination.ContaminationCapabilityProvider
+import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
+import at.martinthedragon.nucleartech.hazard.HazardSystem
+import at.martinthedragon.nucleartech.hazard.HazmatValues
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.ItemAttributeModifierEvent
+import net.minecraftforge.event.TickEvent
+import net.minecraftforge.event.entity.EntityJoinWorldEvent
+import net.minecraftforge.event.entity.EntityLeaveWorldEvent
 import net.minecraftforge.event.entity.living.*
 import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent
 import net.minecraftforge.eventbus.api.Event
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import kotlin.math.roundToInt
@@ -30,10 +36,34 @@ object EventSubscribers {
             event.addCapability(ntm("contamination"), ContaminationCapabilityProvider())
     }
 
+    @SubscribeEvent(priority = EventPriority.LOW)
+    @JvmStatic
+    fun trackItemEntityHazardSystem(event: EntityJoinWorldEvent) {
+        val entity = event.entity
+        if (entity is ItemEntity) HazardSystem.trackItemEntity(entity)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun stopTrackingItemEntityHazardSystem(event: EntityLeaveWorldEvent) {
+        val entity = event.entity
+        if (entity is ItemEntity) HazardSystem.stopTrackingItemEntity(entity)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun tickHazardSystem(event: TickEvent.WorldTickEvent) {
+        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards()
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun tickHazardSystemClient(event: TickEvent.ClientTickEvent) {
+        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards()
+    }
+
     @SubscribeEvent @JvmStatic
     fun onLivingUpdate(event: LivingEvent.LivingUpdateEvent) {
         event.entityLiving.armorSlots.forEach { val item = it.item; if (item is TickingArmor) item.handleTick(event, it) }
         EntityContaminationEffects.update(event.entityLiving)
+        HazardSystem.applyHazardsInInventory(event.entityLiving)
     }
 
     @SubscribeEvent @JvmStatic

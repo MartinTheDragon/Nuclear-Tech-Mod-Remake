@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plutonium_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/plutonium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:plutonium_block"
+  }
+}

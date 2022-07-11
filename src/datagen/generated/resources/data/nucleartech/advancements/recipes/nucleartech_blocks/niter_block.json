@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:niter_block"
+    ]
+  },
+  "criteria": {
+    "has_niter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/salpeter"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:niter_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_niter",
+      "has_the_recipe"
+    ]
+  ]
+}

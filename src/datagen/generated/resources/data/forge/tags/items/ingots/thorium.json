@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:th232_ingot",
-    "nucleartech:thorium_fuel_ingot"
+    "nucleartech:thorium232_ingot"
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:crystals/aluminium",
+    "#forge:crystals/beryllium",
+    "#forge:crystals/coal",
+    "#forge:crystals/copper",
+    "#forge:crystals/diamond",
+    "#forge:crystals/fluorite",
+    "#forge:crystals/gold",
+    "#forge:crystals/iron",
+    "#forge:crystals/lead",
+    "#forge:crystals/lithium",
+    "#forge:crystals/salpeter",
+    "#forge:crystals/phosphorus",
+    "#forge:crystals/plutonium",
+    "#forge:crystals/rare_earth",
+    "#forge:crystals/redstone",
+    "#forge:crystals/schrabidium",
+    "#forge:crystals/schraranium",
+    "#forge:crystals/starmetal",
+    "#forge:crystals/sulfur",
+    "#forge:crystals/thorium",
+    "#forge:crystals/titanium",
+    "#forge:crystals/trixite",
+    "#forge:crystals/tungsten",
+    "#forge:crystals/uranium"
+  ]
+}

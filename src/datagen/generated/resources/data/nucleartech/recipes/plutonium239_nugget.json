@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plutonium239_nugget",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:plutonium239_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:plutonium239_nugget",
+    "count": 9
+  }
+}

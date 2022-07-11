@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "weidanium_ingot",
   "ingredient": {
-    "item": "nucleartech:weidite"
+    "tag": "forge:ores/weidanium"
   },
   "result": "nucleartech:weidanium_ingot",
   "experience": 1.25,

@@ -8,10 +8,10 @@
   ],
   "key": {
     "#": {
-      "item": "nucleartech:combine_steel_ingot"
+      "tag": "forge:ingots/combine_steel"
     },
     "+": {
-      "item": "nucleartech:combine_steel_plate"
+      "tag": "forge:plates/combine_steel"
     }
   },
   "result": {

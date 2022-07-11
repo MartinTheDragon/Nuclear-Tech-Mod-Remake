@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "neptunium_fuel_nugget",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:neptunium_fuel_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:neptunium_fuel_nugget",
+    "count": 9
+  }
+}

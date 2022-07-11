@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "R",
+    "P"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:wires/aluminium"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "P": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "nucleartech:basic_circuit_assembly"
+  }
+}

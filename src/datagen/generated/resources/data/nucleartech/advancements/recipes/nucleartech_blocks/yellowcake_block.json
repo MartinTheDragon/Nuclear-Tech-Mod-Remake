@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:yellowcake_block"
+    ]
+  },
+  "criteria": {
+    "has_yellowcake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:yellow_cake_uranium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:yellowcake_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_yellowcake",
+      "has_the_recipe"
+    ]
+  ]
+}

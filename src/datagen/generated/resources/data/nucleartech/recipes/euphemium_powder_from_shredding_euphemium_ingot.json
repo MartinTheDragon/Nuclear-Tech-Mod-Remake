@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:euphemium_ingot"
+    "tag": "forge:ingots/euphemium"
   },
   "result": {
     "item": "nucleartech:euphemium_powder",

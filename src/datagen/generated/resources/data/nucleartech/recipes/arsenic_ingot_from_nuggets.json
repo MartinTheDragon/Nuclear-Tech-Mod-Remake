@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "arsenic_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:arsenic_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:arsenic_ingot"
+  }
+}

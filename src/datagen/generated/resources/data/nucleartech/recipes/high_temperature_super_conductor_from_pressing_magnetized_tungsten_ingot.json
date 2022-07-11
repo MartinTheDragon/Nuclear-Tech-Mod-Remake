@@ -1,12 +1,12 @@
 {
   "type": "nucleartech:pressing",
   "ingredient": {
-    "item": "nucleartech:magnetized_tungsten_ingot"
+    "tag": "forge:ingots/magnetized_tungsten"
   },
   "stamp_type": "WIRE",
   "result": {
     "item": "nucleartech:high_temperature_super_conductor",
     "count": 8
   },
-  "experience": 0.1
+  "experience": 0.2
 }

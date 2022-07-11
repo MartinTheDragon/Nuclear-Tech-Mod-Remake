@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ghiorsium336_nugget",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:ghiorsium336_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:ghiorsium336_nugget",
+    "count": 9
+  }
+}

@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:weidanium_block"
-            ]
+            "tag": "forge:storage_blocks/weidanium"
           }
         ]
       }

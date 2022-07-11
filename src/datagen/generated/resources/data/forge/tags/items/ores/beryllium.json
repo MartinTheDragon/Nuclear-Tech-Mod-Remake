@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:beryllium_ore"
+    "nucleartech:beryllium_ore",
+    "nucleartech:deepslate_beryllium_ore"
   ]
 }

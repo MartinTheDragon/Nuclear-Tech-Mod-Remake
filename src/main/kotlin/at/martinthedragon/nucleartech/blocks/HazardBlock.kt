@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.blocks
 
-import at.martinthedragon.nucleartech.hazards.blocks.HazardBlockEffect
-import at.martinthedragon.nucleartech.hazards.blocks.RadioactiveBlockEffect
+import at.martinthedragon.nucleartech.hazard.blocks.HazardBlockEffect
+import at.martinthedragon.nucleartech.hazard.blocks.RadioactiveBlockEffect
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level

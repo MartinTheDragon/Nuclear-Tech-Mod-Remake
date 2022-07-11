@@ -3,7 +3,7 @@
   "group": "starmetal_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:starmetal_block"
+      "tag": "forge:storage_blocks/starmetal"
     }
   ],
   "result": {

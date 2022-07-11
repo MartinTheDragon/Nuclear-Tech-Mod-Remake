@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:actinium227_ingot_from_smelting_actinium227_powder"
+    ]
+  },
+  "criteria": {
+    "has_actinium227_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/actinium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:actinium227_ingot_from_smelting_actinium227_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_actinium227_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

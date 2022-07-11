@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:daffergon_ingot"
+    "tag": "forge:ingots/daffergon"
   },
   "result": {
     "item": "nucleartech:daffergon_powder",

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bismuth_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:bismuth_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:bismuth_ingot"
+  }
+}

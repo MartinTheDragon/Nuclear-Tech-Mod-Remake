@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "niobium_ingot",
+  "ingredient": {
+    "item": "nucleartech:niobium_powder"
+  },
+  "result": "nucleartech:niobium_ingot",
+  "experience": 0.1,
+  "cookingtime": 200
+}

@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:verticium_ingot"
+    "tag": "forge:ingots/verticium"
   },
   "result": {
     "item": "nucleartech:verticium_powder",

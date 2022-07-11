@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:polymer_ingot"
+    "#forge:ingots/teflon"
   ]
 }

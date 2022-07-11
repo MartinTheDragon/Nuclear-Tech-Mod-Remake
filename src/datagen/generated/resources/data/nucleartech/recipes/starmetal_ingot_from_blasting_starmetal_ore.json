@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "starmetal_ingot",
   "ingredient": {
-    "item": "nucleartech:starmetal_ore"
+    "tag": "forge:ores/starmetal"
   },
   "result": "nucleartech:starmetal_ingot",
   "experience": 5.0,

@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:lithium_crystals"
+    "tag": "forge:crystals/lithium"
   },
   "result": {
     "item": "nucleartech:lithium_powder",

@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:aluminium_ore",
+    "nucleartech:asbestos_ore",
+    "nucleartech:australian_ore",
+    "nucleartech:beryllium_ore",
+    "nucleartech:cobalt_ore",
+    "nucleartech:dellite",
+    "nucleartech:fluorite_ore",
+    "nucleartech:lead_ore",
+    "nucleartech:lignite_ore",
+    "nucleartech:niter_ore",
+    "nucleartech:oil_deposit",
+    "nucleartech:rare_earth_ore",
+    "nucleartech:reiite",
+    "nucleartech:schrabidium_ore",
+    "nucleartech:sulfur_ore",
+    "nucleartech:thorium_ore",
+    "nucleartech:titanium_ore",
+    "nucleartech:tungsten_ore",
+    "nucleartech:brightblende_ore",
+    "nucleartech:uranium_ore",
+    "nucleartech:scorched_uranium_ore",
+    "nucleartech:dollar_green_mineral",
+    "nucleartech:weidite"
+  ]
+}

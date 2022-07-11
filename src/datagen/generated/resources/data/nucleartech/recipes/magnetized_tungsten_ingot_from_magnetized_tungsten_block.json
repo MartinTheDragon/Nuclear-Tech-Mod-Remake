@@ -3,7 +3,7 @@
   "group": "magnetized_tungsten_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:magnetized_tungsten_block"
+      "tag": "forge:storage_blocks/magnetized_tungsten"
     }
   ],
   "result": {

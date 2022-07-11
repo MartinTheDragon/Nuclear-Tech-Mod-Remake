@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "sulfur",
+  "ingredient": {
+    "item": "nucleartech:meteor_sulfur_ore"
+  },
+  "result": {
+    "item": "nucleartech:sulfur",
+    "count": 3
+  },
+  "experience": 1.0,
+  "cookingtime": 200
+}

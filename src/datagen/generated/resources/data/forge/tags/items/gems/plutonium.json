@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:plutonium_crystals"
+    "#forge:crystals/plutonium"
   ]
 }

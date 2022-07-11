@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.rendering
 
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.capabilites.Capabilities
+import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.DefaultVertexFormat

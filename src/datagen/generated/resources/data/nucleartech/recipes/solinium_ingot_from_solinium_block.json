@@ -3,7 +3,7 @@
   "group": "solinium_ingot",
   "ingredients": [
     {
-      "item": "nucleartech:solinium_block"
+      "tag": "forge:storage_blocks/solinium"
     }
   ],
   "result": {

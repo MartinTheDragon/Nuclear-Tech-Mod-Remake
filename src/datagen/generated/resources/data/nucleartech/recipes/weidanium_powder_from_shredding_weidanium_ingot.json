@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:weidanium_ingot"
+    "tag": "forge:ingots/weidanium"
   },
   "result": {
     "item": "nucleartech:weidanium_powder",

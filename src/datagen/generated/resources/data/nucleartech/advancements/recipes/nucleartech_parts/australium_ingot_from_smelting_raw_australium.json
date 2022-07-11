@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:australium_ingot_from_smelting_raw_australium"
+    ]
+  },
+  "criteria": {
+    "has_raw_australium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/australium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:australium_ingot_from_smelting_raw_australium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_australium",
+      "has_the_recipe"
+    ]
+  ]
+}

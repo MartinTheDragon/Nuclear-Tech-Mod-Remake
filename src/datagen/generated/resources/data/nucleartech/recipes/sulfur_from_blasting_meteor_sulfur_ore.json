@@ -4,7 +4,10 @@
   "ingredient": {
     "item": "nucleartech:meteor_sulfur_ore"
   },
-  "result": "nucleartech:sulfur",
+  "result": {
+    "item": "nucleartech:sulfur",
+    "count": 3
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

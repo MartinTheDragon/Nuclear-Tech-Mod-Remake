@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:reiium_ingot_from_smelting_reiium_powder"
+    ]
+  },
+  "criteria": {
+    "has_reiium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/reiium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:reiium_ingot_from_smelting_reiium_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_reiium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

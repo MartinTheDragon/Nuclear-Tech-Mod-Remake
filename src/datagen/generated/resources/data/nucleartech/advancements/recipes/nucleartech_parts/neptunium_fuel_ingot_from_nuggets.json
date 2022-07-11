@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:neptunium_fuel_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_neptunium_fuel_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:neptunium_fuel_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:neptunium_fuel_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_neptunium_fuel_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

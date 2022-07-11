@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:iron_ingot_from_smelting_iron_crystals"
+    ]
+  },
+  "criteria": {
+    "has_iron_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:iron_ingot_from_smelting_iron_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

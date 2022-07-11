@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "thorium232_ingot",
+  "ingredient": {
+    "tag": "forge:dusts/thorium"
+  },
+  "result": "nucleartech:thorium232_ingot",
+  "experience": 0.1,
+  "cookingtime": 200
+}

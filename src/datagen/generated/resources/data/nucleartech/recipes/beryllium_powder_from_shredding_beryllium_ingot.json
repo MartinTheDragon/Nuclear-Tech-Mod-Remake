@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "tag": "forge:ingots/beryllium"
+  },
+  "result": {
+    "item": "nucleartech:beryllium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

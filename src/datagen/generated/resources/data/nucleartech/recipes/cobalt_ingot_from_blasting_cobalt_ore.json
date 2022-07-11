@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "cobalt_ingot",
+  "ingredient": {
+    "tag": "forge:ores/cobalt"
+  },
+  "result": "nucleartech:cobalt_ingot",
+  "experience": 0.45,
+  "cookingtime": 100
+}

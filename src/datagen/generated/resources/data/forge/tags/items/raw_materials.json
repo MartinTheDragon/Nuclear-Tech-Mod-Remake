@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:raw_materials/aluminium",
+    "#forge:raw_materials/australium",
+    "#forge:raw_materials/beryllium",
+    "#forge:raw_materials/cobalt",
+    "#forge:raw_materials/lead",
+    "#forge:raw_materials/lithium",
+    "#forge:raw_materials/plutonium",
+    "#forge:raw_materials/rare_earth",
+    "#forge:raw_materials/schrabidium",
+    "#forge:raw_materials/starmetal",
+    "#forge:raw_materials/thorium",
+    "#forge:raw_materials/titanium",
+    "#forge:raw_materials/trixite",
+    "#forge:raw_materials/tungsten",
+    "#forge:raw_materials/uranium"
+  ]
+}

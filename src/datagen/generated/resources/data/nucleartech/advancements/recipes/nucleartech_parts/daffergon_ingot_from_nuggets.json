@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:daffergon_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_daffergon_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/daffergon"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:daffergon_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_daffergon_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

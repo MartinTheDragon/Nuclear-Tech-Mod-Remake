@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_fuel_nugget"
+    ]
+  },
+  "criteria": {
+    "has_schrabidium_fuel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/schrabidium_fuel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_fuel_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schrabidium_fuel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

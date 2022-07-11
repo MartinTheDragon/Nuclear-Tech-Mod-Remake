@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "osmiridium_ingot",
+  "ingredient": {
+    "item": "nucleartech:osmiridium_crystals"
+  },
+  "result": {
+    "item": "nucleartech:osmiridium_ingot",
+    "count": 2
+  },
+  "experience": 0.0,
+  "cookingtime": 200
+}

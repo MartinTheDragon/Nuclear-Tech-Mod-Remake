@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_battery_secondary"
+    ]
+  },
+  "criteria": {
+    "has_canonical": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/neptunium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_battery_secondary"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_canonical",
+      "has_the_recipe"
+    ]
+  ]
+}

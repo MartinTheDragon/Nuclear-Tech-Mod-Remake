@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:plutonium_ingot",
-    "nucleartech:pu238_ingot",
-    "nucleartech:pu239_ingot",
-    "nucleartech:pu240_ingot",
-    "nucleartech:plutonium_fuel_ingot"
+    "nucleartech:plutonium_ingot"
   ]
 }

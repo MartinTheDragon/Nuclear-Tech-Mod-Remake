@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:plutonium_crystals"
-            ]
+            "tag": "forge:crystals/plutonium"
           }
         ]
       }

@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:uranium_crystals"
+    "tag": "forge:crystals/uranium"
   },
   "result": {
     "item": "nucleartech:uranium_powder",

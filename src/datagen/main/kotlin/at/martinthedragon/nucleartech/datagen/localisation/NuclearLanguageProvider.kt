@@ -23,6 +23,7 @@ abstract class NuclearLanguageProvider(
 ) : LanguageProvider(dataGenerator, NuclearTech.MODID, locale) {
     protected val translations = mutableMapOf<String, String>()
     protected val materialTranslations = mutableMapOf<MaterialGroup, String>()
+    private val redundantTranslations = mutableMapOf<String, String>()
 
     override fun getName() = "Nuclear Tech ${super.getName()}"
 
@@ -66,8 +67,14 @@ abstract class NuclearLanguageProvider(
     abstract fun translate()
 
     protected open fun validate() {
+        if (redundantTranslations.isNotEmpty()) {
+            val warningMessage = StringBuilder().appendLine("Redundant override translations for following keys in locale $locale:")
+            for ((redundantKey, redundantTranslation) in redundantTranslations) warningMessage.appendLine("$redundantKey=$redundantTranslation")
+            NuclearTech.LOGGER.warn(warningMessage.toString())
+        }
+
         if (!materialTranslations.keys.containsAll(NuclearLanguageProviders.materialTranslations.keys)) {
-            val missingTranslations = (NuclearLanguageProviders.materialTranslations - materialTranslations).values
+            val missingTranslations = (NuclearLanguageProviders.materialTranslations - materialTranslations.keys).values
             val errorMessage = StringBuilder().appendLine("Missing material translations in locale $locale for the following groups:")
             for (missing in missingTranslations) errorMessage.appendLine(missing)
             if (exceptionOnMissing) throw IllegalStateException(errorMessage.toString())
@@ -96,7 +103,9 @@ abstract class NuclearLanguageProvider(
     }
 
     protected fun addIfAbsent(key: String, value: String) {
-        if (!translations.contains(key)) add(key, value)
+        val existing = translations[key]
+        if (existing == value) redundantTranslations[key] = value
+        if (existing == null) add(key, value)
     }
 
     protected fun addMaterial(materialGroup: MaterialGroup, name: String) {

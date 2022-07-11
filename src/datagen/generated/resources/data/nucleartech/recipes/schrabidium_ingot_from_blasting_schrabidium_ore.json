@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "schrabidium_ingot",
   "ingredient": {
-    "item": "nucleartech:schrabidium_ore"
+    "tag": "forge:ores/schrabidium"
   },
   "result": "nucleartech:schrabidium_ingot",
   "experience": 25.0,

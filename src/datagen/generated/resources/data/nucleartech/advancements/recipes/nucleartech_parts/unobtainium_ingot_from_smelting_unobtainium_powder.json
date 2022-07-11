@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:unobtainium_ingot_from_smelting_unobtainium_powder"
+    ]
+  },
+  "criteria": {
+    "has_unobtainium_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/unobtainium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:unobtainium_ingot_from_smelting_unobtainium_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_unobtainium_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

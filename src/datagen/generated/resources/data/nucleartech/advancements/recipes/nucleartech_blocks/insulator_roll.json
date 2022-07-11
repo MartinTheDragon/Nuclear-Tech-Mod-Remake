@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:insulator_roll"
+    ]
+  },
+  "criteria": {
+    "has_insulator": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:plates/insulator"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:insulator_roll"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_insulator",
+      "has_the_recipe"
+    ]
+  ]
+}

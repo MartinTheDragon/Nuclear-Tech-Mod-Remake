@@ -3,9 +3,9 @@ package at.martinthedragon.nucleartech.items
 import at.martinthedragon.nucleartech.DamageSources
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.capabilites.Capabilities
-import at.martinthedragon.nucleartech.capabilites.contamination.addEffect
-import at.martinthedragon.nucleartech.capabilites.contamination.effects.RadiationEffect
+import at.martinthedragon.nucleartech.capability.Capabilities
+import at.martinthedragon.nucleartech.capability.contamination.addEffect
+import at.martinthedragon.nucleartech.capability.contamination.effects.RadiationEffect
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.InteractionHand

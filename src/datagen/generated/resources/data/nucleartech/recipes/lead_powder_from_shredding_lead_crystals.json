@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:lead_crystals"
+    "tag": "forge:crystals/lead"
   },
   "result": {
     "item": "nucleartech:lead_powder",

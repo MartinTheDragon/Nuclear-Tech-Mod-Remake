@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:verticium_ingot_from_smelting_dollar_green_mineral"
+    ]
+  },
+  "criteria": {
+    "has_dollar_green_mineral": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ores/verticium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:verticium_ingot_from_smelting_dollar_green_mineral"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dollar_green_mineral",
+      "has_the_recipe"
+    ]
+  ]
+}

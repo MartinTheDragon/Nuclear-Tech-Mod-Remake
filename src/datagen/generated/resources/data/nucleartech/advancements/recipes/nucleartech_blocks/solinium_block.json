@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:solinium_block"
+    ]
+  },
+  "criteria": {
+    "has_solinium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/solinium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:solinium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_solinium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

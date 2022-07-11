@@ -8,8 +8,8 @@ import at.martinthedragon.nucleartech.api.blocks.entities.TickingServerBlockEnti
 import at.martinthedragon.nucleartech.blocks.AssemblerBlock
 import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.blocks.multi.RotatedMultiBlockPlacer
-import at.martinthedragon.nucleartech.capabilites.items.AccessLimitedInputItemHandler
-import at.martinthedragon.nucleartech.capabilites.items.AccessLimitedOutputItemHandler
+import at.martinthedragon.nucleartech.capability.items.AccessLimitedInputItemHandler
+import at.martinthedragon.nucleartech.capability.items.AccessLimitedOutputItemHandler
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem

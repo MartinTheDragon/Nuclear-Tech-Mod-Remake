@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "nucleartech:redstone_crystals"
+    "#forge:crystals/redstone"
   ]
 }

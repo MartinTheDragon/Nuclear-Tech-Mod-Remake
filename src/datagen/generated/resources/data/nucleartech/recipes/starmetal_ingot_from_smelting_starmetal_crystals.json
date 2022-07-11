@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "starmetal_ingot",
+  "ingredient": {
+    "tag": "forge:crystals/starmetal"
+  },
+  "result": {
+    "item": "nucleartech:starmetal_ingot",
+    "count": 2
+  },
+  "experience": 10.0,
+  "cookingtime": 200
+}

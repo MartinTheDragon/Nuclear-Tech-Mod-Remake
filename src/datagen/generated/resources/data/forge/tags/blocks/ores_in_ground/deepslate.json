@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:deepslate_aluminium_ore",
+    "nucleartech:deepslate_asbestos_ore",
+    "nucleartech:deepslate_australian_ore",
+    "nucleartech:deepslate_beryllium_ore",
+    "nucleartech:deepslate_cobalt_ore",
+    "nucleartech:deepslate_fluorite_ore",
+    "nucleartech:deepslate_lead_ore",
+    "nucleartech:deepslate_niter_ore",
+    "nucleartech:deepslate_oil_deposit",
+    "nucleartech:deepslate_rare_earth_ore",
+    "nucleartech:deepslate_schrabidium_ore",
+    "nucleartech:deepslate_sulfur_ore",
+    "nucleartech:deepslate_thorium_ore",
+    "nucleartech:deepslate_titanium_ore",
+    "nucleartech:deepslate_tungsten_ore",
+    "nucleartech:deepslate_uranium_ore",
+    "nucleartech:scorched_deepslate_uranium_ore"
+  ]
+}

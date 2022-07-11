@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "uranium233_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:u233_block"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:uranium233_ingot",
+    "count": 9
+  }
+}

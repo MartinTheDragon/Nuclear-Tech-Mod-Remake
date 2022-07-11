@@ -14,7 +14,7 @@
       "item": "nucleartech:desh_compound_plate"
     },
     "S": {
-      "item": "nucleartech:schrabidium_nugget"
+      "tag": "forge:nuggets/schrabidium"
     }
   },
   "result": {

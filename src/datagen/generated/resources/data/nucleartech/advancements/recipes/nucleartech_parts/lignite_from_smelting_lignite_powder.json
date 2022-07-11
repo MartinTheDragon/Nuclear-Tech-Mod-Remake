@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lignite_from_smelting_lignite_powder"
+    ]
+  },
+  "criteria": {
+    "has_lignite_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/lignite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lignite_from_smelting_lignite_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lignite_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

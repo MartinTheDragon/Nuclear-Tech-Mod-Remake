@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:lithium_battery_primary"
+    ]
+  },
+  "criteria": {
+    "has_canonical": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/lithium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:lithium_battery_primary"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_canonical",
+      "has_the_recipe"
+    ]
+  ]
+}

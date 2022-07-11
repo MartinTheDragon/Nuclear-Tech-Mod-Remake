@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "insulator_roll",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:plates/insulator"
+    }
+  },
+  "result": {
+    "item": "nucleartech:insulator_roll"
+  }
+}

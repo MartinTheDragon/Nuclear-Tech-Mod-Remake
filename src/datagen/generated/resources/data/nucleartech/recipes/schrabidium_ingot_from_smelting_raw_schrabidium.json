@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "schrabidium_ingot",
+  "ingredient": {
+    "tag": "forge:raw_materials/schrabidium"
+  },
+  "result": "nucleartech:schrabidium_ingot",
+  "experience": 50.0,
+  "cookingtime": 200
+}

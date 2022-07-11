@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:strontium90_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_strontium90_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:strontium90_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:strontium90_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_strontium90_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

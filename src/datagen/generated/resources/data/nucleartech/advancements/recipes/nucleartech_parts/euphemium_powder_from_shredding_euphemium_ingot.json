@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:euphemium_ingot"
-            ]
+            "tag": "forge:ingots/euphemium"
           }
         ]
       }
