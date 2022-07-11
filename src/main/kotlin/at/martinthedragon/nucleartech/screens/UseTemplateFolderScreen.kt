@@ -153,16 +153,6 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
                 itemsStartY + itemsCount / 5 * itemOffset
             )
 
-        // item tooltips
-
-        for (i in templateButtons.indices) {
-            val button = templateButtons[i]
-            if (button.isHoveredOrFocused && button.visible) {
-                val itemStack = itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + i]
-                renderComponentTooltip(matrixStack, getTooltipFromItem(itemStack), mouseX, mouseY, font)
-            }
-        }
-
         // page number
         GuiComponent.drawCenteredString(matrixStack, font, TextComponent("$currentPage / $pagesCount"), width / 2, (height - GUI_HEIGHT) / 2 + 10, 0xFFFFFF)
 
@@ -175,6 +165,15 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
         }
 
         searchBox.render(matrixStack, mouseX, mouseY, partialTicks)
+
+        // item tooltips
+        for (i in templateButtons.indices) {
+            val button = templateButtons[i]
+            if (button.isHoveredOrFocused && button.visible) {
+                val itemStack = itemsToShow[(currentPage - 1) * RECIPES_PER_PAGE + i]
+                renderComponentTooltip(matrixStack, getTooltipFromItem(itemStack), mouseX, mouseY, font)
+            }
+        }
     }
 
     private fun renderButtonItem(item: ItemStack, x: Int, y: Int) {
