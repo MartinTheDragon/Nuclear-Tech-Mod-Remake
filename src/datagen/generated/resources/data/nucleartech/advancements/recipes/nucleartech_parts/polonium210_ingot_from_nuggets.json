@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_polonium_nugget": {
+    "has_polonium210_nugget": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_polonium_nugget",
+      "has_polonium210_nugget",
       "has_the_recipe"
     ]
   ]

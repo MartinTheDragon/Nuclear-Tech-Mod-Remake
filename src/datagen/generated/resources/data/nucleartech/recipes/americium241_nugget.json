@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "americium241_nugget",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:americium241_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:americium241_nugget",
+    "count": 9
+  }
+}

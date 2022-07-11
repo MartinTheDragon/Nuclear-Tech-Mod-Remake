@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt_ingot_from_smelting_cobalt_crystals"
+    ]
+  },
+  "criteria": {
+    "has_cobalt_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:cobalt_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt_ingot_from_smelting_cobalt_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobalt_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

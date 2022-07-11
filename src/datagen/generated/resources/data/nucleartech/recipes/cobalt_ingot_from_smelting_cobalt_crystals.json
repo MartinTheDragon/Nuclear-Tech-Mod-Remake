@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "cobalt_ingot",
+  "ingredient": {
+    "item": "nucleartech:cobalt_crystals"
+  },
+  "result": {
+    "item": "nucleartech:cobalt_ingot",
+    "count": 2
+  },
+  "experience": 0.9,
+  "cookingtime": 200
+}

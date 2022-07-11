@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "group": "lapis_lazuli",
+  "ingredient": {
+    "item": "nucleartech:lapis_crystals"
+  },
+  "result": {
+    "item": "minecraft:lapis_lazuli",
+    "count": 2
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

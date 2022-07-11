@@ -17,14 +17,17 @@ object HazardRegistry {
     */
 
     const val Co60 = 30F // Cobalt
-    const val Tc99 = 2.75 // Technetium
+    const val Sr90 = 15F // Strontium
+    const val Tc99 = 2.75F // Technetium
     const val I131 = 150F // Iodine
     const val Xe135 = 1250F // Xenon
     const val Cs137 = 20F // Caesium
     const val Au198 = 500F // Gold
+    const val Pb209 = 10_000F // Lead
     const val At209 = 2000F // Astatine
     const val Po210 = 75F // Polonium
     const val Ra226 = 7.5F // Radon
+    const val Ac227 = 30F // Actinium
     const val Th232 = .1F // Thorium
     const val ThF = 1.75F
     const val U = .35F // Uranium
@@ -40,9 +43,11 @@ object HazardRegistry {
     const val Pu240 = 7.5F
     const val Pu241 = 25F
     const val PuF = 4.25F
+    const val PuRG = 6.25F
     const val Am241 = 8.5F // Americium
     const val Am242 = 9.5F
     const val AmF = 4.75F
+    const val AmRG = 9F
 
     // Other
 
@@ -56,6 +61,8 @@ object HazardRegistry {
     const val Sa327 = 17.5F // Solinium
     const val SaF = 5.85F
     const val Sr = Sa326 * .1F // Schraranium
+    const val Sb = Sa326 * .1F // Ferric Schrabidate
+    const val Gh336 = 5F
 
     private const val ingot = 1F
     private const val nugget = .1F
@@ -106,23 +113,41 @@ object HazardRegistry {
             register(TagGroups.whitePhosphorus, HazardData(HEAT, 5F))
             register(TagGroups.redPhosphorus, HazardData(HEAT, 2F))
 
-            register(TagGroups.naturalUranium, HazardData(RADIATION, U))
-            register(Materials.uranium233, HazardData(RADIATION, U233))
-            register(Materials.uranium235, HazardData(RADIATION, U235))
-            register(Materials.uranium238, HazardData(RADIATION, U238))
-            register(TagGroups.uraniumFuel, HazardData(RADIATION, UF))
-            register(TagGroups.thorium, HazardData(RADIATION, Th232))
-            register(TagGroups.naturalPlutonium, HazardData(RADIATION, Pu))
+            register(Materials.americium241, HazardData(RADIATION, Am241))
+            register(Materials.americium242, HazardData(RADIATION, Am242))
+            register(Materials.americiumFuel, HazardData(RADIATION, AmF))
+            register(Materials.cobalt60, HazardData(RADIATION, Co60).addEntry(HEAT))
+            register(Materials.ferricSchrabidate, HazardData(RADIATION, Sb).addEntry(BLINDING, 2.5F))
+            register(Materials.ghiorsium336, HazardData(RADIATION, Gh336))
+            register(Materials.gold198, HazardData(RADIATION, Au198).addEntry(HEAT, 5F))
+            register(Materials.lead209, HazardData(RADIATION, Pb209).addEntry(BLINDING, 2.5F).addEntry(HEAT, 7F))
+            register(Materials.neptuniumFuel, HazardData(RADIATION, NpF))
             register(Materials.plutonium238, HazardData(RADIATION, Pu238).addEntry(HEAT, 3F))
             register(Materials.plutonium239, HazardData(RADIATION, Pu239))
             register(Materials.plutonium240, HazardData(RADIATION, Pu240))
-            register(TagGroups.plutoniumFuel, HazardData(RADIATION, PuF))
+            register(Materials.plutonium241, HazardData(RADIATION, Pu241))
+            register(Materials.radium226, HazardData(RADIATION, Ra226))
+            register(Materials.reactorGradeAmericium, HazardData(RADIATION, AmRG))
+            register(Materials.reactorGradePlutonium, HazardData(RADIATION, PuRG))
+            register(Materials.strontium90, HazardData(RADIATION, Sr90).addEntry(HEAT).addEntry(HYDROREACTIVE))
+            register(Materials.technetium99, HazardData(RADIATION, Tc99))
+            register(Materials.uranium233, HazardData(RADIATION, U233))
+            register(Materials.uranium235, HazardData(RADIATION, U235))
+            register(Materials.uranium238, HazardData(RADIATION, U238))
+            register(TagGroups.actinium227, HazardData(RADIATION, Ac227))
+            register(TagGroups.moxFuel, HazardData(RADIATION, MOX))
+            register(TagGroups.naturalPlutonium, HazardData(RADIATION, Pu))
+            register(TagGroups.naturalUranium, HazardData(RADIATION, U))
             register(TagGroups.neptunium, HazardData(RADIATION, Np237))
+            register(TagGroups.plutoniumFuel, HazardData(RADIATION, PuF))
             register(TagGroups.polonium, HazardData(RADIATION, Po210).addEntry(HEAT, 3F))
-            register(TagGroups.schrabidium, HazardData(RADIATION, Sa326).addEntry(BLINDING))
-            register(TagGroups.solinium, HazardData(RADIATION, Sa327).addEntry(BLINDING))
-            register(TagGroups.schrabidiumFuel, HazardData(RADIATION, SaF).addEntry(BLINDING))
-            register(TagGroups.schraranium, HazardData(RADIATION, Sr).addEntry(BLINDING))
+            register(TagGroups.schrabidium, HazardData(RADIATION, Sa326).addEntry(BLINDING, 2.5F))
+            register(TagGroups.schrabidiumFuel, HazardData(RADIATION, SaF).addEntry(BLINDING, 2.5F))
+            register(TagGroups.schraranium, HazardData(RADIATION, Sr).addEntry(BLINDING, 2.5F))
+            register(TagGroups.solinium, HazardData(RADIATION, Sa327).addEntry(BLINDING, 2.5F))
+            register(TagGroups.thorium, HazardData(RADIATION, Th232))
+            register(TagGroups.thoriumFuel, HazardData(RADIATION, ThF))
+            register(TagGroups.uraniumFuel, HazardData(RADIATION, UF))
 
             register(NuclearTags.Items.ORES_URANIUM, HazardData.EMPTY)
             register(NuclearTags.Items.ORES_THORIUM, HazardData.EMPTY)

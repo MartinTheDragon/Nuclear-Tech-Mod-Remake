@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:osmiridium_ingot_from_smelting_osmiridium_crystals"
+    ]
+  },
+  "criteria": {
+    "has_osmiridium_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:osmiridium_crystals"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:osmiridium_ingot_from_smelting_osmiridium_crystals"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_osmiridium_crystals",
+      "has_the_recipe"
+    ]
+  ]
+}

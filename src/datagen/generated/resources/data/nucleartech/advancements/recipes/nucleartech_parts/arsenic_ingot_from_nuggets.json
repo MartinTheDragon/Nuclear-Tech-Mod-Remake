@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:arsenic_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_arsenic_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:arsenic_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:arsenic_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_arsenic_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

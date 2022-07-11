@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "osmiridium_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:osmiridium_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:osmiridium_ingot"
+  }
+}

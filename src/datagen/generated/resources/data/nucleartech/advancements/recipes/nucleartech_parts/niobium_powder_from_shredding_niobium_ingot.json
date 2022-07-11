@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:niobium_powder_from_shredding_niobium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_niobium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:niobium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:niobium_powder_from_shredding_niobium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_niobium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "strontium90_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:strontium90_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:strontium90_ingot"
+  }
+}

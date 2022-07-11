@@ -1,0 +1,11 @@
+{
+  "type": "nucleartech:shredding",
+  "ingredient": {
+    "item": "nucleartech:niobium_ingot"
+  },
+  "result": {
+    "item": "nucleartech:niobium_powder",
+    "count": 1
+  },
+  "experience": 0.0
+}

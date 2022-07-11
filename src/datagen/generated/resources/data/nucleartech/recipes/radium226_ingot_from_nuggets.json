@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "radium226_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:radium226_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:radium226_ingot"
+  }
+}

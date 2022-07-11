@@ -17,7 +17,7 @@ class HydroreactiveHazard : HazardType {
         // TODO config
 
         if (!target.level.isClientSide && target.isInWater) {
-            target.level.explode(null, target.x, target.y, target.z, level * (ln(itemStack.count.toFloat()) + 1), false, Explosion.BlockInteraction.BREAK)
+            target.level.explode(null, target.x, target.y, target.z, level * (ln(itemStack.count.toFloat()) + 1), false, Explosion.BlockInteraction.DESTROY)
             itemStack.count = 0
         }
     }
@@ -25,7 +25,7 @@ class HydroreactiveHazard : HazardType {
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {
         if (!itemEntity.level.isClientSide && itemEntity.isInWaterOrRain) {
             itemEntity.discard()
-            itemEntity.level.explode(null, itemEntity.x, itemEntity.y, itemEntity.z, level * (ln(itemEntity.item.count.toFloat()) + 1), false, Explosion.BlockInteraction.BREAK)
+            itemEntity.level.explode(null, itemEntity.x, itemEntity.y, itemEntity.z, level * (ln(itemEntity.item.count.toFloat()) + 1), false, Explosion.BlockInteraction.DESTROY)
         }
     }
 

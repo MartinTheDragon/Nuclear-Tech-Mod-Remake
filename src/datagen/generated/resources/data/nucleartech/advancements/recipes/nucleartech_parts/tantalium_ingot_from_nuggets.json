@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tantalium_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_tantalium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:tantalium_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tantalium_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tantalium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

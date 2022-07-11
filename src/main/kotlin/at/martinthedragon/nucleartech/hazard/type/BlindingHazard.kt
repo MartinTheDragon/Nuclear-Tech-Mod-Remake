@@ -20,14 +20,14 @@ class BlindingHazard : HazardType {
     override fun tick(target: LivingEntity, itemStack: ItemStack, level: Float) {
         // TODO protection
 
-        target.addEffect(MobEffectInstance(MobEffects.BLINDNESS, ceil(level * 60).toInt(), ceil(level).toInt(), false, false, true))
+        target.addEffect(MobEffectInstance(MobEffects.BLINDNESS, ceil(max(level * 20, 40F)).toInt(), ceil(level).toInt(), false, false, true))
     }
 
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {
         val world = itemEntity.level
-        for (entity in world.getEntities(EntityTypeTest.forClass(LivingEntity::class.java), itemEntity.boundingBox.inflate(level * 5.0), Entity::isAlive)) {
+        for (entity in world.getEntities(EntityTypeTest.forClass(LivingEntity::class.java), itemEntity.boundingBox.inflate(max(level * 2.0, 3.0)), Entity::isAlive)) {
             // could be inverse square for more of 'muh realism
-            entity.addEffect(MobEffectInstance(MobEffects.BLINDNESS, max(ceil(level * 60 / entity.distanceTo(itemEntity)).toInt(), 1), ceil(level).toInt(), false, false, true), itemEntity)
+            entity.addEffect(MobEffectInstance(MobEffects.BLINDNESS, max(ceil(max(level * 20, 40F) / entity.distanceTo(itemEntity)).toInt(), 1), ceil(level).toInt(), false, false, true), itemEntity)
         }
     }
 

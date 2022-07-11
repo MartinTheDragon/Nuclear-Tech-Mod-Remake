@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:radium226_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_radium226_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:radium226_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:radium226_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_radium226_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

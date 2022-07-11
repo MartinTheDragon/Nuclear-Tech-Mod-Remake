@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gold198_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_gold198_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:gold198_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gold198_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold198_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}
