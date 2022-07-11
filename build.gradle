@@ -74,7 +74,11 @@ minecraft {
 
             // you'll have to use JetBrains Runtime to get anything out of this
             // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
-            jvmArgs("-XX:+AllowEnhancedClassRedefinition", "-XX:HotswapAgent=fatjar", "-Xlog:redefine+class*=info")
+            // for use with hotswap agent, use the following arguments: -XX:+AllowEnhancedClassRedefinition,-XX:HotswapAgent=fatjar,-Xlog:redefine+class*=info
+            // don't forget to regenerate run configs when changing arguments
+            if (project.localProperties != null && project.localProperties.containsKey('jvm.args')) {
+                jvmArgs(project.localProperties.get('jvm.args').split(','))
+            }
 
             mods {
                 nucleartech {
