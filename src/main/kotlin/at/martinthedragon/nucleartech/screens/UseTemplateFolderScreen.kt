@@ -261,12 +261,11 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
             AssemblyTemplateItem.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager)
 
         fun reloadSearchTree() {
+            if (Minecraft.getInstance().level == null) return // outside of session
             NuclearTech.LOGGER.debug("Reloading Machine Template Folder search tree")
             val templateFolderSearchTree = Minecraft.getInstance().getSearchTree(searchTree)
             templateFolderSearchTree.clear()
-            val level = Minecraft.getInstance().level
-            if (level != null) getAllItems().forEach(templateFolderSearchTree::add)
-            else NuclearTech.LOGGER.error("Template Folder search tree reload failed")
+            getAllItems().forEach(templateFolderSearchTree::add)
             templateFolderSearchTree.refresh()
         }
     }
