@@ -14,7 +14,7 @@
       "tag": "forge:plates/titanium"
     },
     "B": {
-      "item": "nucleartech:lithium_power_cell"
+      "item": "nucleartech:triple_lithium_power_cell"
     }
   },
   "result": {

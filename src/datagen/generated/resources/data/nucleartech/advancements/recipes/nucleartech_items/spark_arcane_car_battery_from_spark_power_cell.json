@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:spark_power_cell_from_spark_arcane_car_battery"
+      "nucleartech:spark_arcane_car_battery_from_spark_power_cell"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:spark_power_cell_from_spark_arcane_car_battery"
+        "recipe": "nucleartech:spark_arcane_car_battery_from_spark_power_cell"
       }
     }
   },

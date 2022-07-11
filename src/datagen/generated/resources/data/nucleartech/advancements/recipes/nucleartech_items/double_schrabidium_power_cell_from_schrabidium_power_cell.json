@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:spark_arcane_car_battery_from_spark_battery"
+      "nucleartech:double_schrabidium_power_cell_from_schrabidium_power_cell"
     ]
   },
   "criteria": {
@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:spark_mix"
-            ]
+            "tag": "forge:dusts/neptunium"
           }
         ]
       }
@@ -21,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:spark_arcane_car_battery_from_spark_battery"
+        "recipe": "nucleartech:double_schrabidium_power_cell_from_schrabidium_power_cell"
       }
     }
   },

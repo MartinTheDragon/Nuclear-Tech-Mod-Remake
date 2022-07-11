@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:double_schrabidium_power_cell_from_schrabidium_battery"
+      "nucleartech:spark_power_cell_from_spark_battery"
     ]
   },
   "criteria": {
@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:dusts/neptunium"
+            "items": [
+              "nucleartech:spark_mix"
+            ]
           }
         ]
       }
@@ -19,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:double_schrabidium_power_cell_from_schrabidium_battery"
+        "recipe": "nucleartech:spark_power_cell_from_spark_battery"
       }
     }
   },
