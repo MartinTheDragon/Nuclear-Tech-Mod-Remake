@@ -30,7 +30,7 @@ open class AnvilSmithingRecipe(
 ) : Recipe<Container> {
     val tier = if (NuclearConfig.general.enableBabyMode.get()) 1 else tier
 
-    fun getAmountConsumed(index: Int, mirrored: Boolean) = when (index) {
+    open fun getAmountConsumed(index: Int, mirrored: Boolean) = when (index) {
         0 -> if (mirrored) ingredient2.requiredAmount else ingredient1.requiredAmount
         1 -> if (mirrored) ingredient1.requiredAmount else ingredient2.requiredAmount
         else -> 0
@@ -38,13 +38,13 @@ open class AnvilSmithingRecipe(
 
     override fun matches(container: Container, level: Level): Boolean = matchesInt(container) != -1
 
-    fun matchesInt(container: Container): Int =
+    open fun matchesInt(container: Container): Int =
         if (container.containerSize < 2) -1
         else if (ingredient1.testWithStackSize(container.getItem(0)) && ingredient2.testWithStackSize(container.getItem(1))) 0
         else if (shapeless) if (ingredient1.testWithStackSize(container.getItem(1)) && ingredient2.testWithStackSize(container.getItem(0))) 1 else -1
         else -1
 
-    fun isMissingIngredient(stack: ItemStack, firstSlotHasItem: Boolean): Boolean =
+    open fun isMissingIngredient(stack: ItemStack, firstSlotHasItem: Boolean): Boolean =
         if (firstSlotHasItem) ingredient2.test(stack)
         else if (shapeless) ingredient2.test(stack)
         else ingredient1.test(stack)
@@ -52,7 +52,7 @@ open class AnvilSmithingRecipe(
     override fun assemble(container: Container): ItemStack = result.copy()
 
     override fun getId() = recipeID
-    override fun getSerializer(): Serializer = RecipeSerializers.SMITHING.get()
+    override fun getSerializer(): RecipeSerializer<*> = RecipeSerializers.SMITHING.get()
     override fun getType() = RecipeTypes.SMITHING
     override fun isSpecial() = true
     override fun canCraftInDimensions(p_43999_: Int, p_44000_: Int) = true

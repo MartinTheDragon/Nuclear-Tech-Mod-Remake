@@ -3,15 +3,13 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.recipes.*
 import at.martinthedragon.nucleartech.recipes.PressingRecipe
+import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.data.DataGenerator
-import net.minecraft.data.recipes.FinishedRecipe
-import net.minecraft.data.recipes.RecipeProvider
-import net.minecraft.data.recipes.ShapedRecipeBuilder
-import net.minecraft.data.recipes.ShapelessRecipeBuilder
+import net.minecraft.data.recipes.*
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
@@ -32,6 +30,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     override fun buildCraftingRecipes(consumer: Consumer<FinishedRecipe>) {
         setExperienceYields()
+
+        SpecialRecipeBuilder.special(RecipeSerializers.SMITHING_RENAMING.get()).save(consumer, ntm("anvil_smithing_renaming").toString())
 
         ShapelessRecipeBuilder.shapeless(ModItems.schrabidiumFuelIngot.get()).requires(ModItems.schrabidiumNugget.get(), 3).requires(NuclearTags.Items.NUGGETS_NEPTUNIUM, 3).requires(NuclearTags.Items.NUGGETS_BERYLLIUM, 3).group("schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(ModItems.schrabidiumNugget.get())).save(consumer, ntm("schrabidium_fuel_ingot_from_isotope_nuggets"))
         ShapelessRecipeBuilder.shapeless(ModItems.highEnrichedSchrabidiumFuelIngot.get()).requires(ModItems.schrabidiumNugget.get(), 5).requires(NuclearTags.Items.NUGGETS_NEPTUNIUM, 2).requires(NuclearTags.Items.NUGGETS_BERYLLIUM, 2).group("high_enriched_schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(ModItems.schrabidiumNugget.get())).save(consumer, ntm("high_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"))
