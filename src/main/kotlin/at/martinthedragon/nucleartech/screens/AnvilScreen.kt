@@ -88,6 +88,11 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
         getMinecraft().keyboardHandler.setSendRepeatsToGui(false)
     }
 
+    override fun mouseClicked(mouseX: Double, mouseY: Double, button: Int): Boolean {
+        searchBox.mouseClicked(mouseX, mouseY, button) // so the search bar can deselect properly
+        return super.mouseClicked(mouseX, mouseY, button)
+    }
+
     private fun pageBack() {
         if (currentPage > 1) currentPage--
         else currentPage = pagesCount
