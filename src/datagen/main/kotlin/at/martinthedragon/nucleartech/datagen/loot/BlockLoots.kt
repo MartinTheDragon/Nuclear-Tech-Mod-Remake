@@ -207,13 +207,15 @@ class BlockLoots : BlockLoot() {
         dropSelf(ModBlocks.dineutroniumAnvil.get())
         dropSelf(ModBlocks.murkyAnvil.get())
         dropSelf(ModBlocks.assembler.get())
-        add(ModBlocks.assemblerPart.get(), noDrop())
 
         dropSelf(ModBlocks.littleBoy.get())
         dropSelf(ModBlocks.fatMan.get())
 
         dropSelf(ModBlocks.launchPad.get())
         add(ModBlocks.launchPadPart.get(), noDrop())
+
+        add(ModBlocks.genericMultiBlockPart.get(), noDrop())
+        add(ModBlocks.genericMultiBlockPort.get(), noDrop())
     }
 
     // automatically await a loot table for all blocks registered by this mod

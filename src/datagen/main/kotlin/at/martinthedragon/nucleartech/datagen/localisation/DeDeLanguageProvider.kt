@@ -130,13 +130,15 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.electricFurnace, "Elektrischer Ofen")
         addBlock(ModBlocks.shredder, "Brecher")
         addBlock(ModBlocks.assembler, "Fertigungsmaschine")
-        addBlock(ModBlocks.assemblerPart, "Fertigungsmaschine")
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
 
         addBlock(ModBlocks.launchPad, "Raketenabschussrampe")
         addBlock(ModBlocks.launchPadPart, "Raketenabschussrampe")
+
+        addBlock(ModBlocks.genericMultiBlockPart, "Multi-Block-Struktur Teil")
+        addBlock(ModBlocks.genericMultiBlockPort, "Multi-Block-Struktur Anschluss")
 
         addItem(ModItems.rawThorium, "Rohes Thorium")
         addItem(ModItems.rawRareEarth, "Rohe Seltene Erde")

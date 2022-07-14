@@ -133,13 +133,15 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.electricFurnace, "Electric Furnace")
         addBlock(ModBlocks.shredder, "Shredder")
         addBlock(ModBlocks.assembler, "Assembler")
-        addBlock(ModBlocks.assemblerPart, "Assembler")
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
 
         addBlock(ModBlocks.launchPad, "Missile Launch Pad")
         addBlock(ModBlocks.launchPadPart, "Missile Launch Pad")
+
+        addBlock(ModBlocks.genericMultiBlockPart, "Multi Block Structure Part")
+        addBlock(ModBlocks.genericMultiBlockPort, "Multi Block Structure Port")
 
         addItem(ModItems.rawThorium, "Raw Thorium")
         addItem(ModItems.rawRareEarth, "Raw Rare Earth")

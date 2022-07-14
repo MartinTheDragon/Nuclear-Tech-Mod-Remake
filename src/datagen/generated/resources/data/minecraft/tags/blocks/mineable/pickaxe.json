@@ -143,8 +143,9 @@
     "nucleartech:dineutronium_anvil",
     "nucleartech:murky_anvil",
     "nucleartech:assembler",
-    "nucleartech:assembler_part",
     "nucleartech:little_boy",
-    "nucleartech:fat_man"
+    "nucleartech:fat_man",
+    "nucleartech:generic_multi_block_part",
+    "nucleartech:generic_multi_block_port"
   ]
 }

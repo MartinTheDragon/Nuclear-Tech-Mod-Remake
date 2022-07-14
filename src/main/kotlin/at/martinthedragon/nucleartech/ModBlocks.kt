@@ -4,6 +4,8 @@ import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.blocks.*
 import at.martinthedragon.nucleartech.blocks.AnvilBlock
 import at.martinthedragon.nucleartech.blocks.BlastFurnaceBlock
+import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
+import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPort
 import net.minecraft.core.BlockPos
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.LevelReader
@@ -181,7 +183,6 @@ object ModBlocks {
     val electricFurnace = BLOCKS.registerK("electric_furnace") { ElectricFurnaceBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().lightLevel(this::getLightLevelLit13).sound(SoundType.METAL)) }
     val shredder = BLOCKS.registerK("shredder") { ShredderBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val assembler = BLOCKS.registerK("assembler") { AssemblerBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
-    val assemblerPart = BLOCKS.registerK("assembler_part", AssemblerBlock::AssemblerPart)
 
     val ironAnvil = BLOCKS.registerK("iron_anvil") { AnvilBlock(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
     val leadAnvil = BLOCKS.registerK("lead_anvil") { AnvilBlock(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
@@ -203,6 +204,11 @@ object ModBlocks {
 
     val launchPad = BLOCKS.registerK("launch_pad") { LaunchPadBlock(Properties.of(METAL).strength(5F, 1000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
     val launchPadPart = BLOCKS.registerK("launch_pad_part", LaunchPadBlock::LaunchPadPartBlock)
+
+    // Other
+
+    val genericMultiBlockPart = BLOCKS.registerK("generic_multi_block_part") { MultiBlockPart() }
+    val genericMultiBlockPort = BLOCKS.registerK("generic_multi_block_port") { MultiBlockPort() }
 
     private fun getLightLevelLit13(state: BlockState) = if (state.getValue(BlockStateProperties.LIT)) 13 else 0
 }

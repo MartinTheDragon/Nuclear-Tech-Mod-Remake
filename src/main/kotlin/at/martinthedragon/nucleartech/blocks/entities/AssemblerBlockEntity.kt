@@ -4,9 +4,6 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.blocks.entities.SoundLoopBlockEntity
 import at.martinthedragon.nucleartech.api.blocks.entities.TickingBlockEntity
-import at.martinthedragon.nucleartech.api.blocks.entities.TickingServerBlockEntity
-import at.martinthedragon.nucleartech.blocks.AssemblerBlock
-import at.martinthedragon.nucleartech.blocks.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.blocks.multi.RotatedMultiBlockPlacer
 import at.martinthedragon.nucleartech.capability.items.AccessLimitedInputItemHandler
 import at.martinthedragon.nucleartech.capability.items.AccessLimitedOutputItemHandler
@@ -14,7 +11,6 @@ import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.items.canTransferItem
-import at.martinthedragon.nucleartech.items.transferItemsBetweenItemHandlers
 import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.menus.AssemblerMenu
 import at.martinthedragon.nucleartech.networking.AssemblerSyncMessage
@@ -234,8 +230,8 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY -> {
                 if (side == null) return inventoryCapability.cast()
                 when (relativeRotation.rotate(side)) {
-                    in inventoryInputPorts.values.flatMap(Set<Direction>::asIterable) -> return inventoryInputCapability.cast()
-                    in inventoryOutputPorts.values.flatMap(Set<Direction>::asIterable) -> return inventoryOutputCapability.cast()
+                    Direction.WEST -> return inventoryInputCapability.cast()
+                    Direction.EAST -> return inventoryOutputCapability.cast()
                     else -> {}
                 }
             }
@@ -250,59 +246,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
         energyCapability.invalidate()
     }
 
-    class AssemblerPartBlockEntity(pos: BlockPos, state: BlockState) : MultiBlockPart.MultiBlockPartBlockEntity(BlockEntityTypes.assemblerPartBlockEntityType.get(), pos, state), TickingServerBlockEntity {
-        private val relativeRotation by lazy { RotatedMultiBlockPlacer.invert(RotatedMultiBlockPlacer.getRotationFor(level!!.getBlockState(core).getValue(HorizontalDirectionalBlock.FACING))) }
-        private val relativePos by lazy { blockPos.subtract(core).rotate(relativeRotation) }
-
-        // only has a ticker if it's in port position
-        override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
-            val mode = state.getValue(AssemblerBlock.AssemblerPart.PORT_MODE)
-            if (mode.isNone()) return
-            val portMap = if (mode.isInput()) inventoryInputPorts else inventoryOutputPorts
-            val otherBlockEntityPos = pos.relative(RotatedMultiBlockPlacer.invert(relativeRotation).rotate(portMap.getValue(relativePos).first()))
-            val direction = Direction.fromNormal(otherBlockEntityPos.subtract(pos))
-            level.getBlockEntity(core)?.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction)?.ifPresent { assembler ->
-                val otherBlockEntity = level.getBlockEntity(otherBlockEntityPos) ?: return@ifPresent
-                otherBlockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, direction).ifPresent { other ->
-                    transferItemsBetweenItemHandlers(other, assembler, 64, mode.isOutput())
-                }
-            }
-        }
-
-        override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-            if (hasLevel() && side != null) {
-                val coreEntity = level!!.getBlockEntity(core)
-                if (coreEntity != null) {
-                    val relativeDirection = relativeRotation.rotate(side)
-                    if (cap == CapabilityEnergy.ENERGY && relativePos in energyPorts.keys) {
-                        if (relativeDirection in energyPorts.getValue(relativePos)) return coreEntity.getCapability(cap, side).cast()
-                    } else if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                        if (relativePos in inventoryInputPorts.keys && relativeDirection in inventoryInputPorts.getValue(relativePos)) return coreEntity.getCapability(cap, side).cast()
-                        if (relativePos in inventoryOutputPorts.keys && relativeDirection in inventoryOutputPorts.getValue(relativePos)) return coreEntity.getCapability(cap, side).cast()
-                    }
-                }
-            }
-
-            return super.getCapability(cap, side)
-        }
-    }
-
     companion object {
         const val MAX_ENERGY = 100_000
-
-        val energyPorts = mapOf(
-            BlockPos(0, 0, 1) to setOf(Direction.SOUTH),
-            BlockPos(-1, 0, 1) to setOf(Direction.SOUTH),
-            BlockPos(0, 0, -2) to setOf(Direction.NORTH),
-            BlockPos(-1, 0, -2) to setOf(Direction.NORTH)
-        )
-
-        val inventoryInputPorts = mapOf(
-            BlockPos(1, 0, -1) to setOf(Direction.EAST)
-        )
-
-        val inventoryOutputPorts = mapOf(
-            BlockPos(-2, 0, 0) to setOf(Direction.WEST)
-        )
     }
 }

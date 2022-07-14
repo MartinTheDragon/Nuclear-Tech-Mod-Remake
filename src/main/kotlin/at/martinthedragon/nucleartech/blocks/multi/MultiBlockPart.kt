@@ -1,32 +1,44 @@
 package at.martinthedragon.nucleartech.blocks.multi
 
+import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.blocks.openMultiBlockMenu
+import net.minecraft.client.particle.ParticleEngine
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.BaseEntityBlock
-import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.SoundType
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.HitResult
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
+import net.minecraftforge.client.IBlockRenderProperties
+import java.util.function.Consumer
 
-abstract class MultiBlockPart(val core: Block) : BaseEntityBlock(Properties.of(Material.METAL).strength(10F).sound(SoundType.METAL)) {
+open class MultiBlockPart(val blockEntityGetter: (pos: BlockPos, state: BlockState) -> MultiBlockPartBlockEntity? = ::GenericMultiBlockPartBlockEntity) : BaseEntityBlock(Properties.of(Material.METAL).strength(10F).sound(SoundType.METAL)) {
     override fun isPathfindable(state: BlockState, level: BlockGetter, pos: BlockPos, path: PathComputationType) = false
-    override fun getCloneItemStack(state: BlockState, target: HitResult, world: BlockGetter, pos: BlockPos, player: Player) = ItemStack(core)
+
+    override fun getCloneItemStack(state: BlockState, target: HitResult, world: BlockGetter, pos: BlockPos, player: Player): ItemStack {
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity !is MultiBlockPartBlockEntity) return ItemStack.EMPTY
+        val blockState = world.getBlockState(blockEntity.core)
+        return ItemStack(blockState.block)
+    }
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_60519_: Boolean) {
         if (!state.`is`(newState.block)) {
             val blockEntity = level.getBlockEntity(pos)
-            if (blockEntity is MultiBlockPartBlockEntity && level.getBlockState(blockEntity.core).`is`(core))
-                level.destroyBlock(blockEntity.core, true)
+            if (blockEntity is MultiBlockPartBlockEntity) level.destroyBlock(blockEntity.core, true)
         }
         @Suppress("DEPRECATION") super.onRemove(state, level, pos, newState, p_60519_)
     }
@@ -39,9 +51,21 @@ abstract class MultiBlockPart(val core: Block) : BaseEntityBlock(Properties.of(M
         super.playerWillDestroy(level, pos, state, player)
     }
 
+    override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMultiBlockMenu<BaseContainerBlockEntity, MultiBlockPartBlockEntity>(level, pos, player)
+
     override fun getOcclusionShape(state: BlockState, level: BlockGetter, pos: BlockPos): VoxelShape = Shapes.empty()
     override fun propagatesSkylightDown(state: BlockState, level: BlockGetter, pos: BlockPos) = true
     override fun getShadeBrightness(state: BlockState, level: BlockGetter, pos: BlockPos) = 1F
+
+    override fun newBlockEntity(pos: BlockPos, state: BlockState) = blockEntityGetter(pos, state)
+
+    override fun initializeClient(consumer: Consumer<IBlockRenderProperties>) {
+        consumer.accept(object : IBlockRenderProperties {
+            override fun addDestroyEffects(state: BlockState?, Level: Level?, pos: BlockPos?, manager: ParticleEngine?): Boolean {
+                return true // prevent particles
+            }
+        })
+    }
 
     open class MultiBlockPartBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) : BlockEntity(type, pos, state) {
         var core: BlockPos = BlockPos.ZERO
@@ -57,4 +81,6 @@ abstract class MultiBlockPart(val core: Block) : BaseEntityBlock(Properties.of(M
             core = BlockPos(tag.getInt("coreX"), tag.getInt("coreY"), tag.getInt("coreZ"))
         }
     }
+
+    class GenericMultiBlockPartBlockEntity(pos: BlockPos, state: BlockState) : MultiBlockPartBlockEntity(BlockEntityTypes.genericMultiBlockPartBlockEntityType.get(), pos, state)
 }

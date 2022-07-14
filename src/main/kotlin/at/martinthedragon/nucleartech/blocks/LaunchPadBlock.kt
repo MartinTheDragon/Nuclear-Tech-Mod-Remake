@@ -46,11 +46,7 @@ class LaunchPadBlock(properties: Properties) : BaseEntityBlock(properties), Igni
     override fun newBlockEntity(pos: BlockPos, state: BlockState) = LaunchPadBlockEntity(pos, state)
     override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.launchPadBlockEntityType.get())
 
-    class LaunchPadPartBlock : MultiBlockPart(ModBlocks.launchPad.get()), IgnitableExplosive {
-        override fun isPathfindable(state: BlockState, level: BlockGetter, pos: BlockPos, path: PathComputationType) = false
-
-        override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMultiBlockMenu<LaunchPadBlockEntity, LaunchPadBlockEntity.LaunchPadPartBlockEntity>(level, pos, player)
-
+    class LaunchPadPartBlock : MultiBlockPart(LaunchPadBlockEntity::LaunchPadPartBlockEntity), IgnitableExplosive {
         override fun onPlace(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, something: Boolean) {
             if (!newState.`is`(oldState.block) && level.hasNeighborSignal(pos)) detonate(level, pos)
         }
@@ -58,8 +54,6 @@ class LaunchPadBlock(properties: Properties) : BaseEntityBlock(properties), Igni
         override fun neighborChanged(blockState: BlockState, level: Level, pos: BlockPos, neighbor: Block, neighborPos: BlockPos, something: Boolean) {
             if (level.hasNeighborSignal(pos)) detonate(level, pos)
         }
-
-        override fun newBlockEntity(pos: BlockPos, state: BlockState) = LaunchPadBlockEntity.LaunchPadPartBlockEntity(pos, state)
 
         override fun detonate(level: Level, pos: BlockPos): IgnitableExplosive.DetonationResult {
             val blockEntity = level.getBlockEntity(pos)

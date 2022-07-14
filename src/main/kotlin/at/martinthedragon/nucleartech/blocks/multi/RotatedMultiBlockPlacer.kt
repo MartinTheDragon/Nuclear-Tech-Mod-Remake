@@ -6,8 +6,7 @@ import net.minecraft.core.Direction
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.Rotation
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.block.state.properties.Property
 import net.minecraft.world.phys.AABB
 
 class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
@@ -34,7 +33,18 @@ class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
 
     override fun finish(level: LevelAccessor, pos: BlockPos): Boolean {
         structureMap.remove(BlockPos.ZERO) // never place at origin
-        for ((relativePos, state) in structureMap) if (!level.setBlock(relativePos.offset(pos), state, 11)) return false
+        for ((relativePos, state) in structureMap) { // modify direction values
+            var newState = state
+            for ((property, direction) in state.values.filterValues { it is Direction }) {
+                @Suppress("UNCHECKED_CAST")
+                property as? Property<Direction> ?: continue
+
+                val newDirection = rotation.rotate(direction as Direction)
+                if (newDirection !in property.possibleValues) continue
+                newState = newState.setValue(property, newDirection)
+            }
+            if (!level.setBlock(relativePos.offset(pos), newState, 11)) return false
+        }
         for (relativePos in structureMap.keys) {
             val blockEntity = level.getBlockEntity(relativePos.offset(pos))
             if (blockEntity is MultiBlockPart.MultiBlockPartBlockEntity) blockEntity.core = pos
@@ -45,10 +55,10 @@ class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
 
     companion object {
         fun getRotationFor(direction: Direction) = when (direction) {
-            Direction.SOUTH -> Rotation.NONE
-            Direction.WEST -> Rotation.CLOCKWISE_90
-            Direction.NORTH -> Rotation.CLOCKWISE_180
-            Direction.EAST -> Rotation.COUNTERCLOCKWISE_90
+            Direction.NORTH -> Rotation.NONE
+            Direction.EAST -> Rotation.CLOCKWISE_90
+            Direction.SOUTH -> Rotation.CLOCKWISE_180
+            Direction.WEST -> Rotation.COUNTERCLOCKWISE_90
             Direction.UP, Direction.DOWN -> Rotation.NONE
         }
 
