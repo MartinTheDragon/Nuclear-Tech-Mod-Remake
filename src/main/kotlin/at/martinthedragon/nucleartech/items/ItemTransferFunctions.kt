@@ -1,11 +1,15 @@
 package at.martinthedragon.nucleartech.items
 
+import at.martinthedragon.nucleartech.extensions.getItems
+import at.martinthedragon.nucleartech.extensions.toStupidMojangList
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import net.minecraftforge.items.IItemHandler
+import net.minecraftforge.items.ItemHandlerHelper
+import net.minecraftforge.items.ItemStackHandler
 import kotlin.math.min
 
 fun canTransferItem(from: ItemStack, to: ItemStack, inventory: Container? = null): Boolean = when {
@@ -48,15 +52,16 @@ fun giveItemToInventory(player: Player, item: ItemLike, amount: Int) {
     while (true) {
         if (amountLeft <= 0) break
 
-        @Suppress("DEPRECATION")
-        val possibleAmount = min(item.asItem().maxStackSize, amountLeft)
-        val newStack = ItemStack(item, possibleAmount)
-        giveItemToInventory(player, newStack)
+        val newStack = ItemStack(item, amount)
+        val possibleAmount = min(newStack.maxStackSize, amountLeft)
+        newStack.count = possibleAmount
+        ItemHandlerHelper.giveItemToPlayer(player, newStack)
 
         amountLeft -= possibleAmount
     }
 }
 
+@Deprecated("This util method already exists in ItemHandlerHelper", ReplaceWith("ItemHandlerHelper.giveItemToPlayer(player, stack)", "net.minecraftforge.items.ItemHandlerHelper"))
 fun giveItemToInventory(player: Player, stack: ItemStack) {
     val successful = player.inventory.add(stack)
     if (successful && stack.isEmpty) {
@@ -75,5 +80,26 @@ fun giveItemToInventory(player: Player, stack: ItemStack) {
             droppedStack.setNoPickUpDelay()
             droppedStack.owner = player.uuid
         }
+    }
+}
+
+fun insertAllItemsStacked(inventory: IItemHandler, stacks: Collection<ItemStack>, simulate: Boolean): List<ItemStack> {
+    if (stacks.all(ItemStack::isEmpty)) return emptyList()
+
+    if (simulate) {
+        val handler = ItemStackHandler(inventory.getItems().toStupidMojangList())
+        val remainingStacks = mutableListOf<ItemStack>()
+        for (stack in stacks) {
+            val remainder = ItemHandlerHelper.insertItemStacked(handler, stack.copy(), false)
+            if (!remainder.isEmpty) remainingStacks += remainder
+        }
+        return remainingStacks
+    } else {
+        val remainingStacks = mutableListOf<ItemStack>()
+        for (stack in stacks) {
+            val remainder = ItemHandlerHelper.insertItemStacked(inventory, stack.copy(), false)
+            if (!remainder.isEmpty) remainingStacks += remainder
+        }
+        return remainingStacks
     }
 }

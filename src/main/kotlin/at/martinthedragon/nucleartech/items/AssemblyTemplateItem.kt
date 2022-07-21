@@ -1,10 +1,9 @@
 package at.martinthedragon.nucleartech.items
 
-import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.recipes.AssemblyRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import at.martinthedragon.nucleartech.rendering.CustomBEWLR
-import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.core.NonNullList
 import net.minecraft.network.chat.Component
@@ -37,15 +36,15 @@ class AssemblyTemplateItem(properties: Properties) : Item(properties) {
         val resultItem = recipe.resultItem
 
         with(tooltips) {
-            add(TranslatableComponent("info.template.out").withStyle(ChatFormatting.BOLD, ChatFormatting.GRAY))
-            add(TextComponent("${resultItem.count}x ".prependIndent("  ")).append(resultItem.hoverName).withStyle(ChatFormatting.GRAY))
-            add(TranslatableComponent("info.template.in").withStyle(ChatFormatting.BOLD, ChatFormatting.GRAY))
-            for (input in recipe.ingredientsList) add(TextComponent("${input.requiredAmount}x ".prependIndent("  ")).append(input.items.first().hoverName).withStyle(ChatFormatting.GRAY))
-            add(TranslatableComponent("info.template.time").withStyle(ChatFormatting.BOLD, ChatFormatting.GRAY))
-            add(TextComponent("${floor(recipe.duration / 20F * 100F) / 100F} ".prependIndent("  ")).append(TranslatableComponent("info.template.seconds")).withStyle(ChatFormatting.GRAY))
+            add(TranslatableComponent("info.template.out").bold().gray())
+            add(TextComponent("${resultItem.count}x ".prependIndent("  ")).append(resultItem.hoverName).gray())
+            add(TranslatableComponent("info.template.ins").bold().gray())
+            for (input in recipe.ingredientsList) add(TextComponent("${input.requiredAmount}x ".prependIndent("  ")).append(input.items.first().hoverName).gray())
+            add(TranslatableComponent("info.template.time").bold().gray())
+            add(TextComponent("${floor(recipe.duration / 20F * 100F) / 100F} ".prependIndent("  ")).append(TranslatableComponent("info.template.seconds")).gray())
         }
 
-        if (flag.isAdvanced) tooltips += TextComponent(recipe.id.toString()).withStyle(ChatFormatting.ITALIC, ChatFormatting.BLUE)
+        if (flag.isAdvanced) tooltips += TextComponent(recipe.id.toString()).italic().blue()
     }
 
     override fun initializeClient(consumer: Consumer<IItemRenderProperties>) {

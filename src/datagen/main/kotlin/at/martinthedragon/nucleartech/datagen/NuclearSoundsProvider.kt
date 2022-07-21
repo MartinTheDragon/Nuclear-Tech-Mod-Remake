@@ -38,6 +38,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.anvilFall, definition().with(sound(ntm("block/anvil_fall_berserk"))).subtitle(ntmSubtitle("anvil.fall")))
         add(SoundEvents.pressOperate, definition().with(sound(ntm("block/press/press_operate"))).subtitle(ntmSubtitle("press.operate")))
         add(SoundEvents.assemblerOperate, definition().with(sound(ntm("block/assembler/assembler_operate"))).subtitle(ntmSubtitle("assembler.operate")))
+        add(SoundEvents.chemPlantOperate, definition().with(sound(ntm("block/chem_plant/chem_plant_operate"))).subtitle(ntmSubtitle("chem_plant.operate")))
         add(SoundEvents.debris, definition().with(sound(ntm("block/debris1")), sound(ntm("block/debris2")), sound(ntm("block/debris3"))).subtitle(ntmSubtitle("block.debris")))
         add(SoundEvents.inject, definition().with(sound(ntm("item/use/inject"))).subtitle(ntmSubtitle("item.use.inject")))
         add(SoundEvents.emptyIVBag, definition().with(sound(ntm("item/use/radaway"))).subtitle(ntmSubtitle("item.use.radaway")))

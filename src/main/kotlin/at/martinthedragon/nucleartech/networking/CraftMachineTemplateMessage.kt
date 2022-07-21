@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.networking
 import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.NuclearTags
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.items.giveItemToInventory
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
 import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
@@ -50,15 +51,8 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                     val pressStamps = tagManager.getTag(NuclearTags.Items.FOLDER_STAMPS)
                     val sirenTracks = tagManager.getTag(NuclearTags.Items.SIREN_TRACKS)
                     when (result.item) {
-                        is AssemblyTemplateItem -> {
-                            if (!AssemblyTemplateItem.isValidTemplate(result, sender.level.recipeManager)) return@enqueueWork
-
-                            // h
-                            val ingredients = listOf(StackedIngredient.of(1, Items.PAPER), StackedIngredient.of(1, Tags.Items.DYES))
-                            if (ingredients.containerSatisfiesRequirements(sender.inventory))
-                                ingredients.containerSatisfiesRequirements(sender.inventory, true)
-                            else return@enqueueWork
-                        }
+                        is AssemblyTemplateItem -> if (!AssemblyTemplateItem.isValidTemplate(result, sender.level.recipeManager) || !removeTemplateIngredients(sender)) return@enqueueWork
+                        is ChemPlantTemplateItem -> if (!ChemPlantTemplateItem.isValidTemplate(result, sender.level.recipeManager) || !removeTemplateIngredients(sender)) return@enqueueWork
                         in pressStamps -> {
                             val stoneStamps = tagManager.getTag(NuclearTags.Items.STONE_STAMPS)
                             val ironStamps = tagManager.getTag(NuclearTags.Items.IRON_STAMPS)
@@ -90,6 +84,14 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                 giveItemToInventory(sender, result.copy())
             }
         context.get().packetHandled = true
+    }
+
+    private fun removeTemplateIngredients(sender: ServerPlayer): Boolean {
+        val ingredients = listOf(StackedIngredient.of(1, Items.PAPER), StackedIngredient.of(1, Tags.Items.DYES))
+        if (ingredients.containerSatisfiesRequirements(sender.inventory))
+            ingredients.containerSatisfiesRequirements(sender.inventory, true)
+        else return false
+        return true
     }
 
     companion object {

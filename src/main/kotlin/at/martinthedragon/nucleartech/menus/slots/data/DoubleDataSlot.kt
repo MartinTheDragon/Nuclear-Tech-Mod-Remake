@@ -26,7 +26,7 @@ abstract class DoubleDataSlot private constructor() : NTechDataSlot {
             buffer.writeDouble(value)
         }
 
-        override fun handleDataUpdate(menu: NTechContainerMenu) {
+        override fun handleDataUpdate(menu: NTechContainerMenu<*>) {
             menu.handleDataUpdate(slot, value)
         }
     }

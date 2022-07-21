@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.menus.slots.data
 
 import at.martinthedragon.nucleartech.menus.NTechContainerMenu
 import net.minecraft.network.FriendlyByteBuf
+import net.minecraftforge.fluids.FluidStack
 import kotlin.reflect.KClass
 
 sealed interface NTechDataSlot {
@@ -16,7 +17,10 @@ sealed interface NTechDataSlot {
             INT(Int::class, 0, IntDataSlot::createUnsafe, IntDataSlot::IntData),
             LONG(Long::class, 0L, LongDataSlot::createUnsafe, LongDataSlot::LongData),
             FLOAT(Float::class, 0F, FloatDataSlot::createUnsafe, FloatDataSlot::FloatData),
-            DOUBLE(Double::class, 0.0, DoubleDataSlot::createUnsafe, DoubleDataSlot::DoubleData);
+            DOUBLE(Double::class, 0.0, DoubleDataSlot::createUnsafe, DoubleDataSlot::DoubleData),
+
+            FLUID_STACK(FluidStack::class, FluidStack.EMPTY, FluidStackDataSlot::createUnsafe, FluidStackDataSlot::FluidStackData),
+            ;
 
             @Suppress("UNCHECKED_CAST")
             fun <T> getDefault() = default as T
@@ -31,7 +35,7 @@ sealed interface NTechDataSlot {
             buffer.writeShort(slot.toInt())
         }
 
-        abstract fun handleDataUpdate(menu: NTechContainerMenu)
+        abstract fun handleDataUpdate(menu: NTechContainerMenu<*>)
 
         companion object {
             fun readFromBuffer(buffer: FriendlyByteBuf): Data {

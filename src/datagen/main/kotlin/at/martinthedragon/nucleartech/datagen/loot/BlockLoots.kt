@@ -207,6 +207,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(ModBlocks.dineutroniumAnvil.get())
         dropSelf(ModBlocks.murkyAnvil.get())
         dropSelf(ModBlocks.assembler.get())
+        dropSelf(ModBlocks.chemPlant.get())
 
         dropSelf(ModBlocks.littleBoy.get())
         dropSelf(ModBlocks.fatMan.get())

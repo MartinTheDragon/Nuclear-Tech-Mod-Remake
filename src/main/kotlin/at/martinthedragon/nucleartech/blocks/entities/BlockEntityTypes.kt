@@ -21,6 +21,7 @@ object BlockEntityTypes {
     val electricFurnaceBlockEntityType = BLOCK_ENTITIES.registerK("electric_furnace") { BlockEntityType.Builder.of(::ElectricFurnaceBlockEntity, ModBlocks.electricFurnace.get()).build() }
     val shredderBlockEntityType = BLOCK_ENTITIES.registerK("shredder") { BlockEntityType.Builder.of(::ShredderBlockEntity, ModBlocks.shredder.get()).build() }
     val assemblerBlockEntityType = BLOCK_ENTITIES.registerK("assembler") { BlockEntityType.Builder.of(::AssemblerBlockEntity, ModBlocks.assembler.get()).build() }
+    val chemPlantBlockEntityType = BLOCK_ENTITIES.registerK("chem_plant") { BlockEntityType.Builder.of(::ChemPlantBlockEntity, ModBlocks.chemPlant.get()).build() }
     val littleBoyBlockEntityType = BLOCK_ENTITIES.registerK("little_boy") { BlockEntityType.Builder.of(::LittleBoyBlockEntity, ModBlocks.littleBoy.get()).build() }
     val fatManBlockEntityType = BLOCK_ENTITIES.registerK("fat_man") { BlockEntityType.Builder.of(::FatManBlockEntity, ModBlocks.fatMan.get()).build() }
     val launchPadBlockEntityType = BLOCK_ENTITIES.registerK("launch_pad") { BlockEntityType.Builder.of(::LaunchPadBlockEntity, ModBlocks.launchPad.get()).build() }

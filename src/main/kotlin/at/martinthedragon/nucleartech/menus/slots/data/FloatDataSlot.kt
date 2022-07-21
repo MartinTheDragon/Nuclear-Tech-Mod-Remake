@@ -26,7 +26,7 @@ abstract class FloatDataSlot private constructor() : NTechDataSlot {
             buffer.writeFloat(value)
         }
 
-        override fun handleDataUpdate(menu: NTechContainerMenu) {
+        override fun handleDataUpdate(menu: NTechContainerMenu<*>) {
             menu.handleDataUpdate(slot, value)
         }
     }

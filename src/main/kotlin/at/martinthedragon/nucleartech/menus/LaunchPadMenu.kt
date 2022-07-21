@@ -18,7 +18,7 @@ class LaunchPadMenu(
     playerInventory: Inventory,
     blockEntity: LaunchPadBlockEntity,
     val data: ContainerData = SimpleContainerData(1)
-) : NTechContainerMenu(MenuTypes.launchPadMenu.get(), windowID, playerInventory, blockEntity) {
+) : NTechContainerMenu<LaunchPadBlockEntity>(MenuTypes.launchPadMenu.get(), windowID, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {

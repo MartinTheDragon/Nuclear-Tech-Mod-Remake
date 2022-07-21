@@ -26,7 +26,7 @@ abstract class BooleanDataSlot private constructor() : NTechDataSlot {
             buffer.writeBoolean(value)
         }
 
-        override fun handleDataUpdate(menu: NTechContainerMenu) {
+        override fun handleDataUpdate(menu: NTechContainerMenu<*>) {
             menu.handleDataUpdate(slot, value)
         }
     }

@@ -18,7 +18,7 @@ class ShredderMenu(
     playerInventory: Inventory,
     blockEntity: ShredderBlockEntity,
     val data: ContainerData = SimpleContainerData(2)
-) : NTechContainerMenu(MenuTypes.shredderMenu.get(), windowID, playerInventory, blockEntity) {
+) : NTechContainerMenu<ShredderBlockEntity>(MenuTypes.shredderMenu.get(), windowID, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {

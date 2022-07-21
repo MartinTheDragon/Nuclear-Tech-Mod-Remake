@@ -44,6 +44,24 @@ class NuclearModelProvider(
                 .flipV(true).end()
                 .texture("texture", modLoc("block/assembler/assembler_arm"))
             ).end()
+        getBuilder("chem_plant")
+            .customLoader { modelLoader, existingFileHelper -> CompositeModelBuilder.begin(modelLoader, existingFileHelper) }
+            .submodel("body", getBuilder("chem_plant_body")
+                .customLoader { modelLoader, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
+                .modelLocation(modLoc("models/other/chem_plant/chem_plant_body.obj"))
+                .flipV(true).detectCullableFaces(false).end()
+                .texture("texture", modLoc("block/chem_plant/chem_plant_body"))
+            ).submodel("spinner", getBuilder("chem_plant_spinner")
+                .customLoader { modeLoader, existingFileHelper -> OBJLoaderBuilder.begin(modeLoader, existingFileHelper) }
+                .modelLocation(modLoc("models/other/chem_plant/chem_plant_spinner.obj"))
+                .flipV(true).detectCullableFaces(false).end()
+                .texture("texture", modLoc("block/chem_plant/chem_plant_spinner"))
+            ).submodel("piston", getBuilder("chem_plant_piston")
+                .customLoader { modeLoader, existingFileHelper -> OBJLoaderBuilder.begin(modeLoader, existingFileHelper) }
+                .modelLocation(modLoc("models/other/chem_plant/chem_plant_piston.obj"))
+                .flipV(true).detectCullableFaces(false).end()
+                .texture("texture", modLoc("block/chem_plant/chem_plant_piston"))
+            ).end()
         getBuilder("mushroom_cloud")
             .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
             .modelLocation(modLoc("models/other/mushroom_cloud/mush.obj"))

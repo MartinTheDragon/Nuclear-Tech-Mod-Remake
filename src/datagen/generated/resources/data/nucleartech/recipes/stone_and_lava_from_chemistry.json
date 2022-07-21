@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:chem",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "minecraft:stone"
+      },
+      "amount": 1
+    }
+  ],
+  "inputFluid1": "{Amount:500,FluidName:\"minecraft:water\"}",
+  "inputFluid2": "{Amount:0,FluidName:\"minecraft:empty\"}",
+  "results": [
+    {
+      "item": "minecraft:stone",
+      "count": 2
+    }
+  ],
+  "outputFluid1": "{Amount:250,FluidName:\"minecraft:lava\"}",
+  "outputFluid2": "{Amount:0,FluidName:\"minecraft:empty\"}",
+  "duration": 10
+}

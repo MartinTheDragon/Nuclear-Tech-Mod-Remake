@@ -19,7 +19,7 @@ class CombustionGeneratorMenu(
     playerInventory: Inventory,
     blockEntity: CombustionGeneratorBlockEntity,
     val data: ContainerData = SimpleContainerData(4)
-) : NTechContainerMenu(MenuTypes.combustionGeneratorMenu.get(), windowId, playerInventory, blockEntity) {
+) : NTechContainerMenu<CombustionGeneratorBlockEntity>(MenuTypes.combustionGeneratorMenu.get(), windowId, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {

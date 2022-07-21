@@ -5,7 +5,11 @@ import at.martinthedragon.nucleartech.blocks.openMultiBlockMenu
 import net.minecraft.client.particle.ParticleEngine
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
@@ -59,6 +63,9 @@ open class MultiBlockPart(val blockEntityGetter: (pos: BlockPos, state: BlockSta
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState) = blockEntityGetter(pos, state)
 
+    override fun addRunningEffects(state: BlockState, level: Level, pos: BlockPos, entity: Entity) = true
+    override fun addLandingEffects(state1: BlockState, level: ServerLevel, pos: BlockPos, state2: BlockState, entity: LivingEntity, numberOfParticles: Int) = true
+
     override fun initializeClient(consumer: Consumer<IBlockRenderProperties>) {
         consumer.accept(object : IBlockRenderProperties {
             override fun addDestroyEffects(state: BlockState?, Level: Level?, pos: BlockPos?, manager: ParticleEngine?): Boolean {
@@ -71,6 +78,7 @@ open class MultiBlockPart(val blockEntityGetter: (pos: BlockPos, state: BlockSta
         var core: BlockPos = BlockPos.ZERO
 
         override fun saveAdditional(tag: CompoundTag) {
+            super.saveAdditional(tag)
             tag.putInt("coreX", core.x)
             tag.putInt("coreY", core.y)
             tag.putInt("coreZ", core.z)
@@ -80,6 +88,9 @@ open class MultiBlockPart(val blockEntityGetter: (pos: BlockPos, state: BlockSta
             super.load(tag)
             core = BlockPos(tag.getInt("coreX"), tag.getInt("coreY"), tag.getInt("coreZ"))
         }
+
+        override fun getUpdatePacket(): ClientboundBlockEntityDataPacket = ClientboundBlockEntityDataPacket.create(this)
+        override fun getUpdateTag(): CompoundTag = saveWithoutMetadata()
     }
 
     class GenericMultiBlockPartBlockEntity(pos: BlockPos, state: BlockState) : MultiBlockPartBlockEntity(BlockEntityTypes.genericMultiBlockPartBlockEntityType.get(), pos, state)

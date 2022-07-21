@@ -444,6 +444,7 @@ object NuclearTags {
         val COILS_COPPER = forgeTag("coils/copper")
         val COILS_GOLD = forgeTag("coils/gold")
         val COILS_SUPER_CONDUCTOR = forgeTag("coils/super_conductor")
+        val COILS_TUNGSTEN = forgeTag("coils/tungsten")
 
         val FISSILE_FUELS = forgeTag("fissile_fuels")
         val FISSILE_FUELS_MOX = forgeTag("fissile_fuels/mox")

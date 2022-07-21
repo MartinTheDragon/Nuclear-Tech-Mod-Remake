@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.menus
 
+import at.martinthedragon.nucleartech.api.menus.slots.ResultSlot
 import at.martinthedragon.nucleartech.blocks.entities.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
 import net.minecraft.network.FriendlyByteBuf
@@ -17,7 +18,7 @@ class AssemblerMenu(
     playerInventory: Inventory,
     blockEntity: AssemblerBlockEntity,
     val data: ContainerData = SimpleContainerData(3)
-) : NTechContainerMenu(MenuTypes.assemblerMenu.get(), windowID, playerInventory, blockEntity) {
+) : NTechContainerMenu<AssemblerBlockEntity>(MenuTypes.assemblerMenu.get(), windowID, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {
@@ -25,7 +26,7 @@ class AssemblerMenu(
         for (i in 0 until 3) addSlot(SlotItemHandler(inv, 1 + i, 152, 18 + i * 18))
         addSlot(SlotItemHandler(inv, 4, 80, 54))
         for (i in 0 until 6) for (j in 0 until 2) addSlot(SlotItemHandler(inv, 5 + j + i * 2, 8 + j * 18, 18 + i * 18))
-        addSlot(SlotItemHandler(inv, 17, 134, 90))
+        addSlot(ResultSlot(playerInventory.player, inv, 17, 134, 90))
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
         addDataSlots(data)
     }

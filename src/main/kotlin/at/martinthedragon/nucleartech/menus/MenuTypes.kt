@@ -15,6 +15,7 @@ object MenuTypes {
     val electricFurnaceMenu: RegistryObject<MenuType<ElectricFurnaceMenu>> = MENUS.register("electric_furnace") { IForgeMenuType.create(ElectricFurnaceMenu::fromNetwork) }
     val shredderMenu: RegistryObject<MenuType<ShredderMenu>> = MENUS.register("shredder") { IForgeMenuType.create(ShredderMenu::fromNetwork) }
     val assemblerMenu: RegistryObject<MenuType<AssemblerMenu>> = MENUS.register("assembler") { IForgeMenuType.create(AssemblerMenu::fromNetwork) }
+    val chemPlantMenu: RegistryObject<MenuType<ChemPlantMenu>> = MENUS.register("chem_plant") { IForgeMenuType.create(ChemPlantMenu::fromNetwork) }
     val littleBoyMenu: RegistryObject<MenuType<LittleBoyMenu>> = MENUS.register("little_boy") { IForgeMenuType.create(LittleBoyMenu::fromNetwork) }
     val fatManMenu: RegistryObject<MenuType<FatManMenu>> = MENUS.register("fat_man") { IForgeMenuType.create(FatManMenu::fromNetwork) }
     val launchPadMenu: RegistryObject<MenuType<LaunchPadMenu>> = MENUS.register("launch_pad") { IForgeMenuType.create(LaunchPadMenu::fromNetwork) }

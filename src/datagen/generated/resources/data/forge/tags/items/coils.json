@@ -2,7 +2,8 @@
   "replace": false,
   "values": [
     "#forge:coils/copper",
+    "#forge:coils/gold",
     "#forge:coils/super_conductor",
-    "#forge:coils/gold"
+    "#forge:coils/tungsten"
   ]
 }

@@ -19,7 +19,7 @@ class ElectricFurnaceMenu(
     playerInventory: Inventory,
     blockEntity: ElectricFurnaceBlockEntity,
     val data: ContainerData = SimpleContainerData(2)
-) : NTechContainerMenu(MenuTypes.electricFurnaceMenu.get(), windowId, playerInventory, blockEntity) {
+) : NTechContainerMenu<ElectricFurnaceBlockEntity>(MenuTypes.electricFurnaceMenu.get(), windowId, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
     private val level = playerInventory.player.level
 

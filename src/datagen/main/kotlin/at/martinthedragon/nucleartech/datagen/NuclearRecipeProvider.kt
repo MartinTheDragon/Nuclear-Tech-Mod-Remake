@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.ItemLike
+import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.common.Tags
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
@@ -149,6 +150,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         anvilSmithing(consumer)
         anvilConstructing(consumer)
         assembly(consumer)
+        chemistry(consumer)
         consumables(consumer)
         misc(consumer)
     }
@@ -491,6 +493,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AssemblyRecipeBuilder(ModItems.highTemperatureSuperConductor.get(), 6, 20).requires(ModItems.magnetizedTungstenIngot.get()).save(consumer)
         AssemblyRecipeBuilder(ModItems.hazmatCloth.get(), 4, 50).requires(4 to NuclearTags.Items.DUSTS_LEAD, 8 to Tags.Items.STRING).save(consumer)
         AssemblyRecipeBuilder(ModBlockItems.fatMan.get(), 1, 300).requires(1 to ModItems.steelSphere.get(), 2 to ModItems.bigSteelShell.get(), 1 to ModItems.bigSteelGridFins.get(), 2 to ModItems.militaryGradeCircuitBoardTier2.get()).requires(6 to NuclearTags.Items.WIRES_COPPER, 6 to Tags.Items.DYES_YELLOW).save(consumer)
+        AssemblyRecipeBuilder(ModBlockItems.chemPlantPlacer.get(), 1, 200).requires(8 to NuclearTags.Items.INGOTS_STEEL, 6 to NuclearTags.Items.PLATES_COPPER).requires(4 to ModItems.steelTank.get()).requires(ModItems.bigSteelShell.get()).requires(3 to NuclearTags.Items.COILS_TUNGSTEN).requires(2 to ModItems.enhancedCircuit.get(), 1 to ModItems.advancedCircuit.get()).requires(8 to NuclearTags.Items.INGOTS_POLYMER).save(consumer)
+    }
+
+    private fun chemistry(consumer: Consumer<FinishedRecipe>) {
+        ChemRecipeBuilder(10).requires(Fluids.WATER, 500).requires(Items.STONE).results(Fluids.LAVA, 250).results(Items.STONE, 2).save(consumer)
     }
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {

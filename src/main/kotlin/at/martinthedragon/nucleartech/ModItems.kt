@@ -611,6 +611,7 @@ object ModItems {
     val sirenTrackRazortrainHorn = ITEMS.registerK("siren_track_razortrain_horn") { SirenTrackItem(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
 
     val assemblyTemplate = ITEMS.registerK("assembly_template") { AssemblyTemplateItem(Properties().tab(CreativeTabs.Templates)) }
+    val chemTemplate = ITEMS.registerK("chem_template") { ChemPlantTemplateItem(Properties().tab(CreativeTabs.Templates)) }
 
     // Bomb Items
 

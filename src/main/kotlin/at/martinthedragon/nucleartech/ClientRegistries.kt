@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.blocks.entities.renderers.AssemblerRenderer
+import at.martinthedragon.nucleartech.blocks.entities.renderers.ChemPlantRenderer
 import at.martinthedragon.nucleartech.blocks.entities.renderers.LaunchPadRenderer
 import at.martinthedragon.nucleartech.blocks.entities.renderers.SteamPressRenderer
 import at.martinthedragon.nucleartech.entities.EntityTypes
@@ -10,6 +11,7 @@ import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.entities.renderers.SimpleMissileRenderer
 import at.martinthedragon.nucleartech.items.BombKitItem
+import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.items.setIdSupplier
 import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.model.RandomModelLoader
@@ -63,6 +65,7 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.shredderMenu.get(), ::ShredderScreen)
         MenuScreens.register(MenuTypes.anvilMenu.get(), ::AnvilScreen)
         MenuScreens.register(MenuTypes.assemblerMenu.get(), ::AssemblerScreen)
+        MenuScreens.register(MenuTypes.chemPlantMenu.get(), ::ChemPlantScreen)
         MenuScreens.register(MenuTypes.littleBoyMenu.get(), ::LittleBoyScreen)
         MenuScreens.register(MenuTypes.fatManMenu.get(), ::FatManScreen)
         MenuScreens.register(MenuTypes.launchPadMenu.get(), ::LaunchPadScreen)
@@ -96,6 +99,7 @@ object ClientRegistries {
         NuclearTech.LOGGER.debug("Registering item properties")
         event.enqueueWork {
             ItemProperties.register(ModItems.assemblyTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
+            ItemProperties.register(ModItems.chemTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
         }
     }
 
@@ -105,6 +109,7 @@ object ClientRegistries {
         with(event) {
             registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.assemblerBlockEntityType.get(), ::AssemblerRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.chemPlantBlockEntityType.get(), ::ChemPlantRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.launchPadBlockEntityType.get(), ::LaunchPadRenderer)
         }
 
@@ -146,6 +151,7 @@ object ClientRegistries {
         if (event.atlas.location() == InventoryMenu.BLOCK_ATLAS) {
             NuclearTech.LOGGER.debug("Adding atlas textures")
             event.addSprite(ntm("block/steam_press/steam_press_head"))
+            ChemPlantTemplateItem.getChemistrySpriteLocations(Minecraft.getInstance().resourceManager).forEach(event::addSprite)
         }
     }
 
@@ -169,6 +175,12 @@ object ClientRegistries {
 
 //        ForgeModelBakery.addSpecialModel(ntm("other/assembler"))
 //        ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun bakeExtraModels(event: ModelBakeEvent) {
+        NuclearTech.LOGGER.debug("Baking additional models")
+        ChemPlantTemplateItem.generateTemplateIcons(event.modelLoader)
     }
 
     @SubscribeEvent @JvmStatic

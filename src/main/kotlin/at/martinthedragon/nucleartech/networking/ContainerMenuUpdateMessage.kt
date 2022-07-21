@@ -18,7 +18,7 @@ class ContainerMenuUpdateMessage(val windowID: Int, val data: List<NTechDataSlot
         if (context.get().direction.receptionSide.isClient) context.get().enqueueWork {
             val player = Minecraft.getInstance().player ?: return@enqueueWork
             val containerMenu = player.containerMenu
-            if (containerMenu !is NTechContainerMenu || containerMenu.containerId != windowID) return@enqueueWork
+            if (containerMenu !is NTechContainerMenu<*> || containerMenu.containerId != windowID) return@enqueueWork
             for (data in data) data.handleDataUpdate(containerMenu)
         }
         context.get().packetHandled = true

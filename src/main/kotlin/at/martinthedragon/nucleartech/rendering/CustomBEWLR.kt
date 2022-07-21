@@ -1,6 +1,9 @@
 package at.martinthedragon.nucleartech.rendering
 
+import at.martinthedragon.nucleartech.ModItems
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.prependToPath
 import com.mojang.blaze3d.platform.Lighting
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
@@ -37,6 +40,24 @@ object CustomBEWLR : BlockEntityWithoutLevelRenderer(Minecraft.getInstance().blo
                             itemRenderer.renderStatic(resultItem, transformType, light, overlay, matrix, buffers, 0)
                         }
                     }
+                }
+            }
+        } else if (stack.item is ChemPlantTemplateItem) {
+            val level = Minecraft.getInstance().level
+            if (level != null) {
+                val recipe = ChemPlantTemplateItem.getRecipeIDFromStack(stack)
+                val modelLocation = recipe?.prependToPath("chemistry_icons/") ?: ModItems.chemTemplate.id
+                val model = Minecraft.getInstance().modelManager.getModel(modelLocation)
+                val itemRenderer = Minecraft.getInstance().itemRenderer
+                matrix.translate(.5, .5, .5)
+                if (transformType == ItemTransforms.TransformType.GUI && !model.usesBlockLight()) {
+                    val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
+                    Lighting.setupForFlatItems()
+                    itemRenderer.render(stack, transformType, false, matrix, bufferSource, light, overlay, model)
+                    bufferSource.endBatch()
+                    Lighting.setupFor3DItems()
+                } else {
+                    itemRenderer.render(stack, transformType, false, matrix, buffers, light, overlay, model)
                 }
             }
         }

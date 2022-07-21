@@ -606,6 +606,14 @@ class NuclearItemModelProvider(
             .model(UncheckedModelFile("builtin/entity"))
             .end()
 
+        getBuilder(ModItems.chemTemplate.id.path)
+            .parent(generatedItem)
+            .texture("layer0", itemTexture(ModItems.chemTemplate.get()))
+            .override()
+            .predicate(ntm("shift"), 1F)
+            .model(UncheckedModelFile("builtin/entity"))
+            .end()
+
         simpleItem(ModItems.neutronShieldingLittleBoy.get())
         simpleItem(ModItems.subcriticalUraniumTarget.get())
         simpleItem(ModItems.uraniumProjectile.get())
@@ -698,6 +706,7 @@ class NuclearItemModelProvider(
         getBuilder(ModBlockItems.glowingMushroomStem.id.path).parent(cubeAll).texture("all", blockTexture(ModBlocks.glowingMushroomStem.get()))
         simpleItem(ModBlockItems.steamPress.get())
         simpleItem(ModBlockItems.assemblerPlacer.get())
+        simpleItem(ModBlockItems.chemPlantPlacer.get())
         simpleItem(ModBlockItems.launchPadPlacer.get())
     }
 

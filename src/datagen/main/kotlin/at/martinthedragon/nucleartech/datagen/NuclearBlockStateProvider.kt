@@ -211,6 +211,7 @@ class NuclearBlockStateProvider(
         litHorizontalBlock(ModBlocks.electricFurnace.get())
         cubeAllSides(ModBlocks.shredder.get(), north = extend(blockTexture(ModBlocks.shredder.get()), "_front"), south = extend(blockTexture(ModBlocks.shredder.get()), "_front"), east = extend(blockTexture(ModBlocks.shredder.get()), "_side"), west = extend(blockTexture(ModBlocks.shredder.get()), "_side"))
         horizontalBlock(ModBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "block/assembler/assembler_particles"))
+        horizontalBlock(ModBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "block/chem_plant/chem_plant_particles"))
         horizontalBlock(ModBlocks.littleBoy.get(), models().getBuilder("little_boy")
             .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
             .modelLocation(modLoc("models/block/little_boy/little_boy.obj"))

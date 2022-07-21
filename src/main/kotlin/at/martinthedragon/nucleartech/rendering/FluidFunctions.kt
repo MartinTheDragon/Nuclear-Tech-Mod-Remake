@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraftforge.fluids.FluidAttributes
+import net.minecraftforge.fluids.IFluidTank
 
 // Adapted from Mekanism: https://github.com/mekanism/Mekanism/blob/807a081b149dd258e2d8475b8dfafd8b9bceb01f/src/main/java/mekanism/client/gui/GuiUtils.java#L178
 fun renderGuiFluid(
@@ -71,4 +72,10 @@ fun renderGuiFluid(
     Tesselator.getInstance().end()
     RenderSystem.disableBlend()
     RenderSystem.setShaderColor(1F, 1F, 1F, 1F)
+}
+
+fun renderGuiFluidTank(matrixStack: PoseStack, x: Int, y: Int, width: Int, height: Int, blitOffset: Int, fluidTank: IFluidTank) {
+    val attributes = fluidTank.fluid.fluid.attributes
+    val fluidLevelScaled = fluidTank.fluidAmount * height / fluidTank.capacity
+    renderGuiFluid(matrixStack, x, y, width, fluidLevelScaled, blitOffset, attributes)
 }

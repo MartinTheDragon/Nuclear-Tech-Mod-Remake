@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
 import at.martinthedragon.nucleartech.blocks.AssemblerBlock
+import at.martinthedragon.nucleartech.blocks.ChemPlantBlock
 import at.martinthedragon.nucleartech.blocks.LaunchPadBlock
 import at.martinthedragon.nucleartech.items.AutoTooltippedBlockItem
 import at.martinthedragon.nucleartech.items.MultiBlockPlacerItem
@@ -171,6 +172,7 @@ object ModBlockItems {
     val electricFurnace = ITEMS.registerK("electric_furnace") { BlockItem(ModBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val shredder = ITEMS.registerK("shredder") { BlockItem(ModBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val assemblerPlacer = ITEMS.registerK("assembler") { MultiBlockPlacerItem(ModBlocks.assembler.get(), AssemblerBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val chemPlantPlacer = ITEMS.registerK("chem_plant") { MultiBlockPlacerItem(ModBlocks.chemPlant.get(), ChemPlantBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
 
     val ironAnvil = ITEMS.registerK("iron_anvil") { BlockItem(ModBlocks.ironAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val leadAnvil = ITEMS.registerK("lead_anvil") { BlockItem(ModBlocks.leadAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }

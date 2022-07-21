@@ -26,7 +26,7 @@ abstract class LongDataSlot private constructor() : NTechDataSlot {
             buffer.writeLong(value)
         }
 
-        override fun handleDataUpdate(menu: NTechContainerMenu) {
+        override fun handleDataUpdate(menu: NTechContainerMenu<*>) {
             menu.handleDataUpdate(slot, value)
         }
     }

@@ -130,6 +130,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.electricFurnace, "Elektrischer Ofen")
         addBlock(ModBlocks.shredder, "Brecher")
         addBlock(ModBlocks.assembler, "Fertigungsmaschine")
+        addBlock(ModBlocks.chemPlant, "Chemiewerk")
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
@@ -636,8 +637,12 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
         addItem(ModItems.assemblyTemplate, "Fertigungsvorlage: %s")
-        add("info.template.in", "Inputs:")
+        addItem(ModItems.chemTemplate, "Chemievorlage: %s")
+
+        add("info.template.in", "Input:")
+        add("info.template.ins", "Inputs:")
         add("info.template.out", "Output:")
+        add("info.template.outs", "Outputs:")
         add("info.template.time", "Produktionszeit:")
         add("info.template.seconds", "Sekunden")
 
@@ -789,6 +794,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.electricFurnaceMenu, "Elektrischer Ofen")
         addMenuType(MenuTypes.shredderMenu, "Brecher")
         addMenuType(MenuTypes.assemblerMenu, "Fertigungsmaschine")
+        addMenuType(MenuTypes.chemPlantMenu, "Chemiewerk")
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")
@@ -818,6 +824,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.anvilFall, "Amboss klescht")
         addSound(SoundEvents.pressOperate, "Presse stampft")
         addSound(SoundEvents.assemblerOperate, "Fertigungsmaschine arbeitet")
+        addSound(SoundEvents.chemPlantOperate, "Chemiewerk arbeitet")
         addSound(SoundEvents.debris, "Trümmer schlagen ein")
         addSound(SoundEvents.inject, "Nadel injiziert")
         addSound(SoundEvents.emptyIVBag, "Flüssigkeit infusioniert")
@@ -884,6 +891,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.template_folder_results", "Vorlagen-Zeichenmappe")
         add("jei.$MODID.category.shredding", "Zerkleinerungsrezepte")
         add("jei.$MODID.category.assembling", "Maschienenanfertigungsrezepte")
+        add("jei.$MODID.category.chemistry", "Chemierezepte")
     }
 
     private fun addMaterials() = with(Materials) {

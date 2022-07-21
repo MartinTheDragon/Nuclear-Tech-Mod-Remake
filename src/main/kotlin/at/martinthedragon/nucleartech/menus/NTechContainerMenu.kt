@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.menus
 
+import at.martinthedragon.nucleartech.blocks.entities.ContainerSyncableBlockEntity
 import at.martinthedragon.nucleartech.menus.slots.data.*
 import at.martinthedragon.nucleartech.networking.ContainerMenuUpdateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -10,11 +11,17 @@ import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.DataSlot
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.network.NetworkDirection
 
 // an implementation that doesn't advertise shorts as ints
-open class NTechContainerMenu(type: MenuType<*>, id: Int, val playerInventory: Inventory, val blockEntity: BlockEntity) : AbstractContainerMenu(type, id) {
+open class NTechContainerMenu<T : BlockEntity>(type: MenuType<*>, id: Int, val playerInventory: Inventory, val blockEntity: T) : AbstractContainerMenu(type, id) {
     private val trackedSlots = mutableListOf<NTechDataSlot>()
+
+    init {
+        @Suppress("LeakingThis")
+        if (blockEntity is ContainerSyncableBlockEntity) blockEntity.trackContainerMenu(this)
+    }
 
     fun track(dataSlot: NTechDataSlot) {
         trackedSlots += dataSlot
@@ -74,6 +81,12 @@ open class NTechContainerMenu(type: MenuType<*>, id: Int, val playerInventory: I
     fun handleDataUpdate(slot: Short, value: Double) {
         val data = getTrackedSlot(slot)
         if (data is DoubleDataSlot)
+            data.set(value)
+    }
+
+    fun handleDataUpdate(slot: Short, value: FluidStack) {
+        val data = getTrackedSlot(slot)
+        if (data is FluidStackDataSlot)
             data.set(value)
     }
 

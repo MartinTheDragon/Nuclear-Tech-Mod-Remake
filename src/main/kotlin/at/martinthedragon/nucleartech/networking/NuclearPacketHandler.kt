@@ -32,6 +32,7 @@ object NuclearPacketHandler {
         registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(LaunchPadMissileMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(SirenMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
+        registerMessage(BlockEntityUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT) // TODO replace others with this
     }
 
     private fun <T : NetworkMessage<T>> registerMessage(message: KClass<T>, decoder: (FriendlyByteBuf) -> T, networkDirection: NetworkDirection? = null): NuclearPacketHandler {

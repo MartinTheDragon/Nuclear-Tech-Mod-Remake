@@ -1,0 +1,32 @@
+{
+  "loader": "forge:composite",
+  "parts": {
+    "body": {
+      "textures": {
+        "texture": "nucleartech:block/chem_plant/chem_plant_body"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/chem_plant/chem_plant_body.obj",
+      "detectCullableFaces": false,
+      "flip-v": true
+    },
+    "spinner": {
+      "textures": {
+        "texture": "nucleartech:block/chem_plant/chem_plant_spinner"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/chem_plant/chem_plant_spinner.obj",
+      "detectCullableFaces": false,
+      "flip-v": true
+    },
+    "piston": {
+      "textures": {
+        "texture": "nucleartech:block/chem_plant/chem_plant_piston"
+      },
+      "loader": "forge:obj",
+      "model": "nucleartech:models/other/chem_plant/chem_plant_piston.obj",
+      "detectCullableFaces": false,
+      "flip-v": true
+    }
+  }
+}

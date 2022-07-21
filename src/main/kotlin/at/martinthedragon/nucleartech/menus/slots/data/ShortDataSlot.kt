@@ -26,7 +26,7 @@ abstract class ShortDataSlot private constructor() : NTechDataSlot {
             buffer.writeShort(value.toInt())
         }
 
-        override fun handleDataUpdate(menu: NTechContainerMenu) {
+        override fun handleDataUpdate(menu: NTechContainerMenu<*>) {
             menu.handleDataUpdate(slot, value)
         }
     }

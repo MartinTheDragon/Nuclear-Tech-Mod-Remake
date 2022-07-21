@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJ
 import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJRC.TemplateFolderRecipe.TemplateType
 import at.martinthedragon.nucleartech.integration.jei.transfers.PressingJRTI
 import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.menus.*
 import at.martinthedragon.nucleartech.recipes.*
 import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
@@ -42,6 +43,7 @@ class JeiIntegration : IModPlugin {
         registration.addRecipeCategories(
             AssemblingJRC(guiHelper),
             BlastingJRC(guiHelper),
+            ChemistryJRC(guiHelper),
             ConstructingJRC(guiHelper),
             PressingJRC(guiHelper),
             ShreddingJRC(guiHelper),
@@ -67,6 +69,7 @@ class JeiIntegration : IModPlugin {
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NuclearTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NuclearTags.Items.CIRCUIT_STAMPS).map(::ItemStack)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.SirenTrack, Ingredient.of(NuclearTags.Items.PLATES_INSULATOR), Ingredient.of(NuclearTags.Items.PLATES_STEEL), tagManager.getTag(NuclearTags.Items.SIREN_TRACKS).map(::ItemStack)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.AssemblyTemplate, Ingredient.of(Items.PAPER), Ingredient.of(Tags.Items.DYES), AssemblyTemplateItem.getAllTemplates(recipeManager)))
+                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.ChemistryTemplate, Ingredient.of(Items.PAPER), Ingredient.of(Tags.Items.DYES), ChemPlantTemplateItem.getAllChemTemplates(recipeManager)))
             })
         }
 
@@ -76,6 +79,7 @@ class JeiIntegration : IModPlugin {
             .withDefault { emptyList() }
         registration.addRecipes(NuclearRecipeTypes.ASSEMBLING, recipeMap.getValue(RecipeTypes.ASSEMBLY).filterIsInstance<AssemblyRecipe>())
         registration.addRecipes(NuclearRecipeTypes.BLASTING, recipeMap.getValue(RecipeTypes.BLASTING).filterIsInstance<BlastingRecipe>())
+        registration.addRecipes(NuclearRecipeTypes.CHEMISTRY, recipeMap.getValue(RecipeTypes.CHEM).filterIsInstance<ChemRecipe>())
         registration.addRecipes(NuclearRecipeTypes.CONSTRUCTING, recipeMap.getValue(RecipeTypes.CONSTRUCTING).filterIsInstance<AnvilConstructingRecipe>())
         registration.addRecipes(NuclearRecipeTypes.PRESSING, recipeMap.getValue(RecipeTypes.PRESSING).filterIsInstance<PressingRecipe>())
         registration.addRecipes(NuclearRecipeTypes.SHREDDING, recipeMap.getValue(RecipeTypes.SHREDDING).filterIsInstance<ShreddingRecipe>())
@@ -94,6 +98,7 @@ class JeiIntegration : IModPlugin {
 
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.assemblerPlacer.get()), NuclearRecipeTypes.ASSEMBLING)
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.blastFurnace.get()), NuclearRecipeTypes.BLASTING, JeiRecipeTypes.FUELING)
+        registration.addRecipeCatalyst(ItemStack(ModBlockItems.chemPlantPlacer.get()), NuclearRecipeTypes.CHEMISTRY)
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.steamPress.get()), NuclearRecipeTypes.PRESSING, JeiRecipeTypes.FUELING)
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.shredder.get()), NuclearRecipeTypes.SHREDDING)
         registration.addRecipeCatalyst(ItemStack(ModBlockItems.combustionGenerator.get()), JeiRecipeTypes.FUELING)
@@ -116,6 +121,7 @@ class JeiIntegration : IModPlugin {
         registration.addRecipeClickArea(AnvilScreen::class.java, 72, 61, 33, 9, NuclearRecipeTypes.CONSTRUCTING)
         registration.addRecipeClickArea(AssemblerScreen::class.java, 45, 83, 82, 30, NuclearRecipeTypes.ASSEMBLING)
         registration.addRecipeClickArea(BlastFurnaceScreen::class.java, 101, 35, 24, 17, NuclearRecipeTypes.BLASTING)
+        registration.addRecipeClickArea(ChemPlantScreen::class.java, 44, 88, 88, 20, NuclearRecipeTypes.CHEMISTRY)
         registration.addRecipeClickArea(ElectricFurnaceScreen::class.java, 79, 34, 24, 17, JeiRecipeTypes.SMELTING)
         registration.addRecipeClickArea(ShredderScreen::class.java, 43, 89, 54, 14, NuclearRecipeTypes.SHREDDING)
         registration.addRecipeClickArea(SteamPressScreen::class.java, 103, 34, 24, 17, NuclearRecipeTypes.PRESSING)
@@ -123,5 +129,6 @@ class JeiIntegration : IModPlugin {
 
     override fun registerItemSubtypes(registration: ISubtypeRegistration) {
         registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.assemblyTemplate.get()) { ingredient, _ -> if (ingredient.hasTag()) ingredient.tag!!.getString("recipe") else "" }
+        registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.chemTemplate.get()) { ingredient, _ -> if (ingredient.hasTag()) ingredient.tag!!.getString("recipe") else "" }
     }
 }

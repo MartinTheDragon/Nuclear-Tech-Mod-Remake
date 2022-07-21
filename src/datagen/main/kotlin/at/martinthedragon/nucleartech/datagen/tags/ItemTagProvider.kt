@@ -386,18 +386,12 @@ class ItemTagProvider(
         return@with
     }
 
-    private fun coilTags() {
-        tag(NuclearTags.Items.COILS)
-            .addTag(NuclearTags.Items.COILS_COPPER)
-            .addTag(NuclearTags.Items.COILS_SUPER_CONDUCTOR)
-            .addTag(NuclearTags.Items.COILS_GOLD)
-
-        tag(NuclearTags.Items.COILS_COPPER).add(ModItems.copperCoil.get(), ModItems.ringCoil.get())
-        tag(NuclearTags.Items.COILS_SUPER_CONDUCTOR).add(
-            ModItems.superConductingCoil.get(), ModItems.superConductingRingCoil.get(),
-            ModItems.heatingCoil.get(), ModItems.highTemperatureSuperConductingCoil.get()
-        )
-        tag(NuclearTags.Items.COILS_GOLD).add(ModItems.goldCoil.get(), ModItems.goldRingCoil.get())
+    private fun coilTags() = with(NuclearTags.Items) {
+        tag(COILS).addTag(COILS_COPPER).addTag(COILS_GOLD).addTag(COILS_SUPER_CONDUCTOR).addTag(COILS_TUNGSTEN)
+        tag(COILS_COPPER).add(ModItems.copperCoil, ModItems.ringCoil)
+        tag(COILS_GOLD).add(ModItems.goldCoil, ModItems.goldRingCoil)
+        tag(COILS_SUPER_CONDUCTOR).add(ModItems.superConductingCoil, ModItems.superConductingRingCoil, ModItems.heatingCoil, ModItems.highTemperatureSuperConductingCoil)
+        tag(COILS_TUNGSTEN).add(ModItems.heatingCoil)
     }
 
     private fun fissileFuelTags() = with(NuclearTags.Items) {
@@ -588,6 +582,7 @@ class ItemTagProvider(
             .addTag(NuclearTags.Items.FOLDER_STAMPS)
             .addTag(NuclearTags.Items.SIREN_TRACKS)
             .add(ModItems.assemblyTemplate.get())
+            .add(ModItems.chemTemplate.get())
     }
 
     private fun modifyVanillaTags() {

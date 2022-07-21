@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "nucleartech:block/chem_plant"
+    },
+    "facing=south": {
+      "model": "nucleartech:block/chem_plant",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "nucleartech:block/chem_plant",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "nucleartech:block/chem_plant",
+      "y": 90
+    }
+  }
+}

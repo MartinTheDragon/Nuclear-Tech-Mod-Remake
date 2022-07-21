@@ -16,6 +16,7 @@ object RecipeTypes {
     val BLASTING = create<BlastingRecipe>("blasting")
     val SHREDDING = create<ShreddingRecipe>("shredding")
     val ASSEMBLY = create<AssemblyRecipe>("assembly")
+    val CHEM = create<ChemRecipe>("chem")
 
     private fun <T : Recipe<*>> create(name: String): RecipeType<T> = object : RecipeType<T> {
         private val registryName = ntm(name)

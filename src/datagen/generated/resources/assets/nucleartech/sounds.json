@@ -199,6 +199,12 @@
       "nucleartech:block/assembler/assembler_operate"
     ]
   },
+  "chem_plant.operate": {
+    "subtitle": "subtitle.nucleartech.chem_plant.operate",
+    "sounds": [
+      "nucleartech:block/chem_plant/chem_plant_operate"
+    ]
+  },
   "block.debris": {
     "subtitle": "subtitle.nucleartech.block.debris",
     "sounds": [

@@ -28,6 +28,7 @@ object SoundEvents {
     val anvilFall = register("anvil.fall")
     val pressOperate = register("press.operate")
     val assemblerOperate = register("assembler.operate")
+    val chemPlantOperate = register("chem_plant.operate")
     val debris = register("block.debris")
     val inject = register("item.use.inject")
     val emptyIVBag = register("item.use.radaway")

@@ -133,6 +133,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(ModBlocks.electricFurnace, "Electric Furnace")
         addBlock(ModBlocks.shredder, "Shredder")
         addBlock(ModBlocks.assembler, "Assembler")
+        addBlock(ModBlocks.chemPlant, "Chemical Plant")
 
         addBlock(ModBlocks.littleBoy, "Little Boy")
         addBlock(ModBlocks.fatMan, "Fat Man")
@@ -588,8 +589,12 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(ModItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
         addItem(ModItems.assemblyTemplate, "Assembly Template: %s")
-        add("info.template.in", "Inputs:")
+        addItem(ModItems.chemTemplate, "Chemistry Template: %s")
+
+        add("info.template.in", "Input:")
+        add("info.template.ins", "Inputs:")
         add("info.template.out", "Output:")
+        add("info.template.outs", "Outputs:")
         add("info.template.time", "Production Time:")
         add("info.template.seconds", "Seconds")
 
@@ -741,6 +746,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.electricFurnaceMenu, "Electric Furnace")
         addMenuType(MenuTypes.shredderMenu, "Shredder")
         addMenuType(MenuTypes.assemblerMenu, "Assembler")
+        addMenuType(MenuTypes.chemPlantMenu, "Chemical Plant")
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")
@@ -770,6 +776,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.anvilFall, "Anvil clashes")
         addSound(SoundEvents.pressOperate, "Press stamps")
         addSound(SoundEvents.assemblerOperate, "Assembler whirs")
+        addSound(SoundEvents.chemPlantOperate, "Chemical Plant operates")
         addSound(SoundEvents.debris, "Debris hit the ground")
         addSound(SoundEvents.inject, "Needle injected")
         addSound(SoundEvents.emptyIVBag, "Liquid infused")
@@ -836,6 +843,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add("jei.$MODID.category.template_folder_results", "Template Folder")
         add("jei.$MODID.category.shredding", "Shredding")
         add("jei.$MODID.category.assembling", "Assembling")
+        add("jei.$MODID.category.chemistry", "Chemistry")
     }
 
     private fun addMaterials() = with(Materials) {

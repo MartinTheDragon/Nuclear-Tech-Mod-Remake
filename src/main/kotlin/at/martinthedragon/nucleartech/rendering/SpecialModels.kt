@@ -1,6 +1,9 @@
 package at.martinthedragon.nucleartech.rendering
 
 import net.minecraft.client.resources.model.BakedModel
+import net.minecraft.client.resources.model.BlockModelRotation
+import net.minecraft.client.resources.model.ModelBakery
+import net.minecraft.client.resources.model.UnbakedModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener
@@ -39,5 +42,24 @@ object SpecialModels : ResourceManagerReloadListener {
     override fun onResourceManagerReload(manager: ResourceManager) {
         modelCache.clear()
         bakedModelCache.clear()
+    }
+
+    // must be called at right time, e.g. ModelRegistryEvent or TextureStitchEvent.Post
+    fun injectIntoModelBakery(modelBakery: ModelBakery, key: ResourceLocation, unbakedModel: UnbakedModel, override: Boolean = false, bakeNow: Boolean = true) {
+        if (override) {
+            modelBakery.unbakedCache[key] = unbakedModel
+            modelBakery.topLevelModels[key] = unbakedModel
+            if (bakeNow) {
+                unbakedModel.getMaterials(modelBakery::getModel, mutableSetOf()) // so the BlockModel's parent gets set
+                modelBakery.bakedTopLevelModels[key] = modelBakery.bake(key, BlockModelRotation.X0_Y0, modelBakery.spriteMap::getSprite)
+            }
+        } else {
+            val existed = modelBakery.unbakedCache.putIfAbsent(key, unbakedModel) != null
+            modelBakery.topLevelModels.putIfAbsent(key, unbakedModel)
+            if (bakeNow && !existed) {
+                unbakedModel.getMaterials(modelBakery::getModel, mutableSetOf())
+                modelBakery.bakedTopLevelModels.putIfAbsent(key, modelBakery.bake(key, BlockModelRotation.X0_Y0, modelBakery.spriteMap::getSprite))
+            }
+        }
     }
 }

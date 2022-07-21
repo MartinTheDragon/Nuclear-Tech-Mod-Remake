@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:stone_and_lava_from_chemistry"
+    ]
+  },
+  "criteria": {
+    "has_primary": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:stone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:stone_and_lava_from_chemistry"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_primary",
+      "has_the_recipe"
+    ]
+  ]
+}
