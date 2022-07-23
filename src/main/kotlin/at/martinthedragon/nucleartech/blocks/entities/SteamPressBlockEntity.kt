@@ -7,6 +7,8 @@ import at.martinthedragon.nucleartech.api.blocks.entities.ExperienceRecipeResult
 import at.martinthedragon.nucleartech.api.blocks.entities.TickingServerBlockEntity
 import at.martinthedragon.nucleartech.items.canTransferItem
 import at.martinthedragon.nucleartech.menus.PressMenu
+import at.martinthedragon.nucleartech.networking.BlockEntityUpdateMessage
+import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.recipes.PressingRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeTypes
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
@@ -14,7 +16,9 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.Tag
 import net.minecraft.network.chat.TranslatableComponent
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.ContainerHelper
@@ -30,23 +34,28 @@ import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.AABB
 import net.minecraftforge.common.ForgeHooks
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.ItemStackHandler
+import net.minecraftforge.network.PacketDistributor
 
 class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.steamPressHeadBlockEntityType.get(), pos, state),
     TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultBlockEntity
 {
     private var litDuration = 0
     private var litTime = 0
-    val isLit: Boolean
+    private val isLit: Boolean
         get() = litTime > 0
     var power = 0
         private set
     var pressProgress = 0
+        private set
+
+    var pressedItem: ItemStack = ItemStack.EMPTY
         private set
 
     private val dataAccess = object : ContainerData {
@@ -94,6 +103,7 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
         litDuration = if (fuel.isEmpty) 0 else ForgeHooks.getBurnTime(fuel, null)
         pressProgress = nbt.getInt("PressTime")
         power = nbt.getInt("Power")
+        isRetracting = nbt.getBoolean("IsRetracting")
         val recipesNbt = nbt.getCompound("RecipesUsed")
         for (string in recipesNbt.allKeys)
             recipesUsed[ResourceLocation(string)] = recipesNbt.getInt(string)
@@ -105,11 +115,27 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
         nbt.putInt("BurnTime", litTime)
         nbt.putInt("PressTime", pressProgress)
         nbt.putInt("Power", power)
+        nbt.putBoolean("IsRetracting", isRetracting)
         val recipesNbt = CompoundTag()
         for ((recipeID, amount) in recipesUsed)
             recipesNbt.putInt(recipeID.toString(), amount)
         nbt.put("RecipesUsed", recipesNbt)
     }
+
+    override fun getUpdateTag() = CompoundTag().apply {
+        putInt("Progress", pressProgress)
+        val item = CompoundTag()
+        items[0].save(item)
+        put("PressedItem", item)
+    }
+
+    override fun handleUpdateTag(tag: CompoundTag) {
+        pressProgress = tag.getInt("Progress")
+        if (tag.contains("PressedItem", Tag.TAG_COMPOUND.toInt()))
+            pressedItem = ItemStack.of(tag.getCompound("PressedItem"))
+    }
+
+    override fun getUpdatePacket(): ClientboundBlockEntityDataPacket = ClientboundBlockEntityDataPacket.create(this)
 
     override fun clearContent() {
         items.clear()
@@ -148,6 +174,8 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
 
     override fun getDefaultName() = TranslatableComponent("container.${NuclearTech.MODID}.steam_press")
 
+    override fun getRenderBoundingBox() = AABB(blockPos.offset(.0, -1.0, .0), blockPos.offset(1.0, 1.0, 1.0))
+
     override fun setRecipeUsed(recipe: Recipe<*>?) {
         if (recipe == null) return
         recipesUsed.addTo(recipe.id, 1)
@@ -172,7 +200,7 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
     }
 
     private fun canPress(recipe: Recipe<*>?): Boolean =
-        if (items[0].isEmpty || recipe == null) false
+        if (items[0].isEmpty || items[1].isEmpty || recipe == null) false
         else canTransferItem(recipe.resultItem, items[3], this)
 
     private fun getBurnDuration(fuel: ItemStack): Int = if (fuel.isEmpty) 0 else ForgeHooks.getBurnTime(fuel, null)
@@ -194,6 +222,8 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
         level!!.playSound(null, blockPos, SoundEvents.pressOperate.get(), SoundSource.BLOCKS, 1.5F, 1F)
         return true
     }
+
+    private var isRetracting = false
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         if (isLit)
@@ -219,15 +249,43 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
                 }
             }
         }
+
         if (isLit && power < maxPower) power++ else if (!isLit && power > 0) power--
-        if (power >= powerNeeded && pressProgress >= pressTotalTime) if (press(recipe)) {
-            pressProgress = 0
+
+        if (power < powerNeeded) isRetracting = true
+
+        if (!isRetracting && power >= powerNeeded && pressProgress >= pressTotalTime) if (press(recipe)) {
+            isRetracting = true
             contentsChanged = true
         }
-        if (power >= powerNeeded && canPress(recipe)) pressProgress += power * 25 / maxPower else pressProgress = 0
+
+        val  speed = power * 25 / maxPower
+        if (power >= powerNeeded) {
+            if (canPress(recipe)) {
+                if (!isRetracting) pressProgress += speed
+            } else isRetracting = true
+            if (isRetracting) pressProgress -= speed
+        } else isRetracting = true
+
+        if (pressProgress <= 0) {
+            isRetracting = false
+            pressProgress = 0
+        }
+
+        syncToClient(false)
 
         if (wasLit != isLit) contentsChanged = true
         if (contentsChanged) setChanged()
+    }
+
+    override fun setChanged() {
+        super.setChanged()
+        syncToClient(true)
+    }
+
+    private fun syncToClient(withItems: Boolean) {
+        if (!level!!.isClientSide)
+            NuclearPacketHandler.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with { (level!!.getChunkAt(blockPos)) }, BlockEntityUpdateMessage(blockPos, if (withItems) updateTag else CompoundTag().apply { putInt("Progress", pressProgress) }))
     }
 
     private var inventoryCapability: LazyOptional<IItemHandler>? = null
