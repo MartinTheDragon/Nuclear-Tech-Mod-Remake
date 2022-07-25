@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "schrabidium_fuel_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "tag": "forge:ingots/schrabidium_fuel"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:schrabidium_fuel_nugget",
     "count": 9

@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "tantalium_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "nucleartech:tantalium_ingot"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:tantalium_nugget",
     "count": 9

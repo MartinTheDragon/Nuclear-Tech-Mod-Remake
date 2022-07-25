@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "thorium232_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "tag": "forge:ingots/thorium"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:thorium232_nugget",
     "count": 9

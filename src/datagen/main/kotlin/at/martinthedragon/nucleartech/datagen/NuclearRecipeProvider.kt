@@ -68,7 +68,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
                 val nugget = tagGroup.materialGroup.nugget() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                ShapedRecipeBuilder.shaped(nugget, 9).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(nugget)).unlockedBy(getHasName(ingotTag, ingotItem), condition)to ntm(getItemName(nugget))
+                ShapelessRecipeBuilder.shapeless(nugget, 9).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(ingotTag, ingotItem), condition)to ntm(getItemName(nugget))
             }
             addRule { tagGroup -> // smelting ores to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null

@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "reactor_grade_plutonium_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "nucleartech:reactor_grade_plutonium_ingot"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:reactor_grade_plutonium_nugget",
     "count": 9

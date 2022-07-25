@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "uranium238_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "nucleartech:uranium238_ingot"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:uranium238_nugget",
     "count": 9

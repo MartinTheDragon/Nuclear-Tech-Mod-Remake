@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "uranium_fuel_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "tag": "forge:ingots/uranium_fuel"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:uranium_fuel_nugget",
     "count": 9

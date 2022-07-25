@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "americium_fuel_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "nucleartech:americium_fuel_ingot"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:americium_fuel_nugget",
     "count": 9

@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "cobalt60_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "nucleartech:cobalt60_ingot"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:cobalt60_nugget",
     "count": 9

@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "plutonium_fuel_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "tag": "forge:ingots/plutonium_fuel"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:plutonium_fuel_nugget",
     "count": 9

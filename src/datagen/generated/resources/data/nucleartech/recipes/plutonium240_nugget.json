@@ -1,16 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "plutonium240_nugget",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
+  "ingredients": [
+    {
       "item": "nucleartech:plutonium240_ingot"
     }
-  },
+  ],
   "result": {
     "item": "nucleartech:plutonium240_nugget",
     "count": 9
