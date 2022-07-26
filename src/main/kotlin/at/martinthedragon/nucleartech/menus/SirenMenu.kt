@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.menus
 
 import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.api.menus.slots.SlotItemHandlerUnglitched
 import at.martinthedragon.nucleartech.blocks.entities.SirenBlockEntity
 import at.martinthedragon.nucleartech.items.SirenTrackItem
 import net.minecraft.network.FriendlyByteBuf
@@ -9,13 +10,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.SlotItemHandler
 
 class SirenMenu(windowId: Int, playerInventory: Inventory, val tileEntity: SirenBlockEntity) : AbstractContainerMenu(MenuTypes.sirenMenu.get(), windowId) {
     init {
         val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
-        addSlot(SlotItemHandler(inv, 0, 8, 35))
+        addSlot(SlotItemHandlerUnglitched(inv, 0, 8, 35))
 
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
     }

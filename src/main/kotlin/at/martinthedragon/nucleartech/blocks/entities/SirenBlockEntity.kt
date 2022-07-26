@@ -97,6 +97,6 @@ class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainer
     override fun getItems(): NonNullList<ItemStack> = items
 
     override fun setItems(newItems: NonNullList<ItemStack>) {
-        items = newItems
+        throw UnsupportedOperationException("Don't just swap out the siren's entire inventory like that!") // normally shouldn't ever happen, but just in case...
     }
 }

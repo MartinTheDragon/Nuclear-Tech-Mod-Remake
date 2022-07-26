@@ -17,7 +17,7 @@ class SirenMessage(val blockPos: BlockPos, val sirenTrack: ItemStack) : NetworkM
 
     override fun handle(context: Supplier<NetworkEvent.Context>) {
         if (context.get().direction.receptionSide.isClient) context.get().enqueueWork {
-            if (sirenTrack == ItemStack.EMPTY) SoundHandler.stopBlockEntitySound(blockPos)
+            if (sirenTrack.isEmpty) SoundHandler.stopBlockEntitySound(blockPos)
             val item = sirenTrack.item
             if (item !is SirenTrackItem) return@enqueueWork
             SoundHandler.stopBlockEntitySound(blockPos)
