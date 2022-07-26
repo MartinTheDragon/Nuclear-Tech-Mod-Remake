@@ -1,6 +1,5 @@
 package at.martinthedragon.nucleartech.screens
 
-import at.martinthedragon.nucleartech.blocks.entities.ElectricFurnaceBlockEntity
 import at.martinthedragon.nucleartech.blocks.entities.LaunchPadBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menus.LaunchPadMenu
@@ -46,7 +45,7 @@ class LaunchPadScreen(
             renderComponentTooltip(matrix,
                 listOf(
                     TranslatableComponent("energy.nucleartech"),
-                    TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(ElectricFurnaceBlockEntity.MAX_ENERGY)} HE")
+                    TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(LaunchPadBlockEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )
     }
