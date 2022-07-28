@@ -16,6 +16,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'kotlin'
 // apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply from: '.scripts/properties-reader.gradle'
 
 if (project.hasProperty("release")) version = "$minecraft_version-$mod_version" as Object
@@ -261,6 +262,12 @@ compileTestKotlin {
     kotlinOptions {
         jvmTarget = "17"
         freeCompilerArgs += kotlinCompilerArgs
+    }
+}
+
+idea {
+    module {
+        excludeDirs += file("run")
     }
 }
 
