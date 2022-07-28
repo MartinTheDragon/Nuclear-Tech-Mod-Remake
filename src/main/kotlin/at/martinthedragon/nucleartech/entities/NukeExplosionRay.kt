@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.entities
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.math.toBlockPos
 import net.minecraft.core.BlockPos
 import net.minecraft.core.SectionPos
@@ -9,6 +10,7 @@ import net.minecraft.nbt.DoubleTag
 import net.minecraft.nbt.ListTag
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.chunk.LevelChunk
@@ -21,6 +23,8 @@ class NukeExplosionRay(
     val strength: Int,
     val length: Int
 ) {
+    private val phased = NuclearConfig.explosions.phasedExplosions.get()
+
     private val tips = mutableListOf<Vec3>()
     val tipsCount: Int get() = tips.size
     var initialized = false
@@ -44,7 +48,6 @@ class NukeExplosionRay(
             currentSpiralPointY = 0.0
         }
     }
-
 
     private fun getSpherical2Cartesian(): Vec3 {
         val sinX = sin(currentSpiralPointX)
@@ -97,7 +100,7 @@ class NukeExplosionRay(
         var processedBlocks = 0
         var destroyedBlocks = 0
 
-        for (l in 0 until Int.MAX_VALUE) {
+        if (phased) for (l in 0 until Int.MAX_VALUE) {
             if (destroyedBlocks >= count) return
             if (processedBlocks >= count * 50) return
 
@@ -121,6 +124,34 @@ class NukeExplosionRay(
                 val currentPos = unitVector.multiply(distanceDouble, distanceDouble, distanceDouble).add(pos).toBlockPos()
                 if (!getBlockState(world, currentPos).isAir) {
                     removeBlock(world, currentPos)
+                    destroyedBlocks++
+                }
+                processedBlocks++
+            }
+        } else for (l in 0 until Int.MAX_VALUE) {
+            if (destroyedBlocks >= count) return
+            if (processedBlocks >= count * 50) return
+
+            if (l > tipsCount - 1) break
+            if (tips.isEmpty()) return
+
+            val tip = tips.removeLast()
+
+            world.setBlock(BlockPos(tip), Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL)
+
+            val vector = Vec3(
+                tip.x - pos.x,
+                tip.y - pos.y,
+                tip.z - pos.z
+            )
+
+            val unitVector = vector.normalize()
+
+            for (distance in 0..vector.length().toInt()) {
+                val distanceDouble = distance.toDouble()
+                val currentPos = unitVector.multiply(distanceDouble, distanceDouble, distanceDouble).add(pos).toBlockPos()
+                if (!getBlockState(world, currentPos).isAir) {
+                    world.setBlock(currentPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL)
                     destroyedBlocks++
                 }
                 processedBlocks++
@@ -177,6 +208,7 @@ class NukeExplosionRay(
     }
 
     fun updateAllBlocks(level: Level) {
+        if (!phased) return
         for ((pos, oldState) in changedPositions) level.markAndNotifyBlock(pos, getChunk(level, SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z)), oldState, Blocks.AIR.defaultBlockState(), 0b10, 0)
         for ((pos, oldState) in changedTips) level.markAndNotifyBlock(pos, getChunk(level, SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z)), oldState, Blocks.AIR.defaultBlockState(), 0b11, 512)
         (changedPositions.keys + changedTips.keys) // update the lighting starting with the highest blocks

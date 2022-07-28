@@ -15,6 +15,7 @@ class ExplosionsConfig : ConfigBase {
     val explosionSpeed: ForgeConfigSpec.IntValue
     val falloutRange: ForgeConfigSpec.DoubleValue
     val falloutSpeed: ForgeConfigSpec.IntValue
+    val phasedExplosions: ForgeConfigSpec.BooleanValue
 
     init {
         ForgeConfigSpec.Builder().apply {
@@ -30,6 +31,7 @@ class ExplosionsConfig : ConfigBase {
             explosionSpeed = comment("The maximum amount of blocks destroyed by an explosion per tick").defineInRange("explosionSpeed", 3072, 1, 1_000_000_000)
             falloutRange = comment("Modifies the range of the fallout area (value in percent)").defineInRange("falloutRange", 100.0, 0.0, 100_000.0)
             falloutSpeed = comment("The amount of block columns changed per tick by fallout after explosions").defineInRange("falloutSpeed", 256, 1, 1_000_000_000)
+            phasedExplosions = comment("Splits the nuclear explosion algorithm into multiple phases, sending blocks and updating lighting afterwards. Goes easier on TPS, FPS and client connection. Disabling this will get the old \"animation\" back.").define("phasedExplosion", true)
             pop()
 
             pop()
