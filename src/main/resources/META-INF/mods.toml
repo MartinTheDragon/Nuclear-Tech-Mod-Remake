@@ -29,6 +29,6 @@ A recreation by MartinTheDragon of HbMinecraft's Nuclear Tech Mod.
 [[dependencies.nucleartech]]
   modId="jei"
   mandatory=false
-  versionRange="[9.7.0.180,)"
+  versionRange="[9.7.1.232,)"
   ordering="NONE"
   side="BOTH"
