@@ -214,6 +214,7 @@ object NuclearTags {
         val INGOTS_ASBESTOS = forgeTag("ingots/asbestos")
         val INGOTS_AUSTRALIUM = forgeTag("ingots/australium")
         val INGOTS_BERYLLIUM = forgeTag("ingots/beryllium")
+        val INGOTS_BISMUTH = forgeTag("ingots/bismuth")
         val INGOTS_COBALT = forgeTag("ingots/cobalt")
         val INGOTS_COMBINE_STEEL = forgeTag("ingots/combine_steel")
         val INGOTS_DAFFERGON = forgeTag("ingots/daffergon")
@@ -237,6 +238,7 @@ object NuclearTags {
         val INGOTS_RED_COPPER = forgeTag("ingots/red_copper")
         val INGOTS_REIIUM = forgeTag("ingots/reiium")
         val INGOTS_SATURNITE = forgeTag("ingots/saturnite")
+        val INGOTS_SCHRABIDATE = forgeTag("ingots/schrabidate")
         val INGOTS_SCHRABIDIUM = forgeTag("ingots/schrabidium")
         val INGOTS_SCHRABIDIUM_FUEL = forgeTag("ingots/schrabidium_fuel")
         val INGOTS_SCHRARANIUM = forgeTag("ingots/schraranium")
@@ -386,6 +388,7 @@ object NuclearTags {
 
         val NUGGETS_AUSTRALIUM = forgeTag("nuggets/australium")
         val NUGGETS_BERYLLIUM = forgeTag("nuggets/beryllium")
+        val NUGGETS_BISMUTH = forgeTag("nuggets/bismuth")
         val NUGGETS_DAFFERGON = forgeTag("nuggets/daffergon")
         val NUGGETS_DESH = forgeTag("nuggets/desh")
         val NUGGETS_DINEUTRONIUM = forgeTag("nuggets/dineutronium")

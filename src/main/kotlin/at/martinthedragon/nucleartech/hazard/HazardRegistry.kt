@@ -117,7 +117,7 @@ object HazardRegistry {
             register(Materials.americium242, HazardData(RADIATION, Am242))
             register(Materials.americiumFuel, HazardData(RADIATION, AmF))
             register(Materials.cobalt60, HazardData(RADIATION, Co60).addEntry(HEAT))
-            register(Materials.ferricSchrabidate, HazardData(RADIATION, Sb).addEntry(BLINDING, 2.5F))
+            register(TagGroups.ferricSchrabidate, HazardData(RADIATION, Sb).addEntry(BLINDING, 2.5F))
             register(Materials.ghiorsium336, HazardData(RADIATION, Gh336))
             register(Materials.gold198, HazardData(RADIATION, Au198).addEntry(HEAT, 5F))
             register(Materials.lead209, HazardData(RADIATION, Pb209).addEntry(BLINDING, 2.5F).addEntry(HEAT, 7F))

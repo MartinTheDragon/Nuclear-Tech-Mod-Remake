@@ -16,12 +16,12 @@
   "right": {
     "type": "nucleartech:stacked",
     "item": {
-      "tag": "forge:ingots/dineutronium"
+      "tag": "forge:ingots/bismuth"
     },
     "amount": 10
   },
   "result": {
-    "item": "nucleartech:dineutronium_anvil",
+    "item": "nucleartech:bismuth_anvil",
     "count": 1
   }
 }

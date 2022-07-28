@@ -402,11 +402,16 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun anvilSmithing(consumer: Consumer<FinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ModBlockItems.ironAnvil.get()).define('I', Tags.Items.INGOTS_IRON).define('B', Tags.Items.STORAGE_BLOCKS_IRON).pattern("III").pattern(" B ").pattern("III").group(ModBlockItems.ironAnvil.id.path).unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON)).save(consumer)
+        ShapedRecipeBuilder.shaped(ModBlockItems.leadAnvil.get()).define('I', NuclearTags.Items.INGOTS_LEAD).define('B', NuclearTags.Items.STORAGE_BLOCKS_LEAD).pattern("III").pattern(" B ").pattern("III").group(ModBlockItems.leadAnvil.id.path).unlockedBy("has_lead_block", has(NuclearTags.Items.STORAGE_BLOCKS_LEAD)).save(consumer)
+
         val baseAnvils = StackedIngredient.of(1, ModBlockItems.ironAnvil.get(), ModBlockItems.leadAnvil.get())
         AnvilSmithingRecipeBuilder(1, ModBlockItems.steelAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_STEEL)).unlockedBy("has_steel", has(NuclearTags.Items.INGOTS_STEEL)).save(consumer)
         AnvilSmithingRecipeBuilder(1, ModBlockItems.starmetalAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_STARMETAL)).unlockedBy("has_starmetal", has(NuclearTags.Items.INGOTS_STARMETAL)).save(consumer)
         AnvilSmithingRecipeBuilder(1, ModBlockItems.ferrouraniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, ModItems.u238Ingot.get())).unlockedBy("has_ferrouranium", has(ModItems.u238Ingot.get())).save(consumer)
-        AnvilSmithingRecipeBuilder(1, ModBlockItems.dineutroniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, ModItems.dineutroniumIngot.get())).unlockedBy("has_dineutronium", has(ModItems.dineutroniumIngot.get())).save(consumer)
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.bismuthAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_BISMUTH)).unlockedBy("has_bismuth", has(NuclearTags.Items.INGOTS_BISMUTH)).save(consumer)
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.schrabidateAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_SCHRABIDATE)).unlockedBy("has_schrabidate", has(NuclearTags.Items.INGOTS_SCHRABIDATE)).save(consumer)
+        AnvilSmithingRecipeBuilder(1, ModBlockItems.dineutroniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NuclearTags.Items.INGOTS_DINEUTRONIUM)).unlockedBy("has_dineutronium", has(NuclearTags.Items.INGOTS_DINEUTRONIUM)).save(consumer)
     }
 
     private fun anvilConstructing(consumer: Consumer<FinishedRecipe>) {

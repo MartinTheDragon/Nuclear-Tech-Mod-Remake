@@ -3,7 +3,7 @@
   "group": "bismuth_nugget",
   "ingredients": [
     {
-      "item": "nucleartech:bismuth_ingot"
+      "tag": "forge:ingots/bismuth"
     }
   ],
   "result": {

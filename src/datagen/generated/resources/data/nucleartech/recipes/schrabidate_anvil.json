@@ -16,12 +16,12 @@
   "right": {
     "type": "nucleartech:stacked",
     "item": {
-      "tag": "forge:ingots/dineutronium"
+      "tag": "forge:ingots/schrabidate"
     },
     "amount": 10
   },
   "result": {
-    "item": "nucleartech:dineutronium_anvil",
+    "item": "nucleartech:schrabidate_anvil",
     "count": 1
   }
 }

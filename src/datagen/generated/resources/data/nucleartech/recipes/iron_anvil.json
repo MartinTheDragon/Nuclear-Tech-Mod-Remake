@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "iron_anvil",
+  "pattern": [
+    "III",
+    " B ",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/iron"
+    }
+  },
+  "result": {
+    "item": "nucleartech:iron_anvil"
+  }
+}

@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:dineutronium_anvil"
+      "nucleartech:schrabidate_anvil"
     ]
   },
   "criteria": {
-    "has_dineutronium": {
+    "has_schrabidate": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/dineutronium"
+            "tag": "forge:ingots/schrabidate"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:dineutronium_anvil"
+        "recipe": "nucleartech:schrabidate_anvil"
       }
     }
   },
   "requirements": [
     [
-      "has_dineutronium",
+      "has_schrabidate",
       "has_the_recipe"
     ]
   ]
