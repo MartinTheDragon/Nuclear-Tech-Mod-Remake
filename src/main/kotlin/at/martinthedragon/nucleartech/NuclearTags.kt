@@ -2,10 +2,12 @@ package at.martinthedragon.nucleartech
 
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
+import net.minecraft.tags.FluidTags
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.material.Fluid
 import net.minecraftforge.registries.IForgeRegistry
 import net.minecraftforge.registries.IForgeRegistryEntry
 import net.minecraftforge.registries.tags.ITagManager
@@ -487,6 +489,15 @@ object NuclearTags {
         val SIREN_TRACKS = tag("siren_tracks")
 
         val SHREDDER_BLADES = tag("shredder_blades")
+    }
+
+    object Fluids {
+        private fun tag(name: String): TagKey<Fluid> =
+            FluidTags.create(ntm(name))
+        private fun forgeTag(name: String): TagKey<Fluid> =
+            FluidTags.create(ResourceLocation("forge", name))
+
+        val URANIUM_HEXAFLUORIDE = forgeTag("uranium_hexafluoride")
     }
 }
 

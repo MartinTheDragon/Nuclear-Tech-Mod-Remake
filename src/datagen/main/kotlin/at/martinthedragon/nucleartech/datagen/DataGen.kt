@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.datagen.tags.BlockTagProvider
+import at.martinthedragon.nucleartech.datagen.tags.FluidTagProvider
 import at.martinthedragon.nucleartech.datagen.tags.ItemTagProvider
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
@@ -19,6 +20,7 @@ object DataGen {
             val blockTagProvider = BlockTagProvider(dataGenerator, existingFileHelper)
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
+            dataGenerator.addProvider(FluidTagProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(HarvestabilityProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
             dataGenerator.addProvider(NuclearLootProvider(dataGenerator))

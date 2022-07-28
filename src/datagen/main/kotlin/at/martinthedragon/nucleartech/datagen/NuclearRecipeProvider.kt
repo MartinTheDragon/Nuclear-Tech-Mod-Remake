@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.recipes.*
+import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.recipes.PressingRecipe
 import at.martinthedragon.nucleartech.recipes.RecipeSerializers
 import at.martinthedragon.nucleartech.recipes.StackedIngredient
@@ -20,6 +21,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.common.Tags
+import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 import at.martinthedragon.nucleartech.datagen.recipes.AnvilConstructingRecipeBuilder as AnvilRecipeBuilder
@@ -497,7 +499,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun chemistry(consumer: Consumer<FinishedRecipe>) {
-        ChemRecipeBuilder(10).requires(Fluids.WATER, 500).requires(Items.STONE).results(Fluids.LAVA, 250).results(Items.STONE, 2).save(consumer)
+        ChemRecipeBuilder(100).requires(NuclearTags.Items.YELLOWCAKE_URANIUM).requires(NuclearTags.Items.DUSTS_FLUORITE, 4).requires(FluidStack(Fluids.WATER, 1000)).results(ModItems.sulfur.get(), 2).results(FluidStack(NTechFluids.uraniumHexafluoride.source.get(), 1200)).save(consumer)
     }
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {

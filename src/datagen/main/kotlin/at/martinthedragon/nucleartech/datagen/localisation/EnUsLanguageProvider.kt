@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.datagen.localisation
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.menus.MenuTypes
 import at.martinthedragon.nucleartech.screens.AnvilScreen
 import net.minecraft.data.DataGenerator
@@ -143,6 +144,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(ModBlocks.genericMultiBlockPart, "Multi Block Structure Part")
         addBlock(ModBlocks.genericMultiBlockPort, "Multi Block Structure Port")
+
+        addBlock(NTechFluids.uraniumHexafluoride.block, "Uranium Hexafluoride")
 
         addItem(ModItems.rawThorium, "Raw Thorium")
         addItem(ModItems.rawRareEarth, "Raw Rare Earth")
@@ -700,6 +703,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addItem(ModItems.polaroid, "The Polaroid")
 
+        addItem(NTechFluids.uraniumHexafluoride.bucket, "Uranium Hexafluoride Bucket")
+
         addItem(ModItems.creativeNuclearExplosionSpawner, "Nuclear Explosion Spawner")
         add("creative_nuclear_explosion_spawner.$MODID.strength", "Strength")
         add("creative_nuclear_explosion_spawner.$MODID.muted", "Muted")
@@ -829,6 +834,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(ntmTranslationString("hazard.heat"), "[Pyrophoric / Hot]")
         add(ntmTranslationString("hazard.hydroreactive"), "[Hydroreactive]")
         add(ntmTranslationString("hazard.radiation"), "[Radioactive]")
+
+        add("chem.$MODID.sulfur_and_uranium_hexafluoride_from_chemistry", "Uranium Hexafluoride Production")
 
         add("jei.$MODID.category.smithing", "Smithing")
         add("jei.$MODID.category.smithing.tier", "Minimum Tier: %s")

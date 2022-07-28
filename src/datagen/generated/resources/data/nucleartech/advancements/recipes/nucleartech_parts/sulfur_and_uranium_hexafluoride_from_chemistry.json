@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:stone_and_lava_from_chemistry"
+      "nucleartech:sulfur_and_uranium_hexafluoride_from_chemistry"
     ]
   },
   "criteria": {
@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:stone"
-            ]
+            "tag": "forge:yellow_cake_uranium"
           }
         ]
       }
@@ -21,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:stone_and_lava_from_chemistry"
+        "recipe": "nucleartech:sulfur_and_uranium_hexafluoride_from_chemistry"
       }
     }
   },

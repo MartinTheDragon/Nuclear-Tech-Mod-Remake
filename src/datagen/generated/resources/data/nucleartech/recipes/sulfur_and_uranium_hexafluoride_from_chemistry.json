@@ -1,0 +1,30 @@
+{
+  "type": "nucleartech:chem",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:yellow_cake_uranium"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/fluorite"
+      },
+      "amount": 4
+    }
+  ],
+  "inputFluid1": "{Amount:1000,FluidName:\"minecraft:water\"}",
+  "inputFluid2": "{Amount:0,FluidName:\"minecraft:empty\"}",
+  "results": [
+    {
+      "item": "nucleartech:sulfur",
+      "count": 2
+    }
+  ],
+  "outputFluid1": "{Amount:1200,FluidName:\"nucleartech:uranium_hexafluoride\"}",
+  "outputFluid2": "{Amount:0,FluidName:\"minecraft:empty\"}",
+  "duration": 100
+}

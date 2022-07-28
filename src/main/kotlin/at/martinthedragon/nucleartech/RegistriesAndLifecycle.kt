@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.entities.EntityTypes
 import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.hazard.HazardRegistry
 import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
 import at.martinthedragon.nucleartech.menus.MenuTypes
@@ -25,6 +26,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.feature.Feature
+import net.minecraft.world.level.material.Fluid
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent
 import net.minecraftforge.common.crafting.CraftingHelper
 import net.minecraftforge.common.world.ForgeChunkManager
@@ -44,6 +46,7 @@ import net.minecraftforge.registries.RegistryObject
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object RegistriesAndLifecycle {
     val BLOCKS: DeferredRegister<Block> = DeferredRegister.create(ForgeRegistries.BLOCKS, NuclearTech.MODID)
+    val FLUIDS: DeferredRegister<Fluid> = DeferredRegister.create(ForgeRegistries.FLUIDS, NuclearTech.MODID)
     val ITEMS: DeferredRegister<Item> = DeferredRegister.create(ForgeRegistries.ITEMS, NuclearTech.MODID)
     val BLOCK_ENTITIES: DeferredRegister<BlockEntityType<*>> = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, NuclearTech.MODID)
     val ENTITIES: DeferredRegister<EntityType<*>> = DeferredRegister.create(ForgeRegistries.ENTITIES, NuclearTech.MODID)
@@ -58,6 +61,8 @@ object RegistriesAndLifecycle {
         val modEventBus = FMLJavaModLoadingContext.get().modEventBus
         BLOCKS.register(modEventBus)
         ModBlocks
+        FLUIDS.register(modEventBus)
+        NTechFluids
         ITEMS.register(modEventBus)
         ModBlockItems
         ModItems
@@ -84,11 +89,18 @@ object RegistriesAndLifecycle {
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
+
+        NuclearTech.LOGGER.debug("Initializing plugins...")
         PluginEvents.init()
         HazardRegistry.registerItems()
+
         event.enqueueWork {
+            NuclearTech.LOGGER.debug("Setting forced chunk loading callback...")
             ForgeChunkManager.setForcedChunkLoadingCallback(NuclearTech.MODID, ChunkLoadingValidationCallback)
         }
+
+        NuclearTech.LOGGER.debug("Registering dispenser behaviours...")
+        NTechFluids.registerDispenserBehaviour()
     }
 
     @SubscribeEvent @JvmStatic

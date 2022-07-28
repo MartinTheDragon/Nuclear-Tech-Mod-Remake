@@ -148,6 +148,7 @@ object HazardRegistry {
             register(TagGroups.thorium, HazardData(RADIATION, Th232))
             register(TagGroups.thoriumFuel, HazardData(RADIATION, ThF))
             register(TagGroups.uraniumFuel, HazardData(RADIATION, UF))
+            register(TagGroups.yellowcake, HazardData(RADIATION, 15F))
 
             register(NuclearTags.Items.ORES_URANIUM, HazardData.EMPTY)
             register(NuclearTags.Items.ORES_THORIUM, HazardData.EMPTY)

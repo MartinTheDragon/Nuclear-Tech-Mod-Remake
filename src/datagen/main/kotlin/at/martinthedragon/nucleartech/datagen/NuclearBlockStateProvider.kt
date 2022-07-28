@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.ModBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.blocks.AnvilBlock
+import at.martinthedragon.nucleartech.fluid.NTechFluids
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
@@ -241,6 +242,10 @@ class NuclearBlockStateProvider(
 
         simpleBlock(ModBlocks.genericMultiBlockPart.get(), models().getBuilder("generic_multi_block_part"))
         simpleBlock(ModBlocks.genericMultiBlockPort.get(), models().getBuilder("generic_multi_block_port"))
+
+        for ((source, _, _, block) in NTechFluids.getFluidsList()) {
+            simpleBlock(block.get(), models().getBuilder(block.id.path).texture("particle", source.get().attributes.stillTexture))
+        }
 
         copiedBlockItem(ModBlocks.uraniumOre.get())
         copiedBlockItem(ModBlocks.scorchedUraniumOre.get())

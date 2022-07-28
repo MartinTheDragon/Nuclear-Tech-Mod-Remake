@@ -2,14 +2,19 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.model.RandomModelBuilder
+import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.items.BombKitItem
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.BucketItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.material.Fluid
+import net.minecraftforge.client.model.generators.ItemModelBuilder
 import net.minecraftforge.client.model.generators.ItemModelProvider
 import net.minecraftforge.client.model.generators.ModelFile
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile
+import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder
 import net.minecraftforge.common.data.ExistingFileHelper
 
 class NuclearItemModelProvider(
@@ -708,6 +713,9 @@ class NuclearItemModelProvider(
         simpleItem(ModBlockItems.assemblerPlacer.get())
         simpleItem(ModBlockItems.chemPlantPlacer.get())
         simpleItem(ModBlockItems.launchPadPlacer.get())
+
+        // Buckets
+        for ((source, _, bucket, _) in NTechFluids.getFluidsList()) bucket(source.get(), bucket.get())
     }
 
     private val cubeAll = getExistingFile(mcLoc("block/cube_all"))
@@ -727,6 +735,13 @@ class NuclearItemModelProvider(
 
     private fun spawnEgg(item: Item) {
         getBuilder(item.registryName!!.path).parent(spawnEggItem)
+    }
+
+    private fun bucket(fluid: Fluid, bucket: BucketItem) {
+        withExistingParent(bucket.registryName!!.path, ResourceLocation("forge", "item/bucket"))
+            .customLoader { modelBuilder: ItemModelBuilder, existingFileHelper -> DynamicBucketModelBuilder.begin(modelBuilder, existingFileHelper) }
+            .fluid(fluid)
+            .end()
     }
 
     private fun blockTexture(block: Block) =

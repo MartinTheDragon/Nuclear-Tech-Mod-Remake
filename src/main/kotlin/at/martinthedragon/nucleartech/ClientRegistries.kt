@@ -10,6 +10,7 @@ import at.martinthedragon.nucleartech.entities.renderers.MushroomCloudRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
 import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.entities.renderers.SimpleMissileRenderer
+import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.items.BombKitItem
 import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.items.setIdSupplier
@@ -95,6 +96,10 @@ object ClientRegistries {
 
         NuclearTech.LOGGER.debug("Setting rendering layers")
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.glowingMushroom.get(), RenderType.cutout())
+        for ((source, flowing, _, _) in NTechFluids.getFluidsList()) {
+            ItemBlockRenderTypes.setRenderLayer(source.get(), RenderType.translucent())
+            ItemBlockRenderTypes.setRenderLayer(flowing.get(), RenderType.translucent())
+        }
 
         NuclearTech.LOGGER.debug("Registering item properties")
         event.enqueueWork {
