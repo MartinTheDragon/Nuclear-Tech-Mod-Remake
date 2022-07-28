@@ -258,8 +258,8 @@ class UseTemplateFolderScreen : Screen(ModItems.machineTemplateFolder.get().desc
 
         fun getAllItems(): List<ItemStack> = ForgeRegistries.ITEMS.getTagManager().getTag(NuclearTags.Items.FOLDER_STAMPS).map(::ItemStack) +
             ForgeRegistries.ITEMS.getTagManager().getTag(NuclearTags.Items.SIREN_TRACKS).map(::ItemStack) +
-            AssemblyTemplateItem.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager) +
-            ChemPlantTemplateItem.getAllChemTemplates((Minecraft.getInstance().level!!.recipeManager))
+            AssemblyTemplateItem.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager).sortedBy { it.displayName.string } +
+            ChemPlantTemplateItem.getAllChemTemplates(Minecraft.getInstance().level!!.recipeManager).sortedBy { it.displayName.string }
 
         fun reloadSearchTree() {
             if (Minecraft.getInstance().level == null) return // outside of session

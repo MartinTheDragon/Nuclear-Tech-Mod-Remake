@@ -42,7 +42,7 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
     private lateinit var recipeButtons: List<Button>
     private lateinit var searchBox: EditBox
     private val tier = menu.tier
-    private val originalRecipeList = menu.playerInventory.player.level.recipeManager.getAllRecipesFor(RecipeTypes.CONSTRUCTING).filter { it.isTierWithinBounds(tier) }
+    private val originalRecipeList = menu.playerInventory.player.level.recipeManager.getAllRecipesFor(RecipeTypes.CONSTRUCTING).filter { it.isTierWithinBounds(tier) }.sortedBy { it.resultItem.displayName.string }
     private val searchResults = mutableListOf<AnvilConstructingRecipe>()
     private var pagesCount = ceil(originalRecipeList.size.toFloat() / RECIPES_PER_PAGE).toInt().coerceAtLeast(1)
     private var currentPage = 1
