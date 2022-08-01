@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases",
   "promos": {
-    "1.18.2-latest": "0.0.13.0",
+    "1.18.2-latest": "0.0.14.0",
     "1.18.1-latest": "0.0.11.0"
   },
   "1.18.2": {
+    "0.0.14.0": "Chemical Plant, hazard system, many fixes and more",
     "0.0.13.0": "Missiles, configurable fallout transformations, spiral point algorithm and some fixes",
     "0.0.12.1": "Fixes and improvements related to the Assembler",
     "0.0.12.0": "Added the Assembler and improved explosion algorithms\nSee changelog for more details"
