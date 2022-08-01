@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.api.explosions.NuclearExplosionMk4Params
-import at.martinthedragon.nucleartech.api.explosions.createAndStart
-import at.martinthedragon.nucleartech.entities.NukeExplosion
-import at.martinthedragon.nucleartech.screens.UseCreativeNuclearExplosionSpawnerScreen
+import at.martinthedragon.nucleartech.api.explosion.NuclearExplosionMk4Params
+import at.martinthedragon.nucleartech.api.explosion.createAndStart
+import at.martinthedragon.nucleartech.entity.NukeExplosion
+import at.martinthedragon.nucleartech.screen.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.Util
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.phys.Vec3

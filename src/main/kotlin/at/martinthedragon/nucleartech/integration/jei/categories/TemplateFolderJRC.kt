@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
@@ -18,7 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient
 class TemplateFolderJRC(guiHelper: IGuiHelper) : IRecipeCategory<TemplateFolderJRC.TemplateFolderRecipe> {
     private val texture = ntm("textures/gui/jei_template_folder.png")
     private val background = guiHelper.createDrawable(texture, 0, 0, 112, 38)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModItems.machineTemplateFolder.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(NTechItems.machineTemplateFolder.get()))
 
     override fun getUid() = ntm("template_folder_results")
     override fun getRecipeClass() = TemplateFolderRecipe::class.java

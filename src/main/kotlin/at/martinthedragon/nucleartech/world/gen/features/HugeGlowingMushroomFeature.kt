@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.world.gen.features
 
-import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.NTechTags
 import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.BlockTags
@@ -65,7 +65,7 @@ class HugeGlowingMushroomFeature(codec: Codec<HugeMushroomFeatureConfiguration>)
         val i = pos.y
         return if (i >= level.minBuildHeight + 1 && i + height + 1 < level.maxBuildHeight) {
             val block = level.getBlockState(pos.below())
-            if (!block.`is`(NuclearTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)) false
+            if (!block.`is`(NTechTags.Blocks.GLOWING_MUSHROOM_GROW_BLOCK)) false
             else {
                 for (j in 0..height) {
                     val k = getTreeRadiusForHeight(height, -1, config.foliageRadius, j)

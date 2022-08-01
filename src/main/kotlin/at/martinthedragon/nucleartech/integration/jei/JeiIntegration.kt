@@ -5,13 +5,15 @@ import at.martinthedragon.nucleartech.integration.jei.categories.*
 import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJRC.TemplateFolderRecipe
 import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJRC.TemplateFolderRecipe.TemplateType
 import at.martinthedragon.nucleartech.integration.jei.transfers.PressingJRTI
-import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
-import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.menus.*
-import at.martinthedragon.nucleartech.recipes.*
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilSmithingRecipe
-import at.martinthedragon.nucleartech.screens.*
+import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.item.NTechBlockItems
+import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.menu.*
+import at.martinthedragon.nucleartech.recipe.*
+import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
+import at.martinthedragon.nucleartech.recipe.anvil.AnvilSmithingRecipe
+import at.martinthedragon.nucleartech.screen.*
 import mezz.jei.api.IModPlugin
 import mezz.jei.api.JeiPlugin
 import mezz.jei.api.constants.VanillaTypes
@@ -60,14 +62,14 @@ class JeiIntegration : IModPlugin {
     override fun registerRecipes(registration: IRecipeRegistration) {
         val recipeManager = Minecraft.getInstance().level!!.recipeManager
         val tagManager = ForgeRegistries.ITEMS.tags() ?: throw IllegalStateException("No tag manager bound to items")
-        val templateFolderOutputs = tagManager.getTag(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
+        val templateFolderOutputs = tagManager.getTag(NTechTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
         if (!templateFolderOutputs.isEmpty) {
-            val machineTemplateFolder = ItemStack(ModItems.machineTemplateFolder.get())
+            val machineTemplateFolder = ItemStack(NTechItems.machineTemplateFolder.get())
             registration.addRecipes(NuclearRecipeTypes.FOLDER_RESULTS, buildList {
-                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NuclearTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NuclearTags.Items.PLATE_STAMPS).map(::ItemStack)))
-                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NuclearTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NuclearTags.Items.WIRE_STAMPS).map(::ItemStack)))
-                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NuclearTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NuclearTags.Items.CIRCUIT_STAMPS).map(::ItemStack)))
-                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.SirenTrack, Ingredient.of(NuclearTags.Items.PLATES_INSULATOR), Ingredient.of(NuclearTags.Items.PLATES_STEEL), tagManager.getTag(NuclearTags.Items.SIREN_TRACKS).map(::ItemStack)))
+                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NTechTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NTechTags.Items.PLATE_STAMPS).map(::ItemStack)))
+                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NTechTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NTechTags.Items.WIRE_STAMPS).map(::ItemStack)))
+                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NTechTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NTechTags.Items.CIRCUIT_STAMPS).map(::ItemStack)))
+                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.SirenTrack, Ingredient.of(NTechTags.Items.PLATES_INSULATOR), Ingredient.of(NTechTags.Items.PLATES_STEEL), tagManager.getTag(NTechTags.Items.SIREN_TRACKS).map(::ItemStack)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.AssemblyTemplate, Ingredient.of(Items.PAPER), Ingredient.of(Tags.Items.DYES), AssemblyTemplateItem.getAllTemplates(recipeManager)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.ChemistryTemplate, Ingredient.of(Items.PAPER), Ingredient.of(Tags.Items.DYES), ChemPlantTemplateItem.getAllChemTemplates(recipeManager)))
             })
@@ -87,22 +89,22 @@ class JeiIntegration : IModPlugin {
     }
 
     override fun registerRecipeCatalysts(registration: IRecipeCatalystRegistration) {
-        registration.addRecipeCatalyst(ItemStack(ModItems.machineTemplateFolder.get()), NuclearRecipeTypes.FOLDER_RESULTS)
+        registration.addRecipeCatalyst(ItemStack(NTechItems.machineTemplateFolder.get()), NuclearRecipeTypes.FOLDER_RESULTS)
 
         listOf(
-            ModBlockItems.ironAnvil.get(), ModBlockItems.leadAnvil.get(), ModBlockItems.steelAnvil.get(),
-            ModBlockItems.meteoriteAnvil.get(), ModBlockItems.starmetalAnvil.get(), ModBlockItems.ferrouraniumAnvil.get(),
-            ModBlockItems.bismuthAnvil.get(), ModBlockItems.schrabidateAnvil.get(), ModBlockItems.dineutroniumAnvil.get(),
-            ModBlockItems.murkyAnvil.get()
+            NTechBlockItems.ironAnvil.get(), NTechBlockItems.leadAnvil.get(), NTechBlockItems.steelAnvil.get(),
+            NTechBlockItems.meteoriteAnvil.get(), NTechBlockItems.starmetalAnvil.get(), NTechBlockItems.ferrouraniumAnvil.get(),
+            NTechBlockItems.bismuthAnvil.get(), NTechBlockItems.schrabidateAnvil.get(), NTechBlockItems.dineutroniumAnvil.get(),
+            NTechBlockItems.murkyAnvil.get()
         ).forEach { registration.addRecipeCatalyst(ItemStack(it), NuclearRecipeTypes.SMITHING, NuclearRecipeTypes.CONSTRUCTING) }
 
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.assemblerPlacer.get()), NuclearRecipeTypes.ASSEMBLING)
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.blastFurnace.get()), NuclearRecipeTypes.BLASTING, JeiRecipeTypes.FUELING)
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.chemPlantPlacer.get()), NuclearRecipeTypes.CHEMISTRY)
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.steamPress.get()), NuclearRecipeTypes.PRESSING, JeiRecipeTypes.FUELING)
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.shredder.get()), NuclearRecipeTypes.SHREDDING)
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.combustionGenerator.get()), JeiRecipeTypes.FUELING)
-        registration.addRecipeCatalyst(ItemStack(ModBlockItems.electricFurnace.get()), JeiRecipeTypes.SMELTING)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.assemblerPlacer.get()), NuclearRecipeTypes.ASSEMBLING)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.blastFurnace.get()), NuclearRecipeTypes.BLASTING, JeiRecipeTypes.FUELING)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.chemPlantPlacer.get()), NuclearRecipeTypes.CHEMISTRY)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.steamPress.get()), NuclearRecipeTypes.PRESSING, JeiRecipeTypes.FUELING)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.shredder.get()), NuclearRecipeTypes.SHREDDING)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.combustionGenerator.get()), JeiRecipeTypes.FUELING)
+        registration.addRecipeCatalyst(ItemStack(NTechBlockItems.electricFurnace.get()), JeiRecipeTypes.SMELTING)
     }
 
     override fun registerRecipeTransferHandlers(registration: IRecipeTransferRegistration) {
@@ -128,7 +130,7 @@ class JeiIntegration : IModPlugin {
     }
 
     override fun registerItemSubtypes(registration: ISubtypeRegistration) {
-        registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.assemblyTemplate.get()) { ingredient, _ -> if (ingredient.hasTag()) ingredient.tag!!.getString("recipe") else "" }
-        registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.chemTemplate.get()) { ingredient, _ -> if (ingredient.hasTag()) ingredient.tag!!.getString("recipe") else "" }
+        registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, NTechItems.assemblyTemplate.get()) { ingredient, _ -> if (ingredient.hasTag()) ingredient.tag!!.getString("recipe") else "" }
+        registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, NTechItems.chemTemplate.get()) { ingredient, _ -> if (ingredient.hasTag()) ingredient.tag!!.getString("recipe") else "" }
     }
 }

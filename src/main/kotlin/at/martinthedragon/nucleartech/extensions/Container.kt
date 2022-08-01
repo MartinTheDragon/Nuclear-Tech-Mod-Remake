@@ -2,7 +2,7 @@ package at.martinthedragon.nucleartech.extensions
 
 import at.martinthedragon.nucleartech.fluid.ContainerFluidHandler
 import at.martinthedragon.nucleartech.fluid.SimpleContainerFluidHandler
-import at.martinthedragon.nucleartech.recipes.getItems
+import at.martinthedragon.nucleartech.recipe.getItems
 import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraftforge.fluids.capability.IFluidHandler

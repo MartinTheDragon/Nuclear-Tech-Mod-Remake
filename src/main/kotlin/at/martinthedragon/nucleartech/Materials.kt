@@ -2,6 +2,8 @@
 
 package at.martinthedragon.nucleartech
 
+import at.martinthedragon.nucleartech.item.NTechBlockItems
+import at.martinthedragon.nucleartech.item.NTechItems
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.BlockItem
@@ -12,8 +14,8 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 import net.minecraft.world.item.Items as VI
 
-private typealias BI = ModBlockItems
-private typealias I = ModItems
+private typealias BI = NTechBlockItems
+private typealias I = NTechItems
 
 private typealias VG = VanillaGroup
 private typealias MG = ModGroup
@@ -130,7 +132,7 @@ object Materials {
     }
 }
 
-private typealias NT = NuclearTags.Items
+private typealias NT = NTechTags.Items
 private typealias FT = Tags.Items
 private typealias MT = ItemTags
 

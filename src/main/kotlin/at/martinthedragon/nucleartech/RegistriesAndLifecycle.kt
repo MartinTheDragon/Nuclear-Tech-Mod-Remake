@@ -1,18 +1,22 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
+import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
+import at.martinthedragon.nucleartech.block.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
-import at.martinthedragon.nucleartech.entities.EntityTypes
-import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.entity.EntityTypes
+import at.martinthedragon.nucleartech.entity.NuclearCreeper
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.hazard.HazardRegistry
-import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
-import at.martinthedragon.nucleartech.menus.MenuTypes
-import at.martinthedragon.nucleartech.particles.ModParticles
-import at.martinthedragon.nucleartech.plugins.PluginEvents
-import at.martinthedragon.nucleartech.recipes.RecipeSerializers
-import at.martinthedragon.nucleartech.recipes.RecipeTypes
-import at.martinthedragon.nucleartech.recipes.StackedIngredient
+import at.martinthedragon.nucleartech.item.NTechBlockItems
+import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.item.NuclearArmorMaterials
+import at.martinthedragon.nucleartech.menu.MenuTypes
+import at.martinthedragon.nucleartech.particle.ModParticles
+import at.martinthedragon.nucleartech.plugin.PluginEvents
+import at.martinthedragon.nucleartech.recipe.RecipeSerializers
+import at.martinthedragon.nucleartech.recipe.RecipeTypes
+import at.martinthedragon.nucleartech.recipe.StackedIngredient
 import at.martinthedragon.nucleartech.world.ChunkLoadingValidationCallback
 import at.martinthedragon.nucleartech.world.gen.WorldGen
 import net.minecraft.core.Registry
@@ -60,12 +64,12 @@ object RegistriesAndLifecycle {
     init {
         val modEventBus = FMLJavaModLoadingContext.get().modEventBus
         BLOCKS.register(modEventBus)
-        ModBlocks
+        NTechBlocks
         FLUIDS.register(modEventBus)
         NTechFluids
         ITEMS.register(modEventBus)
-        ModBlockItems
-        ModItems
+        NTechBlockItems
+        NTechItems
         NuclearArmorMaterials
         BLOCK_ENTITIES.register(modEventBus)
         BlockEntityTypes

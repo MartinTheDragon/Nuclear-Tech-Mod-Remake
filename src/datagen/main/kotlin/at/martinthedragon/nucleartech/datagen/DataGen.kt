@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.datagen.tags.BlockTagProvider
-import at.martinthedragon.nucleartech.datagen.tags.FluidTagProvider
-import at.martinthedragon.nucleartech.datagen.tags.ItemTagProvider
+import at.martinthedragon.nucleartech.datagen.tag.BlockTagProvider
+import at.martinthedragon.nucleartech.datagen.tag.FluidTagProvider
+import at.martinthedragon.nucleartech.datagen.tag.ItemTagProvider
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent

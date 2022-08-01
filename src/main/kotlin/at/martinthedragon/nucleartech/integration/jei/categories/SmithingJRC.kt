@@ -1,10 +1,10 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.ModBlockItems
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilSmithingRecipe
+import at.martinthedragon.nucleartech.recipe.anvil.AnvilSmithingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack
 class SmithingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
     private val texture = ntm("textures/gui/jei_smithing.png")
     private val background: IDrawable = guiHelper.drawableBuilder(texture, 0, 0, 90, 27).setTextureSize(128, 128).build()
-    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.ironAnvil.get()))
+    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(NTechBlockItems.ironAnvil.get()))
 
     override fun getUid() = ntm("smithing")
     override fun getRecipeClass() = AnvilSmithingRecipe::class.java

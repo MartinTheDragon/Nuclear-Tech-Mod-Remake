@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.menus.NTechContainerMenu
-import at.martinthedragon.nucleartech.menus.slots.data.NTechDataSlot
+import at.martinthedragon.nucleartech.menu.NTechContainerMenu
+import at.martinthedragon.nucleartech.menu.slots.data.NTechDataSlot
 import net.minecraft.client.Minecraft
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraftforge.network.NetworkEvent

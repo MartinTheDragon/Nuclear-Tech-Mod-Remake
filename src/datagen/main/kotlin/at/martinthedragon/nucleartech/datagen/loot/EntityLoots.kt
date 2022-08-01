@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.datagen.loot
 
-import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle
-import at.martinthedragon.nucleartech.entities.EntityTypes
+import at.martinthedragon.nucleartech.entity.EntityTypes
 import net.minecraft.advancements.critereon.EntityPredicate
 import net.minecraft.data.loot.EntityLoot
 import net.minecraft.tags.EntityTypeTags
@@ -30,13 +30,13 @@ class EntityLoots : EntityLoot() {
             )
             .withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1F))
-                .add(LootItem.lootTableItem(ModItems.u233Nugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
-                .add(LootItem.lootTableItem(ModItems.pu238Nugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
-                .add(LootItem.lootTableItem(ModItems.pu239Nugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
-                .add(LootItem.lootTableItem(ModItems.neptuniumNugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
+                .add(LootItem.lootTableItem(NTechItems.u233Nugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
+                .add(LootItem.lootTableItem(NTechItems.pu238Nugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
+                .add(LootItem.lootTableItem(NTechItems.pu239Nugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
+                .add(LootItem.lootTableItem(NTechItems.neptuniumNugget.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 2F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
                 // TODO Fat Man Core
-                .add(LootItem.lootTableItem(ModItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 4F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
-                .add(LootItem.lootTableItem(ModItems.niter.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 4F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
+                .add(LootItem.lootTableItem(NTechItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 4F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
+                .add(LootItem.lootTableItem(NTechItems.niter.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1F, 4F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0F, 1F))))
                 // TODO AWESOME, Fusion Core, Stimpak, T45 Armor, Nuke Ammo
                 .`when`(AlternativeLootItemCondition.alternative(
                     LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)),

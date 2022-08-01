@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.integration.jei.transfers
 
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
-import at.martinthedragon.nucleartech.menus.PressMenu
+import at.martinthedragon.nucleartech.menu.PressMenu
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.PressingRecipe
+import at.martinthedragon.nucleartech.recipe.PressingRecipe
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.inventory.Slot

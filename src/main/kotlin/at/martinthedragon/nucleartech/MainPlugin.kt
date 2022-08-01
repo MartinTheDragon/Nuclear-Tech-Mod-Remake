@@ -2,14 +2,15 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.api.ModPlugin
 import at.martinthedragon.nucleartech.api.NuclearTechPlugin
-import at.martinthedragon.nucleartech.api.explosions.NuclearExplosionMk4Params
-import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration
-import at.martinthedragon.nucleartech.api.explosions.ExplosionLargeParams
-import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration.Defaults as DefaultExplosionAlgorithms
+import at.martinthedragon.nucleartech.api.explosion.NuclearExplosionMk4Params
+import at.martinthedragon.nucleartech.api.explosion.ExplosionAlgorithmRegistration
+import at.martinthedragon.nucleartech.api.explosion.ExplosionLargeParams
+import at.martinthedragon.nucleartech.api.explosion.ExplosionAlgorithmRegistration.Defaults as DefaultExplosionAlgorithms
 import at.martinthedragon.nucleartech.api.hazard.radiation.HazmatRegistry
-import at.martinthedragon.nucleartech.entities.NukeExplosion
-import at.martinthedragon.nucleartech.explosions.ExplosionLarge
-import at.martinthedragon.nucleartech.items.NuclearArmorMaterials
+import at.martinthedragon.nucleartech.entity.NukeExplosion
+import at.martinthedragon.nucleartech.explosion.ExplosionLarge
+import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.item.NuclearArmorMaterials
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ArmorMaterials as VanillaArmorMaterials
 
@@ -30,12 +31,12 @@ class MainPlugin : ModPlugin {
         registerMaterial(NuclearArmorMaterials.steel, .045F)
         registerMaterial(NuclearArmorMaterials.titanium, .045F)
         registerMaterial(NuclearArmorMaterials.advancedAlloy, .07F)
-        registerArmorRepairItem(ModItems.cobaltIngot, .125F)
+        registerArmorRepairItem(NTechItems.cobaltIngot, .125F)
         registerMaterial(NuclearArmorMaterials.hazmat, .6F)
         registerMaterial(NuclearArmorMaterials.advancedHazmat, 1F)
         registerMaterial(NuclearArmorMaterials.reinforcedHazmat, 2F)
         registerMaterial(NuclearArmorMaterials.paAAlloy, 1.7F)
-        registerArmorRepairItem(ModItems.starmetalIngot, 1F)
+        registerArmorRepairItem(NTechItems.starmetalIngot, 1F)
         registerMaterial(NuclearArmorMaterials.combineSteel, 1.3F)
         registerMaterial(NuclearArmorMaterials.schrabidium, 3F)
     }

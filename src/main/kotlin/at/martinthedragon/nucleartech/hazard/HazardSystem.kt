@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.hazard
 
-import at.martinthedragon.nucleartech.recipes.getItems
+import at.martinthedragon.nucleartech.recipe.getItems
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.server.TickTask

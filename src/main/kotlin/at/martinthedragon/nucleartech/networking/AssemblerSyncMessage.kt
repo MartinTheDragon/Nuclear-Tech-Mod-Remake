@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.ModBlocks
-import at.martinthedragon.nucleartech.blocks.entities.AssemblerBlockEntity
+import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.ntm
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
@@ -20,7 +20,8 @@ class AssemblerSyncMessage(val pos: BlockPos, val recipeID: ResourceLocation?, v
     override fun handle(context: Supplier<NetworkEvent.Context>) {
         if (context.get().direction.receptionSide.isClient) context.get().enqueueWork {
             val level = Minecraft.getInstance().level
-            if (level != null && Minecraft.getInstance().player != null && level.isLoaded(pos) && level.getBlockState(pos).`is`(ModBlocks.assembler.get())) {
+            if (level != null && Minecraft.getInstance().player != null && level.isLoaded(pos) && level.getBlockState(pos).`is`(
+                    NTechBlocks.assembler.get())) {
                 val blockEntity = level.getBlockEntity(pos)
                 if (blockEntity !is AssemblerBlockEntity) return@enqueueWork
                 blockEntity.recipeID = recipeID

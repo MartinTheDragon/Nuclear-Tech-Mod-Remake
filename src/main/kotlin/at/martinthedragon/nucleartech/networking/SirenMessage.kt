@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.api.sounds.SoundHandler
-import at.martinthedragon.nucleartech.items.SirenTrackItem
+import at.martinthedragon.nucleartech.api.sound.SoundHandler
+import at.martinthedragon.nucleartech.item.SirenTrackItem
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.sounds.SoundSource

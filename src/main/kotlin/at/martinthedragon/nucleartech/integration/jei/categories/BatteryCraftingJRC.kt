@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.recipes.BatteryRecipe
+import at.martinthedragon.nucleartech.recipe.BatteryRecipe
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.ingredient.ICraftingGridHelper

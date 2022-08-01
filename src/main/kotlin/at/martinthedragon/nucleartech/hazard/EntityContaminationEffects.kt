@@ -1,13 +1,13 @@
 package at.martinthedragon.nucleartech.hazard
 
-import at.martinthedragon.nucleartech.DamageSources
+import at.martinthedragon.nucleartech.world.DamageSources
 import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
 import at.martinthedragon.nucleartech.capability.contamination.addDigamma
 import at.martinthedragon.nucleartech.capability.contamination.addIrradiation
 import at.martinthedragon.nucleartech.config.NuclearConfig
-import at.martinthedragon.nucleartech.entities.NuclearCreeper
+import at.martinthedragon.nucleartech.entity.NuclearCreeper
 import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.world.ChunkRadiation
@@ -87,7 +87,8 @@ object EntityContaminationEffects {
 
         if (irradiation > 2500) capability.setIrradiation(2500F)
 
-        if ((entity is Player && (entity.isCreative || entity.isSpectator)) || entity.isInvulnerable || entity.isInvulnerableTo(DamageSources.radiation) || isRadiationImmune(entity)) return
+        if ((entity is Player && (entity.isCreative || entity.isSpectator)) || entity.isInvulnerable || entity.isInvulnerableTo(
+                DamageSources.radiation) || isRadiationImmune(entity)) return
 
         val random = world.random
 

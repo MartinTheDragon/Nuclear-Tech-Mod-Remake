@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.rendering
 
-import at.martinthedragon.nucleartech.ModItems
+import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.ntm
@@ -36,7 +36,7 @@ object ClientRenderer {
         if (event.type == RenderGameOverlayEvent.ElementType.LAYER) {
             // TODO check for FSB armor
 
-            if (player.inventory.hasAnyOf(setOf(ModItems.geigerCounter.get()))) {
+            if (player.inventory.hasAnyOf(setOf(NTechItems.geigerCounter.get()))) {
                 Capabilities.getContamination(player)?.let { renderGeigerHUD(event.matrixStack, it.getIrradiation()) }
             }
         }

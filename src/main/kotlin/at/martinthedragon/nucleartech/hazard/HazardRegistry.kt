@@ -2,6 +2,8 @@ package at.martinthedragon.nucleartech.hazard
 
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.hazard.type.*
+import at.martinthedragon.nucleartech.item.NTechBlockItems
+import at.martinthedragon.nucleartech.item.NTechItems
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraftforge.common.Tags
@@ -98,15 +100,15 @@ object HazardRegistry {
             register(Tags.Items.GUNPOWDER, DEFAULT_EXPLOSIVE_DATA)
             register(Items.TNT, HazardData(EXPLOSIVE, 4F))
             register(Items.PUMPKIN_PIE, DEFAULT_EXPLOSIVE_DATA)
-            register(ModItems.propellantLittleBoy, HazardData(EXPLOSIVE, 2F))
+            register(NTechItems.propellantLittleBoy, HazardData(EXPLOSIVE, 2F))
 
-            register(NuclearTags.Items.DUSTS_CORDITE, HazardData(EXPLOSIVE, 2F))
-            register(NuclearTags.Items.DUSTS_BALLISTITE, DEFAULT_EXPLOSIVE_DATA)
+            register(NTechTags.Items.DUSTS_CORDITE, HazardData(EXPLOSIVE, 2F))
+            register(NTechTags.Items.DUSTS_BALLISTITE, DEFAULT_EXPLOSIVE_DATA)
 
             register(TagGroups.lithium, DEFAULT_HYDROREACTIVE_DATA)
 
-            register(NuclearTags.Items.DUSTS_COAL, HazardData(COAL, powder))
-            register(NuclearTags.Items.DUSTS_LIGNITE, HazardData(COAL, powder))
+            register(NTechTags.Items.DUSTS_COAL, HazardData(COAL, powder))
+            register(NTechTags.Items.DUSTS_LIGNITE, HazardData(COAL, powder))
 
             register(TagGroups.asbestos, DEFAULT_ASBESTOS_DATA)
 
@@ -150,18 +152,18 @@ object HazardRegistry {
             register(TagGroups.uraniumFuel, HazardData(RADIATION, UF))
             register(TagGroups.yellowcake, HazardData(RADIATION, 15F))
 
-            register(NuclearTags.Items.ORES_URANIUM, HazardData.EMPTY)
-            register(NuclearTags.Items.ORES_THORIUM, HazardData.EMPTY)
-            register(NuclearTags.Items.RAW_MATERIALS_URANIUM, HazardData.EMPTY)
-            register(NuclearTags.Items.RAW_MATERIALS_THORIUM, HazardData.EMPTY)
+            register(NTechTags.Items.ORES_URANIUM, HazardData.EMPTY)
+            register(NTechTags.Items.ORES_THORIUM, HazardData.EMPTY)
+            register(NTechTags.Items.RAW_MATERIALS_URANIUM, HazardData.EMPTY)
+            register(NTechTags.Items.RAW_MATERIALS_THORIUM, HazardData.EMPTY)
 
-            register(ModBlockItems.slakedSellafite, HazardData(RADIATION, .5F))
-            register(ModBlockItems.sellafite, HazardData(RADIATION, 1F))
-            register(ModBlockItems.hotSellafite, HazardData(RADIATION, 2.5F))
-            register(ModBlockItems.boilingSellafite, HazardData(RADIATION, 4F))
-            register(ModBlockItems.blazingSellafite, HazardData(RADIATION, 5F))
-            register(ModBlockItems.infernalSellafite, HazardData(RADIATION, 7.5F))
-            register(ModBlockItems.sellafiteCorium, HazardData(RADIATION, 10F))
+            register(NTechBlockItems.slakedSellafite, HazardData(RADIATION, .5F))
+            register(NTechBlockItems.sellafite, HazardData(RADIATION, 1F))
+            register(NTechBlockItems.hotSellafite, HazardData(RADIATION, 2.5F))
+            register(NTechBlockItems.boilingSellafite, HazardData(RADIATION, 4F))
+            register(NTechBlockItems.blazingSellafite, HazardData(RADIATION, 5F))
+            register(NTechBlockItems.infernalSellafite, HazardData(RADIATION, 7.5F))
+            register(NTechBlockItems.sellafiteCorium, HazardData(RADIATION, 10F))
         }
     }
 

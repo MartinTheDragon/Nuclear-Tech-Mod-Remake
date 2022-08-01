@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.api.items.AttackHandler
-import at.martinthedragon.nucleartech.api.items.DamageHandler
-import at.martinthedragon.nucleartech.api.items.FallHandler
-import at.martinthedragon.nucleartech.api.items.TickingArmor
+import at.martinthedragon.nucleartech.api.item.AttackHandler
+import at.martinthedragon.nucleartech.api.item.DamageHandler
+import at.martinthedragon.nucleartech.api.item.FallHandler
+import at.martinthedragon.nucleartech.api.item.TickingArmor
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationCapabilityProvider
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazardSystem

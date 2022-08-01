@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.hazard.type
 
-import at.martinthedragon.nucleartech.gold
+import at.martinthedragon.nucleartech.extensions.gold
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.ntmTranslation
 import net.minecraft.network.chat.Component

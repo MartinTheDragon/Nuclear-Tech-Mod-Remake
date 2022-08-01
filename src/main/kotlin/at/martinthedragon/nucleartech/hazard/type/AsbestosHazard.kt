@@ -4,7 +4,7 @@ import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.addAsbestos
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.ntmTranslation
-import at.martinthedragon.nucleartech.white
+import at.martinthedragon.nucleartech.extensions.white
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity

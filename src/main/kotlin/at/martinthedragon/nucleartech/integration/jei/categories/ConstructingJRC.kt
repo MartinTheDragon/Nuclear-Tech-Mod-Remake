@@ -3,7 +3,7 @@ package at.martinthedragon.nucleartech.integration.jei.categories
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
+import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
 import mezz.jei.api.gui.drawable.IDrawable

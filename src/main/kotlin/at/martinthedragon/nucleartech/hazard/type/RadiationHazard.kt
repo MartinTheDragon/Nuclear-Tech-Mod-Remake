@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.hazard.type
 
-import at.martinthedragon.nucleartech.green
+import at.martinthedragon.nucleartech.extensions.green
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.hazard.modifier.evaluateAllModifiers
 import at.martinthedragon.nucleartech.ntmTranslation
-import at.martinthedragon.nucleartech.yellow
+import at.martinthedragon.nucleartech.extensions.yellow
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.entity.LivingEntity

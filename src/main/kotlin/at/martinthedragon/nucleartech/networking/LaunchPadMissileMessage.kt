@@ -1,7 +1,6 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.blocks.entities.LaunchPadBlockEntity
-import at.martinthedragon.nucleartech.items.MissileItem
+import at.martinthedragon.nucleartech.block.entity.LaunchPadBlockEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf

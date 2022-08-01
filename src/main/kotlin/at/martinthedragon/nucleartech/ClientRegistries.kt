@@ -1,30 +1,32 @@
 package at.martinthedragon.nucleartech
 
-import at.martinthedragon.nucleartech.blocks.entities.BlockEntityTypes
-import at.martinthedragon.nucleartech.blocks.entities.renderers.AssemblerRenderer
-import at.martinthedragon.nucleartech.blocks.entities.renderers.ChemPlantRenderer
-import at.martinthedragon.nucleartech.blocks.entities.renderers.LaunchPadRenderer
-import at.martinthedragon.nucleartech.blocks.entities.renderers.SteamPressRenderer
-import at.martinthedragon.nucleartech.entities.EntityTypes
-import at.martinthedragon.nucleartech.entities.renderers.MushroomCloudRenderer
-import at.martinthedragon.nucleartech.entities.renderers.NoopRenderer
-import at.martinthedragon.nucleartech.entities.renderers.NuclearCreeperRenderer
-import at.martinthedragon.nucleartech.entities.renderers.SimpleMissileRenderer
+import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
+import at.martinthedragon.nucleartech.block.entity.renderer.AssemblerRenderer
+import at.martinthedragon.nucleartech.block.entity.renderer.ChemPlantRenderer
+import at.martinthedragon.nucleartech.block.entity.renderer.LaunchPadRenderer
+import at.martinthedragon.nucleartech.block.entity.renderer.SteamPressRenderer
+import at.martinthedragon.nucleartech.entity.EntityTypes
+import at.martinthedragon.nucleartech.entity.renderer.MushroomCloudRenderer
+import at.martinthedragon.nucleartech.entity.renderer.NoopRenderer
+import at.martinthedragon.nucleartech.entity.renderer.NuclearCreeperRenderer
+import at.martinthedragon.nucleartech.entity.renderer.SimpleMissileRenderer
 import at.martinthedragon.nucleartech.fluid.NTechFluids
-import at.martinthedragon.nucleartech.items.BombKitItem
-import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.items.setIdSupplier
-import at.martinthedragon.nucleartech.menus.MenuTypes
+import at.martinthedragon.nucleartech.item.BombKitItem
+import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.item.setIdSupplier
+import at.martinthedragon.nucleartech.menu.MenuTypes
 import at.martinthedragon.nucleartech.model.RandomModelLoader
-import at.martinthedragon.nucleartech.particles.ContrailParticle
-import at.martinthedragon.nucleartech.particles.ModParticles
-import at.martinthedragon.nucleartech.particles.RubbleParticle
-import at.martinthedragon.nucleartech.particles.SmokeParticle
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
+import at.martinthedragon.nucleartech.particle.ContrailParticle
+import at.martinthedragon.nucleartech.particle.ModParticles
+import at.martinthedragon.nucleartech.particle.RubbleParticle
+import at.martinthedragon.nucleartech.particle.SmokeParticle
+import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
 import at.martinthedragon.nucleartech.rendering.SpecialModels
-import at.martinthedragon.nucleartech.screens.*
+import at.martinthedragon.nucleartech.screen.*
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.MenuScreens
@@ -95,7 +97,7 @@ object ClientRegistries {
         }
 
         NuclearTech.LOGGER.debug("Setting rendering layers")
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.glowingMushroom.get(), RenderType.cutout())
+        ItemBlockRenderTypes.setRenderLayer(NTechBlocks.glowingMushroom.get(), RenderType.cutout())
         for ((source, flowing, _, _) in NTechFluids.getFluidsList()) {
             ItemBlockRenderTypes.setRenderLayer(source.get(), RenderType.translucent())
             ItemBlockRenderTypes.setRenderLayer(flowing.get(), RenderType.translucent())
@@ -103,8 +105,8 @@ object ClientRegistries {
 
         NuclearTech.LOGGER.debug("Registering item properties")
         event.enqueueWork {
-            ItemProperties.register(ModItems.assemblyTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
-            ItemProperties.register(ModItems.chemTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
+            ItemProperties.register(NTechItems.assemblyTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
+            ItemProperties.register(NTechItems.chemTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
         }
     }
 
@@ -176,7 +178,7 @@ object ClientRegistries {
         ModelLoaderRegistry.registerLoader(ntm("random"), RandomModelLoader)
 
         NuclearTech.LOGGER.debug("Registering random model id suppliers")
-        RandomModelLoader.setIdSupplier(ModItems.polaroid)
+        RandomModelLoader.setIdSupplier(NTechItems.polaroid)
 
 //        ForgeModelBakery.addSpecialModel(ntm("other/assembler"))
 //        ForgeModelBakery.addSpecialModel(ntm("other/mushroom_cloud"))

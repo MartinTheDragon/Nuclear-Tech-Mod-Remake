@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.capability.contamination
 
-import at.martinthedragon.nucleartech.capability.contamination.effects.ContaminationEffect
+import at.martinthedragon.nucleartech.capability.contamination.effect.ContaminationEffect
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract

@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.particles.ModParticles
+import at.martinthedragon.nucleartech.particle.ModParticles
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray

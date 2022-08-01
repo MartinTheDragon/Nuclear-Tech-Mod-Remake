@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.hazard.HazardSystem
-import at.martinthedragon.nucleartech.screens.AnvilScreen
-import at.martinthedragon.nucleartech.screens.UseTemplateFolderScreen
+import at.martinthedragon.nucleartech.screen.AnvilScreen
+import at.martinthedragon.nucleartech.screen.UseTemplateFolderScreen
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.RecipesUpdatedEvent
 import net.minecraftforge.event.TagsUpdatedEvent

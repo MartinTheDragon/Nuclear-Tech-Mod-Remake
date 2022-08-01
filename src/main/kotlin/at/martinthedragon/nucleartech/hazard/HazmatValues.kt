@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.hazard
 
-import at.martinthedragon.nucleartech.Attributes
+import at.martinthedragon.nucleartech.block.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.api.hazard.radiation.HazmatRegistry
 import net.minecraft.world.entity.EquipmentSlot

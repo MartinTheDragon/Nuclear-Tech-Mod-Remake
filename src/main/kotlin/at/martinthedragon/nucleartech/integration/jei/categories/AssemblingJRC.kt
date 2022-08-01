@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.ModBlockItems
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
-import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.AssemblyRecipe
+import at.martinthedragon.nucleartech.recipe.AssemblyRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -23,7 +23,7 @@ import net.minecraft.world.item.crafting.Ingredient
 class AssemblingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AssemblyRecipe> {
     private val texture = ntm("textures/gui/jei_assembler.png")
     private val background = guiHelper.createDrawable(texture, 0, 0, 153, 54)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.assemblerPlacer.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(NTechBlockItems.assemblerPlacer.get()))
     private val arrow = guiHelper.drawableBuilder(texture, 16, 54, 32, 15).buildAnimated(40, IDrawableAnimated.StartDirection.LEFT, false)
     private val energyBar = guiHelper.drawableBuilder(texture, 0, 54, 16, 52).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true)
 

@@ -1,10 +1,10 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.ModBlockItems
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.BlastingRecipe
+import at.martinthedragon.nucleartech.recipe.BlastingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack
 class BlastingJRC(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
     private val texture = ntm("textures/gui/jei_blast_furnace.png")
     private val background = guiHelper.createDrawable(texture, 0, 0, 72, 54)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.blastFurnace.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(NTechBlockItems.blastFurnace.get()))
     private val blastArrow = guiHelper.drawableBuilder(texture, 0, 54, 22, 16).buildAnimated(400, IDrawableAnimated.StartDirection.LEFT, false)
 
     override fun getUid() = ntm("blasting")

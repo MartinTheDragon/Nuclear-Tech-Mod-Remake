@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.ModBlockItems
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
-import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.ChemRecipe
+import at.martinthedragon.nucleartech.recipe.ChemRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.forge.ForgeTypes
@@ -24,7 +24,7 @@ import net.minecraft.world.item.crafting.Ingredient
 class ChemistryJRC(guiHelper: IGuiHelper) : IRecipeCategory<ChemRecipe> {
     private val texture = ntm("textures/gui/jei_chemistry.png")
     private val background: IDrawable = guiHelper.createDrawable(texture, 0, 0, 153, 54)
-    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.chemPlantPlacer.get()))
+    private val icon: IDrawable = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(NTechBlockItems.chemPlantPlacer.get()))
     private val arrow: IDrawable = guiHelper.drawableBuilder(texture, 16, 54, 50, 17).buildAnimated(40, IDrawableAnimated.StartDirection.LEFT, false)
     private val energyBar: IDrawable = guiHelper.drawableBuilder(texture, 0, 54, 16, 52).buildAnimated(200, IDrawableAnimated.StartDirection.TOP, true)
 

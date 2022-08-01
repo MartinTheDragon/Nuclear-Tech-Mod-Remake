@@ -4,7 +4,7 @@ import at.martinthedragon.nucleartech.CreativeTabs
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FLUIDS
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
-import at.martinthedragon.nucleartech.delegates.LateRegistryProperty
+import at.martinthedragon.nucleartech.delegate.LateRegistryProperty
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.core.BlockSource
@@ -37,7 +37,7 @@ object NTechFluids {
         flowingCreator: (properties: Properties) -> F,
         bucketCreator: (fluidSupplier: Supplier<out Fluid>, properties: Item.Properties) -> BU,
         propertiesModifier: Properties.() -> Unit = {},
-        bucketProperties: () -> Item.Properties = { Item.Properties().tab(CreativeTabs.Items.itemGroup).stacksTo(1).craftRemainder(Items.BUCKET) }, // needs to be a lambda so the CreativeTabs don't get triggered before ModItems
+        bucketProperties: () -> Item.Properties = { Item.Properties().tab(CreativeTabs.Items.tab).stacksTo(1).craftRemainder(Items.BUCKET) }, // needs to be a lambda so the CreativeTabs don't get triggered before NTechItems
         fluidBlockProperties: BlockBehaviour.Properties = BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100F).noDrops()
     ): FluidObject<S, F, BU, LiquidBlock> {
         val fluidObject = FluidObject<S, F, BU, LiquidBlock>()

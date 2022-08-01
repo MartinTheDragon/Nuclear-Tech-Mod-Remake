@@ -1,12 +1,12 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.ModItems
-import at.martinthedragon.nucleartech.NuclearTags
-import at.martinthedragon.nucleartech.items.AssemblyTemplateItem
-import at.martinthedragon.nucleartech.items.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.items.giveItemToInventory
-import at.martinthedragon.nucleartech.recipes.StackedIngredient
-import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
+import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.NTechTags
+import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.item.giveItemToInventory
+import at.martinthedragon.nucleartech.recipe.StackedIngredient
+import at.martinthedragon.nucleartech.recipe.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.item.Item
@@ -28,11 +28,11 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                 val sender = context.get().sender ?: return@enqueueWork
 
                 val tagManager = ForgeRegistries.ITEMS.tags() ?: throw IllegalStateException("No tag manager bound to items")
-                val folderResults = tagManager.getTag(NuclearTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
+                val folderResults = tagManager.getTag(NTechTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
                 if (result.item !in folderResults) return@enqueueWork
 
-                if (!sender.inventory.getSelected().sameItem(ModItems.machineTemplateFolder.get().defaultInstance) &&
-                    !sender.inventory.offhand.first().sameItem(ModItems.machineTemplateFolder.get().defaultInstance)) {
+                if (!sender.inventory.getSelected().sameItem(NTechItems.machineTemplateFolder.get().defaultInstance) &&
+                    !sender.inventory.offhand.first().sameItem(NTechItems.machineTemplateFolder.get().defaultInstance)) {
                     return@enqueueWork // h4xx0r detected
                 }
 
@@ -48,31 +48,31 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                         return true
                     }
 
-                    val pressStamps = tagManager.getTag(NuclearTags.Items.FOLDER_STAMPS)
-                    val sirenTracks = tagManager.getTag(NuclearTags.Items.SIREN_TRACKS)
+                    val pressStamps = tagManager.getTag(NTechTags.Items.FOLDER_STAMPS)
+                    val sirenTracks = tagManager.getTag(NTechTags.Items.SIREN_TRACKS)
                     when (result.item) {
                         is AssemblyTemplateItem -> if (!AssemblyTemplateItem.isValidTemplate(result, sender.level.recipeManager) || !removeTemplateIngredients(sender)) return@enqueueWork
                         is ChemPlantTemplateItem -> if (!ChemPlantTemplateItem.isValidTemplate(result, sender.level.recipeManager) || !removeTemplateIngredients(sender)) return@enqueueWork
                         in pressStamps -> {
-                            val stoneStamps = tagManager.getTag(NuclearTags.Items.STONE_STAMPS)
-                            val ironStamps = tagManager.getTag(NuclearTags.Items.IRON_STAMPS)
-                            val steelStamps = tagManager.getTag(NuclearTags.Items.STEEL_STAMPS)
-                            val titaniumStamps = tagManager.getTag(NuclearTags.Items.TITANIUM_STAMPS)
-                            val obsidianStamps = tagManager.getTag(NuclearTags.Items.OBSIDIAN_STAMPS)
-                            val schrabidiumStamps = tagManager.getTag(NuclearTags.Items.SCHRABIDIUM_STAMPS)
+                            val stoneStamps = tagManager.getTag(NTechTags.Items.STONE_STAMPS)
+                            val ironStamps = tagManager.getTag(NTechTags.Items.IRON_STAMPS)
+                            val steelStamps = tagManager.getTag(NTechTags.Items.STEEL_STAMPS)
+                            val titaniumStamps = tagManager.getTag(NTechTags.Items.TITANIUM_STAMPS)
+                            val obsidianStamps = tagManager.getTag(NTechTags.Items.OBSIDIAN_STAMPS)
+                            val schrabidiumStamps = tagManager.getTag(NTechTags.Items.SCHRABIDIUM_STAMPS)
                             when (result.item) {
-                                in stoneStamps -> if (!removeIfPossible(sender, ModItems.stoneFlatStamp.get())) return@enqueueWork
-                                in ironStamps -> if (!removeIfPossible(sender, ModItems.ironFlatStamp.get())) return@enqueueWork
-                                in steelStamps -> if (!removeIfPossible(sender, ModItems.steelFlatStamp.get())) return@enqueueWork
-                                in titaniumStamps -> if (!removeIfPossible(sender, ModItems.titaniumFlatStamp.get())) return@enqueueWork
-                                in obsidianStamps -> if (!removeIfPossible(sender, ModItems.obsidianFlatStamp.get())) return@enqueueWork
-                                in schrabidiumStamps -> if (!removeIfPossible(sender, ModItems.schrabidiumFlatStamp.get())) return@enqueueWork
+                                in stoneStamps -> if (!removeIfPossible(sender, NTechItems.stoneFlatStamp.get())) return@enqueueWork
+                                in ironStamps -> if (!removeIfPossible(sender, NTechItems.ironFlatStamp.get())) return@enqueueWork
+                                in steelStamps -> if (!removeIfPossible(sender, NTechItems.steelFlatStamp.get())) return@enqueueWork
+                                in titaniumStamps -> if (!removeIfPossible(sender, NTechItems.titaniumFlatStamp.get())) return@enqueueWork
+                                in obsidianStamps -> if (!removeIfPossible(sender, NTechItems.obsidianFlatStamp.get())) return@enqueueWork
+                                in schrabidiumStamps -> if (!removeIfPossible(sender, NTechItems.schrabidiumFlatStamp.get())) return@enqueueWork
                                 else -> return@enqueueWork
                             }
                         }
                         in sirenTracks -> if (!removeIfPossible(sender,
-                                sender.inventory.items.firstOrNull { it.`is`(NuclearTags.Items.PLATES_INSULATOR) }?.item,
-                                sender.inventory.items.firstOrNull { it.`is`(NuclearTags.Items.PLATES_STEEL) }?.item
+                                sender.inventory.items.firstOrNull { it.`is`(NTechTags.Items.PLATES_INSULATOR) }?.item,
+                                sender.inventory.items.firstOrNull { it.`is`(NTechTags.Items.PLATES_STEEL) }?.item
                             )) { return@enqueueWork }
                         else -> if (!removeIfPossible(sender,
                                 Items.PAPER,

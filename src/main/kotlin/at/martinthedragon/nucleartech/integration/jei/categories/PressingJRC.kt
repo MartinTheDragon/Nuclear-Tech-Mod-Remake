@@ -1,10 +1,10 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.ModBlockItems
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
-import at.martinthedragon.nucleartech.recipes.PressingRecipe
+import at.martinthedragon.nucleartech.recipe.PressingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
 import mezz.jei.api.constants.VanillaTypes
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder
@@ -23,7 +23,7 @@ import net.minecraft.world.item.crafting.Ingredient
 class PressingJRC(guiHelper: IGuiHelper) : IRecipeCategory<PressingRecipe> {
     private val texture = ntm("textures/gui/jei_press.png")
     private val background = guiHelper.createDrawable(texture, 0, 0, 81, 54)
-    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(ModBlockItems.steamPress.get()))
+    private val icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ItemStack(NTechBlockItems.steamPress.get()))
     private val pressArrow = guiHelper.drawableBuilder(texture, 0, 54, 18, 16).buildAnimated(20, IDrawableAnimated.StartDirection.TOP, false)
 
     override fun getUid() = ntm("pressing")

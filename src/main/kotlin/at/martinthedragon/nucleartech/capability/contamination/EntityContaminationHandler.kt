@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.capability.contamination
 
-import at.martinthedragon.nucleartech.capability.contamination.effects.ContaminationEffect
+import at.martinthedragon.nucleartech.capability.contamination.effect.ContaminationEffect
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
 import net.minecraftforge.common.util.INBTSerializable

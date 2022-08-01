@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.world.gen.features
 
-import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import com.mojang.serialization.Codec
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.BlockTags
@@ -27,9 +27,9 @@ class OilBubbleFeature(codec: Codec<NoneFeatureConfiguration>) : Feature<NoneFea
                         val oilOrePos = BlockPos(x, y, z)
                         val blockState = context.level().getBlockState(oilOrePos)
                         if (blockState.`is`(BlockTags.STONE_ORE_REPLACEABLES)) {
-                            setBlock(context.level(), oilOrePos, ModBlocks.oilDeposit.get().defaultBlockState())
+                            setBlock(context.level(), oilOrePos, NTechBlocks.oilDeposit.get().defaultBlockState())
                         } else if (blockState.`is`(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) {
-                            setBlock(context.level(), oilOrePos, ModBlocks.deepslateOilDeposit.get().defaultBlockState())
+                            setBlock(context.level(), oilOrePos, NTechBlocks.deepslateOilDeposit.get().defaultBlockState())
                         }
                     }
                 }

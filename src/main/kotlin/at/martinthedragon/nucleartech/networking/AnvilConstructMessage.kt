@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.networking
 
 import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.menus.AnvilMenu
-import at.martinthedragon.nucleartech.recipes.anvil.AnvilConstructingRecipe
-import at.martinthedragon.nucleartech.recipes.containerSatisfiesRequirements
+import at.martinthedragon.nucleartech.menu.AnvilMenu
+import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
+import at.martinthedragon.nucleartech.recipe.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.resources.ResourceLocation
 import net.minecraftforge.network.NetworkEvent

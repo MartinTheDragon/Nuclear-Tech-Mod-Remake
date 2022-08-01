@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.world.gen
 
-import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
 import at.martinthedragon.nucleartech.ntm
@@ -128,19 +128,19 @@ object WorldGen {
         val NETHERRACK: RuleTest = VanillaOreFeatures.NETHERRACK
         val NETHER_ORE_REPLACEABLES: RuleTest = VanillaOreFeatures.NETHER_ORE_REPLACEABLES
         val END_STONE: RuleTest = BlockMatchTest(Blocks.END_STONE)
-        val ORE_URANIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.uraniumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateUraniumOre.get().defaultBlockState()))
-        val ORE_THORIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.thoriumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateThoriumOre.get().defaultBlockState()))
-        val ORE_TITANIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.titaniumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateTitaniumOre.get().defaultBlockState()))
-        val ORE_SULFUR_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.sulfurOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateSulfurOre.get().defaultBlockState()))
-        val ORE_NITER_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.niterOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateNiterOre.get().defaultBlockState()))
-        val ORE_TUNGSTEN_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.tungstenOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateTungstenOre.get().defaultBlockState()))
-        val ORE_ALUMINIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.aluminiumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateAluminiumOre.get().defaultBlockState()))
-        val ORE_FLUORITE_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.fluoriteOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateFluoriteOre.get().defaultBlockState()))
-        val ORE_BERYLLIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.berylliumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateBerylliumOre.get().defaultBlockState()))
-        val ORE_LEAD_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.leadOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateLeadOre.get().defaultBlockState()))
-        val ORE_ASBESTOS_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.asbestosOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateAsbestosOre.get().defaultBlockState()))
-        val ORE_RARE_EARTH_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.rareEarthOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateRareEarthOre.get().defaultBlockState()))
-        val ORE_COBALT_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.cobaltOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.deepslateCobaltOre.get().defaultBlockState()))
+        val ORE_URANIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.uraniumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateUraniumOre.get().defaultBlockState()))
+        val ORE_THORIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.thoriumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateThoriumOre.get().defaultBlockState()))
+        val ORE_TITANIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.titaniumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateTitaniumOre.get().defaultBlockState()))
+        val ORE_SULFUR_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.sulfurOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateSulfurOre.get().defaultBlockState()))
+        val ORE_NITER_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.niterOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateNiterOre.get().defaultBlockState()))
+        val ORE_TUNGSTEN_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.tungstenOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateTungstenOre.get().defaultBlockState()))
+        val ORE_ALUMINIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.aluminiumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateAluminiumOre.get().defaultBlockState()))
+        val ORE_FLUORITE_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.fluoriteOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateFluoriteOre.get().defaultBlockState()))
+        val ORE_BERYLLIUM_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.berylliumOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateBerylliumOre.get().defaultBlockState()))
+        val ORE_LEAD_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.leadOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateLeadOre.get().defaultBlockState()))
+        val ORE_ASBESTOS_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.asbestosOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateAsbestosOre.get().defaultBlockState()))
+        val ORE_RARE_EARTH_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.rareEarthOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateRareEarthOre.get().defaultBlockState()))
+        val ORE_COBALT_TARGET_LIST = listOf(OreConfiguration.target(STONE_ORE_REPLACEABLES, NTechBlocks.cobaltOre.get().defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, NTechBlocks.deepslateCobaltOre.get().defaultBlockState()))
         val ORE_URANIUM_SMALL = register("ore_uranium_small", Feature.ORE, OreConfiguration(ORE_URANIUM_TARGET_LIST, 3, .5F))
         val ORE_URANIUM_LARGE = register("ore_uranium_large", Feature.ORE, OreConfiguration(ORE_URANIUM_TARGET_LIST, 12, .7F))
         val ORE_URANIUM_BURIED = register("ore_uranium_buried", Feature.ORE, OreConfiguration(ORE_URANIUM_TARGET_LIST, 6, 1F))
@@ -160,19 +160,19 @@ object WorldGen {
         val ORE_BERYLLIUM = register("ore_beryllium", Feature.ORE, OreConfiguration(ORE_BERYLLIUM_TARGET_LIST, 4))
         val ORE_BERYLLIUM_SMALL = register("ore_beryllium_small", Feature.ORE, OreConfiguration(ORE_BERYLLIUM_TARGET_LIST, 2))
         val ORE_LEAD = register("ore_lead", Feature.ORE, OreConfiguration(ORE_LEAD_TARGET_LIST, 10, .6F))
-        val ORE_LIGNITE = register("ore_lignite", Feature.ORE, OreConfiguration(STONE_ORE_REPLACEABLES, ModBlocks.ligniteOre.get().defaultBlockState(), 30, .2F))
+        val ORE_LIGNITE = register("ore_lignite", Feature.ORE, OreConfiguration(STONE_ORE_REPLACEABLES, NTechBlocks.ligniteOre.get().defaultBlockState(), 30, .2F))
         val ORE_ASBESTOS = register("ore_asbestos", Feature.ORE, OreConfiguration(ORE_ASBESTOS_TARGET_LIST, 10, 1F))
         val ORE_RARE_EARTH_SMALL = register("ore_rare_earth_small", Feature.ORE, OreConfiguration(ORE_RARE_EARTH_TARGET_LIST, 1))
         val ORE_RARE_EARTH_LARGE = register("ore_rare_earth_large", Feature.ORE, OreConfiguration(ORE_RARE_EARTH_TARGET_LIST, 15))
         val ORE_RARE_EARTH_BURIED = register("ore_rare_earth_buried", Feature.ORE, OreConfiguration(ORE_RARE_EARTH_TARGET_LIST, 5, 1F))
         val ORE_COBALT_SMALL = register("ore_cobalt_small", Feature.ORE, OreConfiguration(ORE_COBALT_TARGET_LIST, 3))
         val ORE_COBALT_LARGE = register("ore_cobalt_large", Feature.ORE, OreConfiguration(ORE_COBALT_TARGET_LIST, 15, .25F))
-        val ORE_NETHER_URANIUM = register("ore_nether_uranium", Feature.ORE, OreConfiguration(NETHERRACK, ModBlocks.netherUraniumOre.get().defaultBlockState(), 6))
-        val ORE_NETHER_PLUTONIUM = register("ore_nether_plutonium", Feature.ORE, OreConfiguration(NETHERRACK, ModBlocks.netherPlutoniumOre.get().defaultBlockState(), 4))
-        val ORE_NETHER_TUNGSTEN = register("ore_nether_tungsten", Feature.ORE, OreConfiguration(NETHERRACK, ModBlocks.netherTungstenOre.get().defaultBlockState(), 10))
-        val ORE_NETHER_SULFUR = register("ore_nether_sulfur", Feature.ORE, OreConfiguration(NETHERRACK, ModBlocks.netherSulfurOre.get().defaultBlockState(), 18))
-        val ORE_NETHER_PHOSPHORUS = register("ore_nether_phosphorus", Feature.ORE, OreConfiguration(NETHERRACK, ModBlocks.netherPhosphorusOre.get().defaultBlockState(), 5))
-        val ORE_END_TRIXITE = register("ore_end_trixite", Feature.ORE, OreConfiguration(END_STONE, ModBlocks.trixite.get().defaultBlockState(), 4, .1F))
+        val ORE_NETHER_URANIUM = register("ore_nether_uranium", Feature.ORE, OreConfiguration(NETHERRACK, NTechBlocks.netherUraniumOre.get().defaultBlockState(), 6))
+        val ORE_NETHER_PLUTONIUM = register("ore_nether_plutonium", Feature.ORE, OreConfiguration(NETHERRACK, NTechBlocks.netherPlutoniumOre.get().defaultBlockState(), 4))
+        val ORE_NETHER_TUNGSTEN = register("ore_nether_tungsten", Feature.ORE, OreConfiguration(NETHERRACK, NTechBlocks.netherTungstenOre.get().defaultBlockState(), 10))
+        val ORE_NETHER_SULFUR = register("ore_nether_sulfur", Feature.ORE, OreConfiguration(NETHERRACK, NTechBlocks.netherSulfurOre.get().defaultBlockState(), 18))
+        val ORE_NETHER_PHOSPHORUS = register("ore_nether_phosphorus", Feature.ORE, OreConfiguration(NETHERRACK, NTechBlocks.netherPhosphorusOre.get().defaultBlockState(), 5))
+        val ORE_END_TRIXITE = register("ore_end_trixite", Feature.ORE, OreConfiguration(END_STONE, NTechBlocks.trixite.get().defaultBlockState(), 4, .1F))
 
         val OIL_BUBBLE = register("oil_bubble", Features.OIL_BUBBLE.get(), FeatureConfiguration.NONE)
     }
@@ -222,7 +222,8 @@ object WorldGen {
 
 
     object TreeFeatures {
-        val HUGE_GLOWING_MUSHROOM = register("huge_glowing_mushroom", Features.HUGE_GLOWING_MUSHROOM.get(), HugeMushroomFeatureConfiguration(BlockStateProvider.simple(ModBlocks.glowingMushroomBlock.get()), BlockStateProvider.simple(ModBlocks.glowingMushroomStem.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 4))
+        val HUGE_GLOWING_MUSHROOM = register("huge_glowing_mushroom", Features.HUGE_GLOWING_MUSHROOM.get(), HugeMushroomFeatureConfiguration(BlockStateProvider.simple(
+            NTechBlocks.glowingMushroomBlock.get()), BlockStateProvider.simple(NTechBlocks.glowingMushroomStem.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 4))
     }
 
     private fun <FC : FeatureConfiguration, F : Feature<FC>> register(name: String, feature: F, config: FC): Holder<ConfiguredFeature<FC, *>> = BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_FEATURE, ntm(name).toString(), ConfiguredFeature(feature, config))

@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.api
 
-import at.martinthedragon.nucleartech.api.explosions.ExplosionAlgorithmRegistration
+import at.martinthedragon.nucleartech.api.explosion.ExplosionAlgorithmRegistration
 import at.martinthedragon.nucleartech.api.hazard.radiation.HazmatRegistry
 import net.minecraft.resources.ResourceLocation
 

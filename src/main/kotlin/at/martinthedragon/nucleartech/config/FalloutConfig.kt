@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.config
 
-import at.martinthedragon.nucleartech.ModBlocks
-import at.martinthedragon.nucleartech.NuclearTags
+import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.NTechTags
 import com.mojang.logging.LogUtils
 import net.minecraft.Util
 import net.minecraft.resources.ResourceLocation
@@ -150,20 +150,21 @@ class FalloutConfig : ConfigBase {
             fun buildDefaultTransformations() = listOf(
                 TagFalloutTransformation(BlockTags.LEAVES, Blocks.AIR, transformationDepth = -1),
                 TagFalloutTransformation(BlockTags.SNOW, Blocks.AIR, transformationDepth = -1),
-                TagFalloutTransformation(BlockTags.LOGS_THAT_BURN, ModBlocks.charredLog.get(), transformationDepth = -1),
-                BlockListFalloutTransformation(Blocks.MUSHROOM_STEM, ModBlocks.charredLog.get(), transformationDepth = -1),
-                TagFalloutTransformation(Tags.Blocks.STONE, ModBlocks.hotSellafite.get(), distance = .05F, transformationDepth = 3),
-                TagFalloutTransformation(Tags.Blocks.STONE, ModBlocks.sellafite.get(), distance = .15F, transformationDepth = 3),
-                TagFalloutTransformation(Tags.Blocks.STONE, ModBlocks.slakedSellafite.get(), distance = .75F, transformationDepth = 3),
-                BlockListFalloutTransformation(listOf(Blocks.GRASS_BLOCK, Blocks.PODZOL), ModBlocks.deadGrass.get()),
-                BlockListFalloutTransformation(Blocks.MYCELIUM, ModBlocks.glowingMycelium.get()),
-                TagFalloutTransformation(Tags.Blocks.SAND_COLORLESS, ModBlocks.trinitite.get(), chance = .05F),
-                TagFalloutTransformation(Tags.Blocks.SAND_RED, ModBlocks.trinitite.get(), chance = .05F),
+                TagFalloutTransformation(BlockTags.LOGS_THAT_BURN, NTechBlocks.charredLog.get(), transformationDepth = -1),
+                BlockListFalloutTransformation(Blocks.MUSHROOM_STEM, NTechBlocks.charredLog.get(), transformationDepth = -1),
+                TagFalloutTransformation(Tags.Blocks.STONE, NTechBlocks.hotSellafite.get(), distance = .05F, transformationDepth = 3),
+                TagFalloutTransformation(Tags.Blocks.STONE, NTechBlocks.sellafite.get(), distance = .15F, transformationDepth = 3),
+                TagFalloutTransformation(Tags.Blocks.STONE, NTechBlocks.slakedSellafite.get(), distance = .75F, transformationDepth = 3),
+                BlockListFalloutTransformation(listOf(Blocks.GRASS_BLOCK, Blocks.PODZOL), NTechBlocks.deadGrass.get()),
+                BlockListFalloutTransformation(Blocks.MYCELIUM, NTechBlocks.glowingMycelium.get()),
+                TagFalloutTransformation(Tags.Blocks.SAND_COLORLESS, NTechBlocks.trinitite.get(), chance = .05F),
+                TagFalloutTransformation(Tags.Blocks.SAND_RED, NTechBlocks.trinitite.get(), chance = .05F),
                 BlockListFalloutTransformation(Blocks.CLAY, Blocks.TERRACOTTA),
                 TagFalloutTransformation(Tags.Blocks.ORES_COAL, Blocks.DIAMOND_ORE, chance = 0.08F),
                 TagFalloutTransformation(Tags.Blocks.ORES_COAL, Blocks.EMERALD_ORE, chance = 0.15F),
                 BlockListFalloutTransformation(listOf(Blocks.RED_MUSHROOM_BLOCK, Blocks.BROWN_MUSHROOM_BLOCK), Blocks.AIR, transformationDepth = -1),
-                BlacklistedFalloutTransformation(AlternativeFalloutTransformation(TagFalloutTransformation(NuclearTags.Blocks.ORES_URANIUM, ModBlocks.schrabidiumOre.get(), chance = 0.01F), ModBlocks.scorchedUraniumOre.get().defaultBlockState()), listOf(ModBlocks.scorchedUraniumOre.get().defaultBlockState()))
+                BlacklistedFalloutTransformation(AlternativeFalloutTransformation(TagFalloutTransformation(NTechTags.Blocks.ORES_URANIUM, NTechBlocks.schrabidiumOre.get(), chance = 0.01F), NTechBlocks.scorchedUraniumOre.get().defaultBlockState()), listOf(
+                    NTechBlocks.scorchedUraniumOre.get().defaultBlockState()))
             ).map(FalloutTransformation::toString)
 
             fun isValidElement(whatever: Any) = try {

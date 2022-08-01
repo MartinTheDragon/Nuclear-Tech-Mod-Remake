@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.world
 
-import at.martinthedragon.nucleartech.ModBlocks
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.api.world.ChunkRadiationHandler
 import at.martinthedragon.nucleartech.config.NuclearConfig
@@ -137,7 +137,7 @@ object ChunkRadiation : ChunkRadiationHandler {
                     // TODO config
                     when {
                         block.`is`(BlockTags.LEAVES) -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
-                        block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> world.setBlockAndUpdate(blockPos, ModBlocks.deadGrass.get().defaultBlockState())
+                        block.`is`(Blocks.GRASS_BLOCK) || block.`is`(Blocks.PODZOL) -> world.setBlockAndUpdate(blockPos, NTechBlocks.deadGrass.get().defaultBlockState())
                         block.block is IPlantable || block.block is BonemealableBlock -> world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState())
                     }
                 }
