@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.hazard.type
 
-import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
-import at.martinthedragon.nucleartech.ntmTranslation
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.extensions.red
+import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
@@ -32,6 +32,6 @@ class ExplosiveHazard : HazardType {
     }
 
     override fun appendHoverText(itemStack: ItemStack, level: Float, modifiers: List<HazardModifier>, player: Player?, tooltip: MutableList<Component>, flag: TooltipFlag) {
-        tooltip += ntmTranslation("hazard.explosive").red()
+        tooltip += LangKeys.HAZARD_EXPLOSIVE.red()
     }
 }

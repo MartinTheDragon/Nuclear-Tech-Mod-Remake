@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.hazard.type
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.extensions.green
+import at.martinthedragon.nucleartech.extensions.yellow
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.hazard.modifier.evaluateAllModifiers
-import at.martinthedragon.nucleartech.ntmTranslation
-import at.martinthedragon.nucleartech.extensions.yellow
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.entity.LivingEntity
@@ -33,7 +33,7 @@ class RadiationHazard : HazardType {
         if (radiation < 1E-5) return
 
         with(tooltip) {
-            add(ntmTranslation("hazard.radiation").green())
+            add(LangKeys.HAZARD_RADIATON.green())
             add(TextComponent("${floor(radiation * itemStack.count * 1000F) / 1000F} RAD/s").yellow())
         }
     }

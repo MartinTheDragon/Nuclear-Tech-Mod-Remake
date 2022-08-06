@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.item
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.extensions.blue
 import at.martinthedragon.nucleartech.extensions.bold
 import at.martinthedragon.nucleartech.extensions.gray
@@ -30,7 +31,7 @@ import java.util.function.Consumer
 import kotlin.math.floor
 
 class ChemPlantTemplateItem(properties: Properties) : Item(properties) {
-    override fun getName(stack: ItemStack): Component = TranslatableComponent(getDescriptionId(stack), Minecraft.getInstance().level?.use { getRecipeFromStack(stack, it.recipeManager)?.recipeID }?.let { TranslatableComponent("chem.${it.namespace}.${it.path}") } ?: "N/A")
+    override fun getName(stack: ItemStack): Component = TranslatableComponent(getDescriptionId(stack), Minecraft.getInstance().level?.use { getRecipeFromStack(stack, it.recipeManager)?.recipeID }?.let { TranslatableComponent("${LangKeys.CAT_CHEMISTRY}.${it.namespace}.${it.path}") } ?: "N/A")
 
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         val level = Minecraft.getInstance().level
@@ -46,16 +47,16 @@ class ChemPlantTemplateItem(properties: Properties) : Item(properties) {
         fun formatFluid(fluidStack: FluidStack) = TextComponent("  ${fluidStack.amount}mb ").append(fluidStack.displayName).gray()
 
         with(tooltip) {
-            add(TranslatableComponent("info.template.outs").bold().gray())
+            add(LangKeys.INFO_OUTPUTS.bold().gray())
             for (output in recipe.resultsList) add(TextComponent("  ${output.count}x ").append(output.hoverName).gray())
             if (!recipe.outputFluid1.isEmpty) add(formatFluid(recipe.outputFluid1))
             if (!recipe.outputFluid2.isEmpty) add(formatFluid(recipe.outputFluid2))
-            add(TranslatableComponent("info.template.ins").bold().gray())
+            add(LangKeys.INFO_INPUTS.bold().gray())
             for (input in recipe.ingredientsList) add(TextComponent("  ${input.requiredAmount}x ").append(input.items.first().hoverName).gray())
             if (!recipe.inputFluid1.isEmpty) add(formatFluid(recipe.inputFluid1))
             if (!recipe.inputFluid2.isEmpty) add(formatFluid(recipe.inputFluid2))
-            add(TranslatableComponent("info.template.time").bold().gray())
-            add(TextComponent("  ${floor(recipe.duration / 20F * 100F) / 100F} ").append(TranslatableComponent("info.template.seconds")).gray())
+            add(LangKeys.INFO_PRODUCTION_TIME.bold().gray())
+            add(TextComponent("  ${floor(recipe.duration / 20F * 100F) / 100F} ").append(LangKeys.WORD_SECONDS.get()).gray())
             if (flag.isAdvanced) add(TextComponent(recipe.id.toString()).italic().blue())
         }
     }

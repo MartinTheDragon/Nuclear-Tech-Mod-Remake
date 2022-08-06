@@ -1,7 +1,8 @@
 package at.martinthedragon.nucleartech.screen
 
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.extensions.red
 import at.martinthedragon.nucleartech.item.NTechItems
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.networking.SpawnNuclearExplosionMessage
 import at.martinthedragon.nucleartech.ntm
@@ -9,7 +10,6 @@ import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.brigadier.StringReader
 import com.mojang.brigadier.exceptions.CommandSyntaxException
-import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.commands.arguments.coordinates.Vec3Argument
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 
 class UseCreativeNuclearExplosionSpawnerScreen : Screen(NTechItems.creativeNuclearExplosionSpawner.get().description) {
     private lateinit var strengthEdit: EditBox
@@ -165,15 +164,15 @@ class UseCreativeNuclearExplosionSpawnerScreen : Screen(NTechItems.creativeNucle
         const val GUI_WIDTH = 176
         const val GUI_HEIGHT = 141
         val GUI_LOCATION = ntm("textures/gui/creative_nuclear_explosion_spawner.png")
-        private val STRENGTH_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.strength")
-        private val MUTED_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.muted")
-        private val HAS_FALLOUT_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.has_fallout")
-        private val EXTRA_FALLOUT_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.extra_fallout")
-        private val POSITION_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.position")
-        private val CANCEL_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.cancel")
-        private val START_LABEL = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.start")
-        private val ERR_STRENGTH = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_strength")
-        private val ERR_EXTRA_FALLOUT = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_extra_fallout")
-        val ERR_INSUFFICIENT_PERMISSION: Component = TranslatableComponent("creative_nuclear_explosion_spawner.${NuclearTech.MODID}.error_insufficient_permission").withStyle(ChatFormatting.RED)
+        private val STRENGTH_LABEL = LangKeys.EXPLOSION_SPAWNER_STRENGTH.get()
+        private val MUTED_LABEL = LangKeys.EXPLOSION_SPAWNER_MUTED.get()
+        private val HAS_FALLOUT_LABEL = LangKeys.EXPLOSION_SPAWNER_HAS_FALLOUT.get()
+        private val EXTRA_FALLOUT_LABEL = LangKeys.EXPLOSION_SPAWNER_EXTRA_FALLOUT.get()
+        private val POSITION_LABEL = LangKeys.EXPLOSION_SPAWNER_POSITION.get()
+        private val CANCEL_LABEL = LangKeys.BUTTON_CANCEL.get()
+        private val START_LABEL = LangKeys.BUTTON_START.get()
+        private val ERR_STRENGTH = LangKeys.EXPLOSION_SPAWNER_ERROR_STRENGTH.get()
+        private val ERR_EXTRA_FALLOUT = LangKeys.EXPLOSION_SPAWNER_ERROR_EXTRA_FALLOUT.get()
+        val ERR_INSUFFICIENT_PERMISSION: Component = LangKeys.EXPLOSION_SPAWNER_NO_PERMISSION.red()
     }
 }

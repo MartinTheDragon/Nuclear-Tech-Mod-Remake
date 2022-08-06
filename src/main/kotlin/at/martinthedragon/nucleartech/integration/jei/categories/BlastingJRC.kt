@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.item.NTechBlockItems
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipe.BlastingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
@@ -16,7 +16,6 @@ import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 
 class BlastingJRC(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
@@ -28,7 +27,7 @@ class BlastingJRC(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
     override fun getUid() = ntm("blasting")
     override fun getRecipeClass(): Class<out BlastingRecipe> = BlastingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.BLASTING
-    override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.blasting")
+    override fun getTitle() = LangKeys.JEI_CATEGORY_BLASTING.get()
     override fun getBackground(): IDrawable = background
 
     override fun getIcon(): IDrawable = icon
@@ -47,7 +46,7 @@ class BlastingJRC(guiHelper: IGuiHelper) : IRecipeCategory<BlastingRecipe> {
     private fun drawExperience(recipe: BlastingRecipe, matrixStack: PoseStack) {
         val experience = recipe.experience
         if (experience > 0) {
-            val experienceString = TranslatableComponent("jei.${NuclearTech.MODID}.category.blasting.experience", experience)
+            val experienceString = LangKeys.JEI_EXPERIENCE.format(experience)
             val fontRenderer = Minecraft.getInstance().font
             val stringWidth = fontRenderer.width(experienceString)
             fontRenderer.draw(matrixStack, experienceString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)

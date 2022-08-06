@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.extensions.gold
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
@@ -12,10 +13,8 @@ import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
-import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 
 class ConstructingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructingRecipe> {
     private val texture = ntm("textures/gui/jei_constructing.png")
@@ -30,7 +29,7 @@ class ConstructingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructing
     override fun getUid() = ntm("constructing")
     override fun getRecipeClass() = AnvilConstructingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.CONSTRUCTING
-    override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing")
+    override fun getTitle() = LangKeys.JEI_CATEGORY_CONSTRUCTING.get()
     override fun getBackground() = background
     override fun getIcon() = hammer
 
@@ -54,7 +53,7 @@ class ConstructingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructing
                     val chances = recipe.getTooltipChancesForOutputAt(y * 4 + x)
                     if (chances.isEmpty()) return@addTooltipCallback
                     if (tooltip.isNotEmpty()) tooltip.add(TextComponent.EMPTY)
-                    tooltip.add(TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.chance").withStyle(ChatFormatting.GOLD))
+                    tooltip.add(LangKeys.JEI_OUTPUT_CHANCE.gold())
                     tooltip.addAll(chances)
                 }
             }
@@ -64,8 +63,8 @@ class ConstructingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilConstructing
 
     override fun draw(recipe: AnvilConstructingRecipe, recipeSlotsView: IRecipeSlotsView, stack: PoseStack, mouseX: Double, mouseY: Double) {
         val tierString =
-            if (recipe.tierUpper == -1 || recipe.tierLower == recipe.tierUpper) TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.tier", recipe.tierLower)
-            else TranslatableComponent("jei.${NuclearTech.MODID}.category.constructing.tier_range", recipe.tierLower, recipe.tierUpper)
+            if (recipe.tierUpper == -1 || recipe.tierLower == recipe.tierUpper) LangKeys.JEI_TIER_MINIMUM.format(recipe.tierLower)
+            else LangKeys.JEI_TIER_RANGE.format(recipe.tierLower, recipe.tierUpper)
         val fontRenderer = Minecraft.getInstance().font
         val stringWidth = fontRenderer.width(tierString)
         fontRenderer.draw(stack, tierString, (background.width - stringWidth.toFloat()), 0F, -0x7F7F80)

@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.item.NTechBlockItems
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipe.PressingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
@@ -16,7 +16,6 @@ import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 
@@ -29,7 +28,7 @@ class PressingJRC(guiHelper: IGuiHelper) : IRecipeCategory<PressingRecipe> {
     override fun getUid() = ntm("pressing")
     override fun getRecipeClass(): Class<out PressingRecipe> = PressingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.PRESSING
-    override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.pressing")
+    override fun getTitle() = LangKeys.JEI_CATEGORY_PRESSING.get()
     override fun getBackground(): IDrawable = background
     override fun getIcon(): IDrawable = icon
 
@@ -47,7 +46,7 @@ class PressingJRC(guiHelper: IGuiHelper) : IRecipeCategory<PressingRecipe> {
     private fun drawExperience(recipe: PressingRecipe, matrixStack: PoseStack) {
         val experience = recipe.experience
         if (experience > 0) {
-            val experienceString = TranslatableComponent("jei.${NuclearTech.MODID}.category.pressing.experience", experience)
+            val experienceString = LangKeys.JEI_EXPERIENCE.format(experience)
             val fontRenderer = Minecraft.getInstance().font
             val stringWidth = fontRenderer.width(experienceString)
             fontRenderer.draw(matrixStack, experienceString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)

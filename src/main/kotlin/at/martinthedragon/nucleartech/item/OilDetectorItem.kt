@@ -1,11 +1,13 @@
 package at.martinthedragon.nucleartech.item
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.NTechTags
 import at.martinthedragon.nucleartech.SoundEvents
-import net.minecraft.ChatFormatting
+import at.martinthedragon.nucleartech.extensions.darkGreen
+import at.martinthedragon.nucleartech.extensions.gold
+import at.martinthedragon.nucleartech.extensions.red
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
@@ -41,7 +43,7 @@ class OilDetectorItem(properties: Properties) : Item(properties) {
         if (level.isClientSide) {
             val playerPosition = player.blockPosition()
             if (checkColumns(level, playerPosition, 0, 0)) {
-                player.displayClientMessage(TranslatableComponent("$descriptionId.below").withStyle(ChatFormatting.DARK_GREEN), true)
+                player.displayClientMessage(LangKeys.DEVICE_OIL_DETECTOR_BELOW.darkGreen(), true)
             } else if (
                 checkColumns(level, playerPosition, 5, 0) ||
                 checkColumns(level, playerPosition, 0, 5) ||
@@ -49,9 +51,9 @@ class OilDetectorItem(properties: Properties) : Item(properties) {
                 checkColumns(level, playerPosition, 0, 10) ||
                 checkColumns(level, playerPosition, 5, 5)
             ) {
-                player.displayClientMessage(TranslatableComponent("$descriptionId.near").withStyle(ChatFormatting.GOLD), true)
+                player.displayClientMessage(LangKeys.DEVICE_OIL_DETECTOR_NEAR.gold(), true)
             } else {
-                player.displayClientMessage(TranslatableComponent("$descriptionId.no_oil").withStyle(ChatFormatting.RED), true)
+                player.displayClientMessage(LangKeys.DEVICE_OIL_DETECTOR_NO_OIL.red(), true)
             }
         }
 

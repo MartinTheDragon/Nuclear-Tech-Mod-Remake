@@ -1,11 +1,9 @@
 package at.martinthedragon.nucleartech.item
 
 import at.martinthedragon.nucleartech.CreativeTabs
-import at.martinthedragon.nucleartech.NuclearTech
-import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.Style
-import net.minecraft.network.chat.TextColor
-import net.minecraft.network.chat.TranslatableComponent
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.extensions.append
+import net.minecraft.network.chat.*
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -19,25 +17,14 @@ class SirenTrackItem(val soundSupplier: Supplier<SoundEvent>, val range: Int, va
 {
     // lazy is used here because otherwise the descriptionId gets created too early and becomes item.minecraft.air
     val trackName: Component by lazy { TranslatableComponent(descriptionId).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(color))) }
-    val trackType: Component = (
-            if (loop) TranslatableComponent("item.${NuclearTech.MODID}.siren_tracks.type_loop")
-            else TranslatableComponent("item.${NuclearTech.MODID}.siren_tracks.type_once"))
-        .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(color)))
-    val trackRange: Component = TranslatableComponent("item.${NuclearTech.MODID}.siren_tracks.range", range).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(color)))
+    val trackType: Component = (if (loop) LangKeys.SIREN_TRACK_LOOP.get() else LangKeys.SIREN_TRACK_ONCE.get()).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(color)))
+    val trackRange: Component = LangKeys.SIREN_TRACK_RANGE.format(range).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(color)))
 
-    override fun getDescription(): Component =
-        TranslatableComponent("item.${NuclearTech.MODID}.siren_tracks.siren_track")
-            .append(" - ")
-            .append(TranslatableComponent(descriptionId))
+    override fun getDescription(): Component = LangKeys.SIREN_TRACK_SIREN_TRACK.append(TextComponent(" - ")).append(TranslatableComponent(descriptionId))
 
     override fun getName(stack: ItemStack) = description
 
-    override fun appendHoverText(
-        itemStack: ItemStack,
-        world: Level?,
-        tooltips: MutableList<Component>,
-        tooltipFlag: TooltipFlag
-    ) {
+    override fun appendHoverText(itemStack: ItemStack, world: Level?, tooltips: MutableList<Component>, tooltipFlag: TooltipFlag) {
         tooltips += trackName
         tooltips += trackType
         tooltips += trackRange

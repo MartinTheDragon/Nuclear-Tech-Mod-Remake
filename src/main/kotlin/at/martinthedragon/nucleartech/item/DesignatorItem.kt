@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.item
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.item.TargetDesignator
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.extensions.darkRed
@@ -12,7 +13,6 @@ import at.martinthedragon.nucleartech.math.component3
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -34,7 +34,7 @@ class DesignatorItem(properties: Properties) : Item(properties), TargetDesignato
             putInt("TargetX", x)
             putInt("TargetY", y)
             putInt("TargetZ", z)
-        } else player?.displayClientMessage(ntmTranslation("item.position_set").green(), true)
+        } else player?.displayClientMessage(LangKeys.DEVICE_POSITION_SET.green(), true)
         player?.playSound(SoundEvents.randomBleep.get(), 1F, 1F)
 
         return InteractionResult.sidedSuccess(level.isClientSide)
@@ -47,10 +47,10 @@ class DesignatorItem(properties: Properties) : Item(properties), TargetDesignato
     private fun getTarget(tag: CompoundTag) = BlockPos(tag.getInt("TargetX"), tag.getInt("TargetY"), tag.getInt("TargetZ"))
 
     override fun appendHoverText(stack: ItemStack, level: Level?, tooltip: MutableList<Component>, flag: TooltipFlag) {
-        tooltip += if (!stack.hasTag() || !hasTags(stack.tag!!)) ntmTranslation("item.no_position_set").darkRed()
+        tooltip += if (!stack.hasTag() || !hasTags(stack.tag!!)) LangKeys.DEVICE_POSITION_NOT_SET.darkRed()
         else {
             val (x, y, z) = getTarget(stack.tag!!)
-            TranslatableComponent("$descriptionId.target_coordinates", x, y, z).gray()
+            LangKeys.INFO_POSITION.format(x, y, z).gray()
         }
     }
 }

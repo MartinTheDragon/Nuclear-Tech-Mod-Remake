@@ -1,6 +1,10 @@
 package at.martinthedragon.nucleartech.screen
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.extensions.green
+import at.martinthedragon.nucleartech.extensions.red
+import at.martinthedragon.nucleartech.extensions.yellow
 import at.martinthedragon.nucleartech.menu.AnvilMenu
 import at.martinthedragon.nucleartech.networking.AnvilConstructMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -12,7 +16,6 @@ import at.martinthedragon.nucleartech.recipe.containerSatisfiesRequirements
 import at.martinthedragon.nucleartech.recipe.getItems
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
-import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
@@ -270,11 +273,11 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
         val selectedRecipe = getSelectedRecipe() ?: return emptyList()
         val (available, missing) = partitionIngredients(selectedRecipe.ingredientsList)
         return buildList {
-            add(TranslatableComponent("$CONTAINER_TRANSLATION.inputs").withStyle(ChatFormatting.YELLOW))
-            addAll(missing.map { TextComponent("> ").append(it.withStyle(ChatFormatting.RED)).withStyle(ChatFormatting.RED) })
-            addAll(available.map { TextComponent("> ").append(it.withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GREEN) })
+            add(LangKeys.INFO_INPUTS.yellow())
+            addAll(missing.map { TextComponent("> ").append(it.red()).red() })
+            addAll(available.map { TextComponent("> ").append(it.green()).green() })
             add(TextComponent.EMPTY)
-            add(TranslatableComponent("$CONTAINER_TRANSLATION.outputs").withStyle(ChatFormatting.YELLOW))
+            add(LangKeys.INFO_OUTPUTS.yellow())
             addAll(selectedRecipe.results.map { TextComponent("> ${it.stack.count}x ").append(it.stack.hoverName).apply { if (it.chance != 1F) append(" (${it.chance * 100}%)") }})
         }
     }

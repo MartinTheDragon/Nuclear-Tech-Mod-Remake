@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.item
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.explosion.IgnitableExplosive
 import at.martinthedragon.nucleartech.extensions.darkRed
 import at.martinthedragon.nucleartech.extensions.gray
@@ -9,7 +10,6 @@ import at.martinthedragon.nucleartech.extensions.red
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.InteractionResultHolder
@@ -36,7 +36,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
                 detonatorTag.putInt("ExplosivePosZ", pos.z)
             }
             player.playSound(SoundEvents.randomBoop.get(), 2F, 1F)
-            if (world.isClientSide) player.displayClientMessage(ntmTranslation("item.position_set").green(), true)
+            if (world.isClientSide) player.displayClientMessage(LangKeys.DEVICE_POSITION_SET.green(), true)
             return InteractionResult.sidedSuccess(world.isClientSide)
         }
 
@@ -52,7 +52,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
 
     private fun processUse(stack: ItemStack, world: Level, player: Player) {
         if (!isPositionSet(stack)) {
-            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_set").red(), true)
+            player.displayClientMessage(LangKeys.DEVICE_POSITION_NOT_SET.red(), true)
             return
         }
         val detonatorTag = stack.orCreateTag
@@ -61,21 +61,21 @@ class DetonatorItem(properties: Properties) : Item(properties) {
         val posZ = detonatorTag.getInt("ExplosivePosZ")
         val pos = BlockPos(posX, posY, posZ)
         if (!world.isLoaded(pos)) { // TODO make configurable
-            player.displayClientMessage(TranslatableComponent("$descriptionId.error_position_not_loaded").red(), true)
+            player.displayClientMessage(LangKeys.DEVICE_POSITION_NOT_LOADED.red(), true)
             return
         }
         val block = world.getBlockState(pos).block
         if (block !is IgnitableExplosive) {
-            player.displayClientMessage(TranslatableComponent("$descriptionId.error_not_explosive").red(), true)
+            player.displayClientMessage(LangKeys.DETONATOR_NO_EXPLOSIVE.red(), true)
             return
         }
         val messageToSend = when (block.detonate(world, pos)) {
-            IgnitableExplosive.DetonationResult.Success -> TranslatableComponent("$descriptionId.detonation_successful").green()
-            IgnitableExplosive.DetonationResult.InvalidPosition -> TranslatableComponent("$descriptionId.error_not_explosive").red()
-            IgnitableExplosive.DetonationResult.InvalidBlockEntity -> TranslatableComponent("$descriptionId.error_invalid_tile_entity").red()
-            IgnitableExplosive.DetonationResult.Incomplete -> TranslatableComponent("$descriptionId.error_missing_components").red()
-            IgnitableExplosive.DetonationResult.Prohibited -> TranslatableComponent("$descriptionId.error_detonation_prohibited").red()
-            IgnitableExplosive.DetonationResult.Unknown -> TranslatableComponent("$descriptionId.error_unknown").red()
+            IgnitableExplosive.DetonationResult.Success -> LangKeys.DETONATOR_SUCCESS.green()
+            IgnitableExplosive.DetonationResult.InvalidPosition -> LangKeys.DETONATOR_NO_EXPLOSIVE.red()
+            IgnitableExplosive.DetonationResult.InvalidBlockEntity -> LangKeys.DETONATOR_INVALID_BLOCK_ENTITY.red()
+            IgnitableExplosive.DetonationResult.Incomplete -> LangKeys.DETONATOR_MISSING_COMPONENTS.red()
+            IgnitableExplosive.DetonationResult.Prohibited -> LangKeys.DETONATOR_PROHIBITED.red()
+            IgnitableExplosive.DetonationResult.Unknown -> LangKeys.DETONATOR_UNKNOWN_ERROR.red()
         }
         player.displayClientMessage(messageToSend, true)
     }
@@ -90,6 +90,6 @@ class DetonatorItem(properties: Properties) : Item(properties) {
             val y = tag.getInt("ExplosivePosY")
             val z = tag.getInt("ExplosivePosZ")
             TextComponent("$x, $y, $z").gray()
-        } else ntmTranslation("item.no_position_set").darkRed()
+        } else LangKeys.DEVICE_POSITION_NOT_SET.darkRed()
     }
 }

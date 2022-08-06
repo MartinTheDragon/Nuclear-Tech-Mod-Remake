@@ -1,15 +1,13 @@
 package at.martinthedragon.nucleartech.item
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.energy.LudicrousEnergyStorage
-import net.minecraft.ChatFormatting
+import at.martinthedragon.nucleartech.extensions.gray
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.Style
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.util.Mth
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
@@ -49,9 +47,9 @@ open class BatteryItem(
     }
 
     override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, extra: TooltipFlag) {
-        tooltip.add(TranslatableComponent("item.${NuclearTech.MODID}.batteries.energy_stored", EnergyFormatter.formatEnergy(stack.orCreateTag.getLong("Energy")), EnergyFormatter.formatEnergy(capacity)).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY))) // TODO configurable units
-        tooltip.add(TranslatableComponent("item.${NuclearTech.MODID}.batteries.charge_rate", EnergyFormatter.formatEnergy(chargeRate)).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY)))
-        tooltip.add(TranslatableComponent("item.${NuclearTech.MODID}.batteries.discharge_rate", EnergyFormatter.formatEnergy(dischargeRate)).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY)))
+        tooltip.add(LangKeys.ENERGY_ENERGY_STORED.format(EnergyFormatter.formatEnergy(stack.orCreateTag.getLong("Energy")), EnergyFormatter.formatEnergy(capacity)).gray()) // TODO configurable units
+        tooltip.add(LangKeys.ENERGY_CHARGE_RATE.format(EnergyFormatter.formatEnergy(chargeRate)).gray())
+        tooltip.add(LangKeys.ENERGY_DISCHARGE_RATE.format(EnergyFormatter.formatEnergy(dischargeRate)).gray())
     }
 
     /*

@@ -1,13 +1,14 @@
 package at.martinthedragon.nucleartech.item
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.capability.Capabilities
+import at.martinthedragon.nucleartech.extensions.append
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazmatValues
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -85,27 +86,27 @@ class GeigerCounterItem(properties: Properties) : Item(properties) {
 
             player.displayClientMessage(
                 TextComponent("===== ☢ ")
-                    .append(TranslatableComponent("geiger.title"))
+                    .append(LangKeys.GEIGER_TITLE)
                     .append(TextComponent(" ☢ ====="))
                     .withStyle(ChatFormatting.GOLD), false
             )
             player.displayClientMessage(
-                TranslatableComponent("geiger.chunkRadiation")
+                LangKeys.GEIGER_CHUNK_RADIATION
                     .append(TextComponent(" $chunkRadiation RAD/s").withStyle(getColorForRadValue(chunkRadiation)))
                     .withStyle(ChatFormatting.YELLOW), false
             )
             player.displayClientMessage(
-                TranslatableComponent("geiger.totalEnvironmentRadiation")
+                LangKeys.GEIGER_TOTAL_ENVIRONMENTAL_RADIATION
                     .append(TextComponent(" $environmentRadiation RAD/s").withStyle(getColorForRadValue(environmentRadiation)))
                     .withStyle(ChatFormatting.YELLOW), false
             )
             player.displayClientMessage(
-                TranslatableComponent("geiger.playerIrradiation")
+                LangKeys.GEIGER_PLAYER_IRRADIATION
                     .append(TextComponent(" $playerIrradiation RAD").withStyle(getColorForPlayerRadValue(playerIrradiation)))
                     .withStyle(ChatFormatting.YELLOW), false
             )
             player.displayClientMessage(
-                TranslatableComponent("geiger.playerResistance")
+                LangKeys.GEIGER_PLAYER_RESISTANCE
                     .append(TextComponent(" $playerResistance% ($playerResistanceCoefficient)").withStyle(getColorForResistanceCoefficient(playerResistanceCoefficient)))
                     .withStyle(ChatFormatting.YELLOW), false
             )

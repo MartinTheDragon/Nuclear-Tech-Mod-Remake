@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.screen
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.CombustionGeneratorBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.CombustionGeneratorMenu
@@ -66,7 +67,7 @@ class CombustionGeneratorScreen(
         if (isHovering(152, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrixStack,
                 listOf(
-                    TranslatableComponent("energy.nucleartech"),
+                    LangKeys.ENERGY.get(),
                     TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(CombustionGeneratorBlockEntity.MAX_ENERGY)} HE") // TODO make this somehow switch between HE and FE
                 ), mouseX, mouseY, font
             )

@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.screen
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.AssemblerMenu
@@ -10,7 +11,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.entity.player.Inventory
 
 class AssemblerScreen(
@@ -51,7 +51,7 @@ class AssemblerScreen(
         if (isHovering(116, 18, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrix,
                 listOf(
-                    TranslatableComponent("energy.nucleartech"),
+                    LangKeys.ENERGY.get(),
                     TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(AssemblerBlockEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )

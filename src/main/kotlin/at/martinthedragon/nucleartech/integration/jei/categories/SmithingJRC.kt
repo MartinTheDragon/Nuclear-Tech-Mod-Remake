@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.item.NTechBlockItems
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipe.anvil.AnvilSmithingRecipe
 import com.mojang.blaze3d.vertex.PoseStack
@@ -15,7 +15,6 @@ import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
 import net.minecraft.client.Minecraft
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 
 class SmithingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> {
@@ -26,7 +25,7 @@ class SmithingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> 
     override fun getUid() = ntm("smithing")
     override fun getRecipeClass() = AnvilSmithingRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.SMITHING
-    override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.smithing")
+    override fun getTitle() = LangKeys.JEI_CATEGORY_SMITHING.get()
     override fun getBackground() = background
     override fun getIcon() = icon
 
@@ -37,7 +36,7 @@ class SmithingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AnvilSmithingRecipe> 
     }
 
     override fun draw(recipe: AnvilSmithingRecipe, recipeSlotsView: IRecipeSlotsView, stack: PoseStack, mouseX: Double, mouseY: Double) {
-        val tierString = TranslatableComponent("jei.${NuclearTech.MODID}.category.smithing.tier", recipe.tier)
+        val tierString = LangKeys.JEI_TIER_MINIMUM.format(recipe.tier)
         val fontRenderer = Minecraft.getInstance().font
         val stringWidth = fontRenderer.width(tierString)
         fontRenderer.draw(stack, tierString, (background.width - stringWidth).toFloat(), 0F, -0x7F7F80)

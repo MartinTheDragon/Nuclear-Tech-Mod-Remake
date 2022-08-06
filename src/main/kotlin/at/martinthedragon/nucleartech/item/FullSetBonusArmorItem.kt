@@ -1,12 +1,13 @@
 package at.martinthedragon.nucleartech.item
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.api.item.AttackHandler
 import at.martinthedragon.nucleartech.api.item.DamageHandler
 import at.martinthedragon.nucleartech.api.item.FallHandler
 import at.martinthedragon.nucleartech.api.item.TickingArmor
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.extensions.*
+import at.martinthedragon.nucleartech.ntmTranslationString
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TranslatableComponent
@@ -39,24 +40,24 @@ open class FullSetBonusArmorItem(material: ArmorMaterial, slot: EquipmentSlot, v
             with(bonus) {
                 for (effect in effects) add(TranslatableComponent(effect.descriptionId).aqua().prependIntent())
                 for (resistance in resistances)
-                    if (resistance.value != 0F) add(ntmTranslation("armor.damage_resistance_modifier", I18n.get(ntmTranslationString("armor.resistance.${resistance.key.msgId}"))).yellow().prependIntent())
-                    else add(ntmTranslation("armor.nullifies_damage", I18n.get(ntmTranslationString("armor.resistance.${resistance.key.msgId}"))).red().prependIntent())
-                if (blastProtection != 1F) add(ntmTranslation("armor.blast_protection", bonus.blastProtection).yellow().prependIntent())
-                if (projectileProtection != 1F) add(ntmTranslation("armor.projectile_protection", bonus.projectileProtection).yellow().prependIntent())
-                if (damageCap != -1F) add(ntmTranslation("armor.damage_cap", bonus.damageCap).yellow().prependIntent())
-                if (damageMod != 1F) add(ntmTranslation("armor.damage_modifier", bonus.damageMod).yellow().prependIntent())
-                if (damageThreshold > 0) add(ntmTranslation("armor.damage_threshold", bonus.damageThreshold).yellow().prependIntent())
-                if (fireproof) add(ntmTranslation("armor.fireproof").red().prependIntent())
-                if (geigerSound) add(ntmTranslation("armor.geiger_sound").gold().prependIntent())
-                if (customGeiger) add(ntmTranslation("armor.custom_geiger").gold().prependIntent())
-                if (vats) add(ntmTranslation("armor.vats").red().prependIntent())
-                if (thermal) add(ntmTranslation("armor.thermal").red().prependIntent())
-                if (hardLanding) add(ntmTranslation("armor.hard_landing").red().prependIntent())
-                if (gravity != 0.0) add(ntmTranslation("armor.gravity", gravity).blue().prependIntent())
-                if (dashCount > 0) add(ntmTranslation("armor.dash_count", dashCount).aqua().prependIntent())
-                if (protectionYield != 100F) add(ntmTranslation("armor.protection_yield", protectionYield).blue().prependIntent())
+                    if (resistance.value != 0F) add(LangKeys.ARMOR_DAMAGE_RESISTANCE_MODIFIER.format(I18n.get(ntmTranslationString("armor.resistance.${resistance.key.msgId}"))).yellow().prependIntent())
+                    else add(LangKeys.ARMOR_NULLIFIES_DAMAGE.format(I18n.get(ntmTranslationString("armor.resistance.${resistance.key.msgId}"))).red().prependIntent())
+                if (blastProtection != 1F) add(LangKeys.ARMOR_BLAST_PROTECTION.format(bonus.blastProtection).yellow().prependIntent())
+                if (projectileProtection != 1F) add(LangKeys.ARMOR_PROJECTILE_PROTECTION.format(bonus.projectileProtection).yellow().prependIntent())
+                if (damageCap != -1F) add(LangKeys.ARMOR_DAMAGE_CAP.format(bonus.damageCap).yellow().prependIntent())
+                if (damageMod != 1F) add(LangKeys.ARMOR_DAMAGE_MODIFIER.format(bonus.damageMod).yellow().prependIntent())
+                if (damageThreshold > 0) add(LangKeys.ARMOR_DAMAGE_THRESHOLD.format(bonus.damageThreshold).yellow().prependIntent())
+                if (fireproof) add(LangKeys.ARMOR_FIREPROOF.red().prependIntent())
+                if (geigerSound) add(LangKeys.ARMOR_GEIGER_SOUND.gold().prependIntent())
+                if (customGeiger) add(LangKeys.ARMOR_CUSTOM_GEIGER.gold().prependIntent())
+                if (vats) add(LangKeys.ARMOR_VATS.red().prependIntent())
+                if (thermal) add(LangKeys.ARMOR_THERMAL.red().prependIntent())
+                if (hardLanding) add(LangKeys.ARMOR_HARD_LANDING.red().prependIntent())
+                if (gravity != 0.0) add(LangKeys.ARMOR_GRAVITY.format(gravity).blue().prependIntent())
+                if (dashCount > 0) add(LangKeys.ARMOR_DASH_COUNT.format(dashCount).aqua().prependIntent())
+                if (protectionYield != 100F) add(LangKeys.ARMOR_PROTECTION_YIELD.format(protectionYield).blue().prependIntent())
             }
-            if (tooltip.size > originalCount) add(originalCount, ntmTranslation("armor.full_set_bonus").gold())
+            if (tooltip.size > originalCount) add(originalCount, LangKeys.ARMOR_FULL_SET_BONUS.gold())
         }
     }
 

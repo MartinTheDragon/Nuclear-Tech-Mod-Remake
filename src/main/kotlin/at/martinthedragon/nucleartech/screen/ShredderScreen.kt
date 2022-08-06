@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.screen
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.ShredderBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.ShredderMenu
@@ -10,7 +11,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.entity.player.Inventory
 
 class ShredderScreen(
@@ -75,7 +75,7 @@ class ShredderScreen(
         if (isHovering(8, 16, 16, 88, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrix,
                 listOf(
-                    TranslatableComponent("energy.nucleartech"),
+                    LangKeys.ENERGY.get(),
                     TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(ShredderBlockEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )

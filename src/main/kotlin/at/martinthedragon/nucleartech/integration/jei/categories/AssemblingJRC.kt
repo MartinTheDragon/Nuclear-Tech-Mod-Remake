@@ -1,9 +1,9 @@
 package at.martinthedragon.nucleartech.integration.jei.categories
 
-import at.martinthedragon.nucleartech.item.NTechBlockItems
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.integration.jei.NuclearRecipeTypes
 import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipe.AssemblyRecipe
 import com.mojang.blaze3d.vertex.PoseStack
@@ -16,7 +16,6 @@ import mezz.jei.api.helpers.IGuiHelper
 import mezz.jei.api.recipe.IFocusGroup
 import mezz.jei.api.recipe.RecipeIngredientRole
 import mezz.jei.api.recipe.category.IRecipeCategory
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Ingredient
 
@@ -30,7 +29,7 @@ class AssemblingJRC(guiHelper: IGuiHelper) : IRecipeCategory<AssemblyRecipe> {
     override fun getUid() = ntm("assembling")
     override fun getRecipeClass() = AssemblyRecipe::class.java
     override fun getRecipeType() = NuclearRecipeTypes.ASSEMBLING
-    override fun getTitle() = TranslatableComponent("jei.${NuclearTech.MODID}.category.assembling")
+    override fun getTitle() = LangKeys.JEI_CATEGORY_ASSEMBLING.get()
     override fun getBackground(): IDrawable = background
     override fun getIcon(): IDrawable = icon
 

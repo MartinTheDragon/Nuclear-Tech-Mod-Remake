@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.screen
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.ChemPlantBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.ChemPlantMenu
@@ -11,7 +12,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.entity.player.Inventory
 import net.minecraftforge.fluids.capability.templates.FluidTank
 
@@ -56,7 +56,7 @@ class ChemPlantScreen(menu: ChemPlantMenu, playerInventory: Inventory, title: Co
         if (isHovering(44, 18, 16, 52, mouseX.toDouble(), mouseY.toDouble())) {
             renderComponentTooltip(matrix,
                 listOf(
-                    TranslatableComponent("energy.nucleartech"),
+                    LangKeys.ENERGY.get(),
                     TextComponent("${EnergyFormatter.formatEnergy(chemPlant.energy)}/${EnergyFormatter.formatEnergy(ChemPlantBlockEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )

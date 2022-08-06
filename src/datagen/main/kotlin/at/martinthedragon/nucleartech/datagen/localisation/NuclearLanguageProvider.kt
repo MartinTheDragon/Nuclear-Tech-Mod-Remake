@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.datagen.localisation
 
 import at.martinthedragon.nucleartech.MaterialGroup
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.TranslationKey
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.isVanilla
 import net.minecraft.data.DataGenerator
@@ -102,10 +103,22 @@ abstract class NuclearLanguageProvider(
         super.add(key, value)
     }
 
+    protected fun add(key: TranslationKey, value: String) {
+        add(key.key, value)
+    }
+
     protected fun addIfAbsent(key: String, value: String) {
         val existing = translations[key]
         if (existing == value) redundantTranslations[key] = value
         if (existing == null) add(key, value)
+    }
+
+    protected fun ignore(key: String) {
+        translations[key] = ""
+    }
+
+    protected fun ignore(key: TranslationKey) {
+        ignore(key.key)
     }
 
     protected fun addMaterial(materialGroup: MaterialGroup, name: String) {

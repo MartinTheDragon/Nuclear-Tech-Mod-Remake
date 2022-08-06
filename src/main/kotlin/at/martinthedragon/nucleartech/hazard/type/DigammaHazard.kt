@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.hazard.type
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.addDigamma
+import at.martinthedragon.nucleartech.extensions.red
 import at.martinthedragon.nucleartech.hazard.modifier.HazardModifier
 import at.martinthedragon.nucleartech.hazard.modifier.evaluateAllModifiers
-import at.martinthedragon.nucleartech.ntmTranslation
-import at.martinthedragon.nucleartech.extensions.red
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.entity.LivingEntity
@@ -28,7 +28,7 @@ class DigammaHazard : HazardType {
         val digamma = modifiers.evaluateAllModifiers(itemStack, player, level)
 
         with(tooltip) {
-            add(ntmTranslation("hazard.digamma").red())
+            add(LangKeys.HAZARD_DIGAMMA.red())
             add(TextComponent("${floor(digamma * itemStack.count * 10_000F) / 10F} mDRX/s"))
         }
     }

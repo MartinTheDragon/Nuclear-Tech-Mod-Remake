@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.Materials
+import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
@@ -8,7 +10,6 @@ import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.menu.MenuTypes
-import at.martinthedragon.nucleartech.screen.AnvilScreen
 import at.martinthedragon.nucleartech.world.DamageSources
 import net.minecraft.data.DataGenerator
 
@@ -543,9 +544,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.charredCrystal, "Verkohlter Kristall")
         addItemDesc(NTechItems.charredCrystal, "Auch ein echtes Horn. Komisch, nicht?")
 
-        add("item.$MODID.batteries.energy_stored", "Energie gespeichert: %s/%sHE")
-        add("item.$MODID.batteries.charge_rate", "Laderate: %sHE/t")
-        add("item.$MODID.batteries.discharge_rate", "Entladerate: %sHE/t")
         addItem(NTechItems.battery, "Batterie")
         addItem(NTechItems.redstonePowerCell, "Redstone-Energiezelle")
         addItem(NTechItems.sixfoldRedstonePowerCell, "Sechsfache Redstone-Energiezelle")
@@ -622,10 +620,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
                     "Sirenentracks: Isolator + Stahlplatte"
         )
 
-        add("item.$MODID.siren_tracks.siren_track", "Sirenentrack")
-        add("item.$MODID.siren_tracks.type_loop", "Typ: Endlosschleife")
-        add("item.$MODID.siren_tracks.type_once", "Typ: Einmal abspielen")
-        add("item.$MODID.siren_tracks.range", "Reichweite: %s Meter")
         addItem(NTechItems.sirenTrackHatchSiren, "Hatch Siren")
         addItem(NTechItems.sirenTrackAutopilotDisconnected, "Autopilot Disconnected")
         addItem(NTechItems.sirenTrackAMSSiren, "AMS Siren")
@@ -650,13 +644,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.assemblyTemplate, "Fertigungsvorlage: %s")
         addItem(NTechItems.chemTemplate, "Chemievorlage: %s")
 
-        add("info.template.in", "Input:")
-        add("info.template.ins", "Inputs:")
-        add("info.template.out", "Output:")
-        add("info.template.outs", "Outputs:")
-        add("info.template.time", "Produktionszeit:")
-        add("info.template.seconds", "Sekunden")
-
         run {
             val usedInLittleBoy = "Wird gebraucht für:\nLittle Boy"
             addItem(NTechItems.neutronShieldingLittleBoy, "Neutronenschild")
@@ -678,20 +665,10 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItemDesc(NTechItems.plutoniumCore, "Wird gebraucht für:\nFat Man\nIvy Mike\nTsar Bombe")
         addItem(NTechItems.detonator, "Fernzünder")
         addItemDesc(NTechItems.detonator, "Shift-Rechtsklick auf einen Sprengstoff um die Position zu setzen,\nRechtsklick um zu sprengen!")
-        val detonatorDescriptionId = NTechItems.detonator.get().descriptionId
-        add("$detonatorDescriptionId.error_position_not_set", "Die Position wurde noch nicht gesetzt!")
-        add("$detonatorDescriptionId.error_position_not_loaded", "Das Ziel ist momentan nicht in der Welt geladen!")
-        add("$detonatorDescriptionId.error_not_explosive", "Das Ziel ist kein gültiger Sprengstoff!")
-        add("$detonatorDescriptionId.error_invalid_tile_entity", "Serverfehler: Die BlockEntity des Ziels ist ungültig!")
-        add("$detonatorDescriptionId.error_missing_components", "Der Sprengstoff ist unvollständig!")
-        add("$detonatorDescriptionId.error_detonation_prohibited", "Die Sprengung wurde aufgehalten!")
-        add("$detonatorDescriptionId.error_unknown", "Ein unbekannter Fehler ist während der Sprengung aufgetreten")
-        add("$detonatorDescriptionId.detonation_successful", "Sprengung!")
         addItem(NTechItems.littleBoyKit, "Little Boy Kit")
         addItem(NTechItems.fatManKit, "Fat Man Kit")
 
         addItem(NTechItems.designator, "Kurzdistanz Zielmarkierer")
-        add("${NTechItems.designator.get().descriptionId}.target_coordinates", "Zielkoordinaten: %s %s %s")
         addItem(NTechItems.heMissile, "HE Rakete")
         addItem(NTechItems.incendiaryMissile, "Brandrakete")
         addItem(NTechItems.clusterMissile, "Streurakete")
@@ -708,9 +685,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addItem(NTechItems.oilDetector, "Ölvorkommen-Detektor")
         addItemDesc(NTechItems.oilDetector, "Rechtsklick um nach Öl zu suchen.\nDetektor findet nur größere Vorkommen.")
-        add(NTechItems.oilDetector.get().descriptionId + ".below", "Ölvorkommen direkt untertage!")
-        add(NTechItems.oilDetector.get().descriptionId + ".near", "Ölvorkommen in der Nähe")
-        add(NTechItems.oilDetector.get().descriptionId + ".no_oil", "Kein Öl gefunden")
         addItem(NTechItems.geigerCounter, "Mobiler Geigerzähler")
 
         addItem(NTechItems.ivBag, "Infusionsbeutel")
@@ -762,18 +736,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechFluids.uraniumHexafluoride.bucket, "Uranhexafluorideimer")
 
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Atomexplosionserzeuger")
-        add("creative_nuclear_explosion_spawner.$MODID.strength", "Stärke")
-        add("creative_nuclear_explosion_spawner.$MODID.muted", "Stumm")
-        add("creative_nuclear_explosion_spawner.$MODID.has_fallout", "Mit Fallout")
-        add("creative_nuclear_explosion_spawner.$MODID.extra_fallout", "Extra Fallout")
-        add("creative_nuclear_explosion_spawner.$MODID.position", "Position")
-        add("creative_nuclear_explosion_spawner.$MODID.cancel", "Abbrechen")
-        add("creative_nuclear_explosion_spawner.$MODID.start", "Starten")
-        add("creative_nuclear_explosion_spawner.$MODID.error_strength", "Kann den Stärke-Wert nicht lesen")
-        add("creative_nuclear_explosion_spawner.$MODID.error_extra_fallout", "Kann den Extra-Fallout-Wert nicht lesen")
-        add("creative_nuclear_explosion_spawner.$MODID.error_insufficient_permission", "Kann den Atomexplosionserzeuger nicht benutzen: Unzureichende Berechtigungen")
-
-        add("energy.$MODID", "Energie")
 
         addEntityType(EntityTypes.nuclearExplosion, "Nukleare Explosion")
         addEntityType(EntityTypes.mushroomCloud, "Atompilz")
@@ -799,8 +761,6 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.sirenMenu, "Sirene")
         addMenuType(MenuTypes.safeMenu, "Panzerschrank")
         addMenuType(MenuTypes.anvilMenu, "Stufe %s Amboss")
-        add("${AnvilScreen.CONTAINER_TRANSLATION}.inputs", "Benötigt:")
-        add("${AnvilScreen.CONTAINER_TRANSLATION}.outputs", "Ergibt:")
         addMenuType(MenuTypes.steamPressMenu, "Dampfpresse")
         addMenuType(MenuTypes.blastFurnaceMenu, "Hochofen")
         addMenuType(MenuTypes.combustionGeneratorMenu, "Verbrennungsgenerator")
@@ -855,58 +815,98 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addAttribute(Attributes.RADIATION_RESISTANCE, "Strahlenresistenz")
 
-        add("geiger.title", "GEIGERZÄHLER")
-        add("geiger.chunkRadiation", "Chunk-Strahlung:")
-        add("geiger.totalEnvironmentRadiation", "Gesamte Umgebungsstrahlung:")
-        add("geiger.playerIrradiation", "Spieler-Verstrahlung:")
-        add("geiger.playerResistance", "Strahlungsresistenz:")
+        add(LangKeys.ARMOR_BLAST_PROTECTION, "Explosionsmodifikator: %s")
+        add(LangKeys.ARMOR_CUSTOM_GEIGER, "Geigerzähler-HUD")
+        add(LangKeys.ARMOR_DAMAGE_CAP, "Schadensobergrenze: %s")
+        add(LangKeys.ARMOR_DAMAGE_MODIFIER, "Genereller Schadensmodifikator: %s")
+        add(LangKeys.ARMOR_DAMAGE_RESISTANCE_MODIFIER, "Modifikator: %s (%s)")
+        add(LangKeys.ARMOR_DAMAGE_THRESHOLD, "Schadensschwelle: %s")
+        add(LangKeys.ARMOR_DASH_COUNT, "Gibt %s Dashes")
+        add(LangKeys.ARMOR_FIREPROOF, "Feuerfest")
+        add(LangKeys.ARMOR_FULL_SET_BONUS, "Set-Bonus:")
+        add(LangKeys.ARMOR_GEIGER_SOUND, "Akustischer Geigerzähler")
+        add(LangKeys.ARMOR_GRAVITY, "Schwerkraftsmodifikator: %s")
+        add(LangKeys.ARMOR_HARD_LANDING, "Harte Landung")
+        add(LangKeys.ARMOR_NULLIFIES_DAMAGE, "Nichtet Schaden von %s")
+        add(LangKeys.ARMOR_PROJECTILE_PROTECTION, "Projektilmodifikator: %s")
+        add(LangKeys.ARMOR_PROTECTION_YIELD, "Schützt für Schaden <%s")
+        add(LangKeys.ARMOR_THERMAL, "Wärmebildkamera")
+        add(LangKeys.ARMOR_VATS, "Feinde-HUD")
 
-        add(ntmTranslationString("armor.full_set_bonus"), "Set-Bonus:")
-        add(ntmTranslationString("armor.damage_resistance_modifier"), "Modifikator: %s (%s)")
-        add(ntmTranslationString("armor.nullifies_damage"), "Nichtet Schaden von %s")
-        add(ntmTranslationString("armor.blast_protection"), "Explosionsmodifikator: %s")
-        add(ntmTranslationString("armor.projectile_protection"), "Projektilmodifikator: %s")
-        add(ntmTranslationString("armor.damage_cap"), "Schadensobergrenze: %s")
-        add(ntmTranslationString("armor.damage_modifier"), "Genereller Schadensmodifikator: %s")
-        add(ntmTranslationString("armor.damage_threshold"), "Schadensschwelle: %s")
-        add(ntmTranslationString("armor.fireproof"), "Feuerfest")
-        add(ntmTranslationString("armor.geiger_sound"), "Akustischer Geigerzähler")
-        add(ntmTranslationString("armor.custom_geiger"), "Geigerzähler-HUD")
-        add(ntmTranslationString("armor.vats"), "Feinde-HUD")
-        add(ntmTranslationString("armor.thermal"), "Wärmebildkamera")
-        add(ntmTranslationString("armor.hard_landing"), "Harte Landung")
-        add(ntmTranslationString("armor.gravity"), "Schwerkraftsmodifikator: %s")
-        add(ntmTranslationString("armor.dash_count"), "Gibt %s Dashes")
-        add(ntmTranslationString("armor.protection_yield"), "Schützt für Schaden <%s")
+        add(LangKeys.BUTTON_CANCEL, "Abbrechen")
+        add(LangKeys.BUTTON_START, "Starten")
 
-        add(ntmTranslationString("item.position_set"), "Position gesetzt!")
-        add(ntmTranslationString("item.no_position_set"), "Keine Position gesetzt!")
+        add(LangKeys.CHEMISTRY_URANIUM_HEXAFLUORIDE, "Uranhexafluoridproduktion")
 
-        add(ntmTranslationString("hazard.asbestos"), "[Asbest]")
-        add(ntmTranslationString("hazard.blinding"), "[Blendend]")
-        add(ntmTranslationString("hazard.coal"), "[Kohlestaub]")
-        add(ntmTranslationString("hazard.digamma"), "[Digammastrahlung]")
-        add(ntmTranslationString("hazard.explosive"), "[Entzündlich / Explosiv]")
-        add(ntmTranslationString("hazard.heat"), "[Pyrophorisch / Heiß]")
-        add(ntmTranslationString("hazard.hydroreactive"), "[Hydro-Reaktiv]")
-        add(ntmTranslationString("hazard.radiation"), "[Radioaktiv]")
+        add(LangKeys.DETONATOR_INVALID_BLOCK_ENTITY, "Serverfehler: Die BlockEntity des Ziels ist ungültig!")
+        add(LangKeys.DETONATOR_MISSING_COMPONENTS, "Der Sprengstoff ist unvollständig!")
+        add(LangKeys.DETONATOR_NO_EXPLOSIVE, "Das Ziel ist kein gültiger Sprengstoff!")
+        add(LangKeys.DETONATOR_PROHIBITED, "Die Sprengung wurde aufgehalten!")
+        add(LangKeys.DETONATOR_SUCCESS, "Sprengung!")
+        add(LangKeys.DETONATOR_UNKNOWN_ERROR, "Ein unbekannter Fehler ist während der Sprengung aufgetreten")
 
-        add("chem.$MODID.sulfur_and_uranium_hexafluoride_from_chemistry", "Uranhexafluoridproduktion")
+        add(LangKeys.DEVICE_OIL_DETECTOR_BELOW, "Ölvorkommen direkt untertage!")
+        add(LangKeys.DEVICE_OIL_DETECTOR_NEAR, "Ölvorkommen in der Nähe")
+        add(LangKeys.DEVICE_OIL_DETECTOR_NO_OIL, "Kein Öl gefunden")
+        add(LangKeys.DEVICE_POSITION_SET, "Position gesetzt!")
+        add(LangKeys.DEVICE_POSITION_NOT_LOADED, "Die Zielposition ist momentan nicht in der Welt geladen!")
+        add(LangKeys.DEVICE_POSITION_NOT_SET, "Keine Position gesetzt!")
 
-        add("jei.$MODID.category.smithing", "Schmiederezepte")
-        add("jei.$MODID.category.smithing.tier", "Mindeststufe: %s")
-        add("jei.$MODID.category.constructing", "Konstruktionsrezepe")
-        add("jei.$MODID.category.constructing.tier", "Mindeststufe: %s")
-        add("jei.$MODID.category.constructing.tier_range", "Stufenbereich: %s..%s")
-        add("jei.$MODID.category.constructing.chance", "Wahrscheinlichkeit:")
-        add("jei.$MODID.category.pressing", "Pressrezepte")
-        add("jei.$MODID.category.pressing.experience", "%s EP")
-        add("jei.$MODID.category.blasting", "Hochofenrezepte")
-        add("jei.$MODID.category.blasting.experience", "%s EP")
-        add("jei.$MODID.category.template_folder_results", "Vorlagen-Zeichenmappe")
-        add("jei.$MODID.category.shredding", "Zerkleinerungsrezepte")
-        add("jei.$MODID.category.assembling", "Maschienenanfertigungsrezepte")
-        add("jei.$MODID.category.chemistry", "Chemierezepte")
+        add(LangKeys.ENERGY, "Energie")
+        add(LangKeys.ENERGY_ENERGY_STORED, "Energie gespeichert: %s/%sHE")
+        add(LangKeys.ENERGY_CHARGE_RATE, "Laderate: %sHE/t")
+        add(LangKeys.ENERGY_DISCHARGE_RATE, "Entladerate: %sHE/t")
+
+        add(LangKeys.EXPLOSION_SPAWNER_ERROR_EXTRA_FALLOUT, "Kann den Extra-Fallout-Wert nicht lesen")
+        add(LangKeys.EXPLOSION_SPAWNER_ERROR_STRENGTH, "Kann den Stärke-Wert nicht lesen")
+        add(LangKeys.EXPLOSION_SPAWNER_EXTRA_FALLOUT, "Extra Fallout")
+        add(LangKeys.EXPLOSION_SPAWNER_HAS_FALLOUT, "Mit Fallout")
+        add(LangKeys.EXPLOSION_SPAWNER_MUTED, "Stumm")
+        add(LangKeys.EXPLOSION_SPAWNER_NO_PERMISSION, "Kann den Atomexplosionserzeuger nicht benutzen: Unzureichende Berechtigungen")
+        add(LangKeys.EXPLOSION_SPAWNER_POSITION, "Position")
+        add(LangKeys.EXPLOSION_SPAWNER_STRENGTH, "Stärke")
+
+        add(LangKeys.GEIGER_CHUNK_RADIATION, "Chunk-Strahlung:")
+        add(LangKeys.GEIGER_PLAYER_IRRADIATION, "Spieler-Verstrahlung:")
+        add(LangKeys.GEIGER_PLAYER_RESISTANCE, "Strahlungsresistenz:")
+        add(LangKeys.GEIGER_TITLE, "GEIGERZÄHLER")
+        add(LangKeys.GEIGER_TOTAL_ENVIRONMENTAL_RADIATION, "Gesamte Umgebungsstrahlung:")
+
+        add(LangKeys.HAZARD_ASBESTOS, "[Asbest]")
+        add(LangKeys.HAZARD_BLINDING, "[Blended]")
+        add(LangKeys.HAZARD_COAL, "[Kohlestaub]")
+        add(LangKeys.HAZARD_DIGAMMA, "[Digamma]")
+        add(LangKeys.HAZARD_EXPLOSIVE, "[Entzündlich / Explosiv]")
+        add(LangKeys.HAZARD_HEAT, "[Pyrophorisch / Heiß]")
+        add(LangKeys.HAZARD_HYDROREACTIVE, "[Hydro-Reaktiv]")
+        add(LangKeys.HAZARD_RADIATON, "[Radioaktiv]")
+
+        add(LangKeys.INFO_INPUT, "Input:")
+        add(LangKeys.INFO_INPUTS, "Inputs:")
+        add(LangKeys.INFO_OUTPUT, "Output:")
+        add(LangKeys.INFO_OUTPUTS, "Outputs:")
+        add(LangKeys.INFO_POSITION, "Position: %d %d %d")
+        add(LangKeys.INFO_PRODUCTION_TIME, "Produktionszeit:")
+
+        add(LangKeys.JEI_CATEGORY_ASSEMBLING, "Maschienenanfertigungsrezepte")
+        add(LangKeys.JEI_CATEGORY_BLASTING, "Hochofenrezepte")
+        add(LangKeys.JEI_CATEGORY_CHEMISTRY, "Chemierezepte")
+        add(LangKeys.JEI_CATEGORY_CONSTRUCTING, "Konstruktionsrezepe")
+        add(LangKeys.JEI_CATEGORY_PRESSING, "Pressrezepte")
+        add(LangKeys.JEI_CATEGORY_SHREDDING, "Zerkleinerungsrezepte")
+        add(LangKeys.JEI_CATEGORY_SMITHING, "Schmiederezepte")
+        add(LangKeys.JEI_CATEGORY_TEMPLATE_FOLDER, "Vorlagen-Zeichenmappe")
+        ignore(LangKeys.JEI_EXPERIENCE)
+        add(LangKeys.JEI_OUTPUT_CHANCE, "Wahrscheinlichkeit:")
+        add(LangKeys.JEI_TIER_MINIMUM, "Mindeststufe: %s")
+        add(LangKeys.JEI_TIER_RANGE, "Stufenbereich: %s..%s")
+
+        add(LangKeys.SIREN_TRACK_LOOP, "Typ: Endlosschleife")
+        add(LangKeys.SIREN_TRACK_ONCE, "Typ: Einmal abspielen")
+        add(LangKeys.SIREN_TRACK_RANGE, "Reichweite: %s Meter")
+        add(LangKeys.SIREN_TRACK_SIREN_TRACK, "Sirenentrack")
+
+        add(LangKeys.WORD_SECONDS, "Sekunden")
     }
 
     private fun addMaterials() = with(Materials) {
