@@ -1,19 +1,29 @@
 package at.martinthedragon.nucleartech.block
 
 import at.martinthedragon.nucleartech.api.block.multi.MultiBlockPlacer
+import at.martinthedragon.nucleartech.block.entity.BaseMachineBlockEntity
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.block.multi.RotatedMultiBlockPlacer
+import at.martinthedragon.nucleartech.extensions.ifPresentInline
+import at.martinthedragon.nucleartech.math.component1
+import at.martinthedragon.nucleartech.math.component2
+import at.martinthedragon.nucleartech.math.component3
+import at.martinthedragon.nucleartech.math.toVec3
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.Container
 import net.minecraft.world.Containers
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
+import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.network.NetworkHooks
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
@@ -26,6 +36,18 @@ import kotlin.contracts.contract
  * name is a [custom hover name][ItemStack.hasCustomHoverName].
  */
 inline fun <reified T : BaseContainerBlockEntity> setBlockEntityCustomName(
+    world: Level,
+    pos: BlockPos,
+    stack: ItemStack
+) {
+    if (stack.hasCustomHoverName()) {
+        val blockEntity = world.getBlockEntity(pos)
+        if (blockEntity is T) blockEntity.customName = stack.hoverName
+    }
+}
+
+// TODO merge via interface
+inline fun <reified T : BaseMachineBlockEntity> setMachineCustomName(
     world: Level,
     pos: BlockPos,
     stack: ItemStack
@@ -67,7 +89,7 @@ inline fun <reified T : BaseContainerBlockEntity> dropBlockEntityContents(
 }
 
 @OptIn(ExperimentalContracts::class)
-inline fun <reified T : BaseContainerBlockEntity> dropMultiBlockEntityContentsAndRemoveStructure(
+inline fun <reified T : BlockEntity> dropMultiBlockEntityContentsAndRemoveStructure(
     state: BlockState,
     level: Level,
     pos: BlockPos,
@@ -91,7 +113,13 @@ inline fun <reified T : BaseContainerBlockEntity> dropMultiBlockEntityContentsAn
 
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity is T) {
-            Containers.dropContents(level, pos, blockEntity)
+            if (blockEntity is Container) Containers.dropContents(level, pos, blockEntity)
+            else blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresentInline {
+                val (x, y, z) = pos.toVec3()
+                for (slot in 0 until it.slots) {
+                    Containers.dropItemStack(level, x, y, z, it.extractItem(slot, Int.MAX_VALUE, false))
+                }
+            }
             also(blockEntity)
             return true
         }
@@ -99,7 +127,7 @@ inline fun <reified T : BaseContainerBlockEntity> dropMultiBlockEntityContentsAn
     return false
 }
 
-inline fun <reified T : BaseContainerBlockEntity> openMenu(level: Level, pos: BlockPos, player: Player): InteractionResult {
+inline fun <reified T : MenuProvider> openMenu(level: Level, pos: BlockPos, player: Player): InteractionResult {
     if (!level.isClientSide) {
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, pos)
@@ -108,7 +136,7 @@ inline fun <reified T : BaseContainerBlockEntity> openMenu(level: Level, pos: Bl
 }
 
 inline fun <reified T, reified P> openMultiBlockMenu(level: Level, pos: BlockPos, player: Player): InteractionResult
-    where T : BaseContainerBlockEntity,
+    where T : MenuProvider,
           P : MultiBlockPart.MultiBlockPartBlockEntity
 {
     if (!level.isClientSide) {

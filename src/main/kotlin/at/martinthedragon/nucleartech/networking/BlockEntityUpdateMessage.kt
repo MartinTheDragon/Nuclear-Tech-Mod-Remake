@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.networking
 
+import at.martinthedragon.nucleartech.block.entity.SyncedBlockEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -18,7 +19,8 @@ class BlockEntityUpdateMessage(val pos: BlockPos, val tag: CompoundTag?) : Netwo
             val level = Minecraft.getInstance().level
             if (level != null && Minecraft.getInstance().player != null && level.isLoaded(pos)) {
                 val blockEntity = level.getBlockEntity(pos)
-                blockEntity?.handleUpdateTag(tag)
+                if (blockEntity is SyncedBlockEntity) blockEntity.handleContinuousUpdatePacket(tag)
+                else blockEntity?.handleUpdateTag(tag)
             }
         }
         context.get().packetHandled = true

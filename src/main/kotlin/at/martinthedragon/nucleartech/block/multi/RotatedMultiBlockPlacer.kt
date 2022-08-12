@@ -54,6 +54,7 @@ class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
     }
 
     companion object {
+        @Deprecated("Refactored into extension.", ReplaceWith("direction.horizontalRotation", "at.martinthedragon.nucleartech.extensions.horizontalRotation"))
         fun getRotationFor(direction: Direction) = when (direction) {
             Direction.NORTH -> Rotation.NONE
             Direction.EAST -> Rotation.CLOCKWISE_90
@@ -62,6 +63,7 @@ class RotatedMultiBlockPlacer(val rotation: Rotation) : MultiBlockPlacer {
             Direction.UP, Direction.DOWN -> Rotation.NONE
         }
 
+        @Deprecated("Refactored into extension.", ReplaceWith("rotation.inverted", "at.martinthedragon.nucleartech.extensions.inverted"))
         fun invert(rotation: Rotation) = when (rotation) {
             Rotation.NONE -> Rotation.NONE
             Rotation.CLOCKWISE_90 -> Rotation.COUNTERCLOCKWISE_90

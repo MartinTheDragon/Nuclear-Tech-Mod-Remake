@@ -28,7 +28,6 @@ object NuclearPacketHandler {
 
         registerMessage(ContainerMenuUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
 
-        registerMessage(AssemblerSyncMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(LaunchPadMissileMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(SirenMessage::decode, NetworkDirection.PLAY_TO_CLIENT)

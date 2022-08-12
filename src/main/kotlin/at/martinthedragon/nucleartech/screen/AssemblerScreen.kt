@@ -38,10 +38,11 @@ class AssemblerScreen(
         RenderSystem.setShaderTexture(0, texture)
         blit(stack, guiLeft, guiTop, 0, 0, xSize, ySize)
 
-        val energyScaled = menu.getEnergy() * 52 / AssemblerBlockEntity.MAX_ENERGY
+        val assembler = menu.blockEntity
+        val energyScaled = assembler.energy * 52 / AssemblerBlockEntity.MAX_ENERGY
         if (energyScaled > 0) blit(stack, guiLeft + 116, guiTop + 70 - energyScaled, 176, 52 - energyScaled, 16, energyScaled)
 
-        val progressScaled = menu.getProgress() * 83 / menu.getMaxProgress()
+        val progressScaled = assembler.progress * 83 / assembler.maxProgress.coerceAtLeast(1)
         if (progressScaled > 0) blit(stack, guiLeft + 45, guiTop + 82, 2, 222, progressScaled, 32)
     }
 
@@ -52,7 +53,7 @@ class AssemblerScreen(
             renderComponentTooltip(matrix,
                 listOf(
                     LangKeys.ENERGY.get(),
-                    TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(AssemblerBlockEntity.MAX_ENERGY)} HE")
+                    TextComponent("${EnergyFormatter.formatEnergy(menu.blockEntity.energy)}/${EnergyFormatter.formatEnergy(AssemblerBlockEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )
     }

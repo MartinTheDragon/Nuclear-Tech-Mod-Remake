@@ -6,8 +6,6 @@ import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
@@ -17,7 +15,6 @@ class AssemblerMenu(
     windowID: Int,
     playerInventory: Inventory,
     blockEntity: AssemblerBlockEntity,
-    val data: ContainerData = SimpleContainerData(3)
 ) : NTechContainerMenu<AssemblerBlockEntity>(MenuTypes.assemblerMenu.get(), windowID, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
@@ -28,7 +25,6 @@ class AssemblerMenu(
         for (i in 0 until 6) for (j in 0 until 2) addSlot(SlotItemHandler(inv, 5 + j + i * 2, 8 + j * 18, 18 + i * 18))
         addSlot(ResultSlot(playerInventory.player, inv, 17, 134, 90))
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
-        addDataSlots(data)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -59,10 +55,6 @@ class AssemblerMenu(
         }
         return returnStack
     }
-
-    fun getEnergy(): Int = data[0]
-    fun getProgress(): Int = data[1]
-    fun getMaxProgress(): Int = data[2].coerceAtLeast(1) // FIXME seems to send 0 initially because of multi block shenanigans?
 
     companion object {
         fun fromNetwork(windowID: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =

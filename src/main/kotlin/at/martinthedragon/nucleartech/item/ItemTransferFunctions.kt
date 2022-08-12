@@ -12,11 +12,14 @@ import net.minecraftforge.items.ItemHandlerHelper
 import net.minecraftforge.items.ItemStackHandler
 import kotlin.math.min
 
-fun canTransferItem(from: ItemStack, to: ItemStack, inventory: Container? = null): Boolean = when {
+fun canTransferItem(from: ItemStack, to: ItemStack, inventory: Container): Boolean =
+    canTransferItem(from, to, inventory.maxStackSize)
+
+fun canTransferItem(from: ItemStack, to: ItemStack, maxStackSize: Int = 64): Boolean = when {
     from.isEmpty -> false
     to.isEmpty -> true
     !to.sameItem(from) -> false
-    else -> to.count + from.count <= (inventory?.maxStackSize ?: 64) && to.count + from.count <= to.maxStackSize
+    else -> to.count + from.count <= maxStackSize && to.count + from.count <= to.maxStackSize
 }
 
 inline fun transferItemsBetweenItemHandlers(first: IItemHandler, second: IItemHandler, amount: Int = Int.MAX_VALUE, invert: Boolean = false, filter: (ItemStack) -> Boolean = { true }) {

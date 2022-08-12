@@ -79,20 +79,20 @@ class AssemblerRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         }
 
         matrix.pushPose()
-        if (assembler.isProgressing) {
+        if (assembler.canProgress) {
             val offset = ((assembler.renderTick % 100 + partialTicks) * 10F).let { if (it > 500) 500 - (it - 500) else it }
             matrix.translate(offset * .003 - .75, .0, .0)
         }
         slider.render(matrix, bufferSource, RenderType::entitySmoothCutout, light, overlay, partialTicks, MultipartTransforms.EMPTY)
 
-        if (assembler.isProgressing) {
+        if (assembler.canProgress) {
             val sway = sin((assembler.renderTick % 40 + partialTicks) * .5 / PI)
             matrix.translate(.0, .0, sway * .3)
         }
         arm.render(matrix, bufferSource, RenderType::entitySmoothCutout, light, overlay, partialTicks, MultipartTransforms.EMPTY)
         matrix.popPose()
 
-        val rotation = if (assembler.isProgressing) (assembler.renderTick % 36 + partialTicks) * 10F else 0F
+        val rotation = if (assembler.canProgress) (assembler.renderTick % 36 + partialTicks) * 10F else 0F
 
         matrix.pushPose()
         matrix.translate(-.6, .75, 1.0625)
