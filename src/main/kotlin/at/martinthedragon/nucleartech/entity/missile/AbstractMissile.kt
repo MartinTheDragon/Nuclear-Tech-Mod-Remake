@@ -2,7 +2,6 @@ package at.martinthedragon.nucleartech.entity.missile
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.api.explosion.ExplosionLargeParams
-import at.martinthedragon.nucleartech.api.explosion.createAndStart
 import at.martinthedragon.nucleartech.explosion.ExplosionLarge
 import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.ntm

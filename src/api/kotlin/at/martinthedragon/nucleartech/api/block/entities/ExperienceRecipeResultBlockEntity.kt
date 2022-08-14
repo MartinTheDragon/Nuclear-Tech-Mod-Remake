@@ -8,10 +8,10 @@ public interface ExperienceRecipeResultBlockEntity {
     public fun getExperienceToDrop(player: Player?): Float
     public fun getRecipesToAward(player: Player): List<Recipe<*>>
     public fun clearUsedRecipes()
-}
 
-public fun ExperienceRecipeResultBlockEntity.dropExperienceAndAwardRecipes(player: Player) {
-    player.awardRecipes(getRecipesToAward(player))
-    player.level.dropExperience(player.position(), getExperienceToDrop(player))
-    clearUsedRecipes()
+    public fun dropExperienceAndAwardRecipes(player: Player) {
+        player.awardRecipes(getRecipesToAward(player))
+        player.level.dropExperience(player.position(), getExperienceToDrop(player))
+        clearUsedRecipes()
+    }
 }

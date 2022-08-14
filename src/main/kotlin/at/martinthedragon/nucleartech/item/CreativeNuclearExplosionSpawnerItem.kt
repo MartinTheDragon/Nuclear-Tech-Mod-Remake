@@ -1,7 +1,6 @@
 package at.martinthedragon.nucleartech.item
 
 import at.martinthedragon.nucleartech.api.explosion.NuclearExplosionMk4Params
-import at.martinthedragon.nucleartech.api.explosion.createAndStart
 import at.martinthedragon.nucleartech.entity.NukeExplosion
 import at.martinthedragon.nucleartech.screen.UseCreativeNuclearExplosionSpawnerScreen
 import net.minecraft.Util

@@ -17,8 +17,8 @@ public fun interface ExplosionFactory<in T : ExplosionFactory.ExplosionParams> {
         params: T
     ): Explosion?
 
+    public fun createAndStart(level: Level, pos: Vec3, strength: Float, params: T): Boolean =
+        create(level, pos, strength, params)?.start() == true
+
     public interface ExplosionParams
 }
-
-public fun <P : ExplosionFactory.ExplosionParams> ExplosionFactory<P>.createAndStart(level: Level, pos: Vec3, strength: Float, params: P): Boolean =
-    create(level, pos, strength, params)?.start() == true

@@ -1,7 +1,6 @@
 package at.martinthedragon.nucleartech.entity.missile
 
 import at.martinthedragon.nucleartech.api.explosion.ExplosionLargeParams
-import at.martinthedragon.nucleartech.api.explosion.createAndStart
 import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.explosion.ExplosionLarge
 import net.minecraft.core.BlockPos

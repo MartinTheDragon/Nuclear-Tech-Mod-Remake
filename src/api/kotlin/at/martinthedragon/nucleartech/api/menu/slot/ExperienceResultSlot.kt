@@ -1,7 +1,6 @@
 package at.martinthedragon.nucleartech.api.menu.slot
 
 import at.martinthedragon.nucleartech.api.block.entities.ExperienceRecipeResultBlockEntity
-import at.martinthedragon.nucleartech.api.block.entities.dropExperienceAndAwardRecipes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.items.IItemHandler

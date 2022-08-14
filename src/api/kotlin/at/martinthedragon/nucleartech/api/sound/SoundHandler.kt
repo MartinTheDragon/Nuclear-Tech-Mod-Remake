@@ -17,7 +17,7 @@ public object SoundHandler {
         var instance: SoundInstance? = soundMap[pos.asLong()]
         if (instance.isActive()) return instance
 
-        instance = MachineSoundInstance(event, source, pos, loop)
+        instance = MachineSoundInstance(event, source, pos, loop, volume, pitch)
 
         if (!instance.isClientPlayerInRange()) return null
         Minecraft.getInstance().soundManager.play(instance)

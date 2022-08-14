@@ -1,9 +1,8 @@
 package at.martinthedragon.nucleartech.entity
 
-import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.api.explosion.ExplosionLargeParams
-import at.martinthedragon.nucleartech.api.explosion.createAndStart
 import at.martinthedragon.nucleartech.explosion.ExplosionLarge
+import at.martinthedragon.nucleartech.item.NTechItems
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile
 import net.minecraft.world.level.Level
