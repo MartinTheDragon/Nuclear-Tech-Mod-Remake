@@ -1,9 +1,9 @@
 {
   "textures": {
-    "texture": "nucleartech:block/chem_plant/chem_plant_body"
+    "texture": "nucleartech:block/chem_plant/body"
   },
   "loader": "forge:obj",
-  "model": "nucleartech:models/other/chem_plant/chem_plant_body.obj",
+  "model": "nucleartech:models/other/chem_plant/body.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }

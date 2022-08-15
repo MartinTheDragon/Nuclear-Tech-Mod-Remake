@@ -1,7 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity.renderer
 
 import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
-import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.SpecialModels
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Vector3f
@@ -11,46 +10,20 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.block.model.ItemTransforms
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
-import net.minecraftforge.client.model.IModelConfiguration
-import net.minecraftforge.client.model.StandaloneModelConfiguration
-import net.minecraftforge.client.model.obj.OBJLoader
-import net.minecraftforge.client.model.obj.OBJModel.ModelSettings
 import net.minecraftforge.client.model.renderable.MultipartTransforms
 import kotlin.math.PI
 import kotlin.math.sin
 
 class AssemblerRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRendererProvider.Context) : BlockEntityRenderer<AssemblerBlockEntity> {
-    private val bodyModel = ntm("models/other/assembler/assembler_body.obj")
-    private val cogModel = ntm("models/other/assembler/assembler_cog.obj")
-    private val sliderModel = ntm("models/other/assembler/assembler_slider.obj")
-    private val armModel = ntm("models/other/assembler/assembler_arm.obj")
-
-    init {
-        val modelLoadFunction = { id: ResourceLocation ->
-            OBJLoader.INSTANCE
-                .loadModel(ModelSettings(id, false, false, true, true, null))
-                .bakeRenderable(getModelConfigurationFor(id))
-        }
-
-        SpecialModels.registerModel(bodyModel, modelLoadFunction)
-        SpecialModels.registerModel(cogModel, modelLoadFunction)
-        SpecialModels.registerModel(sliderModel, modelLoadFunction)
-        SpecialModels.registerModel(armModel, modelLoadFunction)
-    }
-
-    private fun getModelConfigurationFor(id: ResourceLocation): IModelConfiguration =
-        StandaloneModelConfiguration.create(id, mapOf("#texture" to ResourceLocation(id.namespace, "block/${id.path.removeSuffix(".obj").removePrefix("models/other/")}")))
-
     override fun render(assembler: AssemblerBlockEntity, partialTicks: Float, matrix: PoseStack, bufferSource: MultiBufferSource, light: Int, overlay: Int) {
         val level = assembler.level ?: return
 
-        val body = SpecialModels.getModel(bodyModel)
-        val cog = SpecialModels.getModel(cogModel)
-        val slider = SpecialModels.getModel(sliderModel)
-        val arm = SpecialModels.getModel(armModel)
+        val body = SpecialModels.ASSEMBLER_BODY.get()
+        val cog = SpecialModels.ASSEMBLER_COG.get()
+        val slider = SpecialModels.ASSEMBLER_SLIDER.get()
+        val arm = SpecialModels.ASSEMBLER_ARM.get()
 
         val state = assembler.blockState
 

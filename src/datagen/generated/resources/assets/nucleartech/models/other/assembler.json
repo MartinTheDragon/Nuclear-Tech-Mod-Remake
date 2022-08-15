@@ -3,34 +3,34 @@
   "parts": {
     "body": {
       "textures": {
-        "texture": "nucleartech:block/assembler/assembler_body"
+        "texture": "nucleartech:block/assembler/body"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/assembler/assembler_body.obj",
+      "model": "nucleartech:models/other/assembler/body.obj",
       "flip-v": true
     },
     "cog": {
       "textures": {
-        "texture": "nucleartech:block/assembler/assembler_cog"
+        "texture": "nucleartech:block/assembler/cog"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/assembler/assembler_cog.obj",
+      "model": "nucleartech:models/other/assembler/cog.obj",
       "flip-v": true
     },
     "slider": {
       "textures": {
-        "texture": "nucleartech:block/assembler/assembler_slider"
+        "texture": "nucleartech:block/assembler/slider"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/assembler/assembler_slider.obj",
+      "model": "nucleartech:models/other/assembler/slider.obj",
       "flip-v": true
     },
     "arm": {
       "textures": {
-        "texture": "nucleartech:block/assembler/assembler_arm"
+        "texture": "nucleartech:block/assembler/arm"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/assembler/assembler_arm.obj",
+      "model": "nucleartech:models/other/assembler/arm.obj",
       "flip-v": true
     }
   }

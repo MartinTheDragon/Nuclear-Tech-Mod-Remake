@@ -1,9 +1,9 @@
 {
   "textures": {
-    "texture": "nucleartech:block/chem_plant/chem_plant_spinner"
+    "texture": "nucleartech:block/chem_plant/spinner"
   },
   "loader": "forge:obj",
-  "model": "nucleartech:models/other/chem_plant/chem_plant_spinner.obj",
+  "model": "nucleartech:models/other/chem_plant/spinner.obj",
   "detectCullableFaces": false,
   "flip-v": true
 }

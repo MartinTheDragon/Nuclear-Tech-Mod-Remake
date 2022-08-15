@@ -16,17 +16,10 @@ import com.mojang.math.Vector3f
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.block.model.ItemOverrides
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraftforge.client.model.ForgeModelBakery
-import net.minecraftforge.client.model.SimpleModelState
-import net.minecraftforge.client.model.StandaloneModelConfiguration
 import net.minecraftforge.client.model.data.EmptyModelData
-import net.minecraftforge.client.model.obj.OBJLoader
-import net.minecraftforge.client.model.obj.OBJModel
-import net.minecraftforge.client.textures.UnitSprite
 import java.util.*
 import kotlin.math.*
 
@@ -34,16 +27,6 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
     private val textureFireball = ntm("textures/entity/mushroom_cloud/fireball.png")
     private val textureBalefire = ntm("textures/entity/mushroom_cloud/balefire.png")
     private val textureCloudlet = ntm("textures/particle/smoke.png")
-
-    private val mushModel = ntm("models/other/mushroom_cloud/mush.obj")
-
-    init {
-        SpecialModels.registerBakedModel(mushModel) {
-            OBJLoader.INSTANCE
-                .loadModel(OBJModel.ModelSettings(it, false, false, true, true, null))
-                .bake(StandaloneModelConfiguration.create(mapOf("#fireball_texture" to textureFireball, "particle" to textureFireball)), ForgeModelBakery.instance(), UnitSprite.GETTER, SimpleModelState.IDENTITY, ItemOverrides.EMPTY, it)
-        }
-    }
 
     private val modelRenderer = Minecraft.getInstance().blockRenderer.modelRenderer
 
@@ -109,7 +92,7 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
             green = 1F - (1F - .7F) * fade
             blue = 1F - (1F - .48F) * fade
         }
-        val model = SpecialModels.getBakedModel(mushModel)
+        val model = SpecialModels.MUSHROOM_CLOUD.get()
         val solidBuffer = renderer.getBuffer(if (Minecraft.useShaderTransparency()) NuclearRenderTypes.mushroomCloudTransparent else NuclearRenderTypes.mushroomCloudSolid)
         modelRenderer.renderModelAlpha(matrix.last(), solidBuffer, null, model, red, green, blue, fade, light, OverlayTexture.NO_OVERLAY, EmptyModelData.INSTANCE)
         val texturedBuffer = renderer.getBuffer(NuclearRenderTypes.mushroomCloudTextured(getTextureLocation(entity), -progress * .035F))
@@ -119,8 +102,6 @@ class MushroomCloudRenderer(context: EntityRendererProvider.Context) : EntityRen
         matrix.popPose()
     }
 
-    // FIXME things with transparency show behind the cloudlets (mushroom cloud, entities, ...)
-    @Suppress("DEPRECATION")
     private fun renderCloudlets(entity: MushroomCloud, matrix: PoseStack, partialTicks: Float) {
         if (entity.cloudlets.isEmpty()) return
 

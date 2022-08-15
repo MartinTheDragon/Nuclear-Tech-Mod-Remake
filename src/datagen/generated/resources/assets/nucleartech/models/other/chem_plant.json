@@ -3,28 +3,28 @@
   "parts": {
     "body": {
       "textures": {
-        "texture": "nucleartech:block/chem_plant/chem_plant_body"
+        "texture": "nucleartech:block/chem_plant/body"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/chem_plant/chem_plant_body.obj",
+      "model": "nucleartech:models/other/chem_plant/body.obj",
       "detectCullableFaces": false,
       "flip-v": true
     },
     "spinner": {
       "textures": {
-        "texture": "nucleartech:block/chem_plant/chem_plant_spinner"
+        "texture": "nucleartech:block/chem_plant/spinner"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/chem_plant/chem_plant_spinner.obj",
+      "model": "nucleartech:models/other/chem_plant/spinner.obj",
       "detectCullableFaces": false,
       "flip-v": true
     },
     "piston": {
       "textures": {
-        "texture": "nucleartech:block/chem_plant/chem_plant_piston"
+        "texture": "nucleartech:block/chem_plant/piston"
       },
       "loader": "forge:obj",
-      "model": "nucleartech:models/other/chem_plant/chem_plant_piston.obj",
+      "model": "nucleartech:models/other/chem_plant/piston.obj",
       "detectCullableFaces": false,
       "flip-v": true
     }

@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.AnvilBlock
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
@@ -231,8 +231,8 @@ class NuclearBlockStateProvider(
             NTechBlocks.shredder.get(), north = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), south = extend(blockTexture(
                 NTechBlocks.shredder.get()), "_front"), east = extend(blockTexture(NTechBlocks.shredder.get()), "_side"), west = extend(blockTexture(
                 NTechBlocks.shredder.get()), "_side"))
-        horizontalBlock(NTechBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "block/assembler/assembler_particles"))
-        horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "block/chem_plant/chem_plant_particles"))
+        horizontalBlock(NTechBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "block/assembler/particles"))
+        horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "block/chem_plant/particles"))
         horizontalBlock(
             NTechBlocks.littleBoy.get(), models().getBuilder("little_boy")
             .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
@@ -259,8 +259,8 @@ class NuclearBlockStateProvider(
             .transform(ModelBuilder.Perspective.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.5F).end()
             .end()
         )
-        simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad"))
-        simpleBlock(NTechBlocks.launchPadPart.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad"))
+        simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad/launch_pad"))
+        simpleBlock(NTechBlocks.launchPadPart.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad/launch_pad"))
 
         simpleBlock(NTechBlocks.genericMultiBlockPart.get(), models().getBuilder("generic_multi_block_part"))
         simpleBlock(NTechBlocks.genericMultiBlockPort.get(), models().getBuilder("generic_multi_block_port"))
