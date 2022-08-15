@@ -40,7 +40,7 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         val fluid1 = chemPlant.inputTank1.fluid
         matrix.pushPose()
         matrix.translate(-.625, .0, .625)
-        if (!fluid1.isEmpty && (chemPlant.isProgressing || chemPlant.canProgress)) matrix.mulPose(Vector3f.YP.rotationDegrees(-spinnerRotation))
+        if (!fluid1.isEmpty && chemPlant.canProgress) matrix.mulPose(Vector3f.YP.rotationDegrees(-spinnerRotation))
         else matrix.mulPose(Vector3f.YP.rotationDegrees(-45F))
         spinner.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
@@ -48,14 +48,14 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         val fluid2 = chemPlant.inputTank2.fluid
         matrix.pushPose()
         matrix.translate(.625, .0, .625)
-        if (!fluid2.isEmpty && (chemPlant.isProgressing || chemPlant.canProgress)) matrix.mulPose(Vector3f.YP.rotationDegrees(-spinnerRotation))
+        if (!fluid2.isEmpty && chemPlant.canProgress) matrix.mulPose(Vector3f.YP.rotationDegrees(-spinnerRotation))
         else matrix.mulPose(Vector3f.YP.rotationDegrees(45F))
         spinner.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         val pistonPush = sin((chemPlant.renderTick % 40 + partials) * .05 * PI) * .25 - .25
         matrix.pushPose()
-        if (chemPlant.isProgressing || chemPlant.canProgress) matrix.translate(.0, pistonPush, .0)
+        if (chemPlant.canProgress) matrix.translate(.0, pistonPush, .0)
         else matrix.translate(.0, -.25, .0)
         piston.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
@@ -100,7 +100,7 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
     }
 
     private fun getTextureForFluid(chemPlant: ChemPlantBlockEntity, fluid: FluidStack) =
-        if (chemPlant.isProgressing || chemPlant.canProgress) fluid.fluid.attributes.getFlowingTexture(fluid)
+        if (chemPlant.canProgress) fluid.fluid.attributes.getFlowingTexture(fluid)
         else fluid.fluid.attributes.getStillTexture(fluid)
 
     override fun shouldRenderOffScreen(chemPlant: ChemPlantBlockEntity) = true

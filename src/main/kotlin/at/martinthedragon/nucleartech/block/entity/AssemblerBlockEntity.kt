@@ -2,8 +2,6 @@ package at.martinthedragon.nucleartech.block.entity
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.api.block.entities.SoundLoopBlockEntity
-import at.martinthedragon.nucleartech.api.block.entities.TickingBlockEntity
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedInputItemHandler
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedOutputItemHandler
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
@@ -29,9 +27,7 @@ import net.minecraft.world.phys.AABB
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
 
-class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<AssemblyRecipe>(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state),
-    TickingBlockEntity, SoundLoopBlockEntity
-{
+class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<AssemblyRecipe>(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state) {
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(18, ItemStack.EMPTY)
 
     override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
@@ -42,6 +38,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
     }
 
     override fun inventoryChanged(slot: Int) {
+        super.inventoryChanged(slot)
         if (slot == 4) checkCanProgress()
     }
 
@@ -68,7 +65,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
     override val soundLoopEvent = SoundEvents.assemblerOperate.get()
 
     override fun clientTick(level: Level, pos: BlockPos, state: BlockState) {
-        super<RecipeMachineBlockEntity>.clientTick(level, pos, state)
+        super.clientTick(level, pos, state)
 
         if (canProgress && !isRemoved) {
             renderTick++
@@ -83,8 +80,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         if (!energyItem.isEmpty) transferEnergy(energyItem, energyStorage)
     }
 
-    override fun checkCanProgress() = super.checkCanProgress() && energy >= consumption
-
+    override fun checkCanProgress() = energy >= consumption && super.checkCanProgress()
 
     override var maxProgress = 100
         private set

@@ -31,7 +31,7 @@ class ChemPlantBlock(properties: Properties) : BaseEntityBlock(properties) {
     override fun getRenderShape(state: BlockState) = RenderShape.ENTITYBLOCK_ANIMATED
     override fun getShadeBrightness(state: BlockState, level: BlockGetter, pos: BlockPos) = 1F
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<ChemPlantBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setMachineCustomName<ChemPlantBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
         dropMultiBlockEntityContentsAndRemoveStructure<ChemPlantBlockEntity>(state, level, pos, newState, Companion::placeMultiBlock)

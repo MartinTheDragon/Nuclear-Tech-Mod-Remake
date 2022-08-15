@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
+import at.martinthedragon.nucleartech.api.block.entities.TickingBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -7,7 +8,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 
-abstract class ProgressingMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) : BaseMachineBlockEntity(type, pos, state), TickingServerBlockEntity {
+abstract class ProgressingMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) : BaseMachineBlockEntity(type, pos, state), TickingServerBlockEntity, TickingBlockEntity {
     abstract val maxProgress: Int
     var progress: Int = 0
         protected set

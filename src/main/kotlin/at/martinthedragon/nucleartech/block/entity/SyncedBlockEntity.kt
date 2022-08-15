@@ -27,7 +27,9 @@ open class SyncedBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: Blo
     protected open fun setChanged(updateRedstone: Boolean) {
         val level = level
         if (level != null) {
-            level.blockEntityChanged(worldPosition)
+            @Suppress("DEPRECATION")
+            if (level.hasChunkAt(worldPosition))
+                level.getChunkAt(worldPosition).isUnsaved = true
             if (updateRedstone && supportsComparators && !level.isClientSide && !blockState.isAir) {
                 level.updateNeighbourForOutputSignal(worldPosition, blockState.block)
             }

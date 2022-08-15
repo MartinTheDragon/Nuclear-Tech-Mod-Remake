@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.block.entity
 
 import at.martinthedragon.nucleartech.extensions.contains
+import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
@@ -61,7 +62,7 @@ abstract class RecipeMachineBlockEntity<RECIPE : Recipe<*>>(type: BlockEntityTyp
         if (tag.contains("Recipe", Tag.TAG_STRING)) {
             val recipeString = tag.getString("Recipe")
             if (ResourceLocation.isValidResourceLocation(recipeString)) {
-                val recipe = getLevelUnchecked().recipeManager.byKey(ResourceLocation(recipeString)).getOrNull()
+                val recipe = Minecraft.getInstance().level?.recipeManager?.byKey(ResourceLocation(recipeString))?.getOrNull()
                 @Suppress("UNCHECKED_CAST")
                 this.recipe = recipe as? RECIPE ?: return
             }
