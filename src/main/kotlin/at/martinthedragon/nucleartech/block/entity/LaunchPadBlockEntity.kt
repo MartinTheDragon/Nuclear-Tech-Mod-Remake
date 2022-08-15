@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.block.entities.BombBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
@@ -17,7 +17,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.ContainerHelper
@@ -131,7 +130,7 @@ class LaunchPadBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
 
     override fun createMenu(windowID: Int, playerInventory: Inventory) = LaunchPadMenu(windowID, playerInventory, this, dataAccess)
 
-    override fun getDefaultName() = TranslatableComponent("container.${NuclearTech.MODID}.launch_pad")
+    override fun getDefaultName() = LangKeys.CONTAINER_LAUNCH_PAD.get()
     override fun getRenderBoundingBox(): AABB = AABB(blockPos.offset(-3, 0, -3), blockPos.offset(3, 16, 3))
 
     override val requiresComponentsToDetonate = true

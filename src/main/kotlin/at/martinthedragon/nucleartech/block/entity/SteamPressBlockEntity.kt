@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.block.entity
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.NTechTags
-import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.block.entities.ExperienceRecipeResultBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
@@ -17,7 +17,6 @@ import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundSource
@@ -172,7 +171,7 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
     override fun createMenu(windowId: Int, playerInventory: Inventory): AbstractContainerMenu =
         PressMenu(windowId, playerInventory, this, dataAccess)
 
-    override fun getDefaultName() = TranslatableComponent("container.${NuclearTech.MODID}.steam_press")
+    override fun getDefaultName() = LangKeys.CONTAINER_STEAM_PRESS.get()
 
     override fun getRenderBoundingBox() = AABB(blockPos.offset(.0, -1.0, .0), blockPos.offset(1.0, 1.0, 1.0))
 

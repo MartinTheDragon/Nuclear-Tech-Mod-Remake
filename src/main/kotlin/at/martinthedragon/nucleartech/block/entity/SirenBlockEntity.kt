@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.item.SirenTrackItem
 import at.martinthedragon.nucleartech.menu.SirenMenu
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -9,7 +10,6 @@ import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity
@@ -92,7 +92,7 @@ class SirenBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainer
 
     override fun createMenu(windowId: Int, playerInventory: Inventory) = SirenMenu(windowId, playerInventory, this)
 
-    override fun getDefaultName(): Component = TranslatableComponent("container.nucleartech.siren")
+    override fun getDefaultName(): Component = LangKeys.CONTAINER_SIREN.get()
 
     override fun getItems(): NonNullList<ItemStack> = items
 

@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.item.NTechItems
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.api.block.entities.ExperienceRecipeResultBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
+import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.item.ShredderBladeItem
 import at.martinthedragon.nucleartech.item.canTransferItem
 import at.martinthedragon.nucleartech.menu.ShredderMenu
@@ -16,7 +16,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -123,7 +122,7 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlock
 
     override fun createMenu(windowID: Int, playerInventory: Inventory) = ShredderMenu(windowID, playerInventory, this, dataAccess)
 
-    override fun getDefaultName() = TranslatableComponent("container.${NuclearTech.MODID}.shredder")
+    override fun getDefaultName() = LangKeys.CONTAINER_SHREDDER.get()
 
     override fun setRecipeUsed(recipe: Recipe<*>?) {
         if (recipe == null) return

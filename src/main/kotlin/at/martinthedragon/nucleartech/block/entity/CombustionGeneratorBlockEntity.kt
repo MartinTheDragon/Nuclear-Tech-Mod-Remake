@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
@@ -10,7 +10,6 @@ import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.Containers
 import net.minecraft.world.entity.player.Inventory
@@ -140,7 +139,7 @@ class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseCon
     override fun createMenu(windowId: Int, playerInventory: Inventory) =
         CombustionGeneratorMenu(windowId, playerInventory, this, dataAccess)
 
-    override fun getDefaultName(): Component = TranslatableComponent("container.${NuclearTech.MODID}.combustion_generator")
+    override fun getDefaultName(): Component = LangKeys.CONTAINER_COMBUSTION_GENERATOR.get()
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         val wasLit = isLit

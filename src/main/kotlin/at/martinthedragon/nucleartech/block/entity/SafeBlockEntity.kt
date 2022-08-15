@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.block.entity
 
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.menu.SafeMenu
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
@@ -43,7 +43,7 @@ class SafeBlockEntity(pos: BlockPos, state: BlockState) : RandomizableContainerB
     override fun createMenu(windowId: Int, playerInventory: Inventory): AbstractContainerMenu =
         SafeMenu(windowId, playerInventory, this)
 
-    override fun getDefaultName() = TranslatableComponent("container.nucleartech.safe")
+    override fun getDefaultName() = LangKeys.CONTAINER_SAFE.get()
 
     override fun getItems(): NonNullList<ItemStack> = items
 

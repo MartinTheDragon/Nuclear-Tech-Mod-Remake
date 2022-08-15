@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedInputItemHandler
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedOutputItemHandler
@@ -17,7 +17,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.item.ItemStack
@@ -49,7 +48,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         set(value) { energyStorage.energy = value }
 
     override fun createMenu(windowID: Int, inventory: Inventory) = AssemblerMenu(windowID, inventory, this)
-    override val defaultName = TranslatableComponent("container.${NuclearTech.MODID}.assembler")
+    override val defaultName = LangKeys.CONTAINER_ASSEMBLER.get()
 
     override fun trackContainerMenu(menu: NTechContainerMenu<*>) {
         menu.track(IntDataSlot.create(this::energy, this::energy::set))

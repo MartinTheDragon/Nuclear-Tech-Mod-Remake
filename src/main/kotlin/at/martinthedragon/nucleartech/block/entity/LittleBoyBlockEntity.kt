@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.api.block.entities.BombBlockEntity
 import at.martinthedragon.nucleartech.api.explosion.NuclearExplosionMk4Params
 import at.martinthedragon.nucleartech.block.LittleBoyBlock
@@ -13,7 +13,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.ContainerHelper
@@ -94,7 +93,7 @@ class LittleBoyBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
     override fun createMenu(windowID: Int, playerInventory: Inventory) =
         LittleBoyMenu(windowID, playerInventory, this, dataAccess)
 
-    override fun getDefaultName() = TranslatableComponent("container.${NuclearTech.MODID}.little_boy")
+    override fun getDefaultName() = LangKeys.CONTAINER_LITTLE_BOY.get()
 
     override fun setChanged() {
         updateBombCompletion()

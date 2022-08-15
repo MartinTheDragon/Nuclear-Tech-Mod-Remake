@@ -343,7 +343,6 @@ class AnvilScreen(anvilMenu: AnvilMenu, playerInventory: Inventory, title: Compo
     }
 
     companion object {
-        const val CONTAINER_TRANSLATION = "container.${NuclearTech.MODID}.anvil"
         private const val GUI_WIDTH = 176
         private const val GUI_HEIGHT = 222
         private const val RECIPES_PER_PAGE = 10

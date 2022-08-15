@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.api.block.entities.ExperienceRecipeResultBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.ContainerHelper
 import net.minecraft.world.entity.player.Inventory
@@ -120,7 +119,7 @@ class ElectricFurnaceBlockEntity(pos: BlockPos, state: BlockState) : BaseContain
     override fun createMenu(windowId: Int, playerInventory: Inventory) =
         ElectricFurnaceMenu(windowId, playerInventory, this, dataAccess)
 
-    override fun getDefaultName() = TranslatableComponent("container.${NuclearTech.MODID}.electric_furnace")
+    override fun getDefaultName() = LangKeys.CONTAINER_ELECTRIC_FURNACE.get()
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         if (level.isClientSide) return

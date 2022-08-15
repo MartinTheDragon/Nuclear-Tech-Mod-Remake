@@ -1,14 +1,13 @@
 package at.martinthedragon.nucleartech.block
 
-import at.martinthedragon.nucleartech.world.DamageSources
+import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.menu.AnvilMenu
-import at.martinthedragon.nucleartech.screen.AnvilScreen
+import at.martinthedragon.nucleartech.world.DamageSources
 import net.minecraft.ChatFormatting
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionHand
@@ -76,7 +75,7 @@ class AnvilBlock(val tier: Int, properties: Properties) : FallingBlock(propertie
 
     override fun getDustColor(state: BlockState, blocks: BlockGetter, pos: BlockPos) = state.getMapColor(blocks, pos).col
 
-    private val containerTitle = TranslatableComponent(AnvilScreen.CONTAINER_TRANSLATION, tier)
+    private val containerTitle = LangKeys.CONTAINER_ANVIL.format(tier)
 
     override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos) = SimpleMenuProvider({ windowID, inventory, _ ->
         AnvilMenu(windowID, inventory, ContainerLevelAccess.create(level, pos), tier)

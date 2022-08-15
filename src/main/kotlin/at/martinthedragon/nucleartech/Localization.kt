@@ -8,6 +8,7 @@ object LangKeys {
     const val CAT_ARMOR = "armor"
     const val CAT_BUTTON = "button"
     const val CAT_CHEMISTRY = "chemistry"
+    const val CAT_CONTAINER = "container"
     const val CAT_DETONATOR = "detonator"
     const val CAT_DEVICE = "device"
     const val CAT_ENERGY = "energy"
@@ -41,6 +42,20 @@ object LangKeys {
     val BUTTON_START = of(CAT_BUTTON, "start")
 
     val CHEMISTRY_URANIUM_HEXAFLUORIDE = of(CAT_CHEMISTRY, "sulfur_and_uranium_hexafluoride_from_chemistry")
+
+    val CONTAINER_ANVIL = of(CAT_CONTAINER, "anvil")
+    val CONTAINER_ASSEMBLER = of(CAT_CONTAINER, "assembler")
+    val CONTAINER_BLAST_FURNACE = of(CAT_CONTAINER, "blast_furnace")
+    val CONTAINER_CHEM_PLANT = of(CAT_CONTAINER, "chem_plant")
+    val CONTAINER_COMBUSTION_GENERATOR = of(CAT_CONTAINER, "combustion_generator")
+    val CONTAINER_ELECTRIC_FURNACE = of(CAT_CONTAINER, "electric_furnace")
+    val CONTAINER_FAT_MAN = of(CAT_CONTAINER, "fat_man")
+    val CONTAINER_LAUNCH_PAD = of(CAT_CONTAINER, "launch_pad")
+    val CONTAINER_LITTLE_BOY = of(CAT_CONTAINER, "little_boy")
+    val CONTAINER_SAFE = of(CAT_CONTAINER, "safe")
+    val CONTAINER_SHREDDER = of(CAT_CONTAINER, "shredder")
+    val CONTAINER_SIREN = of(CAT_CONTAINER, "siren")
+    val CONTAINER_STEAM_PRESS = of(CAT_CONTAINER, "steam_press")
 
     val DETONATOR_INVALID_BLOCK_ENTITY = of(CAT_DETONATOR, "invalid_block_entity")
     val DETONATOR_MISSING_COMPONENTS = of(CAT_DETONATOR, "missing_components")
