@@ -5,9 +5,9 @@ import at.martinthedragon.nucleartech.Materials
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.TranslationKey
 import at.martinthedragon.nucleartech.block.NTechBlocks
-import at.martinthedragon.nucleartech.block.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entity.EntityTypes
+import at.martinthedragon.nucleartech.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.menu.MenuTypes

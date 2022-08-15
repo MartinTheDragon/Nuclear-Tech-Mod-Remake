@@ -1,4 +1,4 @@
-package at.martinthedragon.nucleartech.block.entity.attribute
+package at.martinthedragon.nucleartech.entity.attribute
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ATTRIBUTES
 import net.minecraft.world.entity.ai.attributes.RangedAttribute

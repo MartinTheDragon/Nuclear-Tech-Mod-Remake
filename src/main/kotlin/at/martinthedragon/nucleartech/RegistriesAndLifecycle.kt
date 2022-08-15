@@ -2,10 +2,10 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
-import at.martinthedragon.nucleartech.block.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.NuclearCreeper
+import at.martinthedragon.nucleartech.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.hazard.HazardRegistry
 import at.martinthedragon.nucleartech.item.NTechBlockItems
