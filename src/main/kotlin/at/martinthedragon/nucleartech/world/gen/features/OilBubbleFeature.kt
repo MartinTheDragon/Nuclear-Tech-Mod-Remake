@@ -1,38 +1,29 @@
 package at.martinthedragon.nucleartech.world.gen.features
 
 import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.math.placeSpherical
 import com.mojang.serialization.Codec
-import net.minecraft.core.BlockPos
 import net.minecraft.tags.BlockTags
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
 class OilBubbleFeature(codec: Codec<NoneFeatureConfiguration>) : Feature<NoneFeatureConfiguration>(codec) {
+    private val stoneTest = { state: BlockState -> state.`is`(BlockTags.STONE_ORE_REPLACEABLES) }
+    private val deepslateTest = { state: BlockState -> state.`is`(BlockTags.DEEPSLATE_ORE_REPLACEABLES) }
+
     override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration>): Boolean {
         val radius = 7 + context.random().nextInt(9)
-        val radiusSquared = radius * radius
-        val radiusSquaredHalved = radiusSquared / 2
 
-        for (xIteration in -radius until radius) {
-            val x = xIteration + context.origin().x
-            val xBorder = xIteration * xIteration
-            for (yIteration in -radius until radius) {
-                val y = yIteration + context.origin().y
-                val yBorder = xBorder + yIteration * yIteration
-                for (zIteration in -radius until radius) {
-                    val z = zIteration + context.origin().z
-                    val zBorder = yBorder + zIteration * zIteration
-                    if (zBorder < radiusSquaredHalved) {
-                        val oilOrePos = BlockPos(x, y, z)
-                        val blockState = context.level().getBlockState(oilOrePos)
-                        if (blockState.`is`(BlockTags.STONE_ORE_REPLACEABLES)) {
-                            setBlock(context.level(), oilOrePos, NTechBlocks.oilDeposit.get().defaultBlockState())
-                        } else if (blockState.`is`(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) {
-                            setBlock(context.level(), oilOrePos, NTechBlocks.deepslateOilDeposit.get().defaultBlockState())
-                        }
-                    }
-                }
+        val oilDeposit = NTechBlocks.oilDeposit.get().defaultBlockState()
+        val deepOilDeposit = NTechBlocks.deepslateOilDeposit.get().defaultBlockState()
+
+        val worldGen = context.level()
+        placeSpherical(context.origin(), radius) {
+            when {
+                worldGen.isStateAtPosition(it, stoneTest) -> setBlock(context.level(), it, oilDeposit)
+                worldGen.isStateAtPosition(it, deepslateTest) -> setBlock(context.level(), it, deepOilDeposit)
             }
         }
 
