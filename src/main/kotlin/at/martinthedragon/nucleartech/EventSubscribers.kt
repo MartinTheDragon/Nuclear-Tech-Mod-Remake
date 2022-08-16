@@ -4,7 +4,7 @@ import at.martinthedragon.nucleartech.api.item.AttackHandler
 import at.martinthedragon.nucleartech.api.item.DamageHandler
 import at.martinthedragon.nucleartech.api.item.FallHandler
 import at.martinthedragon.nucleartech.api.item.TickingArmor
-import at.martinthedragon.nucleartech.capability.contamination.ContaminationCapabilityProvider
+import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazardSystem
 import at.martinthedragon.nucleartech.hazard.HazmatValues
@@ -27,13 +27,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import kotlin.math.roundToInt
 
-@Suppress("unused", "UNUSED_PARAMETER")
+@Suppress("unused")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object EventSubscribers {
     @SubscribeEvent @JvmStatic
     fun attachCapabilitiesEvent(event: AttachCapabilitiesEvent<Entity>) {
         if (event.`object` is LivingEntity)
-            event.addCapability(ntm("contamination"), ContaminationCapabilityProvider())
+            event.addCapability(ntm("contamination"), EntityContaminationHandler())
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)

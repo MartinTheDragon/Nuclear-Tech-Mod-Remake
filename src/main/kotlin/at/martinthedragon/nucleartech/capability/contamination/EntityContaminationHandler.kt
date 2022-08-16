@@ -1,12 +1,16 @@
 package at.martinthedragon.nucleartech.capability.contamination
 
+import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.effect.ContaminationEffect
+import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.ListTag
-import net.minecraftforge.common.util.INBTSerializable
+import net.minecraftforge.common.capabilities.Capability
+import net.minecraftforge.common.capabilities.ICapabilitySerializable
+import net.minecraftforge.common.util.LazyOptional
 
 /** Gets synced at [at.martinthedragon.nucleartech.hazard.EntityContaminationEffects] */
-open class EntityContaminationHandler : ContaminationHandler, INBTSerializable<CompoundTag> {
+open class EntityContaminationHandler : ContaminationHandler, ICapabilitySerializable<CompoundTag> {
     protected var irradiationLevel = 0F
     protected var digammaLevel = 0F
     protected var asbestosLevel = 0
@@ -95,4 +99,11 @@ open class EntityContaminationHandler : ContaminationHandler, INBTSerializable<C
     protected open fun onBlacklungLevelChanged() {}
     protected open fun onBombTimerValueChanged() {}
     protected open fun onContagionValueChanged() {}
+
+    private val contaminationHandler = LazyOptional.of { this }
+
+    override fun <T : Any> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
+        if (cap == Capabilities.CONTAMINATION_CAPABILITY) return contaminationHandler.cast()
+        return LazyOptional.empty()
+    }
 }
