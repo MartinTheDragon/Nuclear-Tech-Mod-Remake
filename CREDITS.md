@@ -1,6 +1,6 @@
 # Credits
 
-This project is a rewrite and port for the 1.18.1 Minecraft™ version.
+This project is a rewrite and port for the 1.18.2 Minecraft™ version.
 The [original](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT) was created for the 1.7.10 Minecraft version by different people and contributors since 2014.
 
 Because this project is a complete rewrite (in a different language and version), most code contributions made to the original don't directly apply here.<br>
@@ -30,16 +30,22 @@ However, textures, models, sounds and other assets, or some algorithms, have mos
 - Frooz (models)
 - Minecreep (models)
 - VT-6/24 (models, textures)
-- Pheo (textures, various machines)
-- Vær (fibrosis, gas centrifuges)
-- Adam29 (liquid petroleum, ethanol)
+- Pheo (textures, various machines, weapons)
+- Vær (fibrosis, gas centrifuges, ZIRNOX, CP-1 parts, starter guide)
+- Adam29 (liquid petroleum, ethanol, electric furnace)
 - Pashtet (russian localization)
+- MartinTheDragon (calculator, chunk-based fallout)
+- haru315 (spiral point algorithm)
 - Sten89 (models)
 - Pixelguru26 (textures)
 - TheBlueHat (textures)
 - impbk2002 (project settings)
 - OvermindDL1 (project settings)
 - TehTemmie (reacher radiation function)
+- Toshayo (improved satellite loot system)
+- Silly541 (config for safe ME drives)
+- Voxelstice (OpenComputers integration)
+- Pvndols (thorium fuel recipe)
 
 ### Technologies used
 
@@ -51,6 +57,7 @@ They are sometimes partially, but not fully contained in this project, only refe
 - Java™ by Oracle Corporation
 - Kotlin™ by JetBrains
 - Gradle by Gradle Inc
+- IntelliJ by JetBrains
 - Git
 
 "Minecraft" is a trademark of Mojang AB<br>
