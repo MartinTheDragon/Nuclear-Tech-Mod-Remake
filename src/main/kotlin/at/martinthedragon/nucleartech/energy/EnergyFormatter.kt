@@ -1,6 +1,8 @@
 package at.martinthedragon.nucleartech.energy
 
+import at.martinthedragon.nucleartech.LangKeys
 import net.minecraft.client.Minecraft
+import net.minecraft.network.chat.TextComponent
 
 object EnergyFormatter {
     enum class EnergyUnit(val ratio: Double, val decimals: Int) {
@@ -33,4 +35,13 @@ object EnergyFormatter {
         val string = "%.${unit.decimals}f".format(Minecraft.getInstance().languageManager.selected.javaLocale, valueForSuffix) + if (suffix == 'ß') "" else suffix
         return if (withUnit) string + unit.name else string
     }
+
+    fun formatTooltip(amount: Int, max: Int, unit: EnergyUnit = EnergyUnit.HE) =
+        formatTooltip(amount.toLong(), max.toLong(), unit)
+
+    @JvmStatic
+    fun formatTooltip(amount: Long, max: Long, unit: EnergyUnit = EnergyUnit.HE) = listOf(
+        LangKeys.ENERGY.get(),
+        TextComponent("${formatEnergy(amount, unit)}/${formatEnergy(max, unit, true)}")
+    )
 }

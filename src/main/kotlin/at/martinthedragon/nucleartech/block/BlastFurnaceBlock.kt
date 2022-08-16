@@ -35,7 +35,7 @@ class BlastFurnaceBlock(properties: Properties) : BaseEntityBlock(properties) {
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<BlastFurnaceBlockEntity>(level, pos, player)
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<BlastFurnaceBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setMachineCustomName<BlastFurnaceBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
         dropBlockEntityContents<BlastFurnaceBlockEntity>(state, level, pos, newState) { level.dropExperience(Vec3.atCenterOf(pos), it.getExperienceToDrop(null)) }

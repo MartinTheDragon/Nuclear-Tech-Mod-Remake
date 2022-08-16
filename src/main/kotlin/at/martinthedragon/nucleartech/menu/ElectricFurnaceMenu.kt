@@ -6,8 +6,6 @@ import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.RecipeType
 import net.minecraftforge.energy.CapabilityEnergy
@@ -18,7 +16,6 @@ class ElectricFurnaceMenu(
     windowId: Int,
     playerInventory: Inventory,
     blockEntity: ElectricFurnaceBlockEntity,
-    val data: ContainerData = SimpleContainerData(2)
 ) : NTechContainerMenu<ElectricFurnaceBlockEntity>(MenuTypes.electricFurnaceMenu.get(), windowId, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
     private val level = playerInventory.player.level
@@ -28,7 +25,6 @@ class ElectricFurnaceMenu(
         addSlot(SlotItemHandler(inv, 1, 56, 53))
         addSlot(ExperienceResultSlot(blockEntity, playerInventory.player, inv, 2, 116, 35))
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
-        addDataSlots(data)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -61,10 +57,6 @@ class ElectricFurnaceMenu(
 
     private fun canCook(itemStack: ItemStack) =
         level.recipeManager.getRecipeFor(RecipeType.SMELTING, SimpleContainer(itemStack), level).isPresent
-
-    fun getCookingProgress() = data[0]
-
-    fun getEnergy() = data[1]
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =

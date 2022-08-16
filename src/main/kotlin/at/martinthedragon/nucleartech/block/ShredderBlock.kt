@@ -1,6 +1,6 @@
 package at.martinthedragon.nucleartech.block
 
-import at.martinthedragon.nucleartech.api.block.entities.createServerTickerChecked
+import at.martinthedragon.nucleartech.api.block.entities.createSidedTickerChecked
 import at.martinthedragon.nucleartech.api.world.dropExperience
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
 import at.martinthedragon.nucleartech.block.entity.ShredderBlockEntity
@@ -23,7 +23,7 @@ class ShredderBlock(properties: Properties) : BaseEntityBlock(properties) {
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<ShredderBlockEntity>(level, pos, player)
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<ShredderBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setMachineCustomName<ShredderBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
         dropBlockEntityContents<ShredderBlockEntity>(state, level, pos, newState) { level.dropExperience(Vec3.atCenterOf(pos), it.getExperienceToDrop(null)) }
@@ -34,5 +34,5 @@ class ShredderBlock(properties: Properties) : BaseEntityBlock(properties) {
     override fun getAnalogOutputSignal(state: BlockState, world: Level, pos: BlockPos) = AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos))
 
     override fun newBlockEntity(pos: BlockPos, state: BlockState) = ShredderBlockEntity(pos, state)
-    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.shredderBlockEntityType.get())
+    override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = createSidedTickerChecked(level.isClientSide, type, BlockEntityTypes.shredderBlockEntityType.get())
 }

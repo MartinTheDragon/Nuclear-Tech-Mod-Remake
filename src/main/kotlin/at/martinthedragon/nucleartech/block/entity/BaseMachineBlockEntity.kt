@@ -115,7 +115,12 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
     override fun getContainerSize() = mainInventory.size
     override fun isEmpty() = mainInventory.all(ItemStack::isEmpty)
     override fun getItem(slot: Int): ItemStack = mainInventory[slot]
-    override fun removeItem(slot: Int, amount: Int): ItemStack = ContainerHelper.removeItem(mainInventory, slot, amount)
+
+    override fun removeItem(slot: Int, amount: Int): ItemStack {
+        val item = ContainerHelper.removeItem(mainInventory, slot, amount)
+        inventoryChanged(slot)
+        return item
+    }
     override fun removeItemNoUpdate(slot: Int): ItemStack = ContainerHelper.takeItem(mainInventory, slot)
 
     override fun setItem(slot: Int, itemStack: ItemStack) {
@@ -176,6 +181,17 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
         val lazyOptionalHandler = LazyOptional.of(handler)
         capabilityHandlerSuppliers.put(capability, optionalSide, handler)
         capabilityHandlers.put(capability, optionalSide, lazyOptionalHandler)?.invalidate()
+        return lazyOptionalHandler
+    }
+
+    protected fun <T : Any> registerCapabilityHandler(capability: Capability<T>, handler: () -> T, vararg sides: Direction): LazyOptional<T> {
+        if (sides.isEmpty()) registerCapabilityHandler(capability, handler, null)
+        val lazyOptionalHandler = LazyOptional.of(handler)
+        for (side in sides) {
+            val optionalSide = Optional.of(side)
+            capabilityHandlerSuppliers.put(capability, optionalSide, handler)
+            capabilityHandlers.put(capability, optionalSide, lazyOptionalHandler)
+        }
         return lazyOptionalHandler
     }
 

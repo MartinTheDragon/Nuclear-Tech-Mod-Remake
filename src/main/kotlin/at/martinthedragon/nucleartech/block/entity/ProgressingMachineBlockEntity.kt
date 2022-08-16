@@ -15,19 +15,22 @@ abstract class ProgressingMachineBlockEntity(type: BlockEntityType<*>, pos: Bloc
     var canProgress = false
         protected set
 
+    open val progressSpeed = 1
+    open val progressRegression get() = progress
+
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         val couldProgress = canProgress
         canProgress = checkCanProgress()
         if (canProgress) {
             tickProgress()
-            progress++
+            progress += progressSpeed
 
             if (progress >= maxProgress) {
                 onProgressFinished()
-                progress = 0
+                resetProgress()
                 sendContinuousUpdatePacket()
             }
-        } else progress = 0
+        } else if (progress != 0) progress = (progress - progressRegression).coerceAtLeast(0)
         if (couldProgress != canProgress) {
             markDirty()
             sendContinuousUpdatePacket()
@@ -37,6 +40,9 @@ abstract class ProgressingMachineBlockEntity(type: BlockEntityType<*>, pos: Bloc
     protected abstract fun checkCanProgress(): Boolean
     protected open fun tickProgress() {}
     protected abstract fun onProgressFinished()
+    protected open fun resetProgress() {
+        progress = 0
+    }
 
     override val shouldPlaySoundLoop get() = canProgress && !isRemoved
 

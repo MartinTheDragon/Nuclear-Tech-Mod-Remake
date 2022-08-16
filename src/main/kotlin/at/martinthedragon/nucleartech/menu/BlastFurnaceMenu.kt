@@ -7,9 +7,6 @@ import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 import net.minecraftforge.items.CapabilityItemHandler
@@ -17,20 +14,18 @@ import net.minecraftforge.items.SlotItemHandler
 
 class BlastFurnaceMenu(
     windowID: Int,
-    val playerInventory: Inventory,
-    val tileEntity: BlastFurnaceBlockEntity,
-    val data: ContainerData = SimpleContainerData(2)
-) : AbstractContainerMenu(MenuTypes.blastFurnaceMenu.get(), windowID) {
-    private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
+    playerInventory: Inventory,
+    blockEntity: BlastFurnaceBlockEntity,
+) : NTechContainerMenu<BlastFurnaceBlockEntity>(MenuTypes.blastFurnaceMenu.get(), windowID, playerInventory, blockEntity) {
+    private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
     private val level = playerInventory.player.level
 
     init {
         addSlot(SlotItemHandler(inv, 0, 80, 18))
         addSlot(SlotItemHandler(inv, 1, 80, 54))
         addSlot(SlotItemHandler(inv, 2, 8, 36))
-        addSlot(ExperienceResultSlot(tileEntity, playerInventory.player, inv, 3, 134, 36))
+        addSlot(ExperienceResultSlot(blockEntity, playerInventory.player, inv, 3, 134, 36))
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
-        addDataSlots(data)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -61,16 +56,10 @@ class BlastFurnaceMenu(
         return returnStack
     }
 
-    fun canBlast() = tileEntity.canBlast()
-
     private fun canBlast(itemStack: ItemStack) =
         level.recipeManager.getRecipeFor(RecipeTypes.BLASTING, SimpleContainer(itemStack), level).isPresent
 
     override fun stillValid(player: Player) = playerInventory.stillValid(player)
-
-    fun getBurnTime() = data[0]
-
-    fun getBlastProgress() = data[1]
 
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =

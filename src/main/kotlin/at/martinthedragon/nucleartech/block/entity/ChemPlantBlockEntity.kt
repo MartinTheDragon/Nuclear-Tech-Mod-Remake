@@ -127,7 +127,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         menu.track(IntDataSlot.create(this::maxProgress) { maxProgress = it })
         menu.track(BooleanDataSlot.create(this::canProgress) { canProgress = it })
 
-        val isClient = level!!.isClientSide
+        val isClient = isClientSide()
         menu.track(FluidStackDataSlot.create(inputTank1, isClient))
         menu.track(FluidStackDataSlot.create(inputTank2, isClient))
         menu.track(FluidStackDataSlot.create(outputTank1, isClient))
@@ -191,7 +191,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 
     // this method is quite computationally expensive
     override fun matchesRecipe(recipe: ChemRecipe) =
-        recipe.matches(subViewWithFluids(13..16, 0..1), level!!)
+        recipe.matches(subViewWithFluids(13..16, 0..1), getLevelUnchecked())
             && insertAllItemsStacked(AccessLimitedInputItemHandler(this, 5..8), recipe.resultsList, true).isEmpty()
             && SimpleFluidHandler(outputTank1, outputTank2).acceptFluids(listOf(recipe.outputFluid1, recipe.outputFluid2), true).isEmpty()
 

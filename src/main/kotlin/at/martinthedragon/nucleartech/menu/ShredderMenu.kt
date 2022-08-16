@@ -6,8 +6,6 @@ import at.martinthedragon.nucleartech.item.ShredderBladeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
@@ -17,7 +15,6 @@ class ShredderMenu(
     windowID: Int,
     playerInventory: Inventory,
     blockEntity: ShredderBlockEntity,
-    val data: ContainerData = SimpleContainerData(2)
 ) : NTechContainerMenu<ShredderBlockEntity>(MenuTypes.shredderMenu.get(), windowID, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
@@ -32,7 +29,6 @@ class ShredderMenu(
             for (j in 0 until 3)
                 addSlot(ExperienceResultSlot(blockEntity, playerInventory.player, inv, j + i * 3 + 12, 116 + j * 18, 18 + i * 18))
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
-        addDataSlots(data)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -63,10 +59,6 @@ class ShredderMenu(
         }
         return returnStack
     }
-
-    fun getShreddingProgress() = data[0]
-
-    fun getEnergy() = data[1]
 
     fun getLeftBladeState(): Int = computeBladeState(10)
 

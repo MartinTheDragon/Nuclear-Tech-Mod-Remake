@@ -66,7 +66,7 @@ inline fun <reified T : BaseMachineBlockEntity> setMachineCustomName(
  * The [also] function can be used to perform additional operations after the random were dropped.
  */
 @OptIn(ExperimentalContracts::class)
-inline fun <reified T : BaseContainerBlockEntity> dropBlockEntityContents(
+inline fun <reified T : BlockEntity> dropBlockEntityContents(
     state: BlockState,
     level: Level,
     pos: BlockPos,
@@ -80,7 +80,13 @@ inline fun <reified T : BaseContainerBlockEntity> dropBlockEntityContents(
     if (!state.`is`(newState.block)) {
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity is T) {
-            Containers.dropContents(level, pos, blockEntity)
+            if (blockEntity is Container) Containers.dropContents(level, pos, blockEntity)
+            else blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresentInline {
+                val (x, y, z) = pos.toVec3()
+                for (slot in 0 until it.slots) {
+                    Containers.dropItemStack(level, x, y, z, it.extractItem(slot, Int.MAX_VALUE, false))
+                }
+            }
             also(blockEntity)
             return true
         }

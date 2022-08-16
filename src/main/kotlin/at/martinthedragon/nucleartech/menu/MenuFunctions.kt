@@ -42,8 +42,7 @@ fun AbstractContainerMenu.tryMoveInPlayerInventory(index: Int, inventoryStart: I
     return true
 }
 
-@Suppress("UNCHECKED_CAST")
-fun <T : BlockEntity> getBlockEntityForContainer(buffer: FriendlyByteBuf): T = DistExecutor.safeRunForDist({ ClientBlockEntityGetter(buffer) }) { ServerBlockEntityGetter() }
+fun <T : BlockEntity> getBlockEntityForContainer(buffer: FriendlyByteBuf): T = DistExecutor.safeRunForDist({ ClientBlockEntityGetter(buffer) }, ::ServerBlockEntityGetter)
 
 private class ServerBlockEntityGetter : SafeSupplier<Nothing> {
     override fun get(): Nothing {

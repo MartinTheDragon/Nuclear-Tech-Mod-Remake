@@ -35,7 +35,7 @@ class CombustionGeneratorBlock(properties: Properties) : BaseEntityBlock(propert
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState = defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.horizontalDirection.opposite)
     override fun getRenderShape(state: BlockState) = RenderShape.MODEL
 
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<CombustionGeneratorBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setMachineCustomName<CombustionGeneratorBlockEntity>(level, pos, stack)
 
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, p_196243_5_: Boolean) {
         dropBlockEntityContents<CombustionGeneratorBlockEntity>(state, level, pos, newState)

@@ -1,6 +1,5 @@
 package at.martinthedragon.nucleartech.screen
 
-import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.CombustionGeneratorBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.CombustionGeneratorMenu
@@ -21,6 +20,8 @@ class CombustionGeneratorScreen(
     playerInventory: Inventory,
     title: Component
 ) : AbstractContainerScreen<CombustionGeneratorMenu>(container, playerInventory, title) {
+    private val texture = ntm("textures/gui/combustion_generator.png")
+
     init {
         imageWidth = 176
         imageHeight = 166
@@ -32,23 +33,24 @@ class CombustionGeneratorScreen(
         renderTooltip(matrix, mouseX, mouseY)
     }
 
-    override fun renderBg(matrixStack: PoseStack, partialTicks: Float, x: Int, y: Int) {
+    override fun renderBg(matrix: PoseStack, partials: Float, x: Int, y: Int) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-        RenderSystem.setShaderTexture(0, TEXTURE)
-        blit(matrixStack, leftPos, topPos, 0, 0, xSize, ySize)
+        RenderSystem.setShaderTexture(0, texture)
+        blit(matrix, guiLeft, guiTop, 0, 0, xSize, ySize)
 
-        val burnProgress = menu.getBurnProgress()
-        blit(matrixStack, leftPos + 82, topPos + 50 - burnProgress, 192, 14 - burnProgress, 14, burnProgress)
+        val combustionGenerator = menu.blockEntity
+        val burnProgress = combustionGenerator.litTime * 14 / combustionGenerator.litDuration.coerceAtLeast(1)
+        blit(matrix, guiLeft + 82, guiTop + 50 - burnProgress, 192, 14 - burnProgress, 14, burnProgress)
 
-        if (menu.getEnergy() > 0) {
-            val energyScaled = menu.getEnergy() * 52 / CombustionGeneratorBlockEntity.MAX_ENERGY
-            blit(matrixStack, leftPos + 152, topPos + 69 - energyScaled, 176, 52 - energyScaled, 16, energyScaled)
+        if (combustionGenerator.energy > 0) {
+            val energyScaled = combustionGenerator.energy * 52 / CombustionGeneratorBlockEntity.MAX_ENERGY
+            blit(matrix, guiLeft + 152, guiTop + 69 - energyScaled, 176, 52 - energyScaled, 16, energyScaled)
         }
 
-        if (menu.getWaterLevel() > 0) {
-            val fluidLevelScaled = menu.getWaterLevel() * 52 / CombustionGeneratorBlockEntity.MAX_WATER
-            renderGuiFluid(matrixStack, leftPos + 8, topPos + 69, 16, fluidLevelScaled, blitOffset, Fluids.WATER.attributes)
+        if (combustionGenerator.water > 0) {
+            val fluidLevelScaled = combustionGenerator.water * 52 / CombustionGeneratorBlockEntity.MAX_WATER
+            renderGuiFluid(matrix, guiLeft + 8, guiTop + 69, 16, fluidLevelScaled, blitOffset, Fluids.WATER.attributes)
         }
     }
 
@@ -56,24 +58,15 @@ class CombustionGeneratorScreen(
         super.renderTooltip(matrixStack, mouseX, mouseY)
 
         if (isHovering(80, 36, 16, 16, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrixStack, listOf(TextComponent("${menu.getBurnTime() / 20}s")), mouseX, mouseY, font)
+            renderComponentTooltip(matrixStack, listOf(TextComponent("${menu.blockEntity.litTime / 20}s")), mouseX, mouseY, font)
         if (isHovering(8, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrixStack,
                 listOf(
                     TranslatableComponent("block.minecraft.water"),
-                    TextComponent("${menu.getWaterLevel()}/${CombustionGeneratorBlockEntity.MAX_WATER} mB")
+                    TextComponent("${menu.blockEntity.water}/${CombustionGeneratorBlockEntity.MAX_WATER} mB")
                 ), mouseX, mouseY, font
             )
         if (isHovering(152, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrixStack,
-                listOf(
-                    LangKeys.ENERGY.get(),
-                    TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(CombustionGeneratorBlockEntity.MAX_ENERGY)} HE") // TODO make this somehow switch between HE and FE
-                ), mouseX, mouseY, font
-            )
-    }
-
-    companion object {
-        val TEXTURE = ntm("textures/gui/combustion_generator.png")
+            renderComponentTooltip(matrixStack, EnergyFormatter.formatTooltip(menu.blockEntity.energy, CombustionGeneratorBlockEntity.MAX_ENERGY), mouseX, mouseY, font)
     }
 }

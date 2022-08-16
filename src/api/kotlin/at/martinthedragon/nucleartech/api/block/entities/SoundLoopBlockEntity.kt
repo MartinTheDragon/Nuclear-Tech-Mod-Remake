@@ -51,4 +51,8 @@ public interface SoundLoopBlockEntity : TickingClientBlockEntity {
             }
         }
     }
+
+    public class NoopStateMachine(blockEntity: SoundLoopBlockEntity) : SoundStateMachine(blockEntity) {
+        override fun tick() { /* no-op */ }
+    }
 }

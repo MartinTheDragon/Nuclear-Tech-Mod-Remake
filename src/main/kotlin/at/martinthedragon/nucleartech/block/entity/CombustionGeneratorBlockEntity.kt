@@ -1,145 +1,80 @@
 package at.martinthedragon.nucleartech.block.entity
 
 import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.api.block.entities.SoundLoopBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
+import at.martinthedragon.nucleartech.capability.item.AccessLimitedInputItemHandler
+import at.martinthedragon.nucleartech.capability.item.AccessLimitedOutputItemHandler
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
+import at.martinthedragon.nucleartech.fluid.NTechFluidTank
+import at.martinthedragon.nucleartech.fluid.tryEmptyFluidContainerAndMove
 import at.martinthedragon.nucleartech.menu.CombustionGeneratorMenu
+import at.martinthedragon.nucleartech.menu.NTechContainerMenu
+import at.martinthedragon.nucleartech.menu.slots.data.FluidStackDataSlot
+import at.martinthedragon.nucleartech.menu.slots.data.IntDataSlot
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
-import net.minecraft.world.ContainerHelper
-import net.minecraft.world.Containers
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.common.ForgeHooks
-import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.fluids.FluidAttributes
 import net.minecraftforge.fluids.FluidStack
-import net.minecraftforge.fluids.FluidUtil
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.IFluidHandler
-import net.minecraftforge.fluids.capability.templates.FluidTank
 import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.ItemStackHandler
 
-class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.combustionGeneratorBlockEntityType.get(), pos, state), TickingServerBlockEntity {
-    private var litDuration = 0
-    private var litTime = 0
-    val isLit: Boolean
-        get() = litTime > 0
-    private var water: Int
+class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseMachineBlockEntity(BlockEntityTypes.combustionGeneratorBlockEntityType.get(), pos, state), TickingServerBlockEntity {
+    var litDuration = 0
+        private set
+    var litTime = 0
+        private set
+    private val isLit get() = litTime > 0
+    var water: Int
         get() = tank.fluidAmount
-        set(value) { tank.fluid.amount = value }
-    private var energy: Int
+        private set(value) { tank.fluid.amount = value }
+    var energy: Int
         get() = energyStorage.energyStored
-        set(value) { energyStorage.energy = value }
+        private set(value) { energyStorage.energy = value }
 
-    private val dataAccess = object : ContainerData {
-        override fun get(index: Int): Int = when (index) {
-            0 -> litTime
-            1 -> litDuration
-            2 -> water
-            3 -> energy
-            else -> 0
-        }
+    override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(4, ItemStack.EMPTY)
 
-        override fun set(index: Int, value: Int) {
-            when (index) {
-                0 -> litTime = value
-                1 -> litDuration = value
-                2 -> water
-                3 -> energy
-            }
-        }
-
-        override fun getCount() = 4
+    override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
+        0 -> ForgeHooks.getBurnTime(stack, null) > 0
+        1 -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent
+        2 -> true
+        3 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
+        else -> false
     }
 
-    private val items = NonNullList.withSize(4, ItemStack.EMPTY)
-    private val inventory = object : ItemStackHandler(items) {
-        override fun onContentsChanged(slot: Int) {
-            setChanged()
-        }
-
-        override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
-            0 -> ForgeHooks.getBurnTime(stack, null) > 0
-            1 -> {
-                val fluid = FluidUtil.getFluidContained(stack).let { if (!it.isPresent) return false else it.get() }
-                tank.isFluidValid(fluid)
-            }
-            2 -> FluidUtil.getFluidContained(stack).let { if (!it.isPresent) return false else it.get() }.isEmpty
-            3 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
-            else -> true
-        }
-    }
-    private val tank = object : FluidTank(MAX_WATER, { it.fluid == Fluids.WATER }) {
+    private val tank = object : NTechFluidTank(MAX_WATER, { it.fluid == Fluids.WATER }) {
         override fun drain(resource: FluidStack?, action: IFluidHandler.FluidAction?) = FluidStack.EMPTY
         override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction?) = FluidStack.EMPTY
     }
     private val energyStorage = EnergyStorageExposed(MAX_ENERGY, 0, ENERGY_TRANSFER_RATE)
 
-    override fun load(nbt: CompoundTag) {
-        super.load(nbt)
-        items.clear()
-        ContainerHelper.loadAllItems(nbt, items)
-        litTime = nbt.getInt("BurnTime")
-        litDuration = ForgeHooks.getBurnTime(items[0], RecipeType.SMELTING)
-        tank.readFromNBT(nbt.getCompound("WaterTank"))
-        energy = nbt.getInt("Energy")
+    override fun createMenu(windowID: Int, inventory: Inventory) = CombustionGeneratorMenu(windowID, inventory, this)
+    override val defaultName: Component = LangKeys.CONTAINER_COMBUSTION_GENERATOR.get()
+
+    override fun trackContainerMenu(menu: NTechContainerMenu<*>) {
+        menu.track(IntDataSlot.create(this::litTime, this::litTime::set))
+        menu.track(IntDataSlot.create(this::litDuration, this::litDuration::set))
+        menu.track(FluidStackDataSlot.create(tank, isClientSide()))
+        menu.track(IntDataSlot.create(this::energy, this::energy::set))
     }
 
-    override fun saveAdditional(nbt: CompoundTag) {
-        super.saveAdditional(nbt)
-        ContainerHelper.saveAllItems(nbt, items)
-        nbt.putInt("BurnTime", litTime)
-        val fluidTankNbt = CompoundTag()
-        tank.writeToNBT(fluidTankNbt)
-        nbt.put("WaterTank", fluidTankNbt)
-        nbt.putInt("Energy", energy)
-    }
-
-    override fun clearContent() {
-        items.clear()
-    }
-
-    override fun getContainerSize() = 4
-
-    override fun isEmpty() = items.all { it.isEmpty } && tank.isEmpty && energyStorage.energyStored == 0
-
-    override fun getItem(slot: Int): ItemStack = items[slot]
-
-    override fun removeItem(slot: Int, amount: Int): ItemStack = ContainerHelper.removeItem(items, slot, amount)
-
-    override fun removeItemNoUpdate(slot: Int): ItemStack = ContainerHelper.takeItem(items, slot)
-
-    override fun setItem(slot: Int, itemStack: ItemStack) {
-        items[slot] = itemStack
-        if (itemStack.count > maxStackSize)
-            itemStack.count = maxStackSize
-    }
-
-    override fun stillValid(player: Player): Boolean {
-        return if (level!!.getBlockEntity(worldPosition) != this) false
-        else player.distanceToSqr(worldPosition.x + .5, worldPosition.y + .5, worldPosition.z + .5) <= 64
-    }
-
-    override fun createMenu(windowId: Int, playerInventory: Inventory) =
-        CombustionGeneratorMenu(windowId, playerInventory, this, dataAccess)
-
-    override fun getDefaultName(): Component = LangKeys.CONTAINER_COMBUSTION_GENERATOR.get()
+    override val shouldPlaySoundLoop = false
+    override val soundLoopEvent get() = throw IllegalStateException("No sound loop for combustion generator")
+    override val soundLoopStateMachine = SoundLoopBlockEntity.NoopStateMachine(this)
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         val wasLit = isLit
@@ -148,56 +83,25 @@ class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseCon
         if (isLit)
             litTime--
 
-        val fuel = items[0]
+        val fuel = mainInventory[0]
         if (!fuel.isEmpty && !isLit) {
             litTime = ForgeHooks.getBurnTime(fuel, null) / 2
             litDuration = litTime
             if (isLit) {
                 contentsChanged = true
-                if (fuel.hasContainerItem()) items[0] = fuel.containerItem
+                if (fuel.hasContainerItem()) mainInventory[0] = fuel.containerItem
                 else if (!fuel.isEmpty) {
                     fuel.shrink(1)
-                    if (fuel.isEmpty) items[0] = fuel.containerItem
+                    if (fuel.isEmpty) mainInventory[0] = fuel.containerItem
                 }
             }
         }
 
-        val waterInput = items[1]
-        val outputSlot = items[2]
-        if (!waterInput.isEmpty) {
-            val result = FluidUtil.tryEmptyContainer(waterInput, tank, Int.MAX_VALUE, null, true)
-            val resultItem = result.getResult()
-            if (result.isSuccess) if (FluidUtil.getFluidHandler(resultItem)
-                    .let { // check whether the resulting container has no water left
-                        if (!it.isPresent) true
-                        else it.resolve().get()
-                            .drain(FluidStack(Fluids.WATER, Int.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE)
-                            .isEmpty
-                    }
-            ) { // on success, transfer random if possible
-                when {
-                    outputSlot.isEmpty -> {
-                        waterInput.shrink(1)
-                        items[2] = resultItem.copy()
-                    }
-                    ItemStack.isSame(outputSlot, resultItem) &&
-                            ItemStack.tagMatches(outputSlot, resultItem) &&
-                            outputSlot.count + resultItem.count <= maxStackSize &&
-                            outputSlot.count + resultItem.count <= outputSlot.maxStackSize -> {
-                        waterInput.shrink(1)
-                        outputSlot.grow(1)
-                    }
-                    else -> {
-                        if (waterInput.count > 1) // if somehow there is more than one item in the input slot, drop the rest
-                            Containers.dropContents(level, pos, NonNullList.of(ItemStack.EMPTY, waterInput.copy().apply { count-- }))
-                        items[1] = resultItem.copy()
-                    }
-                }
-            } else items[1] = resultItem.copy() // if the item still has fluid, update it
-        }
+        val fluidTransferResult = tryEmptyFluidContainerAndMove(mainInventory[1], tank, this, tank.space, true)
+        if (fluidTransferResult.success) mainInventory[1] = fluidTransferResult.result
 
         if (energy > 0) {
-            val energyItemSlot = items[3]
+            val energyItemSlot = mainInventory[3]
             if (!energyItemSlot.isEmpty) transferEnergy(energyStorage, energyItemSlot)
 
             // TODO cache somehow TODO improve distribution
@@ -227,24 +131,31 @@ class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseCon
         if (contentsChanged) setChanged()
     }
 
-    private val itemHolder = LazyOptional.of { inventory }
-    private val tankHolder = LazyOptional.of { tank }
-    private val energyHolder = LazyOptional.of { energyStorage }
-
-    override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-        if (!remove) when (cap) {
-            CapabilityItemHandler.ITEM_HANDLER_CAPABILITY -> return itemHolder.cast()
-            CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY -> return tankHolder.cast()
-            CapabilityEnergy.ENERGY -> return energyHolder.cast()
-        }
-        return super.getCapability(cap, side)
+    override fun load(tag: CompoundTag) {
+        super.load(tag)
+        litTime = tag.getInt("BurnTime")
+        litDuration = ForgeHooks.getBurnTime(mainInventory[0], RecipeType.SMELTING)
+        tank.readFromNBT(tag.getCompound("WaterTank"))
+        energy = tag.getInt("Energy")
     }
 
-    override fun invalidateCaps() {
-        super.invalidateCaps()
-        itemHolder.invalidate()
-        tankHolder.invalidate()
-        energyHolder.invalidate()
+    override fun saveAdditional(tag: CompoundTag) {
+        super.saveAdditional(tag)
+        tag.putInt("BurnTime", litTime)
+        tag.put("WaterTank", tank.writeToNBT(CompoundTag()))
+        tag.putInt("Energy", energy)
+    }
+
+    private val inputInventory = AccessLimitedInputItemHandler(this, 0)
+    private val waterInputInventory = AccessLimitedInputItemHandler(this, 1)
+    private val outputInventory = AccessLimitedOutputItemHandler(this, 2)
+
+    init {
+        registerCapabilityHandler(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, this::tank)
+        registerCapabilityHandler(CapabilityEnergy.ENERGY, this::energyStorage)
+        registerCapabilityHandler(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, this::inputInventory, Direction.UP)
+        registerCapabilityHandler(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, this::waterInputInventory, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST)
+        registerCapabilityHandler(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, this::outputInventory, Direction.DOWN)
     }
 
     companion object {

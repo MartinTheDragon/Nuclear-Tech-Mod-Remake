@@ -34,14 +34,15 @@ class SteamPressScreen(
         RenderSystem.setShaderTexture(0, texture)
         blit(matrixStack, (width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
 
-        val powerPos = menu.getPower() * 12 / SteamPressBlockEntity.maxPower
+        val press = menu.blockEntity
+        val powerPos = press.power * 12 / SteamPressBlockEntity.MAX_POWER
         blit(matrixStack, leftPos + 25, topPos + 16, 176, 14 + 18 * powerPos, 18, 18)
 
-        val burnProgress = menu.getBurnProgress()
+        val burnProgress = press.litTime * 13 / press.litDuration.coerceAtLeast(1)
         blit(matrixStack, leftPos + 27, topPos + 49 - burnProgress, 176, 13 - burnProgress, 13, burnProgress)
 
-        if (menu.isPressing()) {
-            val pressProgress = menu.getPressProgress() * 16 / SteamPressBlockEntity.pressTotalTime
+        if (press.progress > 0) {
+            val pressProgress = press.progress * 16 / SteamPressBlockEntity.PRESS_TIME
             blit(matrixStack, leftPos + 79, topPos + 35, 194, 0, 18, pressProgress)
         }
     }

@@ -97,7 +97,7 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 
     override fun findPossibleRecipe() = AssemblyTemplateItem.getRecipeFromStack(mainInventory[4], getLevelUnchecked().recipeManager)
 
-    override fun matchesRecipe(recipe: AssemblyRecipe) = recipe.matches(SimpleContainer(*mainInventory.subList(5, 17).toTypedArray()), level!!) && canTransferItem(recipe.resultItem, mainInventory[17])
+    override fun matchesRecipe(recipe: AssemblyRecipe) = recipe.matches(SimpleContainer(*mainInventory.subList(5, 17).toTypedArray()), getLevelUnchecked()) && canTransferItem(recipe.resultItem, mainInventory[17])
 
     override fun processRecipe(recipe: AssemblyRecipe) {
         recipe.ingredientsList.containerSatisfiesRequirements(SimpleContainer(*mainInventory.subList(5, 17).toTypedArray()), true)

@@ -16,6 +16,8 @@ class BlastFurnaceScreen(
     playerInventory: Inventory,
     title: Component
 ) : AbstractContainerScreen<BlastFurnaceMenu>(container, playerInventory, title) {
+    private val texture = ntm("textures/gui/blast_furnace.png")
+
     init {
         imageWidth = 176
         imageHeight = 166
@@ -30,18 +32,19 @@ class BlastFurnaceScreen(
     override fun renderBg(matrixStack: PoseStack, partialTicks: Float, x: Int, y: Int) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
-        RenderSystem.setShaderTexture(0, TEXTURE)
+        RenderSystem.setShaderTexture(0, texture)
         blit(matrixStack, (width - xSize) / 2, (height - ySize) / 2, 0, 0, xSize, ySize)
 
-        if (menu.getBurnTime() > 0) {
-            val burnTime = menu.getBurnTime() * 52 / BlastFurnaceBlockEntity.MAX_BURN_TIME
+        val blastFurnace = menu.blockEntity
+        if (blastFurnace.litTime > 0) {
+            val burnTime = blastFurnace.litTime * 52 / BlastFurnaceBlockEntity.MAX_BURN_TIME
             blit(matrixStack, leftPos + 44, topPos + 70 - burnTime, 201, 53 - burnTime, 16, burnTime)
         }
 
-        val blastProgress = menu.getBlastProgress() * 24 / BlastFurnaceBlockEntity.MAX_BLAST_TIME
+        val blastProgress = blastFurnace.progress * 24 / BlastFurnaceBlockEntity.MAX_BLAST_TIME
         blit(matrixStack, leftPos + 101, topPos + 35, 176, 14, blastProgress + 1, 17)
 
-        if (menu.getBurnTime() > 0 && menu.canBlast()) {
+        if (blastFurnace.progress > 0 && blastFurnace.canProgress) {
             blit(matrixStack, leftPos + 63, topPos + 37, 176, 0, 14, 14)
         }
     }
@@ -50,10 +53,6 @@ class BlastFurnaceScreen(
         super.renderTooltip(matrixStack, mouseX, mouseY)
 
         if (isHovering(44, 18, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrixStack, listOf(TextComponent("${menu.getBurnTime()}/${BlastFurnaceBlockEntity.MAX_BURN_TIME}")), mouseX, mouseY, font)
-    }
-
-    companion object {
-        val TEXTURE = ntm("textures/gui/blast_furnace.png")
+            renderComponentTooltip(matrixStack, listOf(TextComponent("${menu.blockEntity.litTime}/${BlastFurnaceBlockEntity.MAX_BURN_TIME}")), mouseX, mouseY, font)
     }
 }

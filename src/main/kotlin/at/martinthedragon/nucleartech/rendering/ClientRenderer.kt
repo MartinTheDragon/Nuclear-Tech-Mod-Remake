@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.rendering
 
-import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.capability.Capabilities
+import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.DefaultVertexFormat
@@ -37,7 +37,7 @@ object ClientRenderer {
             // TODO check for FSB armor
 
             if (player.inventory.hasAnyOf(setOf(NTechItems.geigerCounter.get()))) {
-                Capabilities.getContamination(player)?.let { renderGeigerHUD(event.matrixStack, it.getIrradiation()) }
+                renderGeigerHUD(event.matrixStack, Capabilities.getContamination(player).getIrradiation())
             }
         }
     }

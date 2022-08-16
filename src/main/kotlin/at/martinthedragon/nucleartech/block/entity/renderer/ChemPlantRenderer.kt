@@ -28,11 +28,9 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         val fluidPart = SpecialModels.CHEM_PLANT_FLUID.get()
         val fluidCap = SpecialModels.CHEM_PLANT_FLUID_CAP.get()
 
-        val state = chemPlant.blockState
-
         matrix.pushPose()
         matrix.translate(.5, .0, .5)
-        matrix.mulPose(Vector3f.YN.rotationDegrees(state.getValue(HorizontalDirectionalBlock.FACING).toYRot()))
+        matrix.mulPose(Vector3f.YN.rotationDegrees(chemPlant.blockState.getValue(HorizontalDirectionalBlock.FACING).toYRot()))
         matrix.translate(-.5, .0, -.5)
         body.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
 
@@ -104,5 +102,5 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         else fluid.fluid.attributes.getStillTexture(fluid)
 
     override fun shouldRenderOffScreen(chemPlant: ChemPlantBlockEntity) = true
-    override fun getViewDistance() = 512
+    override fun getViewDistance() = 256
 }

@@ -4,176 +4,62 @@ import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.NTechTags
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.block.entities.ExperienceRecipeResultBlockEntity
-import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
+import at.martinthedragon.nucleartech.api.block.entities.SoundLoopBlockEntity
 import at.martinthedragon.nucleartech.item.canTransferItem
+import at.martinthedragon.nucleartech.menu.NTechContainerMenu
 import at.martinthedragon.nucleartech.menu.PressMenu
-import at.martinthedragon.nucleartech.networking.BlockEntityUpdateMessage
-import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
+import at.martinthedragon.nucleartech.menu.slots.data.IntDataSlot
 import at.martinthedragon.nucleartech.recipe.PressingRecipe
 import at.martinthedragon.nucleartech.recipe.RecipeTypes
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
 import net.minecraft.core.BlockPos
-import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.nbt.Tag
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundSource
-import net.minecraft.world.ContainerHelper
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.entity.player.StackedContents
-import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.RecipeHolder
-import net.minecraft.world.inventory.StackedContentsCompatible
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 import net.minecraftforge.common.ForgeHooks
-import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.IItemHandler
-import net.minecraftforge.items.ItemStackHandler
-import net.minecraftforge.network.PacketDistributor
+import kotlin.jvm.optionals.getOrNull
+import kotlin.math.abs
 
-class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlockEntity(BlockEntityTypes.steamPressHeadBlockEntityType.get(), pos, state),
-    TickingServerBlockEntity, RecipeHolder, StackedContentsCompatible, ExperienceRecipeResultBlockEntity
-{
-    private var litDuration = 0
-    private var litTime = 0
+class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<PressingRecipe>(BlockEntityTypes.steamPressHeadBlockEntityType.get(), pos, state), RecipeHolder, ExperienceRecipeResultBlockEntity {
+    var litDuration = 0
+        private set
+    var litTime = 0
+        private set
     private val isLit: Boolean
         get() = litTime > 0
     var power = 0
         private set
-    var pressProgress = 0
-        private set
 
-    var pressedItem: ItemStack = ItemStack.EMPTY
-        private set
+    override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(4, ItemStack.EMPTY)
 
-    private val dataAccess = object : ContainerData {
-        override fun get(index: Int): Int = when (index) {
-            0 -> litTime
-            1 -> litDuration
-            2 -> pressProgress
-            3 -> power
-            else -> 0
-        }
-
-        override fun set(index: Int, value: Int) {
-            when (index) {
-                0 -> litTime = value
-                1 -> litDuration = value
-                2 -> pressProgress = value
-                3 -> power = value
-            }
-        }
-
-        override fun getCount() = 4
+    override fun isItemValid(slot: Int, stack: ItemStack) = when (slot) {
+        1 -> stack.`is`(NTechTags.Items.STAMPS)
+        2 -> ForgeHooks.getBurnTime(stack, null) > 0
+        else -> true
     }
 
-    private val items = NonNullList.withSize(4, ItemStack.EMPTY)
-    private val inventory = object : ItemStackHandler(items) {
-        override fun onContentsChanged(slot: Int) {
-            setChanged()
-        }
+    override fun createMenu(windowID: Int, inventory: Inventory) = PressMenu(windowID, inventory, this)
+    override val defaultName = LangKeys.CONTAINER_STEAM_PRESS.get()
 
-        override fun isItemValid(slot: Int, stack: ItemStack): Boolean {
-            if (slot == 1) return stack.`is`(NTechTags.Items.STAMPS)
-            if (slot == 2) return ForgeHooks.getBurnTime(stack, null) > 0
-            return true
-        }
+    override fun trackContainerMenu(menu: NTechContainerMenu<*>) {
+        menu.track(IntDataSlot.create(this::litTime, this::litTime::set))
+        menu.track(IntDataSlot.create(this::litDuration, this::litDuration::set))
+        menu.track(IntDataSlot.create(this::progress) { progress = it })
+        menu.track(IntDataSlot.create(this::power, this::power::set))
     }
-
-    private val recipesUsed = Object2IntOpenHashMap<ResourceLocation>()
-
-    override fun load(nbt: CompoundTag) {
-        super.load(nbt)
-        items.clear()
-        ContainerHelper.loadAllItems(nbt, items)
-        litTime = nbt.getInt("BurnTime")
-        val fuel = items[2]
-        litDuration = if (fuel.isEmpty) 0 else ForgeHooks.getBurnTime(fuel, null)
-        pressProgress = nbt.getInt("PressTime")
-        power = nbt.getInt("Power")
-        isRetracting = nbt.getBoolean("IsRetracting")
-        val recipesNbt = nbt.getCompound("RecipesUsed")
-        for (string in recipesNbt.allKeys)
-            recipesUsed[ResourceLocation(string)] = recipesNbt.getInt(string)
-    }
-
-    override fun saveAdditional(nbt: CompoundTag) {
-        super.saveAdditional(nbt)
-        ContainerHelper.saveAllItems(nbt, items)
-        nbt.putInt("BurnTime", litTime)
-        nbt.putInt("PressTime", pressProgress)
-        nbt.putInt("Power", power)
-        nbt.putBoolean("IsRetracting", isRetracting)
-        val recipesNbt = CompoundTag()
-        for ((recipeID, amount) in recipesUsed)
-            recipesNbt.putInt(recipeID.toString(), amount)
-        nbt.put("RecipesUsed", recipesNbt)
-    }
-
-    override fun getUpdateTag() = CompoundTag().apply {
-        putInt("Progress", pressProgress)
-        val item = CompoundTag()
-        items[0].save(item)
-        put("PressedItem", item)
-    }
-
-    override fun handleUpdateTag(tag: CompoundTag) {
-        pressProgress = tag.getInt("Progress")
-        if (tag.contains("PressedItem", Tag.TAG_COMPOUND.toInt()))
-            pressedItem = ItemStack.of(tag.getCompound("PressedItem"))
-    }
-
-    override fun getUpdatePacket(): ClientboundBlockEntityDataPacket = ClientboundBlockEntityDataPacket.create(this)
-
-    override fun clearContent() {
-        items.clear()
-    }
-
-    override fun getContainerSize() = items.size
-
-    override fun isEmpty() = items.all { it.isEmpty }
-
-    override fun getItem(slot: Int): ItemStack = items[slot]
-
-    override fun removeItem(slot: Int, amount: Int): ItemStack = ContainerHelper.removeItem(items, slot, amount)
-
-    override fun removeItemNoUpdate(slot: Int): ItemStack = ContainerHelper.takeItem(items, slot)
-
-    override fun setItem(slot: Int, itemStack: ItemStack) {
-        val item = items[slot]
-        val itemEqualToPrevious = !itemStack.isEmpty && itemStack.sameItem(item) && ItemStack.tagMatches(itemStack, item)
-        items[slot] = itemStack
-        if (itemStack.count > maxStackSize)
-            itemStack.count = maxStackSize
-
-        if (slot == 0 && !itemEqualToPrevious) {
-            pressProgress = 0
-            setChanged()
-        }
-    }
-
-    override fun stillValid(player: Player): Boolean {
-        return if (level!!.getBlockEntity(worldPosition) != this) false
-        else player.distanceToSqr(worldPosition.x + .5, worldPosition.y + .5, worldPosition.z + .5) <= 64
-    }
-
-    override fun createMenu(windowId: Int, playerInventory: Inventory): AbstractContainerMenu =
-        PressMenu(windowId, playerInventory, this, dataAccess)
-
-    override fun getDefaultName() = LangKeys.CONTAINER_STEAM_PRESS.get()
 
     override fun getRenderBoundingBox() = AABB(blockPos.offset(.0, -1.0, .0), blockPos.offset(1.0, 1.0, 1.0))
+
+    private val recipesUsed = Object2IntOpenHashMap<ResourceLocation>()
 
     override fun setRecipeUsed(recipe: Recipe<*>?) {
         if (recipe == null) return
@@ -194,121 +80,109 @@ class SteamPressBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBlo
     override fun getRecipesToAward(player: Player): List<Recipe<*>> =
         recipesUsed.keys.mapNotNull { player.level.recipeManager.byKey(it).orElse(null) }
 
-    override fun fillStackedContents(recipeItemHelper: StackedContents) {
-        for (itemStack in items) recipeItemHelper.accountStack(itemStack)
-    }
+    override val shouldPlaySoundLoop = false
+    override val soundLoopEvent get() = throw IllegalStateException("No sound loop for steam press")
+    override val soundLoopStateMachine = SoundLoopBlockEntity.NoopStateMachine(this)
 
-    private fun canPress(recipe: Recipe<*>?): Boolean =
-        if (items[0].isEmpty || items[1].isEmpty || recipe == null) false
-        else canTransferItem(recipe.resultItem, items[3], this)
+    @OptIn(ExperimentalStdlibApi::class)
+    override fun findPossibleRecipe() = getLevelUnchecked().recipeManager.getRecipeFor(RecipeTypes.PRESSING, this, getLevelUnchecked()).getOrNull()
 
-    private fun getBurnDuration(fuel: ItemStack): Int = if (fuel.isEmpty) 0 else ForgeHooks.getBurnTime(fuel, null)
+    override fun matchesRecipe(recipe: PressingRecipe) = !mainInventory[0].isEmpty && !mainInventory[1].isEmpty &&
+        recipe.matches(this, getLevelUnchecked()) && canTransferItem(recipe.resultItem, mainInventory[3], this)
 
     @Suppress("UsePropertyAccessSyntax")
-    private fun press(recipe: Recipe<*>?): Boolean {
-        if (recipe == null || !canPress(recipe)) return false
+    override fun processRecipe(recipe: PressingRecipe) {
         val recipeResult = recipe.resultItem
-        val resultStack = items[3]
-        if (resultStack.isEmpty) items[3] = recipeResult.copy()
+        val resultStack = mainInventory[3]
+        if (resultStack.isEmpty) mainInventory[3] = recipeResult.copy()
         else if (resultStack.sameItem(recipeResult)) resultStack.grow(recipeResult.count)
-        if (!level!!.isClientSide) setRecipeUsed(recipe)
-        items[0].shrink(1)
-        val stamp = items[1]
+        if (!isClientSide()) setRecipeUsed(recipe)
+        mainInventory[0].shrink(1)
+        val stamp = mainInventory[1]
         if (stamp.hurt(1, level!!.random, null)) {
             if (stamp.damageValue >= stamp.maxDamage)
                 stamp.shrink(1)
         }
-        level!!.playSound(null, blockPos, SoundEvents.pressOperate.get(), SoundSource.BLOCKS, 1.5F, 1F)
-        return true
+        getLevelUnchecked().playSound(null, blockPos, SoundEvents.pressOperate.get(), SoundSource.BLOCKS, 1.5F, 1F)
     }
 
+    override val progressRegression: Int get() = abs(progressSpeed)
+    override val progressSpeed get() = power * 25 / MAX_POWER * if (isRetracting) -1 else 1
+    override val maxProgress = PRESS_TIME
     private var isRetracting = false
+
+    override fun checkCanProgress() = super.checkCanProgress() && power >= powerNeeded
+
+    override fun tickProgress() {
+        super.tickProgress()
+        if (progress <= 0) isRetracting = false
+    }
+
+    override fun resetProgress() {
+        isRetracting = true
+    }
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         if (isLit)
             litTime--
 
-        if (level.isClientSide) return
-
-        val wasLit = isLit
-        var contentsChanged = false
-
-        val fuel = items[2]
-        val recipe = level.recipeManager.getRecipeFor(RecipeTypes.PRESSING, this, level).orElse(null)
-
-        if (!fuel.isEmpty && !isLit && canPress(recipe)) {
-            litTime = getBurnDuration(fuel) / 8
+        val fuel = mainInventory[2]
+        if (!fuel.isEmpty && !isLit && recipe != null) {
+            litTime = ForgeHooks.getBurnTime(fuel, null) / 8
             litDuration = litTime
             if (isLit) {
-                contentsChanged = true
-                if (fuel.hasContainerItem()) items[2] = fuel.containerItem
+                setChanged()
+                if (fuel.hasContainerItem()) mainInventory[2] = fuel.containerItem
                 else if (!fuel.isEmpty) {
                     fuel.shrink(1)
-                    if (fuel.isEmpty) items[2] = fuel.containerItem
+                    if (fuel.isEmpty) mainInventory[2] = fuel.containerItem
                 }
             }
         }
 
-        if (isLit && power < maxPower) power++ else if (!isLit && power > 0) power--
+        if (isLit && power < MAX_POWER) power++ else if (!isLit && power > 0) power--
 
-        if (power < powerNeeded) isRetracting = true
-
-        if (!isRetracting && power >= powerNeeded && pressProgress >= pressTotalTime) if (press(recipe)) {
-            isRetracting = true
-            contentsChanged = true
-        }
-
-        val  speed = power * 25 / maxPower
-        if (power >= powerNeeded) {
-            if (canPress(recipe)) {
-                if (!isRetracting) pressProgress += speed
-            } else isRetracting = true
-            if (isRetracting) pressProgress -= speed
-        } else isRetracting = true
-
-        if (pressProgress <= 0) {
-            isRetracting = false
-            pressProgress = 0
-        }
-
-        syncToClient(false)
-
-        if (wasLit != isLit) contentsChanged = true
-        if (contentsChanged) setChanged()
+        val progress = progress
+        super.serverTick(level, pos, state)
+        if (progress != this.progress)
+            sendContinuousUpdatePacket()
     }
 
-    override fun setChanged() {
-        super.setChanged()
-        syncToClient(true)
+    override fun saveAdditional(tag: CompoundTag) {
+        super.saveAdditional(tag)
+        tag.putInt("BurnTime", litTime)
+        tag.putInt("Power", power)
+        tag.putBoolean("IsRetracting", isRetracting)
+        val recipesNbt = CompoundTag()
+        for ((recipeID, amount) in recipesUsed)
+            recipesNbt.putInt(recipeID.toString(), amount)
+        tag.put("RecipesUsed", recipesNbt)
     }
 
-    private fun syncToClient(withItems: Boolean) {
-        if (!level!!.isClientSide)
-            NuclearPacketHandler.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with { (level!!.getChunkAt(blockPos)) }, BlockEntityUpdateMessage(blockPos, if (withItems) updateTag else CompoundTag().apply { putInt("Progress", pressProgress) }))
+    override fun load(tag: CompoundTag) {
+        super.load(tag)
+        litTime = tag.getInt("BurnTime")
+        litDuration = ForgeHooks.getBurnTime(mainInventory[2], null)
+        power = tag.getInt("Power")
+        isRetracting = tag.getBoolean("IsRetracting")
+        val recipesNbt = tag.getCompound("RecipesUsed")
+        for (string in recipesNbt.allKeys)
+            recipesUsed[ResourceLocation(string)] = recipesNbt.getInt(string)
     }
 
-    private var inventoryCapability: LazyOptional<IItemHandler>? = null
-
-    private fun createHandler(): IItemHandler = inventory
-
-    override fun <T : Any?> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
-        if (!remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if (inventoryCapability == null)
-                inventoryCapability = LazyOptional.of(this::createHandler)
-            return inventoryCapability!!.cast()
-        }
-        return super.getCapability(cap, side)
+    override fun getContinuousUpdateTag() = super.getContinuousUpdateTag().apply {
+        putInt("Progress", progress)
     }
 
-    override fun invalidateCaps() {
-        super.invalidateCaps()
-        inventoryCapability?.invalidate()
+    override fun handleContinuousUpdatePacket(tag: CompoundTag) {
+        super.handleContinuousUpdatePacket(tag)
+        progress = tag.getInt("Progress")
     }
 
     companion object {
-        const val maxPower = 700
-        const val pressTotalTime = 200
+        const val MAX_POWER = 700
+        const val PRESS_TIME = 200
         val powerNeeded: Int
-            get() = maxPower / 3
+            get() = MAX_POWER / 3
     }
 }

@@ -24,27 +24,29 @@ class SteamPressRenderer(context: BlockEntityRendererProvider.Context) : BlockEn
     private val pressHead: ModelPart = context.bakeLayer(NuclearModelLayers.STEAM_PRESS).getChild("press_head")
     private val itemRenderer: ItemRenderer = Minecraft.getInstance().itemRenderer
 
+    override fun render(press: SteamPressBlockEntity, partials: Float, matrix: PoseStack, buffers: MultiBufferSource, light: Int, overlay: Int) {
+        matrix.pushPose()
 
-    override fun render(press: SteamPressBlockEntity, partials: Float, stack: PoseStack, buffers: MultiBufferSource, light: Int, overlay: Int) {
-        stack.pushPose()
-
-        if (press.pressProgress > 0) {
-            val position = 15F - (press.pressProgress + partials) * 14F / SteamPressBlockEntity.pressTotalTime
+        if (press.progress > 0) {
+            val position = 15F - (press.progress + partials) * 14F / SteamPressBlockEntity.PRESS_TIME
             pressHead.y = position
         } else pressHead.y = 15F
         val vertexBuilder = PRESS_HEAD_MATERIAL.buffer(buffers, RenderType::entitySolid)
-        pressHead.render(stack, vertexBuilder, light, overlay)
+        pressHead.render(matrix, vertexBuilder, light, overlay)
 
-        stack.pushPose()
-        stack.translate(.5, -1.0 + .5 / 16.0, .5)
-        stack.mulPose(Vector3f.XP.rotationDegrees(-90F))
-        itemRenderer.renderStatic(press.pressedItem, ItemTransforms.TransformType.FIXED, light, overlay, stack, buffers, 11)
-        stack.popPose()
+        matrix.pushPose()
+        matrix.translate(.5, -1.0 + .5 / 16.0, .5)
+        matrix.mulPose(Vector3f.XP.rotationDegrees(-90F))
+        val recipe = press.recipe
+        if (recipe != null)
+            itemRenderer.renderStatic(recipe.resultItem, ItemTransforms.TransformType.FIXED, light, overlay, matrix, buffers, 11)
+        matrix.popPose()
 
-        stack.popPose()
+        matrix.popPose()
     }
 
     override fun shouldRenderOffScreen(press: SteamPressBlockEntity) = true
+    override fun getViewDistance() = 256
 
     companion object {
         val PRESS_HEAD_MATERIAL = Material(InventoryMenu.BLOCK_ATLAS, ntm("block/steam_press/steam_press_head"))
