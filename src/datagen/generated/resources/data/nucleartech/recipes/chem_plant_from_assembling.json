@@ -53,7 +53,7 @@
     {
       "type": "nucleartech:stacked",
       "item": {
-        "tag": "forge:ingots/polymer"
+        "tag": "forge:plates/insulator"
       },
       "amount": 8
     }
