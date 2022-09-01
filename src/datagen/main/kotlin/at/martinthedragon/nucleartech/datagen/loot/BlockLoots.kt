@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.datagen.loot
 
+import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.item.NTechItems
-import at.martinthedragon.nucleartech.NuclearTech
 import net.minecraft.advancements.critereon.EnchantmentPredicate
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.advancements.critereon.MinMaxBounds
@@ -207,6 +207,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.schrabidateAnvil.get())
         dropSelf(NTechBlocks.dineutroniumAnvil.get())
         dropSelf(NTechBlocks.murkyAnvil.get())
+        dropSelf(NTechBlocks.coatedCable.get())
         dropSelf(NTechBlocks.assembler.get())
         dropSelf(NTechBlocks.chemPlant.get())
 

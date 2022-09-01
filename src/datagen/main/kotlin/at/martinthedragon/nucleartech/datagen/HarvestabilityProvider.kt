@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.tags.BlockTagsProvider
 import net.minecraft.tags.BlockTags
@@ -71,6 +71,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.electricFurnace.get(),
             NTechBlocks.shredder.get(),
             NTechBlocks.ironAnvil.get(), NTechBlocks.leadAnvil.get(), NTechBlocks.steelAnvil.get(), NTechBlocks.meteoriteAnvil.get(), NTechBlocks.starmetalAnvil.get(), NTechBlocks.ferrouraniumAnvil.get(), NTechBlocks.bismuthAnvil.get(), NTechBlocks.schrabidateAnvil.get(), NTechBlocks.dineutroniumAnvil.get(), NTechBlocks.murkyAnvil.get(),
+            NTechBlocks.coatedCable.get(),
             NTechBlocks.assembler.get(),
             NTechBlocks.littleBoy.get(), NTechBlocks.fatMan.get(),
             NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get(),
@@ -127,6 +128,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.shredder.get(),
             NTechBlocks.ironAnvil.get(),
             NTechBlocks.leadAnvil.get(),
+            NTechBlocks.coatedCable.get(),
             NTechBlocks.assembler.get(),
             NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get()
         )

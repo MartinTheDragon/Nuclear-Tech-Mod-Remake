@@ -53,6 +53,7 @@ Consecutive machines take previous ones as implied dependencies.
 flowchart TB
   Press & Anvil1[Anvil Tier 1] ==> DiFurnace[Blast Furnace]
   Anvil1 & Press -.-> EFurnace[Electric Furnace]
+  DiFurnace --> Cables
   DiFurnace ==> Anvil2[Anvil Tier 2]
   DiFurnace -.-> CombustionGen[Combustion Generator]
   CombustionGen -.-> Energy[(Energy)] --> Assembler & EFurnace

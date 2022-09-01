@@ -194,7 +194,7 @@ object NTechBlocks {
     val dineutroniumAnvil = BLOCKS.registerK("dineutronium_anvil") { AnvilBlock(7, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
     val murkyAnvil = BLOCKS.registerK("murky_anvil") { AnvilBlock(1916169, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
 
-    val coatedCable = BLOCKS.registerK("coated_cable") { CoatedCableBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val coatedCable = BLOCKS.registerK("coated_red_copper_cable") { CoatedCableBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 
     // Bombs
 

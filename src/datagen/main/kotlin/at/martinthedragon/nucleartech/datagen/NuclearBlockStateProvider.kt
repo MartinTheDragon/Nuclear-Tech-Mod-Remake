@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.AnvilBlock
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.fluid.NTechFluids
+import net.minecraft.client.renderer.block.model.ItemTransforms
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
@@ -14,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraftforge.client.model.generators.BlockModelBuilder
 import net.minecraftforge.client.model.generators.BlockStateProvider
 import net.minecraftforge.client.model.generators.ConfiguredModel
-import net.minecraftforge.client.model.generators.ModelBuilder
 import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder
 import net.minecraftforge.common.data.ExistingFileHelper
 
@@ -219,6 +219,7 @@ class NuclearBlockStateProvider(
         anvil(NTechBlocks.schrabidateAnvil.get())
         anvil(NTechBlocks.dineutroniumAnvil.get())
         anvil(NTechBlocks.murkyAnvil.get())
+        simpleBlock(NTechBlocks.coatedCable.get())
         simpleBlock(NTechBlocks.steamPressBase.get(), models().getExistingFile(NTechBlocks.steamPressBase.id))
         simpleBlock(NTechBlocks.steamPressFrame.get(), models().getExistingFile(NTechBlocks.steamPressFrame.id))
         simpleBlock(NTechBlocks.steamPressTop.get(), models().getExistingFile(NTechBlocks.steamPressTop.id))
@@ -242,8 +243,8 @@ class NuclearBlockStateProvider(
             .texture("particle", modLoc("block/little_boy"))
             .parent(blockTransformsModel)
             .transforms()
-            .transform(ModelBuilder.Perspective.GUI).rotation(30F, 225F, 0F).translation(3F, -2F, 0F).scale(.34F).end()
-            .transform(ModelBuilder.Perspective.FIXED).rotation(0F, 90F, 0F).scale(.5F).end()
+            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(3F, -2F, 0F).scale(.34F).end()
+            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 90F, 0F).scale(.5F).end()
             .end()
         )
         horizontalBlock(
@@ -255,8 +256,8 @@ class NuclearBlockStateProvider(
             .texture("particle", modLoc("block/fat_man"))
             .parent(blockTransformsModel)
             .transforms()
-            .transform(ModelBuilder.Perspective.GUI).rotation(30F, 225F, 0F).translation(2.5F, -3F, 0F).scale(.34F).end()
-            .transform(ModelBuilder.Perspective.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.5F).end()
+            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(2.5F, -3F, 0F).scale(.34F).end()
+            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.5F).end()
             .end()
         )
         simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad/launch_pad"))
@@ -418,6 +419,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(NTechBlocks.schrabidateAnvil.get())
         copiedBlockItem(NTechBlocks.dineutroniumAnvil.get())
         copiedBlockItem(NTechBlocks.murkyAnvil.get())
+        copiedBlockItem(NTechBlocks.coatedCable.get())
         copiedBlockItem(NTechBlocks.blastFurnace.get())
         copiedBlockItem(NTechBlocks.combustionGenerator.get())
         copiedBlockItem(NTechBlocks.electricFurnace.get())

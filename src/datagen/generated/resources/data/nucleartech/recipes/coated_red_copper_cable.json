@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "coated_red_copper_cable",
+  "pattern": [
+    "IWI",
+    "WCW",
+    "IWI"
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/red_copper"
+    },
+    "W": {
+      "tag": "forge:wires/red_copper"
+    },
+    "I": {
+      "tag": "forge:plates/insulator"
+    }
+  },
+  "result": {
+    "item": "nucleartech:coated_red_copper_cable"
+  }
+}
