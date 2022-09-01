@@ -25,7 +25,9 @@ class BlindingHazard : HazardType {
 
     override fun tickDropped(itemEntity: ItemEntity, level: Float) {
         val world = itemEntity.level
-        for (entity in world.getEntities(EntityTypeTest.forClass(LivingEntity::class.java), itemEntity.boundingBox.inflate(max(level * 2.0, 3.0)), Entity::isAlive)) {
+        // we copy the list to make sure there won't be a ConcurrentModificationException
+        // normally this shouldn't be necessary, since Level#getEntities returns a fresh list anyway, but perhaps some performance core mods return a subview (to optimise basically nothing)
+        for (entity in world.getEntities(EntityTypeTest.forClass(LivingEntity::class.java), itemEntity.boundingBox.inflate(max(level * 2.0, 3.0)), Entity::isAlive).toList()) {
             // could be inverse square for more of 'muh realism
             entity.addEffect(MobEffectInstance(MobEffects.BLINDNESS, max(ceil(max(level * 20, 40F) / entity.distanceTo(itemEntity)).toInt(), 1), ceil(level).toInt(), false, false, true), itemEntity)
         }
