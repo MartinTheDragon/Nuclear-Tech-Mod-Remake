@@ -1,0 +1,57 @@
+name: Bug Report
+description: Spot something that doesn't seem quite right? Report it!
+title: "<Descriptive title here, like 'Clicking on x causes y'>"
+labels: [bug]
+assignees: [MartinTheDragon]
+body:
+  - type: markdown
+    attributes:
+      value: Please search to see if an issue already exists for the bug you encountered (also closed ones).
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue description
+      description: A clear and concise description of the issue, and if applicable, what the expected behaviour should have been.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: If there are specific steps to be taken to recreate this issue, provide them here.
+      placeholder: |
+        1. Jump on the block ...
+        2. Right-click it ...
+        3. Use a bullet stamp as a shredder blade ...
+        4. See error
+  - type: input
+    id: forge
+    attributes:
+      label: Forge version
+      placeholder: e.g. 40.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: nucleartech
+    attributes:
+      label: Nuclear Tech version
+      options:
+        - Manually compiled
+        - 0.0.14
+        - Older
+    validations:
+      required: true
+  - type: textarea
+    id: modlist
+    attributes:
+      label: Other mods
+      description: List any other relevant mods including their versions here.
+      placeholder: |
+        - SpamTech Isolation Edition 2.14.3.627
+        - Optimization Incompatible 0.5.6
+        - Poultry Evolution 4.0.54
+  - type: input
+    id: log
+    attributes:
+      label: (Crash) Log
+      description: Provide a link or file attachment to the (crash)log (e.g. pastebin) (almost always applicable).

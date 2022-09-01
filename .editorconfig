@@ -9,7 +9,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 300
 
-[{*.info,*.json,*.mcmeta,*.md, *.toml}]
+[{*.info,*.json,*.mcmeta,*.md, *.toml, *.yml}]
 indent_size = 2
 
 [mods.toml]
