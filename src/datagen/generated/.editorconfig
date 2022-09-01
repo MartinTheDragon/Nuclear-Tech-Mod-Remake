@@ -1,0 +1,6 @@
+[**.json]
+end_of_line = lf
+insert_final_newline = false
+
+[resources/.cache/cache]
+end_of_line = lf
