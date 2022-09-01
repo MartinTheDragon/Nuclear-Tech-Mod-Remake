@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.block.entity
 
-import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCK_ENTITIES
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPort
 import at.martinthedragon.nucleartech.registerK
@@ -22,6 +22,7 @@ object BlockEntityTypes {
     val shredderBlockEntityType = BLOCK_ENTITIES.registerK("shredder") { BlockEntityType.Builder.of(::ShredderBlockEntity, NTechBlocks.shredder.get()).build() }
     val assemblerBlockEntityType = BLOCK_ENTITIES.registerK("assembler") { BlockEntityType.Builder.of(::AssemblerBlockEntity, NTechBlocks.assembler.get()).build() }
     val chemPlantBlockEntityType = BLOCK_ENTITIES.registerK("chem_plant") { BlockEntityType.Builder.of(::ChemPlantBlockEntity, NTechBlocks.chemPlant.get()).build() }
+    val cableBlockEntity = BLOCK_ENTITIES.registerK("cable") { BlockEntityType.Builder.of(::CableBlockEntity, NTechBlocks.coatedCable.get()).build() }
     val littleBoyBlockEntityType = BLOCK_ENTITIES.registerK("little_boy") { BlockEntityType.Builder.of(::LittleBoyBlockEntity, NTechBlocks.littleBoy.get()).build() }
     val fatManBlockEntityType = BLOCK_ENTITIES.registerK("fat_man") { BlockEntityType.Builder.of(::FatManBlockEntity, NTechBlocks.fatMan.get()).build() }
     val launchPadBlockEntityType = BLOCK_ENTITIES.registerK("launch_pad") { BlockEntityType.Builder.of(::LaunchPadBlockEntity, NTechBlocks.launchPad.get()).build() }
