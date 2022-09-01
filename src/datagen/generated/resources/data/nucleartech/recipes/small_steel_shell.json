@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "   ",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/steel"
+    }
+  },
+  "result": {
+    "item": "nucleartech:small_steel_shell",
+    "count": 3
+  }
+}

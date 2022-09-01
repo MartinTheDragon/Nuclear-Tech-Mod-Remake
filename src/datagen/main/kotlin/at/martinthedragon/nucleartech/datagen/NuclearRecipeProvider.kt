@@ -334,6 +334,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ringCoilRecipe(NTechItems.ringCoil.get(), NTechItems.copperCoil.get(), consumer)
         ringCoilRecipe(NTechItems.superConductingRingCoil.get(), NTechItems.superConductingCoil.get(), consumer)
         ringCoilRecipe(NTechItems.goldRingCoil.get(), NTechItems.goldCoil.get(), consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.smallSteelShell.get(), 3).define('P', NTechTags.Items.PLATES_STEEL).pattern("PPP").pattern("   ").pattern("PPP").unlockedBy("has_plate", has(NTechTags.Items.PLATES_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.smallAluminiumShell.get(), 3).define('P', NTechTags.Items.PLATES_ALUMINIUM).pattern("PPP").pattern("   ").pattern("PPP").unlockedBy("has_plate", has(NTechTags.Items.PLATES_ALUMINIUM)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.bigSteelShell.get()).define('I', NTechTags.Items.INGOTS_STEEL).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.bigAluminiumShell.get()).define('I', NTechTags.Items.INGOTS_ALUMINIUM).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_ALUMINIUM)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.bigTitaniumShell.get()).define('I', NTechTags.Items.INGOTS_TITANIUM).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_TITANIUM)).save(consumer)
         //region Circuits
         ShapedRecipeBuilder.shaped(NTechItems.basicCircuitAssembly.get()).define('W', NTechTags.Items.WIRES_ALUMINIUM).define('R', Tags.Items.DUSTS_REDSTONE).define('P', NTechTags.Items.PLATES_STEEL).pattern("W").pattern("R").pattern("P").unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer)
         AssemblyRecipeBuilder(NTechItems.enhancedCircuit.get(), 1, 100).requires(NTechItems.basicCircuit.get()).requires(4 to NTechTags.Items.WIRES_COPPER, 1 to NTechTags.Items.DUSTS_QUARTZ, 1 to NTechTags.Items.PLATES_COPPER).save(consumer)
@@ -462,7 +467,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AnvilRecipeBuilder().requires(NTechTags.Items.INGOTS_TUNGSTEN).results(NTechBlockItems.tungstenDecoBlock.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
 
         AnvilRecipeBuilder().requires(4 to NTechTags.Items.PLATES_COPPER).results(NTechItems.copperPanel.get()).save(consumer)
-        AnvilRecipeBuilder().requires(2 to NTechTags.Items.PLATES_STEEL).results(NTechItems.smallSteelShell.get()).save(consumer) // TODO ?
+        AnvilRecipeBuilder().requires(2 to NTechTags.Items.PLATES_STEEL).results(NTechItems.smallSteelShell.get()).save(consumer)
+        AnvilRecipeBuilder().requires(2 to NTechTags.Items.PLATES_ALUMINIUM).results(NTechItems.smallAluminiumShell.get()).save(consumer)
         AnvilRecipeBuilder().requires(2 to NTechItems.copperCoil.get()).results(NTechItems.ringCoil.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
         AnvilRecipeBuilder().requires(2 to NTechItems.superConductingCoil.get()).results(NTechItems.superConductingRingCoil.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
         AnvilRecipeBuilder().requires(2 to NTechItems.goldCoil.get()).results(NTechItems.goldRingCoil.get()).setOverlay(AnvilRecipeType.CONSTRUCTING).save(consumer)
