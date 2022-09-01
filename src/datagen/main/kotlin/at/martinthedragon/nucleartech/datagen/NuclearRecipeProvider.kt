@@ -393,6 +393,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapedRecipeBuilder.shaped(NTechBlockItems.scrapBlock.get()).define('#', NTechTags.Items.SCRAP).pattern("##").pattern("##").group(NTechBlockItems.scrapBlock.id.path).unlockedBy("has_scrap", has(NTechTags.Items.SCRAP)).save(consumer, ntm("${NTechBlockItems.scrapBlock.id.path}_from_scrap"))
         ShapelessRecipeBuilder.shapeless(NTechBlockItems.trinititeOre.get()).requires(Tags.Items.SAND_COLORLESS).requires(NTechItems.trinitite.get()).group(NTechBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(NTechItems.trinitite.get())).save(consumer, NTechBlockItems.trinititeOre.id)
         ShapelessRecipeBuilder.shapeless(NTechBlockItems.redTrinititeOre.get()).requires(Tags.Items.SAND_RED).requires(NTechItems.trinitite.get()).group(NTechBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(NTechItems.trinitite.get())).save(consumer, NTechBlockItems.redTrinititeOre.id)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.steelBeam.get()).define('S', NTechTags.Items.INGOTS_STEEL).pattern("S").pattern("S").pattern("S").group(NTechBlockItems.steelBeam.id.path).unlockedBy("has_steel", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
     }
 
     private fun machines(consumer: Consumer<FinishedRecipe>) {

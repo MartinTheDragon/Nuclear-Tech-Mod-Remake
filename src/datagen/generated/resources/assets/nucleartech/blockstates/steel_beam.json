@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "nucleartech:block/steel_beam",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "nucleartech:block/steel_beam"
+    },
+    "axis=z": {
+      "model": "nucleartech:block/steel_beam",
+      "x": 90
+    }
+  }
+}

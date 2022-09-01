@@ -98,6 +98,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.berylliumDecoBlock, "Beryllium-Dekoblock")
         addBlock(NTechBlocks.asbestosRoof, "Asbestdach")
         addBlock(NTechBlocks.hazmatBlock, "Strahlenschutzstoff-Block")
+        addBlock(NTechBlocks.steelBeam, "Stahlträger")
 
         addBlock(NTechBlocks.glowingMushroom, "Leuchtender Pilz")
         addBlock(NTechBlocks.glowingMushroomBlock, "Leuchtender Pilzblock")

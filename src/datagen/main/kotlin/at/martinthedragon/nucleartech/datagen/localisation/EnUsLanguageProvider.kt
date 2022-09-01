@@ -109,6 +109,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.berylliumDecoBlock, "Beryllium Deco Block")
         addBlock(NTechBlocks.asbestosRoof, "Asbestos Roof")
         addBlock(NTechBlocks.hazmatBlock, "Hazmat Block")
+        addBlock(NTechBlocks.steelBeam, "Steel Beam")
 
         addBlock(NTechBlocks.glowingMushroom, "Glowing Mushroom")
         addBlock(NTechBlocks.glowingMushroomBlock, "Glowing Mushroom Block")

@@ -149,6 +149,8 @@ object NTechBlocks {
     val asbestosRoof = BLOCKS.registerK("asbestos_roof") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val hazmatBlock = BLOCKS.registerK("hazmat_block") { Block(Properties.of(WOOL).strength(6f).sound(SoundType.WOOL)) }
 
+    val steelBeam = BLOCKS.registerK("steel_beam") { SteelBeamBlock(Properties.of(METAL).strength(5F, 15F).sound(SoundType.METAL)) }
+
     val glowingMushroom = BLOCKS.registerK("glowing_mushroom") { GlowingMushroomBlock(Properties.of(PLANT, MaterialColor.COLOR_GREEN).noCollission().randomTicks().instabreak().lightLevel { 7 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.GRASS)) }
     val glowingMushroomBlock = BLOCKS.registerK("glowing_mushroom_block") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 15 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }
     val glowingMushroomStem = BLOCKS.registerK("glowing_mushroom_stem") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 12 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }

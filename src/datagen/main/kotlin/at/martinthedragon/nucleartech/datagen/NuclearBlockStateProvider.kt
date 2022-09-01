@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.block.AnvilBlock
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import net.minecraft.client.renderer.block.model.ItemTransforms
+import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
@@ -152,6 +153,8 @@ class NuclearBlockStateProvider(
         simpleBlock(NTechBlocks.berylliumDecoBlock.get())
         simpleBlock(NTechBlocks.asbestosRoof.get())
         simpleBlock(NTechBlocks.hazmatBlock.get())
+        models().withExistingParent("steel_beam", "block/block").element().from(7F, 0F, 7F).to(9F, 16F, 9F).allFaces { _, builder -> builder.uvs(0F, 0F, 2F, 16F) }.face(Direction.UP).uvs(0F, 0F, 2F, 2F).cullface(Direction.UP).end().face(Direction.DOWN).uvs(0F, 0F, 2F, 2F).cullface(Direction.DOWN).end().textureAll("#all").end().texture("all", blockTexture(NTechBlocks.steelBeam.get())).texture("particle", blockTexture(NTechBlocks.steelBeam.get()))
+            .also { axisBlock(NTechBlocks.steelBeam.get(), it, it) }
         simpleBlock(NTechBlocks.glowingMushroom.get(), models().cross("glowing_mushroom", blockTexture(NTechBlocks.glowingMushroom.get())))
         val singleFaceTemplateModelFile = models().getExistingFile(mcLoc("block/template_single_face"))
         val glowingMushroomModelFile = models().getBuilder("glowing_mushroom_block").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(
@@ -393,6 +396,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(NTechBlocks.berylliumDecoBlock.get())
         copiedBlockItem(NTechBlocks.asbestosRoof.get())
         copiedBlockItem(NTechBlocks.hazmatBlock.get())
+        copiedBlockItem(NTechBlocks.steelBeam.get())
         simpleItem(NTechBlocks.glowingMushroom.get())
         copiedBlockItem(NTechBlocks.deadGrass.get())
         copiedBlockItem(NTechBlocks.glowingMycelium.get())

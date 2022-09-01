@@ -168,6 +168,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.berylliumDecoBlock.get())
         dropSelf(NTechBlocks.asbestosRoof.get())
         dropSelf(NTechBlocks.hazmatBlock.get())
+        dropSelf(NTechBlocks.steelBeam.get())
 
         dropSelf(NTechBlocks.glowingMushroom.get())
         add(NTechBlocks.glowingMushroomBlock.get()) { createMushroomBlockDrop(it, NTechBlocks.glowingMushroom.get()) }

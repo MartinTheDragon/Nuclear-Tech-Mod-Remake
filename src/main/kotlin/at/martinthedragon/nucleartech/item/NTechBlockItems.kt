@@ -144,6 +144,8 @@ object NTechBlockItems {
     val asbestosRoof = ITEMS.registerK("asbestos_roof") { BlockItem(NTechBlocks.asbestosRoof.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val hazmatBlock = ITEMS.registerK("hazmat_block") { BlockItem(NTechBlocks.hazmatBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
+    val steelBeam = ITEMS.registerK("steel_beam") { BlockItem(NTechBlocks.steelBeam.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+
     val glowingMushroom = ITEMS.registerK("glowing_mushroom") { BlockItem(NTechBlocks.glowingMushroom.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val glowingMushroomBlock = ITEMS.registerK("glowing_mushroom_block") { BlockItem(NTechBlocks.glowingMushroomBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val glowingMushroomStem = ITEMS.registerK("glowing_mushroom_stem") { BlockItem(NTechBlocks.glowingMushroomStem.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
