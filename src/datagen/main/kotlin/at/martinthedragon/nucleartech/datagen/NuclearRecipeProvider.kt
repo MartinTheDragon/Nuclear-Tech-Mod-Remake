@@ -504,6 +504,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AssemblyRecipeBuilder(NTechItems.highTemperatureSuperConductor.get(), 6, 20).requires(NTechItems.magnetizedTungstenIngot.get()).save(consumer)
         AssemblyRecipeBuilder(NTechItems.hazmatCloth.get(), 4, 50).requires(4 to NTechTags.Items.DUSTS_LEAD, 8 to Tags.Items.STRING).save(consumer)
         AssemblyRecipeBuilder(NTechBlockItems.fatMan.get(), 1, 300).requires(1 to NTechItems.steelSphere.get(), 2 to NTechItems.bigSteelShell.get(), 1 to NTechItems.bigSteelGridFins.get(), 2 to NTechItems.militaryGradeCircuitBoardTier2.get()).requires(6 to NTechTags.Items.WIRES_COPPER, 6 to Tags.Items.DYES_YELLOW).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.shredder.get(), 1, 2000).requires(2 to NTechTags.Items.INGOTS_STEEL, 4 to NTechTags.Items.PLATES_STEEL).requires(NTechItems.motor.get()).requires(2 to NTechTags.Items.WIRES_RED_COPPER).requires(2 to NTechBlockItems.steelBeam.get(), 2 to Items.IRON_BARS).requires(NTechBlockItems.coatedCable.get()).save(consumer)
         AssemblyRecipeBuilder(NTechBlockItems.chemPlantPlacer.get(), 1, 200).requires(8 to NTechTags.Items.INGOTS_STEEL, 6 to NTechTags.Items.PLATES_COPPER).requires(4 to NTechItems.steelTank.get()).requires(NTechItems.bigSteelShell.get()).requires(3 to NTechTags.Items.COILS_TUNGSTEN).requires(2 to NTechItems.enhancedCircuit.get(), 1 to NTechItems.advancedCircuit.get()).requires(8 to NTechTags.Items.PLATES_INSULATOR).save(consumer)
     }
 

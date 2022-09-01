@@ -1,0 +1,59 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/steel"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/steel"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:motor"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/red_copper"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_beam"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "minecraft:iron_bars"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:coated_red_copper_cable"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:shredder",
+    "count": 1
+  },
+  "duration": 2000
+}
