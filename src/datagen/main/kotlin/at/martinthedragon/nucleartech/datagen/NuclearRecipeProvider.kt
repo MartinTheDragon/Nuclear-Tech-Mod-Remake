@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.recipe.*
+import at.martinthedragon.nucleartech.extensions.appendToPath
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.item.NTechItems
@@ -326,6 +327,13 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromPowder(NTechTags.Items.DUSTS_COAL, NTechItems.coke.get(), "coal_powder", consumer)
         ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.ligniteBriquette.get()), .1F, 200, NTechItems.coke.get()).group(NTechItems.coke.id.path).unlockedBy("has_${NTechItems.ligniteBriquette.id.path}", has(NTechItems.ligniteBriquette.get())).save(consumer, NTechItems.coke.id)
         ShapedRecipeBuilder.shaped(NTechItems.copperPanel.get()).define('C', NTechTags.Items.PLATES_COPPER).pattern("CCC").pattern("CCC").group(NTechItems.copperPanel.id.path).unlockedBy("has${NTechItems.copperPlate.id.path}", has(NTechTags.Items.PLATES_COPPER)).save(consumer, NTechItems.copperPanel.id)
+        ShapedRecipeBuilder.shaped(NTechItems.copperCoil.get()).define('W', NTechTags.Items.WIRES_RED_COPPER).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.copperCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_RED_COPPER)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.superConductingCoil.get()).define('W', NTechTags.Items.WIRES_SUPER_CONDUCTOR).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.superConductingCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_SUPER_CONDUCTOR)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.goldCoil.get()).define('W', NTechTags.Items.WIRES_GOLD).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.goldCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_GOLD)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.highTemperatureSuperConductingCoil.get()).define('W', NTechTags.Items.WIRES_MAGNETIZED_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.highTemperatureSuperConductingCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_MAGNETIZED_TUNGSTEN)).save(consumer)
+        ringCoilRecipe(NTechItems.ringCoil.get(), NTechItems.copperCoil.get(), consumer)
+        ringCoilRecipe(NTechItems.superConductingRingCoil.get(), NTechItems.superConductingCoil.get(), consumer)
+        ringCoilRecipe(NTechItems.goldRingCoil.get(), NTechItems.goldCoil.get(), consumer)
         //region Circuits
         ShapedRecipeBuilder.shaped(NTechItems.basicCircuitAssembly.get()).define('W', NTechTags.Items.WIRES_ALUMINIUM).define('R', Tags.Items.DUSTS_REDSTONE).define('P', NTechTags.Items.PLATES_STEEL).pattern("W").pattern("R").pattern("P").unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer)
         AssemblyRecipeBuilder(NTechItems.enhancedCircuit.get(), 1, 100).requires(NTechItems.basicCircuit.get()).requires(4 to NTechTags.Items.WIRES_COPPER, 1 to NTechTags.Items.DUSTS_QUARTZ, 1 to NTechTags.Items.PLATES_COPPER).save(consumer)
@@ -355,6 +363,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 16).requires(NTechTags.Items.INGOTS_FIBERGLASS, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_fiberglass", has(NTechTags.Items.INGOTS_FIBERGLASS)).save(consumer, ntm("insulator_from_fiberglass"))
         //endregion
         ShapedRecipeBuilder.shaped(NTechItems.steelTank.get(), 2).define('S', NTechTags.Items.PLATES_STEEL).define('T', NTechTags.Items.PLATES_TITANIUM).pattern("STS").pattern("S S").pattern("STS").group(NTechItems.steelTank.id.path).unlockedBy("has_${NTechItems.steelPlate.id.path}", has(NTechTags.Items.PLATES_STEEL)).save(consumer, NTechItems.steelTank.id)
+    }
+
+    private fun ringCoilRecipe(ringCoil: ItemLike, coil: ItemLike, consumer: Consumer<FinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ringCoil, 2).define('C', coil).define('P', NTechTags.Items.PLATES_IRON).pattern(" C ").pattern("CPC").pattern(" C ").group(ringCoil.asItem().registryName!!.path).unlockedBy("has_coil", has(coil)).save(consumer, ringCoil.asItem().registryName!!.appendToPath("_with_iron_plate"))
+        ShapedRecipeBuilder.shaped(ringCoil, 2).define('C', coil).define('P', NTechTags.Items.PLATES_STEEL).pattern(" C ").pattern("CPC").pattern(" C ").group(ringCoil.asItem().registryName!!.path).unlockedBy("has_coil", has(coil)).save(consumer, ringCoil.asItem().registryName!!.appendToPath("_with_steel_plate"))
     }
 
     private fun machineItems(consumer: Consumer<FinishedRecipe>) {
@@ -433,6 +446,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
         AnvilRecipeBuilder(4).requires(NTechTags.Items.INGOTS_ALUMINIUM).results(ItemStack(NTechItems.aluminiumWire.get(), 8)).save(consumer)
         AnvilRecipeBuilder(4).requires(Tags.Items.INGOTS_COPPER).results(ItemStack(NTechItems.copperWire.get(), 8)).save(consumer)
+        AnvilRecipeBuilder(4).requires(NTechItems.advancedAlloyIngot.get()).results(ItemStack(NTechItems.superConductor.get(), 8)).save(consumer)
         AnvilRecipeBuilder(4).requires(NTechTags.Items.INGOTS_TUNGSTEN).results(ItemStack(NTechItems.tungstenWire.get(), 8)).save(consumer)
         AnvilRecipeBuilder(4).requires(NTechItems.redCopperIngot.get()).results(ItemStack(NTechItems.redCopperWire.get(), 8)).save(consumer)
         AnvilRecipeBuilder(4).requires(Tags.Items.INGOTS_GOLD).results(ItemStack(NTechItems.goldWire.get(), 8)).save(consumer)

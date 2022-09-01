@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:gold_ring_coil_with_iron_plate"
+    ]
+  },
+  "criteria": {
+    "has_coil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:gold_coil"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:gold_ring_coil_with_iron_plate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_coil",
+      "has_the_recipe"
+    ]
+  ]
+}
