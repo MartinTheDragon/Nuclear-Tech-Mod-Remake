@@ -10,5 +10,5 @@ import net.minecraftforge.common.capabilities.CapabilityToken
 object Capabilities {
     val CONTAMINATION_CAPABILITY: Capability<ContaminationHandler> = CapabilityManager.get(object : CapabilityToken<ContaminationHandler>() {})
 
-    fun getContamination(entity: LivingEntity) = entity.getCapability(CONTAMINATION_CAPABILITY).getOrNull() ?: throw IllegalStateException("No contamination capability attached to entity")
+    fun getContamination(entity: LivingEntity) = entity.getCapability(CONTAMINATION_CAPABILITY).getOrNull()
 }

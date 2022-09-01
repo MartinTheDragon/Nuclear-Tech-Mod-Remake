@@ -37,7 +37,8 @@ object ClientRenderer {
             // TODO check for FSB armor
 
             if (player.inventory.hasAnyOf(setOf(NTechItems.geigerCounter.get()))) {
-                renderGeigerHUD(event.matrixStack, Capabilities.getContamination(player).getIrradiation())
+                val radiation = Capabilities.getContamination(player)?.getIrradiation() ?: return
+                renderGeigerHUD(event.matrixStack, radiation)
             }
         }
     }

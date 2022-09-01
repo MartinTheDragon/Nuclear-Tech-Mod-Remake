@@ -1,6 +1,5 @@
 package at.martinthedragon.nucleartech.hazard
 
-import at.martinthedragon.nucleartech.world.DamageSources
 import at.martinthedragon.nucleartech.capability.Capabilities
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
 import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
@@ -11,6 +10,7 @@ import at.martinthedragon.nucleartech.entity.NuclearCreeper
 import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import at.martinthedragon.nucleartech.world.ChunkRadiation
+import at.martinthedragon.nucleartech.world.DamageSources
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -155,7 +155,7 @@ object EntityContaminationEffects {
     }
 
     fun contaminate(entity: LivingEntity, hazardType: HazardType, contaminationType: ContaminationType, amount: Float): Boolean {
-        val capability = Capabilities.getContamination(entity) ?: throw Error("LivingEntity ${entity.name} does not have a contamination capability attached")
+        val capability = Capabilities.getContamination(entity) ?: return false
         return contaminate(entity, capability, hazardType, contaminationType, amount)
     }
 
