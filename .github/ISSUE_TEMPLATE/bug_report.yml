@@ -37,6 +37,7 @@ body:
       label: Nuclear Tech version
       options:
         - Manually compiled
+        - 0.0.15
         - 0.0.14
         - Older
     validations:
