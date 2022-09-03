@@ -1,0 +1,44 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:speed_upgrade_mk2"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/red_copper"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/redstone"
+      },
+      "amount": 6
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/desh"
+      },
+      "amount": 4
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:speed_upgrade_mk3",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 4,
+  "tierUpper": -1
+}

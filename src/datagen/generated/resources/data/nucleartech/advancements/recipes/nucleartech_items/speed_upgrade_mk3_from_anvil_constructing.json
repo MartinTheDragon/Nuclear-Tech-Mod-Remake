@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:speed_upgrade_mk3_from_anvil_constructing"
+    ]
+  },
+  "criteria": {
+    "has_speed_upgrade_mk2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:speed_upgrade_mk2"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:speed_upgrade_mk3_from_anvil_constructing"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_speed_upgrade_mk2",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,12 +1,13 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.datagen.model.RandomModelBuilder
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.BombKitItem
 import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.ntm
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.BucketItem
@@ -574,6 +575,15 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.schrabidiumPlateStamp.get())
         simpleItem(NTechItems.schrabidiumWireStamp.get())
         simpleItem(NTechItems.schrabidiumCircuitStamp.get())
+        simpleItem(NTechItems.speedUpgradeMk1.get())
+        simpleItem(NTechItems.speedUpgradeMk2.get())
+        simpleItem(NTechItems.speedUpgradeMk3.get())
+        simpleItem(NTechItems.powerSavingUpgradeMk1.get())
+        simpleItem(NTechItems.powerSavingUpgradeMk2.get())
+        simpleItem(NTechItems.powerSavingUpgradeMk3.get())
+        simpleItem(NTechItems.overdriveUpgradeMk1.get())
+        simpleItem(NTechItems.overdriveUpgradeMk2.get())
+        simpleItem(NTechItems.overdriveUpgradeMk3.get())
         simpleItem(NTechItems.aluminiumShredderBlade.get())
         simpleItem(NTechItems.goldShredderBlade.get())
         simpleItem(NTechItems.ironShredderBlade.get())

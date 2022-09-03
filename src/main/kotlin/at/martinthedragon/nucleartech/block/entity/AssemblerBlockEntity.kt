@@ -8,6 +8,10 @@ import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.item.canTransferItem
+import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
+import at.martinthedragon.nucleartech.item.upgrades.OverdriveUpgrade
+import at.martinthedragon.nucleartech.item.upgrades.PowerSavingUpgrade
+import at.martinthedragon.nucleartech.item.upgrades.SpeedUpgrade
 import at.martinthedragon.nucleartech.menu.AssemblerMenu
 import at.martinthedragon.nucleartech.menu.NTechContainerMenu
 import at.martinthedragon.nucleartech.menu.slots.data.IntDataSlot
@@ -26,12 +30,14 @@ import net.minecraft.world.phys.AABB
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
 
-class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<AssemblyRecipe>(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state) {
+class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<AssemblyRecipe>(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state),
+    SpeedUpgradeableMachine, PowerSavingUpgradeableMachine, OverdriveUpgradeableMachine
+{
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(18, ItemStack.EMPTY)
 
     override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
         0 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
-        in 1..3 -> false // TODO
+        in 1..3 -> MachineUpgradeItem.isValidForBE(this, stack)
         4 -> stack.item is AssemblyTemplateItem
         else -> true
     }
@@ -81,13 +87,39 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 
     override fun checkCanProgress() = energy >= consumption && super.checkCanProgress()
 
+    override val maxSpeedUpgradeLevel = 3
+    override var speedUpgradeLevel = 0
+
+    override val maxPowerSavingUpgradeLevel = 3
+    override var powerSavingUpgradeLevel = 0
+
+    override val maxOverdriveUpgradeLevel = 9
+    override var overdriveUpgradeLevel = 0
+
+
+    override fun resetUpgrades() {
+        super<SpeedUpgradeableMachine>.resetUpgrades()
+        super<PowerSavingUpgradeableMachine>.resetUpgrades()
+        super<OverdriveUpgradeableMachine>.resetUpgrades()
+    }
+
+    override fun getUpgradeInfoForEffect(effect: MachineUpgradeItem.UpgradeEffect<*>) = when (effect) {
+        is SpeedUpgrade -> listOf(LangKeys.UPGRADE_INFO_DELAY.format("-${effect.tier * 25}%"), LangKeys.UPGRADE_INFO_CONSUMPTION.format("+${effect.tier * 300}HE/t"))
+        is PowerSavingUpgrade -> listOf(LangKeys.UPGRADE_INFO_CONSUMPTION.format("-${effect.tier * 30}HE/t"), LangKeys.UPGRADE_INFO_DELAY.format("+${effect.tier * 5}%"))
+        is OverdriveUpgrade -> listOf(LangKeys.UPGRADE_INFO_DELAY.format("÷${effect.tier + 1}"), LangKeys.UPGRADE_INFO_CONSUMPTION.format("×${effect.tier + 1}"))
+        else -> emptyList()
+    }
+
+    override fun getSupportedUpgrades() = listOf(SpeedUpgrade(maxSpeedUpgradeLevel), PowerSavingUpgrade(maxPowerSavingUpgradeLevel), OverdriveUpgrade(maxOverdriveUpgradeLevel))
+
+    private val consumption get() = (100 + (speedUpgradeLevel * 300) - (powerSavingUpgradeLevel * 30)) * (overdriveUpgradeLevel + 1)
+    private val speed get() = ((100 - (speedUpgradeLevel  * 25) + (powerSavingUpgradeLevel * 5)) / (overdriveUpgradeLevel + 1)).coerceAtLeast(1)
+
     override var maxProgress = 100
         private set
 
-    private var consumption = 100
-    private var speed = 100
-
     override fun tickProgress() {
+        MachineUpgradeItem.applyUpgrades(this, mainInventory.subList(1, 4))
         super.tickProgress()
         val recipe = recipe
         if (recipe != null)

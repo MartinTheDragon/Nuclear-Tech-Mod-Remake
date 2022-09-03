@@ -18,6 +18,7 @@ object LangKeys {
     const val CAT_INFO = "info"
     const val CAT_JEI = "jei"
     const val CAT_SIREN_TRACK = "siren_track"
+    const val CAT_UPGRADE = "upgrade"
     const val CAT_WORD = "word"
 
     val ARMOR_BLAST_PROTECTION = of(CAT_ARMOR, "blast_protection") // 1 float
@@ -124,6 +125,19 @@ object LangKeys {
     val SIREN_TRACK_ONCE = of(CAT_SIREN_TRACK, "once")
     val SIREN_TRACK_RANGE = of(CAT_SIREN_TRACK, "range") // 1 int
     val SIREN_TRACK_SIREN_TRACK = of(CAT_SIREN_TRACK, "siren_track")
+
+    val UPGRADE_INFO_ACCEPTED_UPGRADES = of(CAT_UPGRADE, "info.accepted_upgrades")
+    val UPGRADE_INFO_CONSUMPTION = of(CAT_UPGRADE, "info.consumption") // 1 string
+    val UPGRADE_INFO_DELAY = of(CAT_UPGRADE, "info.delay") // 1 string
+    val UPGRADE_INFO_STACKS_TO = of(CAT_UPGRADE, "info.stacks_to") // 1 int
+    val UPGRADE_NAME_OVERDRIVE = of(CAT_UPGRADE, "name.overdrive")
+    val UPGRADE_NAME_POWER_SAVING = of(CAT_UPGRADE, "name.power_saving")
+    val UPGRADE_NAME_SPEED = of(CAT_UPGRADE, "name.speed")
+    val UPGRADE_WARN_INCOMPATIBLE = of(CAT_UPGRADE, "warn.incompatible")
+    val UPGRADE_WARN_MACHINE_NOT_UPGRADEABLE = of(CAT_UPGRADE, "warn.machine_not_upgradeable")
+    val UPGRADE_WARN_NOT_A_MACHINE = of(CAT_UPGRADE, "warn.not_a_machine")
+    val UPGRADE_WARN_VIEW_MACHINE = of(CAT_UPGRADE, "warn.view_machine")
+    val UPGRADE_WARN_UNKNOWN_COMPATIBILITY = of(CAT_UPGRADE, "warn.unknown_compatibility")
 
     val WORD_SECONDS = of(CAT_WORD, "seconds")
 

@@ -231,6 +231,7 @@ object NTechTags {
         val INGOTS_MOX = forgeTag("ingots/mox")
         val INGOTS_NEPTUNIUM = forgeTag("ingots/neptunium")
         val INGOTS_PHOSPHORUS = forgeTag("ingots/phosphorus")
+        val INGOTS_PLASTIC = forgeTag("ingots/plastic")
         val INGOTS_PLUTONIUM = forgeTag("ingots/plutonium")
         val INGOTS_PLUTONIUM_FUEL = forgeTag("ingots/plutonium_fuel")
         val INGOTS_POLONIUM = forgeTag("ingots/polonium")

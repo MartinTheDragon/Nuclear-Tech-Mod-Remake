@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.api.menu.slot.ResultSlot
 import at.martinthedragon.nucleartech.block.entity.ChemPlantBlockEntity
 import at.martinthedragon.nucleartech.extensions.ifPresentInline
 import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -82,6 +83,7 @@ class ChemPlantMenu(
                             it.fill(FluidStack(blockEntity.outputTank2.fluid.rawFluid, blockEntity.outputTank2.capacity), IFluidHandler.FluidAction.SIMULATE) > 0 && moveItemStackTo(itemStack, 10, 11, false) -> successful = true
                         }
                     }
+                    MachineUpgradeItem.isValidFor(blockEntity, itemStack) && moveItemStackTo(itemStack, 1, 4, false) -> successful = true
                     moveItemStackTo(itemStack, 13, 17, false) -> successful = true
                 }
                 if (!successful && !tryMoveInPlayerInventory(index, 21, itemStack)) return ItemStack.EMPTY

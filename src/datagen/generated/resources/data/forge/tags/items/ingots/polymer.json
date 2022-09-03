@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/teflon"
+    "#forge:ingots/teflon",
+    "#forge:ingots/plastic"
   ]
 }

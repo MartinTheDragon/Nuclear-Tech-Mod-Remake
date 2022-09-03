@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.menu
 import at.martinthedragon.nucleartech.api.menu.slot.ResultSlot
 import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
+import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -41,6 +42,7 @@ class AssemblerMenu(
                 when {
                     itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
                     itemStack.item is AssemblyTemplateItem && moveItemStackTo(itemStack, 4, 5, false) -> successful = true
+                    MachineUpgradeItem.isValidFor(blockEntity, itemStack) && moveItemStackTo(itemStack, 1, 4, false) -> successful = true
                     moveItemStackTo(itemStack, 5, 17, false) -> successful = true
                 }
                 if (!successful && !tryMoveInPlayerInventory(index, 18, itemStack)) return ItemStack.EMPTY

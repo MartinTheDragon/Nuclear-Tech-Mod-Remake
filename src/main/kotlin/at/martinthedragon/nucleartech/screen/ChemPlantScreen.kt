@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.ChemPlantMenu
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.renderGuiFluidTank
+import at.martinthedragon.nucleartech.screen.widgets.UpgradeInfoWidget
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -22,6 +23,11 @@ class ChemPlantScreen(menu: ChemPlantMenu, playerInventory: Inventory, title: Co
         imageWidth = 176
         imageHeight = 222
         inventoryLabelY = imageHeight - 94
+    }
+
+    override fun init() {
+        super.init()
+        addRenderableWidget(UpgradeInfoWidget(guiLeft + 105, guiTop + 40, 8, 8, menu, this::renderComponentTooltip))
     }
 
     override fun render(stack: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {

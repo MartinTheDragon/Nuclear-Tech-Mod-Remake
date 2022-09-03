@@ -1,0 +1,38 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:machine_upgrade_template"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/red_copper"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/redstone"
+      },
+      "amount": 6
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/red_copper"
+      },
+      "amount": 4
+    }
+  ],
+  "result": {
+    "item": "nucleartech:speed_upgrade_mk1",
+    "count": 1
+  },
+  "duration": 200
+}

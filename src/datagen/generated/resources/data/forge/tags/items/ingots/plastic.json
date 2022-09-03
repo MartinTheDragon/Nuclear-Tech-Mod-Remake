@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:bakelite_ingot",
+    "#forge:ingots/teflon"
+  ]
+}

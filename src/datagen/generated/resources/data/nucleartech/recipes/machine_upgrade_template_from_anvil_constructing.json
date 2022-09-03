@@ -1,0 +1,44 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/steel"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/iron"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/copper"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/copper"
+      },
+      "amount": 6
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:machine_upgrade_template",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 2,
+  "tierUpper": -1
+}

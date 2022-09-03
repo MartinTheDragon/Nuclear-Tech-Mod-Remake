@@ -603,6 +603,16 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.schrabidiumWireStamp, "Kabelstempel (Schrabidium)")
         addItem(NTechItems.schrabidiumCircuitStamp, "Schaltkreisstempel (Schrabidium)")
 
+        addItem(NTechItems.speedUpgradeMk1, "Geschwindigkeitsupgrade Mk.I")
+        addItem(NTechItems.speedUpgradeMk2, "Geschwindigkeitsupgrade Mk.II")
+        addItem(NTechItems.speedUpgradeMk3, "Geschwindigkeitsupgrade Mk.III")
+        addItem(NTechItems.powerSavingUpgradeMk1, "Stromsparupgrade Mk.I")
+        addItem(NTechItems.powerSavingUpgradeMk2, "Stromsparupgrade Mk.II")
+        addItem(NTechItems.powerSavingUpgradeMk3, "Stromsparupgrade Mk.III")
+        addItem(NTechItems.overdriveUpgradeMk1, "Overdrive-Upgrade Mk.I")
+        addItem(NTechItems.overdriveUpgradeMk2, "Overdrive-Upgrade Mk.II")
+        addItem(NTechItems.overdriveUpgradeMk3, "Overdrive-Upgrade Mk.III")
+
         addItem(NTechItems.aluminiumShredderBlade, "Aluminiumsägeblatt")
         addItem(NTechItems.goldShredderBlade, "Goldsägeblatt")
         addItem(NTechItems.ironShredderBlade, "Eisensägeblatt")
@@ -907,6 +917,19 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.SIREN_TRACK_ONCE, "Typ: Einmal abspielen")
         add(LangKeys.SIREN_TRACK_RANGE, "Reichweite: %s Meter")
         add(LangKeys.SIREN_TRACK_SIREN_TRACK, "Sirenentrack")
+
+        add(LangKeys.UPGRADE_INFO_ACCEPTED_UPGRADES, "Akzeptierte Upgrades:")
+        add(LangKeys.UPGRADE_INFO_CONSUMPTION, "Verbrauch: %s")
+        add(LangKeys.UPGRADE_INFO_DELAY, "Dauer: %s")
+        add(LangKeys.UPGRADE_INFO_STACKS_TO, "Stapelt bis Level %s")
+        add(LangKeys.UPGRADE_NAME_OVERDRIVE, "Overdrive")
+        add(LangKeys.UPGRADE_NAME_POWER_SAVING, "Stromersparung")
+        add(LangKeys.UPGRADE_NAME_SPEED, "Geschwindigkeit")
+        add(LangKeys.UPGRADE_WARN_INCOMPATIBLE, "Dieses Upgrade ist inkompatibel!")
+        add(LangKeys.UPGRADE_WARN_MACHINE_NOT_UPGRADEABLE, "Diese Maschine ist nicht upgradebar!")
+        add(LangKeys.UPGRADE_WARN_NOT_A_MACHINE, "Das ist keine Maschine!")
+        add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "Betrachte eine Maschine für Info über Effekte")
+        add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "Kompatibilität mit der Maschine ist unbekannt")
 
         add(LangKeys.WORD_SECONDS, "Sekunden")
     }

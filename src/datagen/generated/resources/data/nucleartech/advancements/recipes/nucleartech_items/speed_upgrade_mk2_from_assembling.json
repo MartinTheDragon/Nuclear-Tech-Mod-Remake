@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:speed_upgrade_mk2_from_assembling"
+    ]
+  },
+  "criteria": {
+    "has_speed_upgrade_mk1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:speed_upgrade_mk1"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:speed_upgrade_mk2_from_assembling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_speed_upgrade_mk1",
+      "has_the_recipe"
+    ]
+  ]
+}

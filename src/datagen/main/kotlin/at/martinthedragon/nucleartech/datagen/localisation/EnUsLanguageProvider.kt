@@ -564,6 +564,16 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.schrabidiumWireStamp, "Wire Stamp (Schrabidium)")
         addItem(NTechItems.schrabidiumCircuitStamp, "Circuit Stamp (Schrabidium)")
 
+        addItem(NTechItems.speedUpgradeMk1, "Speed Upgrade Mk.I")
+        addItem(NTechItems.speedUpgradeMk2, "Speed Upgrade Mk.II")
+        addItem(NTechItems.speedUpgradeMk3, "Speed Upgrade Mk.III")
+        addItem(NTechItems.powerSavingUpgradeMk1, "Power Saving Upgrade Mk.I")
+        addItem(NTechItems.powerSavingUpgradeMk2, "Power Saving Upgrade Mk.II")
+        addItem(NTechItems.powerSavingUpgradeMk3, "Power Saving Upgrade Mk.III")
+        addItem(NTechItems.overdriveUpgradeMk1, "Overdrive Upgrade Mk.I")
+        addItem(NTechItems.overdriveUpgradeMk2, "Overdrive Upgrade Mk.II")
+        addItem(NTechItems.overdriveUpgradeMk3, "Overdrive Upgrade Mk.III")
+
         addItem(NTechItems.aluminiumShredderBlade, "Aluminium Shredder Blade")
         addItem(NTechItems.goldShredderBlade, "Gold Shredder Blade")
         addItem(NTechItems.ironShredderBlade, "Iron Shredder Blade")
@@ -868,6 +878,19 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.SIREN_TRACK_ONCE, "Type: Play Once")
         add(LangKeys.SIREN_TRACK_RANGE, "Range: %s Meters")
         add(LangKeys.SIREN_TRACK_SIREN_TRACK, "Siren Track")
+
+        add(LangKeys.UPGRADE_INFO_ACCEPTED_UPGRADES, "Accepted Upgrades:")
+        add(LangKeys.UPGRADE_INFO_CONSUMPTION, "Consumption: %s")
+        add(LangKeys.UPGRADE_INFO_DELAY, "Delay: %s")
+        add(LangKeys.UPGRADE_INFO_STACKS_TO, "Stacks to level %s")
+        add(LangKeys.UPGRADE_NAME_OVERDRIVE, "Overdrive")
+        add(LangKeys.UPGRADE_NAME_POWER_SAVING, "Power Saving")
+        add(LangKeys.UPGRADE_NAME_SPEED, "Speed")
+        add(LangKeys.UPGRADE_WARN_INCOMPATIBLE, "This upgrade is incompatible!")
+        add(LangKeys.UPGRADE_WARN_MACHINE_NOT_UPGRADEABLE, "This machine is not upgradeable!")
+        add(LangKeys.UPGRADE_WARN_NOT_A_MACHINE, "This is not a machine!")
+        add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "View a machine for info about effects")
+        add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "Compatibility with the machine is unknown")
 
         add(LangKeys.WORD_SECONDS, "Seconds")
     }

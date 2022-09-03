@@ -1,0 +1,58 @@
+{
+  "type": "nucleartech:anvil_constructing",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:speed_upgrade_mk1"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/red_copper"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:dusts/redstone"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:advanced_circuit"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/red_copper"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/plastic"
+      },
+      "amount": 2
+    }
+  ],
+  "results": [
+    {
+      "item": {
+        "item": "nucleartech:speed_upgrade_mk2",
+        "count": 1
+      },
+      "chance": 1.0
+    }
+  ],
+  "tierLower": 3,
+  "tierUpper": -1
+}

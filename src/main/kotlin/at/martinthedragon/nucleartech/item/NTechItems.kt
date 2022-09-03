@@ -7,6 +7,10 @@ import at.martinthedragon.nucleartech.block.FatManBlock
 import at.martinthedragon.nucleartech.block.LittleBoyBlock
 import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.missile.*
+import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
+import at.martinthedragon.nucleartech.item.upgrades.OverdriveUpgrade
+import at.martinthedragon.nucleartech.item.upgrades.PowerSavingUpgrade
+import at.martinthedragon.nucleartech.item.upgrades.SpeedUpgrade
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -576,6 +580,15 @@ object NTechItems {
     val schrabidiumPlateStamp = ITEMS.registerK("schrabidium_plate_stamp") { Item(Properties().durability(3000).tab(CreativeTabs.Items)) }
     val schrabidiumWireStamp = ITEMS.registerK("schrabidium_wire_stamp") { Item(Properties().durability(3000).tab(CreativeTabs.Items)) }
     val schrabidiumCircuitStamp = ITEMS.registerK("schrabidium_circuit_stamp") { Item(Properties().durability(3000).tab(CreativeTabs.Items)) }
+    val speedUpgradeMk1 = ITEMS.registerK("speed_upgrade_mk1") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), SpeedUpgrade(1)) }
+    val speedUpgradeMk2 = ITEMS.registerK("speed_upgrade_mk2") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), SpeedUpgrade(2)) }
+    val speedUpgradeMk3 = ITEMS.registerK("speed_upgrade_mk3") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), SpeedUpgrade(3)) }
+    val powerSavingUpgradeMk1 = ITEMS.registerK("power_saving_upgrade_mk1") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), PowerSavingUpgrade(1)) }
+    val powerSavingUpgradeMk2 = ITEMS.registerK("power_saving_upgrade_mk2") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), PowerSavingUpgrade(2)) }
+    val powerSavingUpgradeMk3 = ITEMS.registerK("power_saving_upgrade_mk3") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), PowerSavingUpgrade(3)) }
+    val overdriveUpgradeMk1 = ITEMS.registerK("overdrive_upgrade_mk1") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), OverdriveUpgrade(1)) }
+    val overdriveUpgradeMk2 = ITEMS.registerK("overdrive_upgrade_mk2") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), OverdriveUpgrade(2)) }
+    val overdriveUpgradeMk3 = ITEMS.registerK("overdrive_upgrade_mk3") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), OverdriveUpgrade(3)) }
     val aluminiumShredderBlade = ITEMS.registerK("aluminium_shredder_blade") { ShredderBladeItem(Properties().durability(20).tab(CreativeTabs.Items)) }
     val goldShredderBlade = ITEMS.registerK("gold_shredder_blade") { ShredderBladeItem(Properties().durability(30).tab(CreativeTabs.Items)) }
     val ironShredderBlade = ITEMS.registerK("iron_shredder_blade") { ShredderBladeItem(Properties().durability(100).tab(CreativeTabs.Items)) }

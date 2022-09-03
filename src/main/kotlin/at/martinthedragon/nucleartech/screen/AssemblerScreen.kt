@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.AssemblerMenu
 import at.martinthedragon.nucleartech.ntm
+import at.martinthedragon.nucleartech.screen.widgets.UpgradeInfoWidget
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -24,6 +25,11 @@ class AssemblerScreen(
         imageWidth = 176
         imageHeight = 222
         inventoryLabelY = imageHeight - 94
+    }
+
+    override fun init() {
+        super.init()
+        addRenderableWidget(UpgradeInfoWidget(guiLeft + 141, guiTop + 40, 8, 8, menu, this::renderComponentTooltip))
     }
 
     override fun render(stack: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
