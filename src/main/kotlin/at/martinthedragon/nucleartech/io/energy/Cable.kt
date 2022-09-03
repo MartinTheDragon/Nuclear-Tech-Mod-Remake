@@ -82,7 +82,7 @@ class Cable(val blockEntity: CableBlockEntity) {
                 continue
             }
             val consumer = level.getBlockEntity(consumerPos) ?: continue
-            if (consumer is CableBlockEntity || !consumer.getCapability(CapabilityEnergy.ENERGY).isPresent) continue
+            if (consumer is CableBlockEntity || !consumer.getCapability(CapabilityEnergy.ENERGY, side.opposite).isPresent) continue
             sides += side
         }
         return sides
