@@ -3,7 +3,7 @@
   "textures": {
     "side": "nucleartech:block/electric_furnace_side",
     "front": "nucleartech:block/electric_furnace_front",
-    "bottom": "nucleartech:block/electric_furnace_side",
-    "top": "nucleartech:block/electric_furnace_side"
+    "bottom": "nucleartech:block/electric_furnace_bottom",
+    "top": "nucleartech:block/electric_furnace_top"
   }
 }

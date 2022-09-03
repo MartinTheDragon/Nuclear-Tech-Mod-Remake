@@ -128,12 +128,8 @@ class NuclearBlockStateProvider(
         simpleBlock(NTechBlocks.soliniumBlock.get())
         simpleBlock(NTechBlocks.schrabidiumFuelBlock.get())
         simpleBlock(NTechBlocks.euphemiumBlock.get())
-        simpleBlock(
-            NTechBlocks.schrabidiumCluster.get(), models().cubeColumn("schrabidium_cluster", extend(blockTexture(
-                NTechBlocks.schrabidiumCluster.get()), "_side"), extend(blockTexture(NTechBlocks.schrabidiumCluster.get()), "_end")))
-        simpleBlock(
-            NTechBlocks.euphemiumEtchedSchrabidiumCluster.get(), models().cubeColumn("euphemium_etched_schrabidium_cluster", extend(blockTexture(
-                NTechBlocks.euphemiumEtchedSchrabidiumCluster.get()), "_side"), extend(blockTexture(NTechBlocks.euphemiumEtchedSchrabidiumCluster.get()), "_end")))
+        simpleBlock(NTechBlocks.schrabidiumCluster.get(), models().cubeColumn("schrabidium_cluster", extend(blockTexture(NTechBlocks.schrabidiumCluster.get()), "_side"), extend(blockTexture(NTechBlocks.schrabidiumCluster.get()), "_end")))
+        simpleBlock(NTechBlocks.euphemiumEtchedSchrabidiumCluster.get(), models().cubeColumn("euphemium_etched_schrabidium_cluster", extend(blockTexture(NTechBlocks.euphemiumEtchedSchrabidiumCluster.get()), "_side"), extend(blockTexture(NTechBlocks.euphemiumEtchedSchrabidiumCluster.get()), "_end")))
         simpleBlock(NTechBlocks.magnetizedTungstenBlock.get())
         simpleBlock(NTechBlocks.combineSteelBlock.get())
         simpleBlock(NTechBlocks.deshReinforcedBlock.get())
@@ -157,12 +153,9 @@ class NuclearBlockStateProvider(
             .also { axisBlock(NTechBlocks.steelBeam.get(), it, it) }
         simpleBlock(NTechBlocks.glowingMushroom.get(), models().cross("glowing_mushroom", blockTexture(NTechBlocks.glowingMushroom.get())))
         val singleFaceTemplateModelFile = models().getExistingFile(mcLoc("block/template_single_face"))
-        val glowingMushroomModelFile = models().getBuilder("glowing_mushroom_block").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(
-            NTechBlocks.glowingMushroomBlock.get()))
-        val glowingMushroomInsideModelFile = models().getBuilder("glowing_mushroom_block_inside").parent(singleFaceTemplateModelFile).texture("texture", extend(blockTexture(
-            NTechBlocks.glowingMushroomBlock.get()), "_inside"))
-        val glowingMushroomStemModelFile = models().getBuilder("glowing_mushroom_stem").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(
-            NTechBlocks.glowingMushroomStem.get()))
+        val glowingMushroomModelFile = models().getBuilder("glowing_mushroom_block").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(NTechBlocks.glowingMushroomBlock.get()))
+        val glowingMushroomInsideModelFile = models().getBuilder("glowing_mushroom_block_inside").parent(singleFaceTemplateModelFile).texture("texture", extend(blockTexture(NTechBlocks.glowingMushroomBlock.get()), "_inside"))
+        val glowingMushroomStemModelFile = models().getBuilder("glowing_mushroom_stem").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(NTechBlocks.glowingMushroomStem.get()))
         getMultipartBuilder(NTechBlocks.glowingMushroomBlock.get())
             .part().modelFile(glowingMushroomModelFile).addModel().condition(PipeBlock.NORTH, true).end()
             .part().modelFile(glowingMushroomModelFile).rotationY(90).uvLock(true).addModel().condition(PipeBlock.EAST, true).end()
@@ -189,12 +182,8 @@ class NuclearBlockStateProvider(
             .part().modelFile(glowingMushroomInsideModelFile).rotationY(270).uvLock(false).addModel().condition(PipeBlock.WEST, false).end()
             .part().modelFile(glowingMushroomInsideModelFile).rotationX(270).uvLock(false).addModel().condition(PipeBlock.UP, false).end()
             .part().modelFile(glowingMushroomInsideModelFile).rotationX(90).uvLock(false).addModel().condition(PipeBlock.DOWN, false).end()
-        simpleBlock(
-            NTechBlocks.deadGrass.get(), models().cubeBottomTop("dead_grass", extend(blockTexture(NTechBlocks.deadGrass.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(
-                NTechBlocks.deadGrass.get()), "_top")))
-        simpleBlock(
-            NTechBlocks.glowingMycelium.get(), models().cubeBottomTop("glowing_mycelium", extend(blockTexture(
-                NTechBlocks.glowingMycelium.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(NTechBlocks.glowingMycelium.get()), "_top")))
+        simpleBlock(NTechBlocks.deadGrass.get(), models().cubeBottomTop("dead_grass", extend(blockTexture(NTechBlocks.deadGrass.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(NTechBlocks.deadGrass.get()), "_top")))
+        simpleBlock(NTechBlocks.glowingMycelium.get(), models().cubeBottomTop("glowing_mycelium", extend(blockTexture(NTechBlocks.glowingMycelium.get()), "_side"), blockTexture(Blocks.DIRT), extend(blockTexture(NTechBlocks.glowingMycelium.get()), "_top")))
         simpleBlock(NTechBlocks.trinitite.get())
         simpleBlock(NTechBlocks.redTrinitite.get())
         logBlock(NTechBlocks.charredLog.get())
@@ -206,12 +195,8 @@ class NuclearBlockStateProvider(
         simpleBlock(NTechBlocks.blazingSellafite.get())
         simpleBlock(NTechBlocks.infernalSellafite.get())
         simpleBlock(NTechBlocks.sellafiteCorium.get())
-        simpleBlock(
-            NTechBlocks.siren.get(), models().cubeColumn("siren", extend(blockTexture(NTechBlocks.siren.get()), "_side"), blockTexture(
-                NTechBlocks.steelBlock.get())))
-        horizontalBlock(
-            NTechBlocks.safe.get(), extend(blockTexture(NTechBlocks.safe.get()), "_side"), extend(blockTexture(
-                NTechBlocks.safe.get()), "_front"), extend(blockTexture(NTechBlocks.safe.get()), "_side"))
+        simpleBlock(NTechBlocks.siren.get(), models().cubeColumn("siren", extend(blockTexture(NTechBlocks.siren.get()), "_side"), blockTexture(NTechBlocks.steelBlock.get())))
+        horizontalBlock(NTechBlocks.safe.get(), extend(blockTexture(NTechBlocks.safe.get()), "_side"), extend(blockTexture(NTechBlocks.safe.get()), "_front"), extend(blockTexture(NTechBlocks.safe.get()), "_side"))
         anvil(NTechBlocks.ironAnvil.get())
         anvil(NTechBlocks.leadAnvil.get())
         anvil(NTechBlocks.steelAnvil.get())
@@ -226,15 +211,10 @@ class NuclearBlockStateProvider(
         simpleBlock(NTechBlocks.steamPressBase.get(), models().getExistingFile(NTechBlocks.steamPressBase.id))
         simpleBlock(NTechBlocks.steamPressFrame.get(), models().getExistingFile(NTechBlocks.steamPressFrame.id))
         simpleBlock(NTechBlocks.steamPressTop.get(), models().getExistingFile(NTechBlocks.steamPressTop.id))
-        litHorizontalBlock(
-            NTechBlocks.blastFurnace.get(), top = extend(blockTexture(NTechBlocks.blastFurnace.get()), "_top"), topLit = extend(blockTexture(
-                NTechBlocks.blastFurnace.get()), "_top_on"))
+        litHorizontalBlock(NTechBlocks.blastFurnace.get(), top = extend(blockTexture(NTechBlocks.blastFurnace.get()), "_top"), topLit = extend(blockTexture(NTechBlocks.blastFurnace.get()), "_top_on"))
         litHorizontalBlock(NTechBlocks.combustionGenerator.get())
-        litHorizontalBlock(NTechBlocks.electricFurnace.get())
-        cubeAllSides(
-            NTechBlocks.shredder.get(), north = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), south = extend(blockTexture(
-                NTechBlocks.shredder.get()), "_front"), east = extend(blockTexture(NTechBlocks.shredder.get()), "_side"), west = extend(blockTexture(
-                NTechBlocks.shredder.get()), "_side"))
+        litHorizontalBlock(NTechBlocks.electricFurnace.get(), bottom = extend(blockTexture(NTechBlocks.electricFurnace.get()), "_bottom"), top = extend(blockTexture(NTechBlocks.electricFurnace.get()), "_top"))
+        cubeAllSides(NTechBlocks.shredder.get(), north = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), south = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), east = extend(blockTexture(NTechBlocks.shredder.get()), "_side"), west = extend(blockTexture(NTechBlocks.shredder.get()), "_side"))
         horizontalBlock(NTechBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "block/assembler/particles"))
         horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "block/chem_plant/particles"))
         horizontalBlock(
@@ -469,9 +449,9 @@ class NuclearBlockStateProvider(
         front: ResourceLocation = extend(blockTexture(block), "_front"),
         frontLit: ResourceLocation = extend(blockTexture(block), "_front_on"),
         bottom: ResourceLocation = side,
-        bottomLit: ResourceLocation = sideLit,
+        bottomLit: ResourceLocation = bottom,
         top: ResourceLocation = side,
-        topLit: ResourceLocation = sideLit
+        topLit: ResourceLocation = top
     ) {
         getVariantBuilder(block)
             .forAllStates {

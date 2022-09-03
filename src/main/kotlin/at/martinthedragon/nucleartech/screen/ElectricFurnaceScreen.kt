@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.block.entity.ElectricFurnaceBlockEntity
 import at.martinthedragon.nucleartech.energy.EnergyFormatter
 import at.martinthedragon.nucleartech.menu.ElectricFurnaceMenu
 import at.martinthedragon.nucleartech.ntm
+import at.martinthedragon.nucleartech.screen.widgets.UpgradeInfoWidget
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
@@ -23,6 +24,11 @@ class ElectricFurnaceScreen(
         imageHeight = 166
     }
 
+    override fun init() {
+        super.init()
+        addRenderableWidget(UpgradeInfoWidget(guiLeft + 151, guiTop + 19, 8, 8, menu, this::renderComponentTooltip))
+    }
+
     override fun render(matrix: PoseStack, mouseX: Int, mouseY: Int, partialTicks: Float) {
         renderBackground(matrix)
         super.render(matrix, mouseX, mouseY, partialTicks)
@@ -37,11 +43,11 @@ class ElectricFurnaceScreen(
 
         val electricFurnace = menu.blockEntity
         if (electricFurnace.canProgress) {
-            blit(matrix, leftPos + 57, topPos + 37, 176, 0, 14, 14)
-
-            val cookingProgressScaled = electricFurnace.progress * 22 / ElectricFurnaceBlockEntity.COOKING_TIME
-            blit(matrix, leftPos + 80, topPos + 35, 177, 14, cookingProgressScaled, 16)
+            blit(matrix, leftPos + 56, topPos + 35, 176, 0, 14, 14)
         }
+
+        val cookingProgressScaled = electricFurnace.progress * 22 / electricFurnace.maxProgress.coerceAtLeast(1)
+        blit(matrix, leftPos + 80, topPos + 35, 177, 17, cookingProgressScaled, 16)
 
         if (electricFurnace.energy > 0) {
             val energyScaled = electricFurnace.energy * 52 / ElectricFurnaceBlockEntity.MAX_ENERGY

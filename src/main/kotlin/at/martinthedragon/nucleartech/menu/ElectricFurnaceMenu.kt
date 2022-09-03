@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.menu
 
 import at.martinthedragon.nucleartech.api.menu.slot.ExperienceResultSlot
 import at.martinthedragon.nucleartech.block.entity.ElectricFurnaceBlockEntity
+import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
@@ -24,6 +25,7 @@ class ElectricFurnaceMenu(
         addSlot(SlotItemHandler(inv, 0, 56, 17))
         addSlot(SlotItemHandler(inv, 1, 56, 53))
         addSlot(ExperienceResultSlot(blockEntity, playerInventory.player, inv, 2, 116, 35))
+        addSlot(SlotItemHandler(inv, 3, 147, 34))
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
     }
 
@@ -41,6 +43,7 @@ class ElectricFurnaceMenu(
                 when {
                     canCook(itemStack) && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
                     itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 1, 2, false) -> successful = true
+                    MachineUpgradeItem.isValidForBE(blockEntity, itemStack) && moveItemStackTo(itemStack, 3, 4, false) -> successful = true
                 }
                 if (!successful && !tryMoveInPlayerInventory(index, 3, itemStack)) return ItemStack.EMPTY
             } else if (!moveItemStackTo(itemStack, 3, slots.size, false)) return ItemStack.EMPTY
