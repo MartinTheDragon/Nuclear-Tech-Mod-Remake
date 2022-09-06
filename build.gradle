@@ -10,6 +10,7 @@ buildscript {
 }
 
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id "maven-publish"
 }
 
@@ -193,12 +194,31 @@ jar {
 
     from([sourceSets.api.output, sourceSets.main.output])
 
-    configurations {shaded.extendsFrom library}
-    from { configurations.shaded.collect() { it.isDirectory() ? it : zipTree(it) }}
+//    configurations {shaded.extendsFrom library}
+//    from { configurations.shaded.collect() { it.isDirectory() ? it : zipTree(it) }}
+
+    archiveClassifier.set("slim")
 
     manifest.attributes(manifestAttributes())
     afterEvaluate { finalizedBy reobfJar }
 }
+
+shadowJar {
+    archiveClassifier.set("")
+    configurations = [project.configurations.library]
+
+    from([sourceSets.api.output, sourceSets.main.output])
+
+    def relocation = "${project.group}.relocated"
+
+    relocate "kotlin", "${relocation}.kotlin"
+    relocate "org.intellij", "${relocation}.intellij"
+    relocate "org.jetbrains", "${relocation}.jetbrains"
+
+    afterEvaluate { finalizedBy reobfShadowJar }
+}
+
+assemble.dependsOn shadowJar
 
 // you have no idea how much pain and headaches getting this to work caused me
 task sourcesJar(type: Jar, dependsOn: [classes, apiClasses]) {
@@ -224,6 +244,7 @@ artifacts {
 reobf {
     apiJar { classpath.from(sourceSets.api.compileClasspath) }
     jar { classpath.from(sourceSets.main.compileClasspath) }
+    shadowJar {}
 }
 
 /*
