@@ -12,6 +12,7 @@ import net.minecraftforge.client.model.renderable.MultipartTransforms
 import net.minecraftforge.client.model.renderable.SimpleRenderable
 
 abstract class RotatedBlockEntityRenderer<T : BlockEntity>(@Suppress("UNUSED_PARAMETER") context: BlockEntityRendererProvider.Context) : BlockEntityRenderer<T> {
+    protected open val renderType = RenderType::entityCutout
     abstract fun getModel(blockEntity: T): SimpleRenderable
 
     override fun render(blockEntity: T, partials: Float, matrix: PoseStack, buffers: MultiBufferSource, light: Int, overlay: Int) {
@@ -21,7 +22,7 @@ abstract class RotatedBlockEntityRenderer<T : BlockEntity>(@Suppress("UNUSED_PAR
         matrix.translate(.5, .0, .5)
         matrix.mulPose(Vector3f.YN.rotationDegrees(blockEntity.blockState.getValue(HorizontalDirectionalBlock.FACING).toYRot()))
         matrix.translate(-.5, .0, -.5)
-        model.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        model.render(matrix, buffers, renderType, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
     }
 

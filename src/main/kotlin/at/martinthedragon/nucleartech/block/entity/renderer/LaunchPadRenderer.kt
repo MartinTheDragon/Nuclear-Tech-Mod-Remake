@@ -22,7 +22,7 @@ class LaunchPadRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
 
         matrix.pushPose()
         matrix.translate(.5, .0, .5)
-        model.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        model.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
 
         if (missileItem != null) {
             val missileModel = SpecialModels.getBakedModel(missileItem.renderModel)

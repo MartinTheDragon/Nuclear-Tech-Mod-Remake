@@ -32,7 +32,7 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         matrix.translate(.5, .0, .5)
         matrix.mulPose(Vector3f.YN.rotationDegrees(chemPlant.blockState.getValue(HorizontalDirectionalBlock.FACING).toYRot()))
         matrix.translate(-.5, .0, -.5)
-        body.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        body.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
 
         val spinnerRotation = chemPlant.renderTick % 360 + partials
         val fluid1 = chemPlant.inputTank1.fluid
@@ -40,7 +40,7 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         matrix.translate(-.625, .0, .625)
         if (!fluid1.isEmpty && chemPlant.canProgress) matrix.mulPose(Vector3f.YP.rotationDegrees(-spinnerRotation))
         else matrix.mulPose(Vector3f.YP.rotationDegrees(-45F))
-        spinner.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        spinner.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         val fluid2 = chemPlant.inputTank2.fluid
@@ -48,14 +48,14 @@ class ChemPlantRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         matrix.translate(.625, .0, .625)
         if (!fluid2.isEmpty && chemPlant.canProgress) matrix.mulPose(Vector3f.YP.rotationDegrees(-spinnerRotation))
         else matrix.mulPose(Vector3f.YP.rotationDegrees(45F))
-        spinner.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        spinner.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         val pistonPush = sin((chemPlant.renderTick % 40 + partials) * .05 * PI) * .25 - .25
         matrix.pushPose()
         if (chemPlant.canProgress) matrix.translate(.0, pistonPush, .0)
         else matrix.translate(.0, -.25, .0)
-        piston.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        piston.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         if (!fluid1.isEmpty) {

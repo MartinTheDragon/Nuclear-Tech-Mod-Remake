@@ -27,7 +27,7 @@ class AssemblerRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         matrix.translate(.5, .0, .5)
         matrix.mulPose(Vector3f.YN.rotationDegrees(assembler.blockState.getValue(HorizontalDirectionalBlock.FACING).toYRot()))
         matrix.translate(-.5, .0, -.5)
-        body.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        body.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
 
         val recipe = assembler.recipe
         if (recipe != null) {
@@ -50,13 +50,13 @@ class AssemblerRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
             val offset = ((assembler.renderTick % 100 + partials) * 10F).let { if (it > 500) 500 - (it - 500) else it }
             matrix.translate(offset * .003 - .75, .0, .0)
         }
-        slider.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        slider.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
 
         if (assembler.canProgress) {
             val sway = sin((assembler.renderTick % 40 + partials) * .5 / PI)
             matrix.translate(.0, .0, sway * .3)
         }
-        arm.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        arm.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         val rotation = if (assembler.canProgress) (assembler.renderTick % 36 + partials) * 10F else 0F
@@ -64,25 +64,25 @@ class AssemblerRenderer(@Suppress("UNUSED_PARAMETER") context: BlockEntityRender
         matrix.pushPose()
         matrix.translate(-.6, .75, 1.0625)
         matrix.mulPose(Vector3f.ZP.rotationDegrees(-rotation))
-        cog.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        cog.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         matrix.pushPose()
         matrix.translate(.6, .75, 1.0625)
         matrix.mulPose(Vector3f.ZP.rotationDegrees(rotation))
-        cog.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        cog.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         matrix.pushPose()
         matrix.translate(-.6, .75, -1.0625)
         matrix.mulPose(Vector3f.ZP.rotationDegrees(-rotation))
-        cog.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        cog.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         matrix.pushPose()
         matrix.translate(.6, .75, -1.0625)
         matrix.mulPose(Vector3f.ZP.rotationDegrees(rotation))
-        cog.render(matrix, buffers, RenderType::entitySmoothCutout, light, overlay, partials, MultipartTransforms.EMPTY)
+        cog.render(matrix, buffers, RenderType::entityCutoutNoCull, light, overlay, partials, MultipartTransforms.EMPTY)
         matrix.popPose()
 
         matrix.popPose()
