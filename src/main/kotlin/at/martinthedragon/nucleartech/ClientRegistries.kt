@@ -2,10 +2,7 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
-import at.martinthedragon.nucleartech.block.entity.renderer.AssemblerRenderer
-import at.martinthedragon.nucleartech.block.entity.renderer.ChemPlantRenderer
-import at.martinthedragon.nucleartech.block.entity.renderer.LaunchPadRenderer
-import at.martinthedragon.nucleartech.block.entity.renderer.SteamPressRenderer
+import at.martinthedragon.nucleartech.block.entity.renderer.*
 import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.renderer.MushroomCloudRenderer
 import at.martinthedragon.nucleartech.entity.renderer.NoopRenderer
@@ -114,10 +111,12 @@ object ClientRegistries {
     fun registerEntityRenderers(event: EntityRenderersEvent.RegisterRenderers) {
         NuclearTech.LOGGER.debug("Registering BERs")
         with(event) {
-            registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.assemblerBlockEntityType.get(), ::AssemblerRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.chemPlantBlockEntityType.get(), ::ChemPlantRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.fatManBlockEntityType.get(), ::FatManRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.launchPadBlockEntityType.get(), ::LaunchPadRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.littleBoyBlockEntityType.get(), ::LittleBoyRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
         }
 
         NuclearTech.LOGGER.debug("Registering Entity Renderers")

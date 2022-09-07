@@ -1,6 +1,6 @@
 {
   "textures": {
-    "texture": "nucleartech:block/chem_plant/body"
+    "texture": "nucleartech:other/chem_plant/body"
   },
   "loader": "forge:obj",
   "model": "nucleartech:models/other/chem_plant/body.obj",

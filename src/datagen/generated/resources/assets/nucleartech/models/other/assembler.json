@@ -3,7 +3,7 @@
   "parts": {
     "body": {
       "textures": {
-        "texture": "nucleartech:block/assembler/body"
+        "texture": "nucleartech:other/assembler/body"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/assembler/body.obj",
@@ -11,7 +11,7 @@
     },
     "cog": {
       "textures": {
-        "texture": "nucleartech:block/assembler/cog"
+        "texture": "nucleartech:other/assembler/cog"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/assembler/cog.obj",
@@ -19,7 +19,7 @@
     },
     "slider": {
       "textures": {
-        "texture": "nucleartech:block/assembler/slider"
+        "texture": "nucleartech:other/assembler/slider"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/assembler/slider.obj",
@@ -27,7 +27,7 @@
     },
     "arm": {
       "textures": {
-        "texture": "nucleartech:block/assembler/arm"
+        "texture": "nucleartech:other/assembler/arm"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/assembler/arm.obj",

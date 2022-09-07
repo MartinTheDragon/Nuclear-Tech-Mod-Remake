@@ -4,7 +4,6 @@ import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.AnvilBlock
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.fluid.NTechFluids
-import net.minecraft.client.renderer.block.model.ItemTransforms
 import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
@@ -13,7 +12,6 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.PipeBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraftforge.client.model.generators.BlockModelBuilder
 import net.minecraftforge.client.model.generators.BlockStateProvider
 import net.minecraftforge.client.model.generators.ConfiguredModel
 import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder
@@ -215,36 +213,12 @@ class NuclearBlockStateProvider(
         litHorizontalBlock(NTechBlocks.combustionGenerator.get())
         litHorizontalBlock(NTechBlocks.electricFurnace.get(), bottom = extend(blockTexture(NTechBlocks.electricFurnace.get()), "_bottom"), top = extend(blockTexture(NTechBlocks.electricFurnace.get()), "_top"))
         cubeAllSides(NTechBlocks.shredder.get(), north = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), south = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), east = extend(blockTexture(NTechBlocks.shredder.get()), "_side"), west = extend(blockTexture(NTechBlocks.shredder.get()), "_side"))
-        horizontalBlock(NTechBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "block/assembler/particles"))
-        horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "block/chem_plant/particles"))
-        horizontalBlock(
-            NTechBlocks.littleBoy.get(), models().getBuilder("little_boy")
-            .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
-            .modelLocation(modLoc("models/block/little_boy/little_boy.obj"))
-            .flipV(true).detectCullableFaces(false).end()
-            .texture("little_boy_texture", modLoc("block/little_boy"))
-            .texture("particle", modLoc("block/little_boy"))
-            .parent(blockTransformsModel)
-            .transforms()
-            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(3F, -2F, 0F).scale(.34F).end()
-            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 90F, 0F).scale(.5F).end()
-            .end()
-        )
-        horizontalBlock(
-            NTechBlocks.fatMan.get(), models().getBuilder("fat_man")
-            .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
-            .modelLocation(modLoc("models/block/fat_man/fat_man.obj"))
-            .flipV(true).detectCullableFaces(false).end()
-            .texture("fat_man_texture", modLoc("block/fat_man"))
-            .texture("particle", modLoc("block/fat_man"))
-            .parent(blockTransformsModel)
-            .transforms()
-            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(2.5F, -3F, 0F).scale(.34F).end()
-            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.5F).end()
-            .end()
-        )
-        simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad/launch_pad"))
-        simpleBlock(NTechBlocks.launchPadPart.get(), models().getBuilder("launch_pad").texture("particle", "block/launch_pad/launch_pad"))
+        horizontalBlock(NTechBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "other/assembler/particles"))
+        horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "other/chem_plant/particles"))
+        horizontalBlock(NTechBlocks.littleBoy.get(), models().getBuilder("little_boy").texture("particle", "other/little_boy/little_boy_particles"))
+        horizontalBlock(NTechBlocks.fatMan.get(), models().getBuilder("fat_man").texture("particle", "other/fat_man/fat_man_particles"))
+        simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "other/launch_pad/launch_pad_particles"))
+        simpleBlock(NTechBlocks.launchPadPart.get(), models().getBuilder("launch_pad").texture("particle", "other/launch_pad/launch_pad_particles"))
 
         simpleBlock(NTechBlocks.genericMultiBlockPart.get(), models().getBuilder("generic_multi_block_part"))
         simpleBlock(NTechBlocks.genericMultiBlockPort.get(), models().getBuilder("generic_multi_block_port"))
@@ -408,8 +382,6 @@ class NuclearBlockStateProvider(
         copiedBlockItem(NTechBlocks.combustionGenerator.get())
         copiedBlockItem(NTechBlocks.electricFurnace.get())
         copiedBlockItem(NTechBlocks.shredder.get())
-        copiedBlockItem(NTechBlocks.littleBoy.get())
-        copiedBlockItem(NTechBlocks.fatMan.get())
     }
 
     private val blockTransformsModel = models().getExistingFile(mcLoc("block/block"))

@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "nucleartech:block/launch_pad/launch_pad"
+    "particle": "nucleartech:other/launch_pad/launch_pad_particles"
   }
 }

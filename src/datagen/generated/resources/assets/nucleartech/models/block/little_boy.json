@@ -1,42 +1,5 @@
 {
-  "parent": "minecraft:block/block",
-  "display": {
-    "gui": {
-      "rotation": [
-        30,
-        225,
-        0
-      ],
-      "translation": [
-        3,
-        -2,
-        0
-      ],
-      "scale": [
-        0.34,
-        0.34,
-        0.34
-      ]
-    },
-    "fixed": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "scale": [
-        0.5,
-        0.5,
-        0.5
-      ]
-    }
-  },
   "textures": {
-    "little_boy_texture": "nucleartech:block/little_boy",
-    "particle": "nucleartech:block/little_boy"
-  },
-  "loader": "forge:obj",
-  "model": "nucleartech:models/block/little_boy/little_boy.obj",
-  "detectCullableFaces": false,
-  "flip-v": true
+    "particle": "nucleartech:other/little_boy/little_boy_particles"
+  }
 }

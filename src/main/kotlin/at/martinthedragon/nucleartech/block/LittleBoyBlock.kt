@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.block
 
-import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.api.explosion.IgnitableExplosive
 import at.martinthedragon.nucleartech.block.entity.LittleBoyBlockEntity
+import at.martinthedragon.nucleartech.item.NTechItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionHand
@@ -21,7 +21,7 @@ class LittleBoyBlock(properties: Properties) : BaseEntityBlock(properties), Igni
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) { builder.add(HorizontalDirectionalBlock.FACING) }
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState = defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.horizontalDirection.counterClockWise)
-    override fun getRenderShape(state: BlockState) = RenderShape.MODEL
+    override fun getRenderShape(state: BlockState) = RenderShape.ENTITYBLOCK_ANIMATED
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<LittleBoyBlockEntity>(level, pos, player)
     override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<LittleBoyBlockEntity>(level, pos, stack)

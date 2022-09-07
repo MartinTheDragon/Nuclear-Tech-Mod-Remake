@@ -3,7 +3,7 @@
   "parts": {
     "body": {
       "textures": {
-        "texture": "nucleartech:block/chem_plant/body"
+        "texture": "nucleartech:other/chem_plant/body"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/chem_plant/body.obj",
@@ -12,7 +12,7 @@
     },
     "spinner": {
       "textures": {
-        "texture": "nucleartech:block/chem_plant/spinner"
+        "texture": "nucleartech:other/chem_plant/spinner"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/chem_plant/spinner.obj",
@@ -21,7 +21,7 @@
     },
     "piston": {
       "textures": {
-        "texture": "nucleartech:block/chem_plant/piston"
+        "texture": "nucleartech:other/chem_plant/piston"
       },
       "loader": "forge:obj",
       "model": "nucleartech:models/other/chem_plant/piston.obj",

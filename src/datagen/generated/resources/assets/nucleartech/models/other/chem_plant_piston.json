@@ -1,6 +1,6 @@
 {
   "textures": {
-    "texture": "nucleartech:block/chem_plant/piston"
+    "texture": "nucleartech:other/chem_plant/piston"
   },
   "loader": "forge:obj",
   "model": "nucleartech:models/other/chem_plant/piston.obj",

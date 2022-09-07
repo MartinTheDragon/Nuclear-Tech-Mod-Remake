@@ -23,6 +23,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.phys.AABB
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
@@ -62,6 +63,8 @@ class LittleBoyBlockEntity(pos: BlockPos, state: BlockState) : BaseContainerBloc
             else -> false
         }
     }
+
+    override fun getRenderBoundingBox() = AABB(blockPos.offset(-3, 0, -3), blockPos.offset(3, 1, 3))
 
     override fun load(nbt: CompoundTag) {
         super.load(nbt)

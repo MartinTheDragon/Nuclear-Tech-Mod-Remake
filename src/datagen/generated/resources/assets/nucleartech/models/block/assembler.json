@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "nucleartech:block/assembler/particles"
+    "particle": "nucleartech:other/assembler/particles"
   }
 }

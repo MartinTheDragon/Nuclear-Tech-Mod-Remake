@@ -1,6 +1,6 @@
 {
   "textures": {
-    "texture": "nucleartech:block/assembler/arm"
+    "texture": "nucleartech:other/assembler/arm"
   },
   "loader": "forge:obj",
   "model": "nucleartech:models/other/assembler/arm.obj",

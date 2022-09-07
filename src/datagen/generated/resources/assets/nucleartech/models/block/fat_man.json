@@ -1,47 +1,5 @@
 {
-  "parent": "minecraft:block/block",
-  "display": {
-    "gui": {
-      "rotation": [
-        30,
-        225,
-        0
-      ],
-      "translation": [
-        2.5,
-        -3,
-        0
-      ],
-      "scale": [
-        0.34,
-        0.34,
-        0.34
-      ]
-    },
-    "fixed": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "translation": [
-        0,
-        -2,
-        0
-      ],
-      "scale": [
-        0.5,
-        0.5,
-        0.5
-      ]
-    }
-  },
   "textures": {
-    "fat_man_texture": "nucleartech:block/fat_man",
-    "particle": "nucleartech:block/fat_man"
-  },
-  "loader": "forge:obj",
-  "model": "nucleartech:models/block/fat_man/fat_man.obj",
-  "detectCullableFaces": false,
-  "flip-v": true
+    "particle": "nucleartech:other/fat_man/fat_man_particles"
+  }
 }

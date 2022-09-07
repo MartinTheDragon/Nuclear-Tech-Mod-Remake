@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.block.AssemblerBlock
 import at.martinthedragon.nucleartech.block.ChemPlantBlock
 import at.martinthedragon.nucleartech.block.LaunchPadBlock
 import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.entity.*
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
@@ -175,8 +176,8 @@ object NTechBlockItems {
     val combustionGenerator = ITEMS.registerK("combustion_generator") { BlockItem(NTechBlocks.combustionGenerator.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val electricFurnace = ITEMS.registerK("electric_furnace") { BlockItem(NTechBlocks.electricFurnace.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val shredder = ITEMS.registerK("shredder") { BlockItem(NTechBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
-    val assemblerPlacer = ITEMS.registerK("assembler") { MultiBlockPlacerItem(NTechBlocks.assembler.get(), AssemblerBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
-    val chemPlantPlacer = ITEMS.registerK("chem_plant") { MultiBlockPlacerItem(NTechBlocks.chemPlant.get(), ChemPlantBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val assemblerPlacer = ITEMS.registerK("assembler") { SpecialModelMultiBlockPlacerItem(NTechBlocks.assembler.get(), ::AssemblerBlockEntity, AssemblerBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val chemPlantPlacer = ITEMS.registerK("chem_plant") { SpecialModelMultiBlockPlacerItem(NTechBlocks.chemPlant.get(), ::ChemPlantBlockEntity, ChemPlantBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
 
     val ironAnvil = ITEMS.registerK("iron_anvil") { BlockItem(NTechBlocks.ironAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val leadAnvil = ITEMS.registerK("lead_anvil") { BlockItem(NTechBlocks.leadAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
@@ -191,10 +192,10 @@ object NTechBlockItems {
 
     val coatedCable = ITEMS.registerK("coated_red_copper_cable") { BlockItem(NTechBlocks.coatedCable.get(), Item.Properties().tab(CreativeTabs.Machines)) }
 
-    val littleBoy = ITEMS.registerK("little_boy") { BlockItem(NTechBlocks.littleBoy.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
-    val fatMan = ITEMS.registerK("fat_man") { BlockItem(NTechBlocks.fatMan.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
+    val littleBoy = ITEMS.registerK("little_boy") { SpecialModelBlockItem(NTechBlocks.littleBoy.get(), ::LittleBoyBlockEntity, Item.Properties().tab(CreativeTabs.Bombs)) }
+    val fatMan = ITEMS.registerK("fat_man") { SpecialModelBlockItem(NTechBlocks.fatMan.get(), ::FatManBlockEntity, Item.Properties().tab(CreativeTabs.Bombs)) }
 
-    val launchPadPlacer = ITEMS.registerK("launch_pad") { MultiBlockPlacerItem(NTechBlocks.launchPad.get(), LaunchPadBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Rocketry)) }
+    val launchPadPlacer = ITEMS.registerK("launch_pad") { SpecialModelMultiBlockPlacerItem(NTechBlocks.launchPad.get(), ::LaunchPadBlockEntity, LaunchPadBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Rocketry)) }
 
     private fun Item.Properties.tab(tab: CreativeTabs): Item.Properties = tab(tab.tab)
 }

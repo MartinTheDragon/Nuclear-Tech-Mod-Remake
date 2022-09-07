@@ -1,6 +1,6 @@
 {
   "textures": {
-    "texture": "nucleartech:block/assembler/slider"
+    "texture": "nucleartech:other/assembler/slider"
   },
   "loader": "forge:obj",
   "model": "nucleartech:models/other/assembler/slider.obj",

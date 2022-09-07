@@ -33,7 +33,9 @@ object SpecialModels : ResourceManagerReloadListener {
     val CHEM_PLANT_FLUID_CAP = registerBakedModel(modelLoc("chem_plant/fluid_cap"), bakedModel())
     val CHEM_PLANT_PISTON = registerModel(modelLoc("chem_plant/piston"), simpleModel())
     val CHEM_PLANT_SPINNER = registerModel(modelLoc("chem_plant/spinner"), simpleModel())
+    val FAT_MAN = registerModel(modelLoc("fat_man/fat_man"), simpleModel())
     val LAUNCH_PAD = registerModel(modelLoc("launch_pad/launch_pad"), simpleModel())
+    val LITTLE_BOY = registerModel(modelLoc("little_boy/little_boy"), simpleModel())
     val MISSILE_HUGE = registerBakedModel(AbstractMissile.MODEL_MISSILE_HUGE, bakedModel())
     val MISSILE_NUCLEAR = registerBakedModel(modelLoc("missiles/missile_nuclear"), bakedModel())
     val MISSILE_STRONG = registerBakedModel(AbstractMissile.MODEL_MISSILE_STRONG, bakedModel())
@@ -43,7 +45,7 @@ object SpecialModels : ResourceManagerReloadListener {
     private fun modelLoc(path: String) = ntm("models/other/$path.obj")
 
     private fun simpleModel(detectCullableFaces: Boolean = false, diffuseLighting: Boolean = false, flipV: Boolean = true, ambientToFullbright: Boolean = true, materialLibraryOverrideLocation: String? = null): (ResourceLocation) -> SimpleRenderable =
-        { id -> OBJLoader.INSTANCE.loadModel(OBJModel.ModelSettings(id, detectCullableFaces, diffuseLighting, flipV, ambientToFullbright, materialLibraryOverrideLocation)).bakeRenderable(StandaloneModelConfiguration.create(id, mapOf("#texture" to ResourceLocation(id.namespace, "block/${id.path.removeSuffix(".obj").removePrefix("models/other/")}")))) }
+        { id -> OBJLoader.INSTANCE.loadModel(OBJModel.ModelSettings(id, detectCullableFaces, diffuseLighting, flipV, ambientToFullbright, materialLibraryOverrideLocation)).bakeRenderable(StandaloneModelConfiguration.create(id, mapOf("#texture" to ResourceLocation(id.namespace, id.path.removeSuffix(".obj").removePrefix("models/"))))) }
 
     private fun bakedModel(detectCullableFaces: Boolean = false, diffuseLighting: Boolean = false, flipV: Boolean = true, ambientToFullbright: Boolean = true, materialLibraryOverrideLocation: String? = null): (ResourceLocation) -> BakedModel =
         { id -> OBJLoader.INSTANCE.loadModel(OBJModel.ModelSettings(id, detectCullableFaces, diffuseLighting, flipV, ambientToFullbright, materialLibraryOverrideLocation)).bake(StandaloneModelConfiguration.INSTANCE, ForgeModelBakery.instance(), UnitSprite.GETTER, SimpleModelState.IDENTITY, ItemOverrides.EMPTY, id) }

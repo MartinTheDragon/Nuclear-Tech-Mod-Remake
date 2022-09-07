@@ -1,6 +1,6 @@
 {
   "textures": {
-    "texture": "nucleartech:block/chem_plant/spinner"
+    "texture": "nucleartech:other/chem_plant/spinner"
   },
   "loader": "forge:obj",
   "model": "nucleartech:models/other/chem_plant/spinner.obj",

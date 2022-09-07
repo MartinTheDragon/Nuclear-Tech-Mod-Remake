@@ -27,22 +27,22 @@ class NuclearModelProvider(
                 .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/assembler/body.obj"))
                 .flipV(true).end()
-                .texture("texture", modLoc("block/assembler/body"))
+                .texture("texture", modLoc("other/assembler/body"))
             ).submodel("cog", getBuilder("assembler_cog")
                 .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/assembler/cog.obj"))
                 .flipV(true).end()
-                .texture("texture", modLoc("block/assembler/cog"))
+                .texture("texture", modLoc("other/assembler/cog"))
             ).submodel("slider", getBuilder("assembler_slider")
                 .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/assembler/slider.obj"))
                 .flipV(true).end()
-                .texture("texture", modLoc("block/assembler/slider"))
+                .texture("texture", modLoc("other/assembler/slider"))
             ).submodel("arm", getBuilder("assembler_arm")
                 .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/assembler/arm.obj"))
                 .flipV(true).end()
-                .texture("texture", modLoc("block/assembler/arm"))
+                .texture("texture", modLoc("other/assembler/arm"))
             ).end()
         getBuilder("chem_plant")
             .customLoader { modelLoader, existingFileHelper -> CompositeModelBuilder.begin(modelLoader, existingFileHelper) }
@@ -50,17 +50,17 @@ class NuclearModelProvider(
                 .customLoader { modelLoader, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/chem_plant/body.obj"))
                 .flipV(true).detectCullableFaces(false).end()
-                .texture("texture", modLoc("block/chem_plant/body"))
+                .texture("texture", modLoc("other/chem_plant/body"))
             ).submodel("spinner", getBuilder("chem_plant_spinner")
                 .customLoader { modeLoader, existingFileHelper -> OBJLoaderBuilder.begin(modeLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/chem_plant/spinner.obj"))
                 .flipV(true).detectCullableFaces(false).end()
-                .texture("texture", modLoc("block/chem_plant/spinner"))
+                .texture("texture", modLoc("other/chem_plant/spinner"))
             ).submodel("piston", getBuilder("chem_plant_piston")
                 .customLoader { modeLoader, existingFileHelper -> OBJLoaderBuilder.begin(modeLoader, existingFileHelper) }
                 .modelLocation(modLoc("models/other/chem_plant/piston.obj"))
                 .flipV(true).detectCullableFaces(false).end()
-                .texture("texture", modLoc("block/chem_plant/piston"))
+                .texture("texture", modLoc("other/chem_plant/piston"))
             ).end()
         getBuilder("mushroom_cloud")
             .customLoader { modelLoader: BlockModelBuilder, existingFileHelper -> OBJLoaderBuilder.begin(modelLoader, existingFileHelper) }
