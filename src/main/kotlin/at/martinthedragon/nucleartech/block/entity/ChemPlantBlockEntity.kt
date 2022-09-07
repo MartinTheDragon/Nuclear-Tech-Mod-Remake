@@ -7,6 +7,7 @@ import at.martinthedragon.nucleartech.capability.item.AccessLimitedOutputItemHan
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.extensions.acceptFluids
+import at.martinthedragon.nucleartech.extensions.inverted
 import at.martinthedragon.nucleartech.extensions.subView
 import at.martinthedragon.nucleartech.extensions.subViewWithFluids
 import at.martinthedragon.nucleartech.fluid.*
@@ -16,6 +17,7 @@ import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import at.martinthedragon.nucleartech.item.upgrades.OverdriveUpgrade
 import at.martinthedragon.nucleartech.item.upgrades.PowerSavingUpgrade
 import at.martinthedragon.nucleartech.item.upgrades.SpeedUpgrade
+import at.martinthedragon.nucleartech.math.*
 import at.martinthedragon.nucleartech.menu.ChemPlantMenu
 import at.martinthedragon.nucleartech.menu.NTechContainerMenu
 import at.martinthedragon.nucleartech.menu.slots.data.BooleanDataSlot
@@ -26,12 +28,14 @@ import at.martinthedragon.nucleartech.recipe.containerSatisfiesRequirements
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
+import net.minecraft.world.phys.Vec3
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
@@ -154,6 +158,12 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
             renderTick++
             if (renderTick >= 360) renderTick = 0
         } else renderTick = 0
+
+        if (canProgress && !isRemoved && renderTick % 3 == 0) {
+            val particleOffset = Vec3(1.125, 3.0, 1.125).rotate(getHorizontalBlockRotation().inverted)
+            val (x, y, z) = Vec3.atBottomCenterOf(blockPos).add(particleOffset)
+            level.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0, 0.1, 0.0)
+        }
     }
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {

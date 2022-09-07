@@ -5,6 +5,7 @@ import com.mojang.math.Vector3f
 import com.mojang.math.Vector4f
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Vec3i
+import net.minecraft.world.level.block.Rotation
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 
@@ -18,6 +19,13 @@ fun Vec3i.toVec3() = Vec3(x.toDouble(), y.toDouble(), z.toDouble())
 fun Vec3i.toVector3f() = Vector3f(x.toFloat(), y.toFloat(), z.toFloat())
 
 fun Vector3f.toVec3i() = Vec3i(x().toInt(), y().toInt(), z().toInt())
+
+fun Vec3.rotate(rotation: Rotation) = when (rotation) {
+    Rotation.NONE -> this
+    Rotation.CLOCKWISE_90 -> Vec3(-z, y, x)
+    Rotation.CLOCKWISE_180 -> Vec3(-x, y, -z)
+    Rotation.COUNTERCLOCKWISE_90 -> Vec3(z, y, -x)
+}
 
 operator fun Vec2.component1() = x
 operator fun Vec2.component2() = y
