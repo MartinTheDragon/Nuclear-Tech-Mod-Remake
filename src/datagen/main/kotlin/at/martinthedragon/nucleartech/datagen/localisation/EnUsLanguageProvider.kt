@@ -869,7 +869,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.JEI_CATEGORY_SHREDDING, "Shredding")
         add(LangKeys.JEI_CATEGORY_SMITHING, "Smithing")
         add(LangKeys.JEI_CATEGORY_TEMPLATE_FOLDER, "Template Folder")
-        ignore(LangKeys.JEI_EXPERIENCE)
+        add(LangKeys.JEI_EXPERIENCE, "%s XP")
         add(LangKeys.JEI_OUTPUT_CHANCE, "Output chance:")
         add(LangKeys.JEI_TIER_MINIMUM, "Minimum Tier: %s")
         add(LangKeys.JEI_TIER_RANGE, "Tier Range: %s..%s")

@@ -908,7 +908,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.JEI_CATEGORY_SHREDDING, "Zerkleinerungsrezepte")
         add(LangKeys.JEI_CATEGORY_SMITHING, "Schmiederezepte")
         add(LangKeys.JEI_CATEGORY_TEMPLATE_FOLDER, "Vorlagen-Zeichenmappe")
-        ignore(LangKeys.JEI_EXPERIENCE)
+        add(LangKeys.JEI_EXPERIENCE, "%s EP")
         add(LangKeys.JEI_OUTPUT_CHANCE, "Wahrscheinlichkeit:")
         add(LangKeys.JEI_TIER_MINIMUM, "Mindeststufe: %s")
         add(LangKeys.JEI_TIER_RANGE, "Stufenbereich: %s..%s")

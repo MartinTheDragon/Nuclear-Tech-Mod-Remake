@@ -982,6 +982,7 @@
   "jei.nucleartech.category.shredding": "Shredding",
   "jei.nucleartech.category.smithing": "Smithing",
   "jei.nucleartech.category.template_folder": "Template Folder",
+  "jei.nucleartech.experience": "%s XP",
   "jei.nucleartech.minimum_tier": "Minimum Tier: %s",
   "jei.nucleartech.output_chance": "Output chance:",
   "jei.nucleartech.tier_range": "Tier Range: %s..%s",

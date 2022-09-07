@@ -116,7 +116,7 @@ object LangKeys {
     val JEI_CATEGORY_SHREDDING = of(CAT_JEI, "category.shredding")
     val JEI_CATEGORY_SMITHING = of(CAT_JEI, "category.smithing")
     val JEI_CATEGORY_TEMPLATE_FOLDER = of(CAT_JEI, "category.template_folder")
-    val JEI_EXPERIENCE = of("gui.jei.category.smelting.experience") // 1 float
+    val JEI_EXPERIENCE = of(CAT_JEI, "experience") // 1 float
     val JEI_OUTPUT_CHANCE = of(CAT_JEI, "output_chance")
     val JEI_TIER_MINIMUM = of(CAT_JEI, "minimum_tier") // 1 int
     val JEI_TIER_RANGE = of(CAT_JEI, "tier_range") // 2 int

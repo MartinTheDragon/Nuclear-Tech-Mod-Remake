@@ -73,6 +73,8 @@ minecraft {
             }
 
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             // you'll have to use JetBrains Runtime to get anything out of this
             // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
@@ -93,10 +95,16 @@ minecraft {
             workingDirectory file("run")
 
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             // you'll have to use JetBrains Runtime to get anything out of this
             // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
-            jvmArgs("-XX:+AllowEnhancedClassRedefinition", "-XX:HotswapAgent=fatjar", "-Xlog:redefine+class*=info")
+            // for use with hotswap agent, use the following arguments: -XX:+AllowEnhancedClassRedefinition,-XX:HotswapAgent=fatjar,-Xlog:redefine+class*=info
+            // don't forget to regenerate run configs when changing arguments
+            if (project.localProperties != null && project.localProperties.containsKey('jvm.args')) {
+                jvmArgs(project.localProperties.get('jvm.args').split(','))
+            }
 
             mods {
                 nucleartech {
@@ -110,6 +118,8 @@ minecraft {
 
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', "$modid", '--all', '--output', file('src/datagen/generated/resources/'), '--existing', file('src/main/resources/')
@@ -144,6 +154,7 @@ repositories {
         url = "https://modmaven.k-4u.nl"
     }
     maven { url 'https://modmaven.dev/' }
+    maven { url "https://maven.shedaniel.me" }
     mavenCentral()
 }
 
@@ -161,8 +172,21 @@ dependencies {
     minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
     library "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
+    // reload gradle and run genIntellijRuns (or eclipse) after changing
+    def devModeREI = project.localProperties != null && project.localProperties.containsKey('dev.mode.rei') && Boolean.valueOf(project.localProperties.get("dev.mode.rei"))
+    println("Currently running integration for ${devModeREI ? "REI" : "JEI"}")
+
     compileOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version")
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-api-forge:$rei_version")
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-default-plugin-forge:$rei_version")
+
+    if (devModeREI) {
+        implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:$rei_version")
+        implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:$cloth_config_version")
+        implementation fg.deobf("dev.architectury:architectury-forge:$architectury_version")
+    } else {
+        runtimeOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version")
+    }
 
     // for testing compatibility
     runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
