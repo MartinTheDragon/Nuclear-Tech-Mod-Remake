@@ -42,6 +42,7 @@ fun tryFillFluidContainerAndMove(container: ItemStack, fluidSource: IFluidHandle
     return FluidActionResult.FAILURE
 }
 
+@Deprecated("Fixed in Forge 40.1.61") // TODO re-evaluate
 // FluidUtil#tryEmptyContainer but actually functioning properly ([B]orge moment)
 fun tryEmptyFluidContainer(container: ItemStack, fluidDestination: IFluidHandler, maxAmount: Int, doDrain: Boolean): FluidActionResult {
     val copy = ItemHandlerHelper.copyStackWithSize(container, 1)

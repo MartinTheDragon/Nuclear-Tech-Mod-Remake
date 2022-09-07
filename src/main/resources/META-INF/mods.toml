@@ -17,7 +17,7 @@ A recreation by MartinTheDragon of HbMinecraft's Nuclear Tech Mod.
 [[dependencies.nucleartech]]
   modId="forge"
   mandatory=true
-  versionRange="[40.0.44,)"
+  versionRange="[40.1.59,)"
   ordering="NONE"
   side="BOTH"
 [[dependencies.nucleartech]]
