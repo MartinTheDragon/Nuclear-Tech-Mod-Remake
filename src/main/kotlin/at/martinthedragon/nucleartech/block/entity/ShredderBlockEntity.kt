@@ -116,8 +116,10 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : ProgressingMachine
             container.setItem(0, item.copy())
             val recipe = recipeManager.getRecipeFor(RecipeTypes.SHREDDING, container, level).getOrNull()
             if (recipe == null) {
-                if (!item.isEmpty && ItemHandlerHelper.insertItemStacked(output, ItemStack(NTechItems.scrap.get(), scrapCount + 1), true).isEmpty)
+                if (!item.isEmpty && ItemHandlerHelper.insertItemStacked(output, ItemStack(NTechItems.scrap.get(), scrapCount + 1), true).isEmpty) {
+                    if (!simulate) item.shrink(1)
                     scrapCount++
+                }
                 continue
             } else if (insertAllItemsStacked(output, resultItems + recipe.resultItem, true).isEmpty()) {
                 resultItems += recipe.resultItem
