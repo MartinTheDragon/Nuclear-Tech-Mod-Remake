@@ -20,6 +20,7 @@ import at.martinthedragon.nucleartech.particle.ModParticles
 import at.martinthedragon.nucleartech.particle.RubbleParticle
 import at.martinthedragon.nucleartech.particle.SmokeParticle
 import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
+import at.martinthedragon.nucleartech.rendering.NTechCapes
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
 import at.martinthedragon.nucleartech.rendering.SpecialModels
@@ -192,6 +193,10 @@ object ClientRegistries {
     @SubscribeEvent @JvmStatic
     fun registerResourceReloadListeners(event: RegisterClientReloadListenersEvent) {
         event.registerReloadListener(SpecialModels)
+
+        val capeTextures = NTechCapes.CapeTextureManager(Minecraft.getInstance().textureManager)
+        NTechCapes.capeTextures = capeTextures
+        event.registerReloadListener(capeTextures)
     }
 
     @SubscribeEvent @JvmStatic

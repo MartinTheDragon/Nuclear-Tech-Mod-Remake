@@ -27,6 +27,9 @@ class NuclearTech {
 
     @Suppress("unused", "SpellCheckingInspection")
     object SpecialUsers {
+        const val MartinTheDragon = "3e763f54-12fc-40ef-9416-72edc689a952"
+        const val JulekJulas = "8996d0cc-5bcd-4332-bcc0-fc3391f34c07"
+
         const val HbMinecraft = "192af5d7-ed0f-48d8-bd89-9d41af8524f8"
         const val LPkukin = "937c9804-e11f-4ad2-a5b1-42e62ac73077"
         const val Dafnik = "3af1c262-61c0-4b12-a4cb-424cc3a9c8c0"
@@ -47,11 +50,16 @@ class NuclearTech {
         const val Doctor17 = "e4ab1199-1c22-4f82-a516-c3238bc2d0d1"
         const val Doctor17PH = "4d0477d7-58da-41a9-a945-e93df8601c5a"
         const val ShimmeringBlaze = "061bc566-ec74-4307-9614-ac3a70d2ef38"
+        const val mustang_rudolf = "06ab7c03-55ce-43f8-9d3c-2850e3c652de"
+        const val JMF781 = "5bf069bc-5b46-4179-aafe-35c0a07dee8b"
         const val FifeMiner = "37e5eb63-b9a2-4735-9007-1c77d703daa3"
         const val lag_add = "259785a0-20e9-4c63-9286-ac2f93ff528f"
         const val Pu_238 = "c95fdfd3-bea7-4255-a44b-d21bc3df95e3"
         const val Tankish = "609268ad-5b34-49c2-abba-a9d83229af03"
         const val SolsticeUnlimitd = "f5574fd2-ec28-4927-9d11-3c0c731771f4"
         const val FrizzleFrazzle = "fc4cc2ee-12e8-4097-b26a-1c6cb1b96531"
+        const val Barnaby99_x = "711aaf78-a862-4b7e-921a-216349716e9a"
+        const val Ma118 = "1121cb7a-8773-491f-8e2b-221290c93d81"
+        const val Adam29Adam29 = "bbae7bfa-0eba-40ac-a0dd-f3b715e73e61"
     }
 }

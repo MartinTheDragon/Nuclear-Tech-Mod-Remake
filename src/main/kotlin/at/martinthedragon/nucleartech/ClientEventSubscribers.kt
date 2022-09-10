@@ -1,10 +1,12 @@
 package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.hazard.HazardSystem
+import at.martinthedragon.nucleartech.rendering.NTechCapes
 import at.martinthedragon.nucleartech.screen.AnvilScreen
 import at.martinthedragon.nucleartech.screen.UseTemplateFolderScreen
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.RecipesUpdatedEvent
+import net.minecraftforge.client.event.RenderPlayerEvent
 import net.minecraftforge.event.TagsUpdatedEvent
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -27,5 +29,15 @@ object ClientEventSubscribers {
     fun onRecipesUpdated(event: RecipesUpdatedEvent) {
         UseTemplateFolderScreen.reloadSearchTree()
         AnvilScreen.reloadSearchTree()
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun onRenderPlayer(event: RenderPlayerEvent.Pre) {
+        NTechCapes.renderCape(event.player, event.renderer)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun onRenderPlayerPost(event: RenderPlayerEvent.Post) {
+        NTechCapes.renderCapePost(event.renderer)
     }
 }
