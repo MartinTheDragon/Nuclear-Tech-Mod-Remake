@@ -1,18 +1,16 @@
 package at.martinthedragon.nucleartech.menu
 
-import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.SafeBlockEntity
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
-class SafeMenu(windowId: Int, playerInventory: Inventory, val tileEntity: SafeBlockEntity) : AbstractContainerMenu(MenuTypes.safeMenu.get(), windowId) {
+class SafeMenu(windowId: Int, playerInventory: Inventory, blockEntity: SafeBlockEntity) : NTechContainerMenu<SafeBlockEntity>(MenuTypes.safeMenu.get(), windowId, playerInventory, blockEntity) {
     init {
-        val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
+        val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
         for (i in 0 until 3)
             for (j in 0 until 5) {
@@ -21,9 +19,6 @@ class SafeMenu(windowId: Int, playerInventory: Inventory, val tileEntity: SafeBl
 
         addPlayerInventory(this::addSlot, playerInventory, 8, 86)
     }
-
-    override fun stillValid(player: Player): Boolean =
-        player.level.getBlockState(tileEntity.blockPos).block == NTechBlocks.safe.get()
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
         var returnStack = ItemStack.EMPTY
@@ -47,7 +42,7 @@ class SafeMenu(windowId: Int, playerInventory: Inventory, val tileEntity: SafeBl
 
     override fun removed(player: Player) {
         super.removed(player)
-        tileEntity.stopOpen(player)
+        blockEntity.stopOpen(player)
     }
 
     companion object {

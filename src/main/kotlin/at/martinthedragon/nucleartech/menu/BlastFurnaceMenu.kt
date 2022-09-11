@@ -59,8 +59,6 @@ class BlastFurnaceMenu(
     private fun canBlast(itemStack: ItemStack) =
         level.recipeManager.getRecipeFor(RecipeTypes.BLASTING, SimpleContainer(itemStack), level).isPresent
 
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
-
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
             BlastFurnaceMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))

@@ -4,7 +4,6 @@ import at.martinthedragon.nucleartech.block.entity.FatManBlockEntity
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
 import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
@@ -13,11 +12,11 @@ import net.minecraftforge.items.SlotItemHandler
 
 class FatManMenu(
     windowID: Int,
-    val playerInventory: Inventory,
-    val tileEntity: FatManBlockEntity,
+    playerInventory: Inventory,
+    blockEntity: FatManBlockEntity,
     val data: ContainerData = SimpleContainerData(1)
-) : AbstractContainerMenu(MenuTypes.fatManMenu.get(), windowID) {
-    private val inv = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
+) : NTechContainerMenu<FatManBlockEntity>(MenuTypes.fatManMenu.get(), windowID, playerInventory, blockEntity) {
+    private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
     init {
         addSlot(SlotItemHandler(inv, 0, 8, 17))
@@ -49,8 +48,6 @@ class FatManMenu(
         }
         return returnStack
     }
-
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
 
     fun getBombCompletion() = data[0]
 

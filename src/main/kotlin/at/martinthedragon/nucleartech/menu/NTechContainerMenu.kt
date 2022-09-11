@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.menu
 
 import at.martinthedragon.nucleartech.block.entity.ContainerSyncableBlockEntity
+import at.martinthedragon.nucleartech.math.toVec3Middle
 import at.martinthedragon.nucleartech.menu.slots.data.*
 import at.martinthedragon.nucleartech.networking.ContainerMenuUpdateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -111,7 +112,7 @@ open class NTechContainerMenu<T : BlockEntity>(type: MenuType<*>, id: Int, val p
         }
     }
 
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
+    override fun stillValid(player: Player) = !blockEntity.isRemoved && blockEntity.level?.isLoaded(blockEntity.blockPos) == true && player.distanceToSqr(blockEntity.blockPos.toVec3Middle()) <= 64
 
     fun isClientSide() = playerInventory.player.level.isClientSide
 }

@@ -34,7 +34,7 @@ class SirenScreen(
     override fun renderLabels(matrix: PoseStack, mouseX: Int, mouseY: Int) {
         super.renderLabels(matrix, mouseX, mouseY)
 
-        val invMaybe = menu.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        val invMaybe = menu.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         val inv: IItemHandler
         if (!invMaybe.isPresent) return
         else inv = invMaybe.orElseThrow(::Error)

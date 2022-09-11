@@ -61,8 +61,6 @@ class PressMenu(
     private fun canPress(itemStack: ItemStack) =
         level.recipeManager.getRecipeFor(RecipeTypes.PRESSING, SimpleContainer(itemStack), level).isPresent
 
-    override fun stillValid(player: Player) = playerInventory.stillValid(player)
-
     companion object {
         fun fromNetwork(windowId: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
             PressMenu(windowId, playerInventory, getBlockEntityForContainer(buffer))
