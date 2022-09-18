@@ -1,0 +1,10 @@
+{
+  "targets": {
+    "tag": [
+      "#minecraft:planks"
+    ]
+  },
+  "max_depth": -1,
+  "result": "nucleartech:charred_planks",
+  "keep_rotations": true
+}

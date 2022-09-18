@@ -1,0 +1,9 @@
+{
+  "targets": {
+    "block": [
+      "minecraft:grass_block",
+      "minecraft:podzol"
+    ]
+  },
+  "result": "nucleartech:dead_grass"
+}

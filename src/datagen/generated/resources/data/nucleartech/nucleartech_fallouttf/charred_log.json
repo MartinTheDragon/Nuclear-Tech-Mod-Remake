@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "tag": [
+      "#minecraft:logs_that_burn"
+    ],
+    "block": [
+      "minecraft:mushroom_stem"
+    ]
+  },
+  "max_depth": -1,
+  "result": "nucleartech:charred_log",
+  "keep_rotations": true
+}

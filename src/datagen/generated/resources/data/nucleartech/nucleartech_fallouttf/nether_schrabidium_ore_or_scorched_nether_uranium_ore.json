@@ -1,0 +1,10 @@
+{
+  "targets": {
+    "block": [
+      "nucleartech:nether_uranium_ore"
+    ]
+  },
+  "chance": 0.01,
+  "result": "nucleartech:nether_schrabidium_ore",
+  "alternative": "nucleartech:scorched_nether_uranium_ore"
+}

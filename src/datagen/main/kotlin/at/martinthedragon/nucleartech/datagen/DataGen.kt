@@ -24,6 +24,7 @@ object DataGen {
             dataGenerator.addProvider(HarvestabilityProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
             dataGenerator.addProvider(NuclearLootProvider(dataGenerator))
+            dataGenerator.addProvider(FalloutTransformationsProvider(dataGenerator))
         }
 
         if (event.includeClient()) {

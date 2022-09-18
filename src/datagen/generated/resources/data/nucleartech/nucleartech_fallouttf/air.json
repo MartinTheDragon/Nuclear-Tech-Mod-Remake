@@ -1,0 +1,23 @@
+{
+  "targets": {
+    "tag": [
+      "#minecraft:leaves",
+      "#minecraft:snow"
+    ],
+    "block": [
+      "minecraft:moss_block",
+      "minecraft:moss_carpet",
+      "minecraft:melon",
+      "minecraft:pumpkin",
+      "minecraft:powder_snow",
+      "minecraft:ice",
+      "minecraft:frosted_ice",
+      "minecraft:beehive",
+      "minecraft:bee_nest",
+      "minecraft:red_mushroom_block",
+      "minecraft:brown_mushroom_block"
+    ]
+  },
+  "max_depth": -1,
+  "result": "minecraft:air"
+}

@@ -1,0 +1,9 @@
+{
+  "targets": {
+    "tag": [
+      "#forge:ores/coal"
+    ]
+  },
+  "chance": 0.3,
+  "result": "minecraft:diamond_ore"
+}

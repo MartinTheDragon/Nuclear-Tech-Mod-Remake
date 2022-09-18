@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.api.item.DamageHandler
 import at.martinthedragon.nucleartech.api.item.FallHandler
 import at.martinthedragon.nucleartech.api.item.TickingArmor
 import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
+import at.martinthedragon.nucleartech.fallout.FalloutTransformationManager
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazardSystem
 import at.martinthedragon.nucleartech.hazard.HazmatValues
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.item.ItemEntity
+import net.minecraftforge.event.AddReloadListenerEvent
 import net.minecraftforge.event.AttachCapabilitiesEvent
 import net.minecraftforge.event.ItemAttributeModifierEvent
 import net.minecraftforge.event.TickEvent
@@ -30,6 +32,11 @@ import kotlin.math.roundToInt
 @Suppress("unused")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 object EventSubscribers {
+    @SubscribeEvent @JvmStatic
+    fun addServerResources(event: AddReloadListenerEvent) {
+        event.addListener(FalloutTransformationManager)
+    }
+
     @SubscribeEvent @JvmStatic
     fun attachCapabilitiesEvent(event: AttachCapabilitiesEvent<Entity>) {
         if (event.`object` is LivingEntity)

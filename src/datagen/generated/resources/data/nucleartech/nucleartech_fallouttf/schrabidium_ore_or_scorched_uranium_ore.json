@@ -1,0 +1,17 @@
+{
+  "targets": {
+    "tag": [
+      "#forge:ores/uranium"
+    ],
+    "excluding": [
+      "nucleartech:deepslate_uranium_ore",
+      "nucleartech:nether_uranium_ore",
+      "nucleartech:scorched_uranium_ore",
+      "nucleartech:scorched_deepslate_uranium_ore",
+      "nucleartech:scorched_nether_uranium_ore"
+    ]
+  },
+  "chance": 0.01,
+  "result": "nucleartech:schrabidium_ore",
+  "alternative": "nucleartech:scorched_uranium_ore"
+}

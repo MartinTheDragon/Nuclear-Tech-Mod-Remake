@@ -1,0 +1,9 @@
+{
+  "targets": {
+    "block": [
+      "minecraft:water_cauldron",
+      "minecraft:powder_snow_cauldron"
+    ]
+  },
+  "result": "minecraft:cauldron"
+}

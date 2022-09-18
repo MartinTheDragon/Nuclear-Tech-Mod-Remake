@@ -1,11 +1,11 @@
 package at.martinthedragon.nucleartech.entity
 
-import at.martinthedragon.nucleartech.world.DamageSources
 import at.martinthedragon.nucleartech.api.explosion.Explosion
 import at.martinthedragon.nucleartech.api.explosion.ExplosionFactory
 import at.martinthedragon.nucleartech.api.explosion.NuclearExplosionMk4Params
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.world.ChunkRadiation
+import at.martinthedragon.nucleartech.world.DamageSources
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.Packet
 import net.minecraft.server.level.ServerLevel
@@ -72,7 +72,7 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
         if (hasFallout) {
             val fallout = FalloutRain(EntityTypes.falloutRain.get(), level)
             fallout.moveTo(this@NukeExplosion.position())
-            fallout.setScale(((this@NukeExplosion.length * 1.8 + extraFallout) * NuclearConfig.explosions.falloutRange.get() / 100.0).toInt())
+            fallout.setScale(((this@NukeExplosion.length * 2.5 + extraFallout) * NuclearConfig.explosions.falloutRange.get() / 100.0).toInt())
             level.addFreshEntity(fallout)
         }
     }

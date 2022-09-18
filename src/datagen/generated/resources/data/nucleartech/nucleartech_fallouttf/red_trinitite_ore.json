@@ -1,0 +1,9 @@
+{
+  "targets": {
+    "tag": [
+      "#forge:sand/red"
+    ]
+  },
+  "chance": 0.05,
+  "result": "nucleartech:red_trinitite_ore"
+}

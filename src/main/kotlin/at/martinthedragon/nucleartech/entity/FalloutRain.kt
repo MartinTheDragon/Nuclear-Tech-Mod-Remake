@@ -1,7 +1,8 @@
 package at.martinthedragon.nucleartech.entity
 
-import at.martinthedragon.nucleartech.config.FalloutConfig
 import at.martinthedragon.nucleartech.config.NuclearConfig
+import at.martinthedragon.nucleartech.fallout.FalloutTransformation
+import at.martinthedragon.nucleartech.fallout.FalloutTransformationManager
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -30,7 +31,7 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
             if (chunksToProcess.isNotEmpty()) {
                 val chunkPos = chunksToProcess.removeLast()
                 for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
-                    transformBlocks(x, z, hypot((x - blockX).toFloat(), (z - blockZ).toFloat()) / getScale())
+                    transformBlocks(x, z, hypot((x - blockX).toFloat(), (z - blockZ).toFloat()) / getScale()) // TODO cheaper hypot function
                 }
             } else if (outerChunksToProcess.isNotEmpty()) {
                 val chunkPos = outerChunksToProcess.removeLast()
@@ -63,8 +64,8 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
         outerChunksToProcess.addAll(outerChunks)
     }
 
-    private val transformations = FalloutConfig.FalloutTransformation.loadFromConfig()
-    private val collectiveMaxTransformationDepth = transformations.maxOf(FalloutConfig.FalloutTransformation::transformationDepth)
+    private val transformations = FalloutTransformationManager.getAllTransformations()
+    private val collectiveMaxTransformationDepth = transformations.maxOfOrNull(FalloutTransformation::maxDepth) ?: 1
 
     private fun transformBlocks(x: Int, z: Int, distance: Float) {
         var depth = 0
@@ -82,7 +83,12 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
             }
             if (NuclearConfig.fallout.burnFlammables.get() && random.nextInt(5) == 0 && block.isFlammable(level, pos, Direction.UP)) level.setBlockAndUpdate(pos.above(), Blocks.FIRE.defaultBlockState())
 
-            if (transformations.firstOrNull { it.shouldTransform(block, distance, depth) }?.also { it.transform(block).let { newBlock -> level.setBlockAndUpdate(pos, newBlock) }}?.let { it.transformationDepth < 0 } == true) continue
+            val pair = transformations.firstNotNullOfOrNull { it.process(block, random, distance, depth)?.let { state -> it to state } }
+            if (pair != null) {
+                val (transformation, transformed) = pair
+                level.setBlockAndUpdate(pos, transformed)
+                if (transformation.maxDepth < 0) continue
+            }
 
             if (block.isSolidRender(level, pos)) depth++
             if (depth >= collectiveMaxTransformationDepth) return

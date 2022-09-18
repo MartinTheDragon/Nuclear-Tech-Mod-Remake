@@ -1,0 +1,8 @@
+{
+  "targets": {
+    "tag": [
+      "#forge:cobblestone/mossy"
+    ]
+  },
+  "result": "minecraft:coal_ore"
+}

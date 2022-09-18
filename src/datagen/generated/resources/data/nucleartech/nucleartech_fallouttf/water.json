@@ -1,0 +1,10 @@
+{
+  "targets": {
+    "block": [
+      "minecraft:packed_ice",
+      "minecraft:blue_ice"
+    ]
+  },
+  "max_depth": 3,
+  "result": "minecraft:water"
+}

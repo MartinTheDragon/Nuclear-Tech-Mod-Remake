@@ -1,0 +1,13 @@
+{
+  "targets": {
+    "tag": [
+      "#forge:stone",
+      "#forge:ore_bearing_ground/deepslate",
+      "#forge:gravel"
+    ]
+  },
+  "min_distance": 0.15,
+  "max_distance": 0.5,
+  "max_depth": 3,
+  "result": "nucleartech:slaked_sellafite"
+}

@@ -1,0 +1,10 @@
+{
+  "targets": {
+    "block": [
+      "nucleartech:deepslate_uranium_ore"
+    ]
+  },
+  "chance": 0.01,
+  "result": "nucleartech:deepslate_schrabidium_ore",
+  "alternative": "nucleartech:scorched_deepslate_uranium_ore"
+}
