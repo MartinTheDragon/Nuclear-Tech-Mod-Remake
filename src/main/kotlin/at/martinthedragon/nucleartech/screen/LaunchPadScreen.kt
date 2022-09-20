@@ -32,8 +32,9 @@ class LaunchPadScreen(
         RenderSystem.setShaderTexture(0, texture)
         blit(stack, guiLeft, guiTop, 0, 0, xSize, ySize)
 
-        if (menu.getEnergy() > 0) {
-            val energyScaled = menu.getEnergy() * 160 / LaunchPadBlockEntity.MAX_ENERGY
+        val launchPad = menu.blockEntity
+        if (launchPad.energy > 0) {
+            val energyScaled = launchPad.energy * 160 / LaunchPadBlockEntity.MAX_ENERGY
             blit(stack, guiLeft + 8, guiTop + 53, 8, 166, energyScaled, 16)
         }
     }
@@ -45,7 +46,7 @@ class LaunchPadScreen(
             renderComponentTooltip(matrix,
                 listOf(
                     LangKeys.ENERGY.get(),
-                    TextComponent("${EnergyFormatter.formatEnergy(menu.getEnergy())}/${EnergyFormatter.formatEnergy(LaunchPadBlockEntity.MAX_ENERGY)} HE")
+                    TextComponent("${EnergyFormatter.formatEnergy(menu.blockEntity.energy)}/${EnergyFormatter.formatEnergy(LaunchPadBlockEntity.MAX_ENERGY)} HE")
                 ), mouseX, mouseY, font
             )
     }

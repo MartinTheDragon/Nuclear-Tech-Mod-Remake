@@ -27,7 +27,7 @@ class LaunchPadBlock(properties: Properties) : BaseEntityBlock(properties), Igni
     override fun getRenderShape(state: BlockState) = RenderShape.ENTITYBLOCK_ANIMATED
 
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult) = openMenu<LaunchPadBlockEntity>(level, pos, player)
-    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setBlockEntityCustomName<LaunchPadBlockEntity>(level, pos, stack)
+    override fun setPlacedBy(level: Level, pos: BlockPos, state: BlockState, entity: LivingEntity?, stack: ItemStack) = setMachineCustomName<LaunchPadBlockEntity>(level, pos, stack)
 
     override fun onPlace(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, something: Boolean) {
         if (!newState.`is`(oldState.block) && level.hasNeighborSignal(pos)) detonate(level, pos)
@@ -45,7 +45,7 @@ class LaunchPadBlock(properties: Properties) : BaseEntityBlock(properties), Igni
     override fun newBlockEntity(pos: BlockPos, state: BlockState) = LaunchPadBlockEntity(pos, state)
     override fun <T : BlockEntity> getTicker(level: Level, state: BlockState, type: BlockEntityType<T>) = if (level.isClientSide) null else createServerTickerChecked(type, BlockEntityTypes.launchPadBlockEntityType.get())
 
-    class LaunchPadPartBlock : MultiBlockPart(LaunchPadBlockEntity::LaunchPadPartBlockEntity), IgnitableExplosive {
+    class LaunchPadPartBlock : MultiBlockPart(::GenericMultiBlockPartBlockEntity), IgnitableExplosive {
         override fun onPlace(oldState: BlockState, level: Level, pos: BlockPos, newState: BlockState, something: Boolean) {
             if (!newState.`is`(oldState.block) && level.hasNeighborSignal(pos)) detonate(level, pos)
         }
@@ -56,7 +56,7 @@ class LaunchPadBlock(properties: Properties) : BaseEntityBlock(properties), Igni
 
         override fun detonate(level: Level, pos: BlockPos): IgnitableExplosive.DetonationResult {
             val blockEntity = level.getBlockEntity(pos)
-            if (blockEntity !is LaunchPadBlockEntity.LaunchPadPartBlockEntity) return IgnitableExplosive.DetonationResult.InvalidBlockEntity
+            if (blockEntity !is GenericMultiBlockPartBlockEntity) return IgnitableExplosive.DetonationResult.InvalidBlockEntity
             return super.detonate(level, blockEntity.core)
         }
     }

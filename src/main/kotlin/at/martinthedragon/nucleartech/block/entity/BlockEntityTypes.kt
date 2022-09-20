@@ -7,7 +7,6 @@ import at.martinthedragon.nucleartech.block.multi.MultiBlockPort
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
-import net.minecraftforge.registries.RegistryObject
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object BlockEntityTypes {
@@ -26,7 +25,6 @@ object BlockEntityTypes {
     val littleBoyBlockEntityType = BLOCK_ENTITIES.registerK("little_boy") { BlockEntityType.Builder.of(::LittleBoyBlockEntity, NTechBlocks.littleBoy.get()).build() }
     val fatManBlockEntityType = BLOCK_ENTITIES.registerK("fat_man") { BlockEntityType.Builder.of(::FatManBlockEntity, NTechBlocks.fatMan.get()).build() }
     val launchPadBlockEntityType = BLOCK_ENTITIES.registerK("launch_pad") { BlockEntityType.Builder.of(::LaunchPadBlockEntity, NTechBlocks.launchPad.get()).build() }
-    val launchPadPartBlockEntityType: RegistryObject<BlockEntityType<LaunchPadBlockEntity.LaunchPadPartBlockEntity>> = BLOCK_ENTITIES.register("launch_pad_part") { BlockEntityType.Builder.of(LaunchPadBlockEntity::LaunchPadPartBlockEntity, NTechBlocks.launchPadPart.get()).build() }
 
     private fun <T : BlockEntity> BlockEntityType.Builder<T>.build() = build(null)
 }

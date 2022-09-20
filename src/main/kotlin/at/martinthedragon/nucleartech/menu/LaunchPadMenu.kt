@@ -6,8 +6,6 @@ import at.martinthedragon.nucleartech.item.MissileItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.inventory.SimpleContainerData
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
@@ -17,7 +15,6 @@ class LaunchPadMenu(
     windowID: Int,
     playerInventory: Inventory,
     blockEntity: LaunchPadBlockEntity,
-    val data: ContainerData = SimpleContainerData(1)
 ) : NTechContainerMenu<LaunchPadBlockEntity>(MenuTypes.launchPadMenu.get(), windowID, playerInventory, blockEntity) {
     private val inv = blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(::Error)
 
@@ -26,7 +23,6 @@ class LaunchPadMenu(
         addSlot(SlotItemHandler(inv, 1, 80, 17))
         addSlot(SlotItemHandler(inv, 2, 134, 17))
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
-        addDataSlots(data)
     }
 
     override fun quickMoveStack(player: Player, index: Int): ItemStack {
@@ -54,8 +50,6 @@ class LaunchPadMenu(
         }
         return returnStack
     }
-
-    fun getEnergy() = data[0]
 
     companion object {
         fun fromNetwork(windowID: Int, playerInventory: Inventory, buffer: FriendlyByteBuf) =
