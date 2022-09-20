@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.entity
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.fallout.FalloutTransformation
 import at.martinthedragon.nucleartech.fallout.FalloutTransformationManager
+import at.martinthedragon.nucleartech.math.hackedHypot
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -15,11 +16,11 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.phys.Vec3
 import net.minecraftforge.common.IForgeShearable
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.network.NetworkHooks
-import kotlin.math.hypot
+import kotlin.math.ceil
+import kotlin.math.floor
 
 class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(entityType, world) {
     override fun tick() {
@@ -31,12 +32,12 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
             if (chunksToProcess.isNotEmpty()) {
                 val chunkPos = chunksToProcess.removeLast()
                 for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
-                    transformBlocks(x, z, hypot((x - blockX).toFloat(), (z - blockZ).toFloat()) / getScale()) // TODO cheaper hypot function
+                    transformBlocks(x, z, hackedHypot((x - blockX).toFloat(), (z - blockZ).toFloat()) / getScale())
                 }
             } else if (outerChunksToProcess.isNotEmpty()) {
                 val chunkPos = outerChunksToProcess.removeLast()
                 for (x in chunkPos.minBlockX..chunkPos.maxBlockX) for (z in chunkPos.minBlockZ..chunkPos.maxBlockZ) {
-                    val distance = hypot((x - blockX).toFloat(), (z - blockZ).toFloat())
+                    val distance = hackedHypot((x - blockX).toFloat(), (z - blockZ).toFloat())
                     if (distance <= getScale()) transformBlocks(x, z, distance / getScale())
                 }
             } else remove(RemovalReason.DISCARDED)
@@ -49,19 +50,52 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
     private val outerChunksToProcess = mutableListOf<ChunkPos>()
 
     private fun gatherChunks() {
-        val chunks = mutableSetOf<ChunkPos>()
-        val outerChunks = mutableSetOf<ChunkPos>()
-        val outerRange = getScale()
-        val adjustedMaxAngle = 24 * outerRange / 32
-        // multiply by 2 for more precision
-        for (angle in 0..adjustedMaxAngle * 2) outerChunks += ChunkPos(BlockPos(Vec3(outerRange.toDouble(), .0, .0).yRot(angle * .5F / (adjustedMaxAngle / 360F))).offset(blockPosition()))
-        for (distance in 0..outerRange step 8) for (angle in 0..adjustedMaxAngle * 2) {
-            val chunkPos = ChunkPos(BlockPos(Vec3(distance.toDouble(), .0, .0).yRot(angle * .5F / (adjustedMaxAngle / 360F))).offset(blockPosition()))
-            if (chunkPos !in outerChunks) chunks += chunkPos
+        val radius = getScale()
+        val sectionRadius = radius / 16F
+
+        val minX = floor(x / 16F - sectionRadius).toInt()
+        val maxX = ceil(x / 16F + sectionRadius).toInt()
+        val minZ = floor(z / 16F - sectionRadius).toInt()
+        val maxZ = ceil(z / 16F + sectionRadius).toInt()
+
+        val centerX = x.toFloat() / 16F
+        val centerZ = z.toFloat() / 16F
+
+        val chunks = mutableListOf<ChunkPos>()
+
+        for (x in minX..maxX) for (z in minZ..maxZ) {
+            val xOffset = x - centerX
+            val zOffset = z - centerZ
+            // check each edge of the chunk square against the circle's radius
+            val circleMinXMinZ = xOffset * xOffset + zOffset * zOffset
+            val circleMinXMaxZ = xOffset * xOffset + (zOffset + 1) * (zOffset + 1)
+            val circleMaxXMinZ = (xOffset + 1) * (xOffset + 1) + zOffset * zOffset
+            val circleMaxXMaxZ = (xOffset + 1) * (xOffset + 1) + (zOffset + 1) * (zOffset + 1)
+            val sectionRadius2 = sectionRadius * sectionRadius
+            if (sectionRadius2 in circleMinXMinZ..circleMinXMaxZ || // left edge
+                sectionRadius2 in circleMinXMinZ..circleMaxXMinZ || // bottom edge
+                sectionRadius2 in circleMaxXMinZ..circleMaxXMaxZ || // right edge
+                sectionRadius2 in circleMinXMaxZ..circleMaxXMaxZ || // top edge
+                sectionRadius2 in circleMinXMaxZ..circleMinXMinZ || // reverse left edge
+                sectionRadius2 in circleMaxXMinZ..circleMinXMinZ || // reverse bottom edge
+                sectionRadius2 in circleMaxXMaxZ..circleMaxXMinZ || // reverse right edge
+                sectionRadius2 in circleMaxXMaxZ..circleMinXMaxZ) { // reverse top edge
+                outerChunksToProcess += ChunkPos(x, z)
+            } else if (circleMinXMinZ < sectionRadius2 || circleMinXMaxZ < sectionRadius2 || circleMaxXMinZ < sectionRadius2 || circleMaxXMaxZ < sectionRadius2)
+                chunks += ChunkPos(x, z)
         }
 
-        chunksToProcess.addAll(chunks.reversed())
-        outerChunksToProcess.addAll(outerChunks)
+        if (NuclearConfig.fallout.emulateSpiral.get()) {
+            val centerXInt = centerX.toInt()
+            val centerZInt = centerZ.toInt()
+
+            chunksToProcess += chunks
+                .map { ChunkPos(it.x - centerXInt, it.z - centerZInt) }
+                .sortedByDescending { it.x * it.x + it.z * it.z } // "spiralize" the chunks to make the transformations start from the middle
+                .map { ChunkPos(it.x + centerXInt, it.z + centerZInt) }
+        } else {
+            chunksToProcess += chunks
+        }
     }
 
     private val transformations = FalloutTransformationManager.getAllTransformations()

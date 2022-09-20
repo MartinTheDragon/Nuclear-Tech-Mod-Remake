@@ -51,7 +51,7 @@ class FalloutTransformationsProvider(private val generator: DataGenerator) : Dat
         builder().from(Blocks.MYCELIUM).results(NTechBlocks.glowingMycelium.get()).save(consumer)
         builder().from(Tags.Blocks.SAND_COLORLESS).results(NTechBlocks.trinitite.get()).chance(.05F).save(consumer)
         builder().from(Tags.Blocks.SAND_RED).results(NTechBlocks.redTrinitite.get()).chance(.05F).save(consumer)
-        builder().from(Blocks.CLAY).results(Blocks.TERRACOTTA)
+        builder().from(Blocks.CLAY).results(Blocks.TERRACOTTA).save(consumer)
         builder().from(Blocks.PACKED_ICE).from(Blocks.BLUE_ICE).results(Blocks.WATER).depth(3).save(consumer)
         builder().from(Tags.Blocks.COBBLESTONE_MOSSY).results(Blocks.COAL_ORE).save(consumer)
         builder().from(Tags.Blocks.ORES_COAL).results(Blocks.DIAMOND_ORE).chance(.30F).save(consumer) // TODO perhaps make the alternative mechanism be a map of chances?

@@ -1,0 +1,8 @@
+{
+  "targets": {
+    "block": [
+      "minecraft:clay"
+    ]
+  },
+  "result": "minecraft:terracotta"
+}
