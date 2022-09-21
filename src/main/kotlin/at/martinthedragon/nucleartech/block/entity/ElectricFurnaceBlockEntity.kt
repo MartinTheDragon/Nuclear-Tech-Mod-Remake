@@ -40,12 +40,19 @@ class ElectricFurnaceBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachi
 
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(4, ItemStack.EMPTY)
 
+    override val upgradeSlots = 3..3
+
     override fun isItemValid(slot: Int, stack: ItemStack): Boolean =
         when (slot) {
             1 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
             3 -> MachineUpgradeItem.isValidForBE(this, stack)
             else -> true
         }
+
+    override fun inventoryChanged(slot: Int) {
+        super.inventoryChanged(slot)
+        checkChangedUpgradeSlot(slot)
+    }
 
     private val energyStorage = EnergyStorageExposed(MAX_ENERGY, ENERGY_TRANSFER_RATE, 0)
 

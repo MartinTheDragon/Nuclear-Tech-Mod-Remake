@@ -1,13 +1,25 @@
 package at.martinthedragon.nucleartech.block.entity
 
+import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import net.minecraft.network.chat.MutableComponent
+import net.minecraft.sounds.SoundSource
 
-interface UpgradeableMachine {
+interface UpgradeableMachine : BlockEntityWrapper {
     fun getUpgradeInfoForEffect(effect: MachineUpgradeItem.UpgradeEffect<*>): List<MutableComponent>
-    fun getSupportedUpgrades(): List<MachineUpgradeItem.UpgradeEffect<*>>
 
+    fun getSupportedUpgrades(): List<MachineUpgradeItem.UpgradeEffect<*>>
     fun resetUpgrades()
+
+    val upgradeSlots: IntRange
+
+    fun checkChangedUpgradeSlot(slot: Int) {
+        val level = levelWrapped
+        if (level == null || !hasInventory || slot !in upgradeSlots) return
+        if (getInventory().getStackInSlot(slot).item is MachineUpgradeItem) {
+            level.playSound(null, blockPosWrapped, SoundEvents.installUpgrade.get(), SoundSource.BLOCKS, 1F, 1F)
+        }
+    }
 }
 
 interface SpeedUpgradeableMachine : UpgradeableMachine {

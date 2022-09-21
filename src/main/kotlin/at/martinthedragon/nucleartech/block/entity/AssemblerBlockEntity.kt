@@ -35,15 +35,18 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 {
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(18, ItemStack.EMPTY)
 
+    override val upgradeSlots = 1..3
+
     override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
         0 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
-        in 1..3 -> MachineUpgradeItem.isValidForBE(this, stack)
+        in upgradeSlots -> MachineUpgradeItem.isValidForBE(this, stack)
         4 -> stack.item is AssemblyTemplateItem
         else -> true
     }
 
     override fun inventoryChanged(slot: Int) {
         super.inventoryChanged(slot)
+        checkChangedUpgradeSlot(slot)
         if (slot == 4) checkCanProgress()
     }
 

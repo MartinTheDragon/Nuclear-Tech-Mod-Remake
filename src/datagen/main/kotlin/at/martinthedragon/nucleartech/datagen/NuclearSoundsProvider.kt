@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.datagen
 
-import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.SoundEvents
+import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.ntm
 import net.minecraft.data.DataGenerator
 import net.minecraftforge.common.data.ExistingFileHelper
@@ -58,6 +58,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.assemblerOperate, definition().with(sound(ntm("block/assembler/assembler_operate"))).subtitle(ntmSubtitle("assembler.operate")))
         add(SoundEvents.chemPlantOperate, definition().with(sound(ntm("block/chem_plant/chem_plant_operate"))).subtitle(ntmSubtitle("chem_plant.operate")))
         add(SoundEvents.debris, definition().with(sound(ntm("block/debris1")), sound(ntm("block/debris2")), sound(ntm("block/debris3"))).subtitle(ntmSubtitle("block.debris")))
+        add(SoundEvents.installUpgrade, definition().with(sound(ntm("item/install_upgrade"))).subtitle(ntmSubtitle("item.upgrade.install")))
         add(SoundEvents.inject, definition().with(sound(ntm("item/use/inject"))).subtitle(ntmSubtitle("item.use.inject")))
         add(SoundEvents.emptyIVBag, definition().with(sound(ntm("item/use/radaway"))).subtitle(ntmSubtitle("item.use.radaway")))
         add(SoundEvents.randomBleep, definition().with(sound(ntm("random/bleep"))).subtitle(ntmSubtitle("random.bleep")))

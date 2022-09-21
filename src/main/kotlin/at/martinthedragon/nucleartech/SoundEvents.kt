@@ -30,6 +30,7 @@ object SoundEvents {
     val assemblerOperate = register("assembler.operate")
     val chemPlantOperate = register("chem_plant.operate")
     val debris = register("block.debris")
+    val installUpgrade = register("item.upgrade.install")
     val inject = register("item.use.inject")
     val emptyIVBag = register("item.use.radaway")
     val randomBleep = register("random.bleep")

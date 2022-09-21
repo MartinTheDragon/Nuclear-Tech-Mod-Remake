@@ -772,6 +772,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.assemblerOperate, "Assembler whirs")
         addSound(SoundEvents.chemPlantOperate, "Chemical Plant operates")
         addSound(SoundEvents.debris, "Debris hit the ground")
+        addSound(SoundEvents.installUpgrade, "Upgrade installed")
         addSound(SoundEvents.inject, "Needle injected")
         addSound(SoundEvents.emptyIVBag, "Liquid infused")
         addSound(SoundEvents.randomBleep, "Device bleeps")

@@ -131,6 +131,9 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
 
     override fun stillValid(player: Player) = if (level!!.getBlockEntity(worldPosition) != this) false else player.distanceToSqr(worldPosition.toVec3Middle()) <= 64
 
+    override val hasInventory = true
+    override fun getInventory() = this
+
     protected abstract val defaultName: Component
 
     @get:[JvmSynthetic JvmName("getCustomName$")]

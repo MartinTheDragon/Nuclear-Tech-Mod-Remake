@@ -811,6 +811,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.assemblerOperate, "Fertigungsmaschine arbeitet")
         addSound(SoundEvents.chemPlantOperate, "Chemiewerk arbeitet")
         addSound(SoundEvents.debris, "Trümmer schlagen ein")
+        addSound(SoundEvents.installUpgrade, "Upgrade installiert")
         addSound(SoundEvents.inject, "Nadel injiziert")
         addSound(SoundEvents.emptyIVBag, "Flüssigkeit infusioniert")
         addSound(SoundEvents.randomBleep, "Gerät piepst")

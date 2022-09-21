@@ -8,12 +8,21 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.Connection
 import net.minecraft.network.protocol.PacketFlow
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.network.PacketDistributor
 
-open class SyncedBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) : BlockEntity(type, pos, state) {
+open class SyncedBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) : BlockEntity(type, pos, state), BlockEntityWrapper {
+    override val blockPosWrapped: BlockPos get() = super.getBlockPos()
+    override val levelWrapped: Level? get() = level
+    override val levelUnchecked: Level get() = getLevelUnchecked()
+
+    override val hasInventory = false
+    override fun getInventory(): IItemHandlerModifiable = throw UnsupportedOperationException("No inventory implemented")
+
     protected open val supportsComparators = false // not implemented yet
     override fun setChanged() {
         setChanged(true)
@@ -62,5 +71,8 @@ open class SyncedBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: Blo
     }
 
     fun isClientSide() = level?.isClientSide == true
+
+    @JvmSynthetic
+    @JvmName("getLevelUnchecked_")
     fun getLevelUnchecked() = level!!
 }

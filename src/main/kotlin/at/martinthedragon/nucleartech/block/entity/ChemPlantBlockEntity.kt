@@ -17,7 +17,10 @@ import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import at.martinthedragon.nucleartech.item.upgrades.OverdriveUpgrade
 import at.martinthedragon.nucleartech.item.upgrades.PowerSavingUpgrade
 import at.martinthedragon.nucleartech.item.upgrades.SpeedUpgrade
-import at.martinthedragon.nucleartech.math.*
+import at.martinthedragon.nucleartech.math.component1
+import at.martinthedragon.nucleartech.math.component2
+import at.martinthedragon.nucleartech.math.component3
+import at.martinthedragon.nucleartech.math.rotate
 import at.martinthedragon.nucleartech.menu.ChemPlantMenu
 import at.martinthedragon.nucleartech.menu.NTechContainerMenu
 import at.martinthedragon.nucleartech.menu.slots.data.BooleanDataSlot
@@ -47,9 +50,11 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 {
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(21, ItemStack.EMPTY)
 
+    override val upgradeSlots = 1..3
+
     override fun isItemValid(slot: Int, stack: ItemStack): Boolean = when (slot) {
         0 -> stack.getCapability(CapabilityEnergy.ENERGY).isPresent
-        in 1..3 -> MachineUpgradeItem.isValidForBE(this, stack)
+        in upgradeSlots -> MachineUpgradeItem.isValidForBE(this, stack)
         4 -> stack.item is ChemPlantTemplateItem
         in 5..8 -> true
         9, 10 -> stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent
@@ -62,6 +67,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 
     override fun inventoryChanged(slot: Int) {
         super.inventoryChanged(slot)
+        checkChangedUpgradeSlot(slot)
         if (slot == 4) {
             checkCanProgress()
             setupTanks()

@@ -213,6 +213,12 @@
       "nucleartech:block/debris3"
     ]
   },
+  "item.upgrade.install": {
+    "subtitle": "subtitle.nucleartech.item.upgrade.install",
+    "sounds": [
+      "nucleartech:item/install_upgrade"
+    ]
+  },
   "item.use.inject": {
     "subtitle": "subtitle.nucleartech.item.use.inject",
     "sounds": [
