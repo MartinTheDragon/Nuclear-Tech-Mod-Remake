@@ -7,6 +7,12 @@ body:
   - type: markdown
     attributes:
       value: Please search to see if an issue already exists for the bug you encountered (also closed ones).
+  - type: checkboxes
+    attributes:
+      label: Polaroidal interference
+      options:
+        - label: The Polaroid was not broken
+          required: true
   - type: textarea
     id: description
     attributes:
@@ -37,6 +43,7 @@ body:
       label: Nuclear Tech version
       options:
         - Manually compiled
+        - 0.0.17
         - 0.0.16
         - 0.0.15
         - 0.0.14
