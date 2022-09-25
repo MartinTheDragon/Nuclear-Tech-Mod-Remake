@@ -12,6 +12,7 @@
     }
   },
   "result": {
-    "item": "nucleartech:steel_beam"
+    "item": "nucleartech:steel_beam",
+    "count": 8
   }
 }

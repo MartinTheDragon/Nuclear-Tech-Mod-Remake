@@ -501,6 +501,10 @@ object NTechTags {
         private fun forgeTag(name: String): TagKey<Fluid> =
             FluidTags.create(ResourceLocation("forge", name))
 
+        val CRUDE_OIL = forgeTag("crude_oil")
+        val GAS = forgeTag("gas")
+        val NATURAL_GAS = forgeTag("natural_gas")
+        val OIL = forgeTag("oil")
         val URANIUM_HEXAFLUORIDE = forgeTag("uranium_hexafluoride")
     }
 }

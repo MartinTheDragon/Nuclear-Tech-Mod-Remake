@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "nucleartech:block/steel_scaffold"
+    },
+    "axis=z": {
+      "model": "nucleartech:block/steel_scaffold",
+      "y": 90
+    }
+  }
+}

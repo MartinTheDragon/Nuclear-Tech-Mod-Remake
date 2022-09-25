@@ -1,9 +1,10 @@
 package at.martinthedragon.nucleartech.item
 
-import net.minecraft.ChatFormatting
+import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.extensions.gray
+import at.martinthedragon.nucleartech.extensions.red
 import net.minecraft.client.resources.language.I18n
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.Style
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
@@ -25,9 +26,15 @@ fun autoTooltip(stack: ItemStack, tooltip: MutableList<Component>, ignoreMissing
     val translations = I18n.get(baseString).split('\n')
     val exists = I18n.exists(baseString)
 
-    if (exists) for (translation in translations)
-        tooltip.add(TextComponent(translation).withStyle(Style.EMPTY.applyFormat(ChatFormatting.GRAY)))
-    else if (!ignoreMissing) tooltip.add(TextComponent("Missing Translation").withStyle(ChatFormatting.RED))
+    val brokenPolaroid = "${baseString}11"
+    if (NuclearTech.polaroidBroken && I18n.exists(brokenPolaroid)) {
+        for (brokenPolaroidText in I18n.get(brokenPolaroid).split('\n'))
+            tooltip.add(TextComponent(brokenPolaroidText).gray())
+    } else {
+        if (exists) for (translation in translations)
+            tooltip.add(TextComponent(translation).gray())
+        else if (!ignoreMissing) tooltip.add(TextComponent("Missing Translation").red())
+    }
 
     return exists
 }

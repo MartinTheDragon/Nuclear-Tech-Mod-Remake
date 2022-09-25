@@ -1,0 +1,38 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/steel"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/high_speed_steel"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:high_speed_steel_bolt"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/titanium"
+      },
+      "amount": 6
+    }
+  ],
+  "result": {
+    "item": "nucleartech:titanium_drill",
+    "count": 1
+  },
+  "duration": 100
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:steel_beam_from_scaffold"
+    ]
+  },
+  "criteria": {
+    "has_scaffold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:steel_scaffold"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:steel_beam_from_scaffold"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_scaffold",
+      "has_the_recipe"
+    ]
+  ]
+}

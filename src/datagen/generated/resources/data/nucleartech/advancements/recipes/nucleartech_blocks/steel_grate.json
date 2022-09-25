@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:steel_grate"
+    ]
+  },
+  "criteria": {
+    "has_beam": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:steel_beam"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:steel_grate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beam",
+      "has_the_recipe"
+    ]
+  ]
+}

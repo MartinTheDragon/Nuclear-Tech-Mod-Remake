@@ -129,8 +129,16 @@ abstract class NuclearLanguageProvider(
         add("${supplier.get().descriptionId}.desc", desc)
     }
 
+    protected fun addBlockDesc11(supplier: Supplier<out Block>, desc: String) {
+        add("${supplier.get().descriptionId}.desc11", desc)
+    }
+
     protected fun addItemDesc(supplier: Supplier<out Item>, desc: String) {
         add("${supplier.get().descriptionId}.desc", desc)
+    }
+
+    protected fun addItemDesc11(supplier: Supplier<out Item>, desc: String) {
+        add("${supplier.get().descriptionId}.desc11", desc)
     }
 
     protected fun addMenuType(key: Supplier<out MenuType<*>>, name: String) {

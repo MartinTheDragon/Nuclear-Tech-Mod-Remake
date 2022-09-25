@@ -1,0 +1,6 @@
+{
+  "parent": "forge:item/bucket",
+  "loader": "forge:bucket",
+  "fluid": "nucleartech:gas",
+  "flipGas": true
+}

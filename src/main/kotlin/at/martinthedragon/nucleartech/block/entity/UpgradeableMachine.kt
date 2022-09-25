@@ -48,3 +48,12 @@ interface OverdriveUpgradeableMachine : UpgradeableMachine {
         overdriveUpgradeLevel = 0
     }
 }
+
+interface AfterBurnUpgradeableMachine : UpgradeableMachine {
+    val maxAfterBurnUpgradeLevel: Int
+    var afterBurnUpgradeLevel: Int
+
+    override fun resetUpgrades() {
+        afterBurnUpgradeLevel = 0
+    }
+}

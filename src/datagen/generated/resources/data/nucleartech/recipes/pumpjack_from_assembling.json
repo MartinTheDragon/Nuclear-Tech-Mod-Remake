@@ -1,0 +1,80 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_scaffold"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:storage_blocks/steel"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_pipes"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_tank"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/steel"
+      },
+      "amount": 24
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/steel"
+      },
+      "amount": 16
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/aluminium"
+      },
+      "amount": 6
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:titanium_drill"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:motor"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/red_copper"
+      },
+      "amount": 8
+    }
+  ],
+  "result": {
+    "item": "nucleartech:pumpjack",
+    "count": 1
+  },
+  "duration": 400
+}

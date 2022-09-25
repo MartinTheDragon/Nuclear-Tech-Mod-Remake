@@ -169,6 +169,8 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.asbestosRoof.get())
         dropSelf(NTechBlocks.hazmatBlock.get())
         dropSelf(NTechBlocks.steelBeam.get())
+        dropSelf(NTechBlocks.steelScaffold.get())
+        dropSelf(NTechBlocks.steelGrate.get())
 
         dropSelf(NTechBlocks.glowingMushroom.get())
         add(NTechBlocks.glowingMushroomBlock.get()) { createMushroomBlockDrop(it, NTechBlocks.glowingMushroom.get()) }
@@ -211,6 +213,8 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.coatedCable.get())
         dropSelf(NTechBlocks.assembler.get())
         dropSelf(NTechBlocks.chemPlant.get())
+        dropSelf(NTechBlocks.oilDerrick.get())
+        dropSelf(NTechBlocks.pumpjack.get())
 
         dropSelf(NTechBlocks.littleBoy.get())
         dropSelf(NTechBlocks.fatMan.get())
@@ -220,6 +224,7 @@ class BlockLoots : BlockLoot() {
 
         add(NTechBlocks.genericMultiBlockPart.get(), noDrop())
         add(NTechBlocks.genericMultiBlockPort.get(), noDrop())
+        add(NTechBlocks.oilPipe.get(), noDrop())
     }
 
     // automatically await a loot table for all blocks registered by this mod

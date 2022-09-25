@@ -150,6 +150,8 @@ object NTechBlocks {
     val hazmatBlock = BLOCKS.registerK("hazmat_block") { Block(Properties.of(WOOL).strength(6f).sound(SoundType.WOOL)) }
 
     val steelBeam = BLOCKS.registerK("steel_beam") { SteelBeamBlock(Properties.of(METAL).strength(5F, 15F).sound(SoundType.METAL)) }
+    val steelScaffold = BLOCKS.registerK("steel_scaffold") { SteelScaffoldBlock(Properties.of(METAL).strength(5F, 15F).sound(SoundType.METAL)) }
+    val steelGrate = BLOCKS.registerK("steel_grate") { SteelGrate(Properties.of(METAL).strength(5F, 15F).sound(SoundType.METAL).noOcclusion()) }
 
     val glowingMushroom = BLOCKS.registerK("glowing_mushroom") { GlowingMushroomBlock(Properties.of(PLANT, MaterialColor.COLOR_GREEN).noCollission().randomTicks().instabreak().lightLevel { 7 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.GRASS)) }
     val glowingMushroomBlock = BLOCKS.registerK("glowing_mushroom_block") { HugeMushroomBlock(Properties.of(WOOD, MaterialColor.COLOR_GREEN).strength(.2F).lightLevel { 15 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.WOOD)) }
@@ -184,6 +186,8 @@ object NTechBlocks {
     val shredder = BLOCKS.registerK("shredder") { ShredderBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val assembler = BLOCKS.registerK("assembler") { AssemblerBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
     val chemPlant = BLOCKS.registerK("chem_plant") { ChemPlantBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val oilDerrick = BLOCKS.registerK("oil_derrick") { OilDerrickBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val pumpjack = BLOCKS.registerK("pumpjack") { PumpjackBlock(Properties.of(METAL).strength(5F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
 
     val ironAnvil = BLOCKS.registerK("iron_anvil") { AnvilBlock(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
     val leadAnvil = BLOCKS.registerK("lead_anvil") { AnvilBlock(1, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
@@ -212,6 +216,7 @@ object NTechBlocks {
 
     val genericMultiBlockPart = BLOCKS.registerK("generic_multi_block_part") { MultiBlockPart() }
     val genericMultiBlockPort = BLOCKS.registerK("generic_multi_block_port") { MultiBlockPort() }
+    val oilPipe = BLOCKS.registerK("oil_pipe") { Block(Properties.of(METAL).strength(5F, 10F).sound(SoundType.METAL)) }
 
     private fun getLightLevelLit13(state: BlockState) = if (state.getValue(BlockStateProperties.LIT)) 13 else 0
 }

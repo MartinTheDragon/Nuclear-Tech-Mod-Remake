@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "level=1": {
+      "model": "nucleartech:block/steel_grate0"
+    },
+    "level=2": {
+      "model": "nucleartech:block/steel_grate1"
+    },
+    "level=3": {
+      "model": "nucleartech:block/steel_grate2"
+    },
+    "level=4": {
+      "model": "nucleartech:block/steel_grate3"
+    },
+    "level=5": {
+      "model": "nucleartech:block/steel_grate4"
+    },
+    "level=6": {
+      "model": "nucleartech:block/steel_grate5"
+    },
+    "level=7": {
+      "model": "nucleartech:block/steel_grate6"
+    },
+    "level=8": {
+      "model": "nucleartech:block/steel_grate7"
+    }
+  }
+}

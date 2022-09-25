@@ -7,10 +7,7 @@ import at.martinthedragon.nucleartech.block.FatManBlock
 import at.martinthedragon.nucleartech.block.LittleBoyBlock
 import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.missile.*
-import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
-import at.martinthedragon.nucleartech.item.upgrades.OverdriveUpgrade
-import at.martinthedragon.nucleartech.item.upgrades.PowerSavingUpgrade
-import at.martinthedragon.nucleartech.item.upgrades.SpeedUpgrade
+import at.martinthedragon.nucleartech.item.upgrades.*
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -589,6 +586,9 @@ object NTechItems {
     val overdriveUpgradeMk1 = ITEMS.registerK("overdrive_upgrade_mk1") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), OverdriveUpgrade(1)) }
     val overdriveUpgradeMk2 = ITEMS.registerK("overdrive_upgrade_mk2") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), OverdriveUpgrade(2)) }
     val overdriveUpgradeMk3 = ITEMS.registerK("overdrive_upgrade_mk3") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), OverdriveUpgrade(3)) }
+    val afterBurnUpgradeMk1 = ITEMS.registerK("after_burner_upgrade_mk1") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), AfterBurnUpgrade(1)) }
+    val afterBurnUpgradeMk2 = ITEMS.registerK("after_burner_upgrade_mk2") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), AfterBurnUpgrade(2)) }
+    val afterBurnUpgradeMk3 = ITEMS.registerK("after_burner_upgrade_mk3") { MachineUpgradeItem(Properties().tab(CreativeTabs.Items), AfterBurnUpgrade(3)) }
     val aluminiumShredderBlade = ITEMS.registerK("aluminium_shredder_blade") { ShredderBladeItem(Properties().durability(20).tab(CreativeTabs.Items)) }
     val goldShredderBlade = ITEMS.registerK("gold_shredder_blade") { ShredderBladeItem(Properties().durability(30).tab(CreativeTabs.Items)) }
     val ironShredderBlade = ITEMS.registerK("iron_shredder_blade") { ShredderBladeItem(Properties().durability(100).tab(CreativeTabs.Items)) }

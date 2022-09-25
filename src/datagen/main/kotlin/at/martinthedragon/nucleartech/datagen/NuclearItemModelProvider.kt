@@ -585,6 +585,9 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.overdriveUpgradeMk1.get())
         simpleItem(NTechItems.overdriveUpgradeMk2.get())
         simpleItem(NTechItems.overdriveUpgradeMk3.get())
+        simpleItem(NTechItems.afterBurnUpgradeMk1.get())
+        simpleItem(NTechItems.afterBurnUpgradeMk2.get())
+        simpleItem(NTechItems.afterBurnUpgradeMk3.get())
         simpleItem(NTechItems.aluminiumShredderBlade.get())
         simpleItem(NTechItems.goldShredderBlade.get())
         simpleItem(NTechItems.ironShredderBlade.get())
@@ -739,13 +742,26 @@ class NuclearItemModelProvider(
             .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.25F, 0.25F, 0.25F).end()
             .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 315F, 0F).translation(0F, 5F, 0F).scale(0.1875F, 0.1875F, 0.1875F).end()
             .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 315F, 0F).scale(.2F, .2F, .2F).end().end()
+        specialEntityItem(NTechBlockItems.oilDerrickPlacer.get()).transforms()
+            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 45F, 0F).translation(0F, -4.5F, 0F).scale(.125F, .125F, .125F).end()
+            .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(0.1F, 0.1F, 0.1F).end()
+            .transform(ItemTransforms.TransformType.HEAD).rotation(0F, 180F, 0F).end()
+            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.2F, 0.2F, 0.2F).end()
+            .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 315F, 0F).translation(0F, 5F, 0F).scale(0.15F, 0.15F, 0.15F).end()
+            .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 315F, 0F).scale(.135F, .135F, .135F).end().end()
+        specialEntityItem(NTechBlockItems.pumpjackPlacer.get()).transforms()
+            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 45F, 0F).translation(-4F, -1F, 0F).scale(.125F, .125F, .125F).end()
+            .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(0.1F, 0.1F, 0.1F).end()
+            .transform(ItemTransforms.TransformType.HEAD).rotation(0F, 0F, 0F).translation(0F, 1F, 0F).end()
+            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.2F, 0.2F, 0.2F).end()
+            .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 45F, 0F).translation(0F, 5F, 0F).scale(0.15F, 0.15F, 0.15F).end()
+            .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 45F, 0F).translation(-5F, 0F, -6F).scale(.135F, .135F, .135F).end().end()
         specialEntityItem(NTechBlockItems.littleBoy.get()).transforms()
             .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(3F, -2F, 0F).scale(.34F).end()
             .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(.25F, .25F, .25F).end()
             .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 90F, 0F).scale(.5F).end()
             .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 45F, 0F).translation(0F, 2.5F, 0F).scale(.375F, .375F, .375F).end()
             .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 45F, 0F).scale(.4F, .4F, .4F).end().end()
-
         specialEntityItem(NTechBlockItems.fatMan.get()).transforms()
             .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(2.5F, -3F, 0F).scale(.34F).end()
             .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(.25F, .25F, .25F).end()
@@ -785,10 +801,11 @@ class NuclearItemModelProvider(
         getBuilder(item.registryName!!.path).parent(spawnEggItem)
     }
 
-    private fun bucket(fluid: Fluid, bucket: BucketItem) {
+    private fun bucket(fluid: Fluid, bucket: BucketItem, flipGas: Boolean = fluid.attributes.isLighterThanAir) {
         withExistingParent(bucket.registryName!!.path, ResourceLocation("forge", "item/bucket"))
             .customLoader { modelBuilder: ItemModelBuilder, existingFileHelper -> DynamicBucketModelBuilder.begin(modelBuilder, existingFileHelper) }
             .fluid(fluid)
+            .flipGas(flipGas)
             .end()
     }
 

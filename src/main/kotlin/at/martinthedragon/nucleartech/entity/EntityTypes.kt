@@ -26,5 +26,7 @@ object EntityTypes {
     val missileDrill = ENTITIES.registerK("drill_missile") { EntityType.Builder.of(::DrillMissile, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).clientTrackingRange(100).build("drill_missile") }
     val missileNuclear = ENTITIES.registerK("nuclear_missile") { EntityType.Builder.of(::NuclearMissile, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).clientTrackingRange(100).build("nuclear_missile") }
 
+    val oilSpill = ENTITIES.registerK("oil_spill") { EntityType.Builder.of(::OilSpill, MobCategory.MISC).build("oil_spill") }
+
     val clusterFragment = ENTITIES.registerK("cluster_fragment") { EntityType.Builder.of(::ClusterFragment, MobCategory.MISC).sized(.5F, .5F).updateInterval(20).clientTrackingRange(10).build("cluster_fragment") }
 }

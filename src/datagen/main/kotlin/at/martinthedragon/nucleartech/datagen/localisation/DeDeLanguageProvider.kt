@@ -99,6 +99,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.asbestosRoof, "Asbestdach")
         addBlock(NTechBlocks.hazmatBlock, "Strahlenschutzstoff-Block")
         addBlock(NTechBlocks.steelBeam, "Stahlträger")
+        addBlock(NTechBlocks.steelScaffold, "Stahlgerüst")
+        addBlock(NTechBlocks.steelGrate, "Stahlgitter")
 
         addBlock(NTechBlocks.glowingMushroom, "Leuchtender Pilz")
         addBlock(NTechBlocks.glowingMushroomBlock, "Leuchtender Pilzblock")
@@ -127,6 +129,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.shredder, "Brecher")
         addBlock(NTechBlocks.assembler, "Fertigungsmaschine")
         addBlock(NTechBlocks.chemPlant, "Chemiewerk")
+        addBlock(NTechBlocks.oilDerrick, "Ölbohrturm")
+        addBlock(NTechBlocks.pumpjack, "Pferdekopfpumpe")
+        addBlockDesc11(NTechBlocks.pumpjack, "Der echte Moskito")
         addBlock(NTechBlocks.safe, "Panzerschrank")
         addBlock(NTechBlocks.ironAnvil, "Eisenamboss")
         addBlock(NTechBlocks.leadAnvil, "Bleiamboss")
@@ -148,7 +153,10 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(NTechBlocks.genericMultiBlockPart, "Multi-Block-Struktur Teil")
         addBlock(NTechBlocks.genericMultiBlockPort, "Multi-Block-Struktur Anschluss")
+        addBlock(NTechBlocks.oilPipe, "Ölrohr")
 
+        addBlock(NTechFluids.gas.block, "Erdgas")
+        addBlock(NTechFluids.oil.block, "Rohöl")
         addBlock(NTechFluids.uraniumHexafluoride.block, "Uranhexafluorid")
 
         addItem(NTechItems.rawThorium, "Rohes Thorium")
@@ -612,6 +620,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.overdriveUpgradeMk1, "Overdrive-Upgrade Mk.I")
         addItem(NTechItems.overdriveUpgradeMk2, "Overdrive-Upgrade Mk.II")
         addItem(NTechItems.overdriveUpgradeMk3, "Overdrive-Upgrade Mk.III")
+        addItem(NTechItems.afterBurnUpgradeMk1, "Nachbrennerupgrade Mk.I")
+        addItem(NTechItems.afterBurnUpgradeMk2, "Nachbrennerupgrade Mk.II")
+        addItem(NTechItems.afterBurnUpgradeMk3, "Nachbrennerupgrade Mk.III")
 
         addItem(NTechItems.aluminiumShredderBlade, "Aluminiumsägeblatt")
         addItem(NTechItems.goldShredderBlade, "Goldsägeblatt")
@@ -745,6 +756,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addItem(NTechItems.polaroid, "Das Polaroid")
 
+        addItem(NTechFluids.gas.bucket, "Erdgaseimer")
+        addItem(NTechFluids.oil.bucket, "Rohöleimer")
         addItem(NTechFluids.uraniumHexafluoride.bucket, "Uranhexafluorideimer")
 
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Atomexplosionserzeuger")
@@ -768,6 +781,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.missileDrill, "Der Betonbrecher")
         addEntityType(EntityTypes.missileNuclear, "Atomrakete")
 
+        addEntityType(EntityTypes.oilSpill, "Ölspritzer")
+
         addEntityType(EntityTypes.clusterFragment, "Schüttbombe")
 
         addMenuType(MenuTypes.sirenMenu, "Sirene")
@@ -780,6 +795,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.shredderMenu, "Brecher")
         addMenuType(MenuTypes.assemblerMenu, "Fertigungsmaschine")
         addMenuType(MenuTypes.chemPlantMenu, "Chemiewerk")
+        addMenuType(MenuTypes.oilWellMenu, "Ölpumpe")
+        add(LangKeys.CONTAINER_OIL_DERRICK, "Ölbohrturm")
+        add(LangKeys.CONTAINER_PUMPJACK, "Pferdekopfpumpe")
 
         addMenuType(MenuTypes.littleBoyMenu, "Little Boy")
         addMenuType(MenuTypes.fatManMenu, "Fat Man")
@@ -914,15 +932,24 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.JEI_TIER_MINIMUM, "Mindeststufe: %s")
         add(LangKeys.JEI_TIER_RANGE, "Stufenbereich: %s..%s")
 
+        add(LangKeys.OIL_WELL_STATUS_OK, "Status: Ok")
+        add(LangKeys.OIL_WELL_STATUS_NO_OIL_SOURCE, "Status: Keine Ölquelle")
+        add(LangKeys.OIL_WELL_STATUS_ERROR, "Status: Kann nicht operieren")
+        add(LangKeys.OIL_WELL_STATUS_OUT_OF_FLUID, "Status: Keine Frackinglösung")
+        add(LangKeys.OIL_WELL_STATUS_LOOKING_FOR_OIL, "Status: Suche nach Öl")
+        add(LangKeys.OIL_WELL_STATUS_NO_POWER, "Status: Keine Energie")
+
         add(LangKeys.SIREN_TRACK_LOOP, "Typ: Endlosschleife")
         add(LangKeys.SIREN_TRACK_ONCE, "Typ: Einmal abspielen")
         add(LangKeys.SIREN_TRACK_RANGE, "Reichweite: %s Meter")
         add(LangKeys.SIREN_TRACK_SIREN_TRACK, "Sirenentrack")
 
         add(LangKeys.UPGRADE_INFO_ACCEPTED_UPGRADES, "Akzeptierte Upgrades:")
+        add(LangKeys.UPGRADE_INFO_BURN_GAS, "Verbrenne %smB an Gas für %s")
         add(LangKeys.UPGRADE_INFO_CONSUMPTION, "Verbrauch: %s")
         add(LangKeys.UPGRADE_INFO_DELAY, "Dauer: %s")
         add(LangKeys.UPGRADE_INFO_STACKS_TO, "Stapelt bis Level %s")
+        add(LangKeys.UPGRADE_NAME_AFTER_BURNER, "Nachbrenner")
         add(LangKeys.UPGRADE_NAME_OVERDRIVE, "Overdrive")
         add(LangKeys.UPGRADE_NAME_POWER_SAVING, "Stromersparung")
         add(LangKeys.UPGRADE_NAME_SPEED, "Geschwindigkeit")

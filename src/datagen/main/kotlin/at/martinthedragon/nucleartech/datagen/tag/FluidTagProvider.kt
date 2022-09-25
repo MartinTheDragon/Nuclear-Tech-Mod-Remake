@@ -11,6 +11,10 @@ class FluidTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
     override fun getName(): String = "Nuclear Tech Mod Fluid Tags"
 
     override fun addTags(): Unit = with(NTechTags.Fluids) {
+        tag(CRUDE_OIL).add(NTechFluids.oil.source, NTechFluids.oil.flowing)
+        tag(GAS).addTag(NATURAL_GAS)
+        tag(NATURAL_GAS).add(NTechFluids.gas.source, NTechFluids.gas.flowing)
+        tag(OIL).addTag(CRUDE_OIL)
         tag(URANIUM_HEXAFLUORIDE).add(NTechFluids.uraniumHexafluoride.source, NTechFluids.uraniumHexafluoride.flowing)
     }
 }

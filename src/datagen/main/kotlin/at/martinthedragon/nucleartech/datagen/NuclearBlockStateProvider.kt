@@ -3,7 +3,9 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.AnvilBlock
 import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.extensions.appendToPath
 import at.martinthedragon.nucleartech.fluid.NTechFluids
+import at.martinthedragon.nucleartech.ntm
 import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
 import net.minecraft.resources.ResourceLocation
@@ -149,6 +151,30 @@ class NuclearBlockStateProvider(
         simpleBlock(NTechBlocks.hazmatBlock.get())
         models().withExistingParent("steel_beam", "block/block").element().from(7F, 0F, 7F).to(9F, 16F, 9F).allFaces { _, builder -> builder.uvs(0F, 0F, 2F, 16F) }.face(Direction.UP).uvs(0F, 0F, 2F, 2F).cullface(Direction.UP).end().face(Direction.DOWN).uvs(0F, 0F, 2F, 2F).cullface(Direction.DOWN).end().textureAll("#all").end().texture("all", blockTexture(NTechBlocks.steelBeam.get())).texture("particle", blockTexture(NTechBlocks.steelBeam.get()))
             .also { axisBlock(NTechBlocks.steelBeam.get(), it, it) }
+        run {
+            val scaffoldTexture = blockTexture(NTechBlocks.steelDecoBlock.get())
+            val scaffoldModel = models().withExistingParent("steel_scaffold", "block/block").customLoader { parent, existingFileHelper -> OBJLoaderBuilder.begin(parent, existingFileHelper) }.modelLocation(ntm("models/block/steel_scaffold.obj")).flipV(true).end().texture("texture", scaffoldTexture).texture("particle", scaffoldTexture)
+            getVariantBuilder(NTechBlocks.steelScaffold.get())
+                .partialState().with(BlockStateProperties.HORIZONTAL_AXIS, Direction.Axis.X).modelForState().modelFile(scaffoldModel).addModel()
+                .partialState().with(BlockStateProperties.HORIZONTAL_AXIS, Direction.Axis.Z).modelForState().modelFile(scaffoldModel).rotationY(90).addModel()
+        }
+        run {
+            val grateTop = blockTexture(NTechBlocks.steelGrate.get())
+            val grateSide = extend(grateTop, "_side")
+            fun grateModel(level: Int) = models().withExistingParent("steel_grate${level - 1}", "block/block").element().from(0F, (level - 1) * 2F, 0F).to(16F, level * 2F, 16F)
+                .allFaces { side, builder -> builder.uvs(0F, 0F, 16F, 2F).texture("#side").cullface(side) }
+                .face(Direction.UP).uvs(0F, 0F, 16F, 16F).texture("#up").end()
+                .face(Direction.DOWN).uvs(0F, 0F, 16F, 16F).texture("#up").end()
+                .end().texture("side", grateSide).texture("up", grateTop).texture("particle", grateTop)
+
+            getVariantBuilder(NTechBlocks.steelGrate.get()).forAllStatesExcept({
+                val level = it.getValue(BlockStateProperties.LEVEL_FLOWING)
+
+                ConfiguredModel.builder()
+                    .modelFile(grateModel(level))
+                    .build()
+            }, BlockStateProperties.WATERLOGGED)
+        }
         simpleBlock(NTechBlocks.glowingMushroom.get(), models().cross("glowing_mushroom", blockTexture(NTechBlocks.glowingMushroom.get())))
         val singleFaceTemplateModelFile = models().getExistingFile(mcLoc("block/template_single_face"))
         val glowingMushroomModelFile = models().getBuilder("glowing_mushroom_block").parent(singleFaceTemplateModelFile).texture("texture", blockTexture(NTechBlocks.glowingMushroomBlock.get()))
@@ -215,6 +241,8 @@ class NuclearBlockStateProvider(
         cubeAllSides(NTechBlocks.shredder.get(), north = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), south = extend(blockTexture(NTechBlocks.shredder.get()), "_front"), east = extend(blockTexture(NTechBlocks.shredder.get()), "_side"), west = extend(blockTexture(NTechBlocks.shredder.get()), "_side"))
         horizontalBlock(NTechBlocks.assembler.get(), models().getBuilder("assembler").texture("particle", "other/assembler/particles"))
         horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "other/chem_plant/particles"))
+        simpleBlock(NTechBlocks.oilDerrick.get(), models().getBuilder("oil_derrick").texture("particle", "other/oil_derrick/particles"))
+        simpleBlock(NTechBlocks.pumpjack.get(), models().getBuilder("pumpjack").texture("particle", "other/pumpjack/particles"))
         horizontalBlock(NTechBlocks.littleBoy.get(), models().getBuilder("little_boy").texture("particle", "other/little_boy/little_boy_particles"))
         horizontalBlock(NTechBlocks.fatMan.get(), models().getBuilder("fat_man").texture("particle", "other/fat_man/fat_man_particles"))
         simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "other/launch_pad/launch_pad_particles"))
@@ -222,6 +250,7 @@ class NuclearBlockStateProvider(
 
         simpleBlock(NTechBlocks.genericMultiBlockPart.get(), models().getBuilder("generic_multi_block_part"))
         simpleBlock(NTechBlocks.genericMultiBlockPort.get(), models().getBuilder("generic_multi_block_port"))
+        simpleBlock(NTechBlocks.oilPipe.get())
 
         for ((source, _, _, block) in NTechFluids.getFluidsList()) {
             simpleBlock(block.get(), models().getBuilder(block.id.path).texture("particle", source.get().attributes.stillTexture))
@@ -351,6 +380,8 @@ class NuclearBlockStateProvider(
         copiedBlockItem(NTechBlocks.asbestosRoof.get())
         copiedBlockItem(NTechBlocks.hazmatBlock.get())
         copiedBlockItem(NTechBlocks.steelBeam.get())
+        copiedBlockItem(NTechBlocks.steelScaffold.get())
+        simpleBlockItem(NTechBlocks.steelGrate.get(), models().getExistingFile(NTechBlocks.steelGrate.id.appendToPath("4")))
         simpleItem(NTechBlocks.glowingMushroom.get())
         copiedBlockItem(NTechBlocks.deadGrass.get())
         copiedBlockItem(NTechBlocks.glowingMycelium.get())

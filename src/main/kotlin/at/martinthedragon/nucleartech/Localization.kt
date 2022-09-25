@@ -17,6 +17,7 @@ object LangKeys {
     const val CAT_HAZARD = "hazard"
     const val CAT_INFO = "info"
     const val CAT_JEI = "jei"
+    const val CAT_OIL_WELL = "oil_well"
     const val CAT_SIREN_TRACK = "siren_track"
     const val CAT_UPGRADE = "upgrade"
     const val CAT_WORD = "word"
@@ -53,6 +54,8 @@ object LangKeys {
     val CONTAINER_FAT_MAN = of(CAT_CONTAINER, "fat_man")
     val CONTAINER_LAUNCH_PAD = of(CAT_CONTAINER, "launch_pad")
     val CONTAINER_LITTLE_BOY = of(CAT_CONTAINER, "little_boy")
+    val CONTAINER_OIL_DERRICK = of(CAT_CONTAINER, "oil_derrick")
+    val CONTAINER_PUMPJACK = of(CAT_CONTAINER, "pumpjack")
     val CONTAINER_SAFE = of(CAT_CONTAINER, "safe")
     val CONTAINER_SHREDDER = of(CAT_CONTAINER, "shredder")
     val CONTAINER_SIREN = of(CAT_CONTAINER, "siren")
@@ -121,15 +124,24 @@ object LangKeys {
     val JEI_TIER_MINIMUM = of(CAT_JEI, "minimum_tier") // 1 int
     val JEI_TIER_RANGE = of(CAT_JEI, "tier_range") // 2 int
 
+    val OIL_WELL_STATUS_ERROR = of(CAT_OIL_WELL, "status.error")
+    val OIL_WELL_STATUS_LOOKING_FOR_OIL = of(CAT_OIL_WELL, "status.looking_for_oil")
+    val OIL_WELL_STATUS_NO_OIL_SOURCE = of(CAT_OIL_WELL, "status.no_oil_source")
+    val OIL_WELL_STATUS_NO_POWER = of(CAT_OIL_WELL, "status.no_power")
+    val OIL_WELL_STATUS_OK = of(CAT_OIL_WELL, "status.ok")
+    val OIL_WELL_STATUS_OUT_OF_FLUID = of(CAT_OIL_WELL, "status.out_of_fluid")
+
     val SIREN_TRACK_LOOP = of(CAT_SIREN_TRACK, "loop")
     val SIREN_TRACK_ONCE = of(CAT_SIREN_TRACK, "once")
     val SIREN_TRACK_RANGE = of(CAT_SIREN_TRACK, "range") // 1 int
     val SIREN_TRACK_SIREN_TRACK = of(CAT_SIREN_TRACK, "siren_track")
 
     val UPGRADE_INFO_ACCEPTED_UPGRADES = of(CAT_UPGRADE, "info.accepted_upgrades")
+    val UPGRADE_INFO_BURN_GAS = of(CAT_UPGRADE, "info.burn_gas") // 1 int, 1 string
     val UPGRADE_INFO_CONSUMPTION = of(CAT_UPGRADE, "info.consumption") // 1 string
     val UPGRADE_INFO_DELAY = of(CAT_UPGRADE, "info.delay") // 1 string
     val UPGRADE_INFO_STACKS_TO = of(CAT_UPGRADE, "info.stacks_to") // 1 int
+    val UPGRADE_NAME_AFTER_BURNER = of(CAT_UPGRADE, "name.after_burner")
     val UPGRADE_NAME_OVERDRIVE = of(CAT_UPGRADE, "name.overdrive")
     val UPGRADE_NAME_POWER_SAVING = of(CAT_UPGRADE, "name.power_saving")
     val UPGRADE_NAME_SPEED = of(CAT_UPGRADE, "name.speed")

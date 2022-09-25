@@ -2,10 +2,7 @@ package at.martinthedragon.nucleartech.item
 
 import at.martinthedragon.nucleartech.CreativeTabs
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
-import at.martinthedragon.nucleartech.block.AssemblerBlock
-import at.martinthedragon.nucleartech.block.ChemPlantBlock
-import at.martinthedragon.nucleartech.block.LaunchPadBlock
-import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.*
 import at.martinthedragon.nucleartech.block.entity.*
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.world.item.BlockItem
@@ -146,6 +143,8 @@ object NTechBlockItems {
     val hazmatBlock = ITEMS.registerK("hazmat_block") { BlockItem(NTechBlocks.hazmatBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
     val steelBeam = ITEMS.registerK("steel_beam") { BlockItem(NTechBlocks.steelBeam.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val steelScaffold = ITEMS.registerK("steel_scaffold") { BlockItem(NTechBlocks.steelScaffold.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val steelGrate = ITEMS.registerK("steel_grate") { BlockItem(NTechBlocks.steelGrate.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
     val glowingMushroom = ITEMS.registerK("glowing_mushroom") { BlockItem(NTechBlocks.glowingMushroom.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val glowingMushroomBlock = ITEMS.registerK("glowing_mushroom_block") { BlockItem(NTechBlocks.glowingMushroomBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
@@ -178,6 +177,8 @@ object NTechBlockItems {
     val shredder = ITEMS.registerK("shredder") { BlockItem(NTechBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val assemblerPlacer = ITEMS.registerK("assembler") { SpecialModelMultiBlockPlacerItem(NTechBlocks.assembler.get(), ::AssemblerBlockEntity, AssemblerBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
     val chemPlantPlacer = ITEMS.registerK("chem_plant") { SpecialModelMultiBlockPlacerItem(NTechBlocks.chemPlant.get(), ::ChemPlantBlockEntity, ChemPlantBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val oilDerrickPlacer = ITEMS.registerK("oil_derrick") { SpecialModelMultiBlockPlacerItem(NTechBlocks.oilDerrick.get(), ::OilDerrickBlockEntity, OilDerrickBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val pumpjackPlacer = ITEMS.registerK("pumpjack") { PumpjackPlacerItem(NTechBlocks.pumpjack.get(), ::PumpjackBlockEntity, PumpjackBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
 
     val ironAnvil = ITEMS.registerK("iron_anvil") { BlockItem(NTechBlocks.ironAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val leadAnvil = ITEMS.registerK("lead_anvil") { BlockItem(NTechBlocks.leadAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }

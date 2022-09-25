@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:pumpjack_from_assembling"
+    ]
+  },
+  "criteria": {
+    "has_steel_scaffold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:steel_scaffold"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:pumpjack_from_assembling"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_scaffold",
+      "has_the_recipe"
+    ]
+  ]
+}

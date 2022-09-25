@@ -15,10 +15,7 @@ import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.item.setIdSupplier
 import at.martinthedragon.nucleartech.menu.MenuTypes
 import at.martinthedragon.nucleartech.model.RandomModelLoader
-import at.martinthedragon.nucleartech.particle.ContrailParticle
-import at.martinthedragon.nucleartech.particle.ModParticles
-import at.martinthedragon.nucleartech.particle.RubbleParticle
-import at.martinthedragon.nucleartech.particle.SmokeParticle
+import at.martinthedragon.nucleartech.particle.*
 import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
 import at.martinthedragon.nucleartech.rendering.NTechCapes
 import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
@@ -67,6 +64,7 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.anvilMenu.get(), ::AnvilScreen)
         MenuScreens.register(MenuTypes.assemblerMenu.get(), ::AssemblerScreen)
         MenuScreens.register(MenuTypes.chemPlantMenu.get(), ::ChemPlantScreen)
+        MenuScreens.register(MenuTypes.oilWellMenu.get(), ::OilWellScreen)
         MenuScreens.register(MenuTypes.littleBoyMenu.get(), ::LittleBoyScreen)
         MenuScreens.register(MenuTypes.fatManMenu.get(), ::FatManScreen)
         MenuScreens.register(MenuTypes.launchPadMenu.get(), ::LaunchPadScreen)
@@ -95,6 +93,7 @@ object ClientRegistries {
         }
 
         NuclearTech.LOGGER.debug("Setting rendering layers")
+        ItemBlockRenderTypes.setRenderLayer(NTechBlocks.steelGrate.get(), RenderType.cutoutMipped())
         ItemBlockRenderTypes.setRenderLayer(NTechBlocks.glowingMushroom.get(), RenderType.cutout())
         for ((source, flowing, _, _) in NTechFluids.getFluidsList()) {
             ItemBlockRenderTypes.setRenderLayer(source.get(), RenderType.translucent())
@@ -117,6 +116,8 @@ object ClientRegistries {
             registerBlockEntityRenderer(BlockEntityTypes.fatManBlockEntityType.get(), ::FatManRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.launchPadBlockEntityType.get(), ::LaunchPadRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.littleBoyBlockEntityType.get(), ::LittleBoyRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.oilDerrickBlockEntityType.get(), ::OilDerrickRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.pumpjackBlockEntityType.get(), ::PumpjackRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
         }
 
@@ -140,6 +141,8 @@ object ClientRegistries {
             registerEntityRenderer(EntityTypes.missileRain.get(), ::SimpleMissileRenderer)
             registerEntityRenderer(EntityTypes.missileDrill.get(), ::SimpleMissileRenderer)
             registerEntityRenderer(EntityTypes.missileNuclear.get(), ::SimpleMissileRenderer)
+
+            registerEntityRenderer(EntityTypes.oilSpill.get(), ::NoopRenderer)
 
             registerEntityRenderer(EntityTypes.clusterFragment.get(), ::ThrownItemRenderer)
         }
@@ -203,6 +206,7 @@ object ClientRegistries {
     fun registerParticleProviders(event: ParticleFactoryRegisterEvent) {
         with(Minecraft.getInstance().particleEngine) {
             register(ModParticles.CONTRAIL.get(), ContrailParticle::Provider)
+            register(ModParticles.OIL_SPILL.get(), OilSpillParticle::Provider)
             register(ModParticles.RUBBLE.get(), RubbleParticle.Provider())
             register(ModParticles.SMOKE.get(), SmokeParticle::Provider)
         }

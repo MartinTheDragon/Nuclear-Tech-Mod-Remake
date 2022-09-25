@@ -22,6 +22,7 @@ class NuclearParticleProvider(private val dataGenerator: DataGenerator, private 
 
     private fun createParticleDefinitions() {
         add(ModParticles.CONTRAIL, "contrail")
+        add(ModParticles.OIL_SPILL, "oil_spill")
         empty(ModParticles.RUBBLE)
         add(ModParticles.SMOKE, "smoke")
     }

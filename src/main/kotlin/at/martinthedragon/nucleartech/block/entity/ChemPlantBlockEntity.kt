@@ -46,7 +46,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler
 import net.minecraftforge.items.CapabilityItemHandler
 
 class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<ChemRecipe>(BlockEntityTypes.chemPlantBlockEntityType.get(), pos, state),
-    ContainerFluidHandler, SpeedUpgradeableMachine, PowerSavingUpgradeableMachine, OverdriveUpgradeableMachine
+    ContainerFluidHandler, SpeedUpgradeableMachine, PowerSavingUpgradeableMachine, OverdriveUpgradeableMachine, IODelegatedBlockEntity
 {
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(21, ItemStack.EMPTY)
 
@@ -298,6 +298,15 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         registerCapabilityHandler(CapabilityEnergy.ENERGY, this::energyStorage)
         registerCapabilityHandler(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, { this })
     }
+
+    override val ioConfigurations = IODelegatedBlockEntity.fromTriples(blockPos, getHorizontalBlockRotation(),
+        Triple(BlockPos(-1, 0, 1), Direction.WEST, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
+        Triple(BlockPos(2, 0, 1), Direction.EAST, listOf(IOConfiguration(IOConfiguration.Mode.OUT, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
+        Triple(BlockPos(0, 0, -1), Direction.NORTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+        Triple(BlockPos(1, 0, -1), Direction.NORTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+        Triple(BlockPos(0, 0, 2), Direction.SOUTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+        Triple(BlockPos(1, 0, 2), Direction.SOUTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+    )
 
     companion object {
         const val MAX_ENERGY = 100_000

@@ -64,6 +64,8 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.titaniumDecoBlock.get(), NTechBlocks.redCopperDecoBlock.get(), NTechBlocks.tungstenDecoBlock.get(), NTechBlocks.aluminiumDecoBlock.get(), NTechBlocks.steelDecoBlock.get(), NTechBlocks.leadDecoBlock.get(), NTechBlocks.berylliumDecoBlock.get(),
             NTechBlocks.asbestosRoof.get(),
             NTechBlocks.steelBeam.get(),
+            NTechBlocks.steelScaffold.get(),
+            NTechBlocks.steelGrate.get(),
             NTechBlocks.slakedSellafite.get(), NTechBlocks.sellafite.get(), NTechBlocks.hotSellafite.get(), NTechBlocks.boilingSellafite.get(), NTechBlocks.blazingSellafite.get(), NTechBlocks.infernalSellafite.get(), NTechBlocks.sellafiteCorium.get(),
             NTechBlocks.siren.get(),
             NTechBlocks.safe.get(),
@@ -74,8 +76,12 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.ironAnvil.get(), NTechBlocks.leadAnvil.get(), NTechBlocks.steelAnvil.get(), NTechBlocks.meteoriteAnvil.get(), NTechBlocks.starmetalAnvil.get(), NTechBlocks.ferrouraniumAnvil.get(), NTechBlocks.bismuthAnvil.get(), NTechBlocks.schrabidateAnvil.get(), NTechBlocks.dineutroniumAnvil.get(), NTechBlocks.murkyAnvil.get(),
             NTechBlocks.coatedCable.get(),
             NTechBlocks.assembler.get(),
+            NTechBlocks.chemPlant.get(),
+            NTechBlocks.oilDerrick.get(),
+            NTechBlocks.pumpjack.get(),
             NTechBlocks.littleBoy.get(), NTechBlocks.fatMan.get(),
             NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get(),
+            NTechBlocks.oilPipe.get(),
         )
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
             NTechBlocks.oilSand.get(),
@@ -120,6 +126,8 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.titaniumDecoBlock.get(), NTechBlocks.redCopperDecoBlock.get(), NTechBlocks.tungstenDecoBlock.get(), NTechBlocks.aluminiumDecoBlock.get(), NTechBlocks.steelDecoBlock.get(), NTechBlocks.leadDecoBlock.get(), NTechBlocks.berylliumDecoBlock.get(),
             NTechBlocks.asbestosRoof.get(),
             NTechBlocks.steelBeam.get(),
+            NTechBlocks.steelScaffold.get(),
+            NTechBlocks.steelGrate.get(),
             NTechBlocks.slakedSellafite.get(), NTechBlocks.sellafite.get(), NTechBlocks.hotSellafite.get(), NTechBlocks.boilingSellafite.get(), NTechBlocks.blazingSellafite.get(), NTechBlocks.infernalSellafite.get(), NTechBlocks.sellafiteCorium.get(),
             NTechBlocks.siren.get(),
             NTechBlocks.safe.get(),
@@ -132,7 +140,11 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.leadAnvil.get(),
             NTechBlocks.coatedCable.get(),
             NTechBlocks.assembler.get(),
-            NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get()
+            NTechBlocks.chemPlant.get(),
+            NTechBlocks.oilDerrick.get(),
+            NTechBlocks.pumpjack.get(),
+            NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get(),
+            NTechBlocks.oilPipe.get(),
         )
         tag(BlockTags.NEEDS_IRON_TOOL).add(
             NTechBlocks.uraniumOre.get(), NTechBlocks.deepslateUraniumOre.get(), NTechBlocks.uraniumBlock.get(), NTechBlocks.u233Block.get(), NTechBlocks.u235Block.get(), NTechBlocks.u238Block.get(), NTechBlocks.uraniumFuelBlock.get(),

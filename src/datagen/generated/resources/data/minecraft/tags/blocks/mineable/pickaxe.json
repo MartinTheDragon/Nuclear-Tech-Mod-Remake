@@ -117,6 +117,8 @@
     "nucleartech:beryllium_deco_block",
     "nucleartech:asbestos_roof",
     "nucleartech:steel_beam",
+    "nucleartech:steel_scaffold",
+    "nucleartech:steel_grate",
     "nucleartech:slaked_sellafite",
     "nucleartech:sellafite",
     "nucleartech:hot_sellafite",
@@ -145,9 +147,13 @@
     "nucleartech:murky_anvil",
     "nucleartech:coated_red_copper_cable",
     "nucleartech:assembler",
+    "nucleartech:chem_plant",
+    "nucleartech:oil_derrick",
+    "nucleartech:pumpjack",
     "nucleartech:little_boy",
     "nucleartech:fat_man",
     "nucleartech:generic_multi_block_part",
-    "nucleartech:generic_multi_block_port"
+    "nucleartech:generic_multi_block_port",
+    "nucleartech:oil_pipe"
   ]
 }

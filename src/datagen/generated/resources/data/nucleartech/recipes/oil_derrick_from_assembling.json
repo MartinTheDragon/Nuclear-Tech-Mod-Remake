@@ -1,0 +1,59 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_scaffold"
+      },
+      "amount": 20
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_beam"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_tank"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:motor"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:steel_pipes"
+      },
+      "amount": 3
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:titanium_drill"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:wires/red_copper"
+      },
+      "amount": 6
+    }
+  ],
+  "result": {
+    "item": "nucleartech:oil_derrick",
+    "count": 1
+  },
+  "duration": 250
+}

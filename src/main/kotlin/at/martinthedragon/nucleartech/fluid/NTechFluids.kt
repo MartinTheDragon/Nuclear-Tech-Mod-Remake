@@ -24,6 +24,8 @@ import java.util.function.Supplier
 object NTechFluids {
     private val fluids = mutableListOf<FluidObject<*, *, *, *>>()
 
+    val oil = registerFluid("oil", FluidAttributes.builder(ntm("fluid/oil_still"), ntm("fluid/oil_flow")), ::Source, ::Flowing, ::BucketItem, propertiesModifier = { tickRate(30) })
+    val gas = registerFluid("gas", FluidAttributes.builder(ntm("fluid/gas_still"), ntm("fluid/gas_still")).gaseous().density(-100).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(10) })
     val uraniumHexafluoride = registerFluid("uranium_hexafluoride", FluidAttributes.builder(ntm("fluid/uranium_hexafluoride_still"), ntm("fluid/uranium_hexafluoride_flow")).color(0xE6D1CEBEu.toInt()).gaseous().sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(10) })
 
     // specifying a default argument doesn't work because of generics

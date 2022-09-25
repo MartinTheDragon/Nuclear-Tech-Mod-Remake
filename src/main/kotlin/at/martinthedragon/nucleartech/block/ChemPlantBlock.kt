@@ -4,7 +4,6 @@ import at.martinthedragon.nucleartech.api.block.entities.createSidedTickerChecke
 import at.martinthedragon.nucleartech.api.block.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
 import at.martinthedragon.nucleartech.block.entity.ChemPlantBlockEntity
-import at.martinthedragon.nucleartech.block.multi.MultiBlockPort
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.InteractionHand
@@ -48,24 +47,10 @@ class ChemPlantBlock(properties: Properties) : BaseEntityBlock(properties) {
 
     companion object {
         fun placeMultiBlock(placer: MultiBlockPlacer) = with(placer) {
-            place(-1, 0, 1, NTechBlocks.genericMultiBlockPort.get().defaultBlockState()
-                .setValue(MultiBlockPort.INVENTORY_MODE, MultiBlockPort.PortMode.IN)
-                .setValue(MultiBlockPort.INPUT_SIDE, Direction.WEST))
-            place(2, 0, 0, NTechBlocks.genericMultiBlockPort.get().defaultBlockState()
-                .setValue(MultiBlockPort.INVENTORY_MODE, MultiBlockPort.PortMode.OUT)
-                .setValue(MultiBlockPort.OUTPUT_SIDE, Direction.EAST))
-            fill(0, 0, -1, 1, 0, -1, NTechBlocks.genericMultiBlockPort.get().defaultBlockState()
-                .setValue(MultiBlockPort.ENERGY_MODE, MultiBlockPort.PortMode.IN)
-                .setValue(MultiBlockPort.FLUID_MODE, MultiBlockPort.PortMode.BOTH)
-                .setValue(MultiBlockPort.INPUT_SIDE, Direction.NORTH)
-                .setValue(MultiBlockPort.OUTPUT_SIDE, Direction.NORTH)
-                .setValue(MultiBlockPort.PUSH_TRANSFER, false))
-            fill(0, 0, 2, 1, 0, 2, NTechBlocks.genericMultiBlockPort.get().defaultBlockState()
-                .setValue(MultiBlockPort.ENERGY_MODE, MultiBlockPort.PortMode.IN)
-                .setValue(MultiBlockPort.FLUID_MODE, MultiBlockPort.PortMode.BOTH)
-                .setValue(MultiBlockPort.INPUT_SIDE, Direction.SOUTH)
-                .setValue(MultiBlockPort.OUTPUT_SIDE, Direction.SOUTH)
-                .setValue(MultiBlockPort.PUSH_TRANSFER, false))
+            place(-1, 0, 1, NTechBlocks.genericMultiBlockPort.get().defaultBlockState())
+            place(2, 0, 0, NTechBlocks.genericMultiBlockPort.get().defaultBlockState())
+            fill(0, 0, -1, 1, 0, -1, NTechBlocks.genericMultiBlockPort.get().defaultBlockState())
+            fill(0, 0, 2, 1, 0, 2, NTechBlocks.genericMultiBlockPort.get().defaultBlockState())
             fill(-1, 0, -1, 2, 2, 2, NTechBlocks.genericMultiBlockPart.get().defaultBlockState())
         }
     }

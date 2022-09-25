@@ -41,6 +41,8 @@ object SpecialModels : ResourceManagerReloadListener {
     val MISSILE_STRONG = registerBakedModel(AbstractMissile.MODEL_MISSILE_STRONG, bakedModel())
     val MISSILE_V2 = registerBakedModel(AbstractMissile.MODEL_MISSILE_V2, bakedModel())
     val MUSHROOM_CLOUD = registerBakedModel(modelLoc("mushroom_cloud/mush"), bakedModel())
+    val OIL_DERRICK = registerModel(modelLoc("oil_derrick/oil_derrick"), simpleModel())
+    val PUMPJACK = registerModel(modelLoc("pumpjack/pumpjack"), simpleModel())
 
     private fun modelLoc(path: String) = ntm("models/other/$path.obj")
 

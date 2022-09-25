@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "steel_grate",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "nucleartech:steel_beam"
+    }
+  },
+  "result": {
+    "item": "nucleartech:steel_grate",
+    "count": 4
+  }
+}

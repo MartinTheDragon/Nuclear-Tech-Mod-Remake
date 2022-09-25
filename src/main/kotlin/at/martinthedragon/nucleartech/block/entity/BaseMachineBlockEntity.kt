@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.block.entity
 
 import at.martinthedragon.nucleartech.api.block.entities.SoundLoopBlockEntity
+import at.martinthedragon.nucleartech.capability.WorldlyCapabilityProvider
 import at.martinthedragon.nucleartech.extensions.contains
 import at.martinthedragon.nucleartech.extensions.horizontalRotation
 import at.martinthedragon.nucleartech.extensions.inverted
@@ -9,6 +10,7 @@ import at.martinthedragon.nucleartech.serialization.NBTKeys
 import at.martinthedragon.nucleartech.serialization.loadItemsFromTagToList
 import at.martinthedragon.nucleartech.serialization.saveItemsToTag
 import com.google.common.collect.HashBasedTable
+import com.google.common.collect.Table
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -36,7 +38,7 @@ import java.util.*
 import kotlin.math.min
 
 abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) : SyncedBlockEntity(type, pos, state),
-    IItemHandlerModifiable, MenuProvider, Nameable, StackedContentsCompatible, Container, ContainerSyncableBlockEntity, SoundLoopBlockEntity
+    IItemHandlerModifiable, MenuProvider, Nameable, StackedContentsCompatible, Container, ContainerSyncableBlockEntity, SoundLoopBlockEntity, WorldlyCapabilityProvider
 {
     // is expected to retain its size on clear
     protected abstract val mainInventory: MutableList<ItemStack>
@@ -172,8 +174,11 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
         horizontalRotation = null
     }
 
-    private val capabilityHandlerSuppliers = HashBasedTable.create<Capability<*>, Optional<Direction>, NonNullSupplier<*>>(3, 3)
-    private val capabilityHandlers = HashBasedTable.create<Capability<*>, Optional<Direction>, LazyOptional<*>>(3, 3)
+    private val capabilityHandlerSuppliers: Table<Capability<*>, Optional<Direction>, NonNullSupplier<*>> = defaultCapabilityTable()
+    private val capabilityHandlers: Table<Capability<*>, Optional<Direction>, LazyOptional<*>> = defaultCapabilityTable()
+
+    private val otherCapabilityHandlerSuppliers: MutableMap<BlockPos, Table<Capability<*>, Optional<Direction>, NonNullSupplier<*>>> = mutableMapOf(blockPos to capabilityHandlerSuppliers)
+    private val otherCapabilityHandlers: MutableMap<BlockPos, Table<Capability<*>, Optional<Direction>, LazyOptional<*>>> = mutableMapOf(blockPos to capabilityHandlers)
 
     init {
         registerCapabilityHandler(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, { this })
@@ -188,7 +193,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
     }
 
     protected fun <T : Any> registerCapabilityHandler(capability: Capability<T>, handler: () -> T, vararg sides: Direction): LazyOptional<T> {
-        if (sides.isEmpty()) registerCapabilityHandler(capability, handler, null)
+        if (sides.isEmpty()) return registerCapabilityHandler(capability, handler, null)
         val lazyOptionalHandler = LazyOptional.of(handler)
         for (side in sides) {
             val optionalSide = Optional.of(side)
@@ -198,29 +203,66 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
         return lazyOptionalHandler
     }
 
+    protected fun <T : Any> registerCapabilityHandler(capability: Capability<T>, relativePos: BlockPos, handler: () -> T, side: Direction? = null): LazyOptional<T> {
+        val optionalSide = Optional.ofNullable(side)
+        val lazyOptionalHandler = LazyOptional.of(handler)
+        otherCapabilityHandlerSuppliers.getOrPut(relativePos, this::defaultCapabilityTable).put(capability, optionalSide, handler)
+        otherCapabilityHandlers.getOrPut(relativePos, this::defaultCapabilityTable).put(capability, optionalSide, lazyOptionalHandler)?.invalidate()
+        return lazyOptionalHandler
+    }
+
+    protected fun <T : Any> registerCapabilityHandler(capability: Capability<T>, relativePos: BlockPos, handler: () -> T, vararg sides: Direction): LazyOptional<T> {
+        if (sides.isEmpty()) return registerCapabilityHandler(capability, relativePos, handler, null)
+        val lazyOptionalHandler = LazyOptional.of(handler)
+        for (side in sides) {
+            val optionalSide = Optional.of(side)
+            otherCapabilityHandlerSuppliers.getOrPut(relativePos, this::defaultCapabilityTable).put(capability, optionalSide, handler)
+            otherCapabilityHandlers.getOrPut(relativePos, this::defaultCapabilityTable).put(capability, optionalSide, lazyOptionalHandler)?.invalidate()
+        }
+        return lazyOptionalHandler
+    }
+
     override fun <T : Any> getCapability(cap: Capability<T>, side: Direction?): LazyOptional<T> {
         if (!remove) {
             val capabilityRow = capabilityHandlers.row(cap)
             // if there are no sided handlers always return the unsided one
             if (capabilityRow.size == 1 && capabilityRow.contains(Optional.empty())) return capabilityRow.getValue(Optional.empty()).cast()
-            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation()::rotate))]?.cast() ?: super.getCapability(cap, side)
+            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation()::rotate))]?.cast() ?: super<SyncedBlockEntity>.getCapability(cap, side)
         }
-        return super.getCapability(cap, side)
+        return super<SyncedBlockEntity>.getCapability(cap, side)
     }
 
     // to avoid accidental overrides
-    final override fun <T : Any> getCapability(cap: Capability<T>) = super.getCapability(cap)
+    final override fun <T : Any> getCapability(cap: Capability<T>) = super<SyncedBlockEntity>.getCapability(cap)
+
+    override fun <T : Any> getCapability(cap: Capability<T>, pos: BlockPos, side: Direction?): LazyOptional<T> {
+        if (!remove) {
+            if (otherCapabilityHandlers.size == 1) return getCapability(cap, side) // there is only us
+            val relativePos = pos.subtract(blockPos).rotate(getHorizontalBlockRotation().inverted)
+            val table = otherCapabilityHandlers[relativePos] ?: return LazyOptional.empty()
+            val capabilityRow = table.row(cap)
+            if (capabilityRow.size == 1 && capabilityRow.contains(Optional.empty())) return capabilityRow.getValue(Optional.empty()).cast()
+            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation()::rotate))]?.cast() ?: return LazyOptional.empty()
+        }
+
+        return LazyOptional.empty()
+    }
 
     override fun invalidateCaps() {
         super.invalidateCaps()
         for (handler in capabilityHandlers.values()) handler.invalidate()
+        for (handler in otherCapabilityHandlers.values.flatMap(Table<*, *, LazyOptional<*>>::values)) handler.invalidate()
     }
 
     override fun reviveCaps() {
         super.reviveCaps()
         for (cell in capabilityHandlerSuppliers.cellSet())
             capabilityHandlers.put(cell.rowKey, cell.columnKey, LazyOptional.of(cell.value))?.invalidate() // invalidate just to make sure we don't lose any listeners
+        for ((pos, table) in otherCapabilityHandlerSuppliers) for (cell in table.cellSet())
+            otherCapabilityHandlers.getOrPut(pos, this::defaultCapabilityTable).put(cell.rowKey, cell.columnKey, LazyOptional.of(cell.value))?.invalidate()
     }
+
+    private fun <R, C, V> defaultCapabilityTable() = HashBasedTable.create<R, C, V>(2, 2)
 
     override fun saveAdditional(tag: CompoundTag) {
         super.saveAdditional(tag)

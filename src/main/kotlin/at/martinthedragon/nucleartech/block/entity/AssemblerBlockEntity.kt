@@ -31,7 +31,7 @@ import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
 
 class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlockEntity<AssemblyRecipe>(BlockEntityTypes.assemblerBlockEntityType.get(), pos, state),
-    SpeedUpgradeableMachine, PowerSavingUpgradeableMachine, OverdriveUpgradeableMachine
+    SpeedUpgradeableMachine, PowerSavingUpgradeableMachine, OverdriveUpgradeableMachine, IODelegatedBlockEntity
 {
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(18, ItemStack.EMPTY)
 
@@ -164,6 +164,15 @@ class AssemblerBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         registerCapabilityHandler(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, this::outputInventory, Direction.EAST)
         registerCapabilityHandler(CapabilityEnergy.ENERGY, this::energyStorage)
     }
+
+    override val ioConfigurations = IODelegatedBlockEntity.fromTriples(blockPos, getHorizontalBlockRotation(),
+        Triple(BlockPos(-1, 0, 1), Direction.WEST, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
+        Triple(BlockPos(2, 0, 0), Direction.EAST, listOf(IOConfiguration(IOConfiguration.Mode.OUT, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
+        Triple(BlockPos(0, 0, -1), Direction.NORTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+        Triple(BlockPos(1, 0, -1), Direction.NORTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+        Triple(BlockPos(0, 0, 2), Direction.SOUTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+        Triple(BlockPos(1, 0, 2), Direction.SOUTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
+    )
 
     companion object {
         const val MAX_ENERGY = 100_000
