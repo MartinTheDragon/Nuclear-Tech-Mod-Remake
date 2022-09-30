@@ -1,10 +1,9 @@
 package at.martinthedragon.nucleartech.item
 
 import at.martinthedragon.nucleartech.LangKeys
-import at.martinthedragon.nucleartech.extensions.blue
-import at.martinthedragon.nucleartech.extensions.bold
-import at.martinthedragon.nucleartech.extensions.gray
-import at.martinthedragon.nucleartech.extensions.italic
+import at.martinthedragon.nucleartech.extensions.*
+import at.martinthedragon.nucleartech.getRecipeManagerClient
+import at.martinthedragon.nucleartech.getRecipeManagerServer
 import at.martinthedragon.nucleartech.recipe.ChemRecipe
 import at.martinthedragon.nucleartech.recipe.RecipeTypes
 import at.martinthedragon.nucleartech.rendering.CustomBEWLR
@@ -26,6 +25,8 @@ import net.minecraft.world.item.crafting.RecipeManager
 import net.minecraft.world.level.Level
 import net.minecraftforge.client.IItemRenderProperties
 import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fml.DistExecutor
+import net.minecraftforge.fml.DistExecutor.SafeSupplier
 import org.intellij.lang.annotations.Language
 import java.util.function.Consumer
 import kotlin.math.floor
@@ -34,9 +35,9 @@ class ChemPlantTemplateItem(properties: Properties) : Item(properties) {
     override fun getName(stack: ItemStack): Component = TranslatableComponent(getDescriptionId(stack), Minecraft.getInstance().level?.use { getRecipeFromStack(stack, it.recipeManager)?.recipeID }?.let { TranslatableComponent("${LangKeys.CAT_CHEMISTRY}.${it.namespace}.${it.path}") } ?: "N/A")
 
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
-        val level = Minecraft.getInstance().level
-        if (allowdedIn(tab) && level != null) {
-            items.addAll(getAllChemTemplates(level.recipeManager))
+        val recipeManager = DistExecutor.safeRunForDist({ SafeSupplier(::getRecipeManagerClient) }) { SafeSupplier(::getRecipeManagerServer) } ?: return
+        if (allowdedIn(tab)) {
+            items.addAll(getAllChemTemplates(recipeManager))
         }
     }
 
