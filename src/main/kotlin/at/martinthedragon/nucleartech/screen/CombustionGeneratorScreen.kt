@@ -57,7 +57,7 @@ class CombustionGeneratorScreen(
     override fun renderTooltip(matrixStack: PoseStack, mouseX: Int, mouseY: Int) {
         super.renderTooltip(matrixStack, mouseX, mouseY)
 
-        if (isHovering(80, 36, 16, 16, mouseX.toDouble(), mouseY.toDouble()))
+        if (isHovering(80, 35, 16, 16, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrixStack, listOf(TextComponent("${menu.blockEntity.litTime / 20}s")), mouseX, mouseY, font)
         if (isHovering(8, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrixStack,
