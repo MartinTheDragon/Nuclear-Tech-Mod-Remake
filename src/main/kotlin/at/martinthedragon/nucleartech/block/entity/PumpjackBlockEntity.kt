@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
+import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.IFluidHandler
@@ -67,6 +68,8 @@ class PumpjackBlockEntity(pos: BlockPos, state: BlockState) : AbstractOilWellBlo
     }
 
     init {
+        registerCapabilityHandler(CapabilityEnergy.ENERGY, BlockPos(-1, 0, 2), this::energyStorage, Direction.WEST)
+        registerCapabilityHandler(CapabilityEnergy.ENERGY, BlockPos(-1, 0, 4), this::energyStorage, Direction.WEST)
         registerCapabilityHandler(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, BlockPos(1, 0, 2), this::gasTank, Direction.EAST)
         registerCapabilityHandler(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, BlockPos(1, 0, 4), this::oilTank, Direction.EAST)
     }

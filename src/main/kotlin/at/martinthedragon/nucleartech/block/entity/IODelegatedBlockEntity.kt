@@ -26,7 +26,7 @@ interface IODelegatedBlockEntity {
         fun fromRelativeTable(pos: BlockPos, rotation: Rotation, table: Table<BlockPos, Direction, List<IOConfiguration>>): ImmutableTable<BlockPos, Direction, List<IOConfiguration>> {
             return ImmutableTable.copyOf(HashBasedTable.create<BlockPos, Direction, List<IOConfiguration>>(table.rowKeySet().size, table.columnKeySet().size).apply {
                 for ((relativePos, relativeDirection, configs) in table.cellSet()) {
-                    put(pos.offset(relativePos), rotation.rotate(relativeDirection), configs)
+                    put(pos.offset(relativePos.rotate(rotation)), rotation.rotate(relativeDirection), configs)
                 }
             })
         }
@@ -34,7 +34,7 @@ interface IODelegatedBlockEntity {
         fun fromTriples(pos: BlockPos, rotation: Rotation, vararg triples: Triple<BlockPos, Direction, List<IOConfiguration>>): ImmutableTable<BlockPos, Direction, List<IOConfiguration>> {
             return ImmutableTable.copyOf(HashBasedTable.create<BlockPos, Direction, List<IOConfiguration>>(triples.size, triples.size).apply {
                 for ((relativePos, relativeDirection, configs) in triples) {
-                    put(pos.offset(relativePos), rotation.rotate(relativeDirection), configs)
+                    put(pos.offset(relativePos.rotate(rotation)), rotation.rotate(relativeDirection), configs)
                 }
             })
         }

@@ -7,7 +7,6 @@ import at.martinthedragon.nucleartech.capability.item.AccessLimitedOutputItemHan
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.extensions.acceptFluids
-import at.martinthedragon.nucleartech.extensions.inverted
 import at.martinthedragon.nucleartech.extensions.subView
 import at.martinthedragon.nucleartech.extensions.subViewWithFluids
 import at.martinthedragon.nucleartech.fluid.*
@@ -166,7 +165,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         } else renderTick = 0
 
         if (canProgress && !isRemoved && renderTick % 3 == 0) {
-            val particleOffset = Vec3(1.125, 3.0, 1.125).rotate(getHorizontalBlockRotation().inverted)
+            val particleOffset = Vec3(1.125, 3.0, 1.125).rotate(getHorizontalBlockRotation())
             val (x, y, z) = Vec3.atBottomCenterOf(blockPos).add(particleOffset)
             level.addParticle(ParticleTypes.CLOUD, x, y, z, 0.0, 0.1, 0.0)
         }

@@ -164,7 +164,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
     private var horizontalRotation: Rotation? = null
 
     protected fun getHorizontalBlockRotation(): Rotation {
-        if (horizontalRotation == null) horizontalRotation = if (blockState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) blockState.getValue(BlockStateProperties.HORIZONTAL_FACING).horizontalRotation.inverted else Rotation.NONE
+        if (horizontalRotation == null) horizontalRotation = if (blockState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) blockState.getValue(BlockStateProperties.HORIZONTAL_FACING).horizontalRotation else Rotation.NONE
         return horizontalRotation!!
     }
 
@@ -242,7 +242,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
             val table = otherCapabilityHandlers[relativePos] ?: return LazyOptional.empty()
             val capabilityRow = table.row(cap)
             if (capabilityRow.size == 1 && capabilityRow.contains(Optional.empty())) return capabilityRow.getValue(Optional.empty()).cast()
-            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation()::rotate))]?.cast() ?: return LazyOptional.empty()
+            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation().inverted::rotate))]?.cast() ?: return LazyOptional.empty()
         }
 
         return LazyOptional.empty()
