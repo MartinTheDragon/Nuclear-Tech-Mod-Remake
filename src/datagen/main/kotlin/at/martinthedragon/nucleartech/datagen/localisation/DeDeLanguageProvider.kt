@@ -144,6 +144,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.dineutroniumAnvil, "Dineutroniumamboss")
         addBlock(NTechBlocks.murkyAnvil, "Düsteramboss")
         addBlock(NTechBlocks.coatedCable, "Geschirmtes Rotes Kupferkabel")
+        addBlock(NTechBlocks.coatedUniversalFluidDuct, "Geschirmtes Universelles Flüssigkeitsrohr")
 
         addBlock(NTechBlocks.littleBoy, "Little Boy")
         addBlock(NTechBlocks.fatMan, "Fat Man")

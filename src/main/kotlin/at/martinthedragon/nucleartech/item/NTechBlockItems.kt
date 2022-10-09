@@ -192,6 +192,7 @@ object NTechBlockItems {
     val murkyAnvil = ITEMS.registerK("murky_anvil") { BlockItem(NTechBlocks.murkyAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
 
     val coatedCable = ITEMS.registerK("coated_red_copper_cable") { BlockItem(NTechBlocks.coatedCable.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val coatedUniversalFluidDuct = ITEMS.registerK("coated_fluid_duct") { BlockItem(NTechBlocks.coatedUniversalFluidDuct.get(), Item.Properties().tab(CreativeTabs.Machines)) }
 
     val littleBoy = ITEMS.registerK("little_boy") { SpecialModelBlockItem(NTechBlocks.littleBoy.get(), ::LittleBoyBlockEntity, Item.Properties().tab(CreativeTabs.Bombs)) }
     val fatMan = ITEMS.registerK("fat_man") { SpecialModelBlockItem(NTechBlocks.fatMan.get(), ::FatManBlockEntity, Item.Properties().tab(CreativeTabs.Bombs)) }

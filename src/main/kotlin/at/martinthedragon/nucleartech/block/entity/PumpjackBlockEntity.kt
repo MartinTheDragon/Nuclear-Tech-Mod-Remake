@@ -13,7 +13,6 @@ import net.minecraft.world.phys.AABB
 import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
-import net.minecraftforge.fluids.capability.IFluidHandler
 
 class PumpjackBlockEntity(pos: BlockPos, state: BlockState) : AbstractOilWellBlockEntity(BlockEntityTypes.pumpjackBlockEntityType.get(), pos, state, 250_000), IODelegatedBlockEntity {
     override val baseConsumption = 200
@@ -26,8 +25,8 @@ class PumpjackBlockEntity(pos: BlockPos, state: BlockState) : AbstractOilWellBlo
     override fun getRenderBoundingBox() = AABB(blockPos.offset(-7, 0, -7), blockPos.offset(8, 6, 8))
 
     override fun onSuck(pos: BlockPos) {
-        oilTank.fill(FluidStack(NTechFluids.oil.source.get(), 750), IFluidHandler.FluidAction.EXECUTE)
-        gasTank.fill(FluidStack(NTechFluids.gas.source.get(), 50 + levelUnchecked.random.nextInt(201)), IFluidHandler.FluidAction.EXECUTE)
+        oilTank.forceFluid(FluidStack(NTechFluids.oil.source.get(), (oilTank.fluidAmount + 750).coerceAtMost(oilTank.capacity)))
+        gasTank.forceFluid(FluidStack(NTechFluids.gas.source.get(), (oilTank.fluidAmount + 50 + levelUnchecked.random.nextInt(201)).coerceAtMost(oilTank.capacity)))
     }
 
     private val speed: Int get() = if (status == STATUS_OK) 5 + speedUpgradeLevel * 2 + overdriveUpgradeLevel * 10 else 0

@@ -13,7 +13,6 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.phys.AABB
 import net.minecraftforge.fluids.FluidStack
-import net.minecraftforge.fluids.capability.IFluidHandler
 
 class OilDerrickBlockEntity(pos: BlockPos, state: BlockState) : AbstractOilWellBlockEntity(BlockEntityTypes.oilDerrickBlockEntityType.get(), pos, state, 100_000), IODelegatedBlockEntity {
     override val baseConsumption = 100
@@ -31,8 +30,8 @@ class OilDerrickBlockEntity(pos: BlockPos, state: BlockState) : AbstractOilWellB
         OilSpill.spawnOilSpills(levelUnchecked, blockPos.toVec3Middle().add(0.0, 5.0, 0.0), 3)
         levelUnchecked.playSound(null, blockPos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 2F, .5F)
 
-        oilTank.fill(FluidStack(NTechFluids.oil.source.get(), 500), IFluidHandler.FluidAction.EXECUTE)
-        gasTank.fill(FluidStack(NTechFluids.gas.source.get(), 100 + levelUnchecked.random.nextInt(401)), IFluidHandler.FluidAction.EXECUTE)
+        oilTank.forceFluid(FluidStack(NTechFluids.oil.source.get(), (oilTank.fluidAmount + 500).coerceAtMost(oilTank.capacity)))
+        gasTank.forceFluid(FluidStack(NTechFluids.gas.source.get(), (oilTank.fluidAmount + 100 + levelUnchecked.random.nextInt(401)).coerceAtMost(oilTank.capacity)))
     }
 
     override val ioConfigurations = IODelegatedBlockEntity.fromTriples(blockPos, getHorizontalBlockRotation(),

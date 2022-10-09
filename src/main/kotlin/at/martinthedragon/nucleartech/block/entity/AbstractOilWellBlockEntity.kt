@@ -7,10 +7,7 @@ import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedInputItemHandler
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
 import at.martinthedragon.nucleartech.energy.transferEnergy
-import at.martinthedragon.nucleartech.fluid.ContainerFluidHandler
-import at.martinthedragon.nucleartech.fluid.NTechFluidTank
-import at.martinthedragon.nucleartech.fluid.NTechFluids
-import at.martinthedragon.nucleartech.fluid.tryFillFluidContainerAndMove
+import at.martinthedragon.nucleartech.fluid.*
 import at.martinthedragon.nucleartech.item.upgrades.*
 import at.martinthedragon.nucleartech.menu.NTechContainerMenu
 import at.martinthedragon.nucleartech.menu.slots.data.ByteDataSlot
@@ -61,8 +58,8 @@ abstract class AbstractOilWellBlockEntity(type: BlockEntityType<*>, pos: BlockPo
         get() = energyStorage.energy
         set(value) { energyStorage.energy = value }
 
-    val oilTank = NTechFluidTank(64_000, ::isValidOil).apply { forceFluid(FluidStack(NTechFluids.oil.source.get(), 0)) }
-    val gasTank = NTechFluidTank(64_000, ::isValidGas).apply { forceFluid(FluidStack(NTechFluids.gas.source.get(), 0)) }
+    val oilTank = FluidOutputTank(64_000, ::isValidOil).apply { forceFluid(FluidStack(NTechFluids.oil.source.get(), 0)) }
+    val gasTank = FluidOutputTank(64_000, ::isValidGas).apply { forceFluid(FluidStack(NTechFluids.gas.source.get(), 0)) }
 
     protected open fun isValidOil(fluid: FluidStack): Boolean = fluid.fluid == NTechFluids.oil.source.get()
     protected open fun isValidGas(fluid: FluidStack): Boolean = fluid.fluid == NTechFluids.gas.source.get()

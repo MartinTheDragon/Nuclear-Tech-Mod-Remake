@@ -211,6 +211,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.dineutroniumAnvil.get())
         dropSelf(NTechBlocks.murkyAnvil.get())
         dropSelf(NTechBlocks.coatedCable.get())
+        dropSelf(NTechBlocks.coatedUniversalFluidDuct.get())
         dropSelf(NTechBlocks.assembler.get())
         dropSelf(NTechBlocks.chemPlant.get())
         dropSelf(NTechBlocks.oilDerrick.get())

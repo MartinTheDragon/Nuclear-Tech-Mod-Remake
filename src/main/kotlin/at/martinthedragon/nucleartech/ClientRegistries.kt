@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech
 
+import at.martinthedragon.nucleartech.block.BlockTints
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
 import at.martinthedragon.nucleartech.block.entity.renderer.*
@@ -95,6 +96,7 @@ object ClientRegistries {
         NuclearTech.LOGGER.debug("Setting rendering layers")
         ItemBlockRenderTypes.setRenderLayer(NTechBlocks.steelGrate.get(), RenderType.cutoutMipped())
         ItemBlockRenderTypes.setRenderLayer(NTechBlocks.glowingMushroom.get(), RenderType.cutout())
+        ItemBlockRenderTypes.setRenderLayer(NTechBlocks.coatedUniversalFluidDuct.get(), RenderType.cutoutMipped())
         for ((source, flowing, _, _) in NTechFluids.getFluidsList()) {
             ItemBlockRenderTypes.setRenderLayer(source.get(), RenderType.translucent())
             ItemBlockRenderTypes.setRenderLayer(flowing.get(), RenderType.translucent())
@@ -167,7 +169,15 @@ object ClientRegistries {
 
     @SubscribeEvent @JvmStatic
     fun registerColors(event: ColorHandlerEvent) {
-        if (event is ColorHandlerEvent.Item) {
+        if (event is ColorHandlerEvent.Block) {
+            val blockColors = event.blockColors
+            blockColors.register(
+                { _, level, pos, _ ->
+                    if (level == null || pos == null) -1
+                    else level.getBlockTint(pos, BlockTints.FLUID_DUCT_COLOR_RESOLVER)
+                }, NTechBlocks.coatedUniversalFluidDuct.get()
+            )
+        } else if (event is ColorHandlerEvent.Item) {
             val itemColors = event.itemColors
             for (bombKit in BombKitItem.allKits) {
                 itemColors.register({ _, layer -> if (layer == 0) -1 else bombKit.color }, bombKit)

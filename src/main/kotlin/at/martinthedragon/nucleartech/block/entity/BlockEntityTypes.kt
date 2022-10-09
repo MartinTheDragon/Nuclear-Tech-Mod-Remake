@@ -2,6 +2,8 @@ package at.martinthedragon.nucleartech.block.entity
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCK_ENTITIES
 import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.entity.transmitters.CableBlockEntity
+import at.martinthedragon.nucleartech.block.entity.transmitters.FluidPipeBlockEntity
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPort
 import at.martinthedragon.nucleartech.registerK
@@ -25,7 +27,8 @@ object BlockEntityTypes {
     val chemPlantBlockEntityType = BLOCK_ENTITIES.registerK("chem_plant") { createType(::ChemPlantBlockEntity, NTechBlocks.chemPlant.get()) }
     val oilDerrickBlockEntityType = BLOCK_ENTITIES.registerK("oil_derrick") { createType(::OilDerrickBlockEntity, NTechBlocks.oilDerrick.get()) }
     val pumpjackBlockEntityType = BLOCK_ENTITIES.registerK("pumpjack") { createType(::PumpjackBlockEntity, NTechBlocks.pumpjack.get()) }
-    val cableBlockEntity = BLOCK_ENTITIES.registerK("cable") { createType(::CableBlockEntity, NTechBlocks.coatedCable.get()) }
+    val cableBlockEntityType = BLOCK_ENTITIES.registerK("cable") { createType(::CableBlockEntity, NTechBlocks.coatedCable.get()) }
+    val fluidPipeBlockEntityType = BLOCK_ENTITIES.registerK("fluid_pipe") { createType(::FluidPipeBlockEntity, NTechBlocks.coatedUniversalFluidDuct.get()) }
     val littleBoyBlockEntityType = BLOCK_ENTITIES.registerK("little_boy") { createType(::LittleBoyBlockEntity, NTechBlocks.littleBoy.get()) }
     val fatManBlockEntityType = BLOCK_ENTITIES.registerK("fat_man") { createType(::FatManBlockEntity, NTechBlocks.fatMan.get()) }
     val launchPadBlockEntityType = BLOCK_ENTITIES.registerK("launch_pad") { createType(::LaunchPadBlockEntity, NTechBlocks.launchPad.get()) }

@@ -201,6 +201,7 @@ object NTechBlocks {
     val murkyAnvil = BLOCKS.registerK("murky_anvil") { AnvilBlock(1916169, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
 
     val coatedCable = BLOCKS.registerK("coated_red_copper_cable") { CoatedCableBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val coatedUniversalFluidDuct = BLOCKS.registerK("coated_fluid_duct") { CoatedUniversalFluidPipeBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
 
     // Bombs
 

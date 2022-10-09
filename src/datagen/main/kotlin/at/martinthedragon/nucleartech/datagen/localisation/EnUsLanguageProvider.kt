@@ -156,6 +156,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.dineutroniumAnvil, "Dineutronium Anvil")
         addBlock(NTechBlocks.murkyAnvil, "Murky Anvil")
         addBlock(NTechBlocks.coatedCable, "Coated Red Copper Cable")
+        addBlock(NTechBlocks.coatedUniversalFluidDuct, "Coated Universal Fluid Duct")
 
         addBlock(NTechBlocks.littleBoy, "Little Boy")
         addBlock(NTechBlocks.fatMan, "Fat Man")
