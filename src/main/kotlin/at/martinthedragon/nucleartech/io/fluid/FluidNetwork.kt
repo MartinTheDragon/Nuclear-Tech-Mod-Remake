@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.io.fluid
 
 import at.martinthedragon.nucleartech.io.TransmitterNetwork
+import it.unimi.dsi.fastutil.ints.IntIntPair
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.fluids.FluidStack
@@ -16,12 +17,7 @@ class FluidNetwork : TransmitterNetwork<Pipe, FluidNetwork, IFluidHandler>, IFlu
     override fun self() = this
     override fun compatibleWith(other: FluidNetwork) = fluid.isSame(other.fluid)
 
-    override fun tick() {
-        if (!fluid.isSame(Fluids.EMPTY)) {
-            val toFill = fill(FluidStack(fluid, Int.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE)
-            fill(drain(FluidStack(fluid, toFill), IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE)
-        }
-    }
+    override val networkEmitter = FluidEmissionTicker()
 
     // Flat representation of all tanks somehow connected to the network (one fluid handler can have multiple tanks)
     override fun getTanks() = networkMembers.values().fold(0) { acc, fluidHandler -> acc + fluidHandler.tanks }
@@ -135,5 +131,22 @@ class FluidNetwork : TransmitterNetwork<Pipe, FluidNetwork, IFluidHandler>, IFlu
             else fluidStack.fluid
         } ?: return FluidStack.EMPTY
         return drain(FluidStack(fluidStack, maxDrain), action)
+    }
+
+    inner class FluidEmissionTicker : NetworkEmissionTicker() {
+        override fun isEmitter(member: IFluidHandler) = member.drain(FluidStack(fluid, 1), IFluidHandler.FluidAction.SIMULATE).amount > 0
+        override fun isReceiver(member: IFluidHandler) = member.fill(FluidStack(fluid, 1), IFluidHandler.FluidAction.SIMULATE) > 0
+
+        override fun getPossibleAmountToDistribute(emitters: List<IFluidHandler>, receivers: List<IFluidHandler>): Int {
+            val maxEmission = emitters.fold(0) { acc, emitter -> acc + emitter.drain(FluidStack(fluid, Int.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE).amount }.let { if (it < 0) Int.MAX_VALUE else it }
+            val maxConsumption = receivers.fold(0) { acc, receiver -> acc + receiver.fill(FluidStack(fluid, Int.MAX_VALUE), IFluidHandler.FluidAction.SIMULATE) }.let { if (it < 0) Int.MAX_VALUE else it }
+            return maxEmission.coerceAtMost(maxConsumption)
+        }
+
+        override fun transfer(emitter: IFluidHandler?, receiver: IFluidHandler, amount: Int, additional: Int, extra: Int): IntIntPair {
+            val emitted = emitter?.drain(FluidStack(fluid, amount + additional), IFluidHandler.FluidAction.EXECUTE)?.amount ?: 0
+            val received = receiver.fill(FluidStack(fluid, emitted + extra), IFluidHandler.FluidAction.EXECUTE)
+            return IntIntPair.of(emitted - received, amount - emitted)
+        }
     }
 }

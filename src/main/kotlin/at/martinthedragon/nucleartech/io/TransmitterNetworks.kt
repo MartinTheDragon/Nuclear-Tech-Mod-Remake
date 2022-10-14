@@ -11,11 +11,12 @@ import net.minecraftforge.event.TickEvent.ServerTickEvent
 import net.minecraftforge.event.server.ServerStoppedEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber
+import org.slf4j.Logger
 import java.util.*
 
 @EventBusSubscriber(modid = NuclearTech.MODID, bus = EventBusSubscriber.Bus.FORGE)
 object TransmitterNetworks {
-    private val LOGGER = LogUtils.getLogger()
+    val LOGGER: Logger = LogUtils.getLogger()
 
     private val networks = mutableSetOf<TransmitterNetwork<*, *, *>>()
     private val dirtyNetworks = mutableSetOf<TransmitterNetwork<*, *, *>>()

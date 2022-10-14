@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.block.entity
 import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.api.block.entities.SoundLoopBlockEntity
 import at.martinthedragon.nucleartech.api.block.entities.TickingServerBlockEntity
+import at.martinthedragon.nucleartech.block.entity.transmitters.CableBlockEntity
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedInputItemHandler
 import at.martinthedragon.nucleartech.capability.item.AccessLimitedOutputItemHandler
 import at.martinthedragon.nucleartech.energy.EnergyStorageExposed
@@ -107,6 +108,7 @@ class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseMac
             // TODO cache somehow TODO improve distribution
             val hungryConsumers = Direction.values().associateWith {
                 val tileEntity = level.getBlockEntity(blockPos.relative(it)) ?: return@associateWith null
+                if (tileEntity is CableBlockEntity) return@associateWith null
                 tileEntity.getCapability(CapabilityEnergy.ENERGY, it.opposite)
             }.filterValues { it != null && it.isPresent }.map { (_, consumer) -> consumer!!.resolve().get() }
 

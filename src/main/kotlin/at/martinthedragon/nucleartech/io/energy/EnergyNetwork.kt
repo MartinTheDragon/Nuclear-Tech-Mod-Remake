@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.io.energy
 
 import at.martinthedragon.nucleartech.io.TransmitterNetwork
+import it.unimi.dsi.fastutil.ints.IntIntPair
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap
 import net.minecraftforge.energy.IEnergyStorage
 import java.util.*
@@ -12,10 +13,7 @@ class EnergyNetwork : TransmitterNetwork<Cable, EnergyNetwork, IEnergyStorage>, 
     override fun self() = this
     override fun compatibleWith(other: EnergyNetwork) = true
 
-    override fun tick() {
-        val required = receiveEnergy(Int.MAX_VALUE, true)
-        receiveEnergy(extractEnergy(required, false), false)
-    }
+    override val networkEmitter = EnergyEmissionTicker()
 
     // TODO better distribution: doesn't keep track of last receiver and therefore leaves a few out
     override fun receiveEnergy(maxReceive: Int, simulate: Boolean): Int {
@@ -81,4 +79,21 @@ class EnergyNetwork : TransmitterNetwork<Cable, EnergyNetwork, IEnergyStorage>, 
 
     override fun canExtract() = true
     override fun canReceive() = true
+
+    inner class EnergyEmissionTicker : NetworkEmissionTicker() {
+        override fun isEmitter(member: IEnergyStorage) = member.extractEnergy(Int.MAX_VALUE, true) > 0
+        override fun isReceiver(member: IEnergyStorage) = member.receiveEnergy(Int.MAX_VALUE, true) > 0
+
+        override fun getPossibleAmountToDistribute(emitters: List<IEnergyStorage>, receivers: List<IEnergyStorage>): Int {
+            val maxEmission = emitters.fold(0) { acc, emitter -> acc + emitter.extractEnergy(Int.MAX_VALUE, true) }.let { if (it < 0) Int.MAX_VALUE else it }
+            val maxConsumption = receivers.fold(0) { acc, receiver -> acc + receiver.receiveEnergy(Int.MAX_VALUE, true) }.let { if (it < 0) Int.MAX_VALUE else it }
+            return maxEmission.coerceAtMost(maxConsumption)
+        }
+
+        override fun transfer(emitter: IEnergyStorage?, receiver: IEnergyStorage, amount: Int, additional: Int, extra: Int): IntIntPair {
+            val emitted = emitter?.extractEnergy(amount + additional, false) ?: 0
+            val received = receiver.receiveEnergy(emitted + extra, false)
+            return IntIntPair.of(emitted - received, amount - emitted)
+        }
+    }
 }
