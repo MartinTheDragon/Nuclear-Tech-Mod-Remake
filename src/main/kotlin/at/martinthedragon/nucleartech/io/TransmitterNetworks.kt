@@ -23,10 +23,11 @@ object TransmitterNetworks {
 
     @SubscribeEvent @JvmStatic
     fun tickServer(event: ServerTickEvent) {
-        if (event.phase == TickEvent.Phase.END) {
+        if (event.phase == TickEvent.Phase.START) {
             handleInvalidTransmitters()
             handleOrphans()
             handleDirtyNetworks()
+        } else if (event.phase == TickEvent.Phase.END) {
             for (network in networks) network.tick()
         }
     }

@@ -3,6 +3,7 @@
   "values": [
     "#nucleartech:stamps/template_folder",
     "#nucleartech:siren_tracks",
+    "nucleartech:fluid_identifier",
     "nucleartech:assembly_template",
     "nucleartech:chem_template"
   ]

@@ -146,7 +146,7 @@ abstract class TransmitterNetwork<TRANSMITTER, NETWORK, MEMBER>(val uuid: UUID =
          *
          * @return The amount of stuff the [receiver] couldn't take from the [emitter] minus accepted [extra] on the left side, and the amount of stuff the [emitter] couldn't provide minus transferred [additional] on the right side.
          */
-        abstract fun transfer(emitter: MEMBER?, receiver: MEMBER, amount: Int, additional: Int, extra: Int): IntIntPair
+        abstract fun transfer(emitter: MEMBER?, receiver: MEMBER, amount: Int, additional: Int, extra: Int, simulate: Boolean): IntIntPair
 
         private val emitters = mutableListOf<MEMBER>()
         private val receivers = mutableListOf<MEMBER>()
@@ -181,7 +181,11 @@ abstract class TransmitterNetwork<TRANSMITTER, NETWORK, MEMBER>(val uuid: UUID =
 
             while (i < distributions + additionalRuns) {
                 i++
-                val remaining = transfer(emitters.getOrNull(nextEmitter), receivers[nextReceiver], if (lastReceiverRemaining > 0) 0 else transferEach, lastReceiverRemaining, lastEmitterRemaining)
+                val emitter = emitters.getOrNull(nextEmitter)
+                val receiver = receivers[nextReceiver]
+                val toTransfer = if (lastReceiverRemaining > 0) 0 else transferEach
+                val overload = transfer(emitter, receiver, toTransfer, 0, 0, true).let { max(it.leftInt(), it.rightInt()).coerceAtLeast(0) }
+                val remaining = transfer(emitter, receiver, toTransfer - overload, lastReceiverRemaining, lastEmitterRemaining, false)
                 lastEmitterRemaining += remaining.leftInt()
                 lastReceiverRemaining += remaining.rightInt()
                 if (lastReceiverRemaining <= 0) nextReceiver++ else additionalRuns++
@@ -199,7 +203,7 @@ abstract class TransmitterNetwork<TRANSMITTER, NETWORK, MEMBER>(val uuid: UUID =
 
         fun finish() {
             if (lastEmitterRemaining > 0 && receivers.isNotEmpty()) for (receiver in receivers) {
-                lastEmitterRemaining += transfer(null, receiver, 0, 0, lastEmitterRemaining).leftInt()
+                lastEmitterRemaining += transfer(null, receiver, 0, 0, lastEmitterRemaining, false).leftInt()
             }
         }
 

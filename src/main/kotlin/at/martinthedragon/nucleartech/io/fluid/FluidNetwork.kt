@@ -143,9 +143,9 @@ class FluidNetwork : TransmitterNetwork<Pipe, FluidNetwork, IFluidHandler>, IFlu
             return maxEmission.coerceAtMost(maxConsumption)
         }
 
-        override fun transfer(emitter: IFluidHandler?, receiver: IFluidHandler, amount: Int, additional: Int, extra: Int): IntIntPair {
-            val emitted = emitter?.drain(FluidStack(fluid, amount + additional), IFluidHandler.FluidAction.EXECUTE)?.amount ?: 0
-            val received = receiver.fill(FluidStack(fluid, emitted + extra), IFluidHandler.FluidAction.EXECUTE)
+        override fun transfer(emitter: IFluidHandler?, receiver: IFluidHandler, amount: Int, additional: Int, extra: Int, simulate: Boolean): IntIntPair {
+            val emitted = emitter?.drain(FluidStack(fluid, amount + additional), if (simulate) IFluidHandler.FluidAction.SIMULATE else IFluidHandler.FluidAction.EXECUTE)?.amount ?: 0
+            val received = receiver.fill(FluidStack(fluid, emitted + extra), if (simulate) IFluidHandler.FluidAction.SIMULATE else IFluidHandler.FluidAction.EXECUTE)
             return IntIntPair.of(emitted - received, amount - emitted)
         }
     }

@@ -625,6 +625,8 @@ object NTechItems {
     val sirenTrackAPCPass = ITEMS.registerK("siren_track_apc_pass") { SirenTrackItem(SoundEvents.sirenTrackAPCPass, 50, false, 0x3437D3) }
     val sirenTrackRazortrainHorn = ITEMS.registerK("siren_track_razortrain_horn") { SirenTrackItem(SoundEvents.sirenTrackRazortrainHorn, 250, false, 0x7750ED) }
 
+    val fluidIdentifier = ITEMS.registerK("fluid_identifier") { FluidIdentifierItem(Properties().tab(CreativeTabs.Templates)) }
+
     val assemblyTemplate = ITEMS.registerK("assembly_template") { AssemblyTemplateItem(Properties().tab(CreativeTabs.Templates)) }
     val chemTemplate = ITEMS.registerK("chem_template") { ChemPlantTemplateItem(Properties().tab(CreativeTabs.Templates)) }
 

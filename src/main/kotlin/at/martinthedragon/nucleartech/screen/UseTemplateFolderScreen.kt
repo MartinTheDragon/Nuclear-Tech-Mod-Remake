@@ -1,11 +1,15 @@
 package at.martinthedragon.nucleartech.screen
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.NTechTags
+import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.getTagManager
 import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
+import at.martinthedragon.nucleartech.item.FluidIdentifierItem
 import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.networking.CraftMachineTemplateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
+import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
@@ -259,6 +263,7 @@ class UseTemplateFolderScreen : Screen(NTechItems.machineTemplateFolder.get().de
 
         fun getAllItems(): List<ItemStack> = ForgeRegistries.ITEMS.getTagManager().getTag(NTechTags.Items.FOLDER_STAMPS).map(::ItemStack) +
             ForgeRegistries.ITEMS.getTagManager().getTag(NTechTags.Items.SIREN_TRACKS).map(::ItemStack) +
+            FluidIdentifierItem.getAllFluidIdentifiers() +
             AssemblyTemplateItem.getAllTemplates((Minecraft.getInstance().level ?: throw IllegalStateException("Openend template folder without loaded level")).recipeManager).sortedBy { it.displayName.string } +
             ChemPlantTemplateItem.getAllChemTemplates(Minecraft.getInstance().level!!.recipeManager).sortedBy { it.displayName.string }
 

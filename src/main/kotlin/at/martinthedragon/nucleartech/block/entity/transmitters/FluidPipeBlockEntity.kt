@@ -1,8 +1,10 @@
 package at.martinthedragon.nucleartech.block.entity.transmitters
 
+import at.martinthedragon.nucleartech.block.BlockTints
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
 import at.martinthedragon.nucleartech.io.fluid.Pipe
 import net.minecraft.ResourceLocationException
+import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.nbt.CompoundTag
@@ -21,9 +23,14 @@ class FluidPipeBlockEntity(pos: BlockPos, state: BlockState) : AbstractTransmitt
         private set
 
     fun setFluid(fluid: Fluid) {
+        if (this.fluid == fluid) return
         this.fluid = fluid
-        if (!isClientSide())
+        if (!isClientSide()) {
+            removeFromNetwork() // turn it off and back on again, always works
+            addToNetwork()
+            refresh(true)
             sendContinuousUpdatePacket()
+        }
     }
 
     override fun getContinuousUpdateTag(): CompoundTag = super.getContinuousUpdateTag().apply {
@@ -36,6 +43,7 @@ class FluidPipeBlockEntity(pos: BlockPos, state: BlockState) : AbstractTransmitt
         } catch (ignored: ResourceLocationException) {
             Fluids.EMPTY
         }
+        BlockTints.invalidate(levelUnchecked as ClientLevel, BlockTints.FLUID_DUCT_COLOR_RESOLVER, blockPos, true)
     }
 
     override fun handleUpdateTag(tag: CompoundTag) {

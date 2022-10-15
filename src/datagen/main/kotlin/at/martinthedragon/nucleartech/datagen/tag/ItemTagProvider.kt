@@ -585,6 +585,7 @@ class ItemTagProvider(
         tag(NTechTags.Items.MACHINE_TEMPLATE_FOLDER_RESULTS)
             .addTag(NTechTags.Items.FOLDER_STAMPS)
             .addTag(NTechTags.Items.SIREN_TRACKS)
+            .add(NTechItems.fluidIdentifier.get())
             .add(NTechItems.assemblyTemplate.get())
             .add(NTechItems.chemTemplate.get())
     }

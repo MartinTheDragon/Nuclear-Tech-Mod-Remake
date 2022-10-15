@@ -40,6 +40,6 @@ class TemplateFolderJRC(guiHelper: IGuiHelper) : IRecipeCategory<TemplateFolderJ
     }
 
     data class TemplateFolderRecipe(val folderItem: ItemStack, val templateType: TemplateType, val firstIngredient: Ingredient, val secondIngredient: Ingredient, val result: List<ItemStack>) {
-        enum class TemplateType { PressStamp, SirenTrack, AssemblyTemplate, ChemistryTemplate }
+        enum class TemplateType { PressStamp, SirenTrack, FluidIdentifier, AssemblyTemplate, ChemistryTemplate }
     }
 }

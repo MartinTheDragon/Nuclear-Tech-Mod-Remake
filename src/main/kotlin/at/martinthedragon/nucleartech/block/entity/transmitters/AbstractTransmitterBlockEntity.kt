@@ -16,16 +16,19 @@ abstract class AbstractTransmitterBlockEntity(type: BlockEntityType<*>, pos: Blo
     var loaded = false
         protected set
     protected var shouldRefresh = true
+    protected var forceNeighborUpdates = false
 
     override fun serverTick(level: Level, pos: BlockPos, state: BlockState) {
         if (shouldRefresh) {
-            transmitter.refresh()
+            transmitter.refresh(forceNeighborUpdates)
             shouldRefresh = false
+            forceNeighborUpdates = false
         }
     }
 
-    fun refresh() {
+    fun refresh(forceNeighborUpdates: Boolean = false) {
         shouldRefresh = true
+        this.forceNeighborUpdates = forceNeighborUpdates
     }
 
     fun placeInWorld() {

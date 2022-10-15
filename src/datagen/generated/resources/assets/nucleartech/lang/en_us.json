@@ -500,6 +500,8 @@
   "item.nucleartech.flat_magnet": "Flat Magnet",
   "item.nucleartech.flat_steel_casing": "Flat Steel Casing",
   "item.nucleartech.flechettes": "Flechettes",
+  "item.nucleartech.fluid_identifier": "Fluid Identifier: %s",
+  "item.nucleartech.fluid_identifier.desc": "Right click fluid ducts to designate them for that fluid.\nShift right click fluid ducts to designate adjacent ducts\nup to a maximum range of 64 ducts.",
   "item.nucleartech.fluorite": "Fluorite",
   "item.nucleartech.fluorite_crystals": "Fluorite Crystals",
   "item.nucleartech.gas_bucket": "Natural Gas Bucket",

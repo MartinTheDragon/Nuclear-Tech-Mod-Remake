@@ -10,8 +10,10 @@ import net.minecraft.client.color.block.BlockTintCache
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.core.BlockPos
 import net.minecraft.core.SectionPos
+import net.minecraft.util.Mth
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.level.ColorResolver
+import net.minecraft.world.level.block.Block
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -28,10 +30,12 @@ object BlockTints {
     private val fluidDuctTintCache = NonThreadLocalBlockTintCache sourceFunc@{
         val level = Minecraft.getInstance().level ?: return@sourceFunc -1
         val blockEntity = level.getBlockEntity(it) as? FluidPipeBlockEntity ?: return@sourceFunc -1
-        val texture = blockEntity.fluid.attributes.stillTexture ?: return@sourceFunc -1
+        val fluid = blockEntity.fluid
+        val texture = fluid.attributes.stillTexture ?: return@sourceFunc -1
         try {
             val sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(texture)
-            sprite.getAverageColor(0, 0, 0, 15, 15) and 0xFFFFFF
+            val baseColor = sprite.getAverageColor(0, 0, 0, 15, 15) and 0xFFFFFF
+            Mth.colorMultiply(baseColor, fluid.attributes.color)
         } catch (ex: Exception) {
             LOGGER.error("Couldn't sample fluid texture $texture for tinting fluid duct at $it", ex)
             -1
@@ -75,7 +79,13 @@ object BlockTints {
         }
     }
 
-    fun invalidate(level: ClientLevel, colorResolver: ColorResolver, pos: BlockPos) {
-        level.tintCaches[colorResolver]?.invalidateForChunk(SectionPos.blockToSectionCoord(pos.x), SectionPos.blockToSectionCoord(pos.z))
+    fun invalidate(level: ClientLevel, colorResolver: ColorResolver, pos: BlockPos, forceRenderUpdate: Boolean = false) {
+        val x = SectionPos.blockToSectionCoord(pos.x)
+        val z = SectionPos.blockToSectionCoord(pos.z)
+        level.tintCaches[colorResolver]?.invalidateForChunk(x, z)
+        if (forceRenderUpdate) {
+            val blockState = level.getBlockState(pos)
+            level.sendBlockUpdated(pos, blockState, blockState, Block.UPDATE_IMMEDIATE)
+        }
     }
 }

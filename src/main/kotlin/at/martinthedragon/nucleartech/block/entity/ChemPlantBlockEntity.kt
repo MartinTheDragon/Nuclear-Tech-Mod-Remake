@@ -300,7 +300,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
 
     override val ioConfigurations = IODelegatedBlockEntity.fromTriples(blockPos, getHorizontalBlockRotation(),
         Triple(BlockPos(-1, 0, 1), Direction.WEST, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
-        Triple(BlockPos(2, 0, 1), Direction.EAST, listOf(IOConfiguration(IOConfiguration.Mode.OUT, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
+        Triple(BlockPos(2, 0, 0), Direction.EAST, listOf(IOConfiguration(IOConfiguration.Mode.OUT, IODelegatedBlockEntity.DEFAULT_ITEM_ACTION))),
         Triple(BlockPos(0, 0, -1), Direction.NORTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
         Triple(BlockPos(1, 0, -1), Direction.NORTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),
         Triple(BlockPos(0, 0, 2), Direction.SOUTH, listOf(IOConfiguration(IOConfiguration.Mode.IN, IODelegatedBlockEntity.DEFAULT_ENERGY_ACTION))),

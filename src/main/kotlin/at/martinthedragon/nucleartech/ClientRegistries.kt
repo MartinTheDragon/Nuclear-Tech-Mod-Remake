@@ -9,11 +9,9 @@ import at.martinthedragon.nucleartech.entity.renderer.MushroomCloudRenderer
 import at.martinthedragon.nucleartech.entity.renderer.NoopRenderer
 import at.martinthedragon.nucleartech.entity.renderer.NuclearCreeperRenderer
 import at.martinthedragon.nucleartech.entity.renderer.SimpleMissileRenderer
+import at.martinthedragon.nucleartech.extensions.getAverageColor
 import at.martinthedragon.nucleartech.fluid.NTechFluids
-import at.martinthedragon.nucleartech.item.BombKitItem
-import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.item.NTechItems
-import at.martinthedragon.nucleartech.item.setIdSupplier
+import at.martinthedragon.nucleartech.item.*
 import at.martinthedragon.nucleartech.menu.MenuTypes
 import at.martinthedragon.nucleartech.model.RandomModelLoader
 import at.martinthedragon.nucleartech.particle.*
@@ -33,10 +31,12 @@ import net.minecraft.client.renderer.ShaderInstance
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
 import net.minecraft.client.searchtree.ReloadableSearchTree
+import net.minecraft.util.Mth
 import net.minecraft.world.inventory.InventoryMenu
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.*
 import net.minecraftforge.client.model.ModelLoaderRegistry
@@ -179,6 +179,21 @@ object ClientRegistries {
             )
         } else if (event is ColorHandlerEvent.Item) {
             val itemColors = event.itemColors
+            itemColors.register({ stack, layer ->
+                if (layer == 0) -1 else {
+                    val fluid = FluidIdentifierItem.getFluid(stack)
+                    if (fluid.isSame(Fluids.EMPTY)) return@register -1
+                    val texture = fluid.attributes.stillTexture
+                    try {
+                        val sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(texture)
+                        val baseColor = sprite.getAverageColor(0, 0, 0, 15, 15) and 0xFFFFFF
+                        Mth.colorMultiply(baseColor, fluid.attributes.color)
+                    } catch (ex: Exception) {
+                        NuclearTech.LOGGER.error("Couldn't sample fluid texture $texture for tinting fluid identifier", ex)
+                        -1
+                    }
+                }
+            }, NTechItems.fluidIdentifier.get())
             for (bombKit in BombKitItem.allKits) {
                 itemColors.register({ _, layer -> if (layer == 0) -1 else bombKit.color }, bombKit)
             }

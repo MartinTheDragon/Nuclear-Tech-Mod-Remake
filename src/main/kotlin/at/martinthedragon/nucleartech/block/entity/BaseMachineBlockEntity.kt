@@ -227,7 +227,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
             val capabilityRow = capabilityHandlers.row(cap)
             // if there are no sided handlers always return the unsided one
             if (capabilityRow.size == 1 && capabilityRow.contains(Optional.empty())) return capabilityRow.getValue(Optional.empty()).cast()
-            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation()::rotate))]?.cast() ?: super<SyncedBlockEntity>.getCapability(cap, side)
+            return capabilityRow[Optional.ofNullable(side?.let(getHorizontalBlockRotation().inverted::rotate))]?.cast() ?: super<SyncedBlockEntity>.getCapability(cap, side)
         }
         return super<SyncedBlockEntity>.getCapability(cap, side)
     }

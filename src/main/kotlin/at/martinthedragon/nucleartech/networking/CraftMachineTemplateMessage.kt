@@ -1,10 +1,7 @@
 package at.martinthedragon.nucleartech.networking
 
-import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.NTechTags
-import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
-import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.item.giveItemToInventory
+import at.martinthedragon.nucleartech.item.*
 import at.martinthedragon.nucleartech.recipe.StackedIngredient
 import at.martinthedragon.nucleartech.recipe.containerSatisfiesRequirements
 import net.minecraft.network.FriendlyByteBuf
@@ -73,6 +70,10 @@ class CraftMachineTemplateMessage(val result: ItemStack) : NetworkMessage<CraftM
                         in sirenTracks -> if (!removeIfPossible(sender,
                                 sender.inventory.items.firstOrNull { it.`is`(NTechTags.Items.PLATES_INSULATOR) }?.item,
                                 sender.inventory.items.firstOrNull { it.`is`(NTechTags.Items.PLATES_STEEL) }?.item
+                            )) { return@enqueueWork }
+                        is FluidIdentifierItem -> if(!removeIfPossible(sender,
+                                sender.inventory.items.firstOrNull { it.`is`(NTechTags.Items.PLATES_IRON) }?.item,
+                                sender.inventory.items.firstOrNull { it.`is`(Tags.Items.DYES) }?.item
                             )) { return@enqueueWork }
                         else -> if (!removeIfPossible(sender,
                                 Items.PAPER,

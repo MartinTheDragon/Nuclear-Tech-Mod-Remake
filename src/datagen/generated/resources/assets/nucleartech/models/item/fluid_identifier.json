@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/fluid_identifier",
+    "layer1": "nucleartech:item/fluid_identifier_overlay"
+  }
+}

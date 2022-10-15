@@ -90,9 +90,9 @@ class EnergyNetwork : TransmitterNetwork<Cable, EnergyNetwork, IEnergyStorage>, 
             return maxEmission.coerceAtMost(maxConsumption)
         }
 
-        override fun transfer(emitter: IEnergyStorage?, receiver: IEnergyStorage, amount: Int, additional: Int, extra: Int): IntIntPair {
-            val emitted = emitter?.extractEnergy(amount + additional, false) ?: 0
-            val received = receiver.receiveEnergy(emitted + extra, false)
+        override fun transfer(emitter: IEnergyStorage?, receiver: IEnergyStorage, amount: Int, additional: Int, extra: Int, simulate: Boolean): IntIntPair {
+            val emitted = emitter?.extractEnergy(amount + additional, simulate) ?: 0
+            val received = receiver.receiveEnergy(emitted + extra, simulate)
             return IntIntPair.of(emitted - received, amount - emitted)
         }
     }

@@ -5,10 +5,7 @@ import at.martinthedragon.nucleartech.integration.jei.categories.*
 import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJRC.TemplateFolderRecipe
 import at.martinthedragon.nucleartech.integration.jei.categories.TemplateFolderJRC.TemplateFolderRecipe.TemplateType
 import at.martinthedragon.nucleartech.integration.jei.transfers.PressingJRTI
-import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
-import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.item.NTechBlockItems
-import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.item.*
 import at.martinthedragon.nucleartech.menu.*
 import at.martinthedragon.nucleartech.recipe.*
 import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe
@@ -70,6 +67,7 @@ class JeiIntegration : IModPlugin {
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NTechTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NTechTags.Items.WIRE_STAMPS).map(::ItemStack)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.PressStamp, Ingredient.of(NTechTags.Items.FLAT_STAMPS), Ingredient.EMPTY, tagManager.getTag(NTechTags.Items.CIRCUIT_STAMPS).map(::ItemStack)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.SirenTrack, Ingredient.of(NTechTags.Items.PLATES_INSULATOR), Ingredient.of(NTechTags.Items.PLATES_STEEL), tagManager.getTag(NTechTags.Items.SIREN_TRACKS).map(::ItemStack)))
+                add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.FluidIdentifier, Ingredient.of(NTechTags.Items.PLATES_IRON), Ingredient.of(Tags.Items.DYES), FluidIdentifierItem.getAllFluidIdentifiers()))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.AssemblyTemplate, Ingredient.of(Items.PAPER), Ingredient.of(Tags.Items.DYES), AssemblyTemplateItem.getAllTemplates(recipeManager)))
                 add(TemplateFolderRecipe(machineTemplateFolder, TemplateType.ChemistryTemplate, Ingredient.of(Items.PAPER), Ingredient.of(Tags.Items.DYES), ChemPlantTemplateItem.getAllChemTemplates(recipeManager)))
             })

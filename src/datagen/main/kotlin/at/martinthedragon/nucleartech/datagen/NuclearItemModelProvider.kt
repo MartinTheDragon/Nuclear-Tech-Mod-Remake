@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.datagen.model.RandomModelBuilder
+import at.martinthedragon.nucleartech.extensions.appendToPath
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.BombKitItem
 import at.martinthedragon.nucleartech.item.NTechBlockItems
@@ -619,6 +620,11 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.sirenTrackStandardSiren.get())
         simpleItem(NTechItems.sirenTrackSweepSiren.get())
         simpleItem(NTechItems.sirenTrackVaultDoorAlarm.get())
+
+        getBuilder(NTechItems.fluidIdentifier.id.path)
+            .parent(generatedItem)
+            .texture("layer0", itemTexture(NTechItems.fluidIdentifier.get()))
+            .texture("layer1", itemTexture(NTechItems.fluidIdentifier.get()).appendToPath("_overlay"))
 
         getBuilder(NTechItems.assemblyTemplate.id.path)
             .parent(generatedItem)

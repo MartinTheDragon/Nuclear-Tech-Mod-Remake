@@ -665,6 +665,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.sirenTrackAPCPass, "APC Pass")
         addItem(NTechItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        addItem(NTechItems.fluidIdentifier, "Flüssigkeits-Kennzeichnung: %s")
+        addItemDesc(NTechItems.fluidIdentifier, "Rechtsklicke Rohre, um ihnen die jeweilige Flüssigkeit zuzuweisen.\nShift-rechtsklicke Rohre, um angeschlossene Rohre mit\neiner maximalen Reichweite von 64 Rohren zuzuweisen.")
+
         addItem(NTechItems.assemblyTemplate, "Fertigungsvorlage: %s")
         addItem(NTechItems.chemTemplate, "Chemievorlage: %s")
 

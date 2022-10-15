@@ -500,6 +500,8 @@
   "item.nucleartech.flat_magnet": "Flachmagnet",
   "item.nucleartech.flat_steel_casing": "Flache Stahlabdeckung",
   "item.nucleartech.flechettes": "Flechets",
+  "item.nucleartech.fluid_identifier": "Fl\u00FCssigkeits-Kennzeichnung: %s",
+  "item.nucleartech.fluid_identifier.desc": "Rechtsklicke Rohre, um ihnen die jeweilige Fl\u00FCssigkeit zuzuweisen.\nShift-rechtsklicke Rohre, um angeschlossene Rohre mit\neiner maximalen Reichweite von 64 Rohren zuzuweisen.",
   "item.nucleartech.fluorite": "Fluorit",
   "item.nucleartech.fluorite_crystals": "Fluoritkristalle",
   "item.nucleartech.gas_bucket": "Erdgaseimer",

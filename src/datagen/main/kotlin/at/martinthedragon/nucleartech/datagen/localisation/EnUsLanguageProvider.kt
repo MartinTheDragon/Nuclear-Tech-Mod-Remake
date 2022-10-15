@@ -626,6 +626,9 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.sirenTrackAPCPass, "APC Pass")
         addItem(NTechItems.sirenTrackRazortrainHorn, "Razortrain Horn")
 
+        addItem(NTechItems.fluidIdentifier, "Fluid Identifier: %s")
+        addItemDesc(NTechItems.fluidIdentifier, "Right click fluid ducts to designate them for that fluid.\nShift right click fluid ducts to designate adjacent ducts\nup to a maximum range of 64 ducts.")
+
         addItem(NTechItems.assemblyTemplate, "Assembly Template: %s")
         addItem(NTechItems.chemTemplate, "Chemistry Template: %s")
 

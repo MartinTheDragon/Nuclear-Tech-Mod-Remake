@@ -31,7 +31,7 @@ abstract class AbstractTransmitter<TRANSMITTER, NETWORK, MEMBER>(val blockEntity
 
     private var members = EnumMap<_, MEMBER>(Direction::class.java)
 
-    fun refresh() {
+    fun refresh(forceUpdateNeighbors: Boolean = false) {
         if (isClientSide) return
         val otherTransmitters = getTransmitterNeighbours()
         val memberSides = getMemberSides()
@@ -42,7 +42,9 @@ abstract class AbstractTransmitter<TRANSMITTER, NETWORK, MEMBER>(val blockEntity
             newTransmitters = otherTransmitters - currentTransmitterConnections
         currentTransmitterConnections = otherTransmitters
         currentMemberConnections = memberSides
-        if (newTransmitters != DirectionMask.NULL)
+        if (forceUpdateNeighbors)
+            updateConnections(currentTransmitterConnections, true)
+        else if (newTransmitters != DirectionMask.NULL)
             updateConnections(newTransmitters)
         if (changed) connectionsChanged()
     }
@@ -112,10 +114,10 @@ abstract class AbstractTransmitter<TRANSMITTER, NETWORK, MEMBER>(val blockEntity
     @Suppress("UNCHECKED_CAST")
     fun createNetworkByMerging(networks: Collection<TransmitterNetwork<*, *, *>>) = createNetworkByMerging(networks as Collection<NETWORK>)
 
-    fun updateConnections(sides: DirectionMask) {
-        if (network == null) for (side in sides) {
+    fun updateConnections(sides: DirectionMask, force: Boolean = false) {
+        if (network == null || force) for (side in sides) {
             val blockEntity = level.getBlockEntity(pos.relative(side))
-            if (blockEntity is AbstractTransmitterBlockEntity && isValidTransmitterNeighbour(blockEntity, side))
+            if (blockEntity is AbstractTransmitterBlockEntity && isNeighboringTransmitter(blockEntity, side))
                 blockEntity.transmitter.refresh(side.opposite)
         }
     }
