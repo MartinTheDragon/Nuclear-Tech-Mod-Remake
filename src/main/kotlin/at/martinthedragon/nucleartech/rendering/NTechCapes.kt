@@ -98,6 +98,7 @@ object NTechCapes {
     private val playerCapes = with(NuclearTech.SpecialUsers) {
         mapOf(
             JulekJulas to CapeLocation(ntm("julekjulas_gif")),
+            TheOriginalGolem to CapeLocation(ntm("golem")),
 
             HbMinecraft to CapeLocation(ntm("hbminecraft"), ntm("hbminecraft_polaroid")),
             Drillgon to CapeLocation(ntm("drillgon")),

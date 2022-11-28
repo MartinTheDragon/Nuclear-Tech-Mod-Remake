@@ -29,6 +29,7 @@ class NuclearTech {
     object SpecialUsers {
         const val MartinTheDragon = "3e763f54-12fc-40ef-9416-72edc689a952"
         const val JulekJulas = "8996d0cc-5bcd-4332-bcc0-fc3391f34c07"
+        const val TheOriginalGolem = "058b52a6-05b7-4d11-8cfa-2db665d9a521"
 
         const val HbMinecraft = "192af5d7-ed0f-48d8-bd89-9d41af8524f8"
         const val LPkukin = "937c9804-e11f-4ad2-a5b1-42e62ac73077"
