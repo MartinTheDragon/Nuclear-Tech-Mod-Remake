@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/rbmk_pellet_heaus",
+    "layer1": "nucleartech:item/rbmk_pellet_enrichment_overlay_0",
+    "layer2": "nucleartech:item/rbmk_pellet_xenon_overlay"
+  }
+}

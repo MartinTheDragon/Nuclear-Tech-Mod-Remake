@@ -11,6 +11,7 @@ object NuclearConfig {
     val explosions = ExplosionsConfig()
     val fallout = FalloutConfig()
     val radiation = RadiationConfig()
+    val rbmk = RBMKConfig()
     val world = WorldConfig()
 
     fun registerConfigs(container: ModContainer) {
@@ -20,6 +21,7 @@ object NuclearConfig {
             addConfig(NuclearModConfig(this, explosions))
             addConfig(NuclearModConfig(this, fallout))
             addConfig(NuclearModConfig(this, radiation))
+            addConfig(NuclearModConfig(this, rbmk))
             addConfig(NuclearModConfig(this, world))
         }
 

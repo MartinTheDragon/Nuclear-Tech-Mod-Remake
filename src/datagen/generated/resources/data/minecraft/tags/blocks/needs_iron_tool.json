@@ -45,6 +45,8 @@
     "nucleartech:advanced_alloy_block",
     "nucleartech:steel_block",
     "nucleartech:asbestos_block",
+    "nucleartech:corium",
+    "nucleartech:corebblestone",
     "nucleartech:steel_anvil"
   ]
 }

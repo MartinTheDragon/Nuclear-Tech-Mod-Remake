@@ -134,10 +134,11 @@ inline fun <reified T : BlockEntity> dropMultiBlockEntityContentsAndRemoveStruct
 }
 
 inline fun <reified T : MenuProvider> openMenu(level: Level, pos: BlockPos, player: Player): InteractionResult {
-    if (!level.isClientSide) {
-        val blockEntity = level.getBlockEntity(pos)
-        if (blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, pos)
-    }
+    val blockEntity = level.getBlockEntity(pos)
+    if (blockEntity is T) {
+        if (!level.isClientSide)
+            NetworkHooks.openGui(player as ServerPlayer, blockEntity, pos)
+    } else return InteractionResult.FAIL
     return InteractionResult.sidedSuccess(level.isClientSide)
 }
 

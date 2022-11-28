@@ -43,11 +43,27 @@ object SpecialModels : ResourceManagerReloadListener {
     val MUSHROOM_CLOUD = registerBakedModel(modelLoc("mushroom_cloud/mush"), bakedModel())
     val OIL_DERRICK = registerModel(modelLoc("oil_derrick/oil_derrick"), simpleModel())
     val PUMPJACK = registerModel(modelLoc("pumpjack/pumpjack"), simpleModel())
+    val RBMK_COMMON_COLUMN = registerBakedModel(modelLoc("rbmk/column"), bakedModel())
+    val RBMK_CONSOLE = registerModel(modelLoc("rbmk/console"), simpleModel())
+    val RBMK_CONTROL_ROD_COLUMN = registerBakedModel(modelLoc("rbmk/control_rod_column"), bakedModel())
+    val RBMK_CONTROL_ROD_LID = registerBakedModel(modelLoc("rbmk/control_rod_lid"), bakedModel())
+    val RBMK_DEBRIS_BLANK = registerModel(modelLoc("rbmk/blank_debris"), simpleModel(ntm("other/rbmk/blank")))
+    val RBMK_DEBRIS_ELEMENT = registerModel(modelLoc("rbmk/element_debris"), simpleModel(ntm("other/rbmk/rods")))
+    val RBMK_DEBRIS_FUEL = registerModel(modelLoc("rbmk/fuel_debris"), simpleModel(ntm("other/rbmk/rods")))
+    val RBMK_DEBRIS_GRAPHITE = registerModel(modelLoc("rbmk/graphite_debris"), simpleModel(ntm("block/graphite_block")))
+    val RBMK_DEBRIS_ROD = registerModel(modelLoc("rbmk/rod_debris"), simpleModel(ntm("other/rbmk/manual_control")))
+    val RBMK_DEBRIS_LID = registerModel(modelLoc("rbmk/lid_debris"), simpleModel(ntm("other/rbmk/blank")))
+    val RBMK_LID = registerBakedModel(modelLoc("rbmk/lid"), bakedModel())
+    val RBMK_ROD_COLUMN = registerBakedModel(modelLoc("rbmk/rod_column"), bakedModel())
+    val RBMK_ROD_RODS = registerModel(modelLoc("rbmk/rods"), simpleModel())
 
     private fun modelLoc(path: String) = ntm("models/other/$path.obj")
 
     private fun simpleModel(detectCullableFaces: Boolean = false, diffuseLighting: Boolean = false, flipV: Boolean = true, ambientToFullbright: Boolean = true, materialLibraryOverrideLocation: String? = null): (ResourceLocation) -> SimpleRenderable =
         { id -> OBJLoader.INSTANCE.loadModel(OBJModel.ModelSettings(id, detectCullableFaces, diffuseLighting, flipV, ambientToFullbright, materialLibraryOverrideLocation)).bakeRenderable(StandaloneModelConfiguration.create(id, mapOf("#texture" to ResourceLocation(id.namespace, id.path.removeSuffix(".obj").removePrefix("models/"))))) }
+
+    private fun simpleModel(textureLocation: ResourceLocation, detectCullableFaces: Boolean = false, diffuseLighting: Boolean = false, flipV: Boolean = true, ambientToFullbright: Boolean = true, materialLibraryOverrideLocation: String? = null): (ResourceLocation) -> SimpleRenderable =
+        { id -> OBJLoader.INSTANCE.loadModel(OBJModel.ModelSettings(id, detectCullableFaces, diffuseLighting, flipV, ambientToFullbright, materialLibraryOverrideLocation)).bakeRenderable(StandaloneModelConfiguration.create(id, mapOf("#texture" to textureLocation))) }
 
     private fun bakedModel(detectCullableFaces: Boolean = false, diffuseLighting: Boolean = false, flipV: Boolean = true, ambientToFullbright: Boolean = true, materialLibraryOverrideLocation: String? = null): (ResourceLocation) -> BakedModel =
         { id -> OBJLoader.INSTANCE.loadModel(OBJModel.ModelSettings(id, detectCullableFaces, diffuseLighting, flipV, ambientToFullbright, materialLibraryOverrideLocation)).bake(StandaloneModelConfiguration.INSTANCE, ForgeModelBakery.instance(), UnitSprite.GETTER, SimpleModelState.IDENTITY, ItemOverrides.EMPTY, id) }

@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.block.entity
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCK_ENTITIES
 import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.entity.rbmk.*
 import at.martinthedragon.nucleartech.block.entity.transmitters.CableBlockEntity
 import at.martinthedragon.nucleartech.block.entity.transmitters.FluidPipeBlockEntity
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
@@ -29,6 +30,23 @@ object BlockEntityTypes {
     val pumpjackBlockEntityType = BLOCK_ENTITIES.registerK("pumpjack") { createType(::PumpjackBlockEntity, NTechBlocks.pumpjack.get()) }
     val cableBlockEntityType = BLOCK_ENTITIES.registerK("cable") { createType(::CableBlockEntity, NTechBlocks.coatedCable.get()) }
     val fluidPipeBlockEntityType = BLOCK_ENTITIES.registerK("fluid_pipe") { createType(::FluidPipeBlockEntity, NTechBlocks.coatedUniversalFluidDuct.get()) }
+    val rbmkBlankBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_blank") { createType(::RBMKBlankBlockEntity, NTechBlocks.rbmkBlank.get()) }
+    val rbmkRodBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_rod") { createType(::RBMKRodBlockEntity, NTechBlocks.rbmkRod.get()) }
+    val rbmkModeratedRodBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_moderated_rod") { createType(::RBMKModeratedRodBlockEntity, NTechBlocks.rbmkModeratedRod.get()) }
+    val rbmkReaSimRodBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_reasim_rod") { createType(::RBMKReaSimRodBlockEntity, NTechBlocks.rbmkReaSimRod.get()) }
+    val rbmkModeratedReaSimRodBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_moderated_reasim_rod") { createType(::RBMKModeratedReaSimRodBlockEntity, NTechBlocks.rbmkModeratedReaSimRod.get()) }
+    val rbmkAbsorberBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_absorber") { createType(::RBMKAbsorberBlockEntity, NTechBlocks.rbmkAbsorber.get()) }
+    val rbmkModeratorBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_moderator") { createType(::RBMKModeratorBlockEntity, NTechBlocks.rbmkModerator.get()) }
+    val rbmkReflectorBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_reflector") { createType(::RBMKReflectorBlockEntity, NTechBlocks.rbmkReflector.get()) }
+    val rbmkBoilerBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_boiler") { createType(::RBMKBoilerBlockEntity, NTechBlocks.rbmkBoiler.get()) }
+    val rbmkBoilerWaterInputBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_boiler_water_input") { createType(RBMKBoilerBlockEntity::WaterInputBlockEntity, NTechBlocks.rbmkBoilerColumn.get()) }
+    val rbmkManualControlBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_manual_control") { createType(::RBMKManualControlBlockEntity, NTechBlocks.rbmkManualControlRod.get()) }
+    val rbmkModeratedControlBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_moderated_control") { createType(::RBMKModeratedControlBlockEntity, NTechBlocks.rbmkModeratedControlRod.get()) }
+    val rbmkAutoControlBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_auto_control") { createType(::RBMKAutoControlBlockEntity, NTechBlocks.rbmkAutoControlRod.get()) }
+    val rbmkSteamConnectorBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_steam_connector") { createType(::RBMKSteamConnectorBlockEntity, NTechBlocks.rbmkSteamConnector.get()) }
+    val rbmkInletBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_inlet") { createType(::RBMKInletBlockEntity, NTechBlocks.rbmkInlet.get()) }
+    val rbmkOutletBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_outlet") { createType(::RBMKOutletBlockEntity, NTechBlocks.rbmkOutlet.get()) }
+    val rbmkConsoleBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_console") { createType(::RBMKConsoleBlockEntity, NTechBlocks.rbmkConsole.get()) }
     val littleBoyBlockEntityType = BLOCK_ENTITIES.registerK("little_boy") { createType(::LittleBoyBlockEntity, NTechBlocks.littleBoy.get()) }
     val fatManBlockEntityType = BLOCK_ENTITIES.registerK("fat_man") { createType(::FatManBlockEntity, NTechBlocks.fatMan.get()) }
     val launchPadBlockEntityType = BLOCK_ENTITIES.registerK("launch_pad") { createType(::LaunchPadBlockEntity, NTechBlocks.launchPad.get()) }

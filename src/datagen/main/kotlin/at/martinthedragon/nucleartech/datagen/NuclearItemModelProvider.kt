@@ -1,13 +1,12 @@
 package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.RegistriesAndLifecycle
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.datagen.model.RandomModelBuilder
 import at.martinthedragon.nucleartech.extensions.appendToPath
 import at.martinthedragon.nucleartech.fluid.NTechFluids
-import at.martinthedragon.nucleartech.item.BombKitItem
-import at.martinthedragon.nucleartech.item.NTechBlockItems
-import at.martinthedragon.nucleartech.item.NTechItems
+import at.martinthedragon.nucleartech.item.*
 import at.martinthedragon.nucleartech.ntm
 import net.minecraft.client.renderer.block.model.ItemTransforms
 import net.minecraft.data.DataGenerator
@@ -577,6 +576,10 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.schrabidiumPlateStamp.get())
         simpleItem(NTechItems.schrabidiumWireStamp.get())
         simpleItem(NTechItems.schrabidiumCircuitStamp.get())
+
+        simpleItem(NTechItems.screwdriver.get())
+        simpleItem(NTechItems.deshScrewdriver.get())
+
         simpleItem(NTechItems.speedUpgradeMk1.get())
         simpleItem(NTechItems.speedUpgradeMk2.get())
         simpleItem(NTechItems.speedUpgradeMk3.get())
@@ -598,8 +601,89 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.combineSteelShredderBlade.get())
         simpleItem(NTechItems.schrabidiumShredderBlade.get())
         simpleItem(NTechItems.deshShredderBlade.get())
-        simpleItem(NTechItems.machineTemplateFolder.get())
 
+        simpleItem(NTechItems.rbmkLid.get())
+        simpleItem(NTechItems.rbmkGlassLid.get())
+
+        for (itemRegistryObject in RegistriesAndLifecycle.ITEMS.entries) {
+            val item = itemRegistryObject.get()
+            if (item is RBMKPelletItem) {
+                getBuilder(itemRegistryObject.id.path)
+                    .parent(generatedItem)
+                    .texture("layer0", itemTexture(item))
+                    .texture("layer1", ntm("$ITEM_FOLDER/rbmk_pellet_enrichment_overlay_0")) // base item has no depletion
+                    .apply {
+                        if (item.canHaveXenon) // if the item can have xenon poisoning we need the undepleted xenon version as well
+                            override().predicate(ntm("depletion"), 0F).predicate(ntm("xenon"), 1F)
+                                .model(getBuilder("${itemRegistryObject.id.path}_poisoned")
+                                    .parent(generatedItem)
+                                    .texture("layer0", itemTexture(item))
+                                    .texture("layer1", ntm("$ITEM_FOLDER/rbmk_pellet_enrichment_overlay_0"))
+                                    .texture("layer2", ntm("${ITEM_FOLDER}/rbmk_pellet_xenon_overlay"))
+                                )
+                        for (i in 1..4) { // for all depletion levels...
+                            override().predicate(ntm("depletion"), i.toFloat())
+                                .apply { if (item.canHaveXenon) predicate(ntm("xenon"), 0F) } // if the item can have xenon poisoning, add a false predicate for it
+                                .model(getBuilder("${itemRegistryObject.id.path}_depleted_$i")
+                                    .parent(generatedItem)
+                                    .texture("layer0", itemTexture(item))
+                                    .texture("layer1", ntm("$ITEM_FOLDER/rbmk_pellet_enrichment_overlay_$i"))
+                                )
+                            if (item.canHaveXenon) {
+                                // if the item can have xenon poisoning, do the same thing again but with xenon
+                                override().predicate(ntm("depletion"), i.toFloat()).predicate(ntm("xenon"), 1F)
+                                    .model(getBuilder("${itemRegistryObject.id.path}_depleted_${i}_poisoned")
+                                        .parent(generatedItem)
+                                        .texture("layer0", itemTexture(item))
+                                        .texture("layer1", ntm("$ITEM_FOLDER/rbmk_pellet_enrichment_overlay_$i"))
+                                        .texture("layer2", ntm("$ITEM_FOLDER/rbmk_pellet_xenon_overlay"))
+                                    )
+                            }
+                        }
+                    }
+            }
+        }
+
+        simpleItem(NTechItems.emptyRBMKRod.get())
+        simpleItem(NTechItems.rbmkRodUeu.get())
+        simpleItem(NTechItems.rbmkRodMeu.get())
+        simpleItem(NTechItems.rbmkRodHeu233.get())
+        simpleItem(NTechItems.rbmkRodHeu235.get())
+        simpleItem(NTechItems.rbmkRodThMeu.get())
+        simpleItem(NTechItems.rbmkRodLep.get())
+        simpleItem(NTechItems.rbmkRodMep.get())
+        simpleItem(NTechItems.rbmkRodHep239.get())
+        simpleItem(NTechItems.rbmkRodHep241.get())
+        simpleItem(NTechItems.rbmkRodLea.get())
+        simpleItem(NTechItems.rbmkRodMea.get())
+        simpleItem(NTechItems.rbmkRodHea241.get())
+        simpleItem(NTechItems.rbmkRodHea242.get())
+        simpleItem(NTechItems.rbmkRodMen.get())
+        simpleItem(NTechItems.rbmkRodHen.get())
+        simpleItem(NTechItems.rbmkRodMox.get())
+        simpleItem(NTechItems.rbmkRodLes.get())
+        simpleItem(NTechItems.rbmkRodMes.get())
+        simpleItem(NTechItems.rbmkRodHes.get())
+        simpleItem(NTechItems.rbmkRodLeaus.get())
+        simpleItem(NTechItems.rbmkRodHeaus.get())
+        simpleItem(NTechItems.rbmkRodPo210Be.get())
+        simpleItem(NTechItems.rbmkRodRa226Be.get())
+        simpleItem(NTechItems.rbmkRodPu238Be.get())
+        simpleItem(NTechItems.rbmkRodBalefireGold.get())
+        simpleItem(NTechItems.rbmkRodFlashlead.get())
+        simpleItem(NTechItems.rbmkRodBalefire.get())
+        simpleItem(NTechItems.rbmkRodZfbBismuth.get())
+        simpleItem(NTechItems.rbmkRodZfbPu241.get())
+        simpleItem(NTechItems.rbmkRodZfbAmMix.get())
+        simpleItem(NTechItems.rbmkRodDrx.get())
+
+        simpleItem(NTechItems.meltdownTool.get())
+
+        simpleItem(NTechItems.graphiteDebris.get())
+        simpleItem(NTechItems.metalDebris.get())
+        simpleItem(NTechItems.fuelDebris.get())
+
+        simpleItem(NTechItems.machineTemplateFolder.get())
         simpleItem(NTechItems.sirenTrackAMSSiren.get())
         simpleItem(NTechItems.sirenTrackAPCPass.get())
         simpleItem(NTechItems.sirenTrackAPCSiren.get())
@@ -666,6 +750,7 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.drillMissile.get())
         simpleItem(NTechItems.nuclearMissile.get())
         simpleItem(NTechItems.oilDetector.get())
+        simpleItem(NTechItems.rbmkLinker.get())
         simpleItem(NTechItems.geigerCounter.get())
         simpleItem(NTechItems.ivBag.get())
         simpleItem(NTechItems.bloodBag.get())
@@ -762,6 +847,24 @@ class NuclearItemModelProvider(
             .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.2F, 0.2F, 0.2F).end()
             .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 45F, 0F).translation(0F, 5F, 0F).scale(0.15F, 0.15F, 0.15F).end()
             .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 45F, 0F).translation(-5F, 0F, -6F).scale(.135F, .135F, .135F).end().end()
+        for (itemObject in RegistriesAndLifecycle.ITEMS.entries) {
+            val item = itemObject.get()
+            if (item is RBMKColumnBlockItem) {
+                specialEntityItem(item).transforms()
+                    .transform(ItemTransforms.TransformType.GUI).rotation(30F, 45F, 0F).translation(0F, 4.5F, 0F).scale(.225F, .225F, .225F).end()
+                    .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(0.2F, 0.2F, 0.2F).end()
+                    .transform(ItemTransforms.TransformType.HEAD).rotation(0F, 180F, 0F).end()
+                    .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.2F, 0.2F, 0.2F).end()
+                    .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 45F, 0F).translation(0F, 2.5F, 0F).scale(0.3F, 0.3F, 0.3F).end()
+                    .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 45F, 0F).scale(.25F, .25F, .25F).end().end()
+            }
+        }
+        specialEntityItem(NTechBlockItems.rbmkConsole.get()).transforms()
+            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(1.5F, -4.25F, 0F).scale(.17F).end()
+            .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(.18F).end()
+            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 90F, 0F).translation(0F, -2F, 0F).scale(.35F).end()
+            .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 135F, 0F).translation(0F, 2.5F, 0F).scale(.17F, .17F, .17F).end()
+            .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 135F, 0F).translation(0F, -4F, 0F).scale(.2F, .2F, .2F).end().end()
         specialEntityItem(NTechBlockItems.littleBoy.get()).transforms()
             .transform(ItemTransforms.TransformType.GUI).rotation(30F, 225F, 0F).translation(3F, -2F, 0F).scale(.34F).end()
             .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(.25F, .25F, .25F).end()

@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.block
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPort
+import at.martinthedragon.nucleartech.block.rbmk.*
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.core.BlockPos
 import net.minecraft.util.valueproviders.UniformInt
@@ -171,6 +172,9 @@ object NTechBlocks {
     val infernalSellafite = BLOCKS.registerK("infernal_sellafite") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(5F).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(.6F) }
     val sellafiteCorium = BLOCKS.registerK("sellafite_corium") { HazardBlock(Properties.of(STONE, MaterialColor.COLOR_LIGHT_GREEN).strength(10F).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(1F) }
 
+    val corium = BLOCKS.registerK("corium") { HazardBlock(Properties.of(METAL, MaterialColor.COLOR_BLACK).strength(100F, 6000F).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(10F) }
+    val corebblestone = BLOCKS.registerK("corebblestone") { HazardBlock(Properties.of(METAL, MaterialColor.COLOR_BLACK).strength(100F, 6000F).requiresCorrectToolForDrops().sound(SoundType.STONE)).radiation(8F) } // TODO emit radon
+
     // Machines
 
     val siren = BLOCKS.registerK("siren") { SirenBlock(Properties.of(METAL).strength(5f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
@@ -199,6 +203,28 @@ object NTechBlocks {
     val schrabidateAnvil = BLOCKS.registerK("schrabidate_anvil") { AnvilBlock(6, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
     val dineutroniumAnvil = BLOCKS.registerK("dineutronium_anvil") { AnvilBlock(7, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
     val murkyAnvil = BLOCKS.registerK("murky_anvil") { AnvilBlock(1916169, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.ANVIL)) }
+
+    val rbmkColumn = BLOCKS.registerK("rbmk_column") { RBMKColumnBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkRod = BLOCKS.registerK("rbmk_rod") { RBMKRodBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkModeratedRod = BLOCKS.registerK("rbmk_moderated_rod") { RBMKModeratedRodBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkReaSimRod = BLOCKS.registerK("rbmk_reasim_rod") { RBMKReaSimRodBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkModeratedReaSimRod = BLOCKS.registerK("rbmk_moderated_reasim_rod") { RBMKModeratedReaSimRodBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkReflector = BLOCKS.registerK("rbmk_reflector") { RBMKReflectorBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkModerator = BLOCKS.registerK("rbmk_moderator") { RBMKModeratorBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkAbsorber = BLOCKS.registerK("rbmk_absorber") { RBMKAbsorberBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkBoilerColumn = BLOCKS.registerK("rbmk_boiler_column") { RBMKBoilerColumnBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkBoiler = BLOCKS.registerK("rbmk_boiler") { RBMKBoilerBlock(rbmkBoilerColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkBlank = BLOCKS.registerK("rbmk_blank") { RBMKBlankBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkManualControlRod = BLOCKS.registerK("rbmk_manual_control_rod") { RBMKManualControlBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkModeratedControlRod = BLOCKS.registerK("rbmk_moderated_control_rod") { RBMKModeratedControlBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkAutoControlRod = BLOCKS.registerK("rbmk_auto_control_rod") { RBMKAutoControlBlock(rbmkColumn, Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkSteamConnector = BLOCKS.registerK("rbmk_steam_connector") { RBMKSteamConnectorBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val rbmkInlet = BLOCKS.registerK("rbmk_inlet") { RBMKInletBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val rbmkOutlet = BLOCKS.registerK("rbmk_outlet") { RBMKOutletBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val rbmkConsole = BLOCKS.registerK("rbmk_console") { RBMKConsoleBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkDebris = BLOCKS.registerK("rbmk_debris") { RBMKDebrisBlock(Properties.of(METAL).strength(4F, 50F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkBurningDebris = BLOCKS.registerK("rbmk_burning_debris") { RBMKBurningDebrisBlock(Properties.of(METAL).strength(4F, 50F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val rbmkRadioactiveDebris = BLOCKS.registerK("rbmk_radioactive_debris") { RBMKRadioactiveDebrisBlock(Properties.of(METAL).strength(4F, 50F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion().lightLevel { 15 }) }
 
     val coatedCable = BLOCKS.registerK("coated_red_copper_cable") { CoatedCableBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val coatedUniversalFluidDuct = BLOCKS.registerK("coated_fluid_duct") { CoatedUniversalFluidPipeBlock(Properties.of(METAL).strength(5F, 100F).requiresCorrectToolForDrops().sound(SoundType.METAL)) }

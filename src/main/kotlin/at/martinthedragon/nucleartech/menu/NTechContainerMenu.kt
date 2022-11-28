@@ -18,6 +18,7 @@ import net.minecraftforge.network.NetworkDirection
 // an implementation that doesn't advertise shorts as ints
 open class NTechContainerMenu<T : BlockEntity>(type: MenuType<*>, id: Int, val playerInventory: Inventory, val blockEntity: T) : AbstractContainerMenu(type, id) {
     private val trackedSlots = mutableListOf<NTechDataSlot>()
+    private val dataListeners = mutableListOf<ContainerDataListener<T>>()
 
     init {
         @Suppress("LeakingThis")
@@ -89,6 +90,13 @@ open class NTechContainerMenu<T : BlockEntity>(type: MenuType<*>, id: Int, val p
         val data = getTrackedSlot(slot)
         if (data is FluidStackDataSlot)
             data.set(value)
+    }
+
+    fun addDataListener(listener: ContainerDataListener<T>) = dataListeners.add(listener)
+    fun removeDataListener(listener: ContainerDataListener<T>) = dataListeners.remove(listener)
+
+    fun updateDataListeners(data: NTechDataSlot.Data) {
+        dataListeners.forEach { it.dataChanged(this, data) }
     }
 
     override fun broadcastChanges() {

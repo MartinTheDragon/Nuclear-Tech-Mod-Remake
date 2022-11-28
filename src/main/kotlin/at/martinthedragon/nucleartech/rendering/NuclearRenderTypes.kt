@@ -47,6 +47,16 @@ object NuclearRenderTypes : RenderType(
             .createCompositeState(false)
     )
 
+    val rbmkCherenkov: RenderType = create("${NuclearTech.MODID}_rbmk_cherenkov",
+        DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, true, CompositeState.builder()
+            .setLightmapState(NO_LIGHTMAP)
+            .setCullState(NO_CULL)
+            .setShaderState(RENDERTYPE_LIGHTNING_SHADER)
+            .setTransparencyState(LIGHTNING_TRANSPARENCY)
+            .setWriteMaskState(COLOR_WRITE)
+            .createCompositeState(false)
+    )
+
     fun mushroomCloudTextured(texture: ResourceLocation, textureOffsetY: Float): RenderType {
         val state = CompositeState.builder()
             .setTextureState(TextureStateShard(texture, false, false))

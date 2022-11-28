@@ -4,11 +4,9 @@ import at.martinthedragon.nucleartech.block.BlockTints
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
 import at.martinthedragon.nucleartech.block.entity.renderer.*
+import at.martinthedragon.nucleartech.block.entity.renderer.rbmk.*
 import at.martinthedragon.nucleartech.entity.EntityTypes
-import at.martinthedragon.nucleartech.entity.renderer.MushroomCloudRenderer
-import at.martinthedragon.nucleartech.entity.renderer.NoopRenderer
-import at.martinthedragon.nucleartech.entity.renderer.NuclearCreeperRenderer
-import at.martinthedragon.nucleartech.entity.renderer.SimpleMissileRenderer
+import at.martinthedragon.nucleartech.entity.renderer.*
 import at.martinthedragon.nucleartech.extensions.getAverageColor
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.*
@@ -21,6 +19,7 @@ import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import at.martinthedragon.nucleartech.rendering.NuclearRenderTypes
 import at.martinthedragon.nucleartech.rendering.SpecialModels
 import at.martinthedragon.nucleartech.screen.*
+import at.martinthedragon.nucleartech.screen.rbmk.*
 import net.minecraft.ChatFormatting
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.MenuScreens
@@ -28,8 +27,10 @@ import net.minecraft.client.gui.screens.Screen
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.ShaderInstance
+import net.minecraft.client.renderer.entity.ItemEntityRenderer
 import net.minecraft.client.renderer.entity.ThrownItemRenderer
 import net.minecraft.client.renderer.item.ItemProperties
+import net.minecraft.client.renderer.item.ItemPropertyFunction
 import net.minecraft.client.searchtree.ReloadableSearchTree
 import net.minecraft.util.Mth
 import net.minecraft.world.inventory.InventoryMenu
@@ -66,6 +67,11 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.assemblerMenu.get(), ::AssemblerScreen)
         MenuScreens.register(MenuTypes.chemPlantMenu.get(), ::ChemPlantScreen)
         MenuScreens.register(MenuTypes.oilWellMenu.get(), ::OilWellScreen)
+        MenuScreens.register(MenuTypes.rbmkRodMenu.get(), ::RBMKRodScreen)
+        MenuScreens.register(MenuTypes.rbmkBoilerMenu.get(), ::RBMKBoilerScreen)
+        MenuScreens.register(MenuTypes.rbmkManualControlMenu.get(), ::RBMKManualControlScreen)
+        MenuScreens.register(MenuTypes.rbmkAutoControlMenu.get(), ::RBMKAutoControlScreen)
+        MenuScreens.register(MenuTypes.rbmkConsoleMenu.get(), ::RBMKConsoleScreen)
         MenuScreens.register(MenuTypes.littleBoyMenu.get(), ::LittleBoyScreen)
         MenuScreens.register(MenuTypes.fatManMenu.get(), ::FatManScreen)
         MenuScreens.register(MenuTypes.launchPadMenu.get(), ::LaunchPadScreen)
@@ -104,6 +110,19 @@ object ClientRegistries {
 
         NuclearTech.LOGGER.debug("Registering item properties")
         event.enqueueWork {
+            run {
+                @Suppress("DEPRECATION") val pelletDepletion = ItemPropertyFunction { stack, _, _, _ -> val item = stack.item; if (item is RBMKPelletItem) item.getDepletion(stack).toFloat() else 0F }
+                @Suppress("DEPRECATION") val pelletXenon = ItemPropertyFunction { stack, _, _, _ -> val item = stack.item; if (item is RBMKPelletItem && item.canHaveXenon && item.hasXenon(stack)) 1F else 0F }
+
+                for (itemRegistryObject in RegistriesAndLifecycle.ITEMS.entries) {
+                    val item = itemRegistryObject.get()
+                    if (item is RBMKPelletItem) {
+                        ItemProperties.register(item, ntm("depletion"), pelletDepletion)
+                        if (item.canHaveXenon)
+                            ItemProperties.register(item, ntm("xenon"), pelletXenon)
+                    }
+                }
+            }
             ItemProperties.register(NTechItems.assemblyTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
             ItemProperties.register(NTechItems.chemTemplate.get(), ntm("shift")) { _, _, _, _ -> if (Screen.hasShiftDown()) 1F else 0F }
         }
@@ -120,6 +139,19 @@ object ClientRegistries {
             registerBlockEntityRenderer(BlockEntityTypes.littleBoyBlockEntityType.get(), ::LittleBoyRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.oilDerrickBlockEntityType.get(), ::OilDerrickRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.pumpjackBlockEntityType.get(), ::PumpjackRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkAbsorberBlockEntityType.get(), ::RBMKAbsorberRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkAutoControlBlockEntityType.get(), ::RBMKAutoControlRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkBlankBlockEntityType.get(), ::RBMKBlankRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkBoilerBlockEntityType.get(), ::RBMKBoilerRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkConsoleBlockEntityType.get(), ::RBMKConsoleRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkManualControlBlockEntityType.get(), ::RBMKManualControlRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkModeratedControlBlockEntityType.get(), ::RBMKModeratedControlRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkModeratedReaSimRodBlockEntityType.get(), ::RBMKModeratedReaSimRodRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkModeratedRodBlockEntityType.get(), ::RBMKModeratedRodRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkModeratorBlockEntityType.get(), ::RBMKModeratorRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkReaSimRodBlockEntityType.get(), ::RBMKReaSimRodRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkReflectorBlockEntityType.get(), ::RBMKReflectorRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.rbmkRodBlockEntityType.get(), ::RBMKRodRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
         }
 
@@ -147,6 +179,10 @@ object ClientRegistries {
             registerEntityRenderer(EntityTypes.oilSpill.get(), ::NoopRenderer)
 
             registerEntityRenderer(EntityTypes.clusterFragment.get(), ::ThrownItemRenderer)
+
+            registerEntityRenderer(EntityTypes.rbmkDebris.get(), ::RBMKDebrisRenderer)
+
+            registerEntityRenderer(EntityTypes.wasteItemEntity.get(), ::ItemEntityRenderer)
         }
     }
 
@@ -232,6 +268,8 @@ object ClientRegistries {
         with(Minecraft.getInstance().particleEngine) {
             register(ModParticles.CONTRAIL.get(), ContrailParticle::Provider)
             register(ModParticles.OIL_SPILL.get(), OilSpillParticle::Provider)
+            register(ModParticles.RBMK_FIRE.get(), RBMKFireParticle::Provider)
+            register(ModParticles.RBMK_MUSH.get(), RBMKMushParticle::Provider)
             register(ModParticles.RUBBLE.get(), RubbleParticle.Provider())
             register(ModParticles.SMOKE.get(), SmokeParticle::Provider)
         }

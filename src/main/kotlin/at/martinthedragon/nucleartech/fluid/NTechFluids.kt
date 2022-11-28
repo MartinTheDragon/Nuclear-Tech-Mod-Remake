@@ -13,6 +13,7 @@ import net.minecraft.world.item.*
 import net.minecraft.world.level.block.DispenserBlock
 import net.minecraft.world.level.block.LiquidBlock
 import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.Material
 import net.minecraftforge.fluids.FluidAttributes
@@ -24,9 +25,16 @@ import java.util.function.Supplier
 object NTechFluids {
     private val fluids = mutableListOf<FluidObject<*, *, *, *>>()
 
-    val oil = registerFluid("oil", FluidAttributes.builder(ntm("fluid/oil_still"), ntm("fluid/oil_flow")), ::Source, ::Flowing, ::BucketItem, propertiesModifier = { tickRate(30) })
+    private const val ABSOLUTE_ZERO = -273
+
+    val steam = registerFluid("steam", FluidAttributes.builder(ntm("fluid/steam"), ntm("fluid/steam")).density(-100).gaseous().temperature(100 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
+    val steamHot = registerFluid("hot_steam", FluidAttributes.builder(ntm("fluid/hot_steam"), ntm("fluid/hot_steam")).density(-10).gaseous().temperature(300 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
+    val steamSuperHot = registerFluid("super_hot_steam", FluidAttributes.builder(ntm("fluid/super_hot_steam"), ntm("fluid/super_hot_steam")).density(0).gaseous().temperature(450 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
+    val steamUltraHot = registerFluid("ultra_hot_steam", FluidAttributes.builder(ntm("fluid/ultra_hot_steam"), ntm("fluid/ultra_hot_steam")).density(10).gaseous().temperature(600 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
+    val oil = registerFluid("oil", FluidAttributes.builder(ntm("fluid/oil_still"), ntm("fluid/oil_flow")), ::Source, ::Flowing, ::BucketItem, propertiesModifier = { tickRate(30).levelDecreasePerBlock(5) })
     val gas = registerFluid("gas", FluidAttributes.builder(ntm("fluid/gas_still"), ntm("fluid/gas_still")).gaseous().density(-100).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(10) })
     val uraniumHexafluoride = registerFluid("uranium_hexafluoride", FluidAttributes.builder(ntm("fluid/uranium_hexafluoride_still"), ntm("fluid/uranium_hexafluoride_flow")).color(0xE6D1CEBEu.toInt()).gaseous().sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(10) })
+    val corium = registerFluid("corium_fluid", FluidAttributes.builder(ntm("fluid/corium_still"), ntm("fluid/corium_flow")).density(100_000).temperature(3000 - ABSOLUTE_ZERO), CoriumFluid::Source, CoriumFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(30) }, fluidBlockProperties = BlockBehaviour.Properties.of(Material.WATER).jumpFactor(0.01F).speedFactor(0.01F).noCollission().strength(1000F).noDrops())
 
     // specifying a default argument doesn't work because of generics
     fun registerFluid(name: String, attributes: FluidAttributes.Builder) = registerFluid(name, attributes, ::Source, ::Flowing, ::BucketItem)
@@ -40,7 +48,8 @@ object NTechFluids {
         bucketCreator: (fluidSupplier: Supplier<out Fluid>, properties: Item.Properties) -> BU,
         propertiesModifier: Properties.() -> Unit = {},
         bucketProperties: () -> Item.Properties = { Item.Properties().tab(CreativeTabs.Items.tab).stacksTo(1).craftRemainder(Items.BUCKET) }, // needs to be a lambda so the CreativeTabs don't get triggered before NTechItems
-        fluidBlockProperties: BlockBehaviour.Properties = BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100F).noDrops()
+        fluidBlockProperties: BlockBehaviour.Properties = BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(100F).noDrops(),
+        liquidBlockCreator: (fluidSupplier: Supplier<out FlowingFluid>, properties: BlockBehaviour.Properties) -> LiquidBlock = ::LiquidBlock
     ): FluidObject<S, F, BU, LiquidBlock> {
         val fluidObject = FluidObject<S, F, BU, LiquidBlock>()
         val properties = Properties(fluidObject::getSourceFluid, fluidObject::getFlowingFluid, attributes.translationKey("block.nucleartech.$name")).bucket(fluidObject::getBucket).block(fluidObject::getBlock)
@@ -48,7 +57,7 @@ object NTechFluids {
         fluidObject.source = FLUIDS.registerK(name) { sourceCreator(properties) }
         fluidObject.flowing = FLUIDS.registerK("flowing_$name") { flowingCreator(properties) }
         fluidObject.bucket = ITEMS.registerK("${name}_bucket") { bucketCreator.invoke(fluidObject::getSourceFluid, bucketProperties()) }
-        fluidObject.block = BLOCKS.registerK(name) { LiquidBlock(fluidObject::getSourceFluid, fluidBlockProperties) }
+        fluidObject.block = BLOCKS.registerK(name) { liquidBlockCreator(fluidObject::getSourceFluid, fluidBlockProperties) }
         fluids += fluidObject
         return fluidObject
     }

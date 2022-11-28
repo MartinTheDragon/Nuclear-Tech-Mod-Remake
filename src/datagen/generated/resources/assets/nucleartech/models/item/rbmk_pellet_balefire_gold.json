@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/rbmk_pellet_balefire_gold",
+    "layer1": "nucleartech:item/rbmk_pellet_enrichment_overlay_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nucleartech:depletion": 1.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_balefire_gold_depleted_1"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 2.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_balefire_gold_depleted_2"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 3.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_balefire_gold_depleted_3"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 4.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_balefire_gold_depleted_4"
+    }
+  ]
+}

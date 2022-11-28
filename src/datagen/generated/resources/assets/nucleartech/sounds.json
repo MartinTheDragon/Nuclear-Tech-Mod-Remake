@@ -213,6 +213,30 @@
       "nucleartech:block/debris3"
     ]
   },
+  "block.rbmk.az5_cover": {
+    "subtitle": "subtitle.nucleartech.block.rbmk.az5_cover",
+    "sounds": [
+      "nucleartech:block/rbmk_az5_cover"
+    ]
+  },
+  "block.rbmk.explosion": {
+    "subtitle": "subtitle.nucleartech.block.rbmk.explosion",
+    "sounds": [
+      {
+        "name": "nucleartech:block/rbmk_explosion",
+        "stream": true
+      }
+    ]
+  },
+  "block.rbmk.shutdown": {
+    "subtitle": "subtitle.nucleartech.block.rbmk.shutdown",
+    "sounds": [
+      {
+        "name": "nucleartech:block/rbmk_shutdown",
+        "stream": true
+      }
+    ]
+  },
   "item.upgrade.install": {
     "subtitle": "subtitle.nucleartech.item.upgrade.install",
     "sounds": [

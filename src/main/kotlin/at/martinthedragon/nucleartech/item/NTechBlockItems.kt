@@ -4,6 +4,8 @@ import at.martinthedragon.nucleartech.CreativeTabs
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.ITEMS
 import at.martinthedragon.nucleartech.block.*
 import at.martinthedragon.nucleartech.block.entity.*
+import at.martinthedragon.nucleartech.block.entity.rbmk.*
+import at.martinthedragon.nucleartech.block.rbmk.RBMKConsoleBlock
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
@@ -168,6 +170,9 @@ object NTechBlockItems {
     val infernalSellafite = ITEMS.registerK("infernal_sellafite") { BlockItem(NTechBlocks.infernalSellafite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val sellafiteCorium = ITEMS.registerK("sellafite_corium") { BlockItem(NTechBlocks.sellafiteCorium.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
+    val corium = ITEMS.registerK("corium") { BlockItem(NTechBlocks.corium.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val corebblestone = ITEMS.registerK("corebblestone") { BlockItem(NTechBlocks.corebblestone.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+
     val siren = ITEMS.registerK("siren") { BlockItem(NTechBlocks.siren.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val safe = ITEMS.registerK("safe") { BlockItem(NTechBlocks.safe.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val steamPress = ITEMS.registerK("steam_press") { BlockItem(NTechBlocks.steamPressBase.get(), Item.Properties().tab(CreativeTabs.Machines)) }
@@ -190,6 +195,26 @@ object NTechBlockItems {
     val schrabidateAnvil = ITEMS.registerK("schrabidate_anvil") { BlockItem(NTechBlocks.schrabidateAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val dineutroniumAnvil = ITEMS.registerK("dineutronium_anvil") { BlockItem(NTechBlocks.dineutroniumAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val murkyAnvil = ITEMS.registerK("murky_anvil") { BlockItem(NTechBlocks.murkyAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+
+    val rbmkRod = ITEMS.registerK("rbmk_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkRod.get(), ::RBMKRodBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkModeratedRod = ITEMS.registerK("rbmk_moderated_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkModeratedRod.get(), ::RBMKModeratedRodBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkReaSimRod = ITEMS.registerK("rbmk_reasim_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkReaSimRod.get(), ::RBMKReaSimRodBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkModeratedReaSimRod = ITEMS.registerK("rbmk_moderated_reasim_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkModeratedReaSimRod.get(), ::RBMKModeratedReaSimRodBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkReflector = ITEMS.registerK("rbmk_reflector") { RBMKColumnBlockItem(NTechBlocks.rbmkReflector.get(), ::RBMKReflectorBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkModerator = ITEMS.registerK("rbmk_moderator") { RBMKColumnBlockItem(NTechBlocks.rbmkModerator.get(), ::RBMKModeratorBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkAbsorber = ITEMS.registerK("rbmk_absorber") { RBMKColumnBlockItem(NTechBlocks.rbmkAbsorber.get(), ::RBMKAbsorberBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkBlank = ITEMS.registerK("rbmk_blank") { RBMKColumnBlockItem(NTechBlocks.rbmkBlank.get(), ::RBMKBlankBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkBoiler = ITEMS.registerK("rbmk_boiler") { RBMKBoilerColumnBlockItem(NTechBlocks.rbmkBoiler.get(), ::RBMKBoilerBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkManualControlRod = ITEMS.registerK("rbmk_manual_control_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkManualControlRod.get(), ::RBMKManualControlBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkModeratedControlRod = ITEMS.registerK("rbmk_moderated_control_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkModeratedControlRod.get(), ::RBMKModeratedControlBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkAutoControlRod = ITEMS.registerK("rbmk_auto_control_rod") { RBMKColumnBlockItem(NTechBlocks.rbmkAutoControlRod.get(), ::RBMKAutoControlBlockEntity, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkSteamConnector = ITEMS.registerK("rbmk_steam_connector") { BlockItem(NTechBlocks.rbmkSteamConnector.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkInlet = ITEMS.registerK("rbmk_inlet") { BlockItem(NTechBlocks.rbmkInlet.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkOutlet = ITEMS.registerK("rbmk_outlet") { BlockItem(NTechBlocks.rbmkOutlet.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkConsole = ITEMS.registerK("rbmk_console") { SpecialModelMultiBlockPlacerItem(NTechBlocks.rbmkConsole.get(), ::RBMKConsoleBlockEntity, RBMKConsoleBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkDebris = ITEMS.registerK("rbmk_debris") { BlockItem(NTechBlocks.rbmkDebris.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkBurningDebris = ITEMS.registerK("rbmk_burning_debris") { BlockItem(NTechBlocks.rbmkBurningDebris.get(), Item.Properties().tab(CreativeTabs.Machines)) }
+    val rbmkRadioactiveDebris = ITEMS.registerK("rbmk_radioactive_debris") { BlockItem(NTechBlocks.rbmkRadioactiveDebris.get(), Item.Properties().tab(CreativeTabs.Machines)) }
 
     val coatedCable = ITEMS.registerK("coated_red_copper_cable") { BlockItem(NTechBlocks.coatedCable.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val coatedUniversalFluidDuct = ITEMS.registerK("coated_fluid_duct") { BlockItem(NTechBlocks.coatedUniversalFluidDuct.get(), Item.Properties().tab(CreativeTabs.Machines)) }

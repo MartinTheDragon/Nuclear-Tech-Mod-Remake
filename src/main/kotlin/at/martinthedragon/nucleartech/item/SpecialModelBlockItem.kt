@@ -9,12 +9,10 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraftforge.client.IItemRenderProperties
 import java.util.function.Consumer
 
-open class SpecialModelBlockItem(block: Block, val blockEntityFunc: (pos: BlockPos, state: BlockState) -> BlockEntity, properties: Properties) : BlockItem(block, properties) {
-    override fun initializeClient(consumer: Consumer<IItemRenderProperties>) {
-        consumer.accept(RenderProperties)
-    }
+open class SpecialModelBlockItem(block: Block, override val blockEntityFunc: (pos: BlockPos, state: BlockState) -> BlockEntity, properties: Properties) : BlockItem(block, properties), SpecialRenderingBlockEntityItem {
+    override val blockStateForRendering: BlockState get() = super.getBlock().defaultBlockState()
 
-    private object RenderProperties : IItemRenderProperties {
-        override fun getItemStackRenderer() = CustomBEWLR
+    override fun initializeClient(consumer: Consumer<IItemRenderProperties>) {
+        consumer.accept(CustomBEWLR.DefaultRenderProperties)
     }
 }

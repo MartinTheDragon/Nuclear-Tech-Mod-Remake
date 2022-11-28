@@ -1,0 +1,72 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/rbmk_pellet_hea242",
+    "layer1": "nucleartech:item/rbmk_pellet_enrichment_overlay_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nucleartech:depletion": 0.0,
+        "nucleartech:xenon": 1.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_poisoned"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 1.0,
+        "nucleartech:xenon": 0.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_1"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 1.0,
+        "nucleartech:xenon": 1.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_1_poisoned"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 2.0,
+        "nucleartech:xenon": 0.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_2"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 2.0,
+        "nucleartech:xenon": 1.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_2_poisoned"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 3.0,
+        "nucleartech:xenon": 0.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_3"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 3.0,
+        "nucleartech:xenon": 1.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_3_poisoned"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 4.0,
+        "nucleartech:xenon": 0.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_4"
+    },
+    {
+      "predicate": {
+        "nucleartech:depletion": 4.0,
+        "nucleartech:xenon": 1.0
+      },
+      "model": "nucleartech:item/rbmk_pellet_hea242_depleted_4_poisoned"
+    }
+  ]
+}

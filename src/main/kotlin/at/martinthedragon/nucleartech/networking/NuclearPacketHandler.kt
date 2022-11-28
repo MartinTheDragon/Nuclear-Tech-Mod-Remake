@@ -22,8 +22,11 @@ object NuclearPacketHandler {
     private var currentPacketID = 0
 
     internal fun initialize() {
-        registerMessage(CraftMachineTemplateMessage::decode, NetworkDirection.PLAY_TO_SERVER)
         registerMessage(AnvilConstructMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(CraftMachineTemplateMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(SetRBMKAutoControlRodValuesMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(SetRBMKConsoleControlRodLevelMessage::decode, NetworkDirection.PLAY_TO_SERVER)
+        registerMessage(SetRBMKConsoleScreenAssignedColumnsMessage::decode, NetworkDirection.PLAY_TO_SERVER)
         registerMessage(SpawnNuclearExplosionMessage::decode, NetworkDirection.PLAY_TO_SERVER)
 
         registerMessage(ContainerMenuUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)

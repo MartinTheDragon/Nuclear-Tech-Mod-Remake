@@ -1,0 +1,6 @@
+{
+  "parent": "forge:item/bucket",
+  "loader": "forge:bucket",
+  "fluid": "nucleartech:corium_fluid",
+  "flipGas": false
+}

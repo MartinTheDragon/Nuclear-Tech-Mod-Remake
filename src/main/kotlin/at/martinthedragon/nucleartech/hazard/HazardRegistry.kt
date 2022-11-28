@@ -164,6 +164,13 @@ object HazardRegistry {
             register(NTechBlockItems.blazingSellafite, HazardData(RADIATION, 5F))
             register(NTechBlockItems.infernalSellafite, HazardData(RADIATION, 7.5F))
             register(NTechBlockItems.sellafiteCorium, HazardData(RADIATION, 10F))
+
+            register(NTechBlockItems.corium, HazardData(RADIATION, 100F).addEntry(HEAT, 8F))
+            register(NTechBlockItems.corebblestone, HazardData(RADIATION, 100F).addEntry(HEAT, 8F))
+
+            register(NTechItems.graphiteDebris.get(), HazardData(RADIATION, 70F).addEntry(HEAT, 5F))
+            register(NTechItems.metalDebris.get(), HazardData(RADIATION, 5F))
+            register(NTechItems.fuelDebris.get(), HazardData(RADIATION, 500F).addEntry(HEAT, 5F))
         }
     }
 

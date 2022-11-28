@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.particle.ModParticles
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -23,6 +24,8 @@ class NuclearParticleProvider(private val dataGenerator: DataGenerator, private 
     private fun createParticleDefinitions() {
         add(ModParticles.CONTRAIL, "contrail")
         add(ModParticles.OIL_SPILL, "oil_spill")
+        add(ModParticles.RBMK_FIRE, (0..13).map { ntm("rbmk_fire_$it") })
+        add(ModParticles.RBMK_MUSH, (0..29).map { ntm("rbmk_mush_$it") })
         empty(ModParticles.RUBBLE)
         add(ModParticles.SMOKE, "smoke")
     }

@@ -2,10 +2,12 @@ package at.martinthedragon.nucleartech.datagen.loot
 
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.NTechBlocks
+import at.martinthedragon.nucleartech.block.rbmk.RBMKBaseBlock
 import at.martinthedragon.nucleartech.item.NTechItems
 import net.minecraft.advancements.critereon.EnchantmentPredicate
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.advancements.critereon.MinMaxBounds
+import net.minecraft.advancements.critereon.StatePropertiesPredicate
 import net.minecraft.data.loot.BlockLoot
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.enchantment.Enchantments
@@ -19,6 +21,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
 import net.minecraft.world.level.storage.loot.functions.LimitCount
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
 import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
@@ -190,6 +193,9 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.infernalSellafite.get())
         dropSelf(NTechBlocks.sellafiteCorium.get())
 
+        dropSelf(NTechBlocks.corium.get())
+        dropSelf(NTechBlocks.corebblestone.get())
+
         dropSelf(NTechBlocks.siren.get())
         dropSelf(NTechBlocks.safe.get())
 
@@ -217,6 +223,28 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.oilDerrick.get())
         dropSelf(NTechBlocks.pumpjack.get())
 
+        add(NTechBlocks.rbmkColumn.get(), noDrop())
+        rbmkDrops(NTechBlocks.rbmkRod.get())
+        rbmkDrops(NTechBlocks.rbmkModeratedRod.get())
+        rbmkDrops(NTechBlocks.rbmkReaSimRod.get())
+        rbmkDrops(NTechBlocks.rbmkModeratedReaSimRod.get())
+        rbmkDrops(NTechBlocks.rbmkReflector.get())
+        rbmkDrops(NTechBlocks.rbmkModerator.get())
+        rbmkDrops(NTechBlocks.rbmkAbsorber.get())
+        add(NTechBlocks.rbmkBoilerColumn.get(), noDrop())
+        rbmkDrops(NTechBlocks.rbmkBoiler.get())
+        rbmkDrops(NTechBlocks.rbmkBlank.get())
+        rbmkDrops(NTechBlocks.rbmkManualControlRod.get())
+        rbmkDrops(NTechBlocks.rbmkModeratedControlRod.get())
+        rbmkDrops(NTechBlocks.rbmkAutoControlRod.get())
+        dropSelf(NTechBlocks.rbmkSteamConnector.get())
+        dropSelf(NTechBlocks.rbmkInlet.get())
+        dropSelf(NTechBlocks.rbmkOutlet.get())
+        dropSelf(NTechBlocks.rbmkConsole.get())
+        dropSelf(NTechBlocks.rbmkDebris.get())
+        dropSelf(NTechBlocks.rbmkBurningDebris.get())
+        dropSelf(NTechBlocks.rbmkRadioactiveDebris.get())
+
         dropSelf(NTechBlocks.littleBoy.get())
         dropSelf(NTechBlocks.fatMan.get())
 
@@ -226,6 +254,14 @@ class BlockLoots : BlockLoot() {
         add(NTechBlocks.genericMultiBlockPart.get(), noDrop())
         add(NTechBlocks.genericMultiBlockPort.get(), noDrop())
         add(NTechBlocks.oilPipe.get(), noDrop())
+    }
+
+    private fun rbmkDrops(block: RBMKBaseBlock) {
+        add(block, LootTable.lootTable()
+            .withPool(applyExplosionCondition(block, LootPool.lootPool().add(LootItem.lootTableItem(block))))
+            .withPool(LootPool.lootPool().add(LootItem.lootTableItem(NTechItems.rbmkLid.get())).`when`(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RBMKBaseBlock.LID_TYPE, RBMKBaseBlock.LidType.CONCRETE))))
+            .withPool(LootPool.lootPool().add(LootItem.lootTableItem(NTechItems.rbmkGlassLid.get())).`when`(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RBMKBaseBlock.LID_TYPE, RBMKBaseBlock.LidType.LEAD_GLASS))))
+        )
     }
 
     // automatically await a loot table for all blocks registered by this mod

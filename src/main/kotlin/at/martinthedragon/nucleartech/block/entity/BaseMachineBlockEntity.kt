@@ -163,7 +163,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
 
     private var horizontalRotation: Rotation? = null
 
-    protected fun getHorizontalBlockRotation(): Rotation {
+    fun getHorizontalBlockRotation(): Rotation {
         if (horizontalRotation == null) horizontalRotation = if (blockState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) blockState.getValue(BlockStateProperties.HORIZONTAL_FACING).horizontalRotation else Rotation.NONE
         return horizontalRotation!!
     }
@@ -180,7 +180,12 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
     private val otherCapabilityHandlerSuppliers: MutableMap<BlockPos, Table<Capability<*>, Optional<Direction>, NonNullSupplier<*>>> = mutableMapOf(blockPos to capabilityHandlerSuppliers)
     private val otherCapabilityHandlers: MutableMap<BlockPos, Table<Capability<*>, Optional<Direction>, LazyOptional<*>>> = mutableMapOf(blockPos to capabilityHandlers)
 
-    init {
+    override fun onLoad() {
+        super.onLoad()
+        registerCapabilityHandlers()
+    }
+
+    protected open fun registerCapabilityHandlers() {
         registerCapabilityHandler(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, { this })
     }
 

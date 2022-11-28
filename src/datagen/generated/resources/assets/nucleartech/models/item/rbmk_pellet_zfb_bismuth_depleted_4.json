@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nucleartech:item/rbmk_pellet_zfb_bismuth",
+    "layer1": "nucleartech:item/rbmk_pellet_enrichment_overlay_4"
+  }
+}

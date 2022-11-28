@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.menu
 
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.MENUS
+import at.martinthedragon.nucleartech.menu.rbmk.*
 import at.martinthedragon.nucleartech.registerK
 import net.minecraftforge.common.extensions.IForgeMenuType
 
@@ -16,6 +17,11 @@ object MenuTypes {
     val assemblerMenu = MENUS.registerK("assembler") { IForgeMenuType.create(AssemblerMenu::fromNetwork) }
     val chemPlantMenu = MENUS.registerK("chem_plant") { IForgeMenuType.create(ChemPlantMenu::fromNetwork) }
     val oilWellMenu = MENUS.registerK("oil_well") { IForgeMenuType.create(OilWellMenu::fromNetwork) }
+    val rbmkRodMenu = MENUS.registerK("rbmk_rod") { IForgeMenuType.create(RBMKRodMenu::fromNetwork) }
+    val rbmkBoilerMenu = MENUS.registerK("rbmk_boiler") { IForgeMenuType.create(RBMKBoilerMenu::fromNetwork) }
+    val rbmkManualControlMenu = MENUS.registerK("rbmk_manual_control") { IForgeMenuType.create(RBMKManualControlMenu::fromNetwork) }
+    val rbmkAutoControlMenu = MENUS.registerK("rbmk_auto_control") { IForgeMenuType.create(RBMKAutoControlMenu::fromNetwork) }
+    val rbmkConsoleMenu = MENUS.registerK("rbmk_console") { IForgeMenuType.create(RBMKConsoleMenu::fromNetwork) }
     val littleBoyMenu = MENUS.registerK("little_boy") { IForgeMenuType.create(LittleBoyMenu::fromNetwork) }
     val fatManMenu = MENUS.registerK("fat_man") { IForgeMenuType.create(FatManMenu::fromNetwork) }
     val launchPadMenu = MENUS.registerK("launch_pad") { IForgeMenuType.create(LaunchPadMenu::fromNetwork) }
