@@ -40,8 +40,8 @@ open class AnvilSmithingRecipe(
 
     open fun matchesInt(container: Container): Int =
         if (container.containerSize < 2) -1
-        else if (ingredient1.testWithStackSize(container.getItem(0)) && ingredient2.testWithStackSize(container.getItem(1))) 0
-        else if (shapeless) if (ingredient1.testWithStackSize(container.getItem(1)) && ingredient2.testWithStackSize(container.getItem(0))) 1 else -1
+        else if (ingredient1.test(container.getItem(0)) && ingredient2.test(container.getItem(1))) 0
+        else if (shapeless) if (ingredient1.test(container.getItem(1)) && ingredient2.test(container.getItem(0))) 1 else -1
         else -1
 
     open fun isMissingIngredient(stack: ItemStack, firstSlotHasItem: Boolean): Boolean =

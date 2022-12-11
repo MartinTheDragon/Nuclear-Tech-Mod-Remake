@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tungsten_powder_and_iron_powder_and_tiny_lithium_powder_from_centrifuging_crystals_from_centrifuge"
+    ]
+  },
+  "criteria": {
+    "has_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/tungsten"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tungsten_powder_and_iron_powder_and_tiny_lithium_powder_from_centrifuging_crystals_from_centrifuge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal",
+      "has_the_recipe"
+    ]
+  ]
+}

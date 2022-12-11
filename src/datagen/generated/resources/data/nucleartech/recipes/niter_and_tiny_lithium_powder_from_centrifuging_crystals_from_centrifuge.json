@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/salpeter"
+  },
+  "results": [
+    {
+      "item": "nucleartech:niter",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:niter",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:niter",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

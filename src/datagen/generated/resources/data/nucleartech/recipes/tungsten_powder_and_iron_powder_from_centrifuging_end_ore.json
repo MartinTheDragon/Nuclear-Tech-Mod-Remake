@@ -1,0 +1,28 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "forge:ores/tungsten"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "nucleartech:tungsten_powder"
+    },
+    {
+      "item": "nucleartech:tungsten_powder"
+    },
+    {
+      "item": "nucleartech:iron_powder"
+    },
+    {
+      "item": "minecraft:end_stone"
+    }
+  ]
+}

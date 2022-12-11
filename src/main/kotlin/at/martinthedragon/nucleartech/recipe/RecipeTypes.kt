@@ -10,13 +10,14 @@ object RecipeTypes {
     private val recipeTypes = mutableSetOf<RecipeType<*>>()
 
     // NOTE: all recipes need to have the isSpecial() = true override, so the recipe book does not issue a warning
-    val SMITHING = create<AnvilSmithingRecipe>("anvil_smithing")
+    val ASSEMBLY = create<AssemblyRecipe>("assembly")
+    val BLASTING = create<BlastingRecipe>("blasting")
+    val CHEM = create<ChemRecipe>("chem")
+    val CENTRIFUGE = create<CentrifugeRecipe>("centrifuge")
     val CONSTRUCTING = create<AnvilConstructingRecipe>("anvil_constructing")
     val PRESSING = create<PressingRecipe>("pressing")
-    val BLASTING = create<BlastingRecipe>("blasting")
     val SHREDDING = create<ShreddingRecipe>("shredding")
-    val ASSEMBLY = create<AssemblyRecipe>("assembly")
-    val CHEM = create<ChemRecipe>("chem")
+    val SMITHING = create<AnvilSmithingRecipe>("anvil_smithing")
 
     private fun <T : Recipe<*>> create(name: String): RecipeType<T> = object : RecipeType<T> {
         private val registryName = ntm(name)

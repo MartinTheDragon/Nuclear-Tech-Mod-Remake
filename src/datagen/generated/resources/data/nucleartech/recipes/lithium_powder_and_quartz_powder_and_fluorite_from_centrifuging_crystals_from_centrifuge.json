@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/lithium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:lithium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:lithium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:quartz_powder"
+    },
+    {
+      "item": "nucleartech:fluorite"
+    }
+  ]
+}

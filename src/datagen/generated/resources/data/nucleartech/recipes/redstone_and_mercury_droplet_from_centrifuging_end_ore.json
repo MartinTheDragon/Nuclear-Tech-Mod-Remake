@@ -1,0 +1,30 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "forge:ores/redstone"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "minecraft:redstone",
+      "count": 3
+    },
+    {
+      "item": "minecraft:redstone",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:mercury_droplet"
+    },
+    {
+      "item": "minecraft:end_stone"
+    }
+  ]
+}

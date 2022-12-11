@@ -24,16 +24,15 @@ class StackedIngredient private constructor(private val values: Sequence<Value>,
     private val itemStacks: Array<ItemStack> by lazy { values.flatMap { it.items }.map(ItemStack::copy).onEach { it.count = requiredAmount }.toList().toTypedArray() }
     override fun getItems() = itemStacks
 
-    // does not check for requiredAmount
     override fun test(stack: ItemStack?): Boolean =
         if (stack == null) false
         else if (items.isEmpty()) stack.isEmpty
-        else items.any { it.`is`(stack.item) }
+        else items.any { it.`is`(stack.item) && stack.count >= requiredAmount }
 
-    fun testWithStackSize(stack: ItemStack?): Boolean =
+    fun testWithoutStackSize(stack: ItemStack?): Boolean =
         if (stack == null) false
         else if (items.isEmpty()) stack.isEmpty
-        else items.any { it.`is`(stack.item) && stack.count >= requiredAmount }
+        else items.any { it.`is`(stack.item) }
 
     private val stackingIdList: IntList by lazy {
         IntArrayList(items.size).apply {
@@ -104,21 +103,28 @@ fun Container.getItems(copy: Boolean = true): List<ItemStack> = buildList {
     else for (i in 0 until containerSize) add(getItem(i))
 }
 
-fun Collection<StackedIngredient>.containerSatisfiesRequirements(container: Container, actuallyRemove: Boolean = false): Boolean {
+fun Collection<Ingredient>.containerSatisfiesRequirements(container: Container, actuallyRemove: Boolean = false): Boolean {
     if (isEmpty()) return true
 
     val containerItems = container.getItems(!actuallyRemove)
 
     for (ingredient in this) {
-        var amountLeft = ingredient.requiredAmount
-        for (stack in containerItems) {
+        if (ingredient is StackedIngredient) { // TODO kinda dirty, that's true. maybe move to API?
+            var amountLeft = ingredient.requiredAmount
+            for (stack in containerItems) {
+                if (ingredient.test(stack)) {
+                    val removeCount = min(stack.count, amountLeft)
+                    stack.count -= removeCount
+                    amountLeft -= removeCount
+                }
+            }
+            if (amountLeft > 0) return false
+        } else for (stack in containerItems) {
             if (ingredient.test(stack)) {
-                val removeCount = min(stack.count, amountLeft)
-                stack.count -= removeCount
-                amountLeft -= removeCount
+                stack.shrink(1)
+                break
             }
         }
-        if (amountLeft > 0) return false
     }
 
     return containerItems.all { it.count >= 0 }

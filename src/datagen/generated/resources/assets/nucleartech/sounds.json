@@ -1,196 +1,8 @@
 {
-  "siren.hatch": {
-    "subtitle": "subtitle.nucleartech.siren.hatch",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/hatch",
-        "attenuation_distance": 250
-      }
-    ]
-  },
-  "siren.autopilot_disconnected": {
-    "subtitle": "subtitle.nucleartech.siren.autopilot_disconnected",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/autopilot_disconnected",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.ams": {
-    "subtitle": "subtitle.nucleartech.siren.ams",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/ams",
-        "attenuation_distance": 100
-      }
-    ]
-  },
-  "siren.blast_door": {
-    "subtitle": "subtitle.nucleartech.siren.blast_door",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/blast_door",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.apc": {
-    "subtitle": "subtitle.nucleartech.siren.apc",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/apc",
-        "attenuation_distance": 100
-      }
-    ]
-  },
-  "siren.klaxon": {
-    "subtitle": "subtitle.nucleartech.siren.klaxon",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/klaxon",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.vault_door": {
-    "subtitle": "subtitle.nucleartech.siren.vault_door",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/vault_door",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.security": {
-    "subtitle": "subtitle.nucleartech.siren.security",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/security",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.standard": {
-    "subtitle": "subtitle.nucleartech.siren.standard",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/standard",
-        "attenuation_distance": 250
-      }
-    ]
-  },
-  "siren.classic": {
-    "subtitle": "subtitle.nucleartech.siren.classic",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/classic",
-        "stream": true,
-        "attenuation_distance": 250
-      }
-    ]
-  },
-  "siren.bank": {
-    "subtitle": "subtitle.nucleartech.siren.bank",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/bank",
-        "attenuation_distance": 100
-      }
-    ]
-  },
-  "siren.beep": {
-    "subtitle": "subtitle.nucleartech.siren.beep",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/beep",
-        "attenuation_distance": 100
-      }
-    ]
-  },
-  "siren.container": {
-    "subtitle": "subtitle.nucleartech.siren.container",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/container",
-        "attenuation_distance": 100
-      }
-    ]
-  },
-  "siren.sweep": {
-    "subtitle": "subtitle.nucleartech.siren.sweep",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/sweep",
-        "attenuation_distance": 500
-      }
-    ]
-  },
-  "siren.missile_silo": {
-    "subtitle": "subtitle.nucleartech.siren.missile_silo",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/missile_silo",
-        "attenuation_distance": 500
-      }
-    ]
-  },
-  "siren.air_raid": {
-    "subtitle": "subtitle.nucleartech.siren.air_raid",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/air_raid",
-        "stream": true,
-        "attenuation_distance": 1000
-      }
-    ]
-  },
-  "siren.nostromo_self_destruct": {
-    "subtitle": "subtitle.nucleartech.siren.nostromo_self_destruct",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/nostromo_self_destruct",
-        "attenuation_distance": 100
-      }
-    ]
-  },
-  "siren.eas": {
-    "subtitle": "subtitle.nucleartech.siren.eas",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/eas",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.apc_pass": {
-    "subtitle": "subtitle.nucleartech.siren.apc_pass",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/apc_pass",
-        "attenuation_distance": 50
-      }
-    ]
-  },
-  "siren.razortrain_horn": {
-    "subtitle": "subtitle.nucleartech.siren.razortrain_horn",
-    "sounds": [
-      {
-        "name": "nucleartech:block/siren/razortrain_horn",
-        "attenuation_distance": 250
-      }
-    ]
-  },
   "anvil.fall": {
     "subtitle": "subtitle.nucleartech.anvil.fall",
     "sounds": [
       "nucleartech:block/anvil_fall_berserk"
-    ]
-  },
-  "press.operate": {
-    "subtitle": "subtitle.nucleartech.press.operate",
-    "sounds": [
-      "nucleartech:block/press/press_operate"
     ]
   },
   "assembler.operate": {
@@ -205,6 +17,12 @@
       "nucleartech:block/chem_plant/chem_plant_operate"
     ]
   },
+  "centrifuge.operate": {
+    "subtitle": "subtitle.nucleartech.centrifuge.operate",
+    "sounds": [
+      "nucleartech:block/centrifuge/operate"
+    ]
+  },
   "block.debris": {
     "subtitle": "subtitle.nucleartech.block.debris",
     "sounds": [
@@ -213,65 +31,10 @@
       "nucleartech:block/debris3"
     ]
   },
-  "block.rbmk.az5_cover": {
-    "subtitle": "subtitle.nucleartech.block.rbmk.az5_cover",
-    "sounds": [
-      "nucleartech:block/rbmk_az5_cover"
-    ]
-  },
-  "block.rbmk.explosion": {
-    "subtitle": "subtitle.nucleartech.block.rbmk.explosion",
-    "sounds": [
-      {
-        "name": "nucleartech:block/rbmk_explosion",
-        "stream": true
-      }
-    ]
-  },
-  "block.rbmk.shutdown": {
-    "subtitle": "subtitle.nucleartech.block.rbmk.shutdown",
-    "sounds": [
-      {
-        "name": "nucleartech:block/rbmk_shutdown",
-        "stream": true
-      }
-    ]
-  },
-  "item.upgrade.install": {
-    "subtitle": "subtitle.nucleartech.item.upgrade.install",
-    "sounds": [
-      "nucleartech:item/install_upgrade"
-    ]
-  },
-  "item.use.inject": {
-    "subtitle": "subtitle.nucleartech.item.use.inject",
-    "sounds": [
-      "nucleartech:item/use/inject"
-    ]
-  },
   "item.use.radaway": {
     "subtitle": "subtitle.nucleartech.item.use.radaway",
     "sounds": [
       "nucleartech:item/use/radaway"
-    ]
-  },
-  "random.bleep": {
-    "subtitle": "subtitle.nucleartech.random.bleep",
-    "sounds": [
-      "nucleartech:random/bleep"
-    ]
-  },
-  "random.boop": {
-    "subtitle": "subtitle.nucleartech.random.boop",
-    "sounds": [
-      "nucleartech:random/boop"
-    ]
-  },
-  "random.unpack": {
-    "subtitle": "subtitle.nucleartech.random.unpack",
-    "sounds": [
-      "nucleartech:random/unpack1",
-      "nucleartech:random/unpack2"
     ]
   },
   "geiger.geiger1": {
@@ -310,16 +73,259 @@
       "nucleartech:geiger/geiger6"
     ]
   },
-  "weapon.missile_takeoff": {
-    "subtitle": "subtitle.nucleartech.weapon.missile_takeoff",
+  "item.use.inject": {
+    "subtitle": "subtitle.nucleartech.item.use.inject",
     "sounds": [
-      "nucleartech:weapon/missile_takeoff"
+      "nucleartech:item/use/inject"
+    ]
+  },
+  "item.upgrade.install": {
+    "subtitle": "subtitle.nucleartech.item.upgrade.install",
+    "sounds": [
+      "nucleartech:item/install_upgrade"
     ]
   },
   "weapon.mini_nuke_explosion": {
     "subtitle": "subtitle.nucleartech.weapon.mini_nuke_explosion",
     "sounds": [
       "nucleartech:weapon/mini_nuke_explosion"
+    ]
+  },
+  "weapon.missile_takeoff": {
+    "subtitle": "subtitle.nucleartech.weapon.missile_takeoff",
+    "sounds": [
+      "nucleartech:weapon/missile_takeoff"
+    ]
+  },
+  "press.operate": {
+    "subtitle": "subtitle.nucleartech.press.operate",
+    "sounds": [
+      "nucleartech:block/press/press_operate"
+    ]
+  },
+  "random.bleep": {
+    "subtitle": "subtitle.nucleartech.random.bleep",
+    "sounds": [
+      "nucleartech:random/bleep"
+    ]
+  },
+  "random.boop": {
+    "subtitle": "subtitle.nucleartech.random.boop",
+    "sounds": [
+      "nucleartech:random/boop"
+    ]
+  },
+  "random.unpack": {
+    "subtitle": "subtitle.nucleartech.random.unpack",
+    "sounds": [
+      "nucleartech:random/unpack1",
+      "nucleartech:random/unpack2"
+    ]
+  },
+  "block.rbmk.az5_cover": {
+    "subtitle": "subtitle.nucleartech.block.rbmk.az5_cover",
+    "sounds": [
+      "nucleartech:block/rbmk_az5_cover"
+    ]
+  },
+  "block.rbmk.explosion": {
+    "subtitle": "subtitle.nucleartech.block.rbmk.explosion",
+    "sounds": [
+      {
+        "name": "nucleartech:block/rbmk_explosion",
+        "stream": true
+      }
+    ]
+  },
+  "block.rbmk.shutdown": {
+    "subtitle": "subtitle.nucleartech.block.rbmk.shutdown",
+    "sounds": [
+      {
+        "name": "nucleartech:block/rbmk_shutdown",
+        "stream": true
+      }
+    ]
+  },
+  "siren.ams": {
+    "subtitle": "subtitle.nucleartech.siren.ams",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/ams",
+        "attenuation_distance": 100
+      }
+    ]
+  },
+  "siren.apc_pass": {
+    "subtitle": "subtitle.nucleartech.siren.apc_pass",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/apc_pass",
+        "attenuation_distance": 50
+      }
+    ]
+  },
+  "siren.apc": {
+    "subtitle": "subtitle.nucleartech.siren.apc",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/apc",
+        "attenuation_distance": 100
+      }
+    ]
+  },
+  "siren.air_raid": {
+    "subtitle": "subtitle.nucleartech.siren.air_raid",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/air_raid",
+        "stream": true,
+        "attenuation_distance": 1000
+      }
+    ]
+  },
+  "siren.autopilot_disconnected": {
+    "subtitle": "subtitle.nucleartech.siren.autopilot_disconnected",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/autopilot_disconnected",
+        "attenuation_distance": 50
+      }
+    ]
+  },
+  "siren.bank": {
+    "subtitle": "subtitle.nucleartech.siren.bank",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/bank",
+        "attenuation_distance": 100
+      }
+    ]
+  },
+  "siren.beep": {
+    "subtitle": "subtitle.nucleartech.siren.beep",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/beep",
+        "attenuation_distance": 100
+      }
+    ]
+  },
+  "siren.blast_door": {
+    "subtitle": "subtitle.nucleartech.siren.blast_door",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/blast_door",
+        "attenuation_distance": 50
+      }
+    ]
+  },
+  "siren.classic": {
+    "subtitle": "subtitle.nucleartech.siren.classic",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/classic",
+        "stream": true,
+        "attenuation_distance": 250
+      }
+    ]
+  },
+  "siren.container": {
+    "subtitle": "subtitle.nucleartech.siren.container",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/container",
+        "attenuation_distance": 100
+      }
+    ]
+  },
+  "siren.eas": {
+    "subtitle": "subtitle.nucleartech.siren.eas",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/eas",
+        "attenuation_distance": 50
+      }
+    ]
+  },
+  "siren.hatch": {
+    "subtitle": "subtitle.nucleartech.siren.hatch",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/hatch",
+        "attenuation_distance": 250
+      }
+    ]
+  },
+  "siren.klaxon": {
+    "subtitle": "subtitle.nucleartech.siren.klaxon",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/klaxon",
+        "attenuation_distance": 50
+      }
+    ]
+  },
+  "siren.missile_silo": {
+    "subtitle": "subtitle.nucleartech.siren.missile_silo",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/missile_silo",
+        "attenuation_distance": 500
+      }
+    ]
+  },
+  "siren.nostromo_self_destruct": {
+    "subtitle": "subtitle.nucleartech.siren.nostromo_self_destruct",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/nostromo_self_destruct",
+        "attenuation_distance": 100
+      }
+    ]
+  },
+  "siren.razortrain_horn": {
+    "subtitle": "subtitle.nucleartech.siren.razortrain_horn",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/razortrain_horn",
+        "attenuation_distance": 250
+      }
+    ]
+  },
+  "siren.security": {
+    "subtitle": "subtitle.nucleartech.siren.security",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/security",
+        "attenuation_distance": 50
+      }
+    ]
+  },
+  "siren.standard": {
+    "subtitle": "subtitle.nucleartech.siren.standard",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/standard",
+        "attenuation_distance": 250
+      }
+    ]
+  },
+  "siren.sweep": {
+    "subtitle": "subtitle.nucleartech.siren.sweep",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/sweep",
+        "attenuation_distance": 500
+      }
+    ]
+  },
+  "siren.vault_door": {
+    "subtitle": "subtitle.nucleartech.siren.vault_door",
+    "sounds": [
+      {
+        "name": "nucleartech:block/siren/vault_door",
+        "attenuation_distance": 50
+      }
     ]
   }
 }

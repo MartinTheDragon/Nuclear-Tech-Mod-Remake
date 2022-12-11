@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/schrabidium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:schrabidium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:schrabidium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:plutonium_powder"
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

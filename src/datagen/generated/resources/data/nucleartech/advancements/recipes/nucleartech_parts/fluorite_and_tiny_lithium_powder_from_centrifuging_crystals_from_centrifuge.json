@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:fluorite_and_tiny_lithium_powder_from_centrifuging_crystals_from_centrifuge"
+    ]
+  },
+  "criteria": {
+    "has_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/fluorite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:fluorite_and_tiny_lithium_powder_from_centrifuging_crystals_from_centrifuge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:rods/blaze"
+  },
+  "results": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "nucleartech:red_phosphorus"
+    },
+    {
+      "item": "nucleartech:red_phosphorus"
+    }
+  ]
+}

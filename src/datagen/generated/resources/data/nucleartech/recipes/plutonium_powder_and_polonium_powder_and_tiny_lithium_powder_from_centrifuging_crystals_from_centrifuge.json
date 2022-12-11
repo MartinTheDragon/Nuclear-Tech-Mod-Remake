@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/plutonium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:plutonium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:plutonium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:polonium_powder"
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

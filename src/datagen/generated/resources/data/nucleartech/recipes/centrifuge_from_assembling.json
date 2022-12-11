@@ -1,0 +1,45 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:centrifuge_element"
+      },
+      "amount": 1
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:ingots/polymer"
+      },
+      "amount": 2
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/steel"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/copper"
+      },
+      "amount": 8
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:enhanced_circuit"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:centrifuge",
+    "count": 1
+  },
+  "duration": 200
+}

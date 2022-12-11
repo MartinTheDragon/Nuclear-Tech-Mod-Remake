@@ -1,0 +1,20 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/starmetal"
+  },
+  "results": [
+    {
+      "item": "nucleartech:high_speed_steel_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:cobalt_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:mercury_droplet",
+      "count": 5
+    }
+  ]
+}

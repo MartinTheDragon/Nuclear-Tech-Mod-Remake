@@ -1,0 +1,30 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "forge:ores/phosphorus"
+      },
+      {
+        "tag": "forge:ores_in_ground/netherrack"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "minecraft:blaze_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:red_phosphorus",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:white_phosphorus_ingot"
+    },
+    {
+      "item": "minecraft:netherrack"
+    }
+  ]
+}

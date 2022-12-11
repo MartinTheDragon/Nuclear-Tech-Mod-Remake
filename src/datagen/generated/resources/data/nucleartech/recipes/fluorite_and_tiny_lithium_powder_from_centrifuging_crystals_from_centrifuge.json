@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/fluorite"
+  },
+  "results": [
+    {
+      "item": "nucleartech:fluorite",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:fluorite",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:fluorite",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

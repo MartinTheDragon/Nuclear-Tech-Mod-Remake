@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:red_phosphorus_and_white_phosphorus_ingot_and_blaze_powder_from_centrifuging_crystals_from_centrifuge"
+    ]
+  },
+  "criteria": {
+    "has_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/phosphorus"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:red_phosphorus_and_white_phosphorus_ingot_and_blaze_powder_from_centrifuging_crystals_from_centrifuge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "item": "nucleartech:meteorite_fragment"
+    "tag": "forge:fragments/meteorite"
   },
   "result": {
     "item": "nucleartech:tiny_meteorite_powder",

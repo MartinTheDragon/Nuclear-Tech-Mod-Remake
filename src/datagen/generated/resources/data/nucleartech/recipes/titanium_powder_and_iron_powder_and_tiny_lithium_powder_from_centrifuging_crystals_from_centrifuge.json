@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/titanium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:titanium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:titanium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:iron_powder"
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

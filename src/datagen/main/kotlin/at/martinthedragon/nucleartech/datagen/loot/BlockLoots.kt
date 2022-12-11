@@ -222,6 +222,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.chemPlant.get())
         dropSelf(NTechBlocks.oilDerrick.get())
         dropSelf(NTechBlocks.pumpjack.get())
+        dropSelf(NTechBlocks.centrifuge.get())
 
         add(NTechBlocks.rbmkColumn.get(), noDrop())
         rbmkDrops(NTechBlocks.rbmkRod.get())

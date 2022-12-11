@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:copper_powder_and_sulfur_and_tiny_cobalt_powder_from_centrifuging_crystals_from_centrifuge"
+    ]
+  },
+  "criteria": {
+    "has_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/copper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:copper_powder_and_sulfur_and_tiny_cobalt_powder_from_centrifuging_crystals_from_centrifuge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal",
+      "has_the_recipe"
+    ]
+  ]
+}

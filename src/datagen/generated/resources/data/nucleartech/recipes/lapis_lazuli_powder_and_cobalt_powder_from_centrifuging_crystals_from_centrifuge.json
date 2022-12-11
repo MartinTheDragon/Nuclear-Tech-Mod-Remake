@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/lapis"
+  },
+  "results": [
+    {
+      "item": "nucleartech:lapis_lazuli_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:lapis_lazuli_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:lapis_lazuli_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:cobalt_powder"
+    }
+  ]
+}

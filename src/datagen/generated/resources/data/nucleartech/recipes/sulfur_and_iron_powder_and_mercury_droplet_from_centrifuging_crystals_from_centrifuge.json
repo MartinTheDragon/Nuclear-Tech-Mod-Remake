@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/sulfur"
+  },
+  "results": [
+    {
+      "item": "nucleartech:sulfur",
+      "count": 4
+    },
+    {
+      "item": "nucleartech:sulfur",
+      "count": 4
+    },
+    {
+      "item": "nucleartech:iron_powder"
+    },
+    {
+      "item": "nucleartech:mercury_droplet"
+    }
+  ]
+}

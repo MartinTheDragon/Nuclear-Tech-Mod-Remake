@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "forge:ores/rare_earth"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "nucleartech:desh_mix"
+    },
+    {
+      "item": "minecraft:end_stone"
+    }
+  ]
+}

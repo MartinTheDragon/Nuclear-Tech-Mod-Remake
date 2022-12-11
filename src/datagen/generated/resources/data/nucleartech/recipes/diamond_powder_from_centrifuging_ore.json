@@ -1,0 +1,31 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:difference",
+    "base": {
+      "tag": "forge:ores/diamond"
+    },
+    "subtracted": [
+      {
+        "tag": "forge:ores_in_ground/netherrack"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "nucleartech:diamond_powder"
+    },
+    {
+      "item": "nucleartech:diamond_powder"
+    },
+    {
+      "item": "nucleartech:diamond_powder"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ]
+}

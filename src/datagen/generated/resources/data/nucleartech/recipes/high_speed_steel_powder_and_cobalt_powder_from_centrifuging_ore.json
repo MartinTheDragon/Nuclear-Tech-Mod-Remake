@@ -1,0 +1,30 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:difference",
+    "base": {
+      "tag": "forge:ores/starmetal"
+    },
+    "subtracted": [
+      {
+        "tag": "forge:ores_in_ground/netherrack"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "nucleartech:high_speed_steel_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:cobalt_powder",
+      "count": 2
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ]
+}

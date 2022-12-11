@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/thorium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:thorium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:thorium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:uranium_powder"
+    },
+    {
+      "item": "nucleartech:radium226_nugget"
+    }
+  ]
+}

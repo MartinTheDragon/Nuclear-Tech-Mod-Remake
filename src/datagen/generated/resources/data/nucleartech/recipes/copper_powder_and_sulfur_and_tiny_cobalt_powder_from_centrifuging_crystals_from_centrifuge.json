@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/copper"
+  },
+  "results": [
+    {
+      "item": "nucleartech:copper_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:copper_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:sulfur"
+    },
+    {
+      "item": "nucleartech:tiny_cobalt_powder"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/rare_earth"
+  },
+  "results": [
+    {
+      "item": "nucleartech:desh_mix"
+    },
+    {
+      "item": "nucleartech:desh_mix"
+    }
+  ]
+}

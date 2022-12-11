@@ -1,0 +1,31 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:difference",
+    "base": {
+      "tag": "forge:ores/titanium"
+    },
+    "subtracted": [
+      {
+        "tag": "forge:ores_in_ground/netherrack"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "nucleartech:titanium_powder"
+    },
+    {
+      "item": "nucleartech:titanium_powder"
+    },
+    {
+      "item": "nucleartech:iron_powder"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ]
+}

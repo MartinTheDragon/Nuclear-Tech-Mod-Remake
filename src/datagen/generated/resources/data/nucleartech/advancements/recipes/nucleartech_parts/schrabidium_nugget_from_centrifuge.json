@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_nugget_from_centrifuge"
+    ]
+  },
+  "criteria": {
+    "has_schraranium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/schraranium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_nugget_from_centrifuge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schraranium",
+      "has_the_recipe"
+    ]
+  ]
+}

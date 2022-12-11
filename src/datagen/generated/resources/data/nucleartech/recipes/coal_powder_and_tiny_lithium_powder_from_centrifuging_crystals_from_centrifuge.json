@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/coal"
+  },
+  "results": [
+    {
+      "item": "nucleartech:coal_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:coal_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:coal_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

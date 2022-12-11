@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:desh_mix_from_centrifuging_crystals_from_centrifuge"
+    ]
+  },
+  "criteria": {
+    "has_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:crystals/rare_earth"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:desh_mix_from_centrifuging_crystals_from_centrifuge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal",
+      "has_the_recipe"
+    ]
+  ]
+}

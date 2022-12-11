@@ -1,0 +1,34 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "type": "forge:difference",
+    "base": {
+      "tag": "forge:ores/lignite"
+    },
+    "subtracted": [
+      {
+        "tag": "forge:ores_in_ground/netherrack"
+      },
+      {
+        "tag": "forge:ores_in_ground/end_stone"
+      }
+    ]
+  },
+  "results": [
+    {
+      "item": "nucleartech:lignite_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:lignite_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:lignite_powder",
+      "count": 2
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ]
+}

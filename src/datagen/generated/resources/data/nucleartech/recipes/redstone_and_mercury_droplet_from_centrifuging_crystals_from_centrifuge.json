@@ -1,0 +1,24 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/redstone"
+  },
+  "results": [
+    {
+      "item": "minecraft:redstone",
+      "count": 3
+    },
+    {
+      "item": "minecraft:redstone",
+      "count": 3
+    },
+    {
+      "item": "minecraft:redstone",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:mercury_droplet",
+      "count": 3
+    }
+  ]
+}

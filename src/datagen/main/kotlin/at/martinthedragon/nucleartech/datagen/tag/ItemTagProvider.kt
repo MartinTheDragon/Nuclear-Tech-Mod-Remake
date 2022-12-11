@@ -24,6 +24,7 @@ class ItemTagProvider(
         dustTags()
         crystalTags()
         nuggetTags()
+        fragmentTags()
         plateTags()
         wireTags()
         coilTags()
@@ -265,15 +266,17 @@ class ItemTagProvider(
     }
 
     private fun crystalTags() = with(NTechTags.Items) {
-        tag(CRYSTALS).addTags(CRYSTALS_ALUMINIUM, CRYSTALS_BERYLLIUM, CRYSTALS_COAL, CRYSTALS_COPPER, CRYSTALS_DIAMOND, CRYSTALS_FLUORITE, CRYSTALS_GOLD, CRYSTALS_IRON, CRYSTALS_LEAD, CRYSTALS_LITHIUM, CRYSTALS_NITER, CRYSTALS_PHOSPHORUS, CRYSTALS_PLUTONIUM, CRYSTALS_RARE_EARTH, CRYSTALS_REDSTONE, CRYSTALS_SCHRABIDIUM, CRYSTALS_SCHRARANIUM, CRYSTALS_STARMETAL, CRYSTALS_SULFUR, CRYSTALS_THORIUM, CRYSTALS_TITANIUM, CRYSTALS_TRIXITE, CRYSTALS_TUNGSTEN, CRYSTALS_URANIUM)
+        tag(CRYSTALS).addTags(CRYSTALS_ALUMINIUM, CRYSTALS_BERYLLIUM, CRYSTALS_COAL, CRYSTALS_COBALT, CRYSTALS_COPPER, CRYSTALS_DIAMOND, CRYSTALS_FLUORITE, CRYSTALS_GOLD, CRYSTALS_IRON, CRYSTALS_LAPIS, CRYSTALS_LEAD, CRYSTALS_LITHIUM, CRYSTALS_NITER, CRYSTALS_PHOSPHORUS, CRYSTALS_PLUTONIUM, CRYSTALS_RARE_EARTH, CRYSTALS_REDSTONE, CRYSTALS_SCHRABIDIUM, CRYSTALS_SCHRARANIUM, CRYSTALS_STARMETAL, CRYSTALS_SULFUR, CRYSTALS_THORIUM, CRYSTALS_TITANIUM, CRYSTALS_TRIXITE, CRYSTALS_TUNGSTEN, CRYSTALS_URANIUM)
         tag(CRYSTALS_ALUMINIUM).add(NTechItems.aluminiumCrystals)
         tag(CRYSTALS_BERYLLIUM).add(NTechItems.berylliumCrystals)
         tag(CRYSTALS_COAL).add(NTechItems.coalCrystals)
+        tag(CRYSTALS_COBALT).add(NTechItems.cobaltCrystals)
         tag(CRYSTALS_COPPER).add(NTechItems.copperCrystals)
         tag(CRYSTALS_DIAMOND).add(NTechItems.diamondCrystals)
         tag(CRYSTALS_FLUORITE).add(NTechItems.fluoriteCrystals)
         tag(CRYSTALS_GOLD).add(NTechItems.goldCrystals)
         tag(CRYSTALS_IRON).add(NTechItems.ironCrystals)
+        tag(CRYSTALS_LAPIS).add(NTechItems.lapisCrystals)
         tag(CRYSTALS_LEAD).add(NTechItems.leadCrystals)
         tag(CRYSTALS_LITHIUM).add(NTechItems.lithiumCrystals)
         tag(CRYSTALS_NITER).add(NTechItems.niterCrystals)
@@ -291,23 +294,19 @@ class ItemTagProvider(
         tag(CRYSTALS_TUNGSTEN).add(NTechItems.tungstenCrystals)
         tag(CRYSTALS_URANIUM).add(NTechItems.uraniumCrystals)
 
-        tag(Tags.Items.GEMS).addTags(CRYSTALS, GEMS_ACTINIUM, GEMS_CERIUM, GEMS_COBALT, GEMS_LANTHANUM, GEMS_NEODYMIUM, GEMS_NIOBIUM)
-        tag(GEMS_ACTINIUM).add(NTechItems.actiniumFragment)
+        tag(Tags.Items.GEMS).addTags(CRYSTALS, GEMS_ALUMINIUM, GEMS_BERYLLIUM, GEMS_COAL, GEMS_COBALT, GEMS_COPPER, GEMS_DIAMOND, GEMS_FLUORITE, GEMS_GOLD, GEMS_IRON, GEMS_LAPIS, GEMS_LEAD, GEMS_LITHIUM, GEMS_NITER, GEMS_PHOSPHORUS, GEMS_PLUTONIUM, GEMS_RARE_EARTH, GEMS_REDSTONE, GEMS_SCHRABIDIUM, GEMS_SCHRARANIUM, GEMS_STARMETAL, GEMS_SULFUR, GEMS_THORIUM, GEMS_TITANIUM, GEMS_TRIXITE, GEMS_TUNGSTEN, GEMS_URANIUM)
         tag(GEMS_ALUMINIUM).addTag(CRYSTALS_ALUMINIUM)
         tag(GEMS_BERYLLIUM).addTag(CRYSTALS_BERYLLIUM)
-        tag(GEMS_CERIUM).add(NTechItems.ceriumFragment)
         tag(GEMS_COAL).addTag(CRYSTALS_COAL)
-        tag(GEMS_COBALT).add(NTechItems.cobaltFragment)
+        tag(GEMS_COBALT).addTag(CRYSTALS_COBALT)
         tag(GEMS_COPPER).addTag(CRYSTALS_COPPER)
         tag(GEMS_DIAMOND).addTag(CRYSTALS_DIAMOND)
         tag(GEMS_FLUORITE).addTag(CRYSTALS_FLUORITE)
         tag(GEMS_GOLD).addTag(CRYSTALS_GOLD)
         tag(GEMS_IRON).addTag(CRYSTALS_IRON)
-        tag(GEMS_LANTHANUM).add(NTechItems.lanthanumFragment)
+        tag(GEMS_LAPIS).addTag(CRYSTALS_LAPIS)
         tag(GEMS_LEAD).addTag(CRYSTALS_LEAD)
         tag(GEMS_LITHIUM).addTag(CRYSTALS_LITHIUM)
-        tag(GEMS_NEODYMIUM).add(NTechItems.neodymiumFragment)
-        tag(GEMS_NIOBIUM).add(NTechItems.niobiumFragment)
         tag(GEMS_NITER).addTag(CRYSTALS_NITER)
         tag(GEMS_PHOSPHORUS).addTag(CRYSTALS_PHOSPHORUS)
         tag(GEMS_PLUTONIUM).addTag(CRYSTALS_PLUTONIUM)
@@ -354,6 +353,18 @@ class ItemTagProvider(
         tag(NUGGETS_URANIUM_FUEL).add(NTechItems.uraniumFuelNugget)
         tag(NUGGETS_VERTICIUM).add(NTechItems.verticiumNugget)
         tag(NUGGETS_WEIDANIUM).add(NTechItems.weidaniumNugget)
+        return@with
+    }
+
+    private fun fragmentTags() = with(NTechTags.Items) {
+        tag(FRAGMENTS).addTags(FRAGMENTS_ACTINIUM, FRAGMENTS_CERIUM, FRAGMENTS_COBALT, FRAGMENTS_LANTHANUM, FRAGMENTS_METEORITE, FRAGMENTS_NEODYMIUM, FRAGMENTS_NIOBIUM)
+        tag(FRAGMENTS_ACTINIUM).add(NTechItems.actiniumFragment)
+        tag(FRAGMENTS_CERIUM).add(NTechItems.ceriumFragment)
+        tag(FRAGMENTS_COBALT).add(NTechItems.cobaltFragment)
+        tag(FRAGMENTS_LANTHANUM).add(NTechItems.lanthanumFragment)
+        tag(FRAGMENTS_METEORITE).add(NTechItems.meteoriteFragment)
+        tag(FRAGMENTS_NEODYMIUM).add(NTechItems.neodymiumFragment)
+        tag(FRAGMENTS_NIOBIUM).add(NTechItems.niobiumFragment)
         return@with
     }
 

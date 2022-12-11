@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/gold"
+  },
+  "results": [
+    {
+      "item": "nucleartech:gold_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:gold_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:mercury_droplet"
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

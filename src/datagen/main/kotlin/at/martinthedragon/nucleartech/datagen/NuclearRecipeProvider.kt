@@ -24,6 +24,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.common.Tags
+import net.minecraftforge.common.crafting.CompoundIngredient
+import net.minecraftforge.common.crafting.DifferenceIngredient
+import net.minecraftforge.common.crafting.IntersectionIngredient
 import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
@@ -156,6 +159,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         anvilConstructing(consumer)
         assembly(consumer)
         chemistry(consumer)
+        centrifuge(consumer)
         consumables(consumer)
         misc(consumer)
     }
@@ -265,13 +269,13 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         shreddingRecipe(NTechTags.Items.INGOTS_STARMETAL, NTechItems.highSpeedSteelPowder.get(), 1F, 1, consumer, "starmetal_ingot")
 
         // fragments to powder
-        shreddingRecipe(NTechTags.Items.GEMS_NEODYMIUM, NTechItems.tinyNeodymiumPowder.get(), 0F, 1, consumer, "neodymium_fragment")
-        shreddingRecipe(NTechTags.Items.GEMS_COBALT, NTechItems.tinyCobaltPowder.get(), 0F, 1, consumer, "cobalt_fragment")
-        shreddingRecipe(NTechTags.Items.GEMS_NIOBIUM, NTechItems.tinyNiobiumPowder.get(), 0F, 1, consumer, "niobium_fragment")
-        shreddingRecipe(NTechTags.Items.GEMS_CERIUM, NTechItems.tinyCeriumPowder.get(), 0F, 1, consumer, "cerium_fragment")
-        shreddingRecipe(NTechTags.Items.GEMS_LANTHANUM, NTechItems.tinyLanthanumPowder.get(), 0F, 1, consumer, "lanthanum_fragment")
-        shreddingRecipe(NTechTags.Items.GEMS_ACTINIUM, NTechItems.tinyActiniumPowder.get(), 0F, 1, consumer, "actinium_fragment")
-        shreddingRecipe(NTechItems.meteoriteFragment.get(), NTechItems.tinyMeteoritePowder.get(), 0F, 1, consumer)
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_NEODYMIUM, NTechItems.tinyNeodymiumPowder.get(), 0F, 1, consumer, "neodymium_fragment")
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_COBALT, NTechItems.tinyCobaltPowder.get(), 0F, 1, consumer, "cobalt_fragment")
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_NIOBIUM, NTechItems.tinyNiobiumPowder.get(), 0F, 1, consumer, "niobium_fragment")
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_CERIUM, NTechItems.tinyCeriumPowder.get(), 0F, 1, consumer, "cerium_fragment")
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_LANTHANUM, NTechItems.tinyLanthanumPowder.get(), 0F, 1, consumer, "lanthanum_fragment")
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_ACTINIUM, NTechItems.tinyActiniumPowder.get(), 0F, 1, consumer, "actinium_fragment")
+        shreddingRecipe(NTechTags.Items.FRAGMENTS_METEORITE, NTechItems.tinyMeteoritePowder.get(), 0F, 1, consumer, "meteorite_fragment")
 
         // coils to powder
         shreddingRecipe(NTechItems.copperCoil.get(), NTechItems.redCopperPowder.get(), .1F, 1, consumer)
@@ -549,11 +553,84 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AssemblyRecipeBuilder(NTechBlockItems.chemPlantPlacer.get(), 1, 200).requires(8 to NTechTags.Items.INGOTS_STEEL, 6 to NTechTags.Items.PLATES_COPPER).requires(4 to NTechItems.steelTank.get()).requires(NTechItems.bigSteelShell.get()).requires(3 to NTechTags.Items.COILS_TUNGSTEN).requires(2 to NTechItems.enhancedCircuit.get(), 1 to NTechItems.advancedCircuit.get()).requires(8 to NTechTags.Items.PLATES_INSULATOR).save(consumer)
         AssemblyRecipeBuilder(NTechBlockItems.oilDerrickPlacer.get(), 1, 250).requires(20 to NTechBlockItems.steelScaffold.get(), 8 to NTechBlockItems.steelBeam.get(), 2 to NTechItems.steelTank.get(), 1 to NTechItems.motor.get(), 3 to NTechItems.steelPipes.get(), 1 to NTechItems.titaniumDrill.get()).requires(6 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
         AssemblyRecipeBuilder(NTechBlockItems.pumpjackPlacer.get(), 1, 400).requires(8 to NTechBlockItems.steelScaffold.get()).requires(8 to NTechTags.Items.STORAGE_BLOCKS_STEEL).requires(4 to NTechItems.steelPipes.get(), 4 to NTechItems.steelTank.get()).requires(24 to NTechTags.Items.INGOTS_STEEL, 16 to NTechTags.Items.PLATES_STEEL, 6 to NTechTags.Items.PLATES_ALUMINIUM).requires(NTechItems.titaniumDrill.get()).requires(2 to NTechItems.motor.get()).requires(8 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.centrifugeElement.get(), 1, 100).requires(4 to NTechTags.Items.PLATES_STEEL, 4 to NTechTags.Items.PLATES_TITANIUM).requires(NTechItems.motor.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.centrifugePlacer.get(), 1, 200).requires(NTechItems.centrifugeElement.get()).requires(2 to NTechTags.Items.INGOTS_POLYMER, 8 to NTechTags.Items.PLATES_STEEL, 8 to NTechTags.Items.PLATES_COPPER).requires(NTechItems.enhancedCircuit.get()).save(consumer)
     }
 
     private fun chemistry(consumer: Consumer<FinishedRecipe>) {
         ChemRecipeBuilder(100).requires(NTechTags.Items.YELLOWCAKE_URANIUM).requires(NTechTags.Items.DUSTS_FLUORITE, 4).requires(FluidStack(Fluids.WATER, 1000)).results(
             NTechItems.sulfur.get(), 2).results(FluidStack(NTechFluids.uraniumHexafluoride.source.get(), 1200)).save(consumer)
+    }
+
+    private fun centrifuge(consumer: Consumer<FinishedRecipe>) {
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_COAL, ItemStack(NTechItems.coalPowder.get(), 2), ItemStack(NTechItems.coalPowder.get(), 2), ItemStack(NTechItems.coalPowder.get(), 2))
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_IRON, NTechItems.ironPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_COPPER, NTechItems.copperPowder.get().defaultInstance, NTechItems.copperPowder.get().defaultInstance, NTechItems.copperPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_GOLD, NTechItems.goldPowder.get().defaultInstance, NTechItems.goldPowder.get().defaultInstance, NTechItems.goldPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_QUARTZ, NTechItems.quartzPowder.get().defaultInstance, NTechItems.quartzPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_REDSTONE, ItemStack(Items.REDSTONE, 3), ItemStack(Items.REDSTONE, 3), NTechItems.mercuryDroplet.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_LAPIS, ItemStack(NTechItems.lapisLazuliPowder.get(), 3), ItemStack(NTechItems.lapisLazuliPowder.get(), 3), NTechItems.tinyCobaltPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_DIAMOND, NTechItems.diamondPowder.get().defaultInstance, NTechItems.diamondPowder.get().defaultInstance, NTechItems.diamondPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, Tags.Items.ORES_EMERALD, NTechItems.emeraldPowder.get().defaultInstance, NTechItems.emeraldPowder.get().defaultInstance, NTechItems.emeraldPowder.get().defaultInstance)
+
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_ALUMINIUM, NTechItems.aluminiumPowder.get().defaultInstance, NTechItems.aluminiumPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_ALUMINIUM, NTechItems.leadPowder.get().defaultInstance, NTechItems.leadPowder.get().defaultInstance, NTechItems.goldPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_BERYLLIUM, NTechItems.berylliumPowder.get().defaultInstance, NTechItems.berylliumPowder.get().defaultInstance, NTechItems.emeraldPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_COBALT, ItemStack(NTechItems.cobaltPowder.get(), 2), NTechItems.ironPowder.get().defaultInstance, NTechItems.copperPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_LIGNITE, ItemStack(NTechItems.lignitePowder.get(), 2), ItemStack(NTechItems.lignitePowder.get(), 2), ItemStack(NTechItems.lignitePowder.get(), 2))
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_PHOSPHORUS, ItemStack(Items.BLAZE_POWDER, 2), ItemStack(NTechItems.redPhosphorus.get(), 2), NTechItems.whitePhosphorusIngot.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_PLUTONIUM, NTechItems.plutoniumPowder.get().defaultInstance, NTechItems.plutoniumPowder.get().defaultInstance, ItemStack(NTechItems.plutoniumNugget.get(), 3))
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_RARE_EARTH, NTechItems.deshMix.get().defaultInstance) // TODO zirconium nuggets
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_SCHRABIDIUM, NTechItems.schrabidiumPowder.get().defaultInstance, NTechItems.schrabidiumPowder.get().defaultInstance, NTechItems.soliniumNugget.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_STARMETAL, ItemStack(NTechItems.highSpeedSteelPowder.get(), 3), ItemStack(NTechItems.cobaltPowder.get(), 2)) // TODO astatine
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_THORIUM, NTechItems.thoriumPowder.get().defaultInstance, NTechItems.thoriumPowder.get().defaultInstance, NTechItems.thoriumPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_TITANIUM, NTechItems.titaniumPowder.get().defaultInstance, NTechItems.titaniumPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_TRIXITE, NTechItems.plutoniumPowder.get().defaultInstance, ItemStack(NTechItems.cobaltPowder.get(), 2), ItemStack(NTechItems.niobiumPowder.get(), 2))
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_TUNGSTEN, NTechItems.tungstenPowder.get().defaultInstance, NTechItems.tungstenPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance)
+        centrifugeOreRecipe(consumer, NTechTags.Items.ORES_URANIUM, NTechItems.uraniumPowder.get().defaultInstance, NTechItems.uraniumPowder.get().defaultInstance, NTechItems.radium226Nugget.get().defaultInstance)
+
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_COAL, ItemStack(NTechItems.coalPowder.get(), 3), ItemStack(NTechItems.coalPowder.get(), 3), ItemStack(NTechItems.coalPowder.get(), 3), NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_IRON, ItemStack(NTechItems.ironPowder.get(), 2), ItemStack(NTechItems.ironPowder.get(), 2), NTechItems.titaniumPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_GOLD, ItemStack(NTechItems.goldPowder.get(), 2), ItemStack(NTechItems.goldPowder.get(), 2), NTechItems.mercuryDroplet.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_REDSTONE, ItemStack(Items.REDSTONE, 3), ItemStack(Items.REDSTONE, 3), ItemStack(Items.REDSTONE, 3), ItemStack(NTechItems.mercuryDroplet.get(), 3))
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_LAPIS, ItemStack(NTechItems.lapisLazuliPowder.get(), 3), ItemStack(NTechItems.lapisLazuliPowder.get(), 3), ItemStack(NTechItems.lapisLazuliPowder.get(), 3), NTechItems.cobaltPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_DIAMOND, NTechItems.diamondPowder.get().defaultInstance, NTechItems.diamondPowder.get().defaultInstance, NTechItems.diamondPowder.get().defaultInstance, NTechItems.diamondPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_URANIUM, ItemStack(NTechItems.uraniumPowder.get(), 2), ItemStack(NTechItems.uraniumPowder.get(), 2), ItemStack(NTechItems.radium226Nugget.get(), 2), NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_THORIUM, ItemStack(NTechItems.thoriumPowder.get(), 2), ItemStack(NTechItems.thoriumPowder.get(), 2), NTechItems.uraniumPowder.get().defaultInstance, NTechItems.radium226Nugget.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_PLUTONIUM, ItemStack(NTechItems.plutoniumPowder.get(), 2), ItemStack(NTechItems.plutoniumPowder.get(), 2), NTechItems.poloniumPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_TITANIUM, ItemStack(NTechItems.titaniumPowder.get(), 2), ItemStack(NTechItems.titaniumPowder.get(), 2), NTechItems.ironPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_SULFUR, ItemStack(NTechItems.sulfur.get(), 4), ItemStack(NTechItems.sulfur.get(), 4), NTechItems.ironPowder.get().defaultInstance, NTechItems.mercuryDroplet.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_NITER, ItemStack(NTechItems.niter.get(), 3), ItemStack(NTechItems.niter.get(), 3), ItemStack(NTechItems.niter.get(), 3), NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_COPPER, ItemStack(NTechItems.copperPowder.get(), 2), ItemStack(NTechItems.copperPowder.get(), 2), NTechItems.sulfur.get().defaultInstance, NTechItems.tinyCobaltPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_TUNGSTEN, ItemStack(NTechItems.tungstenPowder.get(), 2), ItemStack(NTechItems.tungstenPowder.get(), 2), NTechItems.ironPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_ALUMINIUM, ItemStack(NTechItems.aluminiumPowder.get(), 2), ItemStack(NTechItems.aluminiumPowder.get(), 2), NTechItems.ironPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_FLUORITE, ItemStack(NTechItems.fluorite.get(), 3), ItemStack(NTechItems.fluorite.get(), 3), ItemStack(NTechItems.fluorite.get(), 3), NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_BERYLLIUM, ItemStack(NTechItems.berylliumPowder.get(), 2), ItemStack(NTechItems.berylliumPowder.get(), 2), NTechItems.quartzPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_LEAD, ItemStack(NTechItems.leadPowder.get(), 2), ItemStack(NTechItems.leadPowder.get(), 2), NTechItems.goldPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_SCHRARANIUM, ItemStack(NTechItems.schrabidiumNugget.get(), 2), ItemStack(NTechItems.schrabidiumNugget.get(), 2), ItemStack(NTechItems.uraniumNugget.get(), 2), ItemStack(NTechItems.plutoniumNugget.get(), 2))
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_SCHRABIDIUM, ItemStack(NTechItems.schrabidiumPowder.get(), 2), ItemStack(NTechItems.schrabidiumPowder.get(), 2), NTechItems.plutoniumPowder.get().defaultInstance, NTechItems.tinyLithiumPowder.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_RARE_EARTH, NTechItems.deshMix.get().defaultInstance, NTechItems.deshMix.get().defaultInstance) // TODO zirconium
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_PHOSPHORUS, ItemStack(NTechItems.redPhosphorus.get(), 3), ItemStack(NTechItems.redPhosphorus.get(), 3), ItemStack(NTechItems.whitePhosphorusIngot.get(), 2), ItemStack(Items.BLAZE_POWDER, 2))
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_TRIXITE, ItemStack(NTechItems.plutoniumPowder.get(), 2), ItemStack(NTechItems.cobaltPowder.get(), 3), ItemStack(NTechItems.niobiumPowder.get(), 2), NTechItems.nitaniumMix.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_LITHIUM, ItemStack(NTechItems.lithiumPowder.get(), 2), ItemStack(NTechItems.lithiumPowder.get(), 2), NTechItems.quartzPowder.get().defaultInstance, NTechItems.fluorite.get().defaultInstance)
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_STARMETAL, ItemStack(NTechItems.highSpeedSteelPowder.get(), 3), ItemStack(NTechItems.cobaltPowder.get(), 3) /* TODO astatine */, ItemStack(NTechItems.mercuryDroplet.get(), 5))
+        centrifugeCrystalRecipe(consumer, NTechTags.Items.CRYSTALS_COBALT, ItemStack(NTechItems.cobaltPowder.get(), 2), ItemStack(NTechItems.ironPowder.get(), 3), ItemStack(NTechItems.copperPowder.get(), 3), NTechItems.tinyLithiumPowder.get().defaultInstance)
+
+        CentrifugeRecipeBuilder(Ingredient.of(Tags.Items.RODS_BLAZE), Items.BLAZE_POWDER.defaultInstance, Items.BLAZE_POWDER.defaultInstance, NTechItems.redPhosphorus.get().defaultInstance, NTechItems.redPhosphorus.get().defaultInstance).unlockedBy("has_blaze_rod", has(Tags.Items.RODS_BLAZE)).save(consumer)
+        CentrifugeRecipeBuilder(Ingredient.of(NTechTags.Items.INGOTS_SCHRARANIUM), ItemStack(NTechItems.schrabidiumNugget.get(), 2), NTechItems.schrabidiumNugget.get().defaultInstance, ItemStack(NTechItems.uraniumNugget.get(), 3), ItemStack(NTechItems.plutoniumNugget.get(), 2)).unlockedBy("has_schraranium", has(NTechTags.Items.INGOTS_SCHRARANIUM)).save(consumer)
+        CentrifugeRecipeBuilder(Ingredient.of(NTechBlockItems.euphemiumEtchedSchrabidiumCluster.get()), ItemStack(NTechItems.euphemiumNugget.get(), 7), ItemStack(NTechItems.schrabidiumPowder.get(), 4), ItemStack(NTechItems.starmetalIngot.get(), 2), ItemStack(NTechItems.soliniumNugget.get(), 2)).unlockedBy("has_cluster", has(NTechBlockItems.euphemiumEtchedSchrabidiumCluster.get())).save(consumer)
+    }
+
+    private fun centrifugeOreRecipe(consumer: Consumer<FinishedRecipe>, oreTag: TagKey<Item>, vararg results: ItemStack) {
+        val resultsString = results.map { it.item.registryName!!.path }.distinct().joinToString(separator = "_and_")
+        CentrifugeRecipeBuilder(DifferenceIngredient.of(Ingredient.of(oreTag), CompoundIngredient.of(Ingredient.of(Tags.Items.ORES_IN_GROUND_NETHERRACK), Ingredient.of(NTechTags.Items.ORES_IN_GROUND_END_STONE))), *results, Items.GRAVEL.defaultInstance).unlockedBy("has_ore", has(oreTag)).save(consumer, ntm("${resultsString}_from_centrifuging_ore"))
+        CentrifugeRecipeBuilder(IntersectionIngredient.of(Ingredient.of(oreTag), Ingredient.of(Tags.Items.ORES_IN_GROUND_NETHERRACK)), *results, Items.NETHERRACK.defaultInstance).unlockedBy("has_ore", has(oreTag)).save(consumer, ntm("${resultsString}_from_centrifuging_netherrack_ore"))
+        CentrifugeRecipeBuilder(IntersectionIngredient.of(Ingredient.of(oreTag), Ingredient.of(NTechTags.Items.ORES_IN_GROUND_END_STONE)), *results, Items.END_STONE.defaultInstance).unlockedBy("has_ore", has(oreTag)).save(consumer, ntm("${resultsString}_from_centrifuging_end_ore"))
+    }
+
+    private fun centrifugeCrystalRecipe(consumer: Consumer<FinishedRecipe>, crystalTag: TagKey<Item>, vararg results: ItemStack) {
+        val resultsString = results.map { it.item.registryName!!.path }.distinct().joinToString(separator = "_and_")
+        CentrifugeRecipeBuilder(Ingredient.of(crystalTag), *results).unlockedBy("has_crystal", has(crystalTag)).save(consumer, "${resultsString}_from_centrifuging_crystals")
     }
 
     private fun consumables(consumer: Consumer<FinishedRecipe>) {

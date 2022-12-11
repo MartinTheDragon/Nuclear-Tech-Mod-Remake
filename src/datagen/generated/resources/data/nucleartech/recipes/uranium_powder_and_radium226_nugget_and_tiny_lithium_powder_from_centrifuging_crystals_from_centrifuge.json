@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/uranium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:uranium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:uranium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:radium226_nugget",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

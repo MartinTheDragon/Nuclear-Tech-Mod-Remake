@@ -247,6 +247,7 @@ class NuclearBlockStateProvider(
         horizontalBlock(NTechBlocks.chemPlant.get(), models().getBuilder("chem_plant").texture("particle", "other/chem_plant/particles"))
         simpleBlock(NTechBlocks.oilDerrick.get(), models().getBuilder("oil_derrick").texture("particle", "other/oil_derrick/particles"))
         simpleBlock(NTechBlocks.pumpjack.get(), models().getBuilder("pumpjack").texture("particle", "other/pumpjack/particles"))
+        simpleBlock(NTechBlocks.centrifuge.get(), models().getBuilder("centrifuge").texture("particle", "other/centrifuge/particles"))
         simpleBlock(NTechBlocks.rbmkColumn.get(), models().getBuilder("rbmk_column"))
         simpleBlock(NTechBlocks.rbmkRod.get(), models().getBuilder("rbmk_rod").texture("particle", "other/rbmk/rods"))
         simpleBlock(NTechBlocks.rbmkModeratedRod.get(), models().getBuilder("rbmk_moderated_rod").texture("particle", "other/rbmk/moderated_rods"))

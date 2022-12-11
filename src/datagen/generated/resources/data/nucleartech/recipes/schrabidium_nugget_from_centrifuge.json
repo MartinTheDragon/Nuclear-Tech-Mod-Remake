@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:ingots/schraranium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:schrabidium_nugget",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:schrabidium_nugget"
+    },
+    {
+      "item": "nucleartech:uranium_nugget",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:plutonium_nugget",
+      "count": 2
+    }
+  ]
+}

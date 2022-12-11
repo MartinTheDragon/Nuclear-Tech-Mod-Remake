@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/lead"
+  },
+  "results": [
+    {
+      "item": "nucleartech:lead_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:lead_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:gold_powder"
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

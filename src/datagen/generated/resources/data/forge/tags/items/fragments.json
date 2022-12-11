@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:fragments/actinium",
+    "#forge:fragments/cerium",
+    "#forge:fragments/cobalt",
+    "#forge:fragments/lanthanum",
+    "#forge:fragments/meteorite",
+    "#forge:fragments/neodymium",
+    "#forge:fragments/niobium"
+  ]
+}

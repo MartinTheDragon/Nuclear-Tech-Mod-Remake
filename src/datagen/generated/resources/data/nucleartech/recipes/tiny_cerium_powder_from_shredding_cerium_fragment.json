@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "tag": "forge:gems/cerium"
+    "tag": "forge:fragments/cerium"
   },
   "result": {
     "item": "nucleartech:tiny_cerium_powder",

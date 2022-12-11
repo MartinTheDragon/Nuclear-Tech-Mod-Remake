@@ -1,0 +1,24 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "item": "nucleartech:euphemium_etched_schrabidium_cluster"
+  },
+  "results": [
+    {
+      "item": "nucleartech:euphemium_nugget",
+      "count": 7
+    },
+    {
+      "item": "nucleartech:schrabidium_powder",
+      "count": 4
+    },
+    {
+      "item": "nucleartech:starmetal_ingot",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:solinium_nugget",
+      "count": 2
+    }
+  ]
+}

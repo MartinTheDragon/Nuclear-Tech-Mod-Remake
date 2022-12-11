@@ -184,6 +184,7 @@ object NTechBlockItems {
     val chemPlantPlacer = ITEMS.registerK("chem_plant") { SpecialModelMultiBlockPlacerItem(NTechBlocks.chemPlant.get(), ::ChemPlantBlockEntity, ChemPlantBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
     val oilDerrickPlacer = ITEMS.registerK("oil_derrick") { SpecialModelMultiBlockPlacerItem(NTechBlocks.oilDerrick.get(), ::OilDerrickBlockEntity, OilDerrickBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
     val pumpjackPlacer = ITEMS.registerK("pumpjack") { PumpjackPlacerItem(NTechBlocks.pumpjack.get(), ::PumpjackBlockEntity, PumpjackBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val centrifugePlacer = ITEMS.registerK("centrifuge") { SpecialModelMultiBlockPlacerItem(NTechBlocks.centrifuge.get(), ::CentrifugeBlockEntity, CentrifugeBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
 
     val ironAnvil = ITEMS.registerK("iron_anvil") { BlockItem(NTechBlocks.ironAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val leadAnvil = ITEMS.registerK("lead_anvil") { BlockItem(NTechBlocks.leadAnvil.get(), Item.Properties().tab(CreativeTabs.Machines)) }

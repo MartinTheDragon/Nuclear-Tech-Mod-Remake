@@ -1,0 +1,23 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/trixite"
+  },
+  "results": [
+    {
+      "item": "nucleartech:plutonium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:cobalt_powder",
+      "count": 3
+    },
+    {
+      "item": "nucleartech:niobium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:nitanium_mix"
+    }
+  ]
+}

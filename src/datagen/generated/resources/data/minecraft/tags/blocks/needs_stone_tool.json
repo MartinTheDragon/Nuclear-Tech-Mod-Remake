@@ -79,6 +79,7 @@
     "nucleartech:chem_plant",
     "nucleartech:oil_derrick",
     "nucleartech:pumpjack",
+    "nucleartech:centrifuge",
     "nucleartech:generic_multi_block_part",
     "nucleartech:generic_multi_block_port",
     "nucleartech:oil_pipe"

@@ -1,0 +1,22 @@
+{
+  "type": "nucleartech:centrifuge",
+  "ingredient": {
+    "tag": "forge:crystals/beryllium"
+  },
+  "results": [
+    {
+      "item": "nucleartech:beryllium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:beryllium_powder",
+      "count": 2
+    },
+    {
+      "item": "nucleartech:quartz_powder"
+    },
+    {
+      "item": "nucleartech:tiny_lithium_powder"
+    }
+  ]
+}

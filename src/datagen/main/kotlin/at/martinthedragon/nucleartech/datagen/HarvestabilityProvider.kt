@@ -90,6 +90,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.chemPlant.get(),
             NTechBlocks.oilDerrick.get(),
             NTechBlocks.pumpjack.get(),
+            NTechBlocks.centrifuge.get(),
             NTechBlocks.littleBoy.get(), NTechBlocks.fatMan.get(),
             NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get(),
             NTechBlocks.oilPipe.get(),
@@ -164,6 +165,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.chemPlant.get(),
             NTechBlocks.oilDerrick.get(),
             NTechBlocks.pumpjack.get(),
+            NTechBlocks.centrifuge.get(),
             NTechBlocks.genericMultiBlockPart.get(), NTechBlocks.genericMultiBlockPort.get(),
             NTechBlocks.oilPipe.get(),
         )

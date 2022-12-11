@@ -1,7 +1,7 @@
 {
   "type": "nucleartech:shredding",
   "ingredient": {
-    "tag": "forge:gems/niobium"
+    "tag": "forge:fragments/niobium"
   },
   "result": {
     "item": "nucleartech:tiny_niobium_powder",

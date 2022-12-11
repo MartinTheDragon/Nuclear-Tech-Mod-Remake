@@ -1,0 +1,31 @@
+{
+  "type": "nucleartech:assembly",
+  "ingredients": [
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/steel"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "tag": "forge:plates/titanium"
+      },
+      "amount": 4
+    },
+    {
+      "type": "nucleartech:stacked",
+      "item": {
+        "item": "nucleartech:motor"
+      },
+      "amount": 1
+    }
+  ],
+  "result": {
+    "item": "nucleartech:centrifuge_element",
+    "count": 1
+  },
+  "duration": 100
+}

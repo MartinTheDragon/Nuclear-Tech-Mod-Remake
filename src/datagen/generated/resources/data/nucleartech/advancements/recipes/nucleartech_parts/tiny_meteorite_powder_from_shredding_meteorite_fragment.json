@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "nucleartech:meteorite_fragment"
-            ]
+            "tag": "forge:fragments/meteorite"
           }
         ]
       }

@@ -847,6 +847,13 @@ class NuclearItemModelProvider(
             .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.2F, 0.2F, 0.2F).end()
             .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 45F, 0F).translation(0F, 5F, 0F).scale(0.15F, 0.15F, 0.15F).end()
             .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 45F, 0F).translation(-5F, 0F, -6F).scale(.135F, .135F, .135F).end().end()
+        specialEntityItem(NTechBlockItems.centrifugePlacer.get()).transforms()
+            .transform(ItemTransforms.TransformType.GUI).rotation(30F, 45F, 0F).translation(0F, -4.5F, 0F).scale(.24F, .24F, .24F).end()
+            .transform(ItemTransforms.TransformType.GROUND).translation(0F, 3F, 0F).scale(0.125F, 0.125F, 0.125F).end()
+            .transform(ItemTransforms.TransformType.HEAD).rotation(0F, 180F, 0F).end()
+            .transform(ItemTransforms.TransformType.FIXED).rotation(0F, 180F, 0F).scale(0.25F, 0.25F, 0.25F).end()
+            .transform(ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND).rotation(75F, 315F, 0F).scale(0.25F, 0.25F, 0.25F).end()
+            .transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND).rotation(0F, 315F, 0F).scale(.25F, .25F, .25F).end().end()
         for (itemObject in RegistriesAndLifecycle.ITEMS.entries) {
             val item = itemObject.get()
             if (item is RBMKColumnBlockItem) {
