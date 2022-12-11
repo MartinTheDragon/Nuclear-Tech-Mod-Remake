@@ -27,10 +27,12 @@ class NuclearTech {
 
     @Suppress("unused", "SpellCheckingInspection")
     object SpecialUsers {
+        // 1.18.2
         const val MartinTheDragon = "3e763f54-12fc-40ef-9416-72edc689a952"
         const val JulekJulas = "8996d0cc-5bcd-4332-bcc0-fc3391f34c07"
         const val TheOriginalGolem = "058b52a6-05b7-4d11-8cfa-2db665d9a521"
 
+        // 1.7.10
         const val HbMinecraft = "192af5d7-ed0f-48d8-bd89-9d41af8524f8"
         const val LPkukin = "937c9804-e11f-4ad2-a5b1-42e62ac73077"
         const val Dafnik = "3af1c262-61c0-4b12-a4cb-424cc3a9c8c0"
@@ -62,5 +64,8 @@ class NuclearTech {
         const val Barnaby99_x = "711aaf78-a862-4b7e-921a-216349716e9a"
         const val Ma118 = "1121cb7a-8773-491f-8e2b-221290c93d81"
         const val Adam29Adam29 = "bbae7bfa-0eba-40ac-a0dd-f3b715e73e61"
+
+        // 1.12.2
+        const val Malpon = "0b399a4a-8545-45a1-be3d-ece70d7d48e9" // Alcater
     }
 }

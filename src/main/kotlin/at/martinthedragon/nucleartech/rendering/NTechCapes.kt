@@ -127,6 +127,8 @@ object NTechCapes {
             Barnaby99_x to CapeLocation(ntm("pheo")),
             Ma118 to CapeLocation(ntm("vaer")),
             Adam29Adam29 to CapeLocation(ntm("adam29")),
+
+            Malpon to CapeLocation(ntm("malpon")),
         )
     }
 
