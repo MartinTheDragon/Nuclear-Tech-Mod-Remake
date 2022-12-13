@@ -1,7 +1,8 @@
 package at.martinthedragon.nucleartech.screen
 
 import at.martinthedragon.nucleartech.block.entity.CombustionGeneratorBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
+import at.martinthedragon.nucleartech.extensions.tooltipFluidTank
 import at.martinthedragon.nucleartech.menu.CombustionGeneratorMenu
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.renderGuiFluid
@@ -11,7 +12,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.network.chat.TranslatableComponent
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.level.material.Fluids
 
@@ -59,14 +59,7 @@ class CombustionGeneratorScreen(
 
         if (isHovering(80, 35, 16, 16, mouseX.toDouble(), mouseY.toDouble()))
             renderComponentTooltip(matrixStack, listOf(TextComponent("${menu.blockEntity.litTime / 20}s")), mouseX, mouseY, font)
-        if (isHovering(8, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrixStack,
-                listOf(
-                    TranslatableComponent("block.minecraft.water"),
-                    TextComponent("${menu.blockEntity.water}/${CombustionGeneratorBlockEntity.MAX_WATER} mB")
-                ), mouseX, mouseY, font
-            )
-        if (isHovering(152, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrixStack, EnergyFormatter.formatTooltip(menu.blockEntity.energy, CombustionGeneratorBlockEntity.MAX_ENERGY), mouseX, mouseY, font)
+        tooltipFluidTank(matrixStack, menu.blockEntity.tank, 8, 17, 16, 52, mouseX, mouseY)
+        tooltipEnergyStorage(matrixStack, menu.blockEntity.energyStorage, 152, 17, 16, 52, mouseX, mouseY)
     }
 }

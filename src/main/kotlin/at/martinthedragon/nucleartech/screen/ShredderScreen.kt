@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.screen
 
 import at.martinthedragon.nucleartech.block.entity.ShredderBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
 import at.martinthedragon.nucleartech.menu.ShredderMenu
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
@@ -56,8 +56,6 @@ class ShredderScreen(
 
     override fun renderTooltip(matrix: PoseStack, mouseX: Int, mouseY: Int) {
         super.renderTooltip(matrix, mouseX, mouseY)
-
-        if (isHovering(8, 16, 16, 88, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, EnergyFormatter.formatTooltip(menu.blockEntity.energy, ShredderBlockEntity.MAX_ENERGY), mouseX, mouseY, font)
+        tooltipEnergyStorage(matrix, menu.blockEntity.energyStorage, 8, 16, 16, 88, mouseX, mouseY)
     }
 }

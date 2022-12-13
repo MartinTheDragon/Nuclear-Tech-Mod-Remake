@@ -58,7 +58,7 @@ class CentrifugeBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBlo
 
     override fun getRenderBoundingBox() = AABB(blockPos, blockPos.offset(1, 4, 1))
 
-    private val energyStorage = EnergyStorageExposed(MAX_ENERGY)
+    val energyStorage = EnergyStorageExposed(MAX_ENERGY)
 
     var energy: Int
         get() = energyStorage.energyStored

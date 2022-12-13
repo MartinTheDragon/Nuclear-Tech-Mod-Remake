@@ -57,11 +57,11 @@ class CombustionGeneratorBlockEntity(pos: BlockPos, state: BlockState) : BaseMac
         else -> false
     }
 
-    private val tank = object : NTechFluidTank(MAX_WATER, { it.fluid == Fluids.WATER }) {
+    val tank = object : NTechFluidTank(MAX_WATER, { it.fluid == Fluids.WATER }) {
         override fun drain(resource: FluidStack?, action: IFluidHandler.FluidAction?) = FluidStack.EMPTY
         override fun drain(maxDrain: Int, action: IFluidHandler.FluidAction?) = FluidStack.EMPTY
     }
-    private val energyStorage = EnergyStorageExposed(MAX_ENERGY, 0, ENERGY_TRANSFER_RATE)
+    val energyStorage = EnergyStorageExposed(MAX_ENERGY, 0, ENERGY_TRANSFER_RATE)
 
     override fun createMenu(windowID: Int, inventory: Inventory) = CombustionGeneratorMenu(windowID, inventory, this)
     override val defaultName: Component = LangKeys.CONTAINER_COMBUSTION_GENERATOR.get()

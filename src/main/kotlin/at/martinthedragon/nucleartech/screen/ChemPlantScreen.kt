@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.screen
 
-import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.ChemPlantBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
+import at.martinthedragon.nucleartech.extensions.tooltipFluidTank
 import at.martinthedragon.nucleartech.menu.ChemPlantMenu
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.renderGuiFluidTank
@@ -12,9 +12,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.entity.player.Inventory
-import net.minecraftforge.fluids.capability.templates.FluidTank
 
 class ChemPlantScreen(menu: ChemPlantMenu, playerInventory: Inventory, title: Component) : AbstractContainerScreen<ChemPlantMenu>(menu, playerInventory, title) {
     private val texture = ntm("textures/gui/chem_plant.png")
@@ -59,26 +57,10 @@ class ChemPlantScreen(menu: ChemPlantMenu, playerInventory: Inventory, title: Co
         super.renderTooltip(matrix, mouseX, mouseY)
 
         val chemPlant = menu.blockEntity
-        if (isHovering(44, 18, 16, 52, mouseX.toDouble(), mouseY.toDouble())) {
-            renderComponentTooltip(matrix,
-                listOf(
-                    LangKeys.ENERGY.get(),
-                    TextComponent("${EnergyFormatter.formatEnergy(chemPlant.energy)}/${EnergyFormatter.formatEnergy(ChemPlantBlockEntity.MAX_ENERGY)} HE")
-                ), mouseX, mouseY, font
-            )
-        }
-        if (isHovering(8, 18, 16, 34, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(chemPlant.inputTank1), mouseX, mouseY, font)
-        if (isHovering(26, 18, 16, 34, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(chemPlant.inputTank2), mouseX, mouseY, font)
-        if (isHovering(134, 18, 16, 34, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(chemPlant.outputTank1), mouseX, mouseY, font)
-        if (isHovering(152, 18, 16, 34, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(chemPlant.outputTank2), mouseX, mouseY, font)
+        tooltipEnergyStorage(matrix, chemPlant.energyStorage, 44, 18, 16, 52, mouseX, mouseY)
+        tooltipFluidTank(matrix, chemPlant.inputTank1, 8, 18, 16, 34, mouseX, mouseY)
+        tooltipFluidTank(matrix, chemPlant.inputTank2, 26, 18, 16, 34, mouseX, mouseY)
+        tooltipFluidTank(matrix, chemPlant.outputTank1, 134, 18, 16, 34, mouseX, mouseY)
+        tooltipFluidTank(matrix, chemPlant.outputTank2, 152, 18, 16, 34, mouseX, mouseY)
     }
-
-    private fun getTooltipFluidTank(fluidTank: FluidTank) = listOf(
-        fluidTank.fluid.rawFluid.attributes.getDisplayName(fluidTank.fluid),
-        TextComponent("${fluidTank.fluidAmount}/${fluidTank.capacity}mB")
-    )
 }

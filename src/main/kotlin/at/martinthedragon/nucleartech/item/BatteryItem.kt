@@ -1,9 +1,11 @@
 package at.martinthedragon.nucleartech.item
 
 import at.martinthedragon.nucleartech.LangKeys
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.energy.EnergyUnit
 import at.martinthedragon.nucleartech.energy.LudicrousEnergyStorage
 import at.martinthedragon.nucleartech.extensions.gray
+import at.martinthedragon.nucleartech.math.format
+import at.martinthedragon.nucleartech.math.getPreferredUnit
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
 import net.minecraft.nbt.CompoundTag
@@ -47,9 +49,10 @@ open class BatteryItem(
     }
 
     override fun appendHoverText(stack: ItemStack, world: Level?, tooltip: MutableList<Component>, extra: TooltipFlag) {
-        tooltip.add(LangKeys.ENERGY_ENERGY_STORED.format(EnergyFormatter.formatEnergy(stack.orCreateTag.getLong("Energy")), EnergyFormatter.formatEnergy(capacity)).gray()) // TODO configurable units
-        tooltip.add(LangKeys.ENERGY_CHARGE_RATE.format(EnergyFormatter.formatEnergy(chargeRate)).gray())
-        tooltip.add(LangKeys.ENERGY_DISCHARGE_RATE.format(EnergyFormatter.formatEnergy(dischargeRate)).gray())
+        val amount = stack.orCreateTag.getLong("Energy")
+        tooltip.add(LangKeys.ENERGY_ENERGY_STORED.format(EnergyUnit.UnitType.HBM.getPreferredUnit(amount).format(amount, false), EnergyUnit.UnitType.HBM.getPreferredUnit(capacity).format(capacity, false)).gray()) // TODO configurable units
+        tooltip.add(LangKeys.ENERGY_CHARGE_RATE.format(EnergyUnit.UnitType.HBM.getPreferredUnit(chargeRate).format(chargeRate, false)).gray())
+        tooltip.add(LangKeys.ENERGY_DISCHARGE_RATE.format(EnergyUnit.UnitType.HBM.getPreferredUnit(dischargeRate).format(dischargeRate, false)).gray())
     }
 
     /*

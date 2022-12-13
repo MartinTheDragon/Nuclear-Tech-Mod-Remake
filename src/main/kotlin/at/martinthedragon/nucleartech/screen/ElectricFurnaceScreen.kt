@@ -1,7 +1,7 @@
 package at.martinthedragon.nucleartech.screen
 
 import at.martinthedragon.nucleartech.block.entity.ElectricFurnaceBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
 import at.martinthedragon.nucleartech.menu.ElectricFurnaceMenu
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.screen.widgets.UpgradeInfoWidget
@@ -57,8 +57,6 @@ class ElectricFurnaceScreen(
 
     override fun renderTooltip(matrix: PoseStack, mouseX: Int, mouseY: Int) {
         super.renderTooltip(matrix, mouseX, mouseY)
-
-        if (isHovering(20, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, EnergyFormatter.formatTooltip(menu.blockEntity.energy, ElectricFurnaceBlockEntity.MAX_ENERGY), mouseX, mouseY, font)
+        tooltipEnergyStorage(matrix, menu.blockEntity.energyStorage, 20, 17, 16, 52, mouseX, mouseY)
     }
 }

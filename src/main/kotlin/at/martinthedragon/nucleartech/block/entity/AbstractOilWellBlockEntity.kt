@@ -52,7 +52,7 @@ abstract class AbstractOilWellBlockEntity(type: BlockEntityType<*>, pos: BlockPo
         checkChangedUpgradeSlot(slot)
     }
 
-    protected val energyStorage = EnergyStorageExposed(maxEnergy, 10_000, 0)
+    val energyStorage = EnergyStorageExposed(maxEnergy, 10_000, 0)
 
     var energy: Int
         get() = energyStorage.energy

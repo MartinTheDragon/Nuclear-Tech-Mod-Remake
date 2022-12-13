@@ -2,7 +2,9 @@ package at.martinthedragon.nucleartech.screen
 
 import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.energy.EnergyUnit
+import at.martinthedragon.nucleartech.math.format
+import at.martinthedragon.nucleartech.math.getPreferredUnit
 import at.martinthedragon.nucleartech.menu.AssemblerMenu
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.screen.widgets.UpgradeInfoWidget
@@ -59,7 +61,7 @@ class AssemblerScreen(
             renderComponentTooltip(matrix,
                 listOf(
                     LangKeys.ENERGY.get(),
-                    TextComponent("${EnergyFormatter.formatEnergy(menu.blockEntity.energy)}/${EnergyFormatter.formatEnergy(AssemblerBlockEntity.MAX_ENERGY)} HE")
+                    TextComponent("${EnergyUnit.UnitType.HBM.getPreferredUnit(menu.blockEntity.energy).format(menu.blockEntity.energy, false)}/${EnergyUnit.UnitType.HBM.getPreferredUnit(AssemblerBlockEntity.MAX_ENERGY).format(AssemblerBlockEntity.MAX_ENERGY)}")
                 ), mouseX, mouseY, font
             )
     }

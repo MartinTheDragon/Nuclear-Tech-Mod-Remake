@@ -54,7 +54,7 @@ class ElectricFurnaceBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachi
         checkChangedUpgradeSlot(slot)
     }
 
-    private val energyStorage = EnergyStorageExposed(MAX_ENERGY, ENERGY_TRANSFER_RATE, 0)
+    val energyStorage = EnergyStorageExposed(MAX_ENERGY, ENERGY_TRANSFER_RATE, 0)
 
     override fun createMenu(windowID: Int, inventory: Inventory) = ElectricFurnaceMenu(windowID, inventory, this)
     override val defaultName = LangKeys.CONTAINER_ELECTRIC_FURNACE.get()

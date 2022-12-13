@@ -2,7 +2,8 @@ package at.martinthedragon.nucleartech.screen
 
 import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.AbstractOilWellBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
+import at.martinthedragon.nucleartech.extensions.tooltipFluidTank
 import at.martinthedragon.nucleartech.menu.OilWellMenu
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.rendering.renderGuiFluidTank
@@ -12,9 +13,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.entity.player.Inventory
-import net.minecraftforge.fluids.capability.templates.FluidTank
 
 class OilWellScreen(menu: OilWellMenu, playerInventory: Inventory, title: Component) : AbstractContainerScreen<OilWellMenu>(menu, playerInventory, title) {
     private val texture = ntm("textures/gui/oil_derrick.png")
@@ -60,12 +59,7 @@ class OilWellScreen(menu: OilWellMenu, playerInventory: Inventory, title: Compon
 
         val oilWell = menu.blockEntity
 
-        if (isHovering(8, 17, 16, 34, mouseX.toDouble(), mouseY.toDouble())) {
-            renderComponentTooltip(matrix, listOf(
-                LangKeys.ENERGY.get(),
-                TextComponent("${EnergyFormatter.formatEnergy(oilWell.energy)}/${EnergyFormatter.formatEnergy(oilWell.maxEnergy)} HE")
-            ), mouseX, mouseY, font)
-        }
+        tooltipEnergyStorage(matrix, oilWell.energyStorage, 8, 17, 16, 34, mouseX, mouseY)
 
         if (isHovering(35, 17, 16, 16, mouseX.toDouble(), mouseY.toDouble())) {
             val status = when (oilWell.status) {
@@ -79,16 +73,8 @@ class OilWellScreen(menu: OilWellMenu, playerInventory: Inventory, title: Compon
             }
             renderComponentTooltip(matrix, listOf(status), mouseX, mouseY, font)
         }
-        if (isHovering(62, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(oilWell.oilTank), mouseX, mouseY, font)
-        if (isHovering(107, 17, 16, 52, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(oilWell.gasTank), mouseX, mouseY, font)
-        if (oilWell.getTanks() > 2 && isHovering(40, 37, 6, 32, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix, getTooltipFluidTank(oilWell.tanks[2]), mouseX, mouseY, font)
+        tooltipFluidTank(matrix, oilWell.oilTank, 62, 17, 16, 52, mouseX, mouseY)
+        tooltipFluidTank(matrix, oilWell.gasTank, 107, 17, 16, 52, mouseX, mouseY)
+        if (oilWell.getTanks() > 2) tooltipFluidTank(matrix, oilWell.tanks[2], 40, 37, 6, 32, mouseX, mouseY)
     }
-
-    private fun getTooltipFluidTank(fluidTank: FluidTank) = listOf(
-        fluidTank.fluid.rawFluid.attributes.getDisplayName(fluidTank.fluid),
-        TextComponent("${fluidTank.fluidAmount}/${fluidTank.capacity}mB")
-    )
 }

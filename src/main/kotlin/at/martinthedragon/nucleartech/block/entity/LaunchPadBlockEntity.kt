@@ -45,7 +45,7 @@ class LaunchPadBlockEntity(pos: BlockPos, state: BlockState) : BaseMachineBlockE
         }
     }
 
-    private val energyStorage = EnergyStorageExposed(MAX_ENERGY, 10000, 0)
+    val energyStorage = EnergyStorageExposed(MAX_ENERGY, 10000, 0)
 
     var energy: Int
         get() = energyStorage.energyStored

@@ -83,8 +83,32 @@ interface ResourceUnit<U, T>
             val defaultUnit = defaultGetter()
             // don't worry about performance, classes and enum constants are cached
             val applicableUnits = defaultUnit.javaClass.enumConstants ?: return defaultUnit
-            return applicableUnits.findLast { it.ratio * it.leniency <= amount } ?: defaultUnit
+            return applicableUnits.filter { it.unitType == this }.findLast { it.ratio * it.leniency <= amount } ?: defaultUnit
         }
+    }
+
+    companion object {
+        const val MILLI = 0.001
+        const val CENTI = 0.01
+        const val DECI = 0.1
+        const val ONE = 1.0
+        const val KILO = 1_000.0
+        const val MEGA = 1_000_000.0
+        const val GIGA = 1_000_000_000.0
+        const val TERA = 1_000_000_000_000.0
+        const val PETA = 1_000_000_000_000_000.0
+        const val EXA = 1_000_000_000_000_000_000.0
+
+        const val PREFIX_MILLI = "m"
+        const val PREFIX_CENTI ="c"
+        const val PREFIX_DECI = "d"
+        const val PREFIX_ONE = ""
+        const val PREFIX_KILO = "k"
+        const val PREFIX_MEGA = "M"
+        const val PREFIX_GIGA = "G"
+        const val PREFIX_TERA = "T"
+        const val PREFIX_PETA = "P"
+        const val PREFIX_EXA = "E"
     }
 }
 

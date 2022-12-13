@@ -1,8 +1,7 @@
 package at.martinthedragon.nucleartech.screen
 
-import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.block.entity.LaunchPadBlockEntity
-import at.martinthedragon.nucleartech.energy.EnergyFormatter
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
 import at.martinthedragon.nucleartech.menu.LaunchPadMenu
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
@@ -10,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.TextComponent
 import net.minecraft.world.entity.player.Inventory
 
 class LaunchPadScreen(
@@ -42,12 +40,6 @@ class LaunchPadScreen(
     override fun renderTooltip(matrix: PoseStack, mouseX: Int, mouseY: Int) {
         super.renderTooltip(matrix, mouseX, mouseY)
 
-        if (isHovering(8, 53, 160, 16, mouseX.toDouble(), mouseY.toDouble()))
-            renderComponentTooltip(matrix,
-                listOf(
-                    LangKeys.ENERGY.get(),
-                    TextComponent("${EnergyFormatter.formatEnergy(menu.blockEntity.energy)}/${EnergyFormatter.formatEnergy(LaunchPadBlockEntity.MAX_ENERGY)} HE")
-                ), mouseX, mouseY, font
-            )
+        tooltipEnergyStorage(matrix, menu.blockEntity.energyStorage, 8, 53, 160, 16, mouseX, mouseY)
     }
 }

@@ -52,7 +52,7 @@ class ShredderBlockEntity(pos: BlockPos, state: BlockState) : ProgressingMachine
         if (slot in 0..8 || slot in 12..29) canProgressCached = null
     }
 
-    private val energyStorage = EnergyStorageExposed(MAX_ENERGY, ENERGY_TRANSFER_RATE, 0)
+    val energyStorage = EnergyStorageExposed(MAX_ENERGY, ENERGY_TRANSFER_RATE, 0)
 
     override fun createMenu(windowID: Int, inventory: Inventory) = ShredderMenu(windowID, inventory, this)
     override val defaultName = LangKeys.CONTAINER_SHREDDER.get()

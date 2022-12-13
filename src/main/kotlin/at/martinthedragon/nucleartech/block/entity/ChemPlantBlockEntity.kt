@@ -73,7 +73,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         }
     }
 
-    private val energyStorage = EnergyStorageExposed(MAX_ENERGY)
+    val energyStorage = EnergyStorageExposed(MAX_ENERGY)
 
     var energy: Int
         get() = energyStorage.energyStored

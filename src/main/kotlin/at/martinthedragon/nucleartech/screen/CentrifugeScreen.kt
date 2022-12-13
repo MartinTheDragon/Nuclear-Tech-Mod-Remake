@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.screen
 
 import at.martinthedragon.nucleartech.block.entity.CentrifugeBlockEntity
+import at.martinthedragon.nucleartech.extensions.tooltipEnergyStorage
 import at.martinthedragon.nucleartech.menu.CentrifugeMenu
 import at.martinthedragon.nucleartech.ntm
 import com.mojang.blaze3d.systems.RenderSystem
@@ -55,5 +56,10 @@ class CentrifugeScreen(menu: CentrifugeMenu, playerInventory: Inventory, title: 
 
     override fun renderLabels(stack: PoseStack, mouseX: Int, mouseY: Int) {
         font.draw(stack, playerInventoryTitle, inventoryLabelX.toFloat(), inventoryLabelY.toFloat(), 0x404040)
+    }
+
+    override fun renderTooltip(stack: PoseStack, mouseX: Int, mouseY: Int) {
+        super.renderTooltip(stack, mouseX, mouseY)
+        tooltipEnergyStorage(stack, menu.blockEntity.energyStorage, 9, 13, 16, 35, mouseX, mouseY)
     }
 }
