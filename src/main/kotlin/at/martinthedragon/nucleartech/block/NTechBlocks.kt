@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.RegistriesAndLifecycle.BLOCKS
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPort
 import at.martinthedragon.nucleartech.block.rbmk.*
+import at.martinthedragon.nucleartech.hazard.HazardRegistry
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.core.BlockPos
 import net.minecraft.util.valueproviders.UniformInt
@@ -16,7 +17,6 @@ import net.minecraft.world.level.material.Material.*
 import net.minecraft.world.level.material.MaterialColor
 import net.minecraftforge.registries.RegistryObject
 import kotlin.random.Random
-import at.martinthedragon.nucleartech.hazard.items.HazardItemEffect.Companion as RadValue
 
 object NTechBlocks {
     val uraniumOre = BLOCKS.registerK("uranium_ore") { OreBlock(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
@@ -87,20 +87,20 @@ object NTechBlocks {
     val starmetalOre = BLOCKS.registerK("starmetal_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
     val trixite = BLOCKS.registerK("trixite") { Block(Properties.of(STONE).strength(4f, 9f).requiresCorrectToolForDrops()) }
 
-    val uraniumBlock = BLOCKS.registerK("uranium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U) }
-    val u233Block = BLOCKS.registerK("u233_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U233) }
-    val u235Block = BLOCKS.registerK("u235_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U235) }
-    val u238Block = BLOCKS.registerK("u238_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.U238) }
-    val uraniumFuelBlock = BLOCKS.registerK("uranium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.UF) }
-    val neptuniumBlock = BLOCKS.registerK("neptunium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Np237) }
-    val moxFuelBlock = BLOCKS.registerK("mox_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.MOX) }
-    val plutoniumBlock = BLOCKS.registerK("plutonium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu) }
-    val pu238Block = BLOCKS.registerK("pu238_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu238) }
-    val pu239Block = BLOCKS.registerK("pu239_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu239) }
-    val pu240Block = BLOCKS.registerK("pu240_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Pu240) }
-    val plutoniumFuelBlock = BLOCKS.registerK("plutonium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.PuF) }
-    val thoriumBlock = BLOCKS.registerK("thorium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Th232) }
-    val thoriumFuelBlock = BLOCKS.registerK("thorium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.ThF) }
+    val uraniumBlock = BLOCKS.registerK("uranium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.U) }
+    val u233Block = BLOCKS.registerK("u233_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.U233) }
+    val u235Block = BLOCKS.registerK("u235_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.U235) }
+    val u238Block = BLOCKS.registerK("u238_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.U238) }
+    val uraniumFuelBlock = BLOCKS.registerK("uranium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.UF) }
+    val neptuniumBlock = BLOCKS.registerK("neptunium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Np237) }
+    val moxFuelBlock = BLOCKS.registerK("mox_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.MOX) }
+    val plutoniumBlock = BLOCKS.registerK("plutonium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Pu) }
+    val pu238Block = BLOCKS.registerK("pu238_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Pu238) }
+    val pu239Block = BLOCKS.registerK("pu239_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Pu239) }
+    val pu240Block = BLOCKS.registerK("pu240_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Pu240) }
+    val plutoniumFuelBlock = BLOCKS.registerK("plutonium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.PuF) }
+    val thoriumBlock = BLOCKS.registerK("thorium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Th232) }
+    val thoriumFuelBlock = BLOCKS.registerK("thorium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.ThF) }
     val titaniumBlock = BLOCKS.registerK("titanium_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val sulfurBlock = BLOCKS.registerK("sulfur_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val niterBlock = BLOCKS.registerK("niter_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
@@ -122,11 +122,11 @@ object NTechBlocks {
     val insulatorRoll = BLOCKS.registerK("insulator_roll") { RotatedPillarBlock(Properties.of(METAL).strength(6f).sound(SoundType.METAL)) }
     val fiberglassRoll = BLOCKS.registerK("fiberglass_roll") { RotatedPillarBlock(Properties.of(METAL).strength(6f).sound(SoundType.METAL)) }
     val asbestosBlock = BLOCKS.registerK("asbestos_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
-    val trinititeBlock = BLOCKS.registerK("trinitite_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Trinitite) }
-    val nuclearWasteBlock = BLOCKS.registerK("nuclear_waste_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Waste) }
-    val schrabidiumBlock = BLOCKS.registerK("schrabidium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Sa326) }
-    val soliniumBlock = BLOCKS.registerK("solinium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.Sa327) }
-    val schrabidiumFuelBlock = BLOCKS.registerK("schrabidium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(RadValue.SaF) }
+    val trinititeBlock = BLOCKS.registerK("trinitite_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Trinitite) }
+    val nuclearWasteBlock = BLOCKS.registerK("nuclear_waste_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Waste) }
+    val schrabidiumBlock = BLOCKS.registerK("schrabidium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Sa326) }
+    val soliniumBlock = BLOCKS.registerK("solinium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.Sa327) }
+    val schrabidiumFuelBlock = BLOCKS.registerK("schrabidium_fuel_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.SaF) }
     val euphemiumBlock = BLOCKS.registerK("euphemium_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val schrabidiumCluster = BLOCKS.registerK("schrabidium_cluster") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val euphemiumEtchedSchrabidiumCluster = BLOCKS.registerK("euphemium_etched_schrabidium_cluster") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
