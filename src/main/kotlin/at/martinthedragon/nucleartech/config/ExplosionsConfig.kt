@@ -8,6 +8,8 @@ class ExplosionsConfig : ConfigBase {
     override val configSpec: ForgeConfigSpec
     override val configType = ModConfig.Type.SERVER
 
+    val detonateUnloadedBombs: ForgeConfigSpec.BooleanValue
+
     val littleBoyStrength: ForgeConfigSpec.IntValue
     val fatManStrength: ForgeConfigSpec.IntValue
     val missileStrength: ForgeConfigSpec.IntValue
@@ -20,6 +22,8 @@ class ExplosionsConfig : ConfigBase {
     init {
         ForgeConfigSpec.Builder().apply {
             comment("Explosions Config. Synced from server to client.").push(fileName)
+
+            detonateUnloadedBombs = comment("Whether bombs not loaded in the world can be detonated").define("detonateUnloadedBombs", false)
 
             comment("Bomb explosion settings").push("bombs")
             littleBoyStrength = comment("Strength value of the Little Boy").defineInRange("littleBoyStrength", 240, 0, 1_000)

@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.item
 import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.api.explosion.IgnitableExplosive
+import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.extensions.darkRed
 import at.martinthedragon.nucleartech.extensions.gray
 import at.martinthedragon.nucleartech.extensions.green
@@ -60,7 +61,7 @@ class DetonatorItem(properties: Properties) : Item(properties) {
         val posY = detonatorTag.getInt("ExplosivePosY")
         val posZ = detonatorTag.getInt("ExplosivePosZ")
         val pos = BlockPos(posX, posY, posZ)
-        if (!world.isLoaded(pos)) { // TODO make configurable
+        if (!NuclearConfig.explosions.detonateUnloadedBombs.get() && !world.isLoaded(pos)) {
             player.displayClientMessage(LangKeys.DEVICE_POSITION_NOT_LOADED.red(), true)
             return
         }
