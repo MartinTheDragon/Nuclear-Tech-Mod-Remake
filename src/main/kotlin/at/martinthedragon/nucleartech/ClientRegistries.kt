@@ -181,6 +181,7 @@ object ClientRegistries {
             registerEntityRenderer(EntityTypes.oilSpill.get(), ::NoopRenderer)
 
             registerEntityRenderer(EntityTypes.clusterFragment.get(), ::ThrownItemRenderer)
+            registerEntityRenderer(EntityTypes.shrapnel.get(), ::ShrapnelRenderer)
 
             registerEntityRenderer(EntityTypes.rbmkDebris.get(), ::RBMKDebrisRenderer)
 
@@ -192,6 +193,7 @@ object ClientRegistries {
     fun registerLayerDefinitions(event: EntityRenderersEvent.RegisterLayerDefinitions) {
         with(event) {
             registerLayerDefinition(NuclearModelLayers.RUBBLE, RubbleParticle.RubbleModel::createLayerDefinition)
+            registerLayerDefinition(NuclearModelLayers.SHRAPNEL, ShrapnelRenderer.ShrapnelModel::createLayerDefinition)
             registerLayerDefinition(NuclearModelLayers.STEAM_PRESS, SteamPressRenderer::createLayerDefinition)
         }
     }

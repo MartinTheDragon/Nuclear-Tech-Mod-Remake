@@ -905,6 +905,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.oilSpill, "Ölspritzer")
 
         addEntityType(EntityTypes.clusterFragment, "Schüttbombe")
+        addEntityType(EntityTypes.shrapnel, "Schrapnell")
 
         addMenuType(MenuTypes.sirenMenu, "Sirene")
         addMenuType(MenuTypes.safeMenu, "Panzerschrank")
@@ -972,9 +973,10 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackVaultDoorAlarm, "Sirene läuft: Vault Door Alarm")
 
         addDamageSource(DamageSources.extractBlood, "%1\$s hat zu viel Lebensessenz extrahiert", "%1\$s hat versucht, schön-verpackten Lebenssaft für %2\$s zu hinterlassen")
-        addDamageSource(DamageSources.radiation, "%1\$s starb an Strahlenvergiftung", "%1\$s fiel während des Kampfes mit %2\$s der Strahlenkrankheit zum Opfer")
-        addDamageSource(DamageSources.nuclearBlast, "%1\$s wurde von einer Atomexplosion weggeblasen", "%1\$s wurde während des Kampfes mit %2\$s atomisiert")
         addDamageSource(DamageSources.murkyAnvil, "%1\$s UNDEFINIERT", "%1\$s UNDEFINIERT beim Versuch %2\$s zu entkommen")
+        addDamageSource(DamageSources.nuclearBlast, "%1\$s wurde von einer Atomexplosion weggeblasen", "%1\$s wurde während des Kampfes mit %2\$s atomisiert")
+        addDamageSource(DamageSources.radiation, "%1\$s starb an Strahlenvergiftung", "%1\$s fiel während des Kampfes mit %2\$s der Strahlenkrankheit zum Opfer")
+        addDamageSource(DamageSources.shrapnel, "%1\$s wurde von einem Schrapnell zerfetzt", "%1\$s wurde während des Kampfes mit %2\$s von einem Schrapnell zerfetzt")
 
         addAttribute(Attributes.RADIATION_RESISTANCE, "Strahlenresistenz")
 

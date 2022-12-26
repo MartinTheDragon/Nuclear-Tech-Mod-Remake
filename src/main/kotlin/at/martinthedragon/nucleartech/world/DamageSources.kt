@@ -8,10 +8,13 @@ import net.minecraft.world.entity.LivingEntity
 import kotlin.random.Random
 
 object DamageSources {
-    val extractBlood: DamageSource = DamageSource("${NuclearTech.MODID}.extractBlood").bypassArmor().bypassMagic().setNoAggro()
-    val radiation: DamageSource = DamageSource("${NuclearTech.MODID}.radiation").bypassArmor()
-    val nuclearBlast: DamageSource = DamageSource("${NuclearTech.MODID}.nuclearBlast").setExplosion()
-    val murkyAnvil: DamageSource = MurkyAnvilDamageSource("${NuclearTech.MODID}.murkyAnvil")
+    val extractBlood: DamageSource = DamageSource(name("extractBlood")).bypassArmor().bypassMagic().setNoAggro()
+    val murkyAnvil: DamageSource = MurkyAnvilDamageSource(name("murkyAnvil"))
+    val nuclearBlast: DamageSource = DamageSource(name("nuclearBlast")).setExplosion()
+    val radiation: DamageSource = DamageSource(name("radiation")).bypassArmor()
+    val shrapnel: DamageSource = DamageSource(name("shrapnel")).setProjectile()
+
+    private fun name(string: String) = "${NuclearTech.MODID}.$string"
 }
 
 private class MurkyAnvilDamageSource(msgID: String) : DamageSource(msgID) {

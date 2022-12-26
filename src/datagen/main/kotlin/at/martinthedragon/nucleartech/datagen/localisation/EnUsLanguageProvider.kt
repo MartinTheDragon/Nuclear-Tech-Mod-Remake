@@ -866,6 +866,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.oilSpill, "Oil Spill")
 
         addEntityType(EntityTypes.clusterFragment, "Bomblet")
+        addEntityType(EntityTypes.shrapnel, "Shrapnel")
 
         addMenuType(MenuTypes.sirenMenu, "Siren")
         addMenuType(MenuTypes.safeMenu, "Safe")
@@ -933,9 +934,10 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addSound(SoundEvents.sirenTrackVaultDoorAlarm, "Siren running: Vault Door Alarm")
 
         addDamageSource(DamageSources.extractBlood, "%1\$s extracted too much life essence", "%1\$s tried to leave neatly-packaged life juice for %2\$s")
-        addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning", "%1\$s fell victim to acute radiation syndrome whilst fighting %2\$s")
-        addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion", "%1\$s got nuked whilst fighting %2\$s")
         addDamageSource(DamageSources.murkyAnvil, "%1\$s UNDEFINED", "%1\$s UNDEFINED whilst trying to escape %2\$s")
+        addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion", "%1\$s got nuked whilst fighting %2\$s")
+        addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning", "%1\$s fell victim to acute radiation syndrome whilst fighting %2\$s")
+        addDamageSource(DamageSources.shrapnel, "%1\$s was ragged by a shrapnel", "%1\$s was ragged by a shrapnel whilst fighting %2\$s")
 
         addAttribute(Attributes.RADIATION_RESISTANCE, "Radiation Resistance")
 

@@ -21,9 +21,8 @@ class ClusterFragment(entityType: EntityType<ClusterFragment>, level: Level) : T
     override fun getGravity() = 0.0125F
 
     companion object {
-        private val random = java.util.Random()
-
         fun spawnClustered(level: Level, position: Vec3, count: Int) {
+            val random = level.random
             for (i in 0 until count) {
                 var dx = random.nextGaussian()
                 val dy = random.nextGaussian()

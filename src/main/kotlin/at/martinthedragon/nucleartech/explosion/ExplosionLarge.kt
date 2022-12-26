@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.explosion
 import at.martinthedragon.nucleartech.api.explosion.Explosion
 import at.martinthedragon.nucleartech.api.explosion.ExplosionFactory
 import at.martinthedragon.nucleartech.api.explosion.ExplosionLargeParams
+import at.martinthedragon.nucleartech.entity.Shrapnel
 import at.martinthedragon.nucleartech.particle.RubbleParticleOptions
 import at.martinthedragon.nucleartech.particle.SmokeParticleOptions
 import at.martinthedragon.nucleartech.particle.sendParticles
@@ -44,7 +45,19 @@ object ExplosionLarge : ExplosionFactory<ExplosionLargeParams> {
     }
 
     fun spawnShrapnel(level: ServerLevel, pos: Vec3, count: Int) {
-        // TODO
+        val random = level.random
+        for (i in 0 until count) {
+            val shrapnel = Shrapnel(level).apply {
+                moveTo(pos)
+                setDeltaMovement(
+                    random.nextGaussian() * (1 + (count / 50)),
+                    ((random.nextDouble() * .5) + .5) * (1 + (count / (15 + random.nextInt(21)))) + (random.nextDouble() / 50 * count),
+                    random.nextGaussian() * (1 + (count / 50))
+                )
+                setHasTrail(random.nextInt(3) == 0)
+            }
+            level.addFreshEntity(shrapnel)
+        }
     }
 
     fun cloudFunction(count: Int) = (850 * (1 - E.pow(-count / 15.0)) + 15).toInt()

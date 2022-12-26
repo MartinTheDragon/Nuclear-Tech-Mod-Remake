@@ -29,6 +29,7 @@ object EntityTypes {
     val oilSpill = ENTITIES.registerK("oil_spill") { EntityType.Builder.of(::OilSpill, MobCategory.MISC).build("oil_spill") }
 
     val clusterFragment = ENTITIES.registerK("cluster_fragment") { EntityType.Builder.of(::ClusterFragment, MobCategory.MISC).sized(.5F, .5F).updateInterval(20).clientTrackingRange(10).build("cluster_fragment") }
+    val shrapnel = ENTITIES.registerK("shrapnel") { EntityType.Builder.of(::Shrapnel, MobCategory.MISC).sized(.5F, .5F).updateInterval(20).clientTrackingRange(10).build("shrapnel") }
 
     val rbmkDebris = ENTITIES.registerK("rbmk_debris") { EntityType.Builder.of(::RBMKDebris, MobCategory.MISC).sized(1F, 1F).updateInterval(20).build("rbmk_debris") }
 
