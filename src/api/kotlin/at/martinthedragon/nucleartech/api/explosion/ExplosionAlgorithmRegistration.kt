@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.api.explosion
 
 import net.minecraft.resources.ResourceLocation
 
+// TODO redesign API
 public interface ExplosionAlgorithmRegistration {
     /** Registers a [factory] with the under the corresponding [params] class to be later used via [getFactory] */
     public fun <P : ExplosionFactory.ExplosionParams> register(key: ResourceLocation, params: Class<out P>, factory: ExplosionFactory<P>)

@@ -10,7 +10,7 @@ import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 
 /** Converts this [BlockPos] to a [Vector3d] with 0.5 added to each component */
-fun BlockPos.toVec3Middle() = Vec3(x + .5, y + .5, z + .5)
+fun BlockPos.toVec3Middle(): Vec3 = Vec3.atCenterOf(this)
 
 fun Vec3.toBlockPos() = BlockPos(x.toInt(), y.toInt(), z.toInt())
 
