@@ -39,7 +39,7 @@ open class RBMKColumnBlockItem(topBlock: RBMKBaseBlock, override val blockEntity
         // check if possible
         for (i in 0 until height) {
             val nextContext = BlockPlaceContext.at(context, pos.offset(0, i, 0), Direction.DOWN)
-            if (!nextContext.canPlace()) return InteractionResult.FAIL
+            if (!nextContext.replacingClickedOnBlock()) return InteractionResult.FAIL
 
             val stateToPlace = (if (i + 1 == height) block.getStateForPlacement(nextContext) else getPlacementState(nextContext, height - i - 1, height - 1)) ?: return InteractionResult.FAIL
             if (!canPlace(nextContext, stateToPlace)) return InteractionResult.FAIL
