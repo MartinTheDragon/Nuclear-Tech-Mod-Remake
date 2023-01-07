@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.IntegerProperty
+import net.minecraft.world.level.material.PushReaction
 import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraftforge.client.IBlockRenderProperties
@@ -57,6 +58,8 @@ open class RBMKColumnBlock(properties: Properties) : Block(properties), RBMKPart
     override fun use(state: BlockState, level: Level, pos: BlockPos, player: Player, hand: InteractionHand, hit: BlockHitResult): InteractionResult {
         return openMenu<InventoryRBMKBaseBlockEntity>(level, pos.offset(0, state.getValue(LEVEL), 0), player)
     }
+
+    override fun getPistonPushReaction(state: BlockState) = PushReaction.BLOCK
 
     override fun initializeClient(consumer: Consumer<IBlockRenderProperties>) {
         consumer.accept(object : IBlockRenderProperties {
