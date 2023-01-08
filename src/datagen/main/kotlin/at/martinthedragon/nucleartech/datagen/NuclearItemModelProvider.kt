@@ -236,6 +236,8 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.tungstenCrystals.get())
         simpleItem(NTechItems.uraniumCrystals.get())
 
+        simpleItem(NTechItems.volcanicGem.get())
+
         simpleItem(NTechItems.actiniumFragment.get())
         simpleItem(NTechItems.ceriumFragment.get())
         simpleItem(NTechItems.cobaltFragment.get())
@@ -749,6 +751,7 @@ class NuclearItemModelProvider(
         simpleItem(NTechItems.rainMissile.get())
         simpleItem(NTechItems.drillMissile.get())
         simpleItem(NTechItems.nuclearMissile.get())
+        simpleItem(NTechItems.tectonicMissile.get())
         simpleItem(NTechItems.oilDetector.get())
         simpleItem(NTechItems.rbmkLinker.get())
         simpleItem(NTechItems.geigerCounter.get())

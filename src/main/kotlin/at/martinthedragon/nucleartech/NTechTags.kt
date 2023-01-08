@@ -46,8 +46,10 @@ object NTechTags {
         val ORES_UNOBTAINIUM = forgeTag("ores/unobtainium")
         val ORES_URANIUM = forgeTag("ores/uranium")
         val ORES_VERTICIUM = forgeTag("ores/verticium")
+        val ORES_VOLCANIC_GEM = forgeTag("ores/volcanic_gem")
         val ORES_WEIDANIUM = forgeTag("ores/weidanium")
 
+        val ORES_IN_GROUND_BASALT = forgeTag("ores_in_ground/basalt")
         val ORES_IN_GROUND_END_STONE = forgeTag("ores_in_ground/end_stone")
 
         val STORAGE_BLOCKS_ALUMINIUM = forgeTag("storage_blocks/aluminium")
@@ -136,8 +138,10 @@ object NTechTags {
         val ORES_UNOBTAINIUM = forgeTag("ores/unobtainium")
         val ORES_URANIUM = forgeTag("ores/uranium")
         val ORES_VERTICIUM = forgeTag("ores/verticium")
+        val ORES_VOLCANIC_GEM = forgeTag("ores/volcanic_gem")
         val ORES_WEIDANIUM = forgeTag("ores/weidanium")
 
+        val ORES_IN_GROUND_BASALT = forgeTag("ores_in_ground/basalt")
         val ORES_IN_GROUND_END_STONE = forgeTag("ores_in_ground/end_stone")
 
         val STORAGE_BLOCKS_ALUMINIUM = forgeTag("storage_blocks/aluminium")
@@ -379,6 +383,7 @@ object NTechTags {
         val GEMS_TRIXITE = forgeTag("gems/trixite")
         val GEMS_TUNGSTEN = forgeTag("gems/tungsten")
         val GEMS_URANIUM = forgeTag("gems/uranium")
+        val GEMS_VOLCANIC = forgeTag("gems/volcanic")
 
         val RARE_EARTH_FRAGMENTS = tag("rare_earth_fragments")
 
@@ -515,6 +520,7 @@ object NTechTags {
         val OIL = forgeTag("oil")
         val STEAM = forgeTag("steam")
         val URANIUM_HEXAFLUORIDE = forgeTag("uranium_hexafluoride")
+        val VOLCANIC_LAVA = forgeTag("volcanic_lava")
     }
 }
 

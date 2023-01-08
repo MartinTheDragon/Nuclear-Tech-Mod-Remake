@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "nucleartech:block/basalt_sulfur_ore_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "nucleartech:block/basalt_sulfur_ore"
+    },
+    "axis=z": {
+      "model": "nucleartech:block/basalt_sulfur_ore_horizontal",
+      "x": 90
+    }
+  }
+}

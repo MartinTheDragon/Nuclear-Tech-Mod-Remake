@@ -177,11 +177,13 @@ object ClientRegistries {
             registerEntityRenderer(EntityTypes.missileRain.get(), ::SimpleMissileRenderer)
             registerEntityRenderer(EntityTypes.missileDrill.get(), ::SimpleMissileRenderer)
             registerEntityRenderer(EntityTypes.missileNuclear.get(), ::SimpleMissileRenderer)
+            registerEntityRenderer(EntityTypes.missileTectonic.get(), ::SimpleMissileRenderer)
 
             registerEntityRenderer(EntityTypes.oilSpill.get(), ::NoopRenderer)
 
             registerEntityRenderer(EntityTypes.clusterFragment.get(), ::ThrownItemRenderer)
             registerEntityRenderer(EntityTypes.shrapnel.get(), ::ShrapnelRenderer)
+            registerEntityRenderer(EntityTypes.volcanicShrapnel.get(), ::VolcanicShrapnelRenderer)
 
             registerEntityRenderer(EntityTypes.rbmkDebris.get(), ::RBMKDebrisRenderer)
 
@@ -276,6 +278,7 @@ object ClientRegistries {
             register(ModParticles.RBMK_MUSH.get(), RBMKMushParticle::Provider)
             register(ModParticles.RUBBLE.get(), RubbleParticle.Provider())
             register(ModParticles.SMOKE.get(), SmokeParticle::Provider)
+            register(ModParticles.VOLCANO_SMOKE.get(), VolcanoSmokeParticle::Provider)
         }
     }
 

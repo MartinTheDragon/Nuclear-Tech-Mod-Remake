@@ -27,6 +27,7 @@
     "#forge:gems/titanium",
     "#forge:gems/trixite",
     "#forge:gems/tungsten",
-    "#forge:gems/uranium"
+    "#forge:gems/uranium",
+    "#forge:gems/volcanic"
   ]
 }

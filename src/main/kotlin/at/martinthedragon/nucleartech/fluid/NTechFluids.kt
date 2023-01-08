@@ -9,6 +9,7 @@ import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.core.BlockSource
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior
+import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.item.*
 import net.minecraft.world.level.block.DispenserBlock
 import net.minecraft.world.level.block.LiquidBlock
@@ -35,6 +36,7 @@ object NTechFluids {
     val gas = registerFluid("gas", FluidAttributes.builder(ntm("fluid/gas_still"), ntm("fluid/gas_still")).gaseous().density(-100).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(10) })
     val uraniumHexafluoride = registerFluid("uranium_hexafluoride", FluidAttributes.builder(ntm("fluid/uranium_hexafluoride_still"), ntm("fluid/uranium_hexafluoride_flow")).color(0xE6D1CEBEu.toInt()).gaseous().sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(10) })
     val corium = registerFluid("corium_fluid", FluidAttributes.builder(ntm("fluid/corium_still"), ntm("fluid/corium_flow")).density(100_000).temperature(3000 - ABSOLUTE_ZERO), CoriumFluid::Source, CoriumFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(30) }, fluidBlockProperties = BlockBehaviour.Properties.of(Material.WATER).jumpFactor(0.01F).speedFactor(0.01F).noCollission().strength(1000F).noDrops())
+    val volcanicLava = registerFluid("volcanic_lava", FluidAttributes.builder(ntm("fluid/volcanic_lava_still"), ntm("fluid/volcanic_lava_flow")).luminosity(15).density(3200).viscosity(7000).temperature(900 - ABSOLUTE_ZERO).sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA), VolcanicLavaFluid::Source, VolcanicLavaFluid::Flowing, ::BucketItem, propertiesModifier = { tickRate(36).levelDecreasePerBlock(2) }, fluidBlockProperties = BlockBehaviour.Properties.of(Material.WATER).noCollission().strength(1000F).noDrops().lightLevel { 15 }.hasPostProcess { _, _, _ -> true }, liquidBlockCreator = ::VolcanicLavaBlock)
 
     // specifying a default argument doesn't work because of generics
     fun registerFluid(name: String, attributes: FluidAttributes.Builder) = registerFluid(name, attributes, ::Source, ::Flowing, ::BucketItem)

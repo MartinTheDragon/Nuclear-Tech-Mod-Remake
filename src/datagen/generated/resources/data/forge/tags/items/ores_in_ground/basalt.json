@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "nucleartech:basalt_sulfur_ore",
+    "nucleartech:basalt_fluorite_ore",
+    "nucleartech:basalt_asbestos_ore",
+    "nucleartech:basalt_volcanic_gem_ore"
+  ]
+}

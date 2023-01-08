@@ -25,11 +25,13 @@ object EntityTypes {
     val missileRain = ENTITIES.registerK("rain_missile") { EntityType.Builder.of(::RainMissile, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).clientTrackingRange(100).build("rain_missile") }
     val missileDrill = ENTITIES.registerK("drill_missile") { EntityType.Builder.of(::DrillMissile, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).clientTrackingRange(100).build("drill_missile") }
     val missileNuclear = ENTITIES.registerK("nuclear_missile") { EntityType.Builder.of(::NuclearMissile, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).clientTrackingRange(100).build("nuclear_missile") }
+    val missileTectonic = ENTITIES.registerK("tectonic_missile") { EntityType.Builder.of(::TectonicMissile, MobCategory.MISC).fireImmune().sized(1.5F, 1.5F).clientTrackingRange(100).build("tectonic_missile") }
 
     val oilSpill = ENTITIES.registerK("oil_spill") { EntityType.Builder.of(::OilSpill, MobCategory.MISC).build("oil_spill") }
 
     val clusterFragment = ENTITIES.registerK("cluster_fragment") { EntityType.Builder.of(::ClusterFragment, MobCategory.MISC).sized(.5F, .5F).updateInterval(20).clientTrackingRange(10).build("cluster_fragment") }
     val shrapnel = ENTITIES.registerK("shrapnel") { EntityType.Builder.of(::Shrapnel, MobCategory.MISC).sized(.5F, .5F).updateInterval(20).clientTrackingRange(10).build("shrapnel") }
+    val volcanicShrapnel = ENTITIES.registerK("volcanic_shrapnel") { EntityType.Builder.of(::VolcanicShrapnel, MobCategory.MISC).sized(.5F, .5F).updateInterval(20).clientTrackingRange(16).build("volcanic_shrapnel") }
 
     val rbmkDebris = ENTITIES.registerK("rbmk_debris") { EntityType.Builder.of(::RBMKDebris, MobCategory.MISC).sized(1F, 1F).updateInterval(20).build("rbmk_debris") }
 

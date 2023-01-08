@@ -17,7 +17,7 @@ abstract class CoriumFluid(properties: Properties) : ForgeFlowingFluid(propertie
             builder.add(LEVEL)
         }
 
-        override fun getAmount(fluidState: FluidState) = fluidState.getValue(LEVEL)
+        override fun getAmount(fluidState: FluidState): Int = fluidState.getValue(LEVEL)
         override fun isSource(fluidState: FluidState) = false
 
         override fun randomTick(level: Level, pos: BlockPos, fluidState: FluidState, random: Random) {

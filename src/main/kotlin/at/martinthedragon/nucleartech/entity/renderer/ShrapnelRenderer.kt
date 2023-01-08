@@ -19,7 +19,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.texture.OverlayTexture
 
-class ShrapnelRenderer(context: EntityRendererProvider.Context) : EntityRenderer<Shrapnel>(context) {
+open class ShrapnelRenderer(context: EntityRendererProvider.Context) : EntityRenderer<Shrapnel>(context) {
     override fun getTextureLocation(shrapnel: Shrapnel) = ntm("textures/entity/shrapnel/shrapnel.png")
 
     private val rotationVector = Vector3f(1F, 1F, 1F).apply(Vector3f::normalize)

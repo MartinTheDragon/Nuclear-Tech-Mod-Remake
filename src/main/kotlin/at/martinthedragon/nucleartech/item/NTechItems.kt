@@ -240,6 +240,7 @@ object NTechItems {
     val starmetalCrystals = ITEMS.registerK("starmetal_crystals") { Item(PARTS_TAB_PROP) }
     val trixiteCrystals = ITEMS.registerK("trixite_crystals") { Item(PARTS_TAB_PROP) }
     val osmiridiumCrystals = ITEMS.registerK("osmiridium_crystals") { Item(PARTS_TAB_PROP_RARE) }
+    val volcanicGem = ITEMS.registerK("volcanic_gem") { Item(PARTS_TAB_PROP_UNCOMMON) }
     val neodymiumFragment = ITEMS.registerK("neodymium_fragment") { Item(PARTS_TAB_PROP) }
     val cobaltFragment = ITEMS.registerK("cobalt_fragment") { Item(PARTS_TAB_PROP) }
     val niobiumFragment = ITEMS.registerK("niobium_fragment") { Item(PARTS_TAB_PROP) }
@@ -739,7 +740,8 @@ object NTechItems {
     val infernoMissile = ITEMS.registerK("inferno_missile") { MissileItem(::InfernoMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
     val rainMissile = ITEMS.registerK("rain_missile") { MissileItem(::RainMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
     val drillMissile = ITEMS.registerK("drill_missile") { MissileItem(::DrillMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_HUGE, renderScale = 2F) }
-    val nuclearMissile = ITEMS.registerK("nuclear_missile") { MissileItem(::NuclearMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.missileModel("missile_nuclear"), renderScale = 1.5F) }
+    val nuclearMissile = ITEMS.registerK("nuclear_missile") { MissileItem(::NuclearMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_NUCLEAR, renderScale = 1.5F) }
+    val tectonicMissile = ITEMS.registerK("tectonic_missile") { MissileItem(::TectonicMissile, Properties().tab(CreativeTabs.Rocketry), renderModel = AbstractMissile.MODEL_MISSILE_NUCLEAR, renderScale = 1.5F, hasTooltip = true) }
 
     // Consumables and Gear
 

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "nucleartech:block/basalt_sulfur_ore_side",
+    "end": "nucleartech:block/basalt_sulfur_ore_end"
+  }
+}

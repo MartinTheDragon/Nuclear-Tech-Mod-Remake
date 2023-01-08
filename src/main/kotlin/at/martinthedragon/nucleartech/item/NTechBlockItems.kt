@@ -77,6 +77,10 @@ object NTechBlockItems {
     val meteorLithiumOre = ITEMS.registerK("meteor_lithium_ore") { BlockItem(NTechBlocks.meteorLithiumOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val starmetalOre = ITEMS.registerK("starmetal_ore") { BlockItem(NTechBlocks.starmetalOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val trixite = ITEMS.registerK("trixite") { BlockItem(NTechBlocks.trixite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val basaltSulfurOre = ITEMS.registerK("basalt_sulfur_ore") { BlockItem(NTechBlocks.basaltSulfurOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val basaltFluoriteOre = ITEMS.registerK("basalt_fluorite_ore") { BlockItem(NTechBlocks.basaltFluoriteOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val basaltAsbestosOre = ITEMS.registerK("basalt_asbestos_ore") { BlockItem(NTechBlocks.basaltAsbestosOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val basaltVolcanicGemOre = ITEMS.registerK("basalt_volcanic_gem_ore") { BlockItem(NTechBlocks.basaltVolcanicGemOre.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
     val uraniumBlock = ITEMS.registerK("uranium_block") { BlockItem(NTechBlocks.uraniumBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val u233Block = ITEMS.registerK("u233_block") { BlockItem(NTechBlocks.u233Block.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
@@ -222,6 +226,7 @@ object NTechBlockItems {
 
     val littleBoy = ITEMS.registerK("little_boy") { SpecialModelBlockItem(NTechBlocks.littleBoy.get(), ::LittleBoyBlockEntity, Item.Properties().tab(CreativeTabs.Bombs)) }
     val fatMan = ITEMS.registerK("fat_man") { SpecialModelBlockItem(NTechBlocks.fatMan.get(), ::FatManBlockEntity, Item.Properties().tab(CreativeTabs.Bombs)) }
+    val volcanoCore = ITEMS.registerK("volcano_core") { BlockItem(NTechBlocks.volcanoCore.get(), Item.Properties().tab(CreativeTabs.Bombs)) }
 
     val launchPadPlacer = ITEMS.registerK("launch_pad") { SpecialModelMultiBlockPlacerItem(NTechBlocks.launchPad.get(), ::LaunchPadBlockEntity, LaunchPadBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Rocketry)) }
 

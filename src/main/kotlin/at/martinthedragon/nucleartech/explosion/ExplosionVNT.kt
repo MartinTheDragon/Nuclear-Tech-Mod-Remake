@@ -149,7 +149,8 @@ class ExplosionVNT(
                 for (blockPos in shuffledPositions) {
                     val blockState = level.getBlockState(blockPos)
                     if (!blockState.isAir) {
-                        if (level is ServerLevel && blockState.canDropFromExplosion(level, blockPos, explosion.compat)) {
+                        val dropChanceMutation = dropChanceMutator?.mutateDropChance(explosion, blockPos, blockState, 1F / explosion.size)
+                        if (dropChanceMutation != 0F && level is ServerLevel && blockState.canDropFromExplosion(level, blockPos, explosion.compat)) {
                             val blockEntity = if (blockState.hasBlockEntity()) level.getBlockEntity(blockPos) else null
                             val lootContext = LootContext.Builder(level)
                                 .withRandom(level.random)
@@ -159,7 +160,7 @@ class ExplosionVNT(
                                 .withOptionalParameter(LootContextParams.THIS_ENTITY, explosion.exploder)
 
                             if (explosion.interaction == BlockInteraction.DESTROY) {
-                                val virtualSize = if (dropChanceMutator == null) explosion.size else 1F / dropChanceMutator.mutateDropChance(explosion, blockPos, blockState, 1F / explosion.size)
+                                val virtualSize = if (dropChanceMutation == null) explosion.size else 1F / dropChanceMutation
                                 lootContext.withParameter(LootContextParams.EXPLOSION_RADIUS, virtualSize)
                             }
 
@@ -319,7 +320,7 @@ class ExplosionVNT(
     }
 
     companion object {
-        fun createStandard(level: Level, pos: Vec3, size: Float, exploder: Entity?) = ExplosionVNT(level, pos, size, exploder).apply {
+        fun createStandard(level: Level, pos: Vec3, size: Float, exploder: Entity? = null) = ExplosionVNT(level, pos, size, exploder).apply {
             blockAllocator = BlockAllocator.Default()
             blockProcessor = BlockProcessor.Default()
             entityProcessor = EntityProcessor.Default()

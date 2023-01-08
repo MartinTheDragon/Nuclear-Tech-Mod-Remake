@@ -8,6 +8,7 @@ import at.martinthedragon.nucleartech.hazard.HazardRegistry
 import at.martinthedragon.nucleartech.registerK
 import net.minecraft.core.BlockPos
 import net.minecraft.util.valueproviders.UniformInt
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
@@ -86,6 +87,10 @@ object NTechBlocks {
     val meteorLithiumOre = BLOCKS.registerK("meteor_lithium_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
     val starmetalOre = BLOCKS.registerK("starmetal_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
     val trixite = BLOCKS.registerK("trixite") { Block(Properties.of(STONE).strength(4f, 9f).requiresCorrectToolForDrops()) }
+    val basaltSulfurOre = BLOCKS.registerK("basalt_sulfur_ore") { RotatedPillarBlock(Properties.of(STONE, DyeColor.BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)) }
+    val basaltFluoriteOre = BLOCKS.registerK("basalt_fluorite_ore") { RotatedPillarBlock(Properties.of(STONE, DyeColor.BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)) }
+    val basaltAsbestosOre = BLOCKS.registerK("basalt_asbestos_ore") { RotatedPillarBlock(Properties.of(STONE, DyeColor.BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)) } // TODO asbestos particles
+    val basaltVolcanicGemOre = BLOCKS.registerK("basalt_volcanic_gem_ore") { VolcanicGemOreBlock(Properties.of(STONE, DyeColor.ORANGE).requiresCorrectToolForDrops().strength(2F, 5F).sound(SoundType.BASALT)) }
 
     val uraniumBlock = BLOCKS.registerK("uranium_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.U) }
     val u233Block = BLOCKS.registerK("u233_block") { HazardBlock(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)).radiation(HazardRegistry.U233) }
@@ -234,6 +239,7 @@ object NTechBlocks {
 
     val littleBoy = BLOCKS.registerK("little_boy") { LittleBoyBlock(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
     val fatMan = BLOCKS.registerK("fat_man") { FatManBlock(Properties.of(METAL).strength(5F, 6000F).requiresCorrectToolForDrops().sound(SoundType.METAL).noOcclusion()) }
+    val volcanoCore = BLOCKS.registerK("volcano_core") { VolcanoBlock(Properties.of(STONE).strength(-1F, 10000F).sound(SoundType.STONE).noDrops()) }
 
     // Missiles
 

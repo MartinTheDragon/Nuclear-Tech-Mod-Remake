@@ -1,8 +1,8 @@
 package at.martinthedragon.nucleartech.datagen.tag
 
-import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.NTechTags
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.tags.BlockTagsProvider
 import net.minecraft.tags.BlockTags
@@ -21,21 +21,22 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
 
     private fun oreTags() = with(NTechTags.Blocks) {
         tag(Tags.Blocks.ORES)
-            .addTags(ORES_ALUMINIUM, ORES_ASBESTOS, ORES_AUSTRALIUM, ORES_BERYLLIUM, ORES_COBALT, ORES_DAFFERGON, ORES_FLUORITE, ORES_LEAD, ORES_LIGNITE, ORES_NITER, ORES_OIL, ORES_PHOSPHORUS, ORES_PLUTONIUM, ORES_RARE_EARTH, ORES_REIIUM, ORES_SCHRABIDIUM, ORES_STARMETAL, ORES_SULFUR, ORES_THORIUM, ORES_TITANIUM, ORES_TRINITITE, ORES_TRIXITE, ORES_TUNGSTEN, ORES_UNOBTAINIUM, ORES_URANIUM, ORES_VERTICIUM, ORES_WEIDANIUM)
+            .addTags(ORES_ALUMINIUM, ORES_ASBESTOS, ORES_AUSTRALIUM, ORES_BERYLLIUM, ORES_COBALT, ORES_DAFFERGON, ORES_FLUORITE, ORES_LEAD, ORES_LIGNITE, ORES_NITER, ORES_OIL, ORES_PHOSPHORUS, ORES_PLUTONIUM, ORES_RARE_EARTH, ORES_REIIUM, ORES_SCHRABIDIUM, ORES_STARMETAL, ORES_SULFUR, ORES_THORIUM, ORES_TITANIUM, ORES_TRINITITE, ORES_TRIXITE, ORES_TUNGSTEN, ORES_UNOBTAINIUM, ORES_URANIUM, ORES_VERTICIUM, ORES_VOLCANIC_GEM, ORES_WEIDANIUM)
             .add(NTechBlocks.meteorUraniumOre, NTechBlocks.meteorThoriumOre, NTechBlocks.meteorTitaniumOre, NTechBlocks.meteorSulfurOre, NTechBlocks.meteorCopperOre, NTechBlocks.meteorTungstenOre, NTechBlocks.meteorAluminiumOre, NTechBlocks.meteorLeadOre, NTechBlocks.meteorLithiumOre)
 
         tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(NTechBlocks.aluminiumOre, NTechBlocks.asbestosOre, NTechBlocks.australianOre, NTechBlocks.berylliumOre, NTechBlocks.cobaltOre, NTechBlocks.dellite, NTechBlocks.fluoriteOre, NTechBlocks.leadOre, NTechBlocks.ligniteOre, NTechBlocks.niterOre, NTechBlocks.oilDeposit, NTechBlocks.rareEarthOre, NTechBlocks.reiite, NTechBlocks.schrabidiumOre, NTechBlocks.sulfurOre, NTechBlocks.thoriumOre, NTechBlocks.titaniumOre, NTechBlocks.tungstenOre, NTechBlocks.brightblendeOre, NTechBlocks.uraniumOre, NTechBlocks.scorchedUraniumOre, NTechBlocks.dollarGreenMineral, NTechBlocks.weidite)
         tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(NTechBlocks.deepslateAluminiumOre, NTechBlocks.deepslateAsbestosOre, NTechBlocks.deepslateAustralianOre, NTechBlocks.deepslateBerylliumOre, NTechBlocks.deepslateCobaltOre, NTechBlocks.deepslateFluoriteOre, NTechBlocks.deepslateLeadOre, NTechBlocks.deepslateNiterOre, NTechBlocks.deepslateOilDeposit, NTechBlocks.deepslateRareEarthOre, NTechBlocks.deepslateSchrabidiumOre, NTechBlocks.deepslateSulfurOre, NTechBlocks.deepslateThoriumOre, NTechBlocks.deepslateTitaniumOre, NTechBlocks.deepslateTungstenOre, NTechBlocks.deepslateUraniumOre, NTechBlocks.scorchedDeepslateUraniumOre)
         tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK).add(NTechBlocks.netherPhosphorusOre, NTechBlocks.netherPlutoniumOre, NTechBlocks.netherSchrabidiumOre, NTechBlocks.netherSulfurOre, NTechBlocks.netherTungstenOre, NTechBlocks.netherUraniumOre, NTechBlocks.scorchedNetherUraniumOre)
+        tag(ORES_IN_GROUND_BASALT).add(NTechBlocks.basaltSulfurOre, NTechBlocks.basaltFluoriteOre, NTechBlocks.basaltAsbestosOre, NTechBlocks.basaltVolcanicGemOre)
         tag(ORES_IN_GROUND_END_STONE).add(NTechBlocks.trixite)
 
         tag(ORES_ALUMINIUM).add(NTechBlocks.aluminiumOre, NTechBlocks.deepslateAluminiumOre)
-        tag(ORES_ASBESTOS).add(NTechBlocks.asbestosOre, NTechBlocks.deepslateAsbestosOre)
+        tag(ORES_ASBESTOS).add(NTechBlocks.asbestosOre, NTechBlocks.deepslateAsbestosOre, NTechBlocks.basaltAsbestosOre)
         tag(ORES_AUSTRALIUM).add(NTechBlocks.australianOre, NTechBlocks.deepslateAustralianOre)
         tag(ORES_BERYLLIUM).add(NTechBlocks.berylliumOre, NTechBlocks.deepslateBerylliumOre)
         tag(ORES_COBALT).add(NTechBlocks.cobaltOre, NTechBlocks.deepslateCobaltOre)
         tag(ORES_DAFFERGON).add(NTechBlocks.dellite)
-        tag(ORES_FLUORITE).add(NTechBlocks.fluoriteOre, NTechBlocks.deepslateFluoriteOre)
+        tag(ORES_FLUORITE).add(NTechBlocks.fluoriteOre, NTechBlocks.deepslateFluoriteOre, NTechBlocks.basaltFluoriteOre)
         tag(ORES_LEAD).add(NTechBlocks.leadOre, NTechBlocks.deepslateLeadOre)
         tag(ORES_LIGNITE).add(NTechBlocks.ligniteOre)
         tag(ORES_NITER).add(NTechBlocks.niterOre, NTechBlocks.deepslateNiterOre)
@@ -46,7 +47,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(ORES_REIIUM).add(NTechBlocks.reiite)
         tag(ORES_SCHRABIDIUM).add(NTechBlocks.schrabidiumOre, NTechBlocks.deepslateSchrabidiumOre, NTechBlocks.netherSchrabidiumOre)
         tag(ORES_STARMETAL).add(NTechBlocks.starmetalOre)
-        tag(ORES_SULFUR).add(NTechBlocks.sulfurOre, NTechBlocks.deepslateSulfurOre, NTechBlocks.netherSulfurOre)
+        tag(ORES_SULFUR).add(NTechBlocks.sulfurOre, NTechBlocks.deepslateSulfurOre, NTechBlocks.netherSulfurOre, NTechBlocks.basaltSulfurOre)
         tag(ORES_THORIUM).add(NTechBlocks.thoriumOre, NTechBlocks.deepslateThoriumOre)
         tag(ORES_TITANIUM).add(NTechBlocks.titaniumOre, NTechBlocks.deepslateTitaniumOre)
         tag(ORES_TRINITITE).add(NTechBlocks.trinitite, NTechBlocks.redTrinitite)
@@ -55,6 +56,7 @@ class BlockTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(ORES_UNOBTAINIUM).add(NTechBlocks.brightblendeOre)
         tag(ORES_URANIUM).add(NTechBlocks.uraniumOre, NTechBlocks.scorchedUraniumOre, NTechBlocks.deepslateUraniumOre, NTechBlocks.scorchedDeepslateUraniumOre, NTechBlocks.netherUraniumOre, NTechBlocks.scorchedNetherUraniumOre)
         tag(ORES_VERTICIUM).add(NTechBlocks.dollarGreenMineral)
+        tag(ORES_VOLCANIC_GEM).add(NTechBlocks.basaltVolcanicGemOre)
         tag(ORES_WEIDANIUM).add(NTechBlocks.weidite)
         return@with
     }

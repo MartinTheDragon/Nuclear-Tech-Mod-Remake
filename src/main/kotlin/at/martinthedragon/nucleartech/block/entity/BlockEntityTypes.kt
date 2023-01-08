@@ -50,6 +50,7 @@ object BlockEntityTypes {
     val rbmkConsoleBlockEntityType = BLOCK_ENTITIES.registerK("rbmk_console") { createType(::RBMKConsoleBlockEntity, NTechBlocks.rbmkConsole.get()) }
     val littleBoyBlockEntityType = BLOCK_ENTITIES.registerK("little_boy") { createType(::LittleBoyBlockEntity, NTechBlocks.littleBoy.get()) }
     val fatManBlockEntityType = BLOCK_ENTITIES.registerK("fat_man") { createType(::FatManBlockEntity, NTechBlocks.fatMan.get()) }
+    val volcanoBlockEntityType = BLOCK_ENTITIES.registerK("volcano") { createType(::VolcanoBlockEntity, NTechBlocks.volcanoCore.get()) }
     val launchPadBlockEntityType = BLOCK_ENTITIES.registerK("launch_pad") { createType(::LaunchPadBlockEntity, NTechBlocks.launchPad.get()) }
 
     private fun <T : BlockEntity> createType(supplier: BlockEntitySupplier<T>, vararg blocks: Block) = BlockEntityType.Builder.of(supplier, *blocks).build()

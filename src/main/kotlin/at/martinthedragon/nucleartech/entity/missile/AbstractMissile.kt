@@ -323,5 +323,6 @@ abstract class AbstractMissile : Entity, ChunkLoader {
         val MODEL_MISSILE_V2 = missileModel("missile_v2")
         val MODEL_MISSILE_STRONG = missileModel("missile_strong")
         val MODEL_MISSILE_HUGE = missileModel("missile_huge")
+        val MODEL_MISSILE_NUCLEAR = missileModel("missile_nuclear")
     }
 }

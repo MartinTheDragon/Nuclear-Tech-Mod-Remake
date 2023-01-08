@@ -13,11 +13,10 @@ import net.minecraft.sounds.SoundSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.projectile.ThrowableProjectile
 import net.minecraft.world.level.Level
-import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.EntityHitResult
 import net.minecraft.world.phys.HitResult
 
-class Shrapnel(entityType: EntityType<Shrapnel>, level: Level) : ThrowableProjectile(entityType, level) {
+open class Shrapnel(entityType: EntityType<out Shrapnel>, level: Level) : ThrowableProjectile(entityType, level) {
     constructor(level: Level) : this(EntityTypes.shrapnel.get(), level)
 
     override fun defineSynchedData() {
@@ -42,17 +41,11 @@ class Shrapnel(entityType: EntityType<Shrapnel>, level: Level) : ThrowableProjec
                 (level as ServerLevel).sendParticles(ParticleTypes.LAVA, true, x, y, z, 1, 0.0, 0.0, 0.0, 0.0)
             }
 
-            level.playSound(null, x, y, z, SoundEvents.LAVA_EXTINGUISH, SoundSource.NEUTRAL, 1F, 1F)
+            level.playSound(null, x, y, z, SoundEvents.LAVA_EXTINGUISH, SoundSource.NEUTRAL, 1F, 2.6F + (random.nextFloat() - random.nextFloat()) * 0.8F)
             super.onHit(hitResult)
 
             discard()
         }
-    }
-
-    override fun onHitBlock(hitResult: BlockHitResult) {
-        super.onHitBlock(hitResult)
-
-        // TODO
     }
 
     override fun onHitEntity(hitResult: EntityHitResult) {

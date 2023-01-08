@@ -108,6 +108,10 @@ class BlockLoots : BlockLoot() {
         add(NTechBlocks.meteorLithiumOre.get()) { createOreDrop(it, NTechItems.rawLithium.get()) }
         add(NTechBlocks.starmetalOre.get()) { createOreDrop(it, NTechItems.rawStarmetal.get()) }
         add(NTechBlocks.trixite.get()) { createOreDrop(it, NTechItems.rawTrixite.get()) }
+        add(NTechBlocks.basaltSulfurOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(NTechItems.sulfur.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(NTechBlocks.basaltFluoriteOre.get()) { createSilkTouchDispatchTable(it, applyExplosionDecay(it, LootItem.lootTableItem(NTechItems.fluorite.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(2F, 4F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE)))) }
+        add(NTechBlocks.basaltAsbestosOre.get()) { createOreDrop(it, NTechItems.asbestosSheet.get()) }
+        add(NTechBlocks.basaltVolcanicGemOre.get()) { createOreDrop(it, NTechItems.volcanicGem.get()) }
 
         dropSelf(NTechBlocks.uraniumBlock.get())
         dropSelf(NTechBlocks.u233Block.get())

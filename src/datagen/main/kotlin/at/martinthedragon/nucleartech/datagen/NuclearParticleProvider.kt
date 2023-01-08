@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.datagen
 
 import at.martinthedragon.nucleartech.NuclearTech
+import at.martinthedragon.nucleartech.mc
 import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.particle.ModParticles
 import com.google.gson.Gson
@@ -28,6 +29,7 @@ class NuclearParticleProvider(private val dataGenerator: DataGenerator, private 
         add(ModParticles.RBMK_MUSH, (0..29).map { ntm("rbmk_mush_$it") })
         empty(ModParticles.RUBBLE)
         add(ModParticles.SMOKE, "smoke")
+        add(ModParticles.VOLCANO_SMOKE, (7 downTo 0).map { mc("generic_$it") })
     }
 
     private fun empty(particle: Supplier<out ParticleType<*>>) = add(particle, emptyList())

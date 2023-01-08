@@ -3,6 +3,7 @@
   "values": [
     "nucleartech:sulfur_ore",
     "nucleartech:deepslate_sulfur_ore",
-    "nucleartech:nether_sulfur_ore"
+    "nucleartech:nether_sulfur_ore",
+    "nucleartech:basalt_sulfur_ore"
   ]
 }

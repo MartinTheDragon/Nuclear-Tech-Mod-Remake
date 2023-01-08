@@ -63,6 +63,10 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.meteorLeadOre, "Meteoritenbleierz")
         addBlock(NTechBlocks.meteorLithiumOre, "Meteoritenlithiumerz")
         addBlock(NTechBlocks.trixite, "Trixit")
+        addBlock(NTechBlocks.basaltSulfurOre, "Schwefelreicher Basalt")
+        addBlock(NTechBlocks.basaltFluoriteOre, "Fluoritreicher Basalt")
+        addBlock(NTechBlocks.basaltAsbestosOre, "Asbestreicher Basalt")
+        addBlock(NTechBlocks.basaltVolcanicGemOre, "Edelsteinreicher Basalt")
 
         addBlock(NTechBlocks.scorchedDeepslateUraniumOre, "Verschmortes Tiefenschiefer-Uranerz")
         addBlock(NTechBlocks.deepslateOilDeposit, "Tiefenschiefer-Ölvorkommen")
@@ -175,6 +179,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(NTechBlocks.littleBoy, "Little Boy")
         addBlock(NTechBlocks.fatMan, "Fat Man")
+        addBlock(NTechBlocks.volcanoCore, "Vulkankern")
 
         addBlock(NTechBlocks.launchPad, "Raketenabschussrampe")
         addBlock(NTechBlocks.launchPadPart, "Raketenabschussrampe")
@@ -191,6 +196,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechFluids.oil.block, "Rohöl")
         addBlock(NTechFluids.uraniumHexafluoride.block, "Uranhexafluorid")
         addBlock(NTechFluids.corium.block, "Corium")
+        addBlock(NTechFluids.volcanicLava.block, "Vulkanische Lava")
 
         addItem(NTechItems.rawThorium, "Rohes Thorium")
         addItem(NTechItems.rawRareEarth, "Rohe Seltene Erde")
@@ -302,6 +308,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.rareEarthCrystals, "Seltene-Erden-Kristalle")
         addItem(NTechItems.redPhosphorusCrystals, "Rote Phosphorkristalle")
         addItem(NTechItems.trixiteCrystals, "Trixitkristalle")
+
+        addItem(NTechItems.volcanicGem, "Vulkanischer Edelstein")
 
         addItem(NTechItems.neodymiumFragment, "Neodymiumfragment")
         addItem(NTechItems.cobaltFragment, "Kobaltfragment")
@@ -819,6 +827,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.rainMissile, "Schüttbombenregen")
         addItem(NTechItems.drillMissile, "Der Betonbrecher")
         addItem(NTechItems.nuclearMissile, "Atomrakete")
+        addItem(NTechItems.tectonicMissile, "Tektonische Rakete")
+        addItemDesc(NTechItems.tectonicMissile, "Mit der Kraft von Kernwaffen können wir einen Vulkan beschwören!")
 
         addItem(NTechItems.oilDetector, "Ölvorkommen-Detektor")
         addItemDesc(NTechItems.oilDetector, "Rechtsklick um nach Öl zu suchen.\nDetektor findet nur größere Vorkommen.")
@@ -880,6 +890,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechFluids.oil.bucket, "Rohöleimer")
         addItem(NTechFluids.uraniumHexafluoride.bucket, "Uranhexafluorideimer")
         addItem(NTechFluids.corium.bucket, "Coriumeimer")
+        addItem(NTechFluids.volcanicLava.bucket, "Vulkanische-Lava-Eimer")
 
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Atomexplosionserzeuger")
 
@@ -901,11 +912,13 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.missileRain, "Schüttbombenregen")
         addEntityType(EntityTypes.missileDrill, "Der Betonbrecher")
         addEntityType(EntityTypes.missileNuclear, "Atomrakete")
+        addEntityType(EntityTypes.missileTectonic, "Tektonische Rakete")
 
         addEntityType(EntityTypes.oilSpill, "Ölspritzer")
 
         addEntityType(EntityTypes.clusterFragment, "Schüttbombe")
         addEntityType(EntityTypes.shrapnel, "Schrapnell")
+        addEntityType(EntityTypes.volcanicShrapnel, "Vulkanisches Shrapnell")
 
         addMenuType(MenuTypes.sirenMenu, "Sirene")
         addMenuType(MenuTypes.safeMenu, "Panzerschrank")
@@ -1048,6 +1061,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         add(LangKeys.INFO_INPUT, "Input:")
         add(LangKeys.INFO_INPUTS, "Inputs:")
+        add(LangKeys.INFO_ORE_CLUSTER, "Droppt nur, wenn von Spielern zerstört")
         add(LangKeys.INFO_OUTPUT, "Output:")
         add(LangKeys.INFO_OUTPUTS, "Outputs:")
         add(LangKeys.INFO_POSITION, "Position: %d %d %d")
@@ -1185,6 +1199,12 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.UPGRADE_WARN_NOT_A_MACHINE, "Das ist keine Maschine!")
         add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "Betrachte eine Maschine für Info über Effekte")
         add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "Kompatibilität mit der Maschine ist unbekannt")
+
+        add(LangKeys.VOLCANO_EXTINGUISHING, "SELBSTLÖSCHEND")
+        add(LangKeys.VOLCANO_GROWING, "WACHSEND")
+        add(LangKeys.VOLCANO_NOT_EXTINGUISHING, "NICHT SELBSTLÖSCHEND")
+        add(LangKeys.VOLCANO_NOT_GROWING, "NICHT WACHSEND")
+        add(LangKeys.VOLCANO_SMOLDERING, "SCHILDVULKAN")
 
         add(LangKeys.WORD_SECONDS, "Sekunden")
     }

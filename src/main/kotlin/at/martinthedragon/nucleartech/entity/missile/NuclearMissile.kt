@@ -12,7 +12,7 @@ class NuclearMissile : AbstractMissile {
     constructor(entityType: EntityType<NuclearMissile>, level: Level) : super(entityType, level)
     constructor(level: Level, startPos: BlockPos, targetPos: BlockPos) : super(EntityTypes.missileNuclear.get(), level, startPos, targetPos)
 
-    override val renderModel = missileModel("missile_nuclear")
+    override val renderModel = MODEL_MISSILE_NUCLEAR
     override val renderScale = 1.5F
 
     override fun onImpact() {

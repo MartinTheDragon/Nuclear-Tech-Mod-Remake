@@ -88,6 +88,10 @@ class NuclearBlockStateProvider(
         simpleBlock(NTechBlocks.meteorLithiumOre.get())
         simpleBlock(NTechBlocks.starmetalOre.get())
         simpleBlock(NTechBlocks.trixite.get())
+        axisBlock(NTechBlocks.basaltSulfurOre.get())
+        axisBlock(NTechBlocks.basaltFluoriteOre.get())
+        axisBlock(NTechBlocks.basaltAsbestosOre.get())
+        axisBlock(NTechBlocks.basaltVolcanicGemOre.get())
         simpleBlock(NTechBlocks.uraniumBlock.get())
         simpleBlock(NTechBlocks.u233Block.get())
         simpleBlock(NTechBlocks.u235Block.get())
@@ -292,6 +296,7 @@ class NuclearBlockStateProvider(
         )
         horizontalBlock(NTechBlocks.littleBoy.get(), models().getBuilder("little_boy").texture("particle", "other/little_boy/little_boy_particles"))
         horizontalBlock(NTechBlocks.fatMan.get(), models().getBuilder("fat_man").texture("particle", "other/fat_man/fat_man_particles"))
+        simpleBlock(NTechBlocks.volcanoCore.get())
         simpleBlock(NTechBlocks.launchPad.get(), models().getBuilder("launch_pad").texture("particle", "other/launch_pad/launch_pad_particles"))
         simpleBlock(NTechBlocks.launchPadPart.get(), models().getBuilder("launch_pad").texture("particle", "other/launch_pad/launch_pad_particles"))
 
@@ -364,6 +369,10 @@ class NuclearBlockStateProvider(
         copiedBlockItem(NTechBlocks.meteorLithiumOre.get())
         copiedBlockItem(NTechBlocks.starmetalOre.get())
         copiedBlockItem(NTechBlocks.trixite.get())
+        copiedBlockItem(NTechBlocks.basaltSulfurOre.get())
+        copiedBlockItem(NTechBlocks.basaltFluoriteOre.get())
+        copiedBlockItem(NTechBlocks.basaltAsbestosOre.get())
+        copiedBlockItem(NTechBlocks.basaltVolcanicGemOre.get())
         copiedBlockItem(NTechBlocks.uraniumBlock.get())
         copiedBlockItem(NTechBlocks.u233Block.get())
         copiedBlockItem(NTechBlocks.u235Block.get())
@@ -469,6 +478,7 @@ class NuclearBlockStateProvider(
         copiedBlockItem(NTechBlocks.combustionGenerator.get())
         copiedBlockItem(NTechBlocks.electricFurnace.get())
         copiedBlockItem(NTechBlocks.shredder.get())
+        copiedBlockItem(NTechBlocks.volcanoCore.get())
     }
 
     private val blockTransformsModel = models().getExistingFile(mcLoc("block/block"))

@@ -14,6 +14,7 @@ object ModParticles {
     val RBMK_MUSH = PARTICLES.registerK("rbmk_mush") { createParticleType(false, RBMKMushParticleOptions.DESERIALIZER) { RBMKMushParticleOptions.CODEC } }
     val RUBBLE = PARTICLES.registerK("rubble") { createParticleType(false, RubbleParticleOptions.DESERIALIZER) { RubbleParticleOptions.CODEC }}
     val SMOKE = PARTICLES.registerK("smoke") { createParticleType(false, SmokeParticleOptions.DESERIALIZER) { SmokeParticleOptions.CODEC }}
+    val VOLCANO_SMOKE = PARTICLES.registerK("volcano_smoke") { SimpleParticleType(true) }
 
     @Suppress("DEPRECATION")
     private fun <T : ParticleOptions> createParticleType(overrideLimiter: Boolean, deserializer: ParticleOptions.Deserializer<T>, codec: (ParticleType<T>) -> Codec<T>): ParticleType<T> =

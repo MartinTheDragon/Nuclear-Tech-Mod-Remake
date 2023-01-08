@@ -21,6 +21,7 @@ object LangKeys {
     const val CAT_SIREN_TRACK = "siren_track"
     const val CAT_RBMK = "rbmk"
     const val CAT_UPGRADE = "upgrade"
+    const val CAT_VOLCANO = "volcano"
     const val CAT_WORD = "word"
 
     val ARMOR_BLAST_PROTECTION = of(CAT_ARMOR, "blast_protection") // 1 float
@@ -115,6 +116,7 @@ object LangKeys {
 
     val INFO_INPUT = of(CAT_INFO, "input")
     val INFO_INPUTS = of(CAT_INFO, "inputs")
+    val INFO_ORE_CLUSTER = of(CAT_INFO, "ore_cluster")
     val INFO_OUTPUT = of(CAT_INFO, "output")
     val INFO_OUTPUTS = of(CAT_INFO, "outputs")
     val INFO_POSITION = of(CAT_INFO, "position") // 3 ints
@@ -252,6 +254,12 @@ object LangKeys {
     val UPGRADE_WARN_NOT_A_MACHINE = of(CAT_UPGRADE, "warn.not_a_machine")
     val UPGRADE_WARN_VIEW_MACHINE = of(CAT_UPGRADE, "warn.view_machine")
     val UPGRADE_WARN_UNKNOWN_COMPATIBILITY = of(CAT_UPGRADE, "warn.unknown_compatibility")
+
+    val VOLCANO_EXTINGUISHING = of(CAT_VOLCANO, "extinguishing")
+    val VOLCANO_GROWING = of(CAT_VOLCANO, "growing")
+    val VOLCANO_NOT_EXTINGUISHING = of(CAT_VOLCANO, "not_extinguishing")
+    val VOLCANO_NOT_GROWING = of(CAT_VOLCANO, "not_growing")
+    val VOLCANO_SMOLDERING = of(CAT_VOLCANO, "smoldering")
 
     val WORD_SECONDS = of(CAT_WORD, "seconds")
 
