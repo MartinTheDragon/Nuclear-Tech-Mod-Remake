@@ -26,7 +26,7 @@ import net.minecraftforge.energy.CapabilityEnergy
 import java.util.function.Supplier
 
 class LaunchPadBlockEntity(pos: BlockPos, state: BlockState) : BaseMachineBlockEntity(BlockEntityTypes.launchPadBlockEntityType.get(), pos, state), BombBlockEntity<LaunchPadBlockEntity>, TickingServerBlockEntity {
-    var missileItem: ItemStack = ItemStack.EMPTY
+    val missileItem: ItemStack get() = mainInventory[0]
 
     override val mainInventory: NonNullList<ItemStack> = NonNullList.withSize(3, ItemStack.EMPTY)
 
@@ -40,7 +40,6 @@ class LaunchPadBlockEntity(pos: BlockPos, state: BlockState) : BaseMachineBlockE
     override fun inventoryChanged(slot: Int) {
         super.inventoryChanged(slot)
         if (!isClientSide() && slot == 0) {
-            missileItem = mainInventory[0]
             sendContinuousUpdatePacket()
         }
     }
@@ -113,8 +112,7 @@ class LaunchPadBlockEntity(pos: BlockPos, state: BlockState) : BaseMachineBlockE
     }
 
     override fun handleContinuousUpdatePacket(tag: CompoundTag) {
-        super.handleContinuousUpdatePacket(tag)
-        missileItem = ItemStack.of(tag.getCompound("Missile"))
+        mainInventory[0] = ItemStack.of(tag.getCompound("Missile"))
     }
 
     init {
