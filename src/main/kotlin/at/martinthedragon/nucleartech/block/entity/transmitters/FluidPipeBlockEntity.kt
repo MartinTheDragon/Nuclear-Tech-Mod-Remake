@@ -46,11 +46,6 @@ class FluidPipeBlockEntity(pos: BlockPos, state: BlockState) : AbstractTransmitt
         BlockTints.invalidate(levelUnchecked as ClientLevel, BlockTints.FLUID_DUCT_COLOR_RESOLVER, blockPos, true)
     }
 
-    override fun handleUpdateTag(tag: CompoundTag) {
-        super.handleUpdateTag(tag)
-        handleContinuousUpdatePacket(tag)
-    }
-
     override fun saveAdditional(tag: CompoundTag) {
         super.saveAdditional(tag)
 

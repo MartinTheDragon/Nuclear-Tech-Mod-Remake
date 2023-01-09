@@ -46,7 +46,7 @@ open class SyncedBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: Blo
     }
 
     override fun handleUpdateTag(tag: CompoundTag) {
-        super.load(tag)
+        handleContinuousUpdatePacket(tag)
     }
 
     override fun getUpdateTag() = getContinuousUpdateTag()
@@ -66,9 +66,7 @@ open class SyncedBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: Blo
         else NuclearPacketHandler.INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with { getLevelUnchecked().getChunkAt(worldPosition) }, BlockEntityUpdateMessage(blockPos, getContinuousUpdateTag()))
     }
 
-    open fun handleContinuousUpdatePacket(tag: CompoundTag) {
-        handleUpdateTag(tag)
-    }
+    open fun handleContinuousUpdatePacket(tag: CompoundTag) {}
 
     fun isClientSide() = level?.isClientSide == true
 

@@ -83,11 +83,6 @@ abstract class RBMKControlBlockEntity(type: BlockEntityType<out RBMKControlBlock
         rodLevel = tag.getDouble("RodLevel")
     }
 
-    override fun handleUpdateTag(tag: CompoundTag) {
-        super.handleUpdateTag(tag)
-        handleContinuousUpdatePacket(tag)
-    }
-
     override fun getConsoleData() = CompoundTag().apply {
         putDouble("RodLevel", rodLevel)
     }
