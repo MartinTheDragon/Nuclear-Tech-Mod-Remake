@@ -12,6 +12,7 @@ import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.item.NuclearArmorMaterials
 import at.martinthedragon.nucleartech.menu.MenuTypes
+import at.martinthedragon.nucleartech.networking.filter.NTechNetFilters
 import at.martinthedragon.nucleartech.particle.ModParticles
 import at.martinthedragon.nucleartech.plugin.PluginEvents
 import at.martinthedragon.nucleartech.recipe.RecipeSerializers
@@ -89,7 +90,6 @@ object RegistriesAndLifecycle {
         ModParticles
     }
 
-    @Suppress("UNUSED_PARAMETER")
     @SubscribeEvent @JvmStatic
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
@@ -105,6 +105,8 @@ object RegistriesAndLifecycle {
 
         NuclearTech.LOGGER.debug("Registering dispenser behaviours...")
         NTechFluids.registerDispenserBehaviour()
+
+        NTechNetFilters.performTheFunny()
     }
 
     @SubscribeEvent @JvmStatic

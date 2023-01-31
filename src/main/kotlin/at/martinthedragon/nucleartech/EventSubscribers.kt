@@ -10,6 +10,7 @@ import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazardSystem
 import at.martinthedragon.nucleartech.hazard.HazmatValues
 import at.martinthedragon.nucleartech.world.ChunkRadiation
+import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
@@ -58,12 +59,12 @@ object EventSubscribers {
 
     @SubscribeEvent @JvmStatic
     fun tickHazardSystem(event: TickEvent.WorldTickEvent) {
-        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards()
+        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards(event.world)
     }
 
     @SubscribeEvent @JvmStatic
     fun tickHazardSystemClient(event: TickEvent.ClientTickEvent) {
-        if (event.phase == TickEvent.Phase.END) HazardSystem.tickWorldHazards()
+        if (event.phase == TickEvent.Phase.END) Minecraft.getInstance().level?.let { HazardSystem.tickWorldHazards(it) }
     }
 
     @SubscribeEvent @JvmStatic

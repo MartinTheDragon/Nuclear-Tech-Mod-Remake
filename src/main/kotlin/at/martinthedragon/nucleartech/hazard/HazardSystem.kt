@@ -1,19 +1,27 @@
 package at.martinthedragon.nucleartech.hazard
 
+import at.martinthedragon.nucleartech.ntm
 import at.martinthedragon.nucleartech.recipe.getItems
+import com.google.common.collect.ImmutableMap
+import io.netty.channel.ChannelHandler
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet
+import net.minecraft.client.Minecraft
+import net.minecraft.network.Connection
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
-import net.minecraft.server.TickTask
+import net.minecraft.network.protocol.Packet
+import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket
+import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
 import net.minecraft.world.item.TooltipFlag
-import net.minecraftforge.common.util.LogicalSidedProvider
-import net.minecraftforge.fml.LogicalSide
+import net.minecraft.world.level.Level
+import net.minecraftforge.network.filters.VanillaPacketFilter
+import java.util.function.BiConsumer
 import java.util.stream.Collectors
 
 object HazardSystem {
@@ -35,27 +43,27 @@ object HazardSystem {
             hazard.applyWorldHazard(itemEntity)
     }
 
-    private val itemEntities = mutableListOf<ItemEntity>()
+    private val itemEntities = IntOpenHashSet()
 
     fun trackItemEntity(itemEntity: ItemEntity) {
         val stack = itemEntity.item
-        if (itemEntity.level.isClientSide && stack.`is`(Items.AIR)) { // basically loops for each tick until the item gets synced
-            val executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.CLIENT)
-            executor.tell(TickTask(0) { trackItemEntity(itemEntity) })
-            return
-        }
+        if (itemEntity.level.isClientSide && stack.isEmpty) return
 
+        trackItemEntity(itemEntity.id, stack)
+    }
+
+    private fun trackItemEntity(entityId: Int, stack: ItemStack) {
         if (getHazardsForStack(stack).isNotEmpty()) {
-            itemEntities += itemEntity
+            itemEntities += entityId
         }
     }
 
     fun stopTrackingItemEntity(itemEntity: ItemEntity) {
-        itemEntities -= itemEntity
+        itemEntities -= itemEntity.id
     }
 
-    fun tickWorldHazards() {
-        itemEntities.toList().forEach(this::applyWorldHazards)
+    fun tickWorldHazards(level: Level) {
+        itemEntities.map(level::getEntity).filterIsInstance<ItemEntity>().forEach(this::applyWorldHazards)
     }
 
     fun addHoverText(stack: ItemStack, player: Player?, tooltip: MutableList<Component>, flag: TooltipFlag) {
@@ -94,5 +102,31 @@ object HazardSystem {
         val tagData = stack.tags.map { tagMap.getValue(it) }.collect(Collectors.toList())
         val itemData = itemMap.getValue(stack.item)
         return (tagData + itemData).filterNot { it === HazardData.EMPTY }.flatMap(HazardData::getEntries)
+    }
+
+    @ChannelHandler.Sharable
+    class ItemDataPacketDetector : VanillaPacketFilter(buildHandlers()) {
+        override fun isNecessary(manager: Connection?) = true
+
+        companion object {
+            val NAME = ntm("hazard_system_item_data_detector")
+
+            private fun onEntityData(packet: ClientboundSetEntityDataPacket): ClientboundSetEntityDataPacket {
+                if (packet.unpackedData?.any { it.accessor.serializer == EntityDataSerializers.ITEM_STACK } == true)
+                    Minecraft.getInstance().execute {
+                        val itemStack = packet.unpackedData?.find { it.accessor.serializer == EntityDataSerializers.ITEM_STACK }?.value as? ItemStack?
+                        if (itemStack != null && !itemStack.isEmpty) {
+                            trackItemEntity(packet.id, itemStack)
+                        }
+                    }
+
+                return packet
+            }
+
+            fun buildHandlers(): Map<Class<out Packet<*>>, BiConsumer<Packet<*>, MutableList<in Packet<*>>>> =
+                ImmutableMap.builder<Class<out Packet<*>>, BiConsumer<Packet<*>, MutableList<in Packet<*>>>>()
+                    .put(handler(ClientboundSetEntityDataPacket::class.java, ItemDataPacketDetector::onEntityData))
+                    .build()
+        }
     }
 }
