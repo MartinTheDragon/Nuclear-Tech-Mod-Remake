@@ -17,6 +17,13 @@ However, textures, models, sounds and other assets, or some algorithms, have mos
 
 - Pheo - Raw ore, deepslate, and new ore textures that fit 1.18
 
+#### Localization
+
+###### Polish
+
+- JulekJulas - Began translating
+- cakedon - Proofreading
+
 ### Contributors on the original project
 
 - rodolphito (explosion algorithms)

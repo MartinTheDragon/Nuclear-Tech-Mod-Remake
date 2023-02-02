@@ -13,7 +13,7 @@ import at.martinthedragon.nucleartech.menu.MenuTypes
 import at.martinthedragon.nucleartech.world.DamageSources
 import net.minecraft.data.DataGenerator
 
-class PlPlLanguageProvider(dataGenerator: DataGenerator,) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.PL_PL, false) {
+class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.PL_PL, false) {
     override fun translate() {
         add("itemGroup.${MODID}_parts", "NTM Materiały i Części")
         add("itemGroup.${MODID}_items", "NTM Części Maszyn i Paliwa")
@@ -26,13 +26,15 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator,) : NuclearLanguageProvi
         add("itemGroup.${MODID}_miscellaneous", "NTM Różne")
 
         addMaterials()
-        
+
         addBlock(NTechBlocks.scorchedUraniumOre, "Spieczone Złoże Uranu")
         addBlock(NTechBlocks.thoriumOre, "Złoże Toru")
         addBlock(NTechBlocks.oilDeposit, "Złoże Ropy Naftowej")
         addBlockDesc(NTechBlocks.oilDeposit, "Nie masz tego kopać\nUżyj wiertnicy ty głupku.")
         addBlock(NTechBlocks.emptyOilDeposit, "Puste Złoże Ropy Naftowej")
         addBlock(NTechBlocks.oilSand, "Piasek Olejowy")
+        addBlock(NTechBlocks.australianOre, "Złoże Australijskie")
+        addBlockDesc(NTechBlocks.australianOre, "Złoże Australium")
         addBlock(NTechBlocks.weidite, "Weidit")
         addBlockDesc(NTechBlocks.weidite, "Złoże Weiditu")
         addBlock(NTechBlocks.reiite, "Reiit")
@@ -60,7 +62,6 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator,) : NuclearLanguageProvi
         addBlock(NTechBlocks.meteorAluminiumOre, "Meteorowe Złoże Aluminium")
         addBlock(NTechBlocks.meteorLeadOre, "Meteorowe Złoże Ołowiu")
         addBlock(NTechBlocks.meteorLithiumOre, "Meteorowe Złoże Litu")
-        addBlock(NTechBlocks.starmetalOre, "Złoże Gwiazdometalu")
         addBlock(NTechBlocks.trixite, "Trycyt")
         addBlock(NTechBlocks.basaltSulfurOre, "Bazalt Bogaty w Siarkę")
         addBlock(NTechBlocks.basaltFluoriteOre, "Bazalt bogaty we Fluoryt")
