@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.MaterialGroup
 import at.martinthedragon.nucleartech.datagen.localisation.DeDeLanguageProvider
 import at.martinthedragon.nucleartech.datagen.localisation.EnUsLanguageProvider
+import at.martinthedragon.nucleartech.datagen.localisation.PlPlLanguageProvider
 import net.minecraft.data.DataGenerator
 import net.minecraftforge.common.data.LanguageProvider
 
@@ -13,8 +14,10 @@ object NuclearLanguageProviders {
     fun getLanguageProviders(dataGenerator: DataGenerator) = listOf<LanguageProvider>(
         EnUsLanguageProvider(dataGenerator), // ensure this runs first for data validation
         DeDeLanguageProvider(dataGenerator),
+        PlPlLanguageProvider(dataGenerator),
     )
 
     const val EN_US = "en_us"
     const val DE_DE = "de_de"
+    const val PL_PL = "pl_pl"
 }
