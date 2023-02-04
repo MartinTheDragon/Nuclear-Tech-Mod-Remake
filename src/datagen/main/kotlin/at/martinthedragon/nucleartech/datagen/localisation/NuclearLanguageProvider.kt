@@ -70,14 +70,14 @@ abstract class NuclearLanguageProvider(
     protected open fun validate() {
         if (redundantTranslations.isNotEmpty()) {
             val warningMessage = StringBuilder().appendLine("Redundant override translations for following keys in locale $locale:")
-            for ((redundantKey, redundantTranslation) in redundantTranslations) warningMessage.appendLine("$redundantKey=$redundantTranslation")
+            for ((redundantKey, redundantTranslation) in redundantTranslations) warningMessage.appendLine("$redundantKey=$redundantTranslation".prependIndent())
             NuclearTech.LOGGER.warn(warningMessage.toString())
         }
 
         if (!materialTranslations.keys.containsAll(NuclearLanguageProviders.materialTranslations.keys)) {
             val missingTranslations = (NuclearLanguageProviders.materialTranslations - materialTranslations.keys).values
             val errorMessage = StringBuilder().appendLine("Missing material translations in locale $locale for the following groups:")
-            for (missing in missingTranslations) errorMessage.appendLine(missing)
+            for (missing in missingTranslations) errorMessage.appendLine(missing.prependIndent())
             if (exceptionOnMissing) throw IllegalStateException(errorMessage.toString())
             else NuclearTech.LOGGER.error(errorMessage.toString())
         }
@@ -87,7 +87,7 @@ abstract class NuclearLanguageProvider(
             val errorMessage = StringBuilder().appendLine("Missing translations in locale $locale for following keys:")
             for (missing in missingTranslations) errorMessage.appendLine(missing.prependIndent())
             if (exceptionOnMissing) throw IllegalStateException(errorMessage.toString())
-            else NuclearTech.LOGGER.error(errorMessage.toString())
+            else NuclearTech.LOGGER.error(errorMessage.appendLine().appendLine("Resulting completion for $locale: ${(translations.keys.size * 1000 / NuclearLanguageProviders.keys.size.toFloat()).toInt() / 10F}%").toString())
         }
 
         if (!NuclearLanguageProviders.keys.containsAll(translations.keys)) {
