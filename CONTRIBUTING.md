@@ -2,7 +2,7 @@
 
 Open source projects like this one live from contributors like you (potentially). If you want to contribute, we are very happy to hear so!
 
-You can contribute in different ways, be it bug reports, localization or even code contributions. All of these help the project greatly on its way to become a good mod.
+You can contribute in different ways, be it bug reports, localization or even code contributions. All of these help the project greatly on its way to becoming a good mod.
 Therefore, thanks a lot!
 
 ## Reporting Bugs

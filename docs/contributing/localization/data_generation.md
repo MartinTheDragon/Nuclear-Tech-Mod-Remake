@@ -1,6 +1,6 @@
 ## Translating: Utilizing data generators
 
-Data generators can be used to generate language more efficiently than just by manual editing. Although they have a bunch of benefits, like...
+Data generators can be used to generate translations more efficiently than just by manual editing. Although they have a bunch of benefits, like...
 
  - Errors are less likely, because of static analysis and no direct use of translation keys
  - Checks for missing or obsolete translation strings, for example after an update, making it easier to catch up
@@ -8,7 +8,7 @@ Data generators can be used to generate language more efficiently than just by m
 
 ..., they require some advanced knowledge to be used. This guide aims at making things easier to set up. Knowing [Kotlin](https://kotlinlang.org/) isn't that much of a necessity, but can still help you a lot. It's also a rather easy language to learn, so if you're interested, check out the [learning material provided on the Kotlin website](https://kotlinlang.org/docs/getting-started.html).
 
-Nevertheless, it'll be easier for you to work with an IDE. See the guide on [setting up IntelliJ with the project](../ide_setup.md), if you haven't already.
+Nevertheless, it'll be easier for you if you work with an IDE. See the guide on [setting up IntelliJ with the project](../ide_setup.md), if you haven't already.
 The rest of this guide assumes you're using IntelliJ.
 
 ### Where are the data generators?
@@ -24,7 +24,7 @@ First of all, you need your language's country code, which you can [find on the 
 
 You'll be adding that country code to the `NuclearLanguageProviders` file. Simply append a constant value near the end of the file, just below and similar to the other ones in there.
 
-Next, you have to create a language-specific data generator under the `localisation` package. Right-click on that package, hover over 'New...', then click 'Kotlin Class/File' and just create a new file for now. The file name should be similar to this one: `EnUsLanguageProvider`.
+Next, you have to create a language-specific data generator under the `localisation` package. Right-click on that package in the project view, hover over 'New...', then click 'Kotlin Class/File' and just create a new file for now. The file name should be similar to this one: `EnUsLanguageProvider`.
 
 Replace everything in that file with the following template and mind the placeholders:
 
@@ -73,7 +73,7 @@ class `FILE NAME WITHOUT DIACRITICS`(dataGenerator: DataGenerator) : NuclearLang
 
 Now you can add that new language provider to the list of language providers in `NuclearLanguageProviders` by appending your newly created file like the other existing providers.
 
-Assuming you following everything correctly: Congratulations, you successfully added a new language provider for your language.
+Assuming you followed everything correctly: Congratulations, you successfully added a new language provider for your language.
 
 You can now move on to adding and editing translations for the mod.
 
@@ -89,9 +89,9 @@ When execution finished, you can see the output of what's missing for every lang
 
 #### Overriding or adding new translation code
 
-Your language may have different exceptions for auto-generated strings, since auto-generation doesn't always work correctly 100%. In the English language provider, if a string can be auto-generated, it is omitted from the code in the `translate` function.
+Your language may have different exceptions for auto-generated strings. Because of this, auto-generation doesn't always work correctly 100%. In the English language provider, if a string can be auto-generated, it is omitted from the code in the `translate` function.
 However, you can override these auto-generated strings by adding lines of code to the `translate` function that add the correct translation explicitly.
-You just add a line like the surrounding ones.
+You just add a line similar to the surrounding ones.
 
 Example:
 

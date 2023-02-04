@@ -89,7 +89,7 @@ If everything worked this far, great! You successfully uploaded your changes to 
 ### Opening a pull request
 
 GitHub already has [pretty good documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) on how to do that, so follow that.
-Now, just wait for your changes to be reviewed, and please be ready to accept proposed changes to your commits and actively following your conversation until your pull request gets accepted. If you made any mistakes, we'll handle them together from there.
+Now, just wait for your changes to be reviewed, and please be ready to accept proposed changes to your commits and actively follow the conversation until your pull request gets accepted. If you made any mistakes, we'll handle them together from there.
 To make that process easier, please enable the "Allow edits from maintainers" option when creating a pull request.
 
 Thanks for contributing!

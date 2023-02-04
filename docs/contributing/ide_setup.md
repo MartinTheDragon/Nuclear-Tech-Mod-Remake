@@ -15,7 +15,7 @@ Simply download the [IntelliJ](https://www.jetbrains.com/idea/download) installe
 
 Assuming you are on IntelliJ's welcome screen, click on 'Get from Version Control' or 'Get from VCS', then with 'Repository URL' mode (default), put <https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake> into the URL input field. Make sure 'Git' is selected in the dropdown-menu above and that you selected the directory you want, then hit 'Clone'.
 
-IntelliJ should now work on fetching all the needed dependencies to get you up and running (can take a few dozen minutes depending on internet speed).
+IntelliJ should now work on fetching all the needed dependencies to get you up and running (can take up to a few dozen minutes depending on internet speed).
 When that's done, check if the correct JDK is being used by clicking the cog icon in the top right, selecting 'Project Structure...', and seeing if a JDK 17 shows up for 'SDK'. If not, click on the dropdown-menu, hover over 'Add SDK', then select 'Download JDK...', and download a JDK 17.
 
 If anything fails during this or any later steps, please contact me via [Discord](../../README.md#discord) or by starting a discussion on GitHub. Maybe there'll be a troubleshooting page later on for common issues.
@@ -26,4 +26,4 @@ Run configurations tell IntelliJ and Gradle what to do when you hit the play but
 
 For IntelliJ, ForgeGradle (the Gradle plugin for developing mods with Forge) has a builtin Gradle task called `genIntellijRuns`. You can run it by opening the Gradle tool window from the right sidebar (the elephant icon), then finding it under `Nuclear Tech Mod` > `Tasks` > `forgegradle runs`, and finally double-clicking `genIntellijRuns`.
 
-When the task execution finished, you should now see the options `runClient`, `runData` and `runServer` in the dropdown-menu to the top-right next to the play button. You'll need those for [testing your changes](testing.md).
+When the task execution finished, you should see the options `runClient`, `runData` and `runServer` in the dropdown-menu to the top-right next to the play button. You'll need those for [testing your changes](testing.md).

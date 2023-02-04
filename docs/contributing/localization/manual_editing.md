@@ -3,7 +3,7 @@
 Contributions with manually-written JSON files are accepted for the sake of simplicity and ease-of-use. If you feel comfortable enough with working with code editors and have some knowledge in programming, maybe you could [try out data generation](data_generation.md) instead. Otherwise, you're at the right place.
 
 First of all, [check if your language is already supported](LOCALIZATION.md#currently-supported-languages). If it is, you may want to [edit mistakes or add new strings](#editing-an-existing-language-file). Otherwise, [add a new language file](#adding-a-new-language-file).
-Before proceeding though, you'll have [download the repository as a ZIP archive from GitHub](https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/archive/refs/heads/1.18.zip) and extract it (or get the source code in any other way you're familiar with).
+Before proceeding though, you'll have to [download the repository as a ZIP archive from GitHub](https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/archive/refs/heads/1.18.zip) and extract it (or get the source code in any other way you're familiar with).
 
 ### Adding a new language file
 
