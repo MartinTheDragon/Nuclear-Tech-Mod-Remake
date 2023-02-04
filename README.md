@@ -15,9 +15,22 @@ But you can still test the current state of the mod by either building the mod y
 
 For a (non-exhaustive) list of who worked on this project and the original, look at the [credits file](CREDITS.md).
 
+### Contributing
+
+Want to report a bug? Translate the mod? Make code contributions? We are interested! The [CONTRIBUTING.md](CONTRIBUTING.md) file contains the information for you.
+
 ### License
 
 This project is licensed under the GNU Lesser General Public License v3. You should have received a copy of the GNU Lesser General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 Make sure usages and modifications comply with the license, and with the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula).
+
+### Privacy
+
+The mod won't spy on you or collect any personal data. That would be unethical (yes I'm looking at you, Microsoft).
+However, it uses the Forge version checker, which fetches a JSON file with update information from <https://nucleartech.martinthedragon.at/raw/update.json>.
+Any requests made to this domain and its subdomains will increment a country-specific counter, depending on the IP-address.
+The IP-address isn't logged for me to see (which doesn't legally count as personally-identifying information anyway), and only the counter is kept for (very) rough statistics on how many people play the mod each day.
+It is just a side effect of providing an update-checker service.
+If you wish to not use that service for the sake of your privacy, you are free to modify the mod as per license by removing the line beginning with `updateJSONURL` in the [mods.toml](src/main/resources/META-INF/mods.toml) file and compiling your own version (Forge also uses that version checker system by the way).

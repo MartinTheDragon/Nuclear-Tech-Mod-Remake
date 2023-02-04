@@ -7,6 +7,7 @@ This little document is to make sure Martin doesn't keep on forgetting some thin
 ### Before releasing
 
 - Update the bug report issue template to contain the new version (should be in the version changing commit)
+- Update the completion rates in [the list of supported languages](../contributing/localization/LOCALIZATION.md#currently-supported-languages)
 
 ### When releasing
 
