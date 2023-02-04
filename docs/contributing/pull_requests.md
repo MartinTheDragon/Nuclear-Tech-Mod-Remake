@@ -10,6 +10,19 @@ All the commands written here assume that you have a terminal or command line op
 
 If you don't want to use a CLI, you can use [IntelliJ's builtin Git support](https://www.jetbrains.com/help/idea/commit-and-push-changes.html) instead. It works really well and is pretty straightforward.
 
+### Before committing
+
+Your local copy of the project may not be up-to-date anymore. Therefore, you should first rebase by running the following command:
+
+```bash
+# It might be good idea to first perform a dry run to know what would be done...
+# git pull --rebase --dry-run
+git pull --rebase
+```
+
+If the above command errors, likely someone else worked on the same file you did and there is now a merge conflict you'll have to resolve.
+If you are comfortable merging, well, you'll already know what to do. Otherwise, skip this step
+
 ### Committing and saving your changes
 
 #### What are commits?
