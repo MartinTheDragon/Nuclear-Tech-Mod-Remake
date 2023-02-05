@@ -3,9 +3,9 @@
 It is currently being developed for the 1.18.2 Minecraft version.
 Everything is still subject to change, even the speed at which blocks get mined. This mod is not ready for general use yet and everything is work in progress.
 
-### Development builds
+### Development Builds
 
-But you can still test the current state of the mod by either building the mod yourself, or downloading one of the [occasional releases published on GitHub](https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases). Finding and reporting bugs is encouraged.
+But you can still test the current state of the mod by either [building the mod yourself](#compilation-instructions), or downloading one of the [occasional releases published on GitHub](https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases). Finding and reporting bugs is encouraged.
 
 ### Discord
 
@@ -18,6 +18,45 @@ For a (non-exhaustive) list of who worked on this project and the original, look
 ### Contributing
 
 Want to report a bug? Translate the mod? Make code contributions? We are interested! The [CONTRIBUTING.md](CONTRIBUTING.md) file contains the information for you.
+
+### Compilation Instructions
+
+If you want to be on the razor's edge of things instead of just cutting edge, you can also compile your own versions of the mod.
+
+1. Fetch the source code
+
+   For people who don't have a Git client:
+
+   1. [Download the source code](https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/archive/refs/heads/1.18.zip)
+   2. Extract the ZIP-archive
+
+2. Open a terminal interface or [command line](https://www.freecodecamp.org/news/command-line-commands-cli-tutorial/) inside the root directory of the project
+3. Make sure you have JDK 17 (not JRE) installed and the `JAVA_HOME` and `PATH` [environment variables set up](https://www3.ntu.edu.sg/home/ehchua/programming/howto/Environment_Variables.html)
+
+   You can do so by entering this command:
+
+   ```bash
+   java -version
+   ```
+
+   The output should look something like this:
+
+   ```
+   openjdk version "17.0.6" 2023-01-17
+   OpenJDK Runtime Environment (build 17.0.6+10)
+   OpenJDK 64-Bit Server VM (build 17.0.6+10, mixed mode)
+   ```
+
+4. Enter the following command to compile the project:
+
+   ```bash
+   # On Windows, you may have to use a \ instead of a /
+   ./gradlew build
+   ```
+
+5. Wait for compilation to finish (may take up to a few dozen minutes, heavily depending on internet speed)
+6. You may now find a freshly-compiled snapshot jar under `build/libs` (only the non-slim and non-API version works directly as a mod).
+7. Install the jar like any other mod
 
 ### License
 
