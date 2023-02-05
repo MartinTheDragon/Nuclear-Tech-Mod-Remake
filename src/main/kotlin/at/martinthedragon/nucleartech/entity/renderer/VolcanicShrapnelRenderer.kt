@@ -5,6 +5,7 @@ import at.martinthedragon.nucleartech.rendering.NuclearModelLayers
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Vector3f
 import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -22,7 +23,7 @@ class VolcanicShrapnelRenderer(context: EntityRendererProvider.Context) : Shrapn
         matrix.scale(3F, 3F, 3F) // scale up volcanic shrapnel
 
         val consumer = buffers.getBuffer(shrapnelModel.renderType(getTextureLocation(shrapnel)))
-        shrapnelModel.renderToBuffer(matrix, consumer, light, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F)
+        shrapnelModel.renderToBuffer(matrix, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F)
 
         matrix.popPose()
     }

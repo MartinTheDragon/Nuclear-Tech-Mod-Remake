@@ -13,6 +13,7 @@ import net.minecraft.client.model.geom.PartPose
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition
 import net.minecraft.client.model.geom.builders.MeshDefinition
+import net.minecraft.client.renderer.LightTexture
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.EntityRenderer
@@ -34,7 +35,7 @@ open class ShrapnelRenderer(context: EntityRendererProvider.Context) : EntityRen
         matrix.mulPose(rotationVector.rotationDegrees((shrapnel.tickCount % 360) * 10 + partialTicks))
 
         val consumer = buffers.getBuffer(shrapnelModel.renderType(getTextureLocation(shrapnel)))
-        shrapnelModel.renderToBuffer(matrix, consumer, light, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F)
+        shrapnelModel.renderToBuffer(matrix, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F)
 
         matrix.popPose()
     }
