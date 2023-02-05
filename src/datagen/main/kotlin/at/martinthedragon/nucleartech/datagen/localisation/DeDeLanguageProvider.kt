@@ -1200,6 +1200,13 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "Betrachte eine Maschine für Info über Effekte")
         add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "Kompatibilität mit der Maschine ist unbekannt")
 
+        add(LangKeys.VERSION_CHECKER_ANNOUNCEMENT, "-- NTM Versionschecker --")
+        add(LangKeys.VERSION_CHECKER_BLEEDING_EDGE, "Version ist top aktuell!")
+        add(LangKeys.VERSION_CHECKER_CHANGES_LIST, "Kurzliste der Änderungen:")
+        add(LangKeys.VERSION_CHECKER_CUTTING_EDGE, "Version ist auf dem neuesten Stand der Beta!")
+        add(LangKeys.VERSION_CHECKER_UPDATE, "Es gibt eine aktuellere Version von NTM!")
+        add(LangKeys.VERSION_CHECKER_VIEW_RELEASES, "Klicke hier um zur Veröffentlichungs-Seite zu gehen!")
+
         add(LangKeys.VOLCANO_EXTINGUISHING, "SELBSTLÖSCHEND")
         add(LangKeys.VOLCANO_GROWING, "WACHSEND")
         add(LangKeys.VOLCANO_NOT_EXTINGUISHING, "NICHT SELBSTLÖSCHEND")

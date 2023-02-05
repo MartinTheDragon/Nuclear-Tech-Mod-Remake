@@ -5,9 +5,13 @@ import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
 import com.mojang.logging.LogUtils
 import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.fml.ModList
 import net.minecraftforge.fml.ModLoadingContext
+import net.minecraftforge.fml.VersionChecker
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.forgespi.language.IModInfo
 import org.slf4j.Logger
+import kotlin.jvm.optionals.getOrNull
 
 @Mod(NuclearTech.MODID)
 class NuclearTech {
@@ -23,6 +27,11 @@ class NuclearTech {
 
         val polaroidID: Int get() = NTechItems.polaroid.get().id + 1
         val polaroidBroken: Boolean get() = polaroidID == 11
+
+        val modInfo: IModInfo? by lazy { ModList.get().getModContainerById(MODID).getOrNull()?.modInfo }
+        val currentVersion: String? by lazy { modInfo?.version?.toString() }
+        val isSnapshot: Boolean by lazy { currentVersion?.contains("snapshot") == true }
+        val versionCheckResult: VersionChecker.CheckResult? by lazy { modInfo?.let{ VersionChecker.getResult(it) }}
     }
 
     @Suppress("unused", "SpellCheckingInspection")

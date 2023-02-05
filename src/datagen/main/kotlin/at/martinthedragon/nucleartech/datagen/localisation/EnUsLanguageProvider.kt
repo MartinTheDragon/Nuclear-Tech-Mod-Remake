@@ -1161,6 +1161,13 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "View a machine for info about effects")
         add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "Compatibility with the machine is unknown")
 
+        add(LangKeys.VERSION_CHECKER_ANNOUNCEMENT, "-- NTM Version Checker --")
+        add(LangKeys.VERSION_CHECKER_BLEEDING_EDGE, "Running on the bleeding edge!")
+        add(LangKeys.VERSION_CHECKER_CHANGES_LIST, "Short list of changes:")
+        add(LangKeys.VERSION_CHECKER_CUTTING_EDGE, "Running on the cutting edge of beta!")
+        add(LangKeys.VERSION_CHECKER_UPDATE, "There's a newer version of NTM available!")
+        add(LangKeys.VERSION_CHECKER_VIEW_RELEASES, "Click here to get to the releases page!")
+
         add(LangKeys.VOLCANO_EXTINGUISHING, "DOES EXTINGUISH")
         add(LangKeys.VOLCANO_GROWING, "DOES GROW")
         add(LangKeys.VOLCANO_NOT_EXTINGUISHING, "DOES NOT EXTINGUISH")

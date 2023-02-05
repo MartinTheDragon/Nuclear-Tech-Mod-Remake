@@ -21,6 +21,7 @@ object LangKeys {
     const val CAT_SIREN_TRACK = "siren_track"
     const val CAT_RBMK = "rbmk"
     const val CAT_UPGRADE = "upgrade"
+    const val CAT_VERSION_CHECKER = "version_checker"
     const val CAT_VOLCANO = "volcano"
     const val CAT_WORD = "word"
 
@@ -254,6 +255,13 @@ object LangKeys {
     val UPGRADE_WARN_NOT_A_MACHINE = of(CAT_UPGRADE, "warn.not_a_machine")
     val UPGRADE_WARN_VIEW_MACHINE = of(CAT_UPGRADE, "warn.view_machine")
     val UPGRADE_WARN_UNKNOWN_COMPATIBILITY = of(CAT_UPGRADE, "warn.unknown_compatibility")
+
+    val VERSION_CHECKER_ANNOUNCEMENT = of(CAT_VERSION_CHECKER, "announcement")
+    val VERSION_CHECKER_BLEEDING_EDGE = of(CAT_VERSION_CHECKER, "bleeding_edge")
+    val VERSION_CHECKER_CHANGES_LIST = of(CAT_VERSION_CHECKER, "changes_list")
+    val VERSION_CHECKER_CUTTING_EDGE = of(CAT_VERSION_CHECKER, "cutting_edge")
+    val VERSION_CHECKER_UPDATE = of(CAT_VERSION_CHECKER, "update")
+    val VERSION_CHECKER_VIEW_RELEASES = of(CAT_VERSION_CHECKER, "view_releases")
 
     val VOLCANO_EXTINGUISHING = of(CAT_VOLCANO, "extinguishing")
     val VOLCANO_GROWING = of(CAT_VOLCANO, "growing")

@@ -39,8 +39,10 @@ import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.VersionChecker
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
@@ -94,6 +96,10 @@ object RegistriesAndLifecycle {
     fun commonSetup(event: FMLCommonSetupEvent) {
         NuclearTech.LOGGER.info("Hello World!")
 
+        if (NuclearTech.isSnapshot) {
+            NuclearTech.LOGGER.warn("Running a bootleg snapshot version!")
+        }
+
         NuclearTech.LOGGER.debug("Initializing plugins...")
         PluginEvents.init()
         HazardRegistry.registerItems()
@@ -107,6 +113,25 @@ object RegistriesAndLifecycle {
         NTechFluids.registerDispenserBehaviour()
 
         NTechNetFilters.performTheFunny()
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    @SubscribeEvent @JvmStatic
+    fun serverSetup(event: FMLDedicatedServerSetupEvent) {
+        val versionCheckResult = NuclearTech.versionCheckResult
+        when (versionCheckResult?.status) {
+            VersionChecker.Status.PENDING, VersionChecker.Status.FAILED, VersionChecker.Status.UP_TO_DATE, null -> {}
+            VersionChecker.Status.BETA, VersionChecker.Status.AHEAD -> {
+                NuclearTech.LOGGER.info(if (NuclearTech.isSnapshot) "Running on the bleeding edge!" else "Running on the cutting edge of beta!")
+            }
+            VersionChecker.Status.OUTDATED, VersionChecker.Status.BETA_OUTDATED -> {
+                val updateMessage = StringBuilder()
+                updateMessage.appendLine("Hello server administrator! There's a newer version of NTM available: ${versionCheckResult.target}")
+                if (versionCheckResult.changes.isNotEmpty()) updateMessage.appendLine("List of changes:")
+                for (change in versionCheckResult.changes.values.flatMap { it.split("\r\n", "\n", "\r") }) updateMessage.appendLine(change.prependIndent())
+                NuclearTech.LOGGER.info(updateMessage.toString())
+            }
+        }
     }
 
     @SubscribeEvent @JvmStatic
