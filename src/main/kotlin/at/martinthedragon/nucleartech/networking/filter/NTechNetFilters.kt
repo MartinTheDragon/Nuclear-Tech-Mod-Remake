@@ -6,8 +6,8 @@ import com.google.common.collect.ImmutableMap
 import net.minecraft.network.Connection
 import net.minecraftforge.network.filters.NetworkFilters
 import net.minecraftforge.network.filters.VanillaPacketFilter
-import org.lwjgl.system.MemoryUtil
 import sun.misc.Unsafe
+import java.lang.reflect.Modifier
 import java.util.function.Function
 
 // no it's not censorship...
@@ -52,10 +52,21 @@ object NTechNetFilters {
         NuclearTech.LOGGER.debug("Successfully injected network filters")
     }
 
-    // using someone else's code in evil ways because of laziness? hell yea!
     private fun getUnsafeInstance(): Unsafe? {
-        val method = MemoryUtil::class.java.getDeclaredMethod("getUnsafeInstance")
-        method.isAccessible = true
-        return method.invoke(null) as? Unsafe
+        for (field in Unsafe::class.java.declaredFields) {
+            if (field.type != Unsafe::class.java)
+                continue
+
+            val modifiers = field.modifiers
+            if (!Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers))
+                continue
+
+            try {
+                field.isAccessible = true
+                return field.get(null) as Unsafe
+            } catch (ignored: Exception) {}
+        }
+
+        return null
     }
 }
