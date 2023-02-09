@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases",
   "promos": {
-    "1.18.2-latest": "0.0.19.0",
+    "1.18.2-latest": "0.0.19.1",
     "1.18.1-latest": "0.0.11.0"
   },
   "1.18.2": {
+    "0.0.19.1": "Hotfix for servers, update notice in chat",
     "0.0.19.0": "Centrifuge, volcanoes, Polish translation and fixes",
     "0.0.18.0": "RBMK, fluid ducts and fixes",
     "0.0.17.0": "Oil wells, capes, new multi-block IO implementation, better fallout config, newer fallout calculation and fixes",
