@@ -11,7 +11,7 @@ Languages are supported with data generators by default. Completion rates get up
 
 - English (US): 100%
 - German (author's translation): 100%
-- Polish: 100%
+- Polish: 99.5%
 
 #### Languages I'd like to support
 
