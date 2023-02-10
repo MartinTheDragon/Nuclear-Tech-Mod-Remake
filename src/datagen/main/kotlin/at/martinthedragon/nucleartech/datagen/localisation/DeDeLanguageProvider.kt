@@ -928,6 +928,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechFluids.volcanicLava.bucket, "Vulkanische-Lava-Eimer")
 
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Atomexplosionserzeuger")
+        addItemDesc(NTechItems.creativeNuclearExplosionSpawner, "Hergestellt von CakeCo\nEast Spawn Rd 2, 68-419 RetroMC")
+
 
         addEntityType(EntityTypes.nuclearExplosion, "Nukleare Explosion")
         addEntityType(EntityTypes.mushroomCloud, "Atompilz")

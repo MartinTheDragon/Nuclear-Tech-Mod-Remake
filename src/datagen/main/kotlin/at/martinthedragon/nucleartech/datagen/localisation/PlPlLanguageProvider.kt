@@ -143,8 +143,9 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.schrabidateAnvil, "Kowadło z Schrabidanu Żelaznego")
         addBlock(NTechBlocks.dineutroniumAnvil, "Dineutronowe Kowadło")
         addBlock(NTechBlocks.murkyAnvil, "Mroczne Kowadło")
-        addBlock(NTechBlocks.coatedCable, "Pokryty Kabel z Czerwonej Miedzi")
-        addBlock(NTechBlocks.coatedUniversalFluidDuct, "Pokryta Uniwersalna Rura Płynu")
+
+        addBlock(NTechBlocks.decoRbmkBlock, "Blok Dekoracyjny RBMK")
+        addBlock(NTechBlocks.decoRbmkSmoothBlock, "Gładki Blok Dekoracyjny RBMK")
 
         addBlock(NTechBlocks.rbmkColumn, "Część Kolumny RBMK")
         addBlock(NTechBlocks.rbmkRod, "Pręt Paliwowy RBMK")
@@ -167,6 +168,9 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.rbmkDebris, "Gruz RBMK")
         addBlock(NTechBlocks.rbmkBurningDebris, "Ognisty Gruz RBMK")
         addBlock(NTechBlocks.rbmkRadioactiveDebris, "Tlący Gruz RBMK")
+
+        addBlock(NTechBlocks.coatedCable, "Pokryty Kabel z Czerwonej Miedzi")
+        addBlock(NTechBlocks.coatedUniversalFluidDuct, "Pokryta Uniwersalna Rura Płynu")
 
         addBlock(NTechBlocks.littleBoy, "Little Boy")
         addBlock(NTechBlocks.fatMan, "Fat Man")
@@ -220,6 +224,20 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItemDesc(NTechItems.fiberglassSheet, "Wysoki we włókno, wysoki w szkło. Wszystko, czego potrzebuje ludzkie ciało.")
         addItem(NTechItems.asbestosSheet, "Arkusz Azbestu")
         addItemDesc(NTechItems.asbestosSheet, "§o„Wypełniony życiem, zwątpieniem w siebie i azbestem. To przychodzi z powietrzem.“")
+
+        addItem(NTechItems.lesserAustraliumBillet, "Lepsza Pastylka Australium")
+        addItem(NTechItems.greaterAustraliumBillet, "Gorsza Pastylka Australium")
+        addItem(NTechItems.po210BeBillet, "Pastylka Po210Be")
+        addItem(NTechItems.ra226BeBillet, "Pastylka Ra226Be")
+        addItem(NTechItems.pu238BeBillet, "Pastylka Pu238Be")
+        addItem(NTechItems.zirconiumBillet, "Pastylka Cyrkonu")
+        addItem(NTechItems.bismuthZfbBillet, "Pastylka Bizmutu ZFB")
+        addItem(NTechItems.pu241ZfbBillet, "Pastylka Plutonu-241 ZFB")
+        addItem(NTechItems.reactorGradeAmericiumZfbBillet, "Pastylka Ameryku ZFB Klasy Reaktora")
+        addItem(NTechItems.yharoniteBillet, "Pastylka Yharonitu")
+        addItem(NTechItems.flashgoldBillet, "Pastylka Flashgold")
+        addItem(NTechItems.flashleadBillet, "Pastylka Flashlead")
+        addItemDesc(NTechItems.flashleadBillet, "Sieć się rozpada, tworząc reakcje anihilacji materii i antymaterii,\npowodując tworzenie pionów, które się rozpadają na miony,\nkatalizujące fuzję jąder nuklearnych, tworzących nowy element.\nPostaraj się nadążyć.")
 
         addItem(NTechItems.mercuryDroplet, "Kropla Rtęci")
         addItem(NTechItems.mercuryBottle, "Butelka Rtęci")
@@ -833,6 +851,8 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechFluids.volcanicLava.bucket, "Wiadro Wulkanicznej Lawy")
 
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Kreator Eksplozji Nuklearnych")
+        addItemDesc(NTechItems.creativeNuclearExplosionSpawner, "Wyprodukowane przez CakeCo\nEast Spawn Rd 2, 68-419 RetroMC")
+
 
         addEntityType(EntityTypes.nuclearExplosion, "Eksplozja Nuklearna")
         addEntityType(EntityTypes.mushroomCloud, "Grzyb Atomowy")
@@ -1269,14 +1289,14 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMaterial(whitePhosphorus, "Białego Fosforu")
         addMaterial(yellowcake, "Yellowcake")
     }
-    override val spawnEggFormat = "Jaja przyzywającego %s"
+    override val spawnEggFormat = "Jajo przyzywające %s"
 
     override val oreFormat = "Złoże %s"
     override val deepOreFormat = "Łupkowe Złoże %s"
     override val blockFormat = "Blok %s"
     override val rawFormat = "Surowe %s"
     override val ingotFormat = "Sztabka %s"
-    override val billetFormat = null
+    override val billetFormat = "Pastylka %s"
     override val nuggetFormat = "Bryłka z %s"
     override val crystalsFormat = "Kryształ z %s"
     override val powderFormat = "Pył %s"
