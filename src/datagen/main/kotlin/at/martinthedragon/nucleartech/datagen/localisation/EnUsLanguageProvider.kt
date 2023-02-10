@@ -868,6 +868,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechFluids.volcanicLava.bucket, "Volcanic Lava Bucket")
 
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Nuclear Explosion Spawner")
+        addItemDesc(NTechItems.creativeNuclearExplosionSpawner, "Manufactured by CakeCo\nEast Spawn Rd 2, 68-419 RetroMC")
 
         addEntityType(EntityTypes.nuclearExplosion, "Nuclear Explosion")
         addEntityType(EntityTypes.mushroomCloud, "Mushroom Cloud")

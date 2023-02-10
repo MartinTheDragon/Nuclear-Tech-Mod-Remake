@@ -8,12 +8,11 @@ import net.minecraft.client.Minecraft
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 // more like destructive
-class CreativeNuclearExplosionSpawnerItem(properties: Properties) : Item(properties) {
+class CreativeNuclearExplosionSpawnerItem(properties: Properties) : AutoTooltippedItem(properties) {
     override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val item = player.getItemInHand(hand)
 
