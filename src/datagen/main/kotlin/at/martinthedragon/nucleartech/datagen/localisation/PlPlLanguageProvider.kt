@@ -1141,6 +1141,13 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "Wejdź w ekran maszyny, by zobaczyć efekty")
         add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "Kompatybilność z tą maszyną jest niewiadoma")
 
+        add(LangKeys.VERSION_CHECKER_ANNOUNCEMENT, "-- Sprawdzacz wersji NTM --")
+        add(LangKeys.VERSION_CHECKER_BLEEDING_EDGE, "Zainstalowana jest najnowsza wersja!")
+        add(LangKeys.VERSION_CHECKER_CHANGES_LIST, "Krótka lista zmian:")
+        add(LangKeys.VERSION_CHECKER_CUTTING_EDGE, "Zainstalowana jest najnowsza wersja beta!")
+        add(LangKeys.VERSION_CHECKER_UPDATE, "Jest nowsza wersja NTM do zainstalowania!")
+        add(LangKeys.VERSION_CHECKER_VIEW_RELEASES, "Kliknij tutaj aby przejść do strony internetowej wersji!")
+
         add(LangKeys.VOLCANO_EXTINGUISHING, "GAŚNIE")
         add(LangKeys.VOLCANO_GROWING, "ROŚNIE")
         add(LangKeys.VOLCANO_NOT_EXTINGUISHING, "NIE GAŚNIE")
@@ -1220,7 +1227,7 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMaterial(niobium, "Niobu")
         addMaterial(niter, "Saletry")
         addMaterial(nuclearWaste, "Odpadów Nuklearnych")
-        addMaterial(osmiridium, "Osmiriditu")
+        addMaterial(osmiridium, "Osmirydu")
         addMaterial(plutonium238, "Plutonu-238")
         addMaterial(plutonium239, "Plutonu-239")
         addMaterial(plutonium240, "Plutonu-240")
