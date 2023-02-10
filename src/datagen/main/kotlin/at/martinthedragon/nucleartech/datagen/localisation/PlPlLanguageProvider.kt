@@ -1146,7 +1146,7 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.VERSION_CHECKER_CHANGES_LIST, "Krótka lista zmian:")
         add(LangKeys.VERSION_CHECKER_CUTTING_EDGE, "Zainstalowana jest najnowsza wersja beta!")
         add(LangKeys.VERSION_CHECKER_UPDATE, "Jest nowsza wersja NTM do zainstalowania!")
-        add(LangKeys.VERSION_CHECKER_VIEW_RELEASES, "Kliknij tutaj aby przejść do strony internetowej wersji!")
+        add(LangKeys.VERSION_CHECKER_VIEW_RELEASES, "Kliknij tutaj, aby przejść do strony internetowej wersji!")
 
         add(LangKeys.VOLCANO_EXTINGUISHING, "GAŚNIE")
         add(LangKeys.VOLCANO_GROWING, "ROŚNIE")
