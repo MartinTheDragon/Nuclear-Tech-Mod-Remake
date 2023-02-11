@@ -48,15 +48,18 @@ object ClientEventSubscribers {
         NTechCapes.renderCapePost(event.renderer)
     }
 
+    private var didVersionCheck = false
+
     @SubscribeEvent @JvmStatic
     fun clientVersionCheckChatMessage(event: EntityJoinWorldEvent) {
         val entity: Entity = event.entity
-        if (entity === Minecraft.getInstance().player) {
+        if (!didVersionCheck && entity === Minecraft.getInstance().player) {
             val message = createVersionUpdateChatMessage()
             message?.let {
                 entity.displayClientMessage(LangKeys.VERSION_CHECKER_ANNOUNCEMENT.gold(), false)
                 entity.displayClientMessage(it, false)
             }
+            didVersionCheck = true
         }
     }
 
