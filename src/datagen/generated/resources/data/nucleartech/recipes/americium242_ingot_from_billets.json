@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "americium242_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:americium242_billet"
+    },
+    {
+      "item": "nucleartech:americium242_billet"
+    },
+    {
+      "item": "nucleartech:americium242_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:americium242_ingot",
+    "count": 2
+  }
+}

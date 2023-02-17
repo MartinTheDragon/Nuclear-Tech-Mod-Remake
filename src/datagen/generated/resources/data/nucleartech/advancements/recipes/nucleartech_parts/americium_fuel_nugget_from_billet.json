@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:americium_fuel_nugget_from_billet"
+    ]
+  },
+  "criteria": {
+    "has_americium_fuel_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:americium_fuel_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:americium_fuel_nugget_from_billet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_americium_fuel_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

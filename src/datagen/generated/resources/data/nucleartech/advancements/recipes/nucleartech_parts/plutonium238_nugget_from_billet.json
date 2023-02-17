@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium238_nugget_from_billet"
+    ]
+  },
+  "criteria": {
+    "has_plutonium238_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:plutonium238_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium238_nugget_from_billet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plutonium238_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

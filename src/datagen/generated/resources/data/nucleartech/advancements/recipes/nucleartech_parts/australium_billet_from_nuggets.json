@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:australium_billet_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_australium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/australium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:australium_billet_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_australium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

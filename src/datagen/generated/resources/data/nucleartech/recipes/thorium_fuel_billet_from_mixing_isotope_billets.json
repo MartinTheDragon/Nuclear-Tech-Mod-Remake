@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thorium_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:thorium232_billet"
+    },
+    {
+      "item": "nucleartech:thorium232_billet"
+    },
+    {
+      "item": "nucleartech:thorium232_billet"
+    },
+    {
+      "item": "nucleartech:thorium232_billet"
+    },
+    {
+      "item": "nucleartech:thorium232_billet"
+    },
+    {
+      "item": "nucleartech:uranium233_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:thorium_fuel_billet",
+    "count": 6
+  }
+}

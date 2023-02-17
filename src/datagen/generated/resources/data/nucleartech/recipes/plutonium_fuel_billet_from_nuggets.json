@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plutonium_fuel_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/plutonium_fuel"
+    }
+  },
+  "result": {
+    "item": "nucleartech:plutonium_fuel_billet"
+  }
+}

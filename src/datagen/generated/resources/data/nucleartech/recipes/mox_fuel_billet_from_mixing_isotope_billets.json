@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mox_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:uranium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:uranium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_plutonium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:mox_fuel_billet",
+    "count": 3
+  }
+}

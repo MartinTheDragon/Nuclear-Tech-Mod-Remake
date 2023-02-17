@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "technetium99_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:technetium99_billet"
+    },
+    {
+      "item": "nucleartech:technetium99_billet"
+    },
+    {
+      "item": "nucleartech:technetium99_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:technetium99_ingot",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bismuth_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/bismuth"
+    }
+  },
+  "result": {
+    "item": "nucleartech:bismuth_billet",
+    "count": 3
+  }
+}

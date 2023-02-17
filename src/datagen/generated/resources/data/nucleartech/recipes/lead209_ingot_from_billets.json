@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "lead209_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:lead209_billet"
+    },
+    {
+      "item": "nucleartech:lead209_billet"
+    },
+    {
+      "item": "nucleartech:lead209_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:lead209_ingot",
+    "count": 2
+  }
+}

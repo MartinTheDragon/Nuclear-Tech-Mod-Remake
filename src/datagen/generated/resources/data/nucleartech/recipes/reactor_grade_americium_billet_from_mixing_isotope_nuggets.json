@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "reactor_grade_americium_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:americium241_nugget"
+    },
+    {
+      "item": "nucleartech:americium241_nugget"
+    },
+    {
+      "item": "nucleartech:americium242_nugget"
+    },
+    {
+      "item": "nucleartech:americium242_nugget"
+    },
+    {
+      "item": "nucleartech:americium242_nugget"
+    },
+    {
+      "item": "nucleartech:americium242_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:reactor_grade_americium_billet"
+  }
+}

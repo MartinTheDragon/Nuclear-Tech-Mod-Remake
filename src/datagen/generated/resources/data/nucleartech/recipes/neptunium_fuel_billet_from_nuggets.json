@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "neptunium_fuel_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:neptunium_fuel_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:neptunium_fuel_billet"
+  }
+}

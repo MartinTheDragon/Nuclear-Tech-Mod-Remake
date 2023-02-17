@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "technetium99_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:technetium99_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:technetium99_nugget",
+    "count": 6
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "australium_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/australium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:australium_billet",
+    "count": 3
+  }
+}

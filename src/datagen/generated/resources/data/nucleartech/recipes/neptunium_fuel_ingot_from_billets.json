@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "neptunium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:neptunium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:neptunium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:neptunium_fuel_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:neptunium_fuel_ingot",
+    "count": 2
+  }
+}

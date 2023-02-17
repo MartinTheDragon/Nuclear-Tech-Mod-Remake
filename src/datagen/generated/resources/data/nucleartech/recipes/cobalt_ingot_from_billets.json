@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "cobalt_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/cobalt"
+    },
+    {
+      "tag": "forge:billets/cobalt"
+    },
+    {
+      "tag": "forge:billets/cobalt"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:cobalt_ingot",
+    "count": 2
+  }
+}

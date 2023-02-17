@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "solinium_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/solinium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:solinium_nugget",
+    "count": 6
+  }
+}

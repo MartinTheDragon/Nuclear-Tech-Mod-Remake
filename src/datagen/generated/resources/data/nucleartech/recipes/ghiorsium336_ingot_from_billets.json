@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "ghiorsium336_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:ghiorsium336_billet"
+    },
+    {
+      "item": "nucleartech:ghiorsium336_billet"
+    },
+    {
+      "item": "nucleartech:ghiorsium336_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:ghiorsium336_ingot",
+    "count": 2
+  }
+}

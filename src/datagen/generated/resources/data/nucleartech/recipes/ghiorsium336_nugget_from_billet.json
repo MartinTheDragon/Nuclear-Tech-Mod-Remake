@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "ghiorsium336_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:ghiorsium336_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:ghiorsium336_nugget",
+    "count": 6
+  }
+}

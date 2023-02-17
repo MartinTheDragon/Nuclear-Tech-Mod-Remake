@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:pu238be_billet_from_mixing_isotope_billets_extra"
+    ]
+  },
+  "criteria": {
+    "has_pu238_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:plutonium238_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:pu238be_billet_from_mixing_isotope_billets_extra"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pu238_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

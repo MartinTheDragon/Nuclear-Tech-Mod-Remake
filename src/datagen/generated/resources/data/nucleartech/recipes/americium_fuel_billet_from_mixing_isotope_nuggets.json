@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "americium_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:reactor_grade_americium_nugget"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:americium_fuel_billet"
+  }
+}

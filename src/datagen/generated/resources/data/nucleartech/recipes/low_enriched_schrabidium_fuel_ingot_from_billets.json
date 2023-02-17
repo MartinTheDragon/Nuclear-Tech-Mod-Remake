@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "low_enriched_schrabidium_fuel_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:low_enriched_schrabidium_fuel_ingot",
+    "count": 2
+  }
+}

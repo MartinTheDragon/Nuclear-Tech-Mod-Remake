@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium238_billet_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_uranium238_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:uranium238_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium238_billet_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium238_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "tiny_nuclear_waste",
+  "ingredients": [
+    {
+      "item": "nucleartech:nuclear_waste"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:tiny_nuclear_waste",
+    "count": 9
+  }
+}

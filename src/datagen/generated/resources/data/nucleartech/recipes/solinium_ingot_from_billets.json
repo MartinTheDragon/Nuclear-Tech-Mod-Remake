@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "solinium_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/solinium"
+    },
+    {
+      "tag": "forge:billets/solinium"
+    },
+    {
+      "tag": "forge:billets/solinium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:solinium_ingot",
+    "count": 2
+  }
+}

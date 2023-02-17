@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:billets/actinium",
+    "#forge:billets/americium",
+    "#forge:billets/americium_fuel",
+    "#forge:billets/australium",
+    "#forge:billets/beryllium",
+    "#forge:billets/bismuth",
+    "#forge:billets/cobalt",
+    "#forge:billets/flashgold",
+    "#forge:billets/flashlead",
+    "#forge:billets/ghiorsium",
+    "#forge:billets/greater_australium",
+    "#forge:billets/lesser_australium",
+    "#forge:billets/mox",
+    "#forge:billets/neptunium",
+    "#forge:billets/nuclear_waste",
+    "#forge:billets/plutonium",
+    "#forge:billets/plutonium_fuel",
+    "#forge:billets/polonium",
+    "#forge:billets/schrabidium",
+    "#forge:billets/schrabidium_fuel",
+    "#forge:billets/solinium",
+    "#forge:billets/thorium",
+    "#forge:billets/thorium_fuel",
+    "#forge:billets/uranium",
+    "#forge:billets/uranium_fuel",
+    "#forge:billets/zirconium"
+  ]
+}

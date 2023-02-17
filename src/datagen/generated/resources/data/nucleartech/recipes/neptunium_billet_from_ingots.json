@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "neptunium_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/neptunium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:neptunium_billet",
+    "count": 3
+  }
+}

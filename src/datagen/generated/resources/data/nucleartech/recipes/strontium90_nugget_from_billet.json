@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "strontium90_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:strontium90_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:strontium90_nugget",
+    "count": 6
+  }
+}

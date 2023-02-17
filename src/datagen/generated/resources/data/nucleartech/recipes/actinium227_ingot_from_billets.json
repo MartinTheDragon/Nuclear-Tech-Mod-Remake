@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "actinium227_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/actinium"
+    },
+    {
+      "tag": "forge:billets/actinium"
+    },
+    {
+      "tag": "forge:billets/actinium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:actinium227_ingot",
+    "count": 2
+  }
+}

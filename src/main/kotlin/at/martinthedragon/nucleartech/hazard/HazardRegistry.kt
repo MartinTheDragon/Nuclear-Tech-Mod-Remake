@@ -78,6 +78,7 @@ object HazardRegistry {
     private const val block = 10F
     private const val crystal = block
     private const val wire = ingot
+    private const val billet = 0.5F
 
     private val RADIATION = RadiationHazard()
     private val DIGAMMA = DigammaHazard()
@@ -141,6 +142,7 @@ object HazardRegistry {
             register(TagGroups.naturalPlutonium, HazardData(RADIATION, Pu))
             register(TagGroups.naturalUranium, HazardData(RADIATION, U))
             register(TagGroups.neptunium, HazardData(RADIATION, Np237))
+            register(TagGroups.nuclearWaste, HazardData(RADIATION, Waste))
             register(TagGroups.plutoniumFuel, HazardData(RADIATION, PuF))
             register(TagGroups.polonium, HazardData(RADIATION, Po210).addEntry(HEAT, 3F))
             register(TagGroups.schrabidium, HazardData(RADIATION, Sa326).addEntry(BLINDING, 2.5F))
@@ -189,6 +191,7 @@ object HazardRegistry {
         tagGroup.powder?.let { register(it, modifyEntries(data, powder)) } ?: tagGroup.materialGroup.powder()?.let { register(it, modifyEntries(data, powder)) }
         tagGroup.plate?.let { register(it, modifyEntries(data, plate)) } ?: tagGroup.materialGroup.plate()?.let { register(it, modifyEntries(data, plate)) }
         tagGroup.wire?.let { register(it, modifyEntries(data, wire)) } ?: tagGroup.materialGroup.wire()?.let { register(it, modifyEntries(data, wire)) }
+        tagGroup.billet?.let { register(it, modifyEntries(data, billet)) } ?: tagGroup.materialGroup.billet()?.let { register(it, modifyEntries(data, billet)) }
         return@with
     }
 
@@ -203,6 +206,7 @@ object HazardRegistry {
         materialGroup.powder()?.let { register(it, modifyEntries(data, powder)) }
         materialGroup.plate()?.let { register(it, modifyEntries(data, plate)) }
         materialGroup.wire()?.let { register(it, modifyEntries(data, wire)) }
+        materialGroup.billet()?.let { register(it, modifyEntries(data, billet)) }
         return@with
     }
 

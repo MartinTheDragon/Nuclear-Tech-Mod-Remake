@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:technetium99_ingot_from_billets"
+    ]
+  },
+  "criteria": {
+    "has_technetium99_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:technetium99_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:technetium99_ingot_from_billets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_technetium99_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

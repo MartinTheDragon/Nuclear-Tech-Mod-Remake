@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:schrabidium_ingot_from_billets"
+    ]
+  },
+  "criteria": {
+    "has_schrabidium_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:billets/schrabidium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:schrabidium_ingot_from_billets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_schrabidium_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

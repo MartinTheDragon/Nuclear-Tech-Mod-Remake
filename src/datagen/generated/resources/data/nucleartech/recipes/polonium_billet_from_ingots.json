@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "polonium_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/polonium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:polonium_billet",
+    "count": 3
+  }
+}

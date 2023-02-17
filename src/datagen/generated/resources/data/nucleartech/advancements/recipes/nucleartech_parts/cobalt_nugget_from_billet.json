@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt_nugget_from_billet"
+    ]
+  },
+  "criteria": {
+    "has_cobalt_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:billets/cobalt"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt_nugget_from_billet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobalt_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

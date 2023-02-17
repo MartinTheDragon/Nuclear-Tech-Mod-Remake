@@ -242,6 +242,20 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.asbestosSheet, "Asbestos Sheet")
         addItemDesc(NTechItems.asbestosSheet, "§o„Filled with life, self-doubt and asbestos. That comes with the air.“")
 
+        addItem(NTechItems.lesserAustraliumBillet, "Lesser Australium Billet")
+        addItem(NTechItems.greaterAustraliumBillet, "Greater Australium Billet")
+        addItem(NTechItems.po210BeBillet, "Po210Be Billet")
+        addItem(NTechItems.ra226BeBillet, "Ra226Be Billet")
+        addItem(NTechItems.pu238BeBillet, "Pu238Be Billet")
+        addItem(NTechItems.zirconiumBillet, "Zirconium Billet")
+        addItem(NTechItems.bismuthZfbBillet, "Bismuth ZFB Billet")
+        addItem(NTechItems.pu241ZfbBillet, "Plutonium-241 ZFB Billet")
+        addItem(NTechItems.reactorGradeAmericiumZfbBillet, "Reactor Grade Americium ZFB Billet")
+        addItem(NTechItems.yharoniteBillet, "Yharonite Billet")
+        addItem(NTechItems.flashgoldBillet, "Flashgold Billet")
+        addItem(NTechItems.flashleadBillet, "Flashlead Billet")
+        addItemDesc(NTechItems.flashleadBillet, "The lattice decays, causing antimatter-matter\nannihilation reactions, causing the release of\npions, decaying into muons, catalyzing fusion of\nthe nuclei, creating the new element.\nPlease try to keep up.")
+
         addItem(NTechItems.mercuryDroplet, "Mercury Droplet")
         addItem(NTechItems.mercuryBottle, "Mercury Bottle")
 
@@ -1282,6 +1296,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
     override val blockFormat = "Block of %s"
     override val rawFormat = "Raw %s"
     override val ingotFormat = "%s Ingot"
+    override val billetFormat = "%s Billet"
     override val nuggetFormat = "%s Nugget"
     override val crystalsFormat = "%s Crystals"
     override val powderFormat = "%s Powder"

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "schrabidium_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/schrabidium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:schrabidium_nugget",
+    "count": 6
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:cobalt60_ingot_from_billets"
+    ]
+  },
+  "criteria": {
+    "has_cobalt60_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:cobalt60_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:cobalt60_ingot_from_billets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobalt60_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

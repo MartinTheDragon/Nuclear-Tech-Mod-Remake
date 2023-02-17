@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    },
+    {
+      "tag": "forge:billets/flashgold"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_balefire_gold"
+  }
+}

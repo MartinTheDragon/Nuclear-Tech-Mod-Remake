@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "plutonium_fuel_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/plutonium_fuel"
+    },
+    {
+      "tag": "forge:billets/plutonium_fuel"
+    },
+    {
+      "tag": "forge:billets/plutonium_fuel"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:plutonium_fuel_ingot",
+    "count": 2
+  }
+}

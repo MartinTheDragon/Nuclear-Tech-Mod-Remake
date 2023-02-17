@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "radium226_beryllium_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:radium226_nugget"
+    },
+    {
+      "item": "nucleartech:radium226_nugget"
+    },
+    {
+      "item": "nucleartech:radium226_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:radium226_beryllium_billet"
+  }
+}

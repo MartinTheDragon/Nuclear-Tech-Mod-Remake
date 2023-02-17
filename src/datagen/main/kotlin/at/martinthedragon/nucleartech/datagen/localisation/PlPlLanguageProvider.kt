@@ -1276,6 +1276,7 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
     override val blockFormat = "Blok %s"
     override val rawFormat = "Surowe %s"
     override val ingotFormat = "Sztabka %s"
+    override val billetFormat = null
     override val nuggetFormat = "Bryłka z %s"
     override val crystalsFormat = "Kryształ z %s"
     override val powderFormat = "Pył %s"

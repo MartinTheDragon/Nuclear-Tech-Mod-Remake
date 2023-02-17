@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "mox_fuel_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/mox"
+    }
+  },
+  "result": {
+    "item": "nucleartech:mox_fuel_billet",
+    "count": 3
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "mox_fuel_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/mox"
+    }
+  },
+  "result": {
+    "item": "nucleartech:mox_fuel_billet"
+  }
+}

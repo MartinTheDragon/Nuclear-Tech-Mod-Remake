@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "uranium_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:uranium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:uranium238_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:uranium_billet",
+    "count": 2
+  }
+}

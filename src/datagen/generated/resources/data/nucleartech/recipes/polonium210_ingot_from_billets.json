@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "polonium210_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/polonium"
+    },
+    {
+      "tag": "forge:billets/polonium"
+    },
+    {
+      "tag": "forge:billets/polonium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:polonium210_ingot",
+    "count": 2
+  }
+}

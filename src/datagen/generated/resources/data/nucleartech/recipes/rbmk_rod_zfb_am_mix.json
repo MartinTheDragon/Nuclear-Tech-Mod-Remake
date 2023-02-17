@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_americium_zfb_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_zfb_am_mix"
+  }
+}

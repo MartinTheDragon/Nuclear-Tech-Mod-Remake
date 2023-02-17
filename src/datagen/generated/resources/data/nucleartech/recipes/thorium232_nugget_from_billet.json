@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thorium232_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/thorium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:thorium232_nugget",
+    "count": 6
+  }
+}

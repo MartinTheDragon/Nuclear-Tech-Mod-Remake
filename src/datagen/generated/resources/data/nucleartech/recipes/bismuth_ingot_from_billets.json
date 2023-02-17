@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "bismuth_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/bismuth"
+    },
+    {
+      "tag": "forge:billets/bismuth"
+    },
+    {
+      "tag": "forge:billets/bismuth"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:bismuth_ingot",
+    "count": 2
+  }
+}

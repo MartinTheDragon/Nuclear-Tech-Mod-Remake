@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "lead209_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:lead209_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:lead209_billet",
+    "count": 3
+  }
+}

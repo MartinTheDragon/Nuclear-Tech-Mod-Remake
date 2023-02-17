@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plutonium239_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:plutonium239_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:plutonium239_billet"
+  }
+}

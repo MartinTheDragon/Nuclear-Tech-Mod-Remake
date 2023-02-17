@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "uranium238_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:uranium238_billet"
+    },
+    {
+      "item": "nucleartech:uranium238_billet"
+    },
+    {
+      "item": "nucleartech:uranium238_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:uranium238_ingot",
+    "count": 2
+  }
+}

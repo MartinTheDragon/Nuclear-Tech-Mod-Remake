@@ -254,6 +254,38 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.asbestosSheet, "Asbestbogen")
         addItemDesc(NTechItems.asbestosSheet, "§o\"Gefüllt mit Leben, Selbstzweifel und Asbest. Das kommt mit der Luft.\"")
 
+        addItem(NTechItems.u233Billet, "Uran-233-Billet")
+        addItem(NTechItems.u235Billet, "Uran-235-Billet")
+        addItem(NTechItems.u238Billet, "Uran-238-Billet")
+        addItem(NTechItems.th232Billet, "Thorium-232-Billet")
+        addItem(NTechItems.pu238Billet, "Plutonium-238-Billet")
+        addItem(NTechItems.pu239Billet, "Plutonium-239-Billet")
+        addItem(NTechItems.pu240Billet, "Plutonium-240-Billet")
+        addItem(NTechItems.pu241Billet, "Plutonium-241-Billet")
+        addItem(NTechItems.americium241Billet, "Americium-241-Billet")
+        addItem(NTechItems.americium242Billet, "Americium-242-Billet")
+        addItem(NTechItems.technetium99Billet, "Technetium-99-Billet")
+        addItem(NTechItems.cobalt60Billet, "Kobalt-60-Billet")
+        addItem(NTechItems.strontium90Billet, "Strontium-90-Billet")
+        addItem(NTechItems.gold198Billet, "Gold-198-Billet")
+        addItem(NTechItems.lead209Billet, "Blei-209-Billet")
+        addItem(NTechItems.radium226Billet, "Radium-226-Billet")
+        addItem(NTechItems.actinium227Billet, "Actinium-227-Billet")
+        addItem(NTechItems.ghiorsium336Billet, "Ghiorsium-336-Billet")
+        addItem(NTechItems.lesserAustraliumBillet, "Tasmanit-Australiumbillet")
+        addItem(NTechItems.greaterAustraliumBillet, "Ayerit-Australiumbillet")
+        addItem(NTechItems.po210BeBillet, "Po210Be-Billet")
+        addItem(NTechItems.ra226BeBillet, "Ra226Be-Billet")
+        addItem(NTechItems.pu238BeBillet, "Pu238Be-Billet")
+        addItem(NTechItems.zirconiumBillet, "Zirkoniumbillet")
+        addItem(NTechItems.bismuthZfbBillet, "Bismut ZFB-Billet")
+        addItem(NTechItems.pu241ZfbBillet, "Plutonium-241 ZFB-Billet")
+        addItem(NTechItems.reactorGradeAmericiumZfbBillet, "Reaktorfähiges Americium ZFB-Billet")
+        addItem(NTechItems.yharoniteBillet, "Yharonitbillet")
+        addItem(NTechItems.flashgoldBillet, "Flammgoldbillet")
+        addItem(NTechItems.flashleadBillet, "Flammbleibillet")
+        addItemDesc(NTechItems.flashleadBillet, "Das Gitter zerfällt, verursacht Antimaterie-Materie-\nVernichtungsreaktionen, was wiederum die Freisetzung von Pionen\nverursacht, die in Myonen zerfallen, was die Fusion der\nKerne katalysiert, und somit das neue Element erzeugt.\nVersuch bitte, Schritt zu halten.")
+
         addItem(NTechItems.mercuryDroplet, "Quecksilbertröpfchen")
         addItem(NTechItems.mercuryBottle, "Quecksilberflasche")
 
@@ -1322,6 +1354,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
     override val blockFormat = "%sblock"
     override val rawFormat = "Rohes %s"
     override val ingotFormat = "%sbarren"
+    override val billetFormat = "%sbillet"
     override val nuggetFormat = "%sklumpen"
     override val crystalsFormat = "%skristalle"
     override val powderFormat = "%spulver"

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:thorium232_billet_from_ingots"
+    ]
+  },
+  "criteria": {
+    "has_thorium232_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/thorium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:thorium232_billet_from_ingots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_thorium232_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

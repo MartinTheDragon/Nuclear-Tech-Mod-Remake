@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "technetium99_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:technetium99_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:technetium99_billet",
+    "count": 3
+  }
+}

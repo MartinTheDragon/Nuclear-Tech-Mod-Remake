@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "neptunium_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/neptunium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:neptunium_nugget",
+    "count": 6
+  }
+}

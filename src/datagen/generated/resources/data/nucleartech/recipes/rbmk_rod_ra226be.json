@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:radium226_beryllium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_ra226be"
+  }
+}

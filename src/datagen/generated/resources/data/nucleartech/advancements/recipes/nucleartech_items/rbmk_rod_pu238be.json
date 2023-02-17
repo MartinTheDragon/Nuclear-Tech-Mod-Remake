@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:rbmk_rod_pu238be"
+    ]
+  },
+  "criteria": {
+    "has_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:plutonium238_beryllium_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:rbmk_rod_pu238be"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

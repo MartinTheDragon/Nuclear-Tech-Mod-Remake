@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "actinium227_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/actinium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:actinium227_nugget",
+    "count": 6
+  }
+}

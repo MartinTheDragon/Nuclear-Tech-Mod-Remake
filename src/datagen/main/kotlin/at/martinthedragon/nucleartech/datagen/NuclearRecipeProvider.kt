@@ -76,7 +76,31 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
                 val nugget = tagGroup.materialGroup.nugget() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                ShapelessRecipeBuilder.shapeless(nugget, 9).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(ingotTag, ingotItem), condition)to ntm(getItemName(nugget))
+                ShapelessRecipeBuilder.shapeless(nugget, 9).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm(getItemName(nugget))
+            }
+            addRule { tagGroup -> // ingots to billets
+                val billet = tagGroup.materialGroup.billet() ?: return@addRule null
+                val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
+                ShapedRecipeBuilder.shaped(billet, 3).define('#', ingredient).pattern("##").group(getItemName(billet)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(billet)}_from_ingots")
+            }
+            addRule { tagGroup -> // billets to ingots
+                val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
+                val (billetTag, billetItem) = tagGroup.billetTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(billetTag, billetItem) ?: return@addRule null
+                ShapelessRecipeBuilder.shapeless(ingot, 2).requires(ingredient, 3).group(getItemName(ingot)).unlockedBy(getHasName(billetTag, billetItem), condition) to ntm("${getItemName(ingot)}_from_billets")
+            }
+            addRule { tagGroup -> // nuggets to billets
+                val billet = tagGroup.materialGroup.billet() ?: return@addRule null
+                val (nuggetTag, nuggetItem) = tagGroup.nuggetTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(nuggetTag, nuggetItem) ?: return@addRule null
+                ShapedRecipeBuilder.shaped(billet).define('#', ingredient).pattern("###").pattern("###").group(getItemName(billet)).unlockedBy(getHasName(nuggetTag, nuggetItem), condition) to ntm("${getItemName(billet)}_from_nuggets")
+            }
+            addRule { tagGroup -> // billets to nuggets
+                val nugget = tagGroup.materialGroup.nugget() ?: return@addRule null
+                val (billetTag, billetItem) = tagGroup.billetTagAndItem()
+                val (ingredient, condition) = ingredientAndConditionOf(billetTag, billetItem) ?: return@addRule null
+                ShapelessRecipeBuilder.shapeless(nugget, 6).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(billetTag, billetItem), condition) to ntm("${getItemName(nugget)}_from_billet")
             }
             addRule { tagGroup -> // smelting ores to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
@@ -328,6 +352,36 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     }
 
     private fun parts(consumer: Consumer<FinishedRecipe>) {
+        ShapelessRecipeBuilder(NTechItems.uraniumBillet.get(), 2).requires(NTechItems.u238Billet.get()).requires(NTechItems.u238Nugget.get(), 5).requires(NTechItems.u235Nugget.get()).group(NTechItems.uraniumBillet.id.path).unlockedBy("has_u238_billet", has(NTechItems.u238Billet.get())).save(consumer, ntm("uranium_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.uraniumBillet.get(), 2).requires(NTechItems.uraniumFuelBillet.get()).requires(NTechItems.u238Billet.get()).group(NTechItems.uraniumBillet.id.path).unlockedBy("has_uranium_fuel_billet", has(NTechItems.uraniumFuelBillet.get())).save(consumer, ntm("uranium_billet_from_mixing_fuel_billets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradePlutoniumBillet.get(), 1).requires(NTechItems.pu238Nugget.get(), 4).requires(NTechItems.pu240Nugget.get(), 2).group(NTechItems.reactorGradePlutoniumBillet.id.path).unlockedBy("has_pu239_nugget", has(NTechItems.pu239Nugget.get())).save(consumer, ntm("reactor_grade_plutonium_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradePlutoniumBillet.get(), 3).requires(NTechItems.pu239Billet.get(), 2).requires(NTechItems.pu240Billet.get()).group(NTechItems.reactorGradePlutoniumBillet.id.path).unlockedBy("has_pu239_billet", has(NTechItems.pu239Billet.get())).save(consumer, ntm("reactor_grade_plutonium_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradeAmericiumBillet.get(), 1).requires(NTechItems.americium241Nugget.get(), 2).requires(NTechItems.americium242Nugget.get(), 4).group(NTechItems.reactorGradeAmericiumBillet.id.path).unlockedBy("has_am242_nugget", has(NTechItems.americium242Nugget.get())).save(consumer, ntm("reactor_grade_americium_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradeAmericiumBillet.get(), 3).requires(NTechItems.americium241Billet.get()).requires(NTechItems.americium242Billet.get(), 2).group(NTechItems.reactorGradeAmericiumBillet.id.path).unlockedBy("has_am242_billet", has(NTechItems.americium242Billet.get())).save(consumer, ntm("reactor_grade_americium_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.uraniumFuelBillet.get(), 1).requires(NTechItems.u238Nugget.get(), 5).requires(NTechItems.u235Nugget.get()).group(NTechItems.uraniumFuelBillet.id.path).unlockedBy("has_u238_nugget", has(NTechItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.uraniumFuelBillet.get(), 6).requires(NTechItems.u238Billet.get(), 5).requires(NTechItems.u235Billet.get()).group(NTechItems.uraniumFuelBillet.id.path).unlockedBy("has_u238_billet", has(NTechItems.u238Billet.get())).save(consumer, ntm("uranium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.thoriumFuelBillet.get(), 1).requires(NTechItems.th232Nugget.get(), 5).requires(NTechItems.u233Nugget.get()).group(NTechItems.thoriumFuelBillet.id.path).unlockedBy("has_th232_nugget", has(NTechItems.th232Nugget.get())).save(consumer, ntm("thorium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.thoriumFuelBillet.get(), 6).requires(NTechItems.th232Billet.get(), 5).requires(NTechItems.u233Billet.get()).group(NTechItems.thoriumFuelBillet.id.path).unlockedBy("has_th232_billet", has(NTechItems.th232Billet.get())).save(consumer, ntm("thorium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.plutoniumFuelBillet.get(), 1).requires(NTechItems.reactorGradePlutoniumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.plutoniumFuelBillet.id.path).unlockedBy("has_reactor_grade_plutonium_nugget", has(NTechItems.reactorGradePlutoniumNugget.get())).save(consumer, ntm("plutonium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.plutoniumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.reactorGradePlutoniumBillet.get()).group(NTechItems.plutoniumFuelBillet.id.path).unlockedBy("has_reactor_grade_plutonium_billet", has(NTechItems.reactorGradePlutoniumBillet.get())).save(consumer, ntm("plutonium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.neptuniumFuelBillet.get(), 1).requires(NTechItems.neptuniumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.neptuniumFuelBillet.id.path).unlockedBy("has_neptunium_nugget", has(NTechItems.neptuniumNugget.get())).save(consumer, ntm("neptunium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.neptuniumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.neptuniumBillet.get()).group(NTechItems.neptuniumFuelBillet.id.path).unlockedBy("has_neptunium_billet", has(NTechItems.neptuniumBillet.get())).save(consumer, ntm("neptunium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.moxFuelBillet.get(), 1).requires(NTechItems.reactorGradePlutoniumNugget.get(), 2).requires(NTechItems.uraniumFuelNugget.get(), 4).group(NTechItems.moxFuelBillet.id.path).unlockedBy("has_uranium_fuel_nugget", has(NTechItems.uraniumFuelNugget.get())).save(consumer, ntm("mox_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.moxFuelBillet.get(), 3).requires(NTechItems.uraniumFuelBillet.get(), 2).requires(NTechItems.reactorGradePlutoniumBillet.get()).group(NTechItems.moxFuelBillet.id.path).unlockedBy("has_uranium_fuel_billet", has(NTechItems.uraniumFuelBillet.get())).save(consumer, ntm("mox_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.americiumFuelBillet.get(), 1).requires(NTechItems.reactorGradeAmericiumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.americiumFuelBillet.id.path).unlockedBy("has_reactor_grade_americium_nugget", has(NTechItems.reactorGradeAmericiumNugget.get())).save(consumer, ntm("americium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.americiumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.reactorGradeAmericiumBillet.get()).group(NTechItems.americiumFuelBillet.id.path).unlockedBy("has_reactor_grade_americium_billet", has(NTechItems.reactorGradeAmericiumBillet.get())).save(consumer, ntm("americium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.schrabidiumFuelBillet.get(), 1).requires(NTechItems.schrabidiumNugget.get(), 2).requires(NTechItems.neptuniumNugget.get(), 2).requires(NTechItems.berylliumNugget.get(), 2).group(NTechItems.schrabidiumFuelBillet.id.path).unlockedBy("has_schrabidium_nugget", has(NTechItems.schrabidiumNugget.get())).save(consumer, ntm("schrabidium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.schrabidiumFuelBillet.get(), 3).requires(NTechItems.schrabidiumBillet.get()).requires(NTechItems.neptuniumBillet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.schrabidiumFuelBillet.id.path).unlockedBy("has_schrabidium_billet", has(NTechItems.schrabidiumBillet.get())).save(consumer, ntm("schrabidium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 1).requires(NTechItems.poloniumNugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_nugget", has(NTechItems.poloniumNugget.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 2).requires(NTechItems.poloniumBillet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_billet", has(NTechItems.poloniumBillet.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 6).requires(NTechItems.poloniumBillet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_billet", has(NTechItems.poloniumBillet.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_billets_extra"))
+        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 1).requires(NTechItems.radium226Nugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_nugget", has(NTechItems.radium226Nugget.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 2).requires(NTechItems.radium226Billet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_billet", has(NTechItems.radium226Billet.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 6).requires(NTechItems.radium226Billet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_billet", has(NTechItems.radium226Billet.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_billets_extra"))
+        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 1).requires(NTechItems.pu238Nugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_nugget", has(NTechItems.pu238Nugget.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 2).requires(NTechItems.pu238Billet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_billet", has(NTechItems.pu238Billet.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 6).requires(NTechItems.pu238Billet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_billet", has(NTechItems.pu238Billet.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_billets_extra"))
+
         ingotFromPowder(NTechTags.Items.DUSTS_COAL, NTechItems.coke.get(), "coal_powder", consumer)
         ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.ligniteBriquette.get()), .1F, 200, NTechItems.coke.get()).group(NTechItems.coke.id.path).unlockedBy("has_${NTechItems.ligniteBriquette.id.path}", has(NTechItems.ligniteBriquette.get())).save(consumer, NTechItems.coke.id)
         ShapedRecipeBuilder.shaped(NTechItems.copperPanel.get()).define('C', NTechTags.Items.PLATES_COPPER).pattern("CCC").pattern("CCC").group(NTechItems.copperPanel.id.path).unlockedBy("has${NTechItems.copperPlate.id.path}", has(NTechTags.Items.PLATES_COPPER)).save(consumer, NTechItems.copperPanel.id)
@@ -408,6 +462,36 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         shredderBlade(NTechTags.Items.INGOTS_COMBINE_STEEL, NTechTags.Items.PLATES_COMBINE_STEEL, NTechItems.combineSteelShredderBlade.get(), consumer)
         shredderBlade(NTechTags.Items.INGOTS_SCHRABIDIUM, NTechTags.Items.PLATES_SCHRABIDIUM, NTechItems.schrabidiumShredderBlade.get(), consumer)
         ShapedRecipeBuilder.shaped(NTechItems.deshShredderBlade.get()).define('B', NTechItems.combineSteelShredderBlade.get()).define('D', NTechItems.deshCompoundPlate.get()).define('S', NTechTags.Items.NUGGETS_SCHRABIDIUM).pattern("SDS").pattern("DBD").pattern("SDS").group(NTechItems.deshShredderBlade.id.path).unlockedBy("has_${NTechItems.deshIngot.id.path}", has(NTechItems.deshIngot.get())).save(consumer, NTechItems.deshShredderBlade.id)
+
+        rbmkRod(NTechItems.rbmkRodUeu.get(), NTechTags.Items.BILLETS_URANIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodMeu.get(), NTechTags.Items.BILLETS_URANIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodHeu233.get(), NTechItems.u233Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHeu235.get(), NTechItems.u235Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodThMeu.get(), NTechTags.Items.BILLETS_THORIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodLep.get(), NTechTags.Items.BILLETS_PLUTONIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodMep.get(), NTechItems.reactorGradePlutoniumBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHep239.get(), NTechItems.pu239Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHep241.get(), NTechItems.pu241Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodLea.get(), NTechTags.Items.BILLETS_AMERICIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodMea.get(), NTechItems.reactorGradeAmericiumBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHea241.get(), NTechItems.americium241Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHea242.get(), NTechItems.americium242Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodMen.get(), NTechItems.neptuniumFuelBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHen.get(), NTechTags.Items.BILLETS_NEPTUNIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodMox.get(), NTechTags.Items.BILLETS_MOX, consumer)
+        rbmkRod(NTechItems.rbmkRodLes.get(), NTechItems.lowEnrichedSchrabidiumFuelBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodMes.get(), NTechTags.Items.BILLETS_SCHRABIDIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodHes.get(), NTechItems.highEnrichedSchrabidiumFuelBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodLeaus.get(), NTechTags.Items.BILLETS_LESSER_AUSTRALIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodHeaus.get(), NTechTags.Items.BILLETS_GREATER_AUSTRALIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodPo210Be.get(), NTechItems.po210BeBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodRa226Be.get(), NTechItems.ra226BeBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodPu238Be.get(), NTechItems.pu238BeBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodBalefireGold.get(), NTechTags.Items.BILLETS_FLASHGOLD, consumer)
+        rbmkRod(NTechItems.rbmkRodFlashlead.get(), NTechTags.Items.BILLETS_FLASHLEAD, consumer)
+        rbmkRod(NTechItems.rbmkRodZfbBismuth.get(), NTechItems.bismuthZfbBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodZfbPu241.get(), NTechItems.pu241ZfbBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodZfbAmMix.get(), NTechItems.reactorGradeAmericiumZfbBillet.get(), consumer)
     }
 
     private fun templates(consumer: Consumer<FinishedRecipe>) {
@@ -651,6 +735,14 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
     private fun ShapelessRecipeBuilder.requires(itemTag: TagKey<Item>, count: Int): ShapelessRecipeBuilder {
         for (i in 0 until count) requires(itemTag)
         return this
+    }
+
+    private fun rbmkRod(rod: ItemLike, billet: ItemLike, consumer: Consumer<FinishedRecipe>) {
+        ShapelessRecipeBuilder(rod, 1).requires(NTechItems.emptyRBMKRod.get()).requires(billet, 8).unlockedBy("has_billet", has(billet)).save(consumer)
+    }
+
+    private fun rbmkRod(rod: ItemLike, billet: TagKey<Item>, consumer: Consumer<FinishedRecipe>) {
+        ShapelessRecipeBuilder(rod, 1).requires(NTechItems.emptyRBMKRod.get()).requires(billet, 8).unlockedBy("has_billet", has(billet)).save(consumer)
     }
 
     private fun ingotFromMeteorOre(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>) {

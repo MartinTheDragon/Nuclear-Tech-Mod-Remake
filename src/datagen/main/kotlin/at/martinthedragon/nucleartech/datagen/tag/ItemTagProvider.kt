@@ -21,6 +21,7 @@ class ItemTagProvider(
         copyFromBlocks()
         rawMaterialTags()
         ingotTags()
+        billetTags()
         dustTags()
         crystalTags()
         nuggetTags()
@@ -197,6 +198,37 @@ class ItemTagProvider(
         tag(INGOTS_URANIUM_FUEL).add(NTechItems.uraniumFuelIngot)
         tag(INGOTS_VERTICIUM).add(NTechItems.verticiumIngot)
         tag(INGOTS_WEIDANIUM).add(NTechItems.weidaniumIngot)
+        return@with
+    }
+
+    private fun billetTags() = with(NTechTags.Items) {
+        tag(BILLETS).addTags(BILLETS_ACTINIUM, BILLETS_AMERICIUM, BILLETS_AMERICIUM_FUEL, BILLETS_AUSTRALIUM, BILLETS_BERYLLIUM, BILLETS_BISMUTH, BILLETS_COBALT, BILLETS_FLASHGOLD, BILLETS_FLASHLEAD, BILLETS_GHIORSIUM, BILLETS_GREATER_AUSTRALIUM, BILLETS_LESSER_AUSTRALIUM, BILLETS_MOX, BILLETS_NEPTUNIUM, BILLETS_NUCLEAR_WASTE, BILLETS_PLUTONIUM, BILLETS_PLUTONIUM_FUEL, BILLETS_POLONIUM, BILLETS_SCHRABIDIUM, BILLETS_SCHRABIDIUM_FUEL, BILLETS_SOLINIUM, BILLETS_THORIUM, BILLETS_THORIUM_FUEL, BILLETS_URANIUM, BILLETS_URANIUM_FUEL, BILLETS_ZIRCONIUM)
+        tag(BILLETS_ACTINIUM).add(NTechItems.actinium227Billet)
+        tag(BILLETS_AMERICIUM).add(NTechItems.americium241Billet, NTechItems.americium242Billet)
+        tag(BILLETS_AMERICIUM_FUEL).add(NTechItems.americiumFuelBillet)
+        tag(BILLETS_AUSTRALIUM).add(NTechItems.australiumBillet)
+        tag(BILLETS_BERYLLIUM).add(NTechItems.berylliumBillet)
+        tag(BILLETS_BISMUTH).add(NTechItems.bismuthBillet)
+        tag(BILLETS_COBALT).add(NTechItems.cobaltBillet)
+        tag(BILLETS_FLASHGOLD).add(NTechItems.flashgoldBillet)
+        tag(BILLETS_FLASHLEAD).add(NTechItems.flashleadBillet)
+        tag(BILLETS_GHIORSIUM).add(NTechItems.ghiorsium336Billet)
+        tag(BILLETS_GREATER_AUSTRALIUM).add(NTechItems.greaterAustraliumBillet)
+        tag(BILLETS_LESSER_AUSTRALIUM).add(NTechItems.lesserAustraliumBillet)
+        tag(BILLETS_MOX).add(NTechItems.moxFuelBillet)
+        tag(BILLETS_NEPTUNIUM).add(NTechItems.neptuniumBillet)
+        tag(BILLETS_NUCLEAR_WASTE).add(NTechItems.nuclearWasteBillet)
+        tag(BILLETS_PLUTONIUM).add(NTechItems.plutoniumBillet)
+        tag(BILLETS_PLUTONIUM_FUEL).add(NTechItems.plutoniumFuelBillet)
+        tag(BILLETS_POLONIUM).add(NTechItems.poloniumBillet)
+        tag(BILLETS_SCHRABIDIUM).add(NTechItems.schrabidiumBillet)
+        tag(BILLETS_SCHRABIDIUM_FUEL).add(NTechItems.schrabidiumFuelBillet)
+        tag(BILLETS_SOLINIUM).add(NTechItems.soliniumBillet)
+        tag(BILLETS_THORIUM).add(NTechItems.th232Billet)
+        tag(BILLETS_THORIUM_FUEL).add(NTechItems.thoriumFuelBillet)
+        tag(BILLETS_URANIUM).add(NTechItems.uraniumBillet)
+        tag(BILLETS_URANIUM_FUEL).add(NTechItems.uraniumFuelBillet)
+        tag(BILLETS_ZIRCONIUM).add(NTechItems.zirconiumBillet)
         return@with
     }
 

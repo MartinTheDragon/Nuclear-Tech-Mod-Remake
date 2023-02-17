@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:bismuth_billet_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_bismuth_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/bismuth"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:bismuth_billet_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bismuth_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

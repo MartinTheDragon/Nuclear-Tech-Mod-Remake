@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thorium_fuel_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/thorium_fuel"
+    },
+    {
+      "tag": "forge:billets/thorium_fuel"
+    },
+    {
+      "tag": "forge:billets/thorium_fuel"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:thorium_fuel_ingot",
+    "count": 2
+  }
+}

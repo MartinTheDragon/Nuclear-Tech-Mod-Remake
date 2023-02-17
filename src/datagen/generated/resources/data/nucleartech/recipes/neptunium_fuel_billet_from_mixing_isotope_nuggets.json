@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "neptunium_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:neptunium_nugget"
+    },
+    {
+      "item": "nucleartech:neptunium_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    },
+    {
+      "item": "nucleartech:uranium238_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:neptunium_fuel_billet"
+  }
+}

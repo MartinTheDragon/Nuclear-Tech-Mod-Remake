@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_mox"
+  }
+}

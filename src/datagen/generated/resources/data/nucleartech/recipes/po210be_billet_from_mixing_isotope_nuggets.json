@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "polonium210_beryllium_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:polonium210_nugget"
+    },
+    {
+      "item": "nucleartech:polonium210_nugget"
+    },
+    {
+      "item": "nucleartech:polonium210_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:polonium210_beryllium_billet"
+  }
+}

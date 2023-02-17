@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "americium_fuel_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:americium_fuel_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:americium_fuel_billet",
+    "count": 3
+  }
+}

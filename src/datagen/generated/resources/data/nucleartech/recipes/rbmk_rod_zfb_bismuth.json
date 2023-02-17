@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    },
+    {
+      "item": "nucleartech:bismuth_zfb_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_zfb_bismuth"
+  }
+}

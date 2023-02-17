@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:rbmk_rod_balefire_gold"
+    ]
+  },
+  "criteria": {
+    "has_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:billets/flashgold"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:rbmk_rod_balefire_gold"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

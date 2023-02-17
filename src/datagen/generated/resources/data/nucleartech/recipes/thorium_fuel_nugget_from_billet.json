@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thorium_fuel_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/thorium_fuel"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:thorium_fuel_nugget",
+    "count": 6
+  }
+}

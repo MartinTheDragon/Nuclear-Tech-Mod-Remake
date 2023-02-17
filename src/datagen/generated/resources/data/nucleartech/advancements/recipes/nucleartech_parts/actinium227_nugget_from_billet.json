@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:actinium227_nugget_from_billet"
+    ]
+  },
+  "criteria": {
+    "has_actinium227_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:billets/actinium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:actinium227_nugget_from_billet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_actinium227_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

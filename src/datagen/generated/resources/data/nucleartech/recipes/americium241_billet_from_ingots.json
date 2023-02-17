@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "americium241_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:americium241_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:americium241_billet",
+    "count": 3
+  }
+}

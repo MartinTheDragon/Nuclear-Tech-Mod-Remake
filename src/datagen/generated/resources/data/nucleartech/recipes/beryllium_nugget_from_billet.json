@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "beryllium_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/beryllium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:beryllium_nugget",
+    "count": 6
+  }
+}

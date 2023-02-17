@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "lead209_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:lead209_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:lead209_nugget",
+    "count": 6
+  }
+}

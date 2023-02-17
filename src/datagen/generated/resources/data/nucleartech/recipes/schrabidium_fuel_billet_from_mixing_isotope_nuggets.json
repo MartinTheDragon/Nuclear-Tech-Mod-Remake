@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "schrabidium_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:schrabidium_nugget"
+    },
+    {
+      "item": "nucleartech:schrabidium_nugget"
+    },
+    {
+      "item": "nucleartech:neptunium_nugget"
+    },
+    {
+      "item": "nucleartech:neptunium_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    },
+    {
+      "item": "nucleartech:beryllium_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:schrabidium_fuel_billet"
+  }
+}

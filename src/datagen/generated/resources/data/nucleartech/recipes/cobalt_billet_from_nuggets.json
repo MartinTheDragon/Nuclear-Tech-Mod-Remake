@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cobalt_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:cobalt_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:cobalt_billet"
+  }
+}

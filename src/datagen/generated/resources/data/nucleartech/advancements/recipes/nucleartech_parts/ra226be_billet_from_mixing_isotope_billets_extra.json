@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:ra226be_billet_from_mixing_isotope_billets_extra"
+    ]
+  },
+  "criteria": {
+    "has_ra226_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:radium226_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:ra226be_billet_from_mixing_isotope_billets_extra"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ra226_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

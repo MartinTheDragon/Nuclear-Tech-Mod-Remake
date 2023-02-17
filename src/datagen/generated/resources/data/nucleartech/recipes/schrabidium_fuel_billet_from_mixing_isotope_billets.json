@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "schrabidium_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:schrabidium_billet"
+    },
+    {
+      "item": "nucleartech:neptunium_billet"
+    },
+    {
+      "item": "nucleartech:beryllium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:schrabidium_fuel_billet",
+    "count": 3
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "strontium90_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:strontium90_billet"
+    },
+    {
+      "item": "nucleartech:strontium90_billet"
+    },
+    {
+      "item": "nucleartech:strontium90_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:strontium90_ingot",
+    "count": 2
+  }
+}

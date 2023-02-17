@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "australium_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/australium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:australium_nugget",
+    "count": 6
+  }
+}

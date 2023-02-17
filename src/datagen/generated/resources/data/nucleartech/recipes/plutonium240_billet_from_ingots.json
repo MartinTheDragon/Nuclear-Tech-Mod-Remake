@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plutonium240_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:plutonium240_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:plutonium240_billet",
+    "count": 3
+  }
+}

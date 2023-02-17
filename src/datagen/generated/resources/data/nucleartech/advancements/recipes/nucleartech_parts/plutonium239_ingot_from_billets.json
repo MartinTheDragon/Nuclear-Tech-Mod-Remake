@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:plutonium239_ingot_from_billets"
+    ]
+  },
+  "criteria": {
+    "has_plutonium239_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:plutonium239_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:plutonium239_ingot_from_billets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_plutonium239_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

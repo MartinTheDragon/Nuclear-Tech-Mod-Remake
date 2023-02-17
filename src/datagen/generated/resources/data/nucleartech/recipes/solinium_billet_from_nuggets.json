@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "solinium_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/solinium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:solinium_billet"
+  }
+}

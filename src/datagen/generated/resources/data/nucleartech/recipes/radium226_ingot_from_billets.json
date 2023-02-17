@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "radium226_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:radium226_billet"
+    },
+    {
+      "item": "nucleartech:radium226_billet"
+    },
+    {
+      "item": "nucleartech:radium226_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:radium226_ingot",
+    "count": 2
+  }
+}

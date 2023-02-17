@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium233_billet_from_ingots"
+    ]
+  },
+  "criteria": {
+    "has_uranium233_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:uranium233_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium233_billet_from_ingots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium233_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "plutonium238_beryllium_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:plutonium238_billet"
+    },
+    {
+      "item": "nucleartech:plutonium238_billet"
+    },
+    {
+      "item": "nucleartech:plutonium238_billet"
+    },
+    {
+      "item": "nucleartech:beryllium_billet"
+    },
+    {
+      "item": "nucleartech:beryllium_billet"
+    },
+    {
+      "item": "nucleartech:beryllium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:plutonium238_beryllium_billet",
+    "count": 6
+  }
+}

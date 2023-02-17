@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "reactor_grade_plutonium_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:reactor_grade_plutonium_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_plutonium_billet"
+    },
+    {
+      "item": "nucleartech:reactor_grade_plutonium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:reactor_grade_plutonium_ingot",
+    "count": 2
+  }
+}

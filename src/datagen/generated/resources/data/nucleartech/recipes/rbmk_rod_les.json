@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    },
+    {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_les"
+  }
+}

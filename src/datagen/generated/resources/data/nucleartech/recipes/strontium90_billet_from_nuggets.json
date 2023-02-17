@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "strontium90_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:strontium90_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:strontium90_billet"
+  }
+}

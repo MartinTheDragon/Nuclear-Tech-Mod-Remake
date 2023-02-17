@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "thorium232_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/thorium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:thorium232_billet"
+  }
+}

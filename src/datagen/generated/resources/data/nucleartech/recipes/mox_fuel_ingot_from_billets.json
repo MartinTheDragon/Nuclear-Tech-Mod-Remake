@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mox_fuel_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    },
+    {
+      "tag": "forge:billets/mox"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:mox_fuel_ingot",
+    "count": 2
+  }
+}

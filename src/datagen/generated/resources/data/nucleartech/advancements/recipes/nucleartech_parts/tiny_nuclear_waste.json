@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:tiny_nuclear_waste"
+    ]
+  },
+  "criteria": {
+    "has_nuclear_waste": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:nuclear_waste"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:tiny_nuclear_waste"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nuclear_waste",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "high_enriched_schrabidium_fuel_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:high_enriched_schrabidium_fuel_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:high_enriched_schrabidium_fuel_nugget",
+    "count": 6
+  }
+}

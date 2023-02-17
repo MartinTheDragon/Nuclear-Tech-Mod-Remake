@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "americium242_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:americium242_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:americium242_billet"
+  }
+}

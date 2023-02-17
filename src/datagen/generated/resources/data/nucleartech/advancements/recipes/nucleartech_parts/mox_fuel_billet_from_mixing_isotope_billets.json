@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:mox_fuel_billet_from_mixing_isotope_billets"
+    ]
+  },
+  "criteria": {
+    "has_uranium_fuel_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "nucleartech:uranium_fuel_billet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:mox_fuel_billet_from_mixing_isotope_billets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium_fuel_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

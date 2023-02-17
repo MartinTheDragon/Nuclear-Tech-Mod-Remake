@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "schrabidium_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/schrabidium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_billet",
+    "count": 3
+  }
+}

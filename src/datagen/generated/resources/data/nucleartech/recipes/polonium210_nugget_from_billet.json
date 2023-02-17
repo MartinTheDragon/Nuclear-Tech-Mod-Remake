@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "polonium210_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/polonium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:polonium210_nugget",
+    "count": 6
+  }
+}

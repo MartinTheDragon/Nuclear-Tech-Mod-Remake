@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "actinium227_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:actinium227_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:actinium227_billet"
+  }
+}

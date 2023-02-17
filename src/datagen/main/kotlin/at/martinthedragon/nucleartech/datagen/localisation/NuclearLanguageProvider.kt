@@ -45,23 +45,25 @@ abstract class NuclearLanguageProvider(
                 val ingot = material.ingot()
                 val nugget = material.nugget()
 
-                if (ore != null) addIfAbsent(ore.descriptionId, oreFormat.format(materialName))
-                if (deepOre != null) addIfAbsent(deepOre.descriptionId, deepOreFormat.format(materialName))
-                if (block != null) addIfAbsent(block.descriptionId, blockFormat.format(materialName))
-                if (raw != null) addIfAbsent(raw.descriptionId, rawFormat.format(materialName))
-                if (ingot != null) addIfAbsent(ingot.descriptionId, ingotFormat.format(materialName))
-                if (nugget != null) addIfAbsent(nugget.descriptionId, nuggetFormat.format(materialName))
+                if (ore != null) addIfAbsent(ore.descriptionId, oreFormat?.format(materialName))
+                if (deepOre != null) addIfAbsent(deepOre.descriptionId, deepOreFormat?.format(materialName))
+                if (block != null) addIfAbsent(block.descriptionId, blockFormat?.format(materialName))
+                if (raw != null) addIfAbsent(raw.descriptionId, rawFormat?.format(materialName))
+                if (ingot != null) addIfAbsent(ingot.descriptionId, ingotFormat?.format(materialName))
+                if (nugget != null) addIfAbsent(nugget.descriptionId, nuggetFormat?.format(materialName))
             }
 
             val crystals = material.crystals()
             val powder = material.powder()
             val plate = material.plate()
             val wire = material.wire()
+            val billet = material.billet()
 
-            if (crystals != null) addIfAbsent(crystals.descriptionId, crystalsFormat.format(materialName))
-            if (powder != null) addIfAbsent(powder.descriptionId, powderFormat.format(materialName))
-            if (plate != null) addIfAbsent(plate.descriptionId, plateFormat.format(materialName))
-            if (wire != null) addIfAbsent(wire.descriptionId, wireFormat.format(materialName))
+            if (crystals != null) addIfAbsent(crystals.descriptionId, crystalsFormat?.format(materialName))
+            if (powder != null) addIfAbsent(powder.descriptionId, powderFormat?.format(materialName))
+            if (plate != null) addIfAbsent(plate.descriptionId, plateFormat?.format(materialName))
+            if (wire != null) addIfAbsent(wire.descriptionId, wireFormat?.format(materialName))
+            if (billet != null) addIfAbsent(billet.descriptionId, billetFormat?.format(materialName))
         }
     }
 
@@ -107,7 +109,8 @@ abstract class NuclearLanguageProvider(
         add(key.key, value)
     }
 
-    protected fun addIfAbsent(key: String, value: String) {
+    protected fun addIfAbsent(key: String, value: String?) {
+        if (value == null) return
         val existing = translations[key]
         if (existing == value) redundantTranslations[key] = value
         if (existing == null) add(key, value)
@@ -165,16 +168,17 @@ abstract class NuclearLanguageProvider(
     /** What to replace spaces with in the name of the entity for the spawn egg */
     protected open val spawnEggEntityStringWordSeparator = ' '
 
-    protected abstract val oreFormat: String
-    protected abstract val deepOreFormat: String
-    protected abstract val blockFormat: String
-    protected abstract val rawFormat: String
-    protected abstract val ingotFormat: String
-    protected abstract val nuggetFormat: String
-    protected abstract val crystalsFormat: String
-    protected abstract val powderFormat: String
-    protected abstract val plateFormat: String
-    protected abstract val wireFormat: String
+    protected abstract val oreFormat: String?
+    protected abstract val deepOreFormat: String?
+    protected abstract val blockFormat: String?
+    protected abstract val rawFormat: String?
+    protected abstract val ingotFormat: String?
+    protected abstract val billetFormat: String?
+    protected abstract val nuggetFormat: String?
+    protected abstract val crystalsFormat: String?
+    protected abstract val powderFormat: String?
+    protected abstract val plateFormat: String?
+    protected abstract val wireFormat: String?
 
     protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, name: String) {
 //        val spawnEgg = ForgeSpawnEggItem.fromEntityType(key.get()) ?: throw IllegalStateException("No spawn egg registered for entity $name")

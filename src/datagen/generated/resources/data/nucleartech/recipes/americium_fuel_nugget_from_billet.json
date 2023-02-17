@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "americium_fuel_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:americium_fuel_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:americium_fuel_nugget",
+    "count": 6
+  }
+}

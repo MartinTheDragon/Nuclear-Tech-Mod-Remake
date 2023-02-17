@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "schrabidium_fuel_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/schrabidium_fuel"
+    },
+    {
+      "tag": "forge:billets/schrabidium_fuel"
+    },
+    {
+      "tag": "forge:billets/schrabidium_fuel"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:schrabidium_fuel_ingot",
+    "count": 2
+  }
+}

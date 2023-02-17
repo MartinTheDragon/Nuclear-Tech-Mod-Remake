@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "nuclear_waste",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:tiny_nuclear_waste"
+    }
+  },
+  "result": {
+    "item": "nucleartech:nuclear_waste"
+  }
+}

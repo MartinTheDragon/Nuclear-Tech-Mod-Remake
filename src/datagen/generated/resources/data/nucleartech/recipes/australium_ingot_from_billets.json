@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "australium_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/australium"
+    },
+    {
+      "tag": "forge:billets/australium"
+    },
+    {
+      "tag": "forge:billets/australium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:australium_ingot",
+    "count": 2
+  }
+}

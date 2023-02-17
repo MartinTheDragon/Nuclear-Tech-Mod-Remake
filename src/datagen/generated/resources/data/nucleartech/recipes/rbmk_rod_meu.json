@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    },
+    {
+      "tag": "forge:billets/uranium_fuel"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_meu"
+  }
+}

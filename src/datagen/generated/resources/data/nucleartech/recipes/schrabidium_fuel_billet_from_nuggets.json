@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "schrabidium_fuel_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/schrabidium_fuel"
+    }
+  },
+  "result": {
+    "item": "nucleartech:schrabidium_fuel_billet"
+  }
+}

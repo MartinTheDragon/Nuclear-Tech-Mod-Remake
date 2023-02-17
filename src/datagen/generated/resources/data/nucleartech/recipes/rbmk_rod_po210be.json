@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "nucleartech:empty_rbmk_rod"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    },
+    {
+      "item": "nucleartech:polonium210_beryllium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:rbmk_rod_po210be"
+  }
+}

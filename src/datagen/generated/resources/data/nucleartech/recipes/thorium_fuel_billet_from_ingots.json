@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "thorium_fuel_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/thorium_fuel"
+    }
+  },
+  "result": {
+    "item": "nucleartech:thorium_fuel_billet",
+    "count": 3
+  }
+}

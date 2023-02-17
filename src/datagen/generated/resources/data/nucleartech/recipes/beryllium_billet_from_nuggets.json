@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "beryllium_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:nuggets/beryllium"
+    }
+  },
+  "result": {
+    "item": "nucleartech:beryllium_billet"
+  }
+}

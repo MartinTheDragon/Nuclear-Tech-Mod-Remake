@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "thorium232_ingot",
+  "ingredients": [
+    {
+      "tag": "forge:billets/thorium"
+    },
+    {
+      "tag": "forge:billets/thorium"
+    },
+    {
+      "tag": "forge:billets/thorium"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:thorium232_ingot",
+    "count": 2
+  }
+}

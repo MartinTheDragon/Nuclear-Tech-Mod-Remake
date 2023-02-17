@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "gold198_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:gold198_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:gold198_nugget",
+    "count": 6
+  }
+}

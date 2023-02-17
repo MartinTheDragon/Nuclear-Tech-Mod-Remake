@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "low_enriched_schrabidium_fuel_billet",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:low_enriched_schrabidium_fuel_nugget"
+    }
+  },
+  "result": {
+    "item": "nucleartech:low_enriched_schrabidium_fuel_billet"
+  }
+}

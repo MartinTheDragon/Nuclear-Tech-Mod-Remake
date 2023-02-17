@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mox_fuel_billet",
+  "ingredients": [
+    {
+      "item": "nucleartech:reactor_grade_plutonium_nugget"
+    },
+    {
+      "item": "nucleartech:reactor_grade_plutonium_nugget"
+    },
+    {
+      "item": "nucleartech:uranium_fuel_nugget"
+    },
+    {
+      "item": "nucleartech:uranium_fuel_nugget"
+    },
+    {
+      "item": "nucleartech:uranium_fuel_nugget"
+    },
+    {
+      "item": "nucleartech:uranium_fuel_nugget"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:mox_fuel_billet"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "cobalt60_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:cobalt60_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:cobalt60_nugget",
+    "count": 6
+  }
+}

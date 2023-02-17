@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "nuclear_waste",
+  "ingredients": [
+    {
+      "tag": "forge:billets/nuclear_waste"
+    },
+    {
+      "tag": "forge:billets/nuclear_waste"
+    },
+    {
+      "tag": "forge:billets/nuclear_waste"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:nuclear_waste",
+    "count": 2
+  }
+}

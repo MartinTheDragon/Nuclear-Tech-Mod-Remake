@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "neptunium_fuel_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:neptunium_fuel_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:neptunium_fuel_nugget",
+    "count": 6
+  }
+}

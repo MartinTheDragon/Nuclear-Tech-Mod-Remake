@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "reactor_grade_americium_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:reactor_grade_americium_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:reactor_grade_americium_nugget",
+    "count": 6
+  }
+}

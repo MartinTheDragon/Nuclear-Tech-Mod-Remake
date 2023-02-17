@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "plutonium240_nugget",
+  "ingredients": [
+    {
+      "item": "nucleartech:plutonium240_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:plutonium240_nugget",
+    "count": 6
+  }
+}

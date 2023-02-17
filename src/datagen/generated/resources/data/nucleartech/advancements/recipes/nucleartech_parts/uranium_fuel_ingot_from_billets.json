@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "nucleartech:uranium_fuel_ingot_from_billets"
+    ]
+  },
+  "criteria": {
+    "has_uranium_fuel_billet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:billets/uranium_fuel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "nucleartech:uranium_fuel_ingot_from_billets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium_fuel_billet",
+      "has_the_recipe"
+    ]
+  ]
+}

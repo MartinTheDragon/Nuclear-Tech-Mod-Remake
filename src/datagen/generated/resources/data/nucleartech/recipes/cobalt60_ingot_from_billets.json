@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "cobalt60_ingot",
+  "ingredients": [
+    {
+      "item": "nucleartech:cobalt60_billet"
+    },
+    {
+      "item": "nucleartech:cobalt60_billet"
+    },
+    {
+      "item": "nucleartech:cobalt60_billet"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:cobalt60_ingot",
+    "count": 2
+  }
+}

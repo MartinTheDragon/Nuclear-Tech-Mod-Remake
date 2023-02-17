@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ghiorsium336_billet",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "nucleartech:ghiorsium336_ingot"
+    }
+  },
+  "result": {
+    "item": "nucleartech:ghiorsium336_billet",
+    "count": 3
+  }
+}

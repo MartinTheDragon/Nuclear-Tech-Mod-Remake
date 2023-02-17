@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "cobalt_nugget",
+  "ingredients": [
+    {
+      "tag": "forge:billets/cobalt"
+    }
+  ],
+  "result": {
+    "item": "nucleartech:cobalt_nugget",
+    "count": 6
+  }
+}
