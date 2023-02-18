@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:big_steel_shell"
+      "nucleartech:crafting/big_steel_shell"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:big_steel_shell"
+        "recipe": "nucleartech:crafting/big_steel_shell"
       }
     }
   },

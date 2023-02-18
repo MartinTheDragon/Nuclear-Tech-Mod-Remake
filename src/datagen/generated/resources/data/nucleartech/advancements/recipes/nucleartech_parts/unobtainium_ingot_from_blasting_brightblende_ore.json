@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:unobtainium_ingot_from_blasting_brightblende_ore"
+      "nucleartech:smelting/unobtainium_ingot_from_blasting_brightblende_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:unobtainium_ingot_from_blasting_brightblende_ore"
+        "recipe": "nucleartech:smelting/unobtainium_ingot_from_blasting_brightblende_ore"
       }
     }
   },

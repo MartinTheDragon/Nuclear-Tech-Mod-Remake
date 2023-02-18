@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gold_wire_from_pressing_gold_ingot"
+      "nucleartech:pressing/gold_wire_from_pressing_gold_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gold_wire_from_pressing_gold_ingot"
+        "recipe": "nucleartech:pressing/gold_wire_from_pressing_gold_ingot"
       }
     }
   },

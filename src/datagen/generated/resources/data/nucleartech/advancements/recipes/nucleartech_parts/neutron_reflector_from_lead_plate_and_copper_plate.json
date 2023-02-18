@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:neutron_reflector_from_lead_plate_and_copper_plate"
+      "nucleartech:blasting/neutron_reflector_from_lead_plate_and_copper_plate"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:neutron_reflector_from_lead_plate_and_copper_plate"
+        "recipe": "nucleartech:blasting/neutron_reflector_from_lead_plate_and_copper_plate"
       }
     }
   },

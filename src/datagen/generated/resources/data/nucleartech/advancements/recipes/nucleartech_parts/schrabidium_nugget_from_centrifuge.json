@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schrabidium_nugget_from_centrifuge"
+      "nucleartech:centrifuge/schrabidium_nugget_from_centrifuge"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schrabidium_nugget_from_centrifuge"
+        "recipe": "nucleartech:centrifuge/schrabidium_nugget_from_centrifuge"
       }
     }
   },

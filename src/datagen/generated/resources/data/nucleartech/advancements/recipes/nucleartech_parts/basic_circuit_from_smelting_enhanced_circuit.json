@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:basic_circuit_from_smelting_enhanced_circuit"
+      "nucleartech:smelting/basic_circuit_from_smelting_enhanced_circuit"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:basic_circuit_from_smelting_enhanced_circuit"
+        "recipe": "nucleartech:smelting/basic_circuit_from_smelting_enhanced_circuit"
       }
     }
   },

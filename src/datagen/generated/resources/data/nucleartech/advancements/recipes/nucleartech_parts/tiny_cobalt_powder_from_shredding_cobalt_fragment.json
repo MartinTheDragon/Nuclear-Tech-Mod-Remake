@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:tiny_cobalt_powder_from_shredding_cobalt_fragment"
+      "nucleartech:shredding/tiny_cobalt_powder_from_shredding_cobalt_fragment"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:tiny_cobalt_powder_from_shredding_cobalt_fragment"
+        "recipe": "nucleartech:shredding/tiny_cobalt_powder_from_shredding_cobalt_fragment"
       }
     }
   },

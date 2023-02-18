@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:red_copper_wire_from_pressing_red_copper_ingot"
+      "nucleartech:pressing/red_copper_wire_from_pressing_red_copper_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:red_copper_wire_from_pressing_red_copper_ingot"
+        "recipe": "nucleartech:pressing/red_copper_wire_from_pressing_red_copper_ingot"
       }
     }
   },

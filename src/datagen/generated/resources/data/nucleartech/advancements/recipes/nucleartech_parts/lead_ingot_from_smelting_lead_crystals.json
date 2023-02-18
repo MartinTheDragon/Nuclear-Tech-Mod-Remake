@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lead_ingot_from_smelting_lead_crystals"
+      "nucleartech:smelting/lead_ingot_from_smelting_lead_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lead_ingot_from_smelting_lead_crystals"
+        "recipe": "nucleartech:smelting/lead_ingot_from_smelting_lead_crystals"
       }
     }
   },

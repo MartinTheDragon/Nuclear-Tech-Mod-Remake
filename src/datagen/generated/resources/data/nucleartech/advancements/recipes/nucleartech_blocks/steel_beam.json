@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:steel_beam"
+      "nucleartech:crafting/steel_beam"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:steel_beam"
+        "recipe": "nucleartech:crafting/steel_beam"
       }
     }
   },

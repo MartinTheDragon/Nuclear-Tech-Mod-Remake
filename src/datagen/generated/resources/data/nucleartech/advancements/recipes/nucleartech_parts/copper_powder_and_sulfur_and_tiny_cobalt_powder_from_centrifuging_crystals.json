@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:iron_powder_and_titanium_powder_and_tiny_lithium_powder_from_centrifuging_crystals_from_centrifuge"
+      "nucleartech:centrifuge/copper_powder_and_sulfur_and_tiny_cobalt_powder_from_centrifuging_crystals"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:crystals/iron"
+            "tag": "forge:crystals/copper"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:iron_powder_and_titanium_powder_and_tiny_lithium_powder_from_centrifuging_crystals_from_centrifuge"
+        "recipe": "nucleartech:centrifuge/copper_powder_and_sulfur_and_tiny_cobalt_powder_from_centrifuging_crystals"
       }
     }
   },

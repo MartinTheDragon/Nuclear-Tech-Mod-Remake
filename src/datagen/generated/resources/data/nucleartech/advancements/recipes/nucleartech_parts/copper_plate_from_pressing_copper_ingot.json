@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:copper_plate_from_pressing_copper_ingot"
+      "nucleartech:pressing/copper_plate_from_pressing_copper_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:copper_plate_from_pressing_copper_ingot"
+        "recipe": "nucleartech:pressing/copper_plate_from_pressing_copper_ingot"
       }
     }
   },

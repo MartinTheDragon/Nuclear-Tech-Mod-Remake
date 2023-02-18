@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:titanium_powder_from_shredding_titanium_ore"
+      "nucleartech:shredding/titanium_powder_from_shredding_titanium_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:titanium_powder_from_shredding_titanium_ore"
+        "recipe": "nucleartech:shredding/titanium_powder_from_shredding_titanium_ore"
       }
     }
   },

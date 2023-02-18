@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:magnetized_tungsten_ingot_from_smelting_magnetized_tungsten_powder"
+      "nucleartech:smelting/magnetized_tungsten_ingot_from_smelting_magnetized_tungsten_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:magnetized_tungsten_ingot_from_smelting_magnetized_tungsten_powder"
+        "recipe": "nucleartech:smelting/magnetized_tungsten_ingot_from_smelting_magnetized_tungsten_powder"
       }
     }
   },

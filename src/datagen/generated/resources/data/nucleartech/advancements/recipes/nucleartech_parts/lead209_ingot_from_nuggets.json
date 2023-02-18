@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lead209_ingot_from_nuggets"
+      "nucleartech:crafting/lead209_ingot_from_nuggets"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lead209_ingot_from_nuggets"
+        "recipe": "nucleartech:crafting/lead209_ingot_from_nuggets"
       }
     }
   },

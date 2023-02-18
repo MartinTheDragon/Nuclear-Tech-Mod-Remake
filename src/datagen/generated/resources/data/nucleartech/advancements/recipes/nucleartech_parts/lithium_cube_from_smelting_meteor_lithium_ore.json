@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lithium_cube_from_smelting_meteor_lithium_ore"
+      "nucleartech:smelting/lithium_cube_from_smelting_meteor_lithium_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lithium_cube_from_smelting_meteor_lithium_ore"
+        "recipe": "nucleartech:smelting/lithium_cube_from_smelting_meteor_lithium_ore"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schraranium_ingot_from_smelting_schraranium_crystals"
+      "nucleartech:smelting/schraranium_ingot_from_smelting_schraranium_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schraranium_ingot_from_smelting_schraranium_crystals"
+        "recipe": "nucleartech:smelting/schraranium_ingot_from_smelting_schraranium_crystals"
       }
     }
   },

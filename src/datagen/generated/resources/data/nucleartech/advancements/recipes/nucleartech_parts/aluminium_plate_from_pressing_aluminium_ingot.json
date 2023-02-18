@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:aluminium_plate_from_pressing_aluminium_ingot"
+      "nucleartech:pressing/aluminium_plate_from_pressing_aluminium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:aluminium_plate_from_pressing_aluminium_ingot"
+        "recipe": "nucleartech:pressing/aluminium_plate_from_pressing_aluminium_ingot"
       }
     }
   },

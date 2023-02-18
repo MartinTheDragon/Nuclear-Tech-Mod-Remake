@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:clay_ball_from_shredding_brick"
+      "nucleartech:shredding/clay_ball_from_shredding_brick"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:clay_ball_from_shredding_brick"
+        "recipe": "nucleartech:shredding/clay_ball_from_shredding_brick"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:saturnite_plate_from_pressing_saturnite_ingot"
+      "nucleartech:pressing/saturnite_plate_from_pressing_saturnite_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:saturnite_plate_from_pressing_saturnite_ingot"
+        "recipe": "nucleartech:pressing/saturnite_plate_from_pressing_saturnite_ingot"
       }
     }
   },

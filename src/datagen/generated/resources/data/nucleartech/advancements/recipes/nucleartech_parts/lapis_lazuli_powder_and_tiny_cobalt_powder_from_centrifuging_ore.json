@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lapis_lazuli_powder_and_tiny_cobalt_powder_from_centrifuging_ore"
+      "nucleartech:centrifuge/lapis_lazuli_powder_and_tiny_cobalt_powder_from_centrifuging_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lapis_lazuli_powder_and_tiny_cobalt_powder_from_centrifuging_ore"
+        "recipe": "nucleartech:centrifuge/lapis_lazuli_powder_and_tiny_cobalt_powder_from_centrifuging_ore"
       }
     }
   },

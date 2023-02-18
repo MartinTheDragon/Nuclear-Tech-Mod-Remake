@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:red_sand_from_shredding_red_sandstone"
+      "nucleartech:shredding/red_sand_from_shredding_red_sandstone"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:red_sand_from_shredding_red_sandstone"
+        "recipe": "nucleartech:shredding/red_sand_from_shredding_red_sandstone"
       }
     }
   },

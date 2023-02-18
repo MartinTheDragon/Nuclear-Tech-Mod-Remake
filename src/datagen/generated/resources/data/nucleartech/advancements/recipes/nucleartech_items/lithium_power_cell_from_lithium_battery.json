@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lithium_power_cell_from_lithium_battery"
+      "nucleartech:crafting/lithium_power_cell_from_lithium_battery"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lithium_power_cell_from_lithium_battery"
+        "recipe": "nucleartech:crafting/lithium_power_cell_from_lithium_battery"
       }
     }
   },

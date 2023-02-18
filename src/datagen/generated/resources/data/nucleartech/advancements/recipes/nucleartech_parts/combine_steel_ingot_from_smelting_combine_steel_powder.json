@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:combine_steel_ingot_from_smelting_combine_steel_powder"
+      "nucleartech:smelting/combine_steel_ingot_from_smelting_combine_steel_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:combine_steel_ingot_from_smelting_combine_steel_powder"
+        "recipe": "nucleartech:smelting/combine_steel_ingot_from_smelting_combine_steel_powder"
       }
     }
   },

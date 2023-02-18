@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:uranium233_ingot_from_u233_block"
+      "nucleartech:crafting/uranium233_ingot_from_u233_block"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:uranium233_ingot_from_u233_block"
+        "recipe": "nucleartech:crafting/uranium233_ingot_from_u233_block"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schrabidium_powder_from_shredding_schrabidium_ingot"
+      "nucleartech:shredding/schrabidium_powder_from_shredding_schrabidium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schrabidium_powder_from_shredding_schrabidium_ingot"
+        "recipe": "nucleartech:shredding/schrabidium_powder_from_shredding_schrabidium_ingot"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:empty_experience_bag"
+      "nucleartech:crafting/empty_experience_bag"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:empty_experience_bag"
+        "recipe": "nucleartech:crafting/empty_experience_bag"
       }
     }
   },

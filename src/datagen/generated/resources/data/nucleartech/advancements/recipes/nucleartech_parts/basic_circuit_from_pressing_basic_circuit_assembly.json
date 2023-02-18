@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:basic_circuit_from_pressing_basic_circuit_assembly"
+      "nucleartech:pressing/basic_circuit_from_pressing_basic_circuit_assembly"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:basic_circuit_from_pressing_basic_circuit_assembly"
+        "recipe": "nucleartech:pressing/basic_circuit_from_pressing_basic_circuit_assembly"
       }
     }
   },

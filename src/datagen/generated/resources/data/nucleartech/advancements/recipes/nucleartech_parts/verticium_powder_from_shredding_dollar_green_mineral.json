@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:verticium_powder_from_shredding_dollar_green_mineral"
+      "nucleartech:shredding/verticium_powder_from_shredding_dollar_green_mineral"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:verticium_powder_from_shredding_dollar_green_mineral"
+        "recipe": "nucleartech:shredding/verticium_powder_from_shredding_dollar_green_mineral"
       }
     }
   },

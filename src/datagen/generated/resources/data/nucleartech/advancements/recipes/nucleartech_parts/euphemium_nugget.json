@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:euphemium_nugget"
+      "nucleartech:crafting/euphemium_nugget"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:euphemium_nugget"
+        "recipe": "nucleartech:crafting/euphemium_nugget"
       }
     }
   },

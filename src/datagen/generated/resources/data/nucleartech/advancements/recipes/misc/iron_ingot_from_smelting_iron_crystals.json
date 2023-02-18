@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:iron_ingot_from_smelting_iron_crystals"
+      "nucleartech:smelting/iron_ingot_from_smelting_iron_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:iron_ingot_from_smelting_iron_crystals"
+        "recipe": "nucleartech:smelting/iron_ingot_from_smelting_iron_crystals"
       }
     }
   },

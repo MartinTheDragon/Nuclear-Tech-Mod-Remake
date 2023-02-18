@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:rbmk_rod_ueu"
+      "nucleartech:crafting/rbmk_rod_ueu"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:rbmk_rod_ueu"
+        "recipe": "nucleartech:crafting/rbmk_rod_ueu"
       }
     }
   },

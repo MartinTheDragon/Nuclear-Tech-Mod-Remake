@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gold_powder_from_shredding_gold_ore"
+      "nucleartech:shredding/gold_powder_from_shredding_gold_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gold_powder_from_shredding_gold_ore"
+        "recipe": "nucleartech:shredding/gold_powder_from_shredding_gold_ore"
       }
     }
   },

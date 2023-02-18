@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:rbmk_rod_les"
+      "nucleartech:crafting/rbmk_rod_les"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:rbmk_rod_les"
+        "recipe": "nucleartech:crafting/rbmk_rod_les"
       }
     }
   },

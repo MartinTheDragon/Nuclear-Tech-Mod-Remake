@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:weidanium_powder_from_shredding_weidite"
+      "nucleartech:shredding/weidanium_powder_from_shredding_weidite"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:weidanium_powder_from_shredding_weidite"
+        "recipe": "nucleartech:shredding/weidanium_powder_from_shredding_weidite"
       }
     }
   },

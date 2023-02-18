@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:iron_powder_from_centrifuging_netherrack_ore"
+      "nucleartech:centrifuge/iron_powder_from_centrifuging_netherrack_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:iron_powder_from_centrifuging_netherrack_ore"
+        "recipe": "nucleartech:centrifuge/iron_powder_from_centrifuging_netherrack_ore"
       }
     }
   },

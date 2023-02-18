@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:dineutronium_anvil"
+      "nucleartech:anvil_smithing/dineutronium_anvil"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:dineutronium_anvil"
+        "recipe": "nucleartech:anvil_smithing/dineutronium_anvil"
       }
     }
   },

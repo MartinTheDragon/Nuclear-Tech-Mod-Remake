@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:coated_red_copper_cable"
+      "nucleartech:crafting/coated_red_copper_cable"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:coated_red_copper_cable"
+        "recipe": "nucleartech:crafting/coated_red_copper_cable"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:tiny_nuclear_waste_from_billet"
+      "nucleartech:crafting/tiny_nuclear_waste_from_billet"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:tiny_nuclear_waste_from_billet"
+        "recipe": "nucleartech:crafting/tiny_nuclear_waste_from_billet"
       }
     }
   },

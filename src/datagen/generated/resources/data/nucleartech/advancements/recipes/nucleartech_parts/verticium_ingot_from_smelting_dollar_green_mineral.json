@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:verticium_ingot_from_smelting_dollar_green_mineral"
+      "nucleartech:smelting/verticium_ingot_from_smelting_dollar_green_mineral"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:verticium_ingot_from_smelting_dollar_green_mineral"
+        "recipe": "nucleartech:smelting/verticium_ingot_from_smelting_dollar_green_mineral"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:quartz_powder_from_shredding_quartz_pillar"
+      "nucleartech:shredding/quartz_powder_from_shredding_quartz_pillar"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:quartz_powder_from_shredding_quartz_pillar"
+        "recipe": "nucleartech:shredding/quartz_powder_from_shredding_quartz_pillar"
       }
     }
   },

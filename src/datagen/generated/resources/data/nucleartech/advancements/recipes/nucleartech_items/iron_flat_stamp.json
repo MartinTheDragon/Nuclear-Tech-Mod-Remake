@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:iron_flat_stamp"
+      "nucleartech:crafting/iron_flat_stamp"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:iron_flat_stamp"
+        "recipe": "nucleartech:crafting/iron_flat_stamp"
       }
     }
   },

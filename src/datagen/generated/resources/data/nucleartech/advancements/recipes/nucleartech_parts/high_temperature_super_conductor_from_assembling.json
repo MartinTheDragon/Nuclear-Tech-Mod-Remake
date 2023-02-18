@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:high_temperature_super_conductor_from_assembling"
+      "nucleartech:assembly/high_temperature_super_conductor_from_assembling"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:high_temperature_super_conductor_from_assembling"
+        "recipe": "nucleartech:assembly/high_temperature_super_conductor_from_assembling"
       }
     }
   },

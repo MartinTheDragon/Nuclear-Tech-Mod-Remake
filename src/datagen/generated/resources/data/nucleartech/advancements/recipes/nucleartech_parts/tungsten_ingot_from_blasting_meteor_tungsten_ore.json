@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:tungsten_ingot_from_blasting_meteor_tungsten_ore"
+      "nucleartech:smelting/tungsten_ingot_from_blasting_meteor_tungsten_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:tungsten_ingot_from_blasting_meteor_tungsten_ore"
+        "recipe": "nucleartech:smelting/tungsten_ingot_from_blasting_meteor_tungsten_ore"
       }
     }
   },

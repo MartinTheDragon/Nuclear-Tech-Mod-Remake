@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:steel_pipes"
+      "nucleartech:crafting/steel_pipes"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:steel_pipes"
+        "recipe": "nucleartech:crafting/steel_pipes"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:mox_fuel_ingot_from_isotope_nuggets"
+      "nucleartech:crafting/mox_fuel_ingot_from_isotope_nuggets"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:mox_fuel_ingot_from_isotope_nuggets"
+        "recipe": "nucleartech:crafting/mox_fuel_ingot_from_isotope_nuggets"
       }
     }
   },

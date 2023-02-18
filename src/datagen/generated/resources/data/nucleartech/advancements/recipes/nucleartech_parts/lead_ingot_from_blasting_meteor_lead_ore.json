@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lead_ingot_from_blasting_meteor_lead_ore"
+      "nucleartech:smelting/lead_ingot_from_blasting_meteor_lead_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lead_ingot_from_blasting_meteor_lead_ore"
+        "recipe": "nucleartech:smelting/lead_ingot_from_blasting_meteor_lead_ore"
       }
     }
   },

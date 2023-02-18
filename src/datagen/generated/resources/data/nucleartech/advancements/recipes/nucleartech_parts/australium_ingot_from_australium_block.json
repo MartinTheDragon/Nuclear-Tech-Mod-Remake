@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:australium_ingot_from_australium_block"
+      "nucleartech:crafting/australium_ingot_from_australium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:australium_ingot_from_australium_block"
+        "recipe": "nucleartech:crafting/australium_ingot_from_australium_block"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:asbestos_powder_from_shredding_asbestos_sheet"
+      "nucleartech:shredding/asbestos_powder_from_shredding_asbestos_sheet"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:asbestos_powder_from_shredding_asbestos_sheet"
+        "recipe": "nucleartech:shredding/asbestos_powder_from_shredding_asbestos_sheet"
       }
     }
   },

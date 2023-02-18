@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:enhanced_circuit_anvil_recycling"
+      "nucleartech:anvil_constructing/enhanced_circuit_anvil_recycling"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:enhanced_circuit_anvil_recycling"
+        "recipe": "nucleartech:anvil_constructing/enhanced_circuit_anvil_recycling"
       }
     }
   },

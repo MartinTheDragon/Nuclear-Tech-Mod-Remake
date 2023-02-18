@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_alloy_powder_from_shredding_advanced_alloy_ingot"
+      "nucleartech:shredding/advanced_alloy_powder_from_shredding_advanced_alloy_ingot"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_alloy_powder_from_shredding_advanced_alloy_ingot"
+        "recipe": "nucleartech:shredding/advanced_alloy_powder_from_shredding_advanced_alloy_ingot"
       }
     }
   },

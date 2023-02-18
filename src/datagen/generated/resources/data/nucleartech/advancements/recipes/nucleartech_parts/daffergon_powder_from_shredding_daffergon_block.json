@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:daffergon_powder_from_shredding_daffergon_block"
+      "nucleartech:shredding/daffergon_powder_from_shredding_daffergon_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:daffergon_powder_from_shredding_daffergon_block"
+        "recipe": "nucleartech:shredding/daffergon_powder_from_shredding_daffergon_block"
       }
     }
   },

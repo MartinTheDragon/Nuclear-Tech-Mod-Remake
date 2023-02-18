@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:trinitite_from_smelting_trinitite_ore"
+      "nucleartech:smelting/trinitite_from_smelting_trinitite_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:trinitite_from_smelting_trinitite_ore"
+        "recipe": "nucleartech:smelting/trinitite_from_smelting_trinitite_ore"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:machine_template_folder"
+      "nucleartech:crafting/machine_template_folder"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:machine_template_folder"
+        "recipe": "nucleartech:crafting/machine_template_folder"
       }
     }
   },

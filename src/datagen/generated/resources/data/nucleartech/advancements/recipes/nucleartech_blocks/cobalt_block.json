@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:cobalt_block"
+      "nucleartech:crafting/cobalt_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:cobalt_block"
+        "recipe": "nucleartech:crafting/cobalt_block"
       }
     }
   },

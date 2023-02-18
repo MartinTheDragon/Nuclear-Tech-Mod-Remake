@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lignite_powder_from_shredding_lignite"
+      "nucleartech:shredding/lignite_powder_from_shredding_lignite"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lignite_powder_from_shredding_lignite"
+        "recipe": "nucleartech:shredding/lignite_powder_from_shredding_lignite"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:uranium_billet_from_mixing_fuel_billets"
+      "nucleartech:crafting/uranium_billet_from_mixing_fuel_billets"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:uranium_billet_from_mixing_fuel_billets"
+        "recipe": "nucleartech:crafting/uranium_billet_from_mixing_fuel_billets"
       }
     }
   },

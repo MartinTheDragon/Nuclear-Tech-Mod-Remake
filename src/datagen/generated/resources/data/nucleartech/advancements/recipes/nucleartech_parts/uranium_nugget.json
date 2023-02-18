@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:uranium_nugget"
+      "nucleartech:crafting/uranium_nugget"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:uranium_nugget"
+        "recipe": "nucleartech:crafting/uranium_nugget"
       }
     }
   },

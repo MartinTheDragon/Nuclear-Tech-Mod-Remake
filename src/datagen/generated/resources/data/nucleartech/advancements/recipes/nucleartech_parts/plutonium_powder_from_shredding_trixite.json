@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:plutonium_powder_from_shredding_trixite"
+      "nucleartech:shredding/plutonium_powder_from_shredding_trixite"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:plutonium_powder_from_shredding_trixite"
+        "recipe": "nucleartech:shredding/plutonium_powder_from_shredding_trixite"
       }
     }
   },

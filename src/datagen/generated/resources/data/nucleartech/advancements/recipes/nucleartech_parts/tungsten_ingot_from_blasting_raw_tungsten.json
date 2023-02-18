@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:tungsten_ingot_from_blasting_raw_tungsten"
+      "nucleartech:smelting/tungsten_ingot_from_blasting_raw_tungsten"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:tungsten_ingot_from_blasting_raw_tungsten"
+        "recipe": "nucleartech:smelting/tungsten_ingot_from_blasting_raw_tungsten"
       }
     }
   },

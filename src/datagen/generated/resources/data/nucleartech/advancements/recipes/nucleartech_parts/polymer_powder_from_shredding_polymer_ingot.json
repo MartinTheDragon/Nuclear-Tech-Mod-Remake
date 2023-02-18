@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:polymer_powder_from_shredding_polymer_ingot"
+      "nucleartech:shredding/polymer_powder_from_shredding_polymer_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:polymer_powder_from_shredding_polymer_ingot"
+        "recipe": "nucleartech:shredding/polymer_powder_from_shredding_polymer_ingot"
       }
     }
   },

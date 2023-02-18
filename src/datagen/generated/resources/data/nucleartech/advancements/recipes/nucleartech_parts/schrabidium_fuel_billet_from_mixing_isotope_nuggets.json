@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schrabidium_fuel_billet_from_mixing_isotope_nuggets"
+      "nucleartech:crafting/schrabidium_fuel_billet_from_mixing_isotope_nuggets"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schrabidium_fuel_billet_from_mixing_isotope_nuggets"
+        "recipe": "nucleartech:crafting/schrabidium_fuel_billet_from_mixing_isotope_nuggets"
       }
     }
   },

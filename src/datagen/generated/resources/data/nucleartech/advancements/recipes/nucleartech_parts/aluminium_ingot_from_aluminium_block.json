@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:aluminium_ingot_from_aluminium_block"
+      "nucleartech:crafting/aluminium_ingot_from_aluminium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:aluminium_ingot_from_aluminium_block"
+        "recipe": "nucleartech:crafting/aluminium_ingot_from_aluminium_block"
       }
     }
   },

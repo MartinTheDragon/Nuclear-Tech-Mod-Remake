@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:thorium_fuel_billet_from_nuggets"
+      "nucleartech:crafting/thorium_fuel_billet_from_nuggets"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:thorium_fuel_billet_from_nuggets"
+        "recipe": "nucleartech:crafting/thorium_fuel_billet_from_nuggets"
       }
     }
   },

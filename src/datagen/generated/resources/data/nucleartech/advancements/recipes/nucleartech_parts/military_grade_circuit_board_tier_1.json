@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:military_grade_circuit_board_tier_1"
+      "nucleartech:crafting/military_grade_circuit_board_tier_1"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:military_grade_circuit_board_tier_1"
+        "recipe": "nucleartech:crafting/military_grade_circuit_board_tier_1"
       }
     }
   },

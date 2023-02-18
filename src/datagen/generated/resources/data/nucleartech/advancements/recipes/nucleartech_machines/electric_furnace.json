@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:electric_furnace"
+      "nucleartech:crafting/electric_furnace"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:electric_furnace"
+        "recipe": "nucleartech:crafting/electric_furnace"
       }
     }
   },

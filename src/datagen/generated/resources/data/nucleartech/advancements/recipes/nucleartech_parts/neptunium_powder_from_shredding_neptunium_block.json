@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:neptunium_powder_from_shredding_neptunium_block"
+      "nucleartech:shredding/neptunium_powder_from_shredding_neptunium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:neptunium_powder_from_shredding_neptunium_block"
+        "recipe": "nucleartech:shredding/neptunium_powder_from_shredding_neptunium_block"
       }
     }
   },

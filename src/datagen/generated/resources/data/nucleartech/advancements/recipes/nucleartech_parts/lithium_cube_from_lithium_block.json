@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lithium_cube_from_lithium_block"
+      "nucleartech:crafting/lithium_cube_from_lithium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lithium_cube_from_lithium_block"
+        "recipe": "nucleartech:crafting/lithium_cube_from_lithium_block"
       }
     }
   },

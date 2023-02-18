@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:neutron_reflector_from_tungsten_ingot_and_coal"
+      "nucleartech:blasting/neutron_reflector_from_tungsten_ingot_and_coal"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:neutron_reflector_from_tungsten_ingot_and_coal"
+        "recipe": "nucleartech:blasting/neutron_reflector_from_tungsten_ingot_and_coal"
       }
     }
   },

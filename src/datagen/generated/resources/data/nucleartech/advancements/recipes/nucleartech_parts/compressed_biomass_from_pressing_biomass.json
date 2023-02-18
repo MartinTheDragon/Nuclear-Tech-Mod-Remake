@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:compressed_biomass_from_pressing_biomass"
+      "nucleartech:pressing/compressed_biomass_from_pressing_biomass"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:compressed_biomass_from_pressing_biomass"
+        "recipe": "nucleartech:pressing/compressed_biomass_from_pressing_biomass"
       }
     }
   },

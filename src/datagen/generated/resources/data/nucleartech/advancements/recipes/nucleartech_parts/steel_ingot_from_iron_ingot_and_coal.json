@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:steel_ingot_from_iron_ingot_and_coal"
+      "nucleartech:blasting/steel_ingot_from_iron_ingot_and_coal"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:steel_ingot_from_iron_ingot_and_coal"
+        "recipe": "nucleartech:blasting/steel_ingot_from_iron_ingot_and_coal"
       }
     }
   },

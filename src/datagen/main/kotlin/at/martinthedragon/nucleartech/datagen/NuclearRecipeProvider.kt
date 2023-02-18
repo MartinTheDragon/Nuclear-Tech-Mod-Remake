@@ -3,15 +3,18 @@ package at.martinthedragon.nucleartech.datagen
 import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.recipe.*
 import at.martinthedragon.nucleartech.extensions.appendToPath
+import at.martinthedragon.nucleartech.extensions.prependToPath
 import at.martinthedragon.nucleartech.fluid.NTechFluids
 import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.recipe.PressingRecipe
 import at.martinthedragon.nucleartech.recipe.RecipeSerializers
+import at.martinthedragon.nucleartech.recipe.RecipeTypes
 import at.martinthedragon.nucleartech.recipe.StackedIngredient
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.core.Registry
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.recipes.*
 import net.minecraft.tags.ItemTags
@@ -21,6 +24,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.common.Tags
@@ -28,7 +32,6 @@ import net.minecraftforge.common.crafting.CompoundIngredient
 import net.minecraftforge.common.crafting.DifferenceIngredient
 import net.minecraftforge.common.crafting.IntersectionIngredient
 import net.minecraftforge.fluids.FluidStack
-import net.minecraftforge.registries.ForgeRegistries
 import java.util.function.Consumer
 import at.martinthedragon.nucleartech.datagen.recipe.AnvilConstructingRecipeBuilder as AnvilRecipeBuilder
 import at.martinthedragon.nucleartech.recipe.anvil.AnvilConstructingRecipe.OverlayType as AnvilRecipeType
@@ -42,6 +45,22 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
         SpecialRecipeBuilder.special(RecipeSerializers.SMITHING_RENAMING.get()).save(consumer, ntm("anvil_smithing_renaming").toString())
 
+        crafting(consumer)
+        cooking(consumer)
+        pressing(consumer)
+        blasting(consumer)
+        shredding(consumer)
+        anvilSmithing(consumer)
+        anvilConstructing(consumer)
+        assembling(consumer)
+        chemistry(consumer)
+        centrifuging(consumer)
+    }
+
+    private fun crafting(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.CRAFTING.createPipe(actualConsumer)
+        // Parts
+
         ShapelessRecipeBuilder.shapeless(NTechItems.schrabidiumFuelIngot.get()).requires(NTechItems.schrabidiumNugget.get(), 3).requires(NTechTags.Items.NUGGETS_NEPTUNIUM, 3).requires(NTechTags.Items.NUGGETS_BERYLLIUM, 3).group("schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(NTechItems.schrabidiumNugget.get())).save(consumer, ntm("schrabidium_fuel_ingot_from_isotope_nuggets"))
         ShapelessRecipeBuilder.shapeless(NTechItems.highEnrichedSchrabidiumFuelIngot.get()).requires(NTechItems.schrabidiumNugget.get(), 5).requires(NTechTags.Items.NUGGETS_NEPTUNIUM, 2).requires(NTechTags.Items.NUGGETS_BERYLLIUM, 2).group("high_enriched_schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(NTechItems.schrabidiumNugget.get())).save(consumer, ntm("high_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"))
         ShapelessRecipeBuilder.shapeless(NTechItems.lowEnrichedSchrabidiumFuelIngot.get()).requires(NTechItems.schrabidiumNugget.get()).requires(NTechTags.Items.NUGGETS_NEPTUNIUM, 4).requires(NTechTags.Items.NUGGETS_BERYLLIUM, 4).group("low_enriched_schrabidium_fuel_ingot").unlockedBy("has_schrabidium_nugget", has(NTechItems.schrabidiumNugget.get())).save(consumer, ntm("low_enriched_schrabidium_fuel_ingot_from_isotope_nuggets"))
@@ -51,84 +70,251 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ShapelessRecipeBuilder.shapeless(NTechItems.uraniumFuelIngot.get()).requires(NTechItems.u238Nugget.get(), 6).requires(NTechItems.u233Nugget.get(), 3).group("uranium_fuel_ingot").unlockedBy("has_u238_nugget", has(NTechItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_ingot_from_isotope_nuggets_u233"))
         ShapelessRecipeBuilder.shapeless(NTechItems.uraniumFuelIngot.get()).requires(NTechItems.u238Nugget.get(), 6).requires(NTechItems.u235Nugget.get(), 3).group("uranium_fuel_ingot").unlockedBy("has_u238_nugget", has(NTechItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_ingot_from_isotope_nuggets_u235"))
 
-        // TODO a lot of repeating stuff here. maybe this could be simplified?
+        ShapelessRecipeBuilder(NTechItems.uraniumBillet.get(), 2).requires(NTechItems.u238Billet.get()).requires(NTechItems.u238Nugget.get(), 5).requires(NTechItems.u235Nugget.get()).group(NTechItems.uraniumBillet.id.path).unlockedBy("has_u238_billet", has(NTechItems.u238Billet.get())).save(consumer, ntm("uranium_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.uraniumBillet.get(), 2).requires(NTechItems.uraniumFuelBillet.get()).requires(NTechItems.u238Billet.get()).group(NTechItems.uraniumBillet.id.path).unlockedBy("has_uranium_fuel_billet", has(NTechItems.uraniumFuelBillet.get())).save(consumer, ntm("uranium_billet_from_mixing_fuel_billets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradePlutoniumBillet.get(), 1).requires(NTechItems.pu238Nugget.get(), 4).requires(NTechItems.pu240Nugget.get(), 2).group(NTechItems.reactorGradePlutoniumBillet.id.path).unlockedBy("has_pu239_nugget", has(NTechItems.pu239Nugget.get())).save(consumer, ntm("reactor_grade_plutonium_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradePlutoniumBillet.get(), 3).requires(NTechItems.pu239Billet.get(), 2).requires(NTechItems.pu240Billet.get()).group(NTechItems.reactorGradePlutoniumBillet.id.path).unlockedBy("has_pu239_billet", has(NTechItems.pu239Billet.get())).save(consumer, ntm("reactor_grade_plutonium_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradeAmericiumBillet.get(), 1).requires(NTechItems.americium241Nugget.get(), 2).requires(NTechItems.americium242Nugget.get(), 4).group(NTechItems.reactorGradeAmericiumBillet.id.path).unlockedBy("has_am242_nugget", has(NTechItems.americium242Nugget.get())).save(consumer, ntm("reactor_grade_americium_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.reactorGradeAmericiumBillet.get(), 3).requires(NTechItems.americium241Billet.get()).requires(NTechItems.americium242Billet.get(), 2).group(NTechItems.reactorGradeAmericiumBillet.id.path).unlockedBy("has_am242_billet", has(NTechItems.americium242Billet.get())).save(consumer, ntm("reactor_grade_americium_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.uraniumFuelBillet.get(), 1).requires(NTechItems.u238Nugget.get(), 5).requires(NTechItems.u235Nugget.get()).group(NTechItems.uraniumFuelBillet.id.path).unlockedBy("has_u238_nugget", has(NTechItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.uraniumFuelBillet.get(), 6).requires(NTechItems.u238Billet.get(), 5).requires(NTechItems.u235Billet.get()).group(NTechItems.uraniumFuelBillet.id.path).unlockedBy("has_u238_billet", has(NTechItems.u238Billet.get())).save(consumer, ntm("uranium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.thoriumFuelBillet.get(), 1).requires(NTechItems.th232Nugget.get(), 5).requires(NTechItems.u233Nugget.get()).group(NTechItems.thoriumFuelBillet.id.path).unlockedBy("has_th232_nugget", has(NTechItems.th232Nugget.get())).save(consumer, ntm("thorium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.thoriumFuelBillet.get(), 6).requires(NTechItems.th232Billet.get(), 5).requires(NTechItems.u233Billet.get()).group(NTechItems.thoriumFuelBillet.id.path).unlockedBy("has_th232_billet", has(NTechItems.th232Billet.get())).save(consumer, ntm("thorium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.plutoniumFuelBillet.get(), 1).requires(NTechItems.reactorGradePlutoniumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.plutoniumFuelBillet.id.path).unlockedBy("has_reactor_grade_plutonium_nugget", has(NTechItems.reactorGradePlutoniumNugget.get())).save(consumer, ntm("plutonium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.plutoniumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.reactorGradePlutoniumBillet.get()).group(NTechItems.plutoniumFuelBillet.id.path).unlockedBy("has_reactor_grade_plutonium_billet", has(NTechItems.reactorGradePlutoniumBillet.get())).save(consumer, ntm("plutonium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.neptuniumFuelBillet.get(), 1).requires(NTechItems.neptuniumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.neptuniumFuelBillet.id.path).unlockedBy("has_neptunium_nugget", has(NTechItems.neptuniumNugget.get())).save(consumer, ntm("neptunium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.neptuniumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.neptuniumBillet.get()).group(NTechItems.neptuniumFuelBillet.id.path).unlockedBy("has_neptunium_billet", has(NTechItems.neptuniumBillet.get())).save(consumer, ntm("neptunium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.moxFuelBillet.get(), 1).requires(NTechItems.reactorGradePlutoniumNugget.get(), 2).requires(NTechItems.uraniumFuelNugget.get(), 4).group(NTechItems.moxFuelBillet.id.path).unlockedBy("has_uranium_fuel_nugget", has(NTechItems.uraniumFuelNugget.get())).save(consumer, ntm("mox_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.moxFuelBillet.get(), 3).requires(NTechItems.uraniumFuelBillet.get(), 2).requires(NTechItems.reactorGradePlutoniumBillet.get()).group(NTechItems.moxFuelBillet.id.path).unlockedBy("has_uranium_fuel_billet", has(NTechItems.uraniumFuelBillet.get())).save(consumer, ntm("mox_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.americiumFuelBillet.get(), 1).requires(NTechItems.reactorGradeAmericiumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.americiumFuelBillet.id.path).unlockedBy("has_reactor_grade_americium_nugget", has(NTechItems.reactorGradeAmericiumNugget.get())).save(consumer, ntm("americium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.americiumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.reactorGradeAmericiumBillet.get()).group(NTechItems.americiumFuelBillet.id.path).unlockedBy("has_reactor_grade_americium_billet", has(NTechItems.reactorGradeAmericiumBillet.get())).save(consumer, ntm("americium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.schrabidiumFuelBillet.get(), 1).requires(NTechItems.schrabidiumNugget.get(), 2).requires(NTechItems.neptuniumNugget.get(), 2).requires(NTechItems.berylliumNugget.get(), 2).group(NTechItems.schrabidiumFuelBillet.id.path).unlockedBy("has_schrabidium_nugget", has(NTechItems.schrabidiumNugget.get())).save(consumer, ntm("schrabidium_fuel_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.schrabidiumFuelBillet.get(), 3).requires(NTechItems.schrabidiumBillet.get()).requires(NTechItems.neptuniumBillet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.schrabidiumFuelBillet.id.path).unlockedBy("has_schrabidium_billet", has(NTechItems.schrabidiumBillet.get())).save(consumer, ntm("schrabidium_fuel_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 1).requires(NTechItems.poloniumNugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_nugget", has(NTechItems.poloniumNugget.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 2).requires(NTechItems.poloniumBillet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_billet", has(NTechItems.poloniumBillet.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 6).requires(NTechItems.poloniumBillet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_billet", has(NTechItems.poloniumBillet.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_billets_extra"))
+        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 1).requires(NTechItems.radium226Nugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_nugget", has(NTechItems.radium226Nugget.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 2).requires(NTechItems.radium226Billet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_billet", has(NTechItems.radium226Billet.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 6).requires(NTechItems.radium226Billet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_billet", has(NTechItems.radium226Billet.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_billets_extra"))
+        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 1).requires(NTechItems.pu238Nugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_nugget", has(NTechItems.pu238Nugget.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_nuggets"))
+        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 2).requires(NTechItems.pu238Billet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_billet", has(NTechItems.pu238Billet.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_billets"))
+        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 6).requires(NTechItems.pu238Billet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_billet", has(NTechItems.pu238Billet.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_billets_extra"))
+
         RuleBasedRecipeBuilder.create {
             forModTagsAndMaterials()
             addRule { tagGroup -> // blocks to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (blockTag, blockItem) = tagGroup.blockTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(blockTag, blockItem) ?: return@addRule null
-                ShapelessRecipeBuilder.shapeless(ingot, 9).requires(ingredient).group(getItemName(ingot)).unlockedBy(getHasName(blockTag, blockItem), condition) to ntm(getConversionRecipeName(ingot, blockTag, blockItem))
+                ShapelessRecipeBuilder.shapeless(ingot, 9).requires(ingredient).group(getItemName(ingot)).unlockedBy(getHasName(blockItem), condition) to ntm(getConversionRecipeName(ingot, blockItem))
             }
             addRule { tagGroup -> // ingots to blocks
                 val block = tagGroup.materialGroup.block() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                ShapedRecipeBuilder.shaped(block).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(block)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm(getItemName(block))
+                ShapedRecipeBuilder.shaped(block).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(block)).unlockedBy(getHasName(ingotItem), condition) to ntm(getItemName(block))
             }
             addRule { tagGroup -> // nuggets to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (nuggetTag, nuggetItem) = tagGroup.nuggetTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(nuggetTag, nuggetItem) ?: return@addRule null
-                ShapedRecipeBuilder.shaped(ingot).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(ingot)).unlockedBy(getHasName(nuggetTag, nuggetItem), condition) to ntm("${getItemName(ingot)}_from_nuggets")
+                ShapedRecipeBuilder.shaped(ingot).define('#', ingredient).pattern("###").pattern("###").pattern("###").group(getItemName(ingot)).unlockedBy(getHasName(nuggetItem), condition) to ntm("${getItemName(ingot)}_from_nuggets")
             }
             addRule { tagGroup -> // ingots to nuggets
                 val nugget = tagGroup.materialGroup.nugget() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                ShapelessRecipeBuilder.shapeless(nugget, 9).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm(getItemName(nugget))
+                ShapelessRecipeBuilder.shapeless(nugget, 9).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(ingotItem), condition) to ntm(getItemName(nugget))
             }
             addRule { tagGroup -> // ingots to billets
                 val billet = tagGroup.materialGroup.billet() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                ShapedRecipeBuilder.shaped(billet, 3).define('#', ingredient).pattern("##").group(getItemName(billet)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(billet)}_from_ingots")
+                ShapedRecipeBuilder.shaped(billet, 3).define('#', ingredient).pattern("##").group(getItemName(billet)).unlockedBy(getHasName(ingotItem), condition) to ntm("${getItemName(billet)}_from_ingots")
             }
             addRule { tagGroup -> // billets to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (billetTag, billetItem) = tagGroup.billetTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(billetTag, billetItem) ?: return@addRule null
-                ShapelessRecipeBuilder.shapeless(ingot, 2).requires(ingredient, 3).group(getItemName(ingot)).unlockedBy(getHasName(billetTag, billetItem), condition) to ntm("${getItemName(ingot)}_from_billets")
+                ShapelessRecipeBuilder.shapeless(ingot, 2).requires(ingredient, 3).group(getItemName(ingot)).unlockedBy(getHasName(billetItem), condition) to ntm("${getItemName(ingot)}_from_billets")
             }
             addRule { tagGroup -> // nuggets to billets
                 val billet = tagGroup.materialGroup.billet() ?: return@addRule null
                 val (nuggetTag, nuggetItem) = tagGroup.nuggetTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(nuggetTag, nuggetItem) ?: return@addRule null
-                ShapedRecipeBuilder.shaped(billet).define('#', ingredient).pattern("###").pattern("###").group(getItemName(billet)).unlockedBy(getHasName(nuggetTag, nuggetItem), condition) to ntm("${getItemName(billet)}_from_nuggets")
+                ShapedRecipeBuilder.shaped(billet).define('#', ingredient).pattern("###").pattern("###").group(getItemName(billet)).unlockedBy(getHasName(nuggetItem), condition) to ntm("${getItemName(billet)}_from_nuggets")
             }
             addRule { tagGroup -> // billets to nuggets
                 val nugget = tagGroup.materialGroup.nugget() ?: return@addRule null
                 val (billetTag, billetItem) = tagGroup.billetTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(billetTag, billetItem) ?: return@addRule null
-                ShapelessRecipeBuilder.shapeless(nugget, 6).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(billetTag, billetItem), condition) to ntm("${getItemName(nugget)}_from_billet")
+                ShapelessRecipeBuilder.shapeless(nugget, 6).requires(ingredient).group(getItemName(nugget)).unlockedBy(getHasName(billetItem), condition) to ntm("${getItemName(nugget)}_from_billet")
             }
+        }.build(consumer)
+
+        ShapedRecipeBuilder.shaped(NTechBlockItems.siren.get()).define('S', NTechTags.Items.PLATES_STEEL).define('I', NTechTags.Items.PLATES_INSULATOR).define('C', NTechItems.enhancedCircuit.get()).define('R', Tags.Items.DUSTS_REDSTONE).pattern("SIS").pattern("ICI").pattern("SRS").group(NTechBlockItems.siren.id.path).unlockedBy("has_${NTechItems.enhancedCircuit.id.path}", has(NTechItems.enhancedCircuit.get())).save(consumer, NTechBlockItems.siren.id)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.steamPress.get()).define('I', Tags.Items.INGOTS_IRON).define('F', Items.FURNACE).define('P', Items.PISTON).define('B', Tags.Items.STORAGE_BLOCKS_IRON).pattern("IFI").pattern("IPI").pattern("IBI").group(NTechBlockItems.steamPress.id.path).unlockedBy("has_${Items.PISTON.registryName!!.path}", has(Items.PISTON)).save(consumer, NTechBlockItems.steamPress.id)
+//        ShapedRecipeBuilder.shaped(NTechBlockItems.blastFurnace.get()).define('T', NTechTags.Items.INGOTS_TUNGSTEN).define('C', NTechItems.copperPanel.get()).define('H', Items.HOPPER).define('F', Items.FURNACE).pattern("T T").pattern("CHC").pattern("TFT").group(NTechBlockItems.blastFurnace.id.path).unlockedBy("has_${NTechItems.tungstenIngot.get()}", has(NTechTags.Items.INGOTS_TUNGSTEN)).save(consumer, NTechBlockItems.blastFurnace.id)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.combustionGenerator.get()).define('S', NTechTags.Items.INGOTS_STEEL).define('T', NTechItems.steelTank.get()).define('C', NTechItems.redCopperIngot.get()).define('F', Items.FURNACE).pattern("STS").pattern("SCS").pattern("SFS").group(NTechBlockItems.combustionGenerator.id.path).unlockedBy("has_${NTechItems.redCopperIngot.id.path}", has(NTechItems.redCopperIngot.get())).save(consumer, NTechBlockItems.combustionGenerator.id)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.electricFurnace.get()).define('B', NTechTags.Items.INGOTS_BERYLLIUM).define('C', NTechItems.copperPanel.get()).define('F', Items.FURNACE).define('H', NTechItems.heatingCoil.get()).pattern("BBB").pattern("CFC").pattern("HHH").group(NTechBlockItems.electricFurnace.id.path).unlockedBy("has_${NTechItems.berylliumIngot.id.path}", has(NTechTags.Items.INGOTS_BERYLLIUM)).save(consumer, NTechBlockItems.electricFurnace.id)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.coatedCable.get()).define('C', NTechTags.Items.INGOTS_RED_COPPER).define('W', NTechTags.Items.WIRES_RED_COPPER).define('I', NTechTags.Items.PLATES_INSULATOR).pattern("IWI").pattern("WCW").pattern("IWI").group(NTechBlockItems.coatedCable.id.path).unlockedBy("has_red_copper", has(NTechTags.Items.INGOTS_RED_COPPER)).save(consumer)
+
+        ShapedRecipeBuilder.shaped(NTechItems.copperPanel.get()).define('C', NTechTags.Items.PLATES_COPPER).pattern("CCC").pattern("CCC").group(NTechItems.copperPanel.id.path).unlockedBy("has${NTechItems.copperPlate.id.path}", has(NTechTags.Items.PLATES_COPPER)).save(consumer, NTechItems.copperPanel.id)
+        ShapedRecipeBuilder.shaped(NTechItems.highSpeedSteelBolt.get(), 4).define('S', NTechTags.Items.INGOTS_HIGH_SPEED_STEEL).pattern("S").pattern("S").unlockedBy("has_high_speed_steel", has(NTechTags.Items.INGOTS_HIGH_SPEED_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.copperCoil.get()).define('W', NTechTags.Items.WIRES_RED_COPPER).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.copperCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_RED_COPPER)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.superConductingCoil.get()).define('W', NTechTags.Items.WIRES_SUPER_CONDUCTOR).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.superConductingCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_SUPER_CONDUCTOR)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.goldCoil.get()).define('W', NTechTags.Items.WIRES_GOLD).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.goldCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_GOLD)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.highTemperatureSuperConductingCoil.get()).define('W', NTechTags.Items.WIRES_MAGNETIZED_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.highTemperatureSuperConductingCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_MAGNETIZED_TUNGSTEN)).save(consumer)
+        ringCoilRecipe(NTechItems.ringCoil.get(), NTechItems.copperCoil.get(), consumer)
+        ringCoilRecipe(NTechItems.superConductingRingCoil.get(), NTechItems.superConductingCoil.get(), consumer)
+        ringCoilRecipe(NTechItems.goldRingCoil.get(), NTechItems.goldCoil.get(), consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.steelPipes.get()).define('S', NTechTags.Items.STORAGE_BLOCKS_STEEL).pattern("S").pattern("S").pattern("S").unlockedBy("has_steel_block", has(NTechTags.Items.STORAGE_BLOCKS_STEEL)).save(consumer)
+
+        ShapedRecipeBuilder.shaped(NTechItems.smallSteelShell.get(), 3).define('P', NTechTags.Items.PLATES_STEEL).pattern("PPP").pattern("   ").pattern("PPP").unlockedBy("has_plate", has(NTechTags.Items.PLATES_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.smallAluminiumShell.get(), 3).define('P', NTechTags.Items.PLATES_ALUMINIUM).pattern("PPP").pattern("   ").pattern("PPP").unlockedBy("has_plate", has(NTechTags.Items.PLATES_ALUMINIUM)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.bigSteelShell.get()).define('I', NTechTags.Items.INGOTS_STEEL).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.bigAluminiumShell.get()).define('I', NTechTags.Items.INGOTS_ALUMINIUM).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_ALUMINIUM)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.bigTitaniumShell.get()).define('I', NTechTags.Items.INGOTS_TITANIUM).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_TITANIUM)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.basicCircuitAssembly.get()).define('W', NTechTags.Items.WIRES_ALUMINIUM).define('R', Tags.Items.DUSTS_REDSTONE).define('P', NTechTags.Items.PLATES_STEEL).pattern("W").pattern("R").pattern("P").unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer)
+
+        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier1.get()).define('C', NTechItems.basicCircuit.get()).define('D', Tags.Items.DUSTS_REDSTONE).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.basicCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier2.get()).define('C', NTechItems.enhancedCircuit.get()).define('D', NTechTags.Items.DUSTS_QUARTZ).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.enhancedCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier3.get()).define('C', NTechItems.advancedCircuit.get()).define('D', NTechTags.Items.DUSTS_GOLD).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.advancedCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier4.get()).define('C', NTechItems.overclockedCircuit.get()).define('D', NTechTags.Items.DUSTS_LAPIS).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.overclockedCircuit.get())).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier5.get()).define('C', NTechItems.highPerformanceCircuit.get()).define('D', NTechTags.Items.DUSTS_DIAMOND).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.highPerformanceCircuit.get())).save(consumer)
+        ShapelessRecipeBuilder.shapeless(NTechItems.basicCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier1.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier1.get())).save(consumer, ntm("${getItemName(NTechItems.basicCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.enhancedCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier2.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier2.get())).save(consumer, ntm("${getItemName(NTechItems.enhancedCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.advancedCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier3.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier3.get())).save(consumer, ntm("${getItemName(NTechItems.advancedCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.overclockedCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier4.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier4.get())).save(consumer, ntm("${getItemName(NTechItems.overclockedCircuit.get())}_from_military_grade"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.highPerformanceCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier5.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier5.get())).save(consumer, ntm("${getItemName(NTechItems.highPerformanceCircuit.get())}_from_military_grade"))
+        ShapedRecipeBuilder.shaped(NTechItems.deshCompoundPlate.get()).define('P', NTechTags.Items.DUSTS_POLYMER).define('D', NTechItems.deshIngot.get()).define('S', NTechItems.highSpeedSteelIngot.get()).pattern("PDP").pattern("DSD").pattern("PDP").group(NTechItems.deshCompoundPlate.id.path).unlockedBy("has_${NTechItems.deshIngot.id.path}", has(NTechItems.deshIngot.get())).save(consumer, NTechItems.deshCompoundPlate.id)
+        ShapedRecipeBuilder.shaped(NTechItems.heatingCoil.get()).define('T', NTechTags.Items.WIRES_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("TTT").pattern("TIT").pattern("TTT").group(NTechItems.heatingCoil.id.path).unlockedBy("has_${NTechItems.tungstenWire.get()}", has(NTechTags.Items.WIRES_TUNGSTEN)).save(consumer, NTechItems.heatingCoil.id)
+        ShapedRecipeBuilder.shaped(NTechItems.insulator.get(), 4).define('S', Tags.Items.STRING).define('W', ItemTags.WOOL).pattern("SWS").group(getItemName(NTechItems.insulator.get())).unlockedBy("has_wool", has(ItemTags.WOOL)).save(consumer, ntm("insulator_from_wool"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 4).requires(Tags.Items.INGOTS_BRICK, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_brick", has(Tags.Items.INGOTS_BRICK)).save(consumer, ntm("insulator_from_bricks"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 8).requires(NTechTags.Items.INGOTS_POLYMER, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_polymer", has(NTechTags.Items.INGOTS_POLYMER)).save(consumer, ntm("insulator_from_polymer"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 16).requires(NTechTags.Items.INGOTS_ASBESTOS, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_yummy", has(NTechTags.Items.INGOTS_ASBESTOS)).save(consumer, ntm("insulator_from_asbestos"))
+        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 16).requires(NTechTags.Items.INGOTS_FIBERGLASS, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_fiberglass", has(NTechTags.Items.INGOTS_FIBERGLASS)).save(consumer, ntm("insulator_from_fiberglass"))
+        ShapedRecipeBuilder.shaped(NTechItems.steelTank.get(), 2).define('S', NTechTags.Items.PLATES_STEEL).define('T', NTechTags.Items.PLATES_TITANIUM).pattern("STS").pattern("S S").pattern("STS").group(NTechItems.steelTank.id.path).unlockedBy("has_${NTechItems.steelPlate.id.path}", has(NTechTags.Items.PLATES_STEEL)).save(consumer, NTechItems.steelTank.id)
+
+        // Machine Items
+
+        with (NTechTags.Items) {
+            with(BatteryRecipeBuilder) {
+                battery(consumer, NTechItems.battery.get(), WIRES_ALUMINIUM, PLATES_ALUMINIUM, Tags.Items.DUSTS_REDSTONE, extra = arrayOf(NTechItems.redstonePowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.sixfoldRedstonePowerCell.get() to arrayOf("BBB", "WPW", "BBB"), NTechItems.twentyFourFoldRedstonePowerCell.get() to arrayOf("BWB", "WPW", "BWB")))
+                battery(consumer, NTechItems.advancedBattery.get(), WIRES_RED_COPPER, PLATES_COPPER, DUSTS_SULFUR, DUSTS_LEAD, extra = arrayOf(NTechItems.advancedPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.quadrupleAdvancedPowerCell.get() to arrayOf("BWB", "WPW", "BWB"), NTechItems.twelveFoldAdvancedPowerCell.get() to arrayOf("WPW", "BBB", "WPW")))
+                battery(consumer, NTechItems.lithiumBattery.get(), WIRES_GOLD, PLATES_TITANIUM, DUSTS_LITHIUM, DUSTS_COBALT, arrayOf("W W", "PXP", "PYP"), extra = arrayOf(NTechItems.lithiumPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.tripleLithiumPowerCell.get() to arrayOf("WPW", "BBB", "WPW"), NTechItems.sixfoldLithiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW")))
+                battery(consumer, NTechItems.schrabidiumBattery.get(), WIRES_SCHRABIDIUM, PLATES_SCHRABIDIUM, DUSTS_NEPTUNIUM, DUSTS_SCHRABIDIUM, extra = arrayOf(NTechItems.schrabidiumPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.doubleSchrabidiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW"), NTechItems.quadrupleSchrabidiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW")))
+                battery(consumer, NTechItems.sparkBattery.get(), Ingredient.of(WIRES_MAGNETIZED_TUNGSTEN), Ingredient.of(NTechItems.dineutroniumCompoundPlate.get()), Ingredient.of(NTechItems.sparkMix.get()), criterion = has(NTechItems.sparkMix.get()), extra = arrayOf(NTechItems.sparkPowerCell.get() to arrayOf("BBW", "BBP", "BBW"), NTechItems.sparkArcaneCarBattery.get() to arrayOf(" WW", "PBB", "BBB")))
+            }
+        }
+
+        pressStamp(Tags.Items.STONE, NTechItems.stoneFlatStamp.get(), consumer)
+        pressStamp(Tags.Items.INGOTS_IRON, NTechItems.ironFlatStamp.get(), consumer)
+        pressStamp(NTechTags.Items.INGOTS_STEEL, NTechItems.steelFlatStamp.get(), consumer)
+        pressStamp(NTechTags.Items.INGOTS_TITANIUM, NTechItems.titaniumFlatStamp.get(), consumer)
+        pressStamp(Tags.Items.OBSIDIAN, NTechItems.obsidianFlatStamp.get(), consumer)
+        pressStamp(NTechTags.Items.INGOTS_SCHRABIDIUM, NTechItems.schrabidiumFlatStamp.get(), consumer)
+        shredderBlade(NTechTags.Items.INGOTS_ALUMINIUM, NTechTags.Items.PLATES_ALUMINIUM, NTechItems.aluminiumShredderBlade.get(), consumer)
+        shredderBlade(Tags.Items.INGOTS_GOLD, NTechTags.Items.PLATES_GOLD, NTechItems.goldShredderBlade.get(), consumer)
+        shredderBlade(Tags.Items.INGOTS_IRON, NTechTags.Items.PLATES_IRON, NTechItems.ironShredderBlade.get(), consumer)
+        shredderBlade(NTechTags.Items.INGOTS_STEEL, NTechTags.Items.PLATES_STEEL, NTechItems.steelShredderBlade.get(), consumer)
+        shredderBlade(NTechTags.Items.INGOTS_TITANIUM, NTechTags.Items.PLATES_TITANIUM, NTechItems.titaniumShredderBlade.get(), consumer)
+        shredderBlade(NTechItems.advancedAlloyIngot.get(), NTechItems.advancedAlloyPlate.get(), NTechItems.advancedAlloyShredderBlade.get(), consumer)
+        shredderBlade(NTechTags.Items.INGOTS_COMBINE_STEEL, NTechTags.Items.PLATES_COMBINE_STEEL, NTechItems.combineSteelShredderBlade.get(), consumer)
+        shredderBlade(NTechTags.Items.INGOTS_SCHRABIDIUM, NTechTags.Items.PLATES_SCHRABIDIUM, NTechItems.schrabidiumShredderBlade.get(), consumer)
+        ShapedRecipeBuilder.shaped(NTechItems.deshShredderBlade.get()).define('B', NTechItems.combineSteelShredderBlade.get()).define('D', NTechItems.deshCompoundPlate.get()).define('S', NTechTags.Items.NUGGETS_SCHRABIDIUM).pattern("SDS").pattern("DBD").pattern("SDS").group(NTechItems.deshShredderBlade.id.path).unlockedBy("has_${NTechItems.deshIngot.id.path}", has(NTechItems.deshIngot.get())).save(consumer, NTechItems.deshShredderBlade.id)
+
+        rbmkRod(NTechItems.rbmkRodUeu.get(), NTechTags.Items.BILLETS_URANIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodMeu.get(), NTechTags.Items.BILLETS_URANIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodHeu233.get(), NTechItems.u233Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHeu235.get(), NTechItems.u235Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodThMeu.get(), NTechTags.Items.BILLETS_THORIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodLep.get(), NTechTags.Items.BILLETS_PLUTONIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodMep.get(), NTechItems.reactorGradePlutoniumBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHep239.get(), NTechItems.pu239Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHep241.get(), NTechItems.pu241Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodLea.get(), NTechTags.Items.BILLETS_AMERICIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodMea.get(), NTechItems.reactorGradeAmericiumBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHea241.get(), NTechItems.americium241Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHea242.get(), NTechItems.americium242Billet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodMen.get(), NTechItems.neptuniumFuelBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodHen.get(), NTechTags.Items.BILLETS_NEPTUNIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodMox.get(), NTechTags.Items.BILLETS_MOX, consumer)
+        rbmkRod(NTechItems.rbmkRodLes.get(), NTechItems.lowEnrichedSchrabidiumFuelBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodMes.get(), NTechTags.Items.BILLETS_SCHRABIDIUM_FUEL, consumer)
+        rbmkRod(NTechItems.rbmkRodHes.get(), NTechItems.highEnrichedSchrabidiumFuelBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodLeaus.get(), NTechTags.Items.BILLETS_LESSER_AUSTRALIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodHeaus.get(), NTechTags.Items.BILLETS_GREATER_AUSTRALIUM, consumer)
+        rbmkRod(NTechItems.rbmkRodPo210Be.get(), NTechItems.po210BeBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodRa226Be.get(), NTechItems.ra226BeBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodPu238Be.get(), NTechItems.pu238BeBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodBalefireGold.get(), NTechTags.Items.BILLETS_FLASHGOLD, consumer)
+        rbmkRod(NTechItems.rbmkRodFlashlead.get(), NTechTags.Items.BILLETS_FLASHLEAD, consumer)
+        rbmkRod(NTechItems.rbmkRodZfbBismuth.get(), NTechItems.bismuthZfbBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodZfbPu241.get(), NTechItems.pu241ZfbBillet.get(), consumer)
+        rbmkRod(NTechItems.rbmkRodZfbAmMix.get(), NTechItems.reactorGradeAmericiumZfbBillet.get(), consumer)
+
+        // Templates
+
+        ShapedRecipeBuilder.shaped(NTechItems.machineTemplateFolder.get()).define('B', Tags.Items.DYES_BLUE).define('P', Items.PAPER).define('W', Tags.Items.DYES_WHITE).pattern("BPB").pattern("WPW").pattern("BPB").group(NTechItems.machineTemplateFolder.id.path).unlockedBy("has_${Items.PAPER.registryName!!.path}", has(Items.PAPER)).save(consumer, NTechItems.machineTemplateFolder.id)
+
+        // Blocks
+
+        ShapedRecipeBuilder.shaped(NTechBlockItems.scrapBlock.get()).define('#', NTechTags.Items.SCRAP).pattern("##").pattern("##").group(NTechBlockItems.scrapBlock.id.path).unlockedBy("has_scrap", has(NTechTags.Items.SCRAP)).save(consumer, ntm("${NTechBlockItems.scrapBlock.id.path}_from_scrap"))
+        ShapelessRecipeBuilder.shapeless(NTechBlockItems.trinititeOre.get()).requires(Tags.Items.SAND_COLORLESS).requires(NTechItems.trinitite.get()).group(NTechBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(NTechItems.trinitite.get())).save(consumer, NTechBlockItems.trinititeOre.id)
+        ShapelessRecipeBuilder.shapeless(NTechBlockItems.redTrinititeOre.get()).requires(Tags.Items.SAND_RED).requires(NTechItems.trinitite.get()).group(NTechBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(NTechItems.trinitite.get())).save(consumer, NTechBlockItems.redTrinititeOre.id)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.steelBeam.get(), 8).define('S', NTechTags.Items.INGOTS_STEEL).pattern("S").pattern("S").pattern("S").group(NTechBlockItems.steelBeam.id.path).unlockedBy("has_steel", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.steelBeam.get(), 8).define('S', NTechBlockItems.steelScaffold.get()).pattern("S").pattern("S").pattern("S").group(NTechBlockItems.steelBeam.id.path).unlockedBy("has_scaffold", has(NTechBlockItems.steelScaffold.get())).save(consumer, NTechBlockItems.steelBeam.id.appendToPath("_from_scaffold"))
+        ShapedRecipeBuilder.shaped(NTechBlockItems.steelScaffold.get(), 8).define('S', NTechTags.Items.INGOTS_STEEL).pattern("SSS").pattern(" S ").pattern("SSS").group(NTechBlockItems.steelScaffold.id.path).unlockedBy("has_steel", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
+        ShapedRecipeBuilder.shaped(NTechBlockItems.steelGrate.get(), 4).define('B', NTechBlockItems.steelBeam.get()).pattern("BB").pattern("BB").group(NTechBlockItems.steelGrate.id.path).unlockedBy("has_beam", has(NTechBlockItems.steelBeam.get())).save(consumer)
+
+        // Consumables
+
+        ShapedRecipeBuilder.shaped(NTechItems.oilDetector.get()).define('G', NTechTags.Items.WIRES_GOLD).define('S', NTechTags.Items.PLATES_STEEL).define('C', Tags.Items.INGOTS_COPPER).define('A', NTechItems.advancedCircuit.get()).pattern("G C").pattern("GAC").pattern("SSS").group(NTechItems.oilDetector.id.path).unlockedBy("has_${NTechItems.advancedCircuit.id.path}", has(NTechItems.advancedCircuit.get())).save(consumer, NTechItems.oilDetector.id)
+        ShapedRecipeBuilder.shaped(NTechItems.ivBag.get(), 4).define('I', NTechTags.Items.PLATES_INSULATOR).define('F', NTechTags.Items.PLATES_IRON).pattern("I").pattern("F").pattern("I").unlockedBy("has_insulator", has(NTechTags.Items.PLATES_INSULATOR)).save(consumer)
+        ShapelessRecipeBuilder.shapeless(NTechItems.emptyExperienceBag.get()).requires(NTechItems.ivBag.get()).requires(NTechItems.enchantmentPowder.get()).unlockedBy("has_powder", has(NTechItems.enchantmentPowder.get())).save(consumer)
+        ShapelessRecipeBuilder.shapeless(NTechItems.radAway.get()).requires(NTechItems.bloodBag.get()).requires(NTechTags.Items.DUSTS_COAL).requires(Tags.Items.SEEDS_PUMPKIN).unlockedBy("has_blood_bag", has(NTechItems.bloodBag.get())).save(consumer)
+        ShapelessRecipeBuilder.shapeless(NTechItems.strongRadAway.get()).requires(NTechItems.radAway.get()).requires(NTechBlockItems.glowingMushroom.get()).unlockedBy("has_glowing_mushroom", has(NTechBlockItems.glowingMushroom.get())).save(consumer)
+        // TODO elite radaway iodine
+        ShapedRecipeBuilder.shaped(NTechItems.polaroid.get()).define('C', NTechTags.Items.DUSTS_COAL).define('A', NTechItems.advancedAlloyPowder.get()).define('G', NTechTags.Items.DUSTS_GOLD).define('L', NTechTags.Items.DUSTS_LAPIS).define('P', Items.PAPER).pattern(" C ").pattern("APG").pattern(" L ").unlockedBy("has_advanced_alloy", has(NTechItems.advancedAlloyPowder.get())).save(consumer)
+
+        // Misc
+
+        ShapedRecipeBuilder.shaped(Items.TORCH, 8).define('C', NTechTags.Items.COKE).define('S', Tags.Items.RODS_WOODEN).pattern("C").pattern("S").group(Items.TORCH.registryName!!.path).unlockedBy("has_coke", has(NTechTags.Items.COKE)).save(consumer, ntm("torch_from_coke"))
+    }
+
+    private fun cooking(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.COOKING.createPipe(actualConsumer)
+
+        RuleBasedRecipeBuilder.create {
+            forModTagsAndMaterials()
             addRule { tagGroup -> // smelting ores to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (oreTag, oreItem) = tagGroup.oreTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(oreTag, oreItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup)
-                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(oreTag, oreItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(oreTag, oreItem)}")
+                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(oreItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(oreItem)}")
             }
             addRule { tagGroup -> // blasting ores to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (oreTag, oreItem) = tagGroup.oreTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(oreTag, oreItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup)
-                ExtendedCookingRecipeBuilder(ingredient, experience / 2F, 100, ingot, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(ingot)).unlockedBy(getHasName(oreTag, oreItem), condition) to ntm("${getItemName(ingot)}_from_blasting_${getItemName(oreTag, oreItem)}")
+                ExtendedCookingRecipeBuilder(ingredient, experience / 2F, 100, ingot, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(ingot)).unlockedBy(getHasName(oreItem), condition) to ntm("${getItemName(ingot)}_from_blasting_${getItemName(oreItem)}")
             }
             addRule { tagGroup -> // smelting raw ores to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (rawTag, rawItem) = tagGroup.rawTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(rawTag, rawItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup)
-                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(rawTag, rawItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(rawTag, rawItem)}")
+                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(rawItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(rawItem)}")
             }
             addRule { tagGroup -> // blasting raw ores to ingots
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (rawTag, rawItem) = tagGroup.rawTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(rawTag, rawItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup)
-                ExtendedCookingRecipeBuilder(ingredient, experience / 2F, 100, ingot, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(ingot)).unlockedBy(getHasName(rawTag, rawItem), condition) to ntm("${getItemName(ingot)}_from_blasting_${getItemName(rawTag, rawItem)}")
+                ExtendedCookingRecipeBuilder(ingredient, experience / 2F, 100, ingot, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(ingot)).unlockedBy(getHasName(rawItem), condition) to ntm("${getItemName(ingot)}_from_blasting_${getItemName(rawItem)}")
             }
         }.build(consumer)
 
@@ -138,7 +324,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
                 val ingot = tagGroup.materialGroup.ingot() ?: return@addRule null
                 val (powderTag, powderItem) = tagGroup.powderTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(powderTag, powderItem) ?: return@addRule null
-                ExtendedCookingRecipeBuilder(ingredient, .1F, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(powderTag, powderItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(powderTag, powderItem)}")
+                ExtendedCookingRecipeBuilder(ingredient, .1F, 200, ingot).group(getItemName(ingot)).unlockedBy(getHasName(powderItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(powderItem)}")
             }
         }.build(consumer)
 
@@ -150,7 +336,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
                 val (ingredient, condition) = ingredientAndConditionOf(crystalsTag, crystalsItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup)
                 val count = if (tagGroup.materialGroup.ingotIsPowder) 6 else 2
-                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot, count).group(getItemName(ingot)).unlockedBy(getHasName(crystalsTag, crystalsItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(crystalsTag, crystalsItem)}")
+                ExtendedCookingRecipeBuilder(ingredient, experience, 200, ingot, count).group(getItemName(ingot)).unlockedBy(getHasName(crystalsItem), condition) to ntm("${getItemName(ingot)}_from_smelting_${getItemName(crystalsItem)}")
             }
         }.build(consumer)
 
@@ -165,43 +351,38 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ingotFromMeteorOre(NTechBlockItems.meteorLeadOre.get(), NTechItems.leadIngot.get(), 1.8F, consumer)
         ingotFromMeteorOre(NTechBlockItems.meteorLithiumOre.get(), NTechItems.lithiumCube.get(), 1.8F, consumer)
 
+        ingotFromPowder(NTechTags.Items.DUSTS_COAL, NTechItems.coke.get(), consumer)
+
         // crystals to ingots
         ingotFromCrystals(NTechItems.trixiteCrystals.get(), NTechItems.plutoniumIngot.get(), 3F, consumer, 4)
 
         ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.combineScrapMetal.get()), .5F, 200, NTechItems.combineSteelIngot.get()).group("combine_steel_ingot").unlockedBy("has_combine_steel_scrap_metal", has(NTechItems.combineScrapMetal.get())).save(consumer, ntm("combine_steel_ingot_from_combine_steel_scrap_metal"))
 
-        pressRecipes(consumer)
-        blastFurnaceRecipes(consumer)
-        shreddingRecipes(consumer)
+        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.ligniteBriquette.get()), .1F, 200, NTechItems.coke.get()).group(NTechItems.coke.id.path).unlockedBy("has_${NTechItems.ligniteBriquette.id.path}", has(NTechItems.ligniteBriquette.get())).save(consumer, NTechItems.coke.id)
 
-        parts(consumer)
-        machineItems(consumer)
-        templates(consumer)
-        blocks(consumer)
-        machines(consumer)
-        anvilSmithing(consumer)
-        anvilConstructing(consumer)
-        assembly(consumer)
-        chemistry(consumer)
-        centrifuge(consumer)
-        consumables(consumer)
-        misc(consumer)
+        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.enhancedCircuit.get()), 0F, 200, NTechItems.basicCircuit.get()).unlockedBy("has_circuit", has(NTechItems.enhancedCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.basicCircuit.get())}_from_smelting_${getItemName(NTechItems.enhancedCircuit.get())}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.advancedCircuit.get()), 0F, 200, NTechItems.enhancedCircuit.get()).unlockedBy("has_circuit", has(NTechItems.advancedCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.enhancedCircuit.get())}_from_smelting_${getItemName(NTechItems.advancedCircuit.get())}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.overclockedCircuit.get()), 0F, 200, NTechItems.advancedCircuit.get()).unlockedBy("has_circuit", has(NTechItems.overclockedCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.advancedCircuit.get())}_from_smelting_${getItemName(NTechItems.overclockedCircuit.get())}"))
+        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.highPerformanceCircuit.get()), 0F, 200, NTechItems.overclockedCircuit.get()).unlockedBy("has_circuit", has(NTechItems.highPerformanceCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.overclockedCircuit.get())}_from_smelting_${getItemName(NTechItems.highPerformanceCircuit.get())}"))
+
     }
 
-    private fun pressRecipes(consumer: Consumer<FinishedRecipe>) {
+    private fun pressing(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.PRESSING.createPipe(actualConsumer)
+
         RuleBasedRecipeBuilder.create {
             forAllTagsAndMaterials()
             addRule { tagGroup ->
                 val plate = tagGroup.materialGroup.plate() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                PressRecipeBuilder(plate, PressingRecipe.StampType.PLATE, .2F).requires(ingredient).group(getItemName(plate)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(plate)}_from_pressing_${getItemName(ingotTag, ingotItem)}")
+                PressRecipeBuilder(plate, PressingRecipe.StampType.PLATE, .2F).requires(ingredient).group(getItemName(plate)).unlockedBy(getHasName(ingotItem), condition) to ntm("${getItemName(plate)}_from_pressing_${getItemName(ingotItem)}")
             }
             addRule { tagGroup ->
                 val wire = tagGroup.materialGroup.wire() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                PressRecipeBuilder(wire, PressingRecipe.StampType.WIRE, .2F, 8).requires(ingredient).group(getItemName(wire)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(wire)}_from_pressing_${getItemName(ingotTag, ingotItem)}")
+                PressRecipeBuilder(wire, PressingRecipe.StampType.WIRE, .2F, 8).requires(ingredient).group(getItemName(wire)).unlockedBy(getHasName(ingotItem), condition) to ntm("${getItemName(wire)}_from_pressing_${getItemName(ingotItem)}")
             }
         }.build(consumer)
 
@@ -217,7 +398,9 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         pressRecipe(NTechItems.basicCircuitAssembly.get(), PressingRecipe.StampType.CIRCUIT, NTechItems.basicCircuit.get(), 1, .75F, consumer)
     }
 
-    private fun blastFurnaceRecipes(consumer: Consumer<FinishedRecipe>) {
+    private fun blasting(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.BLASTING.createPipe(actualConsumer)
+
         blastingRecipe(Tags.Items.INGOTS_IRON, Items.COAL, NTechItems.steelIngot.get(), .25F, 2, "iron_ingot", consumer)
         blastingRecipe(Tags.Items.INGOTS_COPPER, Tags.Items.DUSTS_REDSTONE, NTechItems.redCopperIngot.get(), .25F, 2, "copper_ingot", "redstone", consumer)
         blastingRecipe(NTechTags.Items.INGOTS_RED_COPPER, NTechTags.Items.INGOTS_STEEL, NTechItems.advancedAlloyIngot.get(), .5F, 2, "red_copper_ingot", "steel_ingot",consumer)
@@ -231,7 +414,9 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         blastingRecipe(NTechTags.Items.INGOTS_SATURNITE, NTechTags.Items.DUSTS_METEORITE, NTechItems.starmetalIngot.get(), 2F, 2, "saturnite_ingot", "meteorite_dust", consumer)
     }
 
-    private fun shreddingRecipes(consumer: Consumer<FinishedRecipe>) {
+    private fun shredding(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.SHREDDING.createPipe(actualConsumer)
+
         shreddingRecipe(Tags.Items.DUSTS, NTechItems.dust.get(), .1F, 1, consumer, "any_dust")
         shreddingRecipe(Tags.Items.SAND, NTechItems.dust.get(), .1F, 2, consumer, "sand")
         shreddingRecipe(NTechTags.Items.SCRAP, NTechItems.dust.get(), .25F, 1, consumer, "scrap")
@@ -244,7 +429,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
                 val (ingredient, condition) = ingredientAndConditionOf(oreTag, oreItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup) / 2F
                 val count = if (tagGroup.materialGroup.ingotIsPowder) 6 else 2
-                ShreddingRecipeBuilder(powder, experience, count, ingredient).group(getItemName(powder)).unlockedBy(getHasName(oreTag, oreItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(oreTag, oreItem)}")
+                ShreddingRecipeBuilder(powder, experience, count, ingredient).group(getItemName(powder)).unlockedBy(getHasName(oreItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(oreItem)}")
             }
         }.build(consumer)
 
@@ -256,20 +441,20 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
                 val (ingredient, condition) = ingredientAndConditionOf(crystalsTag, crystalsItem) ?: return@addRule null
                 val experience = experienceLookupTable.getFloat(tagGroup) / 2F
                 val count = if (tagGroup.materialGroup.ingotIsPowder) 9 else 3
-                ShreddingRecipeBuilder(powder, experience, count, ingredient).group(getItemName(powder)).unlockedBy(getHasName(crystalsTag, crystalsItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(crystalsTag, crystalsItem)}")
+                ShreddingRecipeBuilder(powder, experience, count, ingredient).group(getItemName(powder)).unlockedBy(getHasName(crystalsItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(crystalsItem)}")
             }
             addRule { tagGroup ->
                 val powder = tagGroup.materialGroup.powder() ?: return@addRule null
                 val (blockTag, blockItem) = tagGroup.blockTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(blockTag, blockItem) ?: return@addRule null
-                ShreddingRecipeBuilder(powder, 0F, 9, ingredient).group(getItemName(powder)).unlockedBy(getHasName(blockTag, blockItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(blockTag, blockItem)}")
+                ShreddingRecipeBuilder(powder, 0F, 9, ingredient).group(getItemName(powder)).unlockedBy(getHasName(blockItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(blockItem)}")
             }
             addRule { tagGroup ->
                 if (tagGroup.materialGroup.ingotIsPowder) return@addRule null
                 val powder = tagGroup.materialGroup.powder() ?: return@addRule null
                 val (ingotTag, ingotItem) = tagGroup.ingotTagAndItem()
                 val (ingredient, condition) = ingredientAndConditionOf(ingotTag, ingotItem) ?: return@addRule null
-                ShreddingRecipeBuilder(powder, 0F, 1, ingredient).group(getItemName(powder)).unlockedBy(getHasName(ingotTag, ingotItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(ingotTag, ingotItem)}")
+                ShreddingRecipeBuilder(powder, 0F, 1, ingredient).group(getItemName(powder)).unlockedBy(getHasName(ingotItem), condition) to ntm("${getItemName(powder)}_from_shredding_${getItemName(ingotItem)}")
             }
         }.build(consumer)
 
@@ -351,173 +536,9 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         // TODO consider doing biomass here
     }
 
-    private fun parts(consumer: Consumer<FinishedRecipe>) {
-        ShapelessRecipeBuilder(NTechItems.uraniumBillet.get(), 2).requires(NTechItems.u238Billet.get()).requires(NTechItems.u238Nugget.get(), 5).requires(NTechItems.u235Nugget.get()).group(NTechItems.uraniumBillet.id.path).unlockedBy("has_u238_billet", has(NTechItems.u238Billet.get())).save(consumer, ntm("uranium_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.uraniumBillet.get(), 2).requires(NTechItems.uraniumFuelBillet.get()).requires(NTechItems.u238Billet.get()).group(NTechItems.uraniumBillet.id.path).unlockedBy("has_uranium_fuel_billet", has(NTechItems.uraniumFuelBillet.get())).save(consumer, ntm("uranium_billet_from_mixing_fuel_billets"))
-        ShapelessRecipeBuilder(NTechItems.reactorGradePlutoniumBillet.get(), 1).requires(NTechItems.pu238Nugget.get(), 4).requires(NTechItems.pu240Nugget.get(), 2).group(NTechItems.reactorGradePlutoniumBillet.id.path).unlockedBy("has_pu239_nugget", has(NTechItems.pu239Nugget.get())).save(consumer, ntm("reactor_grade_plutonium_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.reactorGradePlutoniumBillet.get(), 3).requires(NTechItems.pu239Billet.get(), 2).requires(NTechItems.pu240Billet.get()).group(NTechItems.reactorGradePlutoniumBillet.id.path).unlockedBy("has_pu239_billet", has(NTechItems.pu239Billet.get())).save(consumer, ntm("reactor_grade_plutonium_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.reactorGradeAmericiumBillet.get(), 1).requires(NTechItems.americium241Nugget.get(), 2).requires(NTechItems.americium242Nugget.get(), 4).group(NTechItems.reactorGradeAmericiumBillet.id.path).unlockedBy("has_am242_nugget", has(NTechItems.americium242Nugget.get())).save(consumer, ntm("reactor_grade_americium_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.reactorGradeAmericiumBillet.get(), 3).requires(NTechItems.americium241Billet.get()).requires(NTechItems.americium242Billet.get(), 2).group(NTechItems.reactorGradeAmericiumBillet.id.path).unlockedBy("has_am242_billet", has(NTechItems.americium242Billet.get())).save(consumer, ntm("reactor_grade_americium_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.uraniumFuelBillet.get(), 1).requires(NTechItems.u238Nugget.get(), 5).requires(NTechItems.u235Nugget.get()).group(NTechItems.uraniumFuelBillet.id.path).unlockedBy("has_u238_nugget", has(NTechItems.u238Nugget.get())).save(consumer, ntm("uranium_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.uraniumFuelBillet.get(), 6).requires(NTechItems.u238Billet.get(), 5).requires(NTechItems.u235Billet.get()).group(NTechItems.uraniumFuelBillet.id.path).unlockedBy("has_u238_billet", has(NTechItems.u238Billet.get())).save(consumer, ntm("uranium_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.thoriumFuelBillet.get(), 1).requires(NTechItems.th232Nugget.get(), 5).requires(NTechItems.u233Nugget.get()).group(NTechItems.thoriumFuelBillet.id.path).unlockedBy("has_th232_nugget", has(NTechItems.th232Nugget.get())).save(consumer, ntm("thorium_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.thoriumFuelBillet.get(), 6).requires(NTechItems.th232Billet.get(), 5).requires(NTechItems.u233Billet.get()).group(NTechItems.thoriumFuelBillet.id.path).unlockedBy("has_th232_billet", has(NTechItems.th232Billet.get())).save(consumer, ntm("thorium_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.plutoniumFuelBillet.get(), 1).requires(NTechItems.reactorGradePlutoniumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.plutoniumFuelBillet.id.path).unlockedBy("has_reactor_grade_plutonium_nugget", has(NTechItems.reactorGradePlutoniumNugget.get())).save(consumer, ntm("plutonium_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.plutoniumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.reactorGradePlutoniumBillet.get()).group(NTechItems.plutoniumFuelBillet.id.path).unlockedBy("has_reactor_grade_plutonium_billet", has(NTechItems.reactorGradePlutoniumBillet.get())).save(consumer, ntm("plutonium_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.neptuniumFuelBillet.get(), 1).requires(NTechItems.neptuniumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.neptuniumFuelBillet.id.path).unlockedBy("has_neptunium_nugget", has(NTechItems.neptuniumNugget.get())).save(consumer, ntm("neptunium_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.neptuniumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.neptuniumBillet.get()).group(NTechItems.neptuniumFuelBillet.id.path).unlockedBy("has_neptunium_billet", has(NTechItems.neptuniumBillet.get())).save(consumer, ntm("neptunium_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.moxFuelBillet.get(), 1).requires(NTechItems.reactorGradePlutoniumNugget.get(), 2).requires(NTechItems.uraniumFuelNugget.get(), 4).group(NTechItems.moxFuelBillet.id.path).unlockedBy("has_uranium_fuel_nugget", has(NTechItems.uraniumFuelNugget.get())).save(consumer, ntm("mox_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.moxFuelBillet.get(), 3).requires(NTechItems.uraniumFuelBillet.get(), 2).requires(NTechItems.reactorGradePlutoniumBillet.get()).group(NTechItems.moxFuelBillet.id.path).unlockedBy("has_uranium_fuel_billet", has(NTechItems.uraniumFuelBillet.get())).save(consumer, ntm("mox_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.americiumFuelBillet.get(), 1).requires(NTechItems.reactorGradeAmericiumNugget.get(), 2).requires(NTechItems.u238Nugget.get(), 4).group(NTechItems.americiumFuelBillet.id.path).unlockedBy("has_reactor_grade_americium_nugget", has(NTechItems.reactorGradeAmericiumNugget.get())).save(consumer, ntm("americium_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.americiumFuelBillet.get(), 3).requires(NTechItems.u238Billet.get(), 2).requires(NTechItems.reactorGradeAmericiumBillet.get()).group(NTechItems.americiumFuelBillet.id.path).unlockedBy("has_reactor_grade_americium_billet", has(NTechItems.reactorGradeAmericiumBillet.get())).save(consumer, ntm("americium_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.schrabidiumFuelBillet.get(), 1).requires(NTechItems.schrabidiumNugget.get(), 2).requires(NTechItems.neptuniumNugget.get(), 2).requires(NTechItems.berylliumNugget.get(), 2).group(NTechItems.schrabidiumFuelBillet.id.path).unlockedBy("has_schrabidium_nugget", has(NTechItems.schrabidiumNugget.get())).save(consumer, ntm("schrabidium_fuel_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.schrabidiumFuelBillet.get(), 3).requires(NTechItems.schrabidiumBillet.get()).requires(NTechItems.neptuniumBillet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.schrabidiumFuelBillet.id.path).unlockedBy("has_schrabidium_billet", has(NTechItems.schrabidiumBillet.get())).save(consumer, ntm("schrabidium_fuel_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 1).requires(NTechItems.poloniumNugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_nugget", has(NTechItems.poloniumNugget.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 2).requires(NTechItems.poloniumBillet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_billet", has(NTechItems.poloniumBillet.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.po210BeBillet.get(), 6).requires(NTechItems.poloniumBillet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.po210BeBillet.id.path).unlockedBy("has_po210_billet", has(NTechItems.poloniumBillet.get())).save(consumer, ntm("po210be_billet_from_mixing_isotope_billets_extra"))
-        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 1).requires(NTechItems.radium226Nugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_nugget", has(NTechItems.radium226Nugget.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 2).requires(NTechItems.radium226Billet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_billet", has(NTechItems.radium226Billet.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.ra226BeBillet.get(), 6).requires(NTechItems.radium226Billet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.ra226BeBillet.id.path).unlockedBy("has_ra226_billet", has(NTechItems.radium226Billet.get())).save(consumer, ntm("ra226be_billet_from_mixing_isotope_billets_extra"))
-        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 1).requires(NTechItems.pu238Nugget.get(), 3).requires(NTechItems.berylliumNugget.get(), 3).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_nugget", has(NTechItems.pu238Nugget.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_nuggets"))
-        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 2).requires(NTechItems.pu238Billet.get()).requires(NTechItems.berylliumBillet.get()).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_billet", has(NTechItems.pu238Billet.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_billets"))
-        ShapelessRecipeBuilder(NTechItems.pu238BeBillet.get(), 6).requires(NTechItems.pu238Billet.get(), 3).requires(NTechItems.berylliumBillet.get(), 3).group(NTechItems.pu238BeBillet.id.path).unlockedBy("has_pu238_billet", has(NTechItems.pu238Billet.get())).save(consumer, ntm("pu238be_billet_from_mixing_isotope_billets_extra"))
+    private fun anvilSmithing(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.SMITHING.createPipe(actualConsumer)
 
-        ingotFromPowder(NTechTags.Items.DUSTS_COAL, NTechItems.coke.get(), "coal_powder", consumer)
-        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.ligniteBriquette.get()), .1F, 200, NTechItems.coke.get()).group(NTechItems.coke.id.path).unlockedBy("has_${NTechItems.ligniteBriquette.id.path}", has(NTechItems.ligniteBriquette.get())).save(consumer, NTechItems.coke.id)
-        ShapedRecipeBuilder.shaped(NTechItems.copperPanel.get()).define('C', NTechTags.Items.PLATES_COPPER).pattern("CCC").pattern("CCC").group(NTechItems.copperPanel.id.path).unlockedBy("has${NTechItems.copperPlate.id.path}", has(NTechTags.Items.PLATES_COPPER)).save(consumer, NTechItems.copperPanel.id)
-        ShapedRecipeBuilder.shaped(NTechItems.highSpeedSteelBolt.get(), 4).define('S', NTechTags.Items.INGOTS_HIGH_SPEED_STEEL).pattern("S").pattern("S").unlockedBy("has_high_speed_steel", has(NTechTags.Items.INGOTS_HIGH_SPEED_STEEL)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.copperCoil.get()).define('W', NTechTags.Items.WIRES_RED_COPPER).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.copperCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_RED_COPPER)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.superConductingCoil.get()).define('W', NTechTags.Items.WIRES_SUPER_CONDUCTOR).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.superConductingCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_SUPER_CONDUCTOR)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.goldCoil.get()).define('W', NTechTags.Items.WIRES_GOLD).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.goldCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_GOLD)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.highTemperatureSuperConductingCoil.get()).define('W', NTechTags.Items.WIRES_MAGNETIZED_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("WWW").pattern("WIW").pattern("WWW").group(NTechItems.highTemperatureSuperConductingCoil.id.path).unlockedBy("has_wire", has(NTechTags.Items.WIRES_MAGNETIZED_TUNGSTEN)).save(consumer)
-        ringCoilRecipe(NTechItems.ringCoil.get(), NTechItems.copperCoil.get(), consumer)
-        ringCoilRecipe(NTechItems.superConductingRingCoil.get(), NTechItems.superConductingCoil.get(), consumer)
-        ringCoilRecipe(NTechItems.goldRingCoil.get(), NTechItems.goldCoil.get(), consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.steelPipes.get()).define('S', NTechTags.Items.STORAGE_BLOCKS_STEEL).pattern("S").pattern("S").pattern("S").unlockedBy("has_steel_block", has(NTechTags.Items.STORAGE_BLOCKS_STEEL)).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.titaniumDrill.get(), 1, 100).requires(2 to NTechTags.Items.INGOTS_STEEL, 2 to NTechTags.Items.INGOTS_HIGH_SPEED_STEEL).requires(2 to NTechItems.highSpeedSteelBolt.get()).requires(6 to NTechTags.Items.PLATES_TITANIUM).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.smallSteelShell.get(), 3).define('P', NTechTags.Items.PLATES_STEEL).pattern("PPP").pattern("   ").pattern("PPP").unlockedBy("has_plate", has(NTechTags.Items.PLATES_STEEL)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.smallAluminiumShell.get(), 3).define('P', NTechTags.Items.PLATES_ALUMINIUM).pattern("PPP").pattern("   ").pattern("PPP").unlockedBy("has_plate", has(NTechTags.Items.PLATES_ALUMINIUM)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.bigSteelShell.get()).define('I', NTechTags.Items.INGOTS_STEEL).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.bigAluminiumShell.get()).define('I', NTechTags.Items.INGOTS_ALUMINIUM).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_ALUMINIUM)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.bigTitaniumShell.get()).define('I', NTechTags.Items.INGOTS_TITANIUM).pattern("III").pattern("   ").pattern("III").unlockedBy("has_ingot", has(NTechTags.Items.INGOTS_TITANIUM)).save(consumer)
-        //region Circuits
-        ShapedRecipeBuilder.shaped(NTechItems.basicCircuitAssembly.get()).define('W', NTechTags.Items.WIRES_ALUMINIUM).define('R', Tags.Items.DUSTS_REDSTONE).define('P', NTechTags.Items.PLATES_STEEL).pattern("W").pattern("R").pattern("P").unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.enhancedCircuit.get(), 1, 100).requires(NTechItems.basicCircuit.get()).requires(4 to NTechTags.Items.WIRES_COPPER, 1 to NTechTags.Items.DUSTS_QUARTZ, 1 to NTechTags.Items.PLATES_COPPER).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.advancedCircuit.get(), 1, 150).requires(NTechItems.enhancedCircuit.get()).requires(4 to NTechTags.Items.WIRES_RED_COPPER, 1 to NTechTags.Items.DUSTS_GOLD, 1 to NTechTags.Items.PLATES_INSULATOR).save(consumer)
-        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.enhancedCircuit.get()), 0F, 200, NTechItems.basicCircuit.get()).unlockedBy("has_circuit", has(NTechItems.enhancedCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.basicCircuit.get())}_from_smelting_${getItemName(NTechItems.enhancedCircuit.get())}"))
-        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.advancedCircuit.get()), 0F, 200, NTechItems.enhancedCircuit.get()).unlockedBy("has_circuit", has(NTechItems.advancedCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.enhancedCircuit.get())}_from_smelting_${getItemName(NTechItems.advancedCircuit.get())}"))
-        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.overclockedCircuit.get()), 0F, 200, NTechItems.advancedCircuit.get()).unlockedBy("has_circuit", has(NTechItems.overclockedCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.advancedCircuit.get())}_from_smelting_${getItemName(NTechItems.overclockedCircuit.get())}"))
-        ExtendedCookingRecipeBuilder(Ingredient.of(NTechItems.highPerformanceCircuit.get()), 0F, 200, NTechItems.overclockedCircuit.get()).unlockedBy("has_circuit", has(NTechItems.highPerformanceCircuit.get())).save(consumer, ntm("${getItemName(NTechItems.overclockedCircuit.get())}_from_smelting_${getItemName(NTechItems.highPerformanceCircuit.get())}"))
-        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier1.get()).define('C', NTechItems.basicCircuit.get()).define('D', Tags.Items.DUSTS_REDSTONE).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.basicCircuit.get())).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier2.get()).define('C', NTechItems.enhancedCircuit.get()).define('D', NTechTags.Items.DUSTS_QUARTZ).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.enhancedCircuit.get())).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier3.get()).define('C', NTechItems.advancedCircuit.get()).define('D', NTechTags.Items.DUSTS_GOLD).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.advancedCircuit.get())).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier4.get()).define('C', NTechItems.overclockedCircuit.get()).define('D', NTechTags.Items.DUSTS_LAPIS).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.overclockedCircuit.get())).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.militaryGradeCircuitBoardTier5.get()).define('C', NTechItems.highPerformanceCircuit.get()).define('D', NTechTags.Items.DUSTS_DIAMOND).pattern("CDC").unlockedBy("has_circuit", has(NTechItems.highPerformanceCircuit.get())).save(consumer)
-        ShapelessRecipeBuilder.shapeless(NTechItems.basicCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier1.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier1.get())).save(consumer, ntm("${getItemName(NTechItems.basicCircuit.get())}_from_military_grade"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.enhancedCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier2.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier2.get())).save(consumer, ntm("${getItemName(NTechItems.enhancedCircuit.get())}_from_military_grade"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.advancedCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier3.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier3.get())).save(consumer, ntm("${getItemName(NTechItems.advancedCircuit.get())}_from_military_grade"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.overclockedCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier4.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier4.get())).save(consumer, ntm("${getItemName(NTechItems.overclockedCircuit.get())}_from_military_grade"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.highPerformanceCircuit.get(), 2).requires(NTechItems.militaryGradeCircuitBoardTier5.get()).unlockedBy("has_military_circuit", has(NTechItems.militaryGradeCircuitBoardTier5.get())).save(consumer, ntm("${getItemName(NTechItems.highPerformanceCircuit.get())}_from_military_grade"))
-        //endregion
-        ShapedRecipeBuilder.shaped(NTechItems.deshCompoundPlate.get()).define('P', NTechTags.Items.DUSTS_POLYMER).define('D', NTechItems.deshIngot.get()).define('S', NTechItems.highSpeedSteelIngot.get()).pattern("PDP").pattern("DSD").pattern("PDP").group(NTechItems.deshCompoundPlate.id.path).unlockedBy("has_${NTechItems.deshIngot.id.path}", has(NTechItems.deshIngot.get())).save(consumer, NTechItems.deshCompoundPlate.id)
-        ShapedRecipeBuilder.shaped(NTechItems.heatingCoil.get()).define('T', NTechTags.Items.WIRES_TUNGSTEN).define('I', Tags.Items.INGOTS_IRON).pattern("TTT").pattern("TIT").pattern("TTT").group(NTechItems.heatingCoil.id.path).unlockedBy("has_${NTechItems.tungstenWire.get()}", has(NTechTags.Items.WIRES_TUNGSTEN)).save(consumer, NTechItems.heatingCoil.id)
-        //region Insulator
-        ShapedRecipeBuilder.shaped(NTechItems.insulator.get(), 4).define('S', Tags.Items.STRING).define('W', ItemTags.WOOL).pattern("SWS").group(getItemName(NTechItems.insulator.get())).unlockedBy("has_wool", has(ItemTags.WOOL)).save(consumer, ntm("insulator_from_wool"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 4).requires(Tags.Items.INGOTS_BRICK, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_brick", has(Tags.Items.INGOTS_BRICK)).save(consumer, ntm("insulator_from_bricks"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 8).requires(NTechTags.Items.INGOTS_POLYMER, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_polymer", has(NTechTags.Items.INGOTS_POLYMER)).save(consumer, ntm("insulator_from_polymer"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 16).requires(NTechTags.Items.INGOTS_ASBESTOS, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_yummy", has(NTechTags.Items.INGOTS_ASBESTOS)).save(consumer, ntm("insulator_from_asbestos"))
-        ShapelessRecipeBuilder.shapeless(NTechItems.insulator.get(), 16).requires(NTechTags.Items.INGOTS_FIBERGLASS, 2).group(getItemName(NTechItems.insulator.get())).unlockedBy("has_fiberglass", has(NTechTags.Items.INGOTS_FIBERGLASS)).save(consumer, ntm("insulator_from_fiberglass"))
-        //endregion
-        ShapedRecipeBuilder.shaped(NTechItems.steelTank.get(), 2).define('S', NTechTags.Items.PLATES_STEEL).define('T', NTechTags.Items.PLATES_TITANIUM).pattern("STS").pattern("S S").pattern("STS").group(NTechItems.steelTank.id.path).unlockedBy("has_${NTechItems.steelPlate.id.path}", has(NTechTags.Items.PLATES_STEEL)).save(consumer, NTechItems.steelTank.id)
-    }
-
-    private fun ringCoilRecipe(ringCoil: ItemLike, coil: ItemLike, consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(ringCoil, 2).define('C', coil).define('P', NTechTags.Items.PLATES_IRON).pattern(" C ").pattern("CPC").pattern(" C ").group(ringCoil.asItem().registryName!!.path).unlockedBy("has_coil", has(coil)).save(consumer, ringCoil.asItem().registryName!!.appendToPath("_with_iron_plate"))
-        ShapedRecipeBuilder.shaped(ringCoil, 2).define('C', coil).define('P', NTechTags.Items.PLATES_STEEL).pattern(" C ").pattern("CPC").pattern(" C ").group(ringCoil.asItem().registryName!!.path).unlockedBy("has_coil", has(coil)).save(consumer, ringCoil.asItem().registryName!!.appendToPath("_with_steel_plate"))
-    }
-
-    private fun machineItems(consumer: Consumer<FinishedRecipe>) {
-        with (NTechTags.Items) {
-            with(BatteryRecipeBuilder) {
-                battery(consumer, NTechItems.battery.get(), WIRES_ALUMINIUM, PLATES_ALUMINIUM, Tags.Items.DUSTS_REDSTONE, extra = arrayOf(NTechItems.redstonePowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.sixfoldRedstonePowerCell.get() to arrayOf("BBB", "WPW", "BBB"), NTechItems.twentyFourFoldRedstonePowerCell.get() to arrayOf("BWB", "WPW", "BWB")))
-                battery(consumer, NTechItems.advancedBattery.get(), WIRES_RED_COPPER, PLATES_COPPER, DUSTS_SULFUR, DUSTS_LEAD, extra = arrayOf(NTechItems.advancedPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.quadrupleAdvancedPowerCell.get() to arrayOf("BWB", "WPW", "BWB"), NTechItems.twelveFoldAdvancedPowerCell.get() to arrayOf("WPW", "BBB", "WPW")))
-                battery(consumer, NTechItems.lithiumBattery.get(), WIRES_GOLD, PLATES_TITANIUM, DUSTS_LITHIUM, DUSTS_COBALT, arrayOf("W W", "PXP", "PYP"), extra = arrayOf(NTechItems.lithiumPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.tripleLithiumPowerCell.get() to arrayOf("WPW", "BBB", "WPW"), NTechItems.sixfoldLithiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW")))
-                battery(consumer, NTechItems.schrabidiumBattery.get(), WIRES_SCHRABIDIUM, PLATES_SCHRABIDIUM, DUSTS_NEPTUNIUM, DUSTS_SCHRABIDIUM, extra = arrayOf(NTechItems.schrabidiumPowerCell.get() to arrayOf("WBW", "PBP", "WBW"), NTechItems.doubleSchrabidiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW"), NTechItems.quadrupleSchrabidiumPowerCell.get() to arrayOf("WPW", "BWB", "WPW")))
-                battery(consumer, NTechItems.sparkBattery.get(), Ingredient.of(WIRES_MAGNETIZED_TUNGSTEN), Ingredient.of(NTechItems.dineutroniumCompoundPlate.get()), Ingredient.of(NTechItems.sparkMix.get()), criterion = has(NTechItems.sparkMix.get()), extra = arrayOf(NTechItems.sparkPowerCell.get() to arrayOf("BBW", "BBP", "BBW"), NTechItems.sparkArcaneCarBattery.get() to arrayOf(" WW", "PBB", "BBB")))
-            }
-        }
-
-        pressStamp(Tags.Items.STONE, NTechItems.stoneFlatStamp.get(), consumer)
-        pressStamp(Tags.Items.INGOTS_IRON, NTechItems.ironFlatStamp.get(), consumer)
-        pressStamp(NTechTags.Items.INGOTS_STEEL, NTechItems.steelFlatStamp.get(), consumer)
-        pressStamp(NTechTags.Items.INGOTS_TITANIUM, NTechItems.titaniumFlatStamp.get(), consumer)
-        pressStamp(Tags.Items.OBSIDIAN, NTechItems.obsidianFlatStamp.get(), consumer)
-        pressStamp(NTechTags.Items.INGOTS_SCHRABIDIUM, NTechItems.schrabidiumFlatStamp.get(), consumer)
-        shredderBlade(NTechTags.Items.INGOTS_ALUMINIUM, NTechTags.Items.PLATES_ALUMINIUM, NTechItems.aluminiumShredderBlade.get(), consumer)
-        shredderBlade(Tags.Items.INGOTS_GOLD, NTechTags.Items.PLATES_GOLD, NTechItems.goldShredderBlade.get(), consumer)
-        shredderBlade(Tags.Items.INGOTS_IRON, NTechTags.Items.PLATES_IRON, NTechItems.ironShredderBlade.get(), consumer)
-        shredderBlade(NTechTags.Items.INGOTS_STEEL, NTechTags.Items.PLATES_STEEL, NTechItems.steelShredderBlade.get(), consumer)
-        shredderBlade(NTechTags.Items.INGOTS_TITANIUM, NTechTags.Items.PLATES_TITANIUM, NTechItems.titaniumShredderBlade.get(), consumer)
-        shredderBlade(NTechItems.advancedAlloyIngot.get(), NTechItems.advancedAlloyPlate.get(), NTechItems.advancedAlloyShredderBlade.get(), consumer)
-        shredderBlade(NTechTags.Items.INGOTS_COMBINE_STEEL, NTechTags.Items.PLATES_COMBINE_STEEL, NTechItems.combineSteelShredderBlade.get(), consumer)
-        shredderBlade(NTechTags.Items.INGOTS_SCHRABIDIUM, NTechTags.Items.PLATES_SCHRABIDIUM, NTechItems.schrabidiumShredderBlade.get(), consumer)
-        ShapedRecipeBuilder.shaped(NTechItems.deshShredderBlade.get()).define('B', NTechItems.combineSteelShredderBlade.get()).define('D', NTechItems.deshCompoundPlate.get()).define('S', NTechTags.Items.NUGGETS_SCHRABIDIUM).pattern("SDS").pattern("DBD").pattern("SDS").group(NTechItems.deshShredderBlade.id.path).unlockedBy("has_${NTechItems.deshIngot.id.path}", has(NTechItems.deshIngot.get())).save(consumer, NTechItems.deshShredderBlade.id)
-
-        rbmkRod(NTechItems.rbmkRodUeu.get(), NTechTags.Items.BILLETS_URANIUM, consumer)
-        rbmkRod(NTechItems.rbmkRodMeu.get(), NTechTags.Items.BILLETS_URANIUM_FUEL, consumer)
-        rbmkRod(NTechItems.rbmkRodHeu233.get(), NTechItems.u233Billet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodHeu235.get(), NTechItems.u235Billet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodThMeu.get(), NTechTags.Items.BILLETS_THORIUM_FUEL, consumer)
-        rbmkRod(NTechItems.rbmkRodLep.get(), NTechTags.Items.BILLETS_PLUTONIUM_FUEL, consumer)
-        rbmkRod(NTechItems.rbmkRodMep.get(), NTechItems.reactorGradePlutoniumBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodHep239.get(), NTechItems.pu239Billet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodHep241.get(), NTechItems.pu241Billet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodLea.get(), NTechTags.Items.BILLETS_AMERICIUM_FUEL, consumer)
-        rbmkRod(NTechItems.rbmkRodMea.get(), NTechItems.reactorGradeAmericiumBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodHea241.get(), NTechItems.americium241Billet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodHea242.get(), NTechItems.americium242Billet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodMen.get(), NTechItems.neptuniumFuelBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodHen.get(), NTechTags.Items.BILLETS_NEPTUNIUM, consumer)
-        rbmkRod(NTechItems.rbmkRodMox.get(), NTechTags.Items.BILLETS_MOX, consumer)
-        rbmkRod(NTechItems.rbmkRodLes.get(), NTechItems.lowEnrichedSchrabidiumFuelBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodMes.get(), NTechTags.Items.BILLETS_SCHRABIDIUM_FUEL, consumer)
-        rbmkRod(NTechItems.rbmkRodHes.get(), NTechItems.highEnrichedSchrabidiumFuelBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodLeaus.get(), NTechTags.Items.BILLETS_LESSER_AUSTRALIUM, consumer)
-        rbmkRod(NTechItems.rbmkRodHeaus.get(), NTechTags.Items.BILLETS_GREATER_AUSTRALIUM, consumer)
-        rbmkRod(NTechItems.rbmkRodPo210Be.get(), NTechItems.po210BeBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodRa226Be.get(), NTechItems.ra226BeBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodPu238Be.get(), NTechItems.pu238BeBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodBalefireGold.get(), NTechTags.Items.BILLETS_FLASHGOLD, consumer)
-        rbmkRod(NTechItems.rbmkRodFlashlead.get(), NTechTags.Items.BILLETS_FLASHLEAD, consumer)
-        rbmkRod(NTechItems.rbmkRodZfbBismuth.get(), NTechItems.bismuthZfbBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodZfbPu241.get(), NTechItems.pu241ZfbBillet.get(), consumer)
-        rbmkRod(NTechItems.rbmkRodZfbAmMix.get(), NTechItems.reactorGradeAmericiumZfbBillet.get(), consumer)
-    }
-
-    private fun templates(consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(NTechItems.machineTemplateFolder.get()).define('B', Tags.Items.DYES_BLUE).define('P', Items.PAPER).define('W', Tags.Items.DYES_WHITE).pattern("BPB").pattern("WPW").pattern("BPB").group(NTechItems.machineTemplateFolder.id.path).unlockedBy("has_${Items.PAPER.registryName!!.path}", has(Items.PAPER)).save(consumer, NTechItems.machineTemplateFolder.id)
-    }
-
-    private fun blocks(consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(NTechBlockItems.scrapBlock.get()).define('#', NTechTags.Items.SCRAP).pattern("##").pattern("##").group(NTechBlockItems.scrapBlock.id.path).unlockedBy("has_scrap", has(NTechTags.Items.SCRAP)).save(consumer, ntm("${NTechBlockItems.scrapBlock.id.path}_from_scrap"))
-        ShapelessRecipeBuilder.shapeless(NTechBlockItems.trinititeOre.get()).requires(Tags.Items.SAND_COLORLESS).requires(NTechItems.trinitite.get()).group(NTechBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(NTechItems.trinitite.get())).save(consumer, NTechBlockItems.trinititeOre.id)
-        ShapelessRecipeBuilder.shapeless(NTechBlockItems.redTrinititeOre.get()).requires(Tags.Items.SAND_RED).requires(NTechItems.trinitite.get()).group(NTechBlockItems.trinititeOre.id.path).unlockedBy("has_trinitite", has(NTechItems.trinitite.get())).save(consumer, NTechBlockItems.redTrinititeOre.id)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.steelBeam.get(), 8).define('S', NTechTags.Items.INGOTS_STEEL).pattern("S").pattern("S").pattern("S").group(NTechBlockItems.steelBeam.id.path).unlockedBy("has_steel", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.steelBeam.get(), 8).define('S', NTechBlockItems.steelScaffold.get()).pattern("S").pattern("S").pattern("S").group(NTechBlockItems.steelBeam.id.path).unlockedBy("has_scaffold", has(NTechBlockItems.steelScaffold.get())).save(consumer, NTechBlockItems.steelBeam.id.appendToPath("_from_scaffold"))
-        ShapedRecipeBuilder.shaped(NTechBlockItems.steelScaffold.get(), 8).define('S', NTechTags.Items.INGOTS_STEEL).pattern("SSS").pattern(" S ").pattern("SSS").group(NTechBlockItems.steelScaffold.id.path).unlockedBy("has_steel", has(NTechTags.Items.INGOTS_STEEL)).save(consumer)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.steelGrate.get(), 4).define('B', NTechBlockItems.steelBeam.get()).pattern("BB").pattern("BB").group(NTechBlockItems.steelGrate.id.path).unlockedBy("has_beam", has(NTechBlockItems.steelBeam.get())).save(consumer)
-    }
-
-    private fun machines(consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(NTechBlockItems.siren.get()).define('S', NTechTags.Items.PLATES_STEEL).define('I', NTechTags.Items.PLATES_INSULATOR).define('C', NTechItems.enhancedCircuit.get()).define('R', Tags.Items.DUSTS_REDSTONE).pattern("SIS").pattern("ICI").pattern("SRS").group(NTechBlockItems.siren.id.path).unlockedBy("has_${NTechItems.enhancedCircuit.id.path}", has(NTechItems.enhancedCircuit.get())).save(consumer, NTechBlockItems.siren.id)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.steamPress.get()).define('I', Tags.Items.INGOTS_IRON).define('F', Items.FURNACE).define('P', Items.PISTON).define('B', Tags.Items.STORAGE_BLOCKS_IRON).pattern("IFI").pattern("IPI").pattern("IBI").group(NTechBlockItems.steamPress.id.path).unlockedBy("has_${Items.PISTON.registryName!!.path}", has(Items.PISTON)).save(consumer, NTechBlockItems.steamPress.id)
-//        ShapedRecipeBuilder.shaped(NTechBlockItems.blastFurnace.get()).define('T', NTechTags.Items.INGOTS_TUNGSTEN).define('C', NTechItems.copperPanel.get()).define('H', Items.HOPPER).define('F', Items.FURNACE).pattern("T T").pattern("CHC").pattern("TFT").group(NTechBlockItems.blastFurnace.id.path).unlockedBy("has_${NTechItems.tungstenIngot.get()}", has(NTechTags.Items.INGOTS_TUNGSTEN)).save(consumer, NTechBlockItems.blastFurnace.id)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.combustionGenerator.get()).define('S', NTechTags.Items.INGOTS_STEEL).define('T', NTechItems.steelTank.get()).define('C', NTechItems.redCopperIngot.get()).define('F', Items.FURNACE).pattern("STS").pattern("SCS").pattern("SFS").group(NTechBlockItems.combustionGenerator.id.path).unlockedBy("has_${NTechItems.redCopperIngot.id.path}", has(NTechItems.redCopperIngot.get())).save(consumer, NTechBlockItems.combustionGenerator.id)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.electricFurnace.get()).define('B', NTechTags.Items.INGOTS_BERYLLIUM).define('C', NTechItems.copperPanel.get()).define('F', Items.FURNACE).define('H', NTechItems.heatingCoil.get()).pattern("BBB").pattern("CFC").pattern("HHH").group(NTechBlockItems.electricFurnace.id.path).unlockedBy("has_${NTechItems.berylliumIngot.id.path}", has(NTechTags.Items.INGOTS_BERYLLIUM)).save(consumer, NTechBlockItems.electricFurnace.id)
-        ShapedRecipeBuilder.shaped(NTechBlockItems.coatedCable.get()).define('C', NTechTags.Items.INGOTS_RED_COPPER).define('W', NTechTags.Items.WIRES_RED_COPPER).define('I', NTechTags.Items.PLATES_INSULATOR).pattern("IWI").pattern("WCW").pattern("IWI").group(NTechBlockItems.coatedCable.id.path).unlockedBy("has_red_copper", has(NTechTags.Items.INGOTS_RED_COPPER)).save(consumer)
-    }
-
-    private fun anvilSmithing(consumer: Consumer<FinishedRecipe>) {
         ShapedRecipeBuilder.shaped(NTechBlockItems.ironAnvil.get()).define('I', Tags.Items.INGOTS_IRON).define('B', Tags.Items.STORAGE_BLOCKS_IRON).pattern("III").pattern(" B ").pattern("III").group(NTechBlockItems.ironAnvil.id.path).unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON)).save(consumer)
         ShapedRecipeBuilder.shaped(NTechBlockItems.leadAnvil.get()).define('I', NTechTags.Items.INGOTS_LEAD).define('B', NTechTags.Items.STORAGE_BLOCKS_LEAD).pattern("III").pattern(" B ").pattern("III").group(NTechBlockItems.leadAnvil.id.path).unlockedBy("has_lead_block", has(NTechTags.Items.STORAGE_BLOCKS_LEAD)).save(consumer)
 
@@ -530,7 +551,9 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AnvilSmithingRecipeBuilder(1, NTechBlockItems.dineutroniumAnvil.get()).requiresFirst(baseAnvils).requiresSecond(StackedIngredient.of(10, NTechTags.Items.INGOTS_DINEUTRONIUM)).unlockedBy("has_dineutronium", has(NTechTags.Items.INGOTS_DINEUTRONIUM)).save(consumer)
     }
 
-    private fun anvilConstructing(consumer: Consumer<FinishedRecipe>) {
+    private fun anvilConstructing(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.CONSTRUCTING.createPipe(actualConsumer)
+
         AnvilRecipeBuilder(3).requires(Tags.Items.INGOTS_IRON).results(NTechItems.ironPlate.get()).save(consumer)
         AnvilRecipeBuilder(3).requires(Tags.Items.INGOTS_GOLD).results(NTechItems.goldPlate.get()).save(consumer)
         AnvilRecipeBuilder(3).requires(NTechTags.Items.INGOTS_TITANIUM).results(NTechItems.titaniumPlate.get()).save(consumer)
@@ -603,50 +626,59 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         AnvilRecipeBuilder(4).requires(NTechItems.powerSavingUpgradeMk2.get()).requires(2 to NTechTags.Items.DUSTS_LAPIS, 6 to Tags.Items.DUSTS_GLOWSTONE, 4 to NTechTags.Items.INGOTS_DESH).results(NTechItems.powerSavingUpgradeMk3.get()).save(consumer)
     }
 
-    private fun assembly(consumer: Consumer<FinishedRecipe>) {
-        AssemblyRecipeBuilder(NTechItems.ironPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_IRON).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.goldPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_GOLD).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.titaniumPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_TITANIUM).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.aluminiumPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_ALUMINIUM).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.steelPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_STEEL).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.leadPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_LEAD).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.copperPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_COPPER).save(consumer)
+    private fun assembling(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.ASSEMBLING.createPipe(actualConsumer)
+
+        AssemblyRecipeBuilder(NTechBlockItems.centrifugePlacer.get(), 1, 200).requires(NTechItems.centrifugeElement.get()).requires(2 to NTechTags.Items.INGOTS_POLYMER, 8 to NTechTags.Items.PLATES_STEEL, 8 to NTechTags.Items.PLATES_COPPER).requires(NTechItems.enhancedCircuit.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.chemPlantPlacer.get(), 1, 200).requires(8 to NTechTags.Items.INGOTS_STEEL, 6 to NTechTags.Items.PLATES_COPPER).requires(4 to NTechItems.steelTank.get()).requires(NTechItems.bigSteelShell.get()).requires(3 to NTechTags.Items.COILS_TUNGSTEN).requires(2 to NTechItems.enhancedCircuit.get(), 1 to NTechItems.advancedCircuit.get()).requires(8 to NTechTags.Items.PLATES_INSULATOR).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.fatMan.get(), 1, 300).requires(1 to NTechItems.steelSphere.get(), 2 to NTechItems.bigSteelShell.get(), 1 to NTechItems.bigSteelGridFins.get(), 2 to NTechItems.militaryGradeCircuitBoardTier2.get()).requires(6 to NTechTags.Items.WIRES_COPPER, 6 to Tags.Items.DYES_YELLOW).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.oilDerrickPlacer.get(), 1, 250).requires(20 to NTechBlockItems.steelScaffold.get(), 8 to NTechBlockItems.steelBeam.get(), 2 to NTechItems.steelTank.get(), 1 to NTechItems.motor.get(), 3 to NTechItems.steelPipes.get(), 1 to NTechItems.titaniumDrill.get()).requires(6 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.pumpjackPlacer.get(), 1, 400).requires(8 to NTechBlockItems.steelScaffold.get()).requires(8 to NTechTags.Items.STORAGE_BLOCKS_STEEL).requires(4 to NTechItems.steelPipes.get(), 4 to NTechItems.steelTank.get()).requires(24 to NTechTags.Items.INGOTS_STEEL, 16 to NTechTags.Items.PLATES_STEEL, 6 to NTechTags.Items.PLATES_ALUMINIUM).requires(NTechItems.titaniumDrill.get()).requires(2 to NTechItems.motor.get()).requires(8 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
+        AssemblyRecipeBuilder(NTechBlockItems.shredder.get(), 1, 2000).requires(2 to NTechTags.Items.INGOTS_STEEL, 4 to NTechTags.Items.PLATES_STEEL).requires(NTechItems.motor.get()).requires(2 to NTechTags.Items.WIRES_RED_COPPER).requires(2 to NTechBlockItems.steelBeam.get(), 2 to Items.IRON_BARS).requires(NTechBlockItems.coatedCable.get()).save(consumer)
         AssemblyRecipeBuilder(NTechItems.advancedAlloyPlate.get(), 2, 30).requires(3 to NTechItems.advancedAlloyIngot.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.schrabidiumPlate.get(), 2, 30).requires(3 to NTechItems.schrabidiumIngot.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.combineSteelPlate.get(), 2, 30).requires(3 to NTechItems.combineSteelIngot.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.saturnitePlate.get(), 2, 30).requires(3 to NTechItems.saturniteIngot.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.mixedPlate.get(), 4, 50).requires(2 to NTechItems.advancedAlloyPlate.get()).requires(NTechTags.Items.PLATES_NEUTRON_REFLECTOR).requires(NTechItems.saturnitePlate.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.advancedCircuit.get(), 1, 150).requires(NTechItems.enhancedCircuit.get()).requires(4 to NTechTags.Items.WIRES_RED_COPPER, 1 to NTechTags.Items.DUSTS_GOLD, 1 to NTechTags.Items.PLATES_INSULATOR).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.aluminiumPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_ALUMINIUM).save(consumer)
         AssemblyRecipeBuilder(NTechItems.aluminiumWire.get(), 6, 20).requires(NTechTags.Items.INGOTS_ALUMINIUM).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.centrifugeElement.get(), 1, 100).requires(4 to NTechTags.Items.PLATES_STEEL, 4 to NTechTags.Items.PLATES_TITANIUM).requires(NTechItems.motor.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.combineSteelPlate.get(), 2, 30).requires(3 to NTechItems.combineSteelIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.copperPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_COPPER).save(consumer)
         AssemblyRecipeBuilder(NTechItems.copperWire.get(), 6, 20).requires(Tags.Items.INGOTS_COPPER).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.tungstenWire.get(), 6, 20).requires(NTechTags.Items.INGOTS_TUNGSTEN).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.redCopperWire.get(), 6, 20).requires(NTechItems.redCopperIngot.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.superConductor.get(), 6, 20).requires(NTechItems.advancedAlloyIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.enhancedCircuit.get(), 1, 100).requires(NTechItems.basicCircuit.get()).requires(4 to NTechTags.Items.WIRES_COPPER, 1 to NTechTags.Items.DUSTS_QUARTZ, 1 to NTechTags.Items.PLATES_COPPER).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.goldPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_GOLD).save(consumer)
         AssemblyRecipeBuilder(NTechItems.goldWire.get(), 6, 20).requires(Tags.Items.INGOTS_GOLD).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.schrabidiumWire.get(), 6, 20).requires(NTechItems.schrabidiumIngot.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.highTemperatureSuperConductor.get(), 6, 20).requires(NTechItems.magnetizedTungstenIngot.get()).save(consumer)
         AssemblyRecipeBuilder(NTechItems.hazmatCloth.get(), 4, 50).requires(4 to NTechTags.Items.DUSTS_LEAD, 8 to Tags.Items.STRING).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.highTemperatureSuperConductor.get(), 6, 20).requires(NTechItems.magnetizedTungstenIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.ironPlate.get(), 2, 30).requires(3 to Tags.Items.INGOTS_IRON).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.leadPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_LEAD).save(consumer)
         AssemblyRecipeBuilder(NTechItems.machineUpgradeTemplate.get(), 1, 100).requires(1 to NTechTags.Items.PLATES_STEEL, 4 to NTechTags.Items.PLATES_IRON, 2 to NTechTags.Items.PLATES_COPPER, 6 to NTechTags.Items.WIRES_COPPER).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.speedUpgradeMk1.get(), 1, 200).requires(NTechItems.machineUpgradeTemplate.get()).requires(4 to NTechTags.Items.DUSTS_RED_COPPER, 6 to Tags.Items.DUSTS_REDSTONE, 4 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.speedUpgradeMk2.get(), 1, 300).requires(NTechItems.speedUpgradeMk1.get()).requires(2 to NTechTags.Items.DUSTS_RED_COPPER, 4 to Tags.Items.DUSTS_REDSTONE).requires(4 to NTechItems.advancedCircuit.get()).requires(4 to NTechTags.Items.WIRES_RED_COPPER, 2 to NTechTags.Items.INGOTS_PLASTIC).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.speedUpgradeMk3.get(), 1, 500).requires(NTechItems.speedUpgradeMk2.get()).requires(2 to NTechTags.Items.DUSTS_RED_COPPER, 6 to Tags.Items.DUSTS_REDSTONE, 4 to NTechTags.Items.INGOTS_DESH).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.mixedPlate.get(), 4, 50).requires(2 to NTechItems.advancedAlloyPlate.get()).requires(NTechTags.Items.PLATES_NEUTRON_REFLECTOR).requires(NTechItems.saturnitePlate.get()).save(consumer)
         AssemblyRecipeBuilder(NTechItems.powerSavingUpgradeMk1.get(), 1, 200).requires(NTechItems.machineUpgradeTemplate.get()).requires(4 to NTechTags.Items.DUSTS_LAPIS, 6 to Tags.Items.DUSTS_GLOWSTONE, 4 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
         AssemblyRecipeBuilder(NTechItems.powerSavingUpgradeMk2.get(), 1, 300).requires(NTechItems.powerSavingUpgradeMk1.get()).requires(2 to NTechTags.Items.DUSTS_LAPIS, 4 to Tags.Items.DUSTS_GLOWSTONE).requires(4 to NTechItems.advancedCircuit.get()).requires(4 to NTechTags.Items.WIRES_RED_COPPER, 2 to NTechTags.Items.INGOTS_PLASTIC).save(consumer)
         AssemblyRecipeBuilder(NTechItems.powerSavingUpgradeMk3.get(), 1, 500).requires(NTechItems.powerSavingUpgradeMk2.get()).requires(2 to NTechTags.Items.DUSTS_LAPIS, 6 to Tags.Items.DUSTS_GLOWSTONE, 4 to NTechTags.Items.INGOTS_DESH).save(consumer)
-        AssemblyRecipeBuilder(NTechBlockItems.fatMan.get(), 1, 300).requires(1 to NTechItems.steelSphere.get(), 2 to NTechItems.bigSteelShell.get(), 1 to NTechItems.bigSteelGridFins.get(), 2 to NTechItems.militaryGradeCircuitBoardTier2.get()).requires(6 to NTechTags.Items.WIRES_COPPER, 6 to Tags.Items.DYES_YELLOW).save(consumer)
-        AssemblyRecipeBuilder(NTechBlockItems.shredder.get(), 1, 2000).requires(2 to NTechTags.Items.INGOTS_STEEL, 4 to NTechTags.Items.PLATES_STEEL).requires(NTechItems.motor.get()).requires(2 to NTechTags.Items.WIRES_RED_COPPER).requires(2 to NTechBlockItems.steelBeam.get(), 2 to Items.IRON_BARS).requires(NTechBlockItems.coatedCable.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechBlockItems.chemPlantPlacer.get(), 1, 200).requires(8 to NTechTags.Items.INGOTS_STEEL, 6 to NTechTags.Items.PLATES_COPPER).requires(4 to NTechItems.steelTank.get()).requires(NTechItems.bigSteelShell.get()).requires(3 to NTechTags.Items.COILS_TUNGSTEN).requires(2 to NTechItems.enhancedCircuit.get(), 1 to NTechItems.advancedCircuit.get()).requires(8 to NTechTags.Items.PLATES_INSULATOR).save(consumer)
-        AssemblyRecipeBuilder(NTechBlockItems.oilDerrickPlacer.get(), 1, 250).requires(20 to NTechBlockItems.steelScaffold.get(), 8 to NTechBlockItems.steelBeam.get(), 2 to NTechItems.steelTank.get(), 1 to NTechItems.motor.get(), 3 to NTechItems.steelPipes.get(), 1 to NTechItems.titaniumDrill.get()).requires(6 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
-        AssemblyRecipeBuilder(NTechBlockItems.pumpjackPlacer.get(), 1, 400).requires(8 to NTechBlockItems.steelScaffold.get()).requires(8 to NTechTags.Items.STORAGE_BLOCKS_STEEL).requires(4 to NTechItems.steelPipes.get(), 4 to NTechItems.steelTank.get()).requires(24 to NTechTags.Items.INGOTS_STEEL, 16 to NTechTags.Items.PLATES_STEEL, 6 to NTechTags.Items.PLATES_ALUMINIUM).requires(NTechItems.titaniumDrill.get()).requires(2 to NTechItems.motor.get()).requires(8 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
-        AssemblyRecipeBuilder(NTechItems.centrifugeElement.get(), 1, 100).requires(4 to NTechTags.Items.PLATES_STEEL, 4 to NTechTags.Items.PLATES_TITANIUM).requires(NTechItems.motor.get()).save(consumer)
-        AssemblyRecipeBuilder(NTechBlockItems.centrifugePlacer.get(), 1, 200).requires(NTechItems.centrifugeElement.get()).requires(2 to NTechTags.Items.INGOTS_POLYMER, 8 to NTechTags.Items.PLATES_STEEL, 8 to NTechTags.Items.PLATES_COPPER).requires(NTechItems.enhancedCircuit.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.redCopperWire.get(), 6, 20).requires(NTechItems.redCopperIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.saturnitePlate.get(), 2, 30).requires(3 to NTechItems.saturniteIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.schrabidiumPlate.get(), 2, 30).requires(3 to NTechItems.schrabidiumIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.schrabidiumWire.get(), 6, 20).requires(NTechItems.schrabidiumIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.speedUpgradeMk1.get(), 1, 200).requires(NTechItems.machineUpgradeTemplate.get()).requires(4 to NTechTags.Items.DUSTS_RED_COPPER, 6 to Tags.Items.DUSTS_REDSTONE, 4 to NTechTags.Items.WIRES_RED_COPPER).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.speedUpgradeMk2.get(), 1, 300).requires(NTechItems.speedUpgradeMk1.get()).requires(2 to NTechTags.Items.DUSTS_RED_COPPER, 4 to Tags.Items.DUSTS_REDSTONE).requires(4 to NTechItems.advancedCircuit.get()).requires(4 to NTechTags.Items.WIRES_RED_COPPER, 2 to NTechTags.Items.INGOTS_PLASTIC).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.speedUpgradeMk3.get(), 1, 500).requires(NTechItems.speedUpgradeMk2.get()).requires(2 to NTechTags.Items.DUSTS_RED_COPPER, 6 to Tags.Items.DUSTS_REDSTONE, 4 to NTechTags.Items.INGOTS_DESH).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.steelPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_STEEL).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.superConductor.get(), 6, 20).requires(NTechItems.advancedAlloyIngot.get()).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.titaniumDrill.get(), 1, 100).requires(2 to NTechTags.Items.INGOTS_STEEL, 2 to NTechTags.Items.INGOTS_HIGH_SPEED_STEEL).requires(2 to NTechItems.highSpeedSteelBolt.get()).requires(6 to NTechTags.Items.PLATES_TITANIUM).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.titaniumPlate.get(), 2, 30).requires(3 to NTechTags.Items.INGOTS_TITANIUM).save(consumer)
+        AssemblyRecipeBuilder(NTechItems.tungstenWire.get(), 6, 20).requires(NTechTags.Items.INGOTS_TUNGSTEN).save(consumer)
     }
 
-    private fun chemistry(consumer: Consumer<FinishedRecipe>) {
+    private fun chemistry(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.CHEMISTRY.createPipe(actualConsumer)
+
         ChemRecipeBuilder(100).requires(NTechTags.Items.YELLOWCAKE_URANIUM).requires(NTechTags.Items.DUSTS_FLUORITE, 4).requires(FluidStack(Fluids.WATER, 1000)).results(
             NTechItems.sulfur.get(), 2).results(FluidStack(NTechFluids.uraniumHexafluoride.source.get(), 1200)).save(consumer)
     }
 
-    private fun centrifuge(consumer: Consumer<FinishedRecipe>) {
+    private fun centrifuging(actualConsumer: Consumer<FinishedRecipe>) {
+        val consumer = SubDirectories.CENTRIFUGING.createPipe(actualConsumer)
+
         centrifugeOreRecipe(consumer, Tags.Items.ORES_COAL, ItemStack(NTechItems.coalPowder.get(), 2), ItemStack(NTechItems.coalPowder.get(), 2), ItemStack(NTechItems.coalPowder.get(), 2))
         centrifugeOreRecipe(consumer, Tags.Items.ORES_IRON, NTechItems.ironPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance, NTechItems.ironPowder.get().defaultInstance)
         centrifugeOreRecipe(consumer, Tags.Items.ORES_COPPER, NTechItems.copperPowder.get().defaultInstance, NTechItems.copperPowder.get().defaultInstance, NTechItems.copperPowder.get().defaultInstance)
@@ -705,6 +737,11 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         CentrifugeRecipeBuilder(Ingredient.of(NTechBlockItems.euphemiumEtchedSchrabidiumCluster.get()), ItemStack(NTechItems.euphemiumNugget.get(), 7), ItemStack(NTechItems.schrabidiumPowder.get(), 4), ItemStack(NTechItems.starmetalIngot.get(), 2), ItemStack(NTechItems.soliniumNugget.get(), 2)).unlockedBy("has_cluster", has(NTechBlockItems.euphemiumEtchedSchrabidiumCluster.get())).save(consumer)
     }
 
+    private fun ringCoilRecipe(ringCoil: ItemLike, coil: ItemLike, consumer: Consumer<FinishedRecipe>) {
+        ShapedRecipeBuilder.shaped(ringCoil, 2).define('C', coil).define('P', NTechTags.Items.PLATES_IRON).pattern(" C ").pattern("CPC").pattern(" C ").group(ringCoil.asItem().registryName!!.path).unlockedBy("has_coil", has(coil)).save(consumer, ringCoil.asItem().registryName!!.appendToPath("_with_iron_plate"))
+        ShapedRecipeBuilder.shaped(ringCoil, 2).define('C', coil).define('P', NTechTags.Items.PLATES_STEEL).pattern(" C ").pattern("CPC").pattern(" C ").group(ringCoil.asItem().registryName!!.path).unlockedBy("has_coil", has(coil)).save(consumer, ringCoil.asItem().registryName!!.appendToPath("_with_steel_plate"))
+    }
+
     private fun centrifugeOreRecipe(consumer: Consumer<FinishedRecipe>, oreTag: TagKey<Item>, vararg results: ItemStack) {
         val resultsString = results.map { it.item.registryName!!.path }.distinct().joinToString(separator = "_and_")
         CentrifugeRecipeBuilder(DifferenceIngredient.of(Ingredient.of(oreTag), CompoundIngredient.of(Ingredient.of(Tags.Items.ORES_IN_GROUND_NETHERRACK), Ingredient.of(NTechTags.Items.ORES_IN_GROUND_END_STONE))), *results, Items.GRAVEL.defaultInstance).unlockedBy("has_ore", has(oreTag)).save(consumer, ntm("${resultsString}_from_centrifuging_ore"))
@@ -714,21 +751,7 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
 
     private fun centrifugeCrystalRecipe(consumer: Consumer<FinishedRecipe>, crystalTag: TagKey<Item>, vararg results: ItemStack) {
         val resultsString = results.map { it.item.registryName!!.path }.distinct().joinToString(separator = "_and_")
-        CentrifugeRecipeBuilder(Ingredient.of(crystalTag), *results).unlockedBy("has_crystal", has(crystalTag)).save(consumer, "${resultsString}_from_centrifuging_crystals")
-    }
-
-    private fun consumables(consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(NTechItems.oilDetector.get()).define('G', NTechTags.Items.WIRES_GOLD).define('S', NTechTags.Items.PLATES_STEEL).define('C', Tags.Items.INGOTS_COPPER).define('A', NTechItems.advancedCircuit.get()).pattern("G C").pattern("GAC").pattern("SSS").group(NTechItems.oilDetector.id.path).unlockedBy("has_${NTechItems.advancedCircuit.id.path}", has(NTechItems.advancedCircuit.get())).save(consumer, NTechItems.oilDetector.id)
-        ShapedRecipeBuilder.shaped(NTechItems.ivBag.get(), 4).define('I', NTechTags.Items.PLATES_INSULATOR).define('F', NTechTags.Items.PLATES_IRON).pattern("I").pattern("F").pattern("I").unlockedBy("has_insulator", has(NTechTags.Items.PLATES_INSULATOR)).save(consumer)
-        ShapelessRecipeBuilder.shapeless(NTechItems.emptyExperienceBag.get()).requires(NTechItems.ivBag.get()).requires(NTechItems.enchantmentPowder.get()).unlockedBy("has_powder", has(NTechItems.enchantmentPowder.get())).save(consumer)
-        ShapelessRecipeBuilder.shapeless(NTechItems.radAway.get()).requires(NTechItems.bloodBag.get()).requires(NTechTags.Items.DUSTS_COAL).requires(Tags.Items.SEEDS_PUMPKIN).unlockedBy("has_blood_bag", has(NTechItems.bloodBag.get())).save(consumer)
-        ShapelessRecipeBuilder.shapeless(NTechItems.strongRadAway.get()).requires(NTechItems.radAway.get()).requires(NTechBlockItems.glowingMushroom.get()).unlockedBy("has_glowing_mushroom", has(NTechBlockItems.glowingMushroom.get())).save(consumer)
-        // TODO elite radaway iodine
-        ShapedRecipeBuilder.shaped(NTechItems.polaroid.get()).define('C', NTechTags.Items.DUSTS_COAL).define('A', NTechItems.advancedAlloyPowder.get()).define('G', NTechTags.Items.DUSTS_GOLD).define('L', NTechTags.Items.DUSTS_LAPIS).define('P', Items.PAPER).pattern(" C ").pattern("APG").pattern(" L ").unlockedBy("has_advanced_alloy", has(NTechItems.advancedAlloyPowder.get())).save(consumer)
-    }
-
-    private fun misc(consumer: Consumer<FinishedRecipe>) {
-        ShapedRecipeBuilder.shaped(Items.TORCH, 8).define('C', NTechTags.Items.COKE).define('S', Tags.Items.RODS_WOODEN).pattern("C").pattern("S").group(Items.TORCH.registryName!!.path).unlockedBy("has_coke", has(NTechTags.Items.COKE)).save(consumer, ntm("torch_from_coke"))
+        CentrifugeRecipeBuilder(Ingredient.of(crystalTag), *results).unlockedBy("has_crystal", has(crystalTag)).save(consumer, ntm("${resultsString}_from_centrifuging_crystals"))
     }
 
     // so we can also use tags when declaring a shapeless recipe with multiple required items of the same type
@@ -750,8 +773,8 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), experience / 2, 100, result, 3, serializer = RecipeSerializer.BLASTING_RECIPE).group(getItemName(result)).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, ntm("${getItemName(result)}_from_blasting_${getItemName(ingredient)}"))
     }
 
-    private fun ingotFromPowder(ingredient: TagKey<Item>, result: ItemLike, ingredientName: String, consumer: Consumer<FinishedRecipe>) {
-        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_$ingredientName", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_powder"))
+    private fun ingotFromPowder(ingredient: TagKey<Item>, result: ItemLike, consumer: Consumer<FinishedRecipe>) {
+        ExtendedCookingRecipeBuilder(Ingredient.of(ingredient), .1F, 200, result).group(result.asItem().registryName!!.path).unlockedBy("has_ingredient", has(ingredient)).save(consumer, ntm("${result.asItem().registryName!!.path}_from_powder"))
     }
 
     private fun ingotFromCrystals(ingredient: ItemLike, result: ItemLike, experience: Float, consumer: Consumer<FinishedRecipe>, resultCount: Int = 2) {
@@ -873,19 +896,48 @@ class NuclearRecipeProvider(generator: DataGenerator) : RecipeProvider(generator
         }
     }
 
-    private fun getHasName(tag: TagKey<Item>?, item: Item?) = "has_${getItemName(tag, item)}"
+    private fun getHasName(item: Item?) = "has_${getItemName(item)}"
 
-    private fun getConversionRecipeName(result: Item, inputTag: TagKey<Item>?, inputItem: Item?) = "${getItemName(result)}_from_${getItemName(inputTag, inputItem)}"
+    private fun getConversionRecipeName(result: Item, inputItem: Item?) = "${getItemName(result)}_from_${getItemName(inputItem)}"
 
-    // FIXME this is kinda unnecessary since the tags aren't bound anyway
-    private fun getItemName(tag: TagKey<Item>?, item: Item?) =
-        tag?.let {
-            val tagManager = ForgeRegistries.ITEMS.getTagManager()
-            if (!tagManager.isKnownTagName(it)) return@let null
-            tagManager.getTag(it).firstOrNull()?.registryName?.path
-        } ?: item?.registryName?.path ?: throw IllegalStateException("Could not find an applicable name for tag '$tag' or item '$item'")
+    private fun getItemName(item: Item?) = item?.registryName?.path ?: throw IllegalStateException("Could not find an applicable name for '$item'")
 
     private fun ingredientAndConditionOf(tag: TagKey<Item>?, item: Item?) =
         tag?.let { Ingredient.of(it) to InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(it).build()) } ?:
         item?.let { Ingredient.of(it) to InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(it).build()) }
+
+    private enum class SubDirectories(type: RecipeType<*>) {
+        CRAFTING(RecipeType.CRAFTING),
+        COOKING(RecipeType.SMELTING),
+        ASSEMBLING(RecipeTypes.ASSEMBLY),
+        BLASTING(RecipeTypes.BLASTING),
+        CENTRIFUGING(RecipeTypes.CENTRIFUGE),
+        CHEMISTRY(RecipeTypes.CHEM),
+        CONSTRUCTING(RecipeTypes.CONSTRUCTING),
+        PRESSING(RecipeTypes.PRESSING),
+        SHREDDING(RecipeTypes.SHREDDING),
+        SMITHING(RecipeTypes.SMITHING),
+        ;
+
+        val subPath = Registry.RECIPE_TYPE.getKey(type)?.path ?: throw IllegalStateException("Unregistered recipe type for $name")
+
+        fun createPipe(consumer: Consumer<FinishedRecipe>): Consumer<FinishedRecipe> = Consumer {
+            consumer.accept(object : FinishedRecipe by it {
+                override fun getId() = it.id.prependToPath("$subPath/")
+
+                // dirty hack, bad code
+                // TODO create a custom interface for recipes or recipe builders instead
+                override fun serializeAdvancement() = it.serializeAdvancement()?.apply {
+                    val stringId = id.toString()
+                    val originalStringId = it.id.toString()
+                    getAsJsonObject("rewards")?.getAsJsonArray("recipes")?.apply idReplacer@{
+                        val originalId = find { recipe -> recipe.asString == originalStringId } ?: return@idReplacer
+                        remove(originalId)
+                        add(stringId)
+                    }
+                    getAsJsonObject("criteria")?.getAsJsonObject("has_the_recipe")?.getAsJsonObject("conditions")?.addProperty("recipe", stringId)
+                }
+            })
+        }
+    }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:desh_reinforced_block"
+      "nucleartech:crafting/desh_reinforced_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:desh_reinforced_block"
+        "recipe": "nucleartech:crafting/desh_reinforced_block"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:thorium232_ingot_from_blasting_meteor_thorium_ore"
+      "nucleartech:smelting/thorium232_ingot_from_blasting_meteor_thorium_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:thorium232_ingot_from_blasting_meteor_thorium_ore"
+        "recipe": "nucleartech:smelting/thorium232_ingot_from_blasting_meteor_thorium_ore"
       }
     }
   },

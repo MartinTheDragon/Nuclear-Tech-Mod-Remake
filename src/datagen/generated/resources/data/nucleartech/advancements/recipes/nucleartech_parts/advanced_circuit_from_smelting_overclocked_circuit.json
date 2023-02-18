@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_circuit_from_smelting_overclocked_circuit"
+      "nucleartech:smelting/advanced_circuit_from_smelting_overclocked_circuit"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_circuit_from_smelting_overclocked_circuit"
+        "recipe": "nucleartech:smelting/advanced_circuit_from_smelting_overclocked_circuit"
       }
     }
   },

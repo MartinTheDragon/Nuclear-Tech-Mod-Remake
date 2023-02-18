@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:desh_mix_from_shredding_rare_earth_ore"
+      "nucleartech:shredding/desh_mix_from_shredding_rare_earth_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:desh_mix_from_shredding_rare_earth_ore"
+        "recipe": "nucleartech:shredding/desh_mix_from_shredding_rare_earth_ore"
       }
     }
   },

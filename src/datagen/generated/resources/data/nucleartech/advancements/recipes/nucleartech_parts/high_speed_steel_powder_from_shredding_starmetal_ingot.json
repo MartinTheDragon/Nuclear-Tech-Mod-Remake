@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:high_speed_steel_powder_from_shredding_starmetal_ingot"
+      "nucleartech:shredding/high_speed_steel_powder_from_shredding_starmetal_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:high_speed_steel_powder_from_shredding_starmetal_ingot"
+        "recipe": "nucleartech:shredding/high_speed_steel_powder_from_shredding_starmetal_ingot"
       }
     }
   },

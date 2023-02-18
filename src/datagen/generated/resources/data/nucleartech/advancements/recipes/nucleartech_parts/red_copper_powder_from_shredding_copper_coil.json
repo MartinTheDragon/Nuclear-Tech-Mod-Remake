@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:red_copper_powder_from_shredding_copper_coil"
+      "nucleartech:shredding/red_copper_powder_from_shredding_copper_coil"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:red_copper_powder_from_shredding_copper_coil"
+        "recipe": "nucleartech:shredding/red_copper_powder_from_shredding_copper_coil"
       }
     }
   },

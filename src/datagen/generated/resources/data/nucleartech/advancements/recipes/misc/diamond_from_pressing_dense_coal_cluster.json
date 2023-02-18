@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:diamond_from_pressing_dense_coal_cluster"
+      "nucleartech:pressing/diamond_from_pressing_dense_coal_cluster"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:diamond_from_pressing_dense_coal_cluster"
+        "recipe": "nucleartech:pressing/diamond_from_pressing_dense_coal_cluster"
       }
     }
   },

@@ -2,11 +2,11 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:coke_from_powder"
+      "nucleartech:smelting/coke_from_powder"
     ]
   },
   "criteria": {
-    "has_coal_powder": {
+    "has_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:coke_from_powder"
+        "recipe": "nucleartech:smelting/coke_from_powder"
       }
     }
   },
   "requirements": [
     [
-      "has_coal_powder",
+      "has_ingredient",
       "has_the_recipe"
     ]
   ]

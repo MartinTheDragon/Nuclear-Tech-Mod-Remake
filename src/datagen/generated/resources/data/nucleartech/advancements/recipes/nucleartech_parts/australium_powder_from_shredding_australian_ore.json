@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:australium_powder_from_shredding_australian_ore"
+      "nucleartech:shredding/australium_powder_from_shredding_australian_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:australium_powder_from_shredding_australian_ore"
+        "recipe": "nucleartech:shredding/australium_powder_from_shredding_australian_ore"
       }
     }
   },

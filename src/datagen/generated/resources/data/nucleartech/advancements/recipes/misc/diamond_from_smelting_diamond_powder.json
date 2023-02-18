@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:diamond_from_smelting_diamond_powder"
+      "nucleartech:smelting/diamond_from_smelting_diamond_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:diamond_from_smelting_diamond_powder"
+        "recipe": "nucleartech:smelting/diamond_from_smelting_diamond_powder"
       }
     }
   },

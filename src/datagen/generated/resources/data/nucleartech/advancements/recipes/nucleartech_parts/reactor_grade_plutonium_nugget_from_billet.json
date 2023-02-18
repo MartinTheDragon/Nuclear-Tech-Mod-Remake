@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:reactor_grade_plutonium_nugget_from_billet"
+      "nucleartech:crafting/reactor_grade_plutonium_nugget_from_billet"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:reactor_grade_plutonium_nugget_from_billet"
+        "recipe": "nucleartech:crafting/reactor_grade_plutonium_nugget_from_billet"
       }
     }
   },

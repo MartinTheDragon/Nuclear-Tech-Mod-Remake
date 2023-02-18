@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:starmetal_ingot_from_smelting_starmetal_crystals"
+      "nucleartech:smelting/starmetal_ingot_from_smelting_starmetal_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:starmetal_ingot_from_smelting_starmetal_crystals"
+        "recipe": "nucleartech:smelting/starmetal_ingot_from_smelting_starmetal_crystals"
       }
     }
   },

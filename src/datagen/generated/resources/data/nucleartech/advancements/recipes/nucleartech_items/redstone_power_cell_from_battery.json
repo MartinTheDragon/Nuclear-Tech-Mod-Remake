@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:redstone_power_cell_from_battery"
+      "nucleartech:crafting/redstone_power_cell_from_battery"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:redstone_power_cell_from_battery"
+        "recipe": "nucleartech:crafting/redstone_power_cell_from_battery"
       }
     }
   },

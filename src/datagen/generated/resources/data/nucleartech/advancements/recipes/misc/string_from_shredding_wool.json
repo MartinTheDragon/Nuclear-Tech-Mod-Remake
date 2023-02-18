@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:string_from_shredding_wool"
+      "nucleartech:shredding/string_from_shredding_wool"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:string_from_shredding_wool"
+        "recipe": "nucleartech:shredding/string_from_shredding_wool"
       }
     }
   },

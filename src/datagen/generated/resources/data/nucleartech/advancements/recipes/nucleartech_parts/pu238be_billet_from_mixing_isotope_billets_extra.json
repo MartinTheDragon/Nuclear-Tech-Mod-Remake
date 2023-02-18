@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:pu238be_billet_from_mixing_isotope_billets_extra"
+      "nucleartech:crafting/pu238be_billet_from_mixing_isotope_billets_extra"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:pu238be_billet_from_mixing_isotope_billets_extra"
+        "recipe": "nucleartech:crafting/pu238be_billet_from_mixing_isotope_billets_extra"
       }
     }
   },

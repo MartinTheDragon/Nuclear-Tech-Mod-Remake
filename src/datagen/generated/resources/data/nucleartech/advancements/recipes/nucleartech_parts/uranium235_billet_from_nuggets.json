@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:uranium235_billet_from_nuggets"
+      "nucleartech:crafting/uranium235_billet_from_nuggets"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:uranium235_billet_from_nuggets"
+        "recipe": "nucleartech:crafting/uranium235_billet_from_nuggets"
       }
     }
   },

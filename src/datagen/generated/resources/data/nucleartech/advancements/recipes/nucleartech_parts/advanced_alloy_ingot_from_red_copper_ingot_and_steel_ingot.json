@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_alloy_ingot_from_red_copper_ingot_and_steel_ingot"
+      "nucleartech:blasting/advanced_alloy_ingot_from_red_copper_ingot_and_steel_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_alloy_ingot_from_red_copper_ingot_and_steel_ingot"
+        "recipe": "nucleartech:blasting/advanced_alloy_ingot_from_red_copper_ingot_and_steel_ingot"
       }
     }
   },

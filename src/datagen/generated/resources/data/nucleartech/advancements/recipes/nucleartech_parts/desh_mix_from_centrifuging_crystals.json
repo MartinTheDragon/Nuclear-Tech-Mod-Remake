@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:thorium_powder_and_uranium_powder_and_radium226_nugget_from_centrifuging_crystals_from_centrifuge"
+      "nucleartech:centrifuge/desh_mix_from_centrifuging_crystals"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:crystals/thorium"
+            "tag": "forge:crystals/rare_earth"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:thorium_powder_and_uranium_powder_and_radium226_nugget_from_centrifuging_crystals_from_centrifuge"
+        "recipe": "nucleartech:centrifuge/desh_mix_from_centrifuging_crystals"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_alloy_ingot_from_smelting_advanced_alloy_powder"
+      "nucleartech:smelting/advanced_alloy_ingot_from_smelting_advanced_alloy_powder"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_alloy_ingot_from_smelting_advanced_alloy_powder"
+        "recipe": "nucleartech:smelting/advanced_alloy_ingot_from_smelting_advanced_alloy_powder"
       }
     }
   },

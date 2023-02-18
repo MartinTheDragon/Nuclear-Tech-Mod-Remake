@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_alloy_plate_from_anvil_constructing"
+      "nucleartech:anvil_constructing/advanced_alloy_plate_from_anvil_constructing"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_alloy_plate_from_anvil_constructing"
+        "recipe": "nucleartech:anvil_constructing/advanced_alloy_plate_from_anvil_constructing"
       }
     }
   },

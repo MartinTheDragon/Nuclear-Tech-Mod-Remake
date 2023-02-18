@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:reiium_nugget"
+      "nucleartech:crafting/reiium_nugget"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:reiium_nugget"
+        "recipe": "nucleartech:crafting/reiium_nugget"
       }
     }
   },

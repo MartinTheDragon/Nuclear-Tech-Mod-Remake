@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:emerald_powder_from_shredding_emerald"
+      "nucleartech:shredding/emerald_powder_from_shredding_emerald"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:emerald_powder_from_shredding_emerald"
+        "recipe": "nucleartech:shredding/emerald_powder_from_shredding_emerald"
       }
     }
   },

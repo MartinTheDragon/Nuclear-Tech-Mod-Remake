@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:combine_steel_ingot_from_combine_steel_block"
+      "nucleartech:crafting/combine_steel_ingot_from_combine_steel_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:combine_steel_ingot_from_combine_steel_block"
+        "recipe": "nucleartech:crafting/combine_steel_ingot_from_combine_steel_block"
       }
     }
   },

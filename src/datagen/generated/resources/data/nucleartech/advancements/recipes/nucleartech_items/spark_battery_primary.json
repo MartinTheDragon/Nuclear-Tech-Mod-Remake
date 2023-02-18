@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:spark_battery_primary"
+      "nucleartech:crafting/spark_battery_primary"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:spark_battery_primary"
+        "recipe": "nucleartech:crafting/spark_battery_primary"
       }
     }
   },

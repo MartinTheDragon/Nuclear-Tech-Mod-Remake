@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:twenty_four_fold_redstone_power_cell_from_sixfold_redstone_power_cell"
+      "nucleartech:crafting/twenty_four_fold_redstone_power_cell_from_sixfold_redstone_power_cell"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:twenty_four_fold_redstone_power_cell_from_sixfold_redstone_power_cell"
+        "recipe": "nucleartech:crafting/twenty_four_fold_redstone_power_cell_from_sixfold_redstone_power_cell"
       }
     }
   },

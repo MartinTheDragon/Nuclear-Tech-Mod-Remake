@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:fluorite_from_smelting_fluorite_crystals"
+      "nucleartech:smelting/fluorite_from_smelting_fluorite_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:fluorite_from_smelting_fluorite_crystals"
+        "recipe": "nucleartech:smelting/fluorite_from_smelting_fluorite_crystals"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gold_powder_from_shredding_gold_ring_coil"
+      "nucleartech:shredding/gold_powder_from_shredding_gold_ring_coil"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gold_powder_from_shredding_gold_ring_coil"
+        "recipe": "nucleartech:shredding/gold_powder_from_shredding_gold_ring_coil"
       }
     }
   },

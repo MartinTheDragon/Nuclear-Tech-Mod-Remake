@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:starmetal_anvil"
+      "nucleartech:anvil_smithing/starmetal_anvil"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:starmetal_anvil"
+        "recipe": "nucleartech:anvil_smithing/starmetal_anvil"
       }
     }
   },

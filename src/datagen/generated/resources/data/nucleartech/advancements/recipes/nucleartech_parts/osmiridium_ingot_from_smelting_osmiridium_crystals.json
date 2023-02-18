@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:osmiridium_ingot_from_smelting_osmiridium_crystals"
+      "nucleartech:smelting/osmiridium_ingot_from_smelting_osmiridium_crystals"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:osmiridium_ingot_from_smelting_osmiridium_crystals"
+        "recipe": "nucleartech:smelting/osmiridium_ingot_from_smelting_osmiridium_crystals"
       }
     }
   },

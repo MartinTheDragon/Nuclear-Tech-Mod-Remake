@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:cobalt_ingot_from_smelting_cobalt_crystals"
+      "nucleartech:smelting/cobalt_ingot_from_smelting_cobalt_crystals"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:cobalt_ingot_from_smelting_cobalt_crystals"
+        "recipe": "nucleartech:smelting/cobalt_ingot_from_smelting_cobalt_crystals"
       }
     }
   },

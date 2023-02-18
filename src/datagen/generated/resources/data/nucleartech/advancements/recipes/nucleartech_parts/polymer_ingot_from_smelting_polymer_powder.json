@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:polymer_ingot_from_smelting_polymer_powder"
+      "nucleartech:smelting/polymer_ingot_from_smelting_polymer_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:polymer_ingot_from_smelting_polymer_powder"
+        "recipe": "nucleartech:smelting/polymer_ingot_from_smelting_polymer_powder"
       }
     }
   },

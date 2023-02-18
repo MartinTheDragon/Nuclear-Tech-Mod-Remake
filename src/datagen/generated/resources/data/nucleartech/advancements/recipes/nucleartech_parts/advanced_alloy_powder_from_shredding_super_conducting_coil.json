@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_alloy_powder_from_shredding_super_conducting_coil"
+      "nucleartech:shredding/advanced_alloy_powder_from_shredding_super_conducting_coil"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_alloy_powder_from_shredding_super_conducting_coil"
+        "recipe": "nucleartech:shredding/advanced_alloy_powder_from_shredding_super_conducting_coil"
       }
     }
   },

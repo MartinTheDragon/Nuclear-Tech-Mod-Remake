@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:double_schrabidium_power_cell_from_schrabidium_power_cell"
+      "nucleartech:crafting/double_schrabidium_power_cell_from_schrabidium_power_cell"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:double_schrabidium_power_cell_from_schrabidium_power_cell"
+        "recipe": "nucleartech:crafting/double_schrabidium_power_cell_from_schrabidium_power_cell"
       }
     }
   },

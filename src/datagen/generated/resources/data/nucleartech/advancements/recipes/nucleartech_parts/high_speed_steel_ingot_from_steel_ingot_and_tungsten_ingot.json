@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:high_speed_steel_ingot_from_steel_ingot_and_tungsten_ingot"
+      "nucleartech:blasting/high_speed_steel_ingot_from_steel_ingot_and_tungsten_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:high_speed_steel_ingot_from_steel_ingot_and_tungsten_ingot"
+        "recipe": "nucleartech:blasting/high_speed_steel_ingot_from_steel_ingot_and_tungsten_ingot"
       }
     }
   },

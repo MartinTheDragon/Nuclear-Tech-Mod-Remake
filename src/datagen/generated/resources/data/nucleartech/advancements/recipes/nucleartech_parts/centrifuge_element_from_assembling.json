@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:centrifuge_element_from_assembling"
+      "nucleartech:assembly/centrifuge_element_from_assembling"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:centrifuge_element_from_assembling"
+        "recipe": "nucleartech:assembly/centrifuge_element_from_assembling"
       }
     }
   },

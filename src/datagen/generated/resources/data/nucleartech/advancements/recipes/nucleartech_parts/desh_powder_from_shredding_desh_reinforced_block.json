@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:desh_powder_from_shredding_desh_reinforced_block"
+      "nucleartech:shredding/desh_powder_from_shredding_desh_reinforced_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:desh_powder_from_shredding_desh_reinforced_block"
+        "recipe": "nucleartech:shredding/desh_powder_from_shredding_desh_reinforced_block"
       }
     }
   },

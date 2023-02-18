@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:plutonium_fuel_ingot_from_billets"
+      "nucleartech:crafting/plutonium_fuel_ingot_from_billets"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:plutonium_fuel_ingot_from_billets"
+        "recipe": "nucleartech:crafting/plutonium_fuel_ingot_from_billets"
       }
     }
   },

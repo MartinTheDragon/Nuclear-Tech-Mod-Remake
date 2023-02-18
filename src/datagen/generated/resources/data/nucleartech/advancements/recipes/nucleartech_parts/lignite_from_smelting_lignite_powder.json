@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lignite_from_smelting_lignite_powder"
+      "nucleartech:smelting/lignite_from_smelting_lignite_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lignite_from_smelting_lignite_powder"
+        "recipe": "nucleartech:smelting/lignite_from_smelting_lignite_powder"
       }
     }
   },

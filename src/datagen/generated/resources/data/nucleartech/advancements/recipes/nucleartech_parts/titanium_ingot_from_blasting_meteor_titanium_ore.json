@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:titanium_ingot_from_blasting_meteor_titanium_ore"
+      "nucleartech:smelting/titanium_ingot_from_blasting_meteor_titanium_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:titanium_ingot_from_blasting_meteor_titanium_ore"
+        "recipe": "nucleartech:smelting/titanium_ingot_from_blasting_meteor_titanium_ore"
       }
     }
   },

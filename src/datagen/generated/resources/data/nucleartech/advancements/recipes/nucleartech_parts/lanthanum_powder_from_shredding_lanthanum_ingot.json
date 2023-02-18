@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lanthanum_powder_from_shredding_lanthanum_ingot"
+      "nucleartech:shredding/lanthanum_powder_from_shredding_lanthanum_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lanthanum_powder_from_shredding_lanthanum_ingot"
+        "recipe": "nucleartech:shredding/lanthanum_powder_from_shredding_lanthanum_ingot"
       }
     }
   },

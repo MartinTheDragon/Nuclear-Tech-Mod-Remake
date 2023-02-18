@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gold_ring_coil_with_steel_plate"
+      "nucleartech:crafting/gold_ring_coil_with_steel_plate"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gold_ring_coil_with_steel_plate"
+        "recipe": "nucleartech:crafting/gold_ring_coil_with_steel_plate"
       }
     }
   },

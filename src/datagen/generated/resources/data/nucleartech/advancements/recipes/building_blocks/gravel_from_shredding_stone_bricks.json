@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gravel_from_shredding_stone_bricks"
+      "nucleartech:shredding/gravel_from_shredding_stone_bricks"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gravel_from_shredding_stone_bricks"
+        "recipe": "nucleartech:shredding/gravel_from_shredding_stone_bricks"
       }
     }
   },

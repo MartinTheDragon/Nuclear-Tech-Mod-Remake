@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:enchantment_powder_from_shredding_enchanted_book"
+      "nucleartech:shredding/enchantment_powder_from_shredding_enchanted_book"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:enchantment_powder_from_shredding_enchanted_book"
+        "recipe": "nucleartech:shredding/enchantment_powder_from_shredding_enchanted_book"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:iron_plate_from_pressing_iron_ingot"
+      "nucleartech:pressing/iron_plate_from_pressing_iron_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:iron_plate_from_pressing_iron_ingot"
+        "recipe": "nucleartech:pressing/iron_plate_from_pressing_iron_ingot"
       }
     }
   },

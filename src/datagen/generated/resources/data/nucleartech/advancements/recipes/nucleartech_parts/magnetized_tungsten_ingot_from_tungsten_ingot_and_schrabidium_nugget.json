@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:magnetized_tungsten_ingot_from_tungsten_ingot_and_schrabidium_nugget"
+      "nucleartech:blasting/magnetized_tungsten_ingot_from_tungsten_ingot_and_schrabidium_nugget"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:magnetized_tungsten_ingot_from_tungsten_ingot_and_schrabidium_nugget"
+        "recipe": "nucleartech:blasting/magnetized_tungsten_ingot_from_tungsten_ingot_and_schrabidium_nugget"
       }
     }
   },

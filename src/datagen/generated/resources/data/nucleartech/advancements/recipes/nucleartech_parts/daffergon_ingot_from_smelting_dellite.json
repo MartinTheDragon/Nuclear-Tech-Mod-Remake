@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:daffergon_ingot_from_smelting_dellite"
+      "nucleartech:smelting/daffergon_ingot_from_smelting_dellite"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:daffergon_ingot_from_smelting_dellite"
+        "recipe": "nucleartech:smelting/daffergon_ingot_from_smelting_dellite"
       }
     }
   },

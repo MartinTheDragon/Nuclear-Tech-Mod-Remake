@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:insulator_from_bricks"
+      "nucleartech:crafting/insulator_from_bricks"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:insulator_from_bricks"
+        "recipe": "nucleartech:crafting/insulator_from_bricks"
       }
     }
   },

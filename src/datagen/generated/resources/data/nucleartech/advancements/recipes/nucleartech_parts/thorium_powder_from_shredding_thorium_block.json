@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:thorium_powder_from_shredding_thorium_block"
+      "nucleartech:shredding/thorium_powder_from_shredding_thorium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:thorium_powder_from_shredding_thorium_block"
+        "recipe": "nucleartech:shredding/thorium_powder_from_shredding_thorium_block"
       }
     }
   },

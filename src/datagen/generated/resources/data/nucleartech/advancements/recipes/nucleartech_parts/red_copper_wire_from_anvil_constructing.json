@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:red_copper_wire_from_anvil_constructing"
+      "nucleartech:anvil_constructing/red_copper_wire_from_anvil_constructing"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:red_copper_wire_from_anvil_constructing"
+        "recipe": "nucleartech:anvil_constructing/red_copper_wire_from_anvil_constructing"
       }
     }
   },

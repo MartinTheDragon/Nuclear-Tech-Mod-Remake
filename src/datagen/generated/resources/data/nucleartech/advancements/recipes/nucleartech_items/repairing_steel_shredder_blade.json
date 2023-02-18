@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:repairing_steel_shredder_blade"
+      "nucleartech:crafting/repairing_steel_shredder_blade"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:repairing_steel_shredder_blade"
+        "recipe": "nucleartech:crafting/repairing_steel_shredder_blade"
       }
     }
   },

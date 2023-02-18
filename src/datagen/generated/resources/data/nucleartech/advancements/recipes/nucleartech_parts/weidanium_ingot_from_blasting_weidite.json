@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:weidanium_ingot_from_blasting_weidite"
+      "nucleartech:smelting/weidanium_ingot_from_blasting_weidite"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:weidanium_ingot_from_blasting_weidite"
+        "recipe": "nucleartech:smelting/weidanium_ingot_from_blasting_weidite"
       }
     }
   },

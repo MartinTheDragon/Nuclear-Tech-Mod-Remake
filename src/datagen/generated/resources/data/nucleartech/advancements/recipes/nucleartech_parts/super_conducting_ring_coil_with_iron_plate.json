@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:super_conducting_ring_coil_with_iron_plate"
+      "nucleartech:crafting/super_conducting_ring_coil_with_iron_plate"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:super_conducting_ring_coil_with_iron_plate"
+        "recipe": "nucleartech:crafting/super_conducting_ring_coil_with_iron_plate"
       }
     }
   },

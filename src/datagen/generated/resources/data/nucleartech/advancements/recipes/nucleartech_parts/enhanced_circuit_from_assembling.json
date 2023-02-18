@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:enhanced_circuit_from_assembling"
+      "nucleartech:assembly/enhanced_circuit_from_assembling"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:enhanced_circuit_from_assembling"
+        "recipe": "nucleartech:assembly/enhanced_circuit_from_assembling"
       }
     }
   },

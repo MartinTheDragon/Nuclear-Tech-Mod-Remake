@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:desh_ingot_from_smelting_desh_powder"
+      "nucleartech:smelting/desh_ingot_from_smelting_desh_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:desh_ingot_from_smelting_desh_powder"
+        "recipe": "nucleartech:smelting/desh_ingot_from_smelting_desh_powder"
       }
     }
   },

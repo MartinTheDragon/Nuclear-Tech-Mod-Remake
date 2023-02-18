@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:low_enriched_schrabidium_fuel_ingot_from_billets"
+      "nucleartech:crafting/low_enriched_schrabidium_fuel_ingot_from_billets"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:low_enriched_schrabidium_fuel_ingot_from_billets"
+        "recipe": "nucleartech:crafting/low_enriched_schrabidium_fuel_ingot_from_billets"
       }
     }
   },

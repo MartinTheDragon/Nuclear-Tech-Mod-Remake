@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:tiny_actinium_powder_from_shredding_actinium_fragment"
+      "nucleartech:shredding/tiny_actinium_powder_from_shredding_actinium_fragment"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:tiny_actinium_powder_from_shredding_actinium_fragment"
+        "recipe": "nucleartech:shredding/tiny_actinium_powder_from_shredding_actinium_fragment"
       }
     }
   },

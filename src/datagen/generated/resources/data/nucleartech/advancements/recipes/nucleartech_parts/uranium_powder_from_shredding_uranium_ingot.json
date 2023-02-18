@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:uranium_powder_from_shredding_uranium_ingot"
+      "nucleartech:shredding/uranium_powder_from_shredding_uranium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:uranium_powder_from_shredding_uranium_ingot"
+        "recipe": "nucleartech:shredding/uranium_powder_from_shredding_uranium_ingot"
       }
     }
   },

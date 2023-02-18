@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:magnetized_tungsten_powder_from_shredding_magnetized_tungsten_block"
+      "nucleartech:shredding/magnetized_tungsten_powder_from_shredding_magnetized_tungsten_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:magnetized_tungsten_powder_from_shredding_magnetized_tungsten_block"
+        "recipe": "nucleartech:shredding/magnetized_tungsten_powder_from_shredding_magnetized_tungsten_block"
       }
     }
   },

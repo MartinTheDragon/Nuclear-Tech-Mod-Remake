@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:verticium_ingot_from_verticium_block"
+      "nucleartech:crafting/verticium_ingot_from_verticium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:verticium_ingot_from_verticium_block"
+        "recipe": "nucleartech:crafting/verticium_ingot_from_verticium_block"
       }
     }
   },

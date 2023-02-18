@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:mox_fuel_billet_from_mixing_isotope_billets"
+      "nucleartech:crafting/mox_fuel_billet_from_mixing_isotope_billets"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:mox_fuel_billet_from_mixing_isotope_billets"
+        "recipe": "nucleartech:crafting/mox_fuel_billet_from_mixing_isotope_billets"
       }
     }
   },

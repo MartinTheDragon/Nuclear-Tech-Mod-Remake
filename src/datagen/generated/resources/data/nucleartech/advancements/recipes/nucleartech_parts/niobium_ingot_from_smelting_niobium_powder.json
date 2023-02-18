@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:niobium_ingot_from_smelting_niobium_powder"
+      "nucleartech:smelting/niobium_ingot_from_smelting_niobium_powder"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:niobium_ingot_from_smelting_niobium_powder"
+        "recipe": "nucleartech:smelting/niobium_ingot_from_smelting_niobium_powder"
       }
     }
   },

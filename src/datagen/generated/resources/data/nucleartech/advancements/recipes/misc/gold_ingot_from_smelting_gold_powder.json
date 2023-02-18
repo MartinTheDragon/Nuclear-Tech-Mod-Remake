@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gold_ingot_from_smelting_gold_powder"
+      "nucleartech:smelting/gold_ingot_from_smelting_gold_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gold_ingot_from_smelting_gold_powder"
+        "recipe": "nucleartech:smelting/gold_ingot_from_smelting_gold_powder"
       }
     }
   },

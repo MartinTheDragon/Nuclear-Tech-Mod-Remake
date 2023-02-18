@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:emerald_from_pressing_emerald_powder"
+      "nucleartech:pressing/emerald_from_pressing_emerald_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:emerald_from_pressing_emerald_powder"
+        "recipe": "nucleartech:pressing/emerald_from_pressing_emerald_powder"
       }
     }
   },

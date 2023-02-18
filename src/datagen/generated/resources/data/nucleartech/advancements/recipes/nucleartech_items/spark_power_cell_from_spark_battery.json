@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:spark_power_cell_from_spark_battery"
+      "nucleartech:crafting/spark_power_cell_from_spark_battery"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:spark_power_cell_from_spark_battery"
+        "recipe": "nucleartech:crafting/spark_power_cell_from_spark_battery"
       }
     }
   },

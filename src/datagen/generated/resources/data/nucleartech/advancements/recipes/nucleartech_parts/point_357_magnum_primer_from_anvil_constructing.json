@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:point_357_magnum_primer_from_anvil_constructing"
+      "nucleartech:anvil_constructing/point_357_magnum_primer_from_anvil_constructing"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:point_357_magnum_primer_from_anvil_constructing"
+        "recipe": "nucleartech:anvil_constructing/point_357_magnum_primer_from_anvil_constructing"
       }
     }
   },

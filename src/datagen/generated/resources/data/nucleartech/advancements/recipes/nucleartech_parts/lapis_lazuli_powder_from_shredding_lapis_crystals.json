@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lapis_lazuli_powder_from_shredding_lapis_crystals"
+      "nucleartech:shredding/lapis_lazuli_powder_from_shredding_lapis_crystals"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lapis_lazuli_powder_from_shredding_lapis_crystals"
+        "recipe": "nucleartech:shredding/lapis_lazuli_powder_from_shredding_lapis_crystals"
       }
     }
   },

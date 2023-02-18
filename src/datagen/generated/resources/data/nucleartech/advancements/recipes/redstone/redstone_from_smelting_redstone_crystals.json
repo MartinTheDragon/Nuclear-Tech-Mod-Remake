@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:redstone_from_smelting_redstone_crystals"
+      "nucleartech:smelting/redstone_from_smelting_redstone_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:redstone_from_smelting_redstone_crystals"
+        "recipe": "nucleartech:smelting/redstone_from_smelting_redstone_crystals"
       }
     }
   },

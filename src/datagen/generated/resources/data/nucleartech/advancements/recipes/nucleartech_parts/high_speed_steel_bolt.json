@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:high_speed_steel_bolt"
+      "nucleartech:crafting/high_speed_steel_bolt"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:high_speed_steel_bolt"
+        "recipe": "nucleartech:crafting/high_speed_steel_bolt"
       }
     }
   },

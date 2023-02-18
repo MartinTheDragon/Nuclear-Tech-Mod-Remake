@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:bismuth_nugget_from_billet"
+      "nucleartech:crafting/bismuth_nugget_from_billet"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:bismuth_nugget_from_billet"
+        "recipe": "nucleartech:crafting/bismuth_nugget_from_billet"
       }
     }
   },

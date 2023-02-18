@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:uranium_ingot_from_smelting_uranium_ore"
+      "nucleartech:smelting/uranium_ingot_from_smelting_uranium_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:uranium_ingot_from_smelting_uranium_ore"
+        "recipe": "nucleartech:smelting/uranium_ingot_from_smelting_uranium_ore"
       }
     }
   },

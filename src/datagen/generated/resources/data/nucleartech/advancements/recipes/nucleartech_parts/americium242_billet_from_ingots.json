@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:americium242_billet_from_ingots"
+      "nucleartech:crafting/americium242_billet_from_ingots"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:americium242_billet_from_ingots"
+        "recipe": "nucleartech:crafting/americium242_billet_from_ingots"
       }
     }
   },

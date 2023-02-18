@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:unobtainium_powder_from_shredding_brightblende_ore"
+      "nucleartech:shredding/unobtainium_powder_from_shredding_brightblende_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:unobtainium_powder_from_shredding_brightblende_ore"
+        "recipe": "nucleartech:shredding/unobtainium_powder_from_shredding_brightblende_ore"
       }
     }
   },

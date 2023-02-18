@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:paa_alloy_plate_from_mixed_plate_and_gold_plate"
+      "nucleartech:blasting/paa_alloy_plate_from_mixed_plate_and_gold_plate"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:paa_alloy_plate_from_mixed_plate_and_gold_plate"
+        "recipe": "nucleartech:blasting/paa_alloy_plate_from_mixed_plate_and_gold_plate"
       }
     }
   },

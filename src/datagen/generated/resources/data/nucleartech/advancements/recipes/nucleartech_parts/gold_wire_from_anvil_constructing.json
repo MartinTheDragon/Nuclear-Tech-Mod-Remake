@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gold_wire_from_anvil_constructing"
+      "nucleartech:anvil_constructing/gold_wire_from_anvil_constructing"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gold_wire_from_anvil_constructing"
+        "recipe": "nucleartech:anvil_constructing/gold_wire_from_anvil_constructing"
       }
     }
   },

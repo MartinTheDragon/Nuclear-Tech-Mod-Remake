@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_battery_secondary"
+      "nucleartech:crafting/advanced_battery_secondary"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_battery_secondary"
+        "recipe": "nucleartech:crafting/advanced_battery_secondary"
       }
     }
   },

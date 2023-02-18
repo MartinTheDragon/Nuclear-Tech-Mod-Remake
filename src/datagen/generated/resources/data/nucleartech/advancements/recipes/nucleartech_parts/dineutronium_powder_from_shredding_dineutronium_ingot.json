@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:dineutronium_powder_from_shredding_dineutronium_ingot"
+      "nucleartech:shredding/dineutronium_powder_from_shredding_dineutronium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:dineutronium_powder_from_shredding_dineutronium_ingot"
+        "recipe": "nucleartech:shredding/dineutronium_powder_from_shredding_dineutronium_ingot"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:reiium_ingot_from_smelting_reiite"
+      "nucleartech:smelting/reiium_ingot_from_smelting_reiite"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:reiium_ingot_from_smelting_reiite"
+        "recipe": "nucleartech:smelting/reiium_ingot_from_smelting_reiite"
       }
     }
   },

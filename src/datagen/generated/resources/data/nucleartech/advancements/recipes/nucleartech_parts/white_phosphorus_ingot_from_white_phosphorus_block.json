@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:white_phosphorus_ingot_from_white_phosphorus_block"
+      "nucleartech:crafting/white_phosphorus_ingot_from_white_phosphorus_block"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:white_phosphorus_ingot_from_white_phosphorus_block"
+        "recipe": "nucleartech:crafting/white_phosphorus_ingot_from_white_phosphorus_block"
       }
     }
   },

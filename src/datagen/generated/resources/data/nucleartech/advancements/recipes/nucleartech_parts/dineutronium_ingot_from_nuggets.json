@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:dineutronium_ingot_from_nuggets"
+      "nucleartech:crafting/dineutronium_ingot_from_nuggets"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:dineutronium_ingot_from_nuggets"
+        "recipe": "nucleartech:crafting/dineutronium_ingot_from_nuggets"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schrabidium_ingot_from_smelting_schrabidium_ore"
+      "nucleartech:smelting/schrabidium_ingot_from_smelting_schrabidium_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schrabidium_ingot_from_smelting_schrabidium_ore"
+        "recipe": "nucleartech:smelting/schrabidium_ingot_from_smelting_schrabidium_ore"
       }
     }
   },

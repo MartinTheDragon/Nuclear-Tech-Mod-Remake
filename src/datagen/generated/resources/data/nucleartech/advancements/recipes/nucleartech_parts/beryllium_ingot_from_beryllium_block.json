@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:beryllium_ingot_from_beryllium_block"
+      "nucleartech:crafting/beryllium_ingot_from_beryllium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:beryllium_ingot_from_beryllium_block"
+        "recipe": "nucleartech:crafting/beryllium_ingot_from_beryllium_block"
       }
     }
   },

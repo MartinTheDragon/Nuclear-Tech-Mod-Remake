@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:high_temperature_super_conductor_from_pressing_magnetized_tungsten_ingot"
+      "nucleartech:pressing/high_temperature_super_conductor_from_pressing_magnetized_tungsten_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:high_temperature_super_conductor_from_pressing_magnetized_tungsten_ingot"
+        "recipe": "nucleartech:pressing/high_temperature_super_conductor_from_pressing_magnetized_tungsten_ingot"
       }
     }
   },

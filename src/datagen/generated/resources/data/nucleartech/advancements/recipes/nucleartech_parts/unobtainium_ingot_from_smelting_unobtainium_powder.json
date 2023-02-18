@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:unobtainium_ingot_from_smelting_unobtainium_powder"
+      "nucleartech:smelting/unobtainium_ingot_from_smelting_unobtainium_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:unobtainium_ingot_from_smelting_unobtainium_powder"
+        "recipe": "nucleartech:smelting/unobtainium_ingot_from_smelting_unobtainium_powder"
       }
     }
   },

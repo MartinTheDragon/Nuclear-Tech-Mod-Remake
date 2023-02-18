@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_alloy_plate_from_pressing_advanced_alloy_ingot"
+      "nucleartech:pressing/advanced_alloy_plate_from_pressing_advanced_alloy_ingot"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_alloy_plate_from_pressing_advanced_alloy_ingot"
+        "recipe": "nucleartech:pressing/advanced_alloy_plate_from_pressing_advanced_alloy_ingot"
       }
     }
   },

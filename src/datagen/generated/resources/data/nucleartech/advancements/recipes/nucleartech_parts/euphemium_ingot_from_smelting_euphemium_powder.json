@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:euphemium_ingot_from_smelting_euphemium_powder"
+      "nucleartech:smelting/euphemium_ingot_from_smelting_euphemium_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:euphemium_ingot_from_smelting_euphemium_powder"
+        "recipe": "nucleartech:smelting/euphemium_ingot_from_smelting_euphemium_powder"
       }
     }
   },

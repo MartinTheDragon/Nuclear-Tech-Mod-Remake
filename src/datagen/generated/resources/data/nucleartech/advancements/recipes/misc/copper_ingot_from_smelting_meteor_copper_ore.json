@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:copper_ingot_from_smelting_meteor_copper_ore"
+      "nucleartech:smelting/copper_ingot_from_smelting_meteor_copper_ore"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:copper_ingot_from_smelting_meteor_copper_ore"
+        "recipe": "nucleartech:smelting/copper_ingot_from_smelting_meteor_copper_ore"
       }
     }
   },

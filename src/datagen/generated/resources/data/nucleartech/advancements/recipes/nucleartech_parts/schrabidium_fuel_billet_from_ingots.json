@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schrabidium_fuel_billet_from_ingots"
+      "nucleartech:crafting/schrabidium_fuel_billet_from_ingots"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schrabidium_fuel_billet_from_ingots"
+        "recipe": "nucleartech:crafting/schrabidium_fuel_billet_from_ingots"
       }
     }
   },

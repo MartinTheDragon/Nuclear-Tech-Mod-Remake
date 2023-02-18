@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:asbestos_sheet_from_blasting_asbestos_ore"
+      "nucleartech:smelting/asbestos_sheet_from_blasting_asbestos_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:asbestos_sheet_from_blasting_asbestos_ore"
+        "recipe": "nucleartech:smelting/asbestos_sheet_from_blasting_asbestos_ore"
       }
     }
   },

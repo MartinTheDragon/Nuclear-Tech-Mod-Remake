@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:blaze_powder_and_red_phosphorus_and_white_phosphorus_ingot_from_centrifuging_ore"
+      "nucleartech:centrifuge/blaze_powder_and_red_phosphorus_and_white_phosphorus_ingot_from_centrifuging_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:blaze_powder_and_red_phosphorus_and_white_phosphorus_ingot_from_centrifuging_ore"
+        "recipe": "nucleartech:centrifuge/blaze_powder_and_red_phosphorus_and_white_phosphorus_ingot_from_centrifuging_ore"
       }
     }
   },

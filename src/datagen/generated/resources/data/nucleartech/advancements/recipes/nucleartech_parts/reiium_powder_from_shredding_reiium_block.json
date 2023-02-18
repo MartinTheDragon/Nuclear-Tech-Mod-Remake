@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:reiium_powder_from_shredding_reiium_block"
+      "nucleartech:shredding/reiium_powder_from_shredding_reiium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:reiium_powder_from_shredding_reiium_block"
+        "recipe": "nucleartech:shredding/reiium_powder_from_shredding_reiium_block"
       }
     }
   },

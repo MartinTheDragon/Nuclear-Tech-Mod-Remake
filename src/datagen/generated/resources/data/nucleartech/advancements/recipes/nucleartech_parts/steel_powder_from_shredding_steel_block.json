@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:steel_powder_from_shredding_steel_block"
+      "nucleartech:shredding/steel_powder_from_shredding_steel_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:steel_powder_from_shredding_steel_block"
+        "recipe": "nucleartech:shredding/steel_powder_from_shredding_steel_block"
       }
     }
   },

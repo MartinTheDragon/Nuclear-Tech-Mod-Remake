@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lithium_powder_from_shredding_lithium_crystals"
+      "nucleartech:shredding/lithium_powder_from_shredding_lithium_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lithium_powder_from_shredding_lithium_crystals"
+        "recipe": "nucleartech:shredding/lithium_powder_from_shredding_lithium_crystals"
       }
     }
   },

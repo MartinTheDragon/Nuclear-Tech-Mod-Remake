@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:combustion_generator"
+      "nucleartech:crafting/combustion_generator"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:combustion_generator"
+        "recipe": "nucleartech:crafting/combustion_generator"
       }
     }
   },

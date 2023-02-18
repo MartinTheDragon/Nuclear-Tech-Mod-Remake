@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_power_cell_from_advanced_battery"
+      "nucleartech:crafting/advanced_power_cell_from_advanced_battery"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_power_cell_from_advanced_battery"
+        "recipe": "nucleartech:crafting/advanced_power_cell_from_advanced_battery"
       }
     }
   },

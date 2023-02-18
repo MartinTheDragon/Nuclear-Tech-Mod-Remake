@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:sulfur_and_uranium_hexafluoride_from_chemistry"
+      "nucleartech:chem/sulfur_and_uranium_hexafluoride_from_chemistry"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:sulfur_and_uranium_hexafluoride_from_chemistry"
+        "recipe": "nucleartech:chem/sulfur_and_uranium_hexafluoride_from_chemistry"
       }
     }
   },

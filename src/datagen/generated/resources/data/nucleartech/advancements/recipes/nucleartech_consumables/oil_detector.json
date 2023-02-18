@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:oil_detector"
+      "nucleartech:crafting/oil_detector"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:oil_detector"
+        "recipe": "nucleartech:crafting/oil_detector"
       }
     }
   },

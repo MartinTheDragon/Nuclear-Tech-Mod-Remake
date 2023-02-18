@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:sand_from_shredding_gravel"
+      "nucleartech:shredding/sand_from_shredding_gravel"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:sand_from_shredding_gravel"
+        "recipe": "nucleartech:shredding/sand_from_shredding_gravel"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:polonium210_ingot_from_smelting_polonium_powder"
+      "nucleartech:smelting/polonium210_ingot_from_smelting_polonium_powder"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:polonium210_ingot_from_smelting_polonium_powder"
+        "recipe": "nucleartech:smelting/polonium210_ingot_from_smelting_polonium_powder"
       }
     }
   },

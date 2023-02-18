@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:mixed_plate_from_assembling"
+      "nucleartech:assembly/mixed_plate_from_assembling"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:mixed_plate_from_assembling"
+        "recipe": "nucleartech:assembly/mixed_plate_from_assembling"
       }
     }
   },

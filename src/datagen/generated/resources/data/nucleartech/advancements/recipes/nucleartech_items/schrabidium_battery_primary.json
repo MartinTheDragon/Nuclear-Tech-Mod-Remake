@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:schrabidium_battery_primary"
+      "nucleartech:crafting/schrabidium_battery_primary"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:schrabidium_battery_primary"
+        "recipe": "nucleartech:crafting/schrabidium_battery_primary"
       }
     }
   },

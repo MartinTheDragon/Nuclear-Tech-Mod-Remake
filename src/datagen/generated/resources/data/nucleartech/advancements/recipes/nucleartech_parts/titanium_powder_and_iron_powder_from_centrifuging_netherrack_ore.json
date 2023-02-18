@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:titanium_powder_and_iron_powder_from_centrifuging_netherrack_ore"
+      "nucleartech:centrifuge/titanium_powder_and_iron_powder_from_centrifuging_netherrack_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:titanium_powder_and_iron_powder_from_centrifuging_netherrack_ore"
+        "recipe": "nucleartech:centrifuge/titanium_powder_and_iron_powder_from_centrifuging_netherrack_ore"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:advanced_circuit_from_military_grade"
+      "nucleartech:crafting/advanced_circuit_from_military_grade"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:advanced_circuit_from_military_grade"
+        "recipe": "nucleartech:crafting/advanced_circuit_from_military_grade"
       }
     }
   },

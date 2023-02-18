@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:strong_radaway"
+      "nucleartech:crafting/strong_radaway"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:strong_radaway"
+        "recipe": "nucleartech:crafting/strong_radaway"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:aluminium_powder_from_shredding_aluminium_block"
+      "nucleartech:shredding/aluminium_powder_from_shredding_aluminium_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:aluminium_powder_from_shredding_aluminium_block"
+        "recipe": "nucleartech:shredding/aluminium_powder_from_shredding_aluminium_block"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:gunpowder_from_shredding_tnt"
+      "nucleartech:shredding/gunpowder_from_shredding_tnt"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:gunpowder_from_shredding_tnt"
+        "recipe": "nucleartech:shredding/gunpowder_from_shredding_tnt"
       }
     }
   },

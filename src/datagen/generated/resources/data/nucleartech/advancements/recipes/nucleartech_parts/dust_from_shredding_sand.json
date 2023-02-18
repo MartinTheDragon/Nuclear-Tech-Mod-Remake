@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:dust_from_shredding_sand"
+      "nucleartech:shredding/dust_from_shredding_sand"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:dust_from_shredding_sand"
+        "recipe": "nucleartech:shredding/dust_from_shredding_sand"
       }
     }
   },

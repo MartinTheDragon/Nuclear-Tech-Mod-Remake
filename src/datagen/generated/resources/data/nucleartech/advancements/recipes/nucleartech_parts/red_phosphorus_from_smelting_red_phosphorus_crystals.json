@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:red_phosphorus_from_smelting_red_phosphorus_crystals"
+      "nucleartech:smelting/red_phosphorus_from_smelting_red_phosphorus_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:red_phosphorus_from_smelting_red_phosphorus_crystals"
+        "recipe": "nucleartech:smelting/red_phosphorus_from_smelting_red_phosphorus_crystals"
       }
     }
   },

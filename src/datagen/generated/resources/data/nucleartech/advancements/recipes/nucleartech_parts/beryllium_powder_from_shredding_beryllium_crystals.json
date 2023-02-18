@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:beryllium_powder_from_shredding_beryllium_crystals"
+      "nucleartech:shredding/beryllium_powder_from_shredding_beryllium_crystals"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:beryllium_powder_from_shredding_beryllium_crystals"
+        "recipe": "nucleartech:shredding/beryllium_powder_from_shredding_beryllium_crystals"
       }
     }
   },

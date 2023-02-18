@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:lead_powder_from_shredding_lead_ore"
+      "nucleartech:shredding/lead_powder_from_shredding_lead_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:lead_powder_from_shredding_lead_ore"
+        "recipe": "nucleartech:shredding/lead_powder_from_shredding_lead_ore"
       }
     }
   },

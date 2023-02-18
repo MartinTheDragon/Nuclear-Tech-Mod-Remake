@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:scrap_block_from_scrap"
+      "nucleartech:crafting/scrap_block_from_scrap"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:scrap_block_from_scrap"
+        "recipe": "nucleartech:crafting/scrap_block_from_scrap"
       }
     }
   },

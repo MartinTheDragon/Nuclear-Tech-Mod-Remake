@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:coal_powder_from_shredding_coal_ore"
+      "nucleartech:shredding/coal_powder_from_shredding_coal_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:coal_powder_from_shredding_coal_ore"
+        "recipe": "nucleartech:shredding/coal_powder_from_shredding_coal_ore"
       }
     }
   },

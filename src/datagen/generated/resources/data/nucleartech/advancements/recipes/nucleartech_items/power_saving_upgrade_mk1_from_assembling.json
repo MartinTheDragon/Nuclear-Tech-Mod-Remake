@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:power_saving_upgrade_mk1_from_assembling"
+      "nucleartech:assembly/power_saving_upgrade_mk1_from_assembling"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:power_saving_upgrade_mk1_from_assembling"
+        "recipe": "nucleartech:assembly/power_saving_upgrade_mk1_from_assembling"
       }
     }
   },

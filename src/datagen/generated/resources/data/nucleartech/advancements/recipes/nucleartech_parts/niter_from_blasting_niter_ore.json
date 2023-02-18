@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:niter_from_blasting_niter_ore"
+      "nucleartech:smelting/niter_from_blasting_niter_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:niter_from_blasting_niter_ore"
+        "recipe": "nucleartech:smelting/niter_from_blasting_niter_ore"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "nucleartech:plutonium240_ingot_from_pu240_block"
+      "nucleartech:crafting/plutonium240_ingot_from_pu240_block"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "nucleartech:plutonium240_ingot_from_pu240_block"
+        "recipe": "nucleartech:crafting/plutonium240_ingot_from_pu240_block"
       }
     }
   },
