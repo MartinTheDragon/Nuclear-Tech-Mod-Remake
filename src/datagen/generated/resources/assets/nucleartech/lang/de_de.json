@@ -55,6 +55,8 @@
   "block.nucleartech.corium_fluid": "Corium",
   "block.nucleartech.daffergon_block": "Daffergonblock",
   "block.nucleartech.dead_grass": "Totes Gras",
+  "block.nucleartech.deco_rbmk": "RBMK Dekorationsblock",
+  "block.nucleartech.deco_rbmk_smooth": "Glatter RBMK Dekorationsblock",
   "block.nucleartech.deepslate_aluminium_ore": "Tiefenschiefer-Aluminiumerz",
   "block.nucleartech.deepslate_asbestos_ore": "Tiefenschiefer-Asbesterz",
   "block.nucleartech.deepslate_australian_ore": "Australisches Tiefenschiefer-Erz",

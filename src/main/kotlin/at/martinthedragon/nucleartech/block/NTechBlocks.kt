@@ -252,5 +252,9 @@ object NTechBlocks {
     val genericMultiBlockPort = BLOCKS.registerK("generic_multi_block_port") { MultiBlockPort() }
     val oilPipe = BLOCKS.registerK("oil_pipe") { Block(Properties.of(METAL).strength(5F, 10F).sound(SoundType.METAL)) }
 
+    // Decoration
+    val decoRbmkBlock = BLOCKS.registerK("deco_rbmk") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+    val decoRbmkSmoothBlock = BLOCKS.registerK("deco_rbmk_smooth") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
+
     private fun getLightLevelLit13(state: BlockState) = if (state.getValue(BlockStateProperties.LIT)) 13 else 0
 }

@@ -96,6 +96,8 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.littleBoy, NTechBlocks.fatMan,
             NTechBlocks.genericMultiBlockPart, NTechBlocks.genericMultiBlockPort,
             NTechBlocks.oilPipe,
+            NTechBlocks.decoRbmkBlock,
+            NTechBlocks.decoRbmkSmoothBlock,
         )
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
             NTechBlocks.oilSand,
@@ -194,6 +196,8 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.asbestosBlock,
             NTechBlocks.corium, NTechBlocks.corebblestone,
             NTechBlocks.steelAnvil,
+            NTechBlocks.decoRbmkBlock,
+            NTechBlocks.decoRbmkSmoothBlock,
         )
         tag(BlockTags.NEEDS_DIAMOND_TOOL).add(
             NTechBlocks.australianOre, NTechBlocks.deepslateAustralianOre, NTechBlocks.australiumBlock,

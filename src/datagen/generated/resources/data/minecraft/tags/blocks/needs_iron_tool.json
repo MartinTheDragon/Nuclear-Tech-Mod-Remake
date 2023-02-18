@@ -48,6 +48,8 @@
     "nucleartech:asbestos_block",
     "nucleartech:corium",
     "nucleartech:corebblestone",
-    "nucleartech:steel_anvil"
+    "nucleartech:steel_anvil",
+    "nucleartech:deco_rbmk",
+    "nucleartech:deco_rbmk_smooth"
   ]
 }
