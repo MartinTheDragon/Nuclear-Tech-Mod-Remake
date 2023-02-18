@@ -209,6 +209,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
     }
 
     protected fun <T : Any> registerCapabilityHandler(capability: Capability<T>, relativePos: BlockPos, handler: () -> T, side: Direction? = null): LazyOptional<T> {
+        if (relativePos == BlockPos.ZERO) return registerCapabilityHandler(capability, handler, side)
         val optionalSide = Optional.ofNullable(side)
         val lazyOptionalHandler = LazyOptional.of(handler)
         otherCapabilityHandlerSuppliers.getOrPut(relativePos, this::defaultCapabilityTable).put(capability, optionalSide, handler)
@@ -217,6 +218,7 @@ abstract class BaseMachineBlockEntity(type: BlockEntityType<*>, pos: BlockPos, s
     }
 
     protected fun <T : Any> registerCapabilityHandler(capability: Capability<T>, relativePos: BlockPos, handler: () -> T, vararg sides: Direction): LazyOptional<T> {
+        if (relativePos == BlockPos.ZERO) return registerCapabilityHandler(capability, handler, *sides)
         if (sides.isEmpty()) return registerCapabilityHandler(capability, relativePos, handler, null)
         val lazyOptionalHandler = LazyOptional.of(handler)
         for (side in sides) {
