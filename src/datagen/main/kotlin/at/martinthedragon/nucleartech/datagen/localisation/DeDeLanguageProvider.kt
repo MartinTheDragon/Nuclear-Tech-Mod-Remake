@@ -198,6 +198,9 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechFluids.corium.block, "Corium")
         addBlock(NTechFluids.volcanicLava.block, "Vulkanische Lava")
 
+        addBlock(NTechBlocks.decoRbmkBlock, "RBMK Dekorationsblock")
+        addBlock(NTechBlocks.decoRbmkSmoothBlock, "Glatter RBMK Dekorationsblock")
+
         addItem(NTechItems.rawThorium, "Rohes Thorium")
         addItem(NTechItems.rawRareEarth, "Rohe Seltene Erde")
         addItem(NTechItems.rawTrixite, "Rohes Trixit")

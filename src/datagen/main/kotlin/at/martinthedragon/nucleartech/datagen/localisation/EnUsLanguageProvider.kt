@@ -164,6 +164,9 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.dineutroniumAnvil, "Dineutronium Anvil")
         addBlock(NTechBlocks.murkyAnvil, "Murky Anvil")
 
+        addBlock(NTechBlocks.decoRbmkBlock, "RBMK Decoration Block")
+        addBlock(NTechBlocks.decoRbmkSmoothBlock, "Smooth RBMK Decoration Block")
+
         addBlock(NTechBlocks.rbmkColumn, "RBMK Column Part")
         addBlock(NTechBlocks.rbmkRod, "RBMK Fuel Rod")
         addBlock(NTechBlocks.rbmkModeratedRod, "RBMK Moderated Fuel Rod")

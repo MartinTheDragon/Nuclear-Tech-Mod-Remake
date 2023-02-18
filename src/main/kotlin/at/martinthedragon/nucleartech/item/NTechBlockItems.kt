@@ -148,6 +148,9 @@ object NTechBlockItems {
     val asbestosRoof = ITEMS.registerK("asbestos_roof") { BlockItem(NTechBlocks.asbestosRoof.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val hazmatBlock = ITEMS.registerK("hazmat_block") { BlockItem(NTechBlocks.hazmatBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
+    val decoRbmkBlock = ITEMS.registerK("deco_rbmk") { BlockItem(NTechBlocks.decoRbmkBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val decoRbmkSmoothBlock = ITEMS.registerK("deco_rbmk_smooth") { BlockItem(NTechBlocks.decoRbmkSmoothBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+
     val steelBeam = ITEMS.registerK("steel_beam") { BlockItem(NTechBlocks.steelBeam.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val steelScaffold = ITEMS.registerK("steel_scaffold") { BlockItem(NTechBlocks.steelScaffold.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val steelGrate = ITEMS.registerK("steel_grate") { BlockItem(NTechBlocks.steelGrate.get(), Item.Properties().tab(CreativeTabs.Blocks)) }

@@ -179,6 +179,9 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.steelScaffold.get())
         dropSelf(NTechBlocks.steelGrate.get())
 
+        dropSelf(NTechBlocks.decoRbmkBlock.get())
+        dropSelf(NTechBlocks.decoRbmkSmoothBlock.get())
+
         dropSelf(NTechBlocks.glowingMushroom.get())
         add(NTechBlocks.glowingMushroomBlock.get()) { createMushroomBlockDrop(it, NTechBlocks.glowingMushroom.get()) }
         dropWhenSilkTouch(NTechBlocks.glowingMushroomStem.get())
