@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
+import net.minecraft.world.phys.HitResult
 import net.minecraft.world.phys.Vec3
 import net.minecraftforge.network.NetworkHooks
 import java.util.*
@@ -113,9 +114,8 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
 
             for (entity in entities) {
                 val distance = pos.distanceTo(entity.position())
-                if (distance <= radius) {
-                    world.clip(ClipContext(pos, entity.position(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null))
-                    val damage = maxDamage * (radius - distance) /  radius
+                if (distance <= radius && world.clip(ClipContext(pos, entity.eyePosition, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).type == HitResult.Type.MISS) {
+                    val damage = maxDamage * (radius - distance) / radius
                     entity.hurt(DamageSources.nuclearBlast, damage.toFloat())
                     entity.setSecondsOnFire(5)
 
@@ -125,7 +125,7 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
                         entity.z - pos.z
                     ).normalize()
 
-                    entity.deltaMovement = knockBack
+                    entity.deltaMovement = knockBack.scale(.2)
                 }
             }
         }

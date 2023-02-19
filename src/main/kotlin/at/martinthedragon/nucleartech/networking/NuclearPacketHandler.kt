@@ -32,6 +32,7 @@ object NuclearPacketHandler {
         registerMessage(ContainerMenuUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
 
         registerMessage(ContaminationValuesUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
+        registerMessage(HurtAnimationMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(SirenMessage::decode, NetworkDirection.PLAY_TO_CLIENT)
         registerMessage(BlockEntityUpdateMessage::decode, NetworkDirection.PLAY_TO_CLIENT) // TODO replace others with this
         registerMessage(ExplosionVNTMessage::decode, NetworkDirection.PLAY_TO_CLIENT)

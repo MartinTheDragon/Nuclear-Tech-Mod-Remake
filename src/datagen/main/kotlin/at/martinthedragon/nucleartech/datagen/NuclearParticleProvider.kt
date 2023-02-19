@@ -24,11 +24,15 @@ class NuclearParticleProvider(private val dataGenerator: DataGenerator, private 
 
     private fun createParticleDefinitions() {
         add(ModParticles.CONTRAIL, "contrail")
+        add(ModParticles.MINI_NUKE_CLOUD, (0..24).map { ntm("mini_nuke_cloud_$it") })
+        add(ModParticles.MINI_NUKE_CLOUD_BALEFIRE, (0..24).map { ntm("mini_nuke_cloud_balefire_$it") })
+        add(ModParticles.MINI_NUKE_FLASH, "flare")
         add(ModParticles.OIL_SPILL, "oil_spill")
         add(ModParticles.RBMK_FIRE, (0..13).map { ntm("rbmk_fire_$it") })
         add(ModParticles.RBMK_MUSH, (0..29).map { ntm("rbmk_mush_$it") })
         empty(ModParticles.RUBBLE)
         add(ModParticles.SMOKE, "smoke")
+        add(ModParticles.SHOCKWAVE, "shockwave")
         add(ModParticles.VOLCANO_SMOKE, (7 downTo 0).map { mc("generic_$it") })
     }
 

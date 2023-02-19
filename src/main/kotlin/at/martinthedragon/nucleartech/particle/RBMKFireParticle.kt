@@ -43,8 +43,6 @@ class RBMKFireParticle private constructor(level: ClientLevel, x: Double, y: Dou
         val f2 = (Mth.lerp(partials.toDouble(), zo, z) - vec3.z()).toFloat()
         val quaternion = Vector3f.YP.rotationDegrees(-camera.yRot)
 
-        val vector3f1 = Vector3f(-1.0f, -1.0f, 0.0f)
-        vector3f1.transform(quaternion)
         val avector3f = arrayOf(Vector3f(-1.0f, -1.0f, 0.0f), Vector3f(-1.0f, 1.0f, 0.0f), Vector3f(1.0f, 1.0f, 0.0f), Vector3f(1.0f, -1.0f, 0.0f))
         val f4 = getQuadSize(partials)
 

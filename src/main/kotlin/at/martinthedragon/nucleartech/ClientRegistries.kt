@@ -273,10 +273,14 @@ object ClientRegistries {
     fun registerParticleProviders(event: ParticleFactoryRegisterEvent) {
         with(Minecraft.getInstance().particleEngine) {
             register(ModParticles.CONTRAIL.get(), ContrailParticle::Provider)
+            register(ModParticles.MINI_NUKE_CLOUD.get(), MiniNukeCloudParticle::Provider)
+            register(ModParticles.MINI_NUKE_CLOUD_BALEFIRE.get(), MiniNukeCloudParticle::Provider)
+            register(ModParticles.MINI_NUKE_FLASH.get(), MiniNukeFlashParticle::Provider)
             register(ModParticles.OIL_SPILL.get(), OilSpillParticle::Provider)
             register(ModParticles.RBMK_FIRE.get(), RBMKFireParticle::Provider)
             register(ModParticles.RBMK_MUSH.get(), RBMKMushParticle::Provider)
             register(ModParticles.RUBBLE.get(), RubbleParticle.Provider())
+            register(ModParticles.SHOCKWAVE.get(), ShockwaveParticle::Provider)
             register(ModParticles.SMOKE.get(), SmokeParticle::Provider)
             register(ModParticles.VOLCANO_SMOKE.get(), VolcanoSmokeParticle::Provider)
         }
