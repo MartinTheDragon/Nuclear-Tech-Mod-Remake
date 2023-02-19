@@ -57,7 +57,7 @@ class MiniNukeFlashParticle private constructor(level: ClientLevel, x: Double, y
     override fun getRenderType(): ParticleRenderType = ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT
 
     override fun render(vertexConsumer: VertexConsumer, camera: Camera, partials: Float) {
-        alpha = 1 - (age + partials) / lifetime
+        alpha = 1 - (age + partials) / (lifetime + 1)
         alpha *= .5F
         quadSize = (age + partials) * 3F + 1F
 
