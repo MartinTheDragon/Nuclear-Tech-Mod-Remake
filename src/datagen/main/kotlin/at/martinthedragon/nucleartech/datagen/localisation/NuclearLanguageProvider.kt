@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.level.block.Block
 import net.minecraftforge.common.data.LanguageProvider
 import java.util.function.Supplier
@@ -161,12 +162,7 @@ abstract class NuclearLanguageProvider(
         add("${key.get().registryName!!.namespace}.attribute.name.${key.get().registryName!!.path}", name)
     }
 
-    /** What to append to the spawn egg name */
-    protected abstract val spawnEggSuffix: String
-    /** If `true`, prefixes the suffix instead */
-    protected open val spawnEggSuffixIsPrefix = false
-    /** What to replace spaces with in the name of the entity for the spawn egg */
-    protected open val spawnEggEntityStringWordSeparator = ' '
+    protected abstract val spawnEggFormat: String
 
     protected abstract val oreFormat: String?
     protected abstract val deepOreFormat: String?
@@ -180,11 +176,9 @@ abstract class NuclearLanguageProvider(
     protected abstract val plateFormat: String?
     protected abstract val wireFormat: String?
 
-    protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, name: String) {
-//        val spawnEgg = ForgeSpawnEggItem.fromEntityType(key.get()) ?: throw IllegalStateException("No spawn egg registered for entity $name")
+    protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, egg: Supplier<out SpawnEggItem>, name: String, eggName: String = spawnEggFormat.format(name)) {
         addEntityType(key, name)
-//        val formatted = name.replace(' ', spawnEggEntityStringWordSeparator)
-//        add(spawnEgg, if (spawnEggSuffixIsPrefix) spawnEggSuffix + formatted else formatted + spawnEggSuffix)
+        addItem(egg, eggName)
     }
 
     companion object {

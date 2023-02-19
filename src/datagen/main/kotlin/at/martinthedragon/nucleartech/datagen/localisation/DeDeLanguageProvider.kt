@@ -932,7 +932,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.nuclearExplosion, "Nukleare Explosion")
         addEntityType(EntityTypes.mushroomCloud, "Atompilz")
         addEntityType(EntityTypes.falloutRain, "Fallout-Regen")
-        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuklearer Creeper")
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, NTechItems.nuclearCreeperSpawnEgg, "Nuklearer Creeper", "Nuklearer-Creeper-Spawn-Ei")
 
         addEntityType(EntityTypes.missileHE, "HE Rakete")
         addEntityType(EntityTypes.missileIncendiary, "Brandrakete")
@@ -1349,8 +1349,7 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMaterial(yellowcake, "Yellowcake")
     }
 
-    override val spawnEggSuffix = "-Spawn-Ei"
-    override val spawnEggEntityStringWordSeparator = '-'
+    override val spawnEggFormat = "%s-Spawn-Ei"
 
     override val oreFormat = "%serz"
     override val deepOreFormat = "Tiefenschiefer-%serz"

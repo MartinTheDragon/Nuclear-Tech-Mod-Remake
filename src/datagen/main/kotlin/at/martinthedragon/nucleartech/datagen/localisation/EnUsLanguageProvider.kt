@@ -875,7 +875,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.nuclearExplosion, "Nuclear Explosion")
         addEntityType(EntityTypes.mushroomCloud, "Mushroom Cloud")
         addEntityType(EntityTypes.falloutRain, "Fallout Rain")
-        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuclear Creeper")
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, NTechItems.nuclearCreeperSpawnEgg, "Nuclear Creeper")
 
         addEntityType(EntityTypes.missileHE, "High Explosive Missile")
         addEntityType(EntityTypes.missileIncendiary, "Incendiary Missile")
@@ -1292,7 +1292,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMaterial(yellowcake, "Yellowcake")
     }
 
-    override val spawnEggSuffix = " Spawn Egg"
+    override val spawnEggFormat = "%s Spawn Egg"
 
     override val oreFormat = "%s Ore"
     override val deepOreFormat = "Deepslate %s Ore"

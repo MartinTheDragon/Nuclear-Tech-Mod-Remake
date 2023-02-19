@@ -837,7 +837,7 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.nuclearExplosion, "Eksplozja Nuklearna")
         addEntityType(EntityTypes.mushroomCloud, "Grzyb Atomowy")
         addEntityType(EntityTypes.falloutRain, "Opad Promieniotwórczy")
-        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, "Nuklearny Creeper")
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, NTechItems.nuclearCreeperSpawnEgg, "Nuklearny Creeper", "Jajo przyzywające nuklearnego creepera")
 
         addEntityType(EntityTypes.missileHE, "Zwykła Rakieta Wybuchowa")
         addEntityType(EntityTypes.missileIncendiary, "Zwykła Rakieta Wybuchowa")
@@ -1269,7 +1269,7 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMaterial(whitePhosphorus, "Białego Fosforu")
         addMaterial(yellowcake, "Yellowcake")
     }
-    override val spawnEggSuffix = "Jaja przyzywającego %s"
+    override val spawnEggFormat = "Jaja przyzywającego %s"
 
     override val oreFormat = "Złoże %s"
     override val deepOreFormat = "Łupkowe Złoże %s"

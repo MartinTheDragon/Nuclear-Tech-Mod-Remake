@@ -6,6 +6,7 @@ import at.martinthedragon.nucleartech.capability.contamination.EntityContaminati
 import at.martinthedragon.nucleartech.capability.contamination.addDigamma
 import at.martinthedragon.nucleartech.capability.contamination.addIrradiation
 import at.martinthedragon.nucleartech.config.NuclearConfig
+import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.NuclearCreeper
 import at.martinthedragon.nucleartech.networking.ContaminationValuesUpdateMessage
 import at.martinthedragon.nucleartech.networking.NuclearPacketHandler
@@ -78,9 +79,7 @@ object EntityContaminationEffects {
         val irradiation = capability.getIrradiation()
 
         when {
-            entity is Creeper && irradiation >= 200 && !entity.isDeadOrDying -> if (world.random.nextInt(3) == 0) {
-                // TODO spawn nuclear creeper
-            } else entity.hurt(DamageSources.radiation, 100F)
+            entity is Creeper && irradiation >= 200 && !entity.isDeadOrDying -> if (world.random.nextInt(3) == 0) entity.convertTo(EntityTypes.nuclearCreeper.get(), true) else entity.hurt(DamageSources.radiation, 100F)
             entity is Cow && entity !is MushroomCow && irradiation >= 50 -> entity.convertTo(EntityType.MOOSHROOM, true)
             entity is Villager && irradiation >= 500 -> entity.convertTo(EntityType.ZOMBIE, true)
         }
