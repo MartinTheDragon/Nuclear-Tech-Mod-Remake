@@ -47,6 +47,6 @@ interface RBMKPart : ScrewdriverInteractable {
             level.setBlockAndUpdate(topBlockPos, level.getBlockState(topBlockPos).setValue(RBMKBaseBlock.LID_TYPE, RBMKBaseBlock.LidType.NONE))
             return InteractionResult.sidedSuccess(level.isClientSide)
         }
-        return InteractionResult.PASS
+        return InteractionResult.FAIL
     }
 }

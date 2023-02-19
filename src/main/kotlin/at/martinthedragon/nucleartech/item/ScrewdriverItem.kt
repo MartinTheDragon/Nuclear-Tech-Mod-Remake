@@ -13,11 +13,14 @@ class ScrewdriverItem(properties: Properties) : AutoTooltippedItem(properties) {
         val player = context.player ?: return InteractionResult.FAIL
         val hand = context.hand
         val block = context.level.getBlockState(context.clickedPos).block
-        if (block is ScrewdriverInteractable && block.onScrew(context).shouldAwardStats()) {
-            context.itemInHand.hurtAndBreak(1, player) {
-                it.broadcastBreakEvent(hand)
+        if (block is ScrewdriverInteractable) {
+            val result = block.onScrew(context)
+            if (result.shouldAwardStats()) {
+                context.itemInHand.hurtAndBreak(1, player) {
+                    it.broadcastBreakEvent(hand)
+                }
             }
-            return InteractionResult.sidedSuccess(context.level.isClientSide)
+            return result
         }
         return InteractionResult.PASS
     }

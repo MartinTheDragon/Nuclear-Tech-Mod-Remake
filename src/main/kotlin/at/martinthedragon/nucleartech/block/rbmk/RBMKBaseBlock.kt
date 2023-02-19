@@ -43,12 +43,12 @@ abstract class RBMKBaseBlock(val column: Supplier<out RBMKColumnBlock>, properti
         if (!hasMenu) return InteractionResult.PASS
 
         val itemInHand = player.getItemInHand(hand).item
-        val rbmk = getTopRBMKBase(level, pos, state) ?: return InteractionResult.FAIL
+        getTopRBMKBase(level, pos, state) ?: return InteractionResult.FAIL
 
-        if (itemInHand is RBMKLidItem && !rbmk.hasLid())
+        if (itemInHand is RBMKLidItem)
             return InteractionResult.PASS
 
-        if (itemInHand is ScrewdriverItem && rbmk.hasLid())
+        if (itemInHand is ScrewdriverItem)
             return InteractionResult.PASS
 
         return openMenu<InventoryRBMKBaseBlockEntity>(level, pos, player)
