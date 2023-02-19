@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.animal.Cat
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.projectile.Projectile
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
@@ -133,6 +134,7 @@ class NukeExplosion(entityType: EntityType<NukeExplosion>, world: Level) : Entit
         fun canExplode(entity: Entity): Boolean = when {
             entity is Player && entity.isCreative -> false
             entity is Cat -> false
+            entity is Projectile -> false
             else -> true
         }
 
