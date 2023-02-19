@@ -4,7 +4,6 @@ import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.HashCache
-import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.Attribute
@@ -146,10 +145,6 @@ abstract class NuclearLanguageProvider(
         add("container.${key.get().registryName!!.namespace}.${key.get().registryName!!.path}", name)
     }
 
-    protected fun addSound(key: Supplier<out SoundEvent>, name: String) {
-        add("subtitle.${key.get().registryName!!.namespace}.${key.get().registryName!!.path}", name)
-    }
-
     protected fun addDamageSource(key: DamageSource, message: String, killCreditMessage: String? = null) {
         add("death.attack.${key.msgId}", message)
         if (killCreditMessage != null) add("death.attack.${key.msgId}.player", killCreditMessage)
@@ -180,10 +175,5 @@ abstract class NuclearLanguageProvider(
     protected fun addEntityTypeWithSpawnEgg(key: Supplier<out EntityType<*>>, egg: Supplier<out SpawnEggItem>, name: String, eggName: String = spawnEggFormat.format(name)) {
         addEntityType(key, name)
         addItem(egg, eggName)
-    }
-
-    companion object {
-        @JvmStatic
-        protected val MODID = NuclearTech.MODID
     }
 }
