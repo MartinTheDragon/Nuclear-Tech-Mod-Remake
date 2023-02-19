@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
+import at.martinthedragon.nucleartech.CreativeTabs
 import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.Materials
 import at.martinthedragon.nucleartech.SoundEvents
@@ -15,15 +16,15 @@ import net.minecraft.data.DataGenerator
 
 class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.PL_PL, false) {
     override fun translate() {
-        add("itemGroup.${MODID}_parts", "NTM Materiały i Części")
-        add("itemGroup.${MODID}_items", "NTM Części Maszyn i Paliwa")
-        add("itemGroup.${MODID}_templates", "NTM Szablony")
-        add("itemGroup.${MODID}_blocks", "NTM Surowce i Bloki")
-        add("itemGroup.${MODID}_machines", "NTM Maszyny")
-        add("itemGroup.${MODID}_bombs", "NTM Bomby")
-        add("itemGroup.${MODID}_rocketry", "NTM Rakiety i Satelity")
-        add("itemGroup.${MODID}_consumables", "NTM Mat. eksploat. i Przybory")
-        add("itemGroup.${MODID}_miscellaneous", "NTM Różne")
+        addCreativeTab(CreativeTabs.Parts, "NTM Materiały i Części")
+        addCreativeTab(CreativeTabs.Items, "NTM Części Maszyn i Paliwa")
+        addCreativeTab(CreativeTabs.Templates, "NTM Szablony")
+        addCreativeTab(CreativeTabs.Blocks, "NTM Surowce i Bloki")
+        addCreativeTab(CreativeTabs.Machines, "NTM Maszyny")
+        addCreativeTab(CreativeTabs.Bombs, "NTM Bomby")
+        addCreativeTab(CreativeTabs.Rocketry, "NTM Rakiety i Satelity")
+        addCreativeTab(CreativeTabs.Consumables, "NTM Mat. eksploat. i Przybory")
+        addCreativeTab(CreativeTabs.Miscellaneous, "NTM Różne")
 
         addMaterials()
 

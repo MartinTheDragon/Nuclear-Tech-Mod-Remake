@@ -1,10 +1,7 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
-import at.martinthedragon.nucleartech.MaterialGroup
-import at.martinthedragon.nucleartech.NuclearTech
-import at.martinthedragon.nucleartech.TranslationKey
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
-import at.martinthedragon.nucleartech.isVanilla
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.HashCache
 import net.minecraft.sounds.SoundEvent
@@ -160,6 +157,10 @@ abstract class NuclearLanguageProvider(
 
     protected fun addAttribute(key: Supplier<out Attribute>, name: String) {
         add("${key.get().registryName!!.namespace}.attribute.name.${key.get().registryName!!.path}", name)
+    }
+
+    protected fun addCreativeTab(tab: CreativeTabs, name: String) {
+        add("itemGroup.${tab.tab.recipeFolderName}", name)
     }
 
     protected abstract val spawnEggFormat: String

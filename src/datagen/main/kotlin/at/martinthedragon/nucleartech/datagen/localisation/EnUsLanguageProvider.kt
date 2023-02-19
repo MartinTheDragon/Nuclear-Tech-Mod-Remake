@@ -1,9 +1,6 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
-import at.martinthedragon.nucleartech.LangKeys
-import at.martinthedragon.nucleartech.Materials
-import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.TranslationKey
+import at.martinthedragon.nucleartech.*
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entity.EntityTypes
@@ -29,15 +26,15 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
     }
 
     override fun translate() {
-        add("itemGroup.${MODID}_parts", "NTM Resources and Parts")
-        add("itemGroup.${MODID}_items", "NTM Machine Items and Fuel")
-        add("itemGroup.${MODID}_templates", "NTM Templates")
-        add("itemGroup.${MODID}_blocks", "NTM Ores and Blocks")
-        add("itemGroup.${MODID}_machines", "NTM Machines")
-        add("itemGroup.${MODID}_bombs", "NTM Bombs")
-        add("itemGroup.${MODID}_rocketry", "NTM Missiles and Satellites")
-        add("itemGroup.${MODID}_consumables", "NTM Consumables and Gear")
-        add("itemGroup.${MODID}_miscellaneous", "NTM Miscellaneous Items")
+        addCreativeTab(CreativeTabs.Parts, "NTM Resources and Parts")
+        addCreativeTab(CreativeTabs.Items, "NTM Machine Items and Fuel")
+        addCreativeTab(CreativeTabs.Templates, "NTM Templates")
+        addCreativeTab(CreativeTabs.Blocks, "NTM Ores and Blocks")
+        addCreativeTab(CreativeTabs.Machines, "NTM Machines")
+        addCreativeTab(CreativeTabs.Bombs, "NTM Bombs")
+        addCreativeTab(CreativeTabs.Rocketry, "NTM Missiles and Satellites")
+        addCreativeTab(CreativeTabs.Consumables, "NTM Consumables and Gear")
+        addCreativeTab(CreativeTabs.Miscellaneous, "NTM Miscellaneous Items")
 
         addMaterials()
 
