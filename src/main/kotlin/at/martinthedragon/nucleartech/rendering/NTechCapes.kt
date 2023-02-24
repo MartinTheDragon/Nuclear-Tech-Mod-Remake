@@ -99,6 +99,7 @@ object NTechCapes {
         mapOf(
             JulekJulas to CapeLocation(ntm("julekjulas_gif")),
             TheOriginalGolem to CapeLocation(ntm("golem")),
+            KauaiMoho to CapeLocation(ntm("6litchh")),
 
             HbMinecraft to CapeLocation(ntm("hbminecraft"), ntm("hbminecraft_polaroid")),
             Drillgon to CapeLocation(ntm("drillgon")),

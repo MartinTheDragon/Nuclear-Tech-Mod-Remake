@@ -40,6 +40,7 @@ class NuclearTech {
         const val MartinTheDragon = "3e763f54-12fc-40ef-9416-72edc689a952"
         const val JulekJulas = "8996d0cc-5bcd-4332-bcc0-fc3391f34c07"
         const val TheOriginalGolem = "058b52a6-05b7-4d11-8cfa-2db665d9a521"
+        const val KauaiMoho = "2bdb22e4-96e9-49c5-be8a-4f8d52c6188c" // 6litchh
 
         // 1.7.10
         const val HbMinecraft = "192af5d7-ed0f-48d8-bd89-9d41af8524f8"

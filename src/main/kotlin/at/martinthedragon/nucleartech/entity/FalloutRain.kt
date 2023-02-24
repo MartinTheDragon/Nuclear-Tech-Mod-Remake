@@ -103,7 +103,7 @@ class FalloutRain(entityType: EntityType<FalloutRain>, world: Level) : Entity(en
 
     private fun transformBlocks(x: Int, z: Int, distance: Float) {
         var depth = 0
-        for (y in 255 downTo 0) {
+        for (y in level.maxBuildHeight downTo level.minBuildHeight) {
             val pos = BlockPos(x, y, z)
             val block = level.getBlockState(pos)
 
