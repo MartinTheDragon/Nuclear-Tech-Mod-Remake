@@ -9,7 +9,6 @@ import com.mojang.math.Matrix4f
 import com.mojang.math.Vector3f
 import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraftforge.client.model.renderable.SimpleRenderable
 import kotlin.math.max
@@ -18,7 +17,6 @@ import kotlin.math.min
 class RBMKConsoleRenderer(context: BlockEntityRendererProvider.Context) : RotatedBlockEntityRenderer<RBMKConsoleBlockEntity>(context) {
     private val font = context.font
 
-    override val renderType = RenderType::entitySmoothCutout
     override fun getModel(blockEntity: RBMKConsoleBlockEntity) = SpecialModels.RBMK_CONSOLE.get()
 
     override fun renderRotated(blockEntity: RBMKConsoleBlockEntity, model: SimpleRenderable, partials: Float, matrix: PoseStack, buffers: MultiBufferSource, light: Int, overlay: Int) {
