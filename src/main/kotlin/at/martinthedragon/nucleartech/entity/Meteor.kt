@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.entity
 import at.martinthedragon.nucleartech.SoundEvents
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.explosion.ExplosionLarge
+import at.martinthedragon.nucleartech.explosion.ExplosionVNT
 import at.martinthedragon.nucleartech.particle.ModParticles
 import at.martinthedragon.nucleartech.world.DamageSources
 import at.martinthedragon.nucleartech.world.gen.WorldGen
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MoverType
-import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
@@ -41,7 +41,10 @@ class Meteor(entityType: EntityType<Meteor>, level: Level) : Entity(entityType, 
 
         if (!level.isClientSide && onGround) {
             level as ServerLevel
-            level.explode(this, x, y, z, 5 + random.nextFloat(), true, Explosion.BlockInteraction.DESTROY)
+            ExplosionVNT.createStandard(level, position(), 5F + random.nextFloat(), this).apply {
+                blockProcessor = ExplosionVNT.BlockProcessor.Default(dropChanceMutator = ExplosionVNT.DropChanceMutator.Default(0F), blockMutator = ExplosionVNT.BlockMutator.fire())
+                syncer = null
+            }.explode()
 
             val particleCount = NuclearConfig.client.meteorTrailsPerTick.get() * 10
             if (particleCount > 0) {
