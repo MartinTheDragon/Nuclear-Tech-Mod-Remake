@@ -74,18 +74,18 @@ object NTechBlocks {
         override fun getExpDrop(state: BlockState?, world: LevelReader, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(2, 5)
     }}
     val netherSchrabidiumOre = BLOCKS.registerK("nether_schrabidium_ore") { Block(Properties.of(STONE).strength(20f, 50f).requiresCorrectToolForDrops().lightLevel { 7 }.hasPostProcess { _, _, _ -> true }.emissiveRendering { _, _, _ -> true }) }
-    val meteorUraniumOre = BLOCKS.registerK("meteor_uranium_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorThoriumOre = BLOCKS.registerK("meteor_thorium_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorTitaniumOre = BLOCKS.registerK("meteor_titanium_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorSulfurOre: RegistryObject<Block> = BLOCKS.registerK("meteor_sulfur_ore") { object : Block(Properties.of(STONE).strength(5f).requiresCorrectToolForDrops()) {
+    val meteorUraniumOre = BLOCKS.registerK("meteor_uranium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorThoriumOre = BLOCKS.registerK("meteor_thorium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorTitaniumOre = BLOCKS.registerK("meteor_titanium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorSulfurOre: RegistryObject<Block> = BLOCKS.registerK("meteor_sulfur_ore") { object : Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) {
         override fun getExpDrop(state: BlockState?, world: LevelReader, pos: BlockPos?, fortune: Int, silktouch: Int) = if (silktouch != 0) 0 else Random.nextInt(5, 9)
     }}
-    val meteorCopperOre = BLOCKS.registerK("meteor_copper_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorTungstenOre = BLOCKS.registerK("meteor_tungsten_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorAluminiumOre = BLOCKS.registerK("meteor_aluminium_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorLeadOre = BLOCKS.registerK("meteor_lead_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val meteorLithiumOre = BLOCKS.registerK("meteor_lithium_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
-    val starmetalOre = BLOCKS.registerK("starmetal_ore") { Block(Properties.of(STONE).strength(6f).requiresCorrectToolForDrops()) }
+    val meteorCopperOre = BLOCKS.registerK("meteor_copper_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorTungstenOre = BLOCKS.registerK("meteor_tungsten_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorAluminiumOre = BLOCKS.registerK("meteor_aluminium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorLeadOre = BLOCKS.registerK("meteor_lead_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val meteorLithiumOre = BLOCKS.registerK("meteor_lithium_ore") { Block(Properties.of(STONE).strength(5F, 10F).requiresCorrectToolForDrops()) }
+    val starmetalOre = BLOCKS.registerK("starmetal_ore") { Block(Properties.of(STONE).strength(10F, 100F).requiresCorrectToolForDrops()) }
     val trixite = BLOCKS.registerK("trixite") { Block(Properties.of(STONE).strength(4f, 9f).requiresCorrectToolForDrops()) }
     val basaltSulfurOre = BLOCKS.registerK("basalt_sulfur_ore") { RotatedPillarBlock(Properties.of(STONE, DyeColor.BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)) }
     val basaltFluoriteOre = BLOCKS.registerK("basalt_fluorite_ore") { RotatedPillarBlock(Properties.of(STONE, DyeColor.BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT)) }
@@ -154,6 +154,12 @@ object NTechBlocks {
     val berylliumDecoBlock = BLOCKS.registerK("beryllium_deco_block") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val asbestosRoof = BLOCKS.registerK("asbestos_roof") { Block(Properties.of(METAL).strength(6f).requiresCorrectToolForDrops().sound(SoundType.METAL)) }
     val hazmatBlock = BLOCKS.registerK("hazmat_block") { Block(Properties.of(WOOL).strength(6f).sound(SoundType.WOOL)) }
+
+    val meteorite = BLOCKS.registerK("meteorite") { Block(Properties.of(STONE).strength(15F, 900F).sound(SoundType.STONE)) }
+    val meteoriteCobblestone = BLOCKS.registerK("meteorite_cobblestone") { Block(Properties.of(STONE).strength(15F, 900F).sound(SoundType.STONE)) }
+    val brokenMeteorite = BLOCKS.registerK("broken_meteorite") { Block(Properties.of(STONE).strength(15F, 900F).sound(SoundType.STONE)) }
+    val hotMeteoriteCobblestone = BLOCKS.registerK("hot_meteorite_cobblestone") { MoltenMeteorBlock(Properties.of(STONE).strength(15F, 900F).randomTicks().lightLevel { 7 }.hasPostProcess { _, _, _ -> true }.sound(SoundType.STONE)) }
+    val meteoriteTreasure = BLOCKS.registerK("meteorite_treasure") { Block(Properties.of(STONE).strength(15F, 900F).sound(SoundType.STONE)) }
 
     val steelBeam = BLOCKS.registerK("steel_beam") { SteelBeamBlock(Properties.of(METAL).strength(5F, 15F).sound(SoundType.METAL)) }
     val steelScaffold = BLOCKS.registerK("steel_scaffold") { SteelScaffoldBlock(Properties.of(METAL).strength(5F, 15F).sound(SoundType.METAL)) }

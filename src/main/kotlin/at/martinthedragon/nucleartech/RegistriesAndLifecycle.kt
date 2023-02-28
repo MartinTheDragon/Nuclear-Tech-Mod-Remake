@@ -20,6 +20,7 @@ import at.martinthedragon.nucleartech.recipe.RecipeTypes
 import at.martinthedragon.nucleartech.recipe.StackedIngredient
 import at.martinthedragon.nucleartech.world.ChunkLoadingValidationCallback
 import at.martinthedragon.nucleartech.world.gen.WorldGen
+import at.martinthedragon.nucleartech.world.gen.features.meteoriteplacers.MeteoritePlacerType
 import net.minecraft.core.Registry
 import net.minecraft.core.particles.ParticleType
 import net.minecraft.sounds.SoundEvent
@@ -44,10 +45,8 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import net.minecraftforge.registries.IForgeRegistryEntry
-import net.minecraftforge.registries.RegistryObject
+import net.minecraftforge.registries.*
+import java.util.function.Supplier
 
 @Suppress("unused")
 @Mod.EventBusSubscriber(modid = NuclearTech.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -63,6 +62,9 @@ object RegistriesAndLifecycle {
     val FEATURES: DeferredRegister<Feature<*>> = DeferredRegister.create(ForgeRegistries.FEATURES, NuclearTech.MODID)
     val SOUNDS: DeferredRegister<SoundEvent> = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NuclearTech.MODID)
     val PARTICLES: DeferredRegister<ParticleType<*>> = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, NuclearTech.MODID)
+
+    val METEORITE_PLACERS: DeferredRegister<MeteoritePlacerType<*>> = DeferredRegister.create(ntm("meteorite_placers"), NuclearTech.MODID)
+    val METEORITE_PLACER_REGISTRY: Supplier<IForgeRegistry<MeteoritePlacerType<*>>>
 
     init {
         val modEventBus = FMLJavaModLoadingContext.get().modEventBus
@@ -84,6 +86,9 @@ object RegistriesAndLifecycle {
         RecipeSerializers
         ATTRIBUTES.register(modEventBus)
         Attributes
+        METEORITE_PLACER_REGISTRY = METEORITE_PLACERS.makeRegistry(MeteoritePlacerType::class.java, ::RegistryBuilder)
+        METEORITE_PLACERS.register(modEventBus)
+        MeteoritePlacerType
         FEATURES.register(modEventBus)
         WorldGen.Features
         SOUNDS.register(modEventBus)

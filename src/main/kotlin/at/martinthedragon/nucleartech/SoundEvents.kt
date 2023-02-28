@@ -28,6 +28,7 @@ object SoundEvents {
     val rbmkAz5Cover = register("block.rbmk.az5_cover")
     val rbmkExplosion = register("block.rbmk.explosion")
     val rbmkShutdown = register("block.rbmk.shutdown")
+    val meteorImpact = register("entity.meteor.impact")
     val sirenTrackAMSSiren = register("siren.ams")
     val sirenTrackAPCPass = register("siren.apc_pass")
     val sirenTrackAPCSiren = register("siren.apc")

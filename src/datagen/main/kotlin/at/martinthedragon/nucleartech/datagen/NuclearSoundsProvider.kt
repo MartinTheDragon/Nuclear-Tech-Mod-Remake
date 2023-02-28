@@ -37,6 +37,7 @@ class NuclearSoundsProvider(
         add(SoundEvents.rbmkAz5Cover, definition().with(sound(ntm("block/rbmk_az5_cover"))).subtitle(LangKeys.SUBTITLE_RBMK_AZ5_COVER))
         add(SoundEvents.rbmkExplosion, definition().with(sound(ntm("block/rbmk_explosion")).stream()).subtitle(LangKeys.SUBTITLE_RBMK_EXPLODE))
         add(SoundEvents.rbmkShutdown, definition().with(sound(ntm("block/rbmk_shutdown")).stream()).subtitle(LangKeys.SUBTITLE_RBMK_SHUTDOWN))
+        add(SoundEvents.meteorImpact, definition().with(sound(ntm("entity/meteor_impact"))).subtitle(LangKeys.SUBTITLE_METEOR_IMPACT))
         add(SoundEvents.sirenTrackAMSSiren, definition().with(sound(ntm("block/siren/ams")).attenuationDistance(NTechItems.sirenTrackAMSSiren.get().range)).subtitle(LangKeys.SUBTITLE_SIREN_AMS))
         add(SoundEvents.sirenTrackAPCPass, definition().with(sound(ntm("block/siren/apc_pass")).attenuationDistance(NTechItems.sirenTrackAPCPass.get().range)).subtitle(LangKeys.SUBTITLE_SIREN_APC_PASS))
         add(SoundEvents.sirenTrackAPCSiren, definition().with(sound(ntm("block/siren/apc")).attenuationDistance(NTechItems.sirenTrackAPCSiren.get().range)).subtitle(LangKeys.SUBTITLE_SIREN_APC))

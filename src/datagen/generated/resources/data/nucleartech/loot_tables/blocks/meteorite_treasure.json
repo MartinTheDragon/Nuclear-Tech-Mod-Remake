@@ -1,0 +1,124 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "nucleartech:meteorite_treasure"
+            },
+            {
+              "type": "minecraft:group",
+              "children": [
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:super_conducting_coil"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:advanced_alloy_plate"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:desh_mix"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:desh_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:advanced_battery"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:advanced_battery"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:lithium_power_cell"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:advanced_power_cell"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:schrabidium_nugget"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:plutonium_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:thorium_fuel_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:uranium233_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:high_speed_steel_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:polymer_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:tungsten_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:combine_steel_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:lanthanum_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:actinium227_ingot"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:meteorite"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:advanced_circuit"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "nucleartech:rare_earth_ore"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

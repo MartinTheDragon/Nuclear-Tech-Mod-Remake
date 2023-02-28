@@ -5,10 +5,21 @@ import net.minecraft.core.Direction
 import net.minecraft.world.level.CommonLevelAccessor
 import net.minecraft.world.level.block.BaseFireBlock
 import net.minecraft.world.level.block.Block
+import kotlin.math.ceil
 
 inline fun placeSpherical(blockPos: BlockPos, radius: Int, placer: (pos: BlockPos) -> Unit) {
     val maxDistanceSquared = radius * radius
     for (x in -radius until radius) for (y in -radius until radius) for (z in -radius until radius) {
+        val distanceSquared = x * x + y * y + z * z
+        if (distanceSquared < maxDistanceSquared)
+            placer(blockPos.offset(x, y, z))
+    }
+}
+
+inline fun placeSpherical(blockPos: BlockPos, radius: Float, placer: (pos: BlockPos) -> Unit) {
+    val maxDistanceSquared = radius * radius
+    val ceilRadius = ceil(radius).toInt()
+    for (x in -ceilRadius until ceilRadius) for (y in -ceilRadius until ceilRadius) for (z in -ceilRadius until ceilRadius) {
         val distanceSquared = x * x + y * y + z * z
         if (distanceSquared < maxDistanceSquared)
             placer(blockPos.offset(x, y, z))

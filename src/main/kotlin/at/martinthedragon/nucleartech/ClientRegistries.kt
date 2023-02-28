@@ -187,6 +187,8 @@ object ClientRegistries {
 
             registerEntityRenderer(EntityTypes.rbmkDebris.get(), ::RBMKDebrisRenderer)
 
+            registerEntityRenderer(EntityTypes.meteor.get(), ::MeteorRenderer)
+
             registerEntityRenderer(EntityTypes.wasteItemEntity.get(), ::ItemEntityRenderer)
         }
     }
@@ -194,6 +196,7 @@ object ClientRegistries {
     @SubscribeEvent @JvmStatic
     fun registerLayerDefinitions(event: EntityRenderersEvent.RegisterLayerDefinitions) {
         with(event) {
+            registerLayerDefinition(NuclearModelLayers.METEOR, MeteorRenderer.MeteorModel::createLayerDefinition)
             registerLayerDefinition(NuclearModelLayers.RUBBLE, RubbleParticle.RubbleModel::createLayerDefinition)
             registerLayerDefinition(NuclearModelLayers.SHRAPNEL, ShrapnelRenderer.ShrapnelModel::createLayerDefinition)
             registerLayerDefinition(NuclearModelLayers.STEAM_PRESS, SteamPressRenderer::createLayerDefinition)
@@ -279,6 +282,7 @@ object ClientRegistries {
             register(ModParticles.OIL_SPILL.get(), OilSpillParticle::Provider)
             register(ModParticles.RBMK_FIRE.get(), RBMKFireParticle::Provider)
             register(ModParticles.RBMK_MUSH.get(), RBMKMushParticle::Provider)
+            register(ModParticles.ROCKET_FLAME.get(), RocketFlameParticle::Provider)
             register(ModParticles.RUBBLE.get(), RubbleParticle.Provider())
             register(ModParticles.SHOCKWAVE.get(), ShockwaveParticle::Provider)
             register(ModParticles.SMOKE.get(), SmokeParticle::Provider)

@@ -1,18 +1,24 @@
 package at.martinthedragon.nucleartech.world.gen
 
-import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.RegistriesAndLifecycle.FEATURES
+import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.ntm
+import at.martinthedragon.nucleartech.registerK
 import at.martinthedragon.nucleartech.world.gen.features.HugeGlowingMushroomFeature
+import at.martinthedragon.nucleartech.world.gen.features.MeteoriteFeature
 import at.martinthedragon.nucleartech.world.gen.features.OilBubbleFeature
+import at.martinthedragon.nucleartech.world.gen.features.configurations.MeteoriteFeatureConfiguration
+import at.martinthedragon.nucleartech.world.gen.features.meteoriteplacers.*
 import net.minecraft.core.Holder
 import net.minecraft.data.BuiltinRegistries
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HugeMushroomBlock
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.GenerationStep
 import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
@@ -22,6 +28,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.HugeMushroomFea
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider
 import net.minecraft.world.level.levelgen.placement.*
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest
@@ -30,7 +38,6 @@ import net.minecraftforge.event.world.BiomeLoadingEvent
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.registries.RegistryObject
 import net.minecraft.data.worldgen.features.OreFeatures as VanillaOreFeatures
 
 @Suppress("unused")
@@ -56,6 +63,12 @@ object WorldGen {
                     if (name == Biomes.DRIPSTONE_CAVES.location()) addDripstoneCavesOres(builder)
                 }
             }
+
+            // ensure load
+            OreFeatures
+            OrePlacements
+            TreeFeatures
+            MeteoriteFeatures
         }
 
         private fun addDefaultOres(builder: BiomeGenerationSettingsBuilder) {
@@ -117,8 +130,9 @@ object WorldGen {
     }
 
     object Features {
-        val OIL_BUBBLE: RegistryObject<OilBubbleFeature> = FEATURES.register("oil_bubble") { OilBubbleFeature(NoneFeatureConfiguration.CODEC) }
-        val HUGE_GLOWING_MUSHROOM: RegistryObject<HugeGlowingMushroomFeature> = FEATURES.register("huge_glowing_mushroom") { HugeGlowingMushroomFeature(HugeMushroomFeatureConfiguration.CODEC) }
+        val OIL_BUBBLE = FEATURES.registerK("oil_bubble") { OilBubbleFeature(NoneFeatureConfiguration.CODEC) }
+        val HUGE_GLOWING_MUSHROOM = FEATURES.registerK("huge_glowing_mushroom") { HugeGlowingMushroomFeature(HugeMushroomFeatureConfiguration.CODEC) }
+        val METEORITE = FEATURES.registerK("meteorite") { MeteoriteFeature(MeteoriteFeatureConfiguration.CODEC) }
     }
 
     private object OreFeatures {
@@ -220,10 +234,167 @@ object WorldGen {
         fun rareOrePlacement(rarity: Int, modifier: PlacementModifier) = orePlacement(RarityFilter.onAverageOnceEvery(rarity), modifier)
     }
 
-
     object TreeFeatures {
         val HUGE_GLOWING_MUSHROOM = register("huge_glowing_mushroom", Features.HUGE_GLOWING_MUSHROOM.get(), HugeMushroomFeatureConfiguration(BlockStateProvider.simple(
             NTechBlocks.glowingMushroomBlock.get()), BlockStateProvider.simple(NTechBlocks.glowingMushroomStem.get().defaultBlockState().setValue(HugeMushroomBlock.UP, false).setValue(HugeMushroomBlock.DOWN, false)), 4))
+    }
+
+    object MeteoriteFeatures {
+        private val SOLID_PROVIDER: SimpleStateProvider = BlockStateProvider.simple(NTechBlocks.meteorite.get())
+        private val MOLTEN_PROVIDER: SimpleStateProvider = BlockStateProvider.simple(NTechBlocks.hotMeteoriteCobblestone.get())
+        private val COBBLE_PROVIDER: SimpleStateProvider = BlockStateProvider.simple(NTechBlocks.meteoriteCobblestone.get())
+        private val TREASURE_PROVIDER: SimpleStateProvider = BlockStateProvider.simple(NTechBlocks.meteoriteTreasure.get())
+        private val BROKEN_PROVIDER: SimpleStateProvider = BlockStateProvider.simple(NTechBlocks.brokenMeteorite.get())
+        private val BROKEN_TREASURE_PROVIDER: WeightedStateProvider = WeightedStateProvider(SimpleWeightedRandomList.builder<BlockState>().add(NTechBlocks.brokenMeteorite.get().defaultBlockState(), 99).add(NTechBlocks.meteoriteTreasure.get().defaultBlockState(), 1))
+        private val MOLTEN_MIXED_PROVIDER: WeightedStateProvider = WeightedStateProvider(SimpleWeightedRandomList.builder<BlockState>().add(NTechBlocks.hotMeteoriteCobblestone.get().defaultBlockState(), 1).add(NTechBlocks.brokenMeteorite.get().defaultBlockState(), 1))
+        private val COBBLE_MIXED_PROVIDER: WeightedStateProvider = WeightedStateProvider(SimpleWeightedRandomList.builder<BlockState>().add(NTechBlocks.meteoriteCobblestone.get().defaultBlockState(), 1).add(NTechBlocks.brokenMeteorite.get().defaultBlockState(), 1))
+        private val RANDOM_ORE_WEIGHTED_LIST = { SimpleWeightedRandomList.builder<BlockState>()
+            .add(NTechBlocks.meteorUraniumOre.get().defaultBlockState(), 3)
+            .add(NTechBlocks.meteorThoriumOre.get().defaultBlockState(), 5)
+            .add(NTechBlocks.meteorTitaniumOre.get().defaultBlockState(), 6)
+            .add(NTechBlocks.meteorSulfurOre.get().defaultBlockState(), 7)
+            .add(NTechBlocks.meteorCopperOre.get().defaultBlockState(), 8)
+            .add(NTechBlocks.meteorTungstenOre.get().defaultBlockState(), 5)
+            .add(NTechBlocks.meteorAluminiumOre.get().defaultBlockState(), 7)
+            .add(NTechBlocks.meteorLeadOre.get().defaultBlockState(), 6)
+            .add(NTechBlocks.meteorLithiumOre.get().defaultBlockState(), 4)
+            .add(NTechBlocks.starmetalOre.get().defaultBlockState(), 1)
+        }
+        private val RANDOM_ORE_PROVIDER: WeightedStateProvider = WeightedStateProvider(RANDOM_ORE_WEIGHTED_LIST())
+
+        private val MOLTEN_COBBLE_ORE_VARIANT = listOf(listOf(MOLTEN_PROVIDER), listOf(COBBLE_PROVIDER), listOf(BROKEN_PROVIDER, COBBLE_PROVIDER), listOf(RANDOM_ORE_PROVIDER))
+        private val MOLTEN_COBBLE_TREASURE_VARIANT = listOf(listOf(MOLTEN_PROVIDER), listOf(COBBLE_PROVIDER), listOf(BROKEN_TREASURE_PROVIDER), listOf(SOLID_PROVIDER, TREASURE_PROVIDER))
+        private val COBBLE_COBBLE_ORE_VARIANT = listOf(listOf(COBBLE_PROVIDER), listOf(COBBLE_PROVIDER), listOf(BROKEN_PROVIDER), listOf(RANDOM_ORE_PROVIDER))
+        private val COBBLE_COBBLE_TREASURE_VARIANT = listOf(listOf(COBBLE_PROVIDER), listOf(COBBLE_PROVIDER), listOf(BROKEN_TREASURE_PROVIDER), listOf(SOLID_PROVIDER, TREASURE_PROVIDER))
+        private val BROKEN_MIX_ORE_VARIANT = listOf(listOf(BROKEN_TREASURE_PROVIDER), listOf(BROKEN_TREASURE_PROVIDER, COBBLE_MIXED_PROVIDER), listOf(BROKEN_PROVIDER), listOf(RANDOM_ORE_PROVIDER))
+        private val BROKEN_MIX_TREASURE_VARIANT = listOf(listOf(BROKEN_TREASURE_PROVIDER), listOf(BROKEN_TREASURE_PROVIDER, COBBLE_MIXED_PROVIDER), listOf(BROKEN_TREASURE_PROVIDER), listOf(SOLID_PROVIDER, TREASURE_PROVIDER))
+        private val MIX_MIX_ORE_VARIANT = listOf(listOf(MOLTEN_MIXED_PROVIDER), listOf(COBBLE_MIXED_PROVIDER), listOf(BROKEN_PROVIDER), listOf(RANDOM_ORE_PROVIDER))
+        private val MIX_MIX_TREASURE_VARIANT = listOf(listOf(MOLTEN_MIXED_PROVIDER), listOf(COBBLE_MIXED_PROVIDER), listOf(BROKEN_TREASURE_PROVIDER), listOf(SOLID_PROVIDER, TREASURE_PROVIDER))
+
+        private val BOX1_PLACER = BoxMeteoritePlacer(1)
+        private val SPHERE2_PLACER = SphereMeteoritePlacer(2)
+        private val SPHERE3_PLACER = SphereMeteoritePlacer(3)
+        private val SPHERE4_PLACER = SphereMeteoritePlacer(4)
+        private val STAR1_PLACER = StarMeteoritePlacer(1)
+        private val STAR2_PLACER = StarMeteoritePlacer(2)
+
+        private val LARGE1_VARIANT = listOf(SPHERE3_PLACER, STAR2_PLACER, STAR1_PLACER, SingleBlockMeteoritePlacer)
+        private val LARGE2_VARIANT = listOf(SPHERE3_PLACER, SPHERE2_PLACER, STAR1_PLACER, SingleBlockMeteoritePlacer)
+        private val LARGE3_VARIANT = listOf(SPHERE3_PLACER, SPHERE2_PLACER, BOX1_PLACER, SingleBlockMeteoritePlacer)
+        private val LARGE4_VARIANT = listOf(SPHERE3_PLACER, SPHERE2_PLACER, BOX1_PLACER, SingleBlockMeteoritePlacer) // has additional RANDOM_ORE STAR1
+        private val LARGE5_VARIANT = listOf(SPHERE3_PLACER, SPHERE2_PLACER, STAR2_PLACER, SingleBlockMeteoritePlacer) // has additional RANDOM_ORE STAR1
+
+        private val MEDIUM1_VARIANT = listOf(SPHERE2_PLACER, NopMeteoritePlacer, NopMeteoritePlacer, SingleBlockMeteoritePlacer) // has no RANDOM_ORE core
+        private val MEDIUM2_VARIANT = listOf(SPHERE2_PLACER, STAR1_PLACER, NopMeteoritePlacer, SingleBlockMeteoritePlacer)
+        private val MEDIUM3_VARIANT = listOf(SPHERE2_PLACER, BOX1_PLACER, NopMeteoritePlacer, SingleBlockMeteoritePlacer)
+        private val MEDIUM4_VARIANT = listOf(SPHERE2_PLACER, BOX1_PLACER, STAR1_PLACER, SingleBlockMeteoritePlacer)
+        private val MEDIUM5_VARIANT = listOf(SPHERE2_PLACER, NopMeteoritePlacer, BOX1_PLACER, SingleBlockMeteoritePlacer) // has extra variant with RANDOM_ORE STAR1
+
+        val LARGE1_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_large1_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_large1_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_large1_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_large1_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_BROKEN_MIX_ORE_VARIANT = register("meteorite_large1_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_large1_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_MIX_MIX_ORE_VARIANT = register("meteorite_large1_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip LARGE1_VARIANT))
+        val LARGE1_MIX_MIX_TREASURE_VARIANT = register("meteorite_large1_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip LARGE1_VARIANT))
+        val LARGE2_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_large2_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_large2_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_large2_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_large2_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_BROKEN_MIX_ORE_VARIANT = register("meteorite_large2_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_large2_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_MIX_MIX_ORE_VARIANT = register("meteorite_large2_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip LARGE2_VARIANT))
+        val LARGE2_MIX_MIX_TREASURE_VARIANT = register("meteorite_large2_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip LARGE2_VARIANT))
+        val LARGE3_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_large3_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_large3_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_large3_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_large3_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_BROKEN_MIX_ORE_VARIANT = register("meteorite_large3_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_large3_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_MIX_MIX_ORE_VARIANT = register("meteorite_large3_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip LARGE3_VARIANT))
+        val LARGE3_MIX_MIX_TREASURE_VARIANT = register("meteorite_large3_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip LARGE3_VARIANT))
+        val LARGE4_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_large4_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MOLTEN_COBBLE_ORE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_large4_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MOLTEN_COBBLE_TREASURE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_large4_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((COBBLE_COBBLE_ORE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_large4_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((COBBLE_COBBLE_TREASURE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_BROKEN_MIX_ORE_VARIANT = register("meteorite_large4_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((BROKEN_MIX_ORE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_large4_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((BROKEN_MIX_TREASURE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_MIX_MIX_ORE_VARIANT = register("meteorite_large4_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MIX_MIX_ORE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE4_MIX_MIX_TREASURE_VARIANT = register("meteorite_large4_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MIX_MIX_TREASURE_VARIANT zip LARGE4_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_large5_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MOLTEN_COBBLE_ORE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_large5_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MOLTEN_COBBLE_TREASURE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_large5_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((COBBLE_COBBLE_ORE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_large5_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((COBBLE_COBBLE_TREASURE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_BROKEN_MIX_ORE_VARIANT = register("meteorite_large5_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((BROKEN_MIX_ORE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_large5_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((BROKEN_MIX_TREASURE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_MIX_MIX_ORE_VARIANT = register("meteorite_large5_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MIX_MIX_ORE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val LARGE5_MIX_MIX_TREASURE_VARIANT = register("meteorite_large5_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MIX_MIX_TREASURE_VARIANT zip LARGE5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+
+        val MEDIUM1_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_medium1_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip MEDIUM1_VARIANT))
+        val MEDIUM1_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_medium1_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip MEDIUM1_VARIANT))
+        val MEDIUM1_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_medium1_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip MEDIUM1_VARIANT))
+        val MEDIUM1_MIX_MIX_TREASURE_VARIANT = register("meteorite_medium1_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip MEDIUM1_VARIANT))
+        val MEDIUM2_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_medium2_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_medium2_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_medium2_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_medium2_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_BROKEN_MIX_ORE_VARIANT = register("meteorite_medium2_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_medium2_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_MIX_MIX_ORE_VARIANT = register("meteorite_medium2_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM2_MIX_MIX_TREASURE_VARIANT = register("meteorite_medium2_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip MEDIUM2_VARIANT))
+        val MEDIUM3_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_medium3_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_medium3_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_medium3_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_medium3_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_BROKEN_MIX_ORE_VARIANT = register("meteorite_medium3_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_medium3_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_MIX_MIX_ORE_VARIANT = register("meteorite_medium3_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM3_MIX_MIX_TREASURE_VARIANT = register("meteorite_medium3_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip MEDIUM3_VARIANT))
+        val MEDIUM4_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_medium4_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_medium4_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_medium4_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_medium4_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_BROKEN_MIX_ORE_VARIANT = register("meteorite_medium4_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_medium4_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_MIX_MIX_ORE_VARIANT = register("meteorite_medium4_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM4_MIX_MIX_TREASURE_VARIANT = register("meteorite_medium4_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip MEDIUM4_VARIANT))
+        val MEDIUM5_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_medium5_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_ORE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_medium5_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MOLTEN_COBBLE_TREASURE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_medium5_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_ORE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_medium5_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(COBBLE_COBBLE_TREASURE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_BROKEN_MIX_ORE_VARIANT = register("meteorite_medium5_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_ORE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_medium5_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(BROKEN_MIX_TREASURE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_MIX_MIX_ORE_VARIANT = register("meteorite_medium5_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_ORE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM5_MIX_MIX_TREASURE_VARIANT = register("meteorite_medium5_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of(MIX_MIX_TREASURE_VARIANT zip MEDIUM5_VARIANT))
+        val MEDIUM6_MOLTEN_COBBLE_ORE_VARIANT = register("meteorite_medium6_molten_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MOLTEN_COBBLE_ORE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_MOLTEN_COBBLE_TREASURE_VARIANT = register("meteorite_medium6_molten_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MOLTEN_COBBLE_TREASURE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_COBBLE_COBBLE_ORE_VARIANT = register("meteorite_medium6_cobble_cobble_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((COBBLE_COBBLE_ORE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_COBBLE_COBBLE_TREASURE_VARIANT = register("meteorite_medium6_cobble_cobble_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((COBBLE_COBBLE_TREASURE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_BROKEN_MIX_ORE_VARIANT = register("meteorite_medium6_broken_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((BROKEN_MIX_ORE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_BROKEN_MIX_TREASURE_VARIANT = register("meteorite_medium6_broken_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((BROKEN_MIX_TREASURE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_MIX_MIX_ORE_VARIANT = register("meteorite_medium6_mix_mix_ore_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MIX_MIX_ORE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+        val MEDIUM6_MIX_MIX_TREASURE_VARIANT = register("meteorite_medium6_mix_mix_treasure_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration.of((MIX_MIX_TREASURE_VARIANT zip MEDIUM5_VARIANT) + (listOf(RANDOM_ORE_PROVIDER) to STAR1_PLACER)))
+
+        val SMALL_MOLTEN_VARIANT = register("meteorite_small_molten_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(MOLTEN_PROVIDER), BOX1_PLACER), MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(SOLID_PROVIDER, TREASURE_PROVIDER), SingleBlockMeteoritePlacer))))
+        val SMALL_COBBLE_VARIANT = register("meteorite_small_cobble_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(COBBLE_PROVIDER), BOX1_PLACER), MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(SOLID_PROVIDER, TREASURE_PROVIDER), SingleBlockMeteoritePlacer))))
+        val SMALL_BROKEN_VARIANT = register("meteorite_small_broken_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(BROKEN_TREASURE_PROVIDER), BOX1_PLACER), MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(SOLID_PROVIDER, TREASURE_PROVIDER), SingleBlockMeteoritePlacer))))
+        val SMALL_MIX_VARIANT = register("meteorite_small_mix_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(MOLTEN_MIXED_PROVIDER), BOX1_PLACER), MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(SOLID_PROVIDER, TREASURE_PROVIDER), SingleBlockMeteoritePlacer))))
+
+        val SPECIAL_SOLID_BOX_VARIANT = register("meteorite_special_solid_box_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(SOLID_PROVIDER), BOX1_PLACER))))
+        val SPECIAL_GIANT_ORE_SPHERE_VARIANT = register("meteorite_special_giant_ore_sphere_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(BROKEN_PROVIDER), SPHERE4_PLACER), MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(RANDOM_ORE_PROVIDER), SPHERE3_PLACER))))
+        val SPECIAL_LARGE_ORE_SPHERE_VARIANT = register("meteorite_special_large_ore_sphere_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(WeightedStateProvider(RANDOM_ORE_WEIGHTED_LIST().let { it.add(NTechBlocks.brokenMeteorite.get().defaultBlockState(), it.build().unwrap().size) })), SPHERE3_PLACER))))
+        val SPECIAL_MEDIUM_ORE_SPHERE_VARIANT = register("meteorite_special_medium_ore_sphere_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(WeightedStateProvider(RANDOM_ORE_WEIGHTED_LIST().let { it.add(NTechBlocks.brokenMeteorite.get().defaultBlockState(), it.build().unwrap().size / 2) })), SPHERE2_PLACER))))
+        val SPECIAL_SMALL_ORE_BOX_VARIANT = register("meteorite_special_small_ore_box_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(RANDOM_ORE_PROVIDER), BOX1_PLACER))))
+        val SPECIAL_LARGE_TREASURE_SPHERE_VARIANT = register("meteorite_special_large_treasure_sphere_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(TREASURE_PROVIDER, BROKEN_PROVIDER), SPHERE3_PLACER))))
+        val SPECIAL_MEDIUM_TREASURE_SPHERE_VARIANT = register("meteorite_special_medium_treasure_sphere_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(TREASURE_PROVIDER, TREASURE_PROVIDER, BROKEN_PROVIDER), SPHERE2_PLACER))))
+        val SPECIAL_SMALL_TREASURE_BOX_VARIANT = register("meteorite_special_small_treasure_box_variant", Features.METEORITE.get(), MeteoriteFeatureConfiguration(listOf(MeteoriteFeatureConfiguration.MeteoritePlacerConfiguration(listOf(TREASURE_PROVIDER), BOX1_PLACER))))
+
+        val LARGE_METEORITE_VARIANTS = listOf(LARGE1_MOLTEN_COBBLE_ORE_VARIANT, LARGE1_MOLTEN_COBBLE_TREASURE_VARIANT, LARGE1_COBBLE_COBBLE_ORE_VARIANT, LARGE1_COBBLE_COBBLE_TREASURE_VARIANT, LARGE1_BROKEN_MIX_ORE_VARIANT, LARGE1_BROKEN_MIX_TREASURE_VARIANT, LARGE1_MIX_MIX_ORE_VARIANT, LARGE1_MIX_MIX_TREASURE_VARIANT, LARGE2_MOLTEN_COBBLE_ORE_VARIANT, LARGE2_MOLTEN_COBBLE_TREASURE_VARIANT, LARGE2_COBBLE_COBBLE_ORE_VARIANT, LARGE2_COBBLE_COBBLE_TREASURE_VARIANT, LARGE2_BROKEN_MIX_ORE_VARIANT, LARGE2_BROKEN_MIX_TREASURE_VARIANT, LARGE2_MIX_MIX_ORE_VARIANT, LARGE2_MIX_MIX_TREASURE_VARIANT, LARGE3_MOLTEN_COBBLE_ORE_VARIANT, LARGE3_MOLTEN_COBBLE_TREASURE_VARIANT, LARGE3_COBBLE_COBBLE_ORE_VARIANT, LARGE3_COBBLE_COBBLE_TREASURE_VARIANT, LARGE3_BROKEN_MIX_ORE_VARIANT, LARGE3_BROKEN_MIX_TREASURE_VARIANT, LARGE3_MIX_MIX_ORE_VARIANT, LARGE3_MIX_MIX_TREASURE_VARIANT, LARGE4_MOLTEN_COBBLE_ORE_VARIANT, LARGE4_MOLTEN_COBBLE_TREASURE_VARIANT, LARGE4_COBBLE_COBBLE_ORE_VARIANT, LARGE4_COBBLE_COBBLE_TREASURE_VARIANT, LARGE4_BROKEN_MIX_ORE_VARIANT, LARGE4_BROKEN_MIX_TREASURE_VARIANT, LARGE4_MIX_MIX_ORE_VARIANT, LARGE4_MIX_MIX_TREASURE_VARIANT, LARGE5_MOLTEN_COBBLE_ORE_VARIANT, LARGE5_MOLTEN_COBBLE_TREASURE_VARIANT, LARGE5_COBBLE_COBBLE_ORE_VARIANT, LARGE5_COBBLE_COBBLE_TREASURE_VARIANT, LARGE5_BROKEN_MIX_ORE_VARIANT, LARGE5_BROKEN_MIX_TREASURE_VARIANT, LARGE5_MIX_MIX_ORE_VARIANT, LARGE5_MIX_MIX_TREASURE_VARIANT)
+        val MEDIUM_METEORITE_VARIANTS = listOf(MEDIUM1_MOLTEN_COBBLE_TREASURE_VARIANT, MEDIUM1_COBBLE_COBBLE_TREASURE_VARIANT, MEDIUM1_BROKEN_MIX_TREASURE_VARIANT, MEDIUM1_MIX_MIX_TREASURE_VARIANT, MEDIUM2_MOLTEN_COBBLE_ORE_VARIANT, MEDIUM2_MOLTEN_COBBLE_TREASURE_VARIANT, MEDIUM2_COBBLE_COBBLE_ORE_VARIANT, MEDIUM2_COBBLE_COBBLE_TREASURE_VARIANT, MEDIUM2_BROKEN_MIX_ORE_VARIANT, MEDIUM2_BROKEN_MIX_TREASURE_VARIANT, MEDIUM2_MIX_MIX_ORE_VARIANT, MEDIUM2_MIX_MIX_TREASURE_VARIANT, MEDIUM3_MOLTEN_COBBLE_ORE_VARIANT, MEDIUM3_MOLTEN_COBBLE_TREASURE_VARIANT, MEDIUM3_COBBLE_COBBLE_ORE_VARIANT, MEDIUM3_COBBLE_COBBLE_TREASURE_VARIANT, MEDIUM3_BROKEN_MIX_ORE_VARIANT, MEDIUM3_BROKEN_MIX_TREASURE_VARIANT, MEDIUM3_MIX_MIX_ORE_VARIANT, MEDIUM3_MIX_MIX_TREASURE_VARIANT, MEDIUM4_MOLTEN_COBBLE_ORE_VARIANT, MEDIUM4_MOLTEN_COBBLE_TREASURE_VARIANT, MEDIUM4_COBBLE_COBBLE_ORE_VARIANT, MEDIUM4_COBBLE_COBBLE_TREASURE_VARIANT, MEDIUM4_BROKEN_MIX_ORE_VARIANT, MEDIUM4_BROKEN_MIX_TREASURE_VARIANT, MEDIUM4_MIX_MIX_ORE_VARIANT, MEDIUM4_MIX_MIX_TREASURE_VARIANT, MEDIUM5_MOLTEN_COBBLE_ORE_VARIANT, MEDIUM5_MOLTEN_COBBLE_TREASURE_VARIANT, MEDIUM5_COBBLE_COBBLE_ORE_VARIANT, MEDIUM5_COBBLE_COBBLE_TREASURE_VARIANT, MEDIUM5_BROKEN_MIX_ORE_VARIANT, MEDIUM5_BROKEN_MIX_TREASURE_VARIANT, MEDIUM5_MIX_MIX_ORE_VARIANT, MEDIUM5_MIX_MIX_TREASURE_VARIANT, MEDIUM6_MOLTEN_COBBLE_ORE_VARIANT, MEDIUM6_MOLTEN_COBBLE_TREASURE_VARIANT, MEDIUM6_COBBLE_COBBLE_ORE_VARIANT, MEDIUM6_COBBLE_COBBLE_TREASURE_VARIANT, MEDIUM6_BROKEN_MIX_ORE_VARIANT, MEDIUM6_BROKEN_MIX_TREASURE_VARIANT, MEDIUM6_MIX_MIX_ORE_VARIANT, MEDIUM6_MIX_MIX_TREASURE_VARIANT)
+        val SMALL_METEORITE_VARIANTS = listOf(SMALL_MOLTEN_VARIANT, SMALL_COBBLE_VARIANT, SMALL_BROKEN_VARIANT, SMALL_MIX_VARIANT)
+
+        // TODO nuclear and taint meteorites
     }
 
     private fun <FC : FeatureConfiguration, F : Feature<FC>> register(name: String, feature: F, config: FC): Holder<ConfiguredFeature<FC, *>> = BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_FEATURE, ntm(name).toString(), ConfiguredFeature(feature, config))

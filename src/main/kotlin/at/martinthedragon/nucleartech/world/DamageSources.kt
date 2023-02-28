@@ -9,6 +9,7 @@ import kotlin.random.Random
 
 object DamageSources {
     val extractBlood: DamageSource = DamageSource(name("extractBlood")).bypassArmor().bypassMagic().setNoAggro()
+    val meteorite: DamageSource = DamageSource(name("meteorite")).bypassMagic().bypassArmor().setNoAggro()
     val murkyAnvil: DamageSource = MurkyAnvilDamageSource(name("murkyAnvil"))
     val nuclearBlast: DamageSource = DamageSource(name("nuclearBlast")).setExplosion()
     val radiation: DamageSource = DamageSource(name("radiation")).bypassArmor()

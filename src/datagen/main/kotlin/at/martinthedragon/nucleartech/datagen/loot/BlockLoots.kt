@@ -3,6 +3,7 @@ package at.martinthedragon.nucleartech.datagen.loot
 import at.martinthedragon.nucleartech.NuclearTech
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.rbmk.RBMKBaseBlock
+import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.item.NTechItems
 import net.minecraft.advancements.critereon.EnchantmentPredicate
 import net.minecraft.advancements.critereon.ItemPredicate
@@ -17,6 +18,7 @@ import net.minecraft.world.level.storage.loot.IntRange
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
+import net.minecraft.world.level.storage.loot.entries.EntryGroup
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
 import net.minecraft.world.level.storage.loot.functions.LimitCount
@@ -175,6 +177,34 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.berylliumDecoBlock.get())
         dropSelf(NTechBlocks.asbestosRoof.get())
         dropSelf(NTechBlocks.hazmatBlock.get())
+        add(NTechBlocks.meteorite.get()) { createSilkTouchDispatchTable(it, EntryGroup.list(LootItem.lootTableItem(NTechItems.dalekaniumPlate.get()), LootItem.lootTableItem(NTechBlockItems.meteorite.get()).setWeight(9))) }
+        add(NTechBlocks.meteoriteCobblestone.get()) { createSingleItemTableWithSilkTouch(it, NTechItems.meteoriteFragment.get()) }
+        add(NTechBlocks.brokenMeteorite.get()) { createSingleItemTableWithSilkTouch(it, NTechItems.meteoriteFragment.get()) }
+        dropWhenSilkTouch(NTechBlocks.hotMeteoriteCobblestone.get())
+        add(NTechBlocks.meteoriteTreasure.get()) { createSilkTouchDispatchTable(it, EntryGroup.list(
+            LootItem.lootTableItem(NTechItems.superConductingCoil.get()),
+            LootItem.lootTableItem(NTechItems.advancedAlloyPlate.get()),
+            LootItem.lootTableItem(NTechItems.deshMix.get()),
+            LootItem.lootTableItem(NTechItems.deshIngot.get()),
+            LootItem.lootTableItem(NTechItems.advancedBattery.get()),
+            LootItem.lootTableItem(NTechItems.advancedBattery.get()),
+            LootItem.lootTableItem(NTechItems.lithiumPowerCell.get()),
+            LootItem.lootTableItem(NTechItems.advancedPowerCell.get()),
+            LootItem.lootTableItem(NTechItems.schrabidiumNugget.get()),
+            LootItem.lootTableItem(NTechItems.plutoniumIngot.get()),
+            LootItem.lootTableItem(NTechItems.thoriumFuelIngot.get()),
+            LootItem.lootTableItem(NTechItems.u233Ingot.get()),
+            LootItem.lootTableItem(NTechItems.highSpeedSteelIngot.get()), // TODO tungsten turbine
+            LootItem.lootTableItem(NTechItems.polymerIngot.get()),
+            LootItem.lootTableItem(NTechItems.tungstenIngot.get()),
+            LootItem.lootTableItem(NTechItems.combineSteelIngot.get()),
+            LootItem.lootTableItem(NTechItems.lanthanumIngot.get()),
+            LootItem.lootTableItem(NTechItems.actiniumIngot.get()),
+            LootItem.lootTableItem(NTechBlockItems.meteorite.get()), // TODO fusion heater
+            LootItem.lootTableItem(NTechItems.advancedCircuit.get()),
+            LootItem.lootTableItem(NTechBlockItems.rareEarthOre.get()),
+            // TODO
+        )) }
         dropSelf(NTechBlocks.steelBeam.get())
         dropSelf(NTechBlocks.steelScaffold.get())
         dropSelf(NTechBlocks.steelGrate.get())
