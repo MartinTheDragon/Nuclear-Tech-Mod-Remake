@@ -217,16 +217,14 @@ class ExplosionVNT(
 
         private object AlwaysFire : BlockMutator {
             override fun mutateAtPosition(explosion: ExplosionVNT, pos: BlockPos) {
-                val firePos = pos.above()
-                explosion.level.setBlockAndUpdate(firePos, BaseFireBlock.getState(explosion.level, firePos))
+                explosion.level.setBlockAndUpdate(pos, BaseFireBlock.getState(explosion.level, pos))
             }
         }
 
         private class RandomFire(private val randomBound: Int) : BlockMutator {
             override fun mutateAtPosition(explosion: ExplosionVNT, pos: BlockPos) {
                 if (explosion.level.random.nextInt(randomBound) == 0) {
-                    val firePos = pos.above()
-                    explosion.level.setBlockAndUpdate(firePos, BaseFireBlock.getState(explosion.level, firePos))
+                    explosion.level.setBlockAndUpdate(pos, BaseFireBlock.getState(explosion.level, pos))
                 }
             }
         }
