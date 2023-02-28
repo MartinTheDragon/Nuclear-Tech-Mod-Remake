@@ -20,6 +20,8 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.fml.loading.FMLEnvironment
 import net.minecraftforge.network.filters.VanillaPacketFilter
 import java.util.function.BiConsumer
 import java.util.stream.Collectors
@@ -106,7 +108,7 @@ object HazardSystem {
 
     @ChannelHandler.Sharable
     class ItemDataPacketDetector : VanillaPacketFilter(buildHandlers()) {
-        override fun isNecessary(manager: Connection?) = true
+        override fun isNecessary(manager: Connection?) = FMLEnvironment.dist == Dist.CLIENT
 
         companion object {
             val NAME = ntm("hazard_system_item_data_detector")
