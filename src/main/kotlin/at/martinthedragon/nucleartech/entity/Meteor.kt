@@ -60,7 +60,7 @@ class Meteor(entityType: EntityType<Meteor>, level: Level) : Entity(entityType, 
             }
 
             placeRandomMeteorite(level, blockPosition(), random)
-            level.playSound(null, this, SoundEvents.meteorImpact.get(), SoundSource.BLOCKS, 10_000F, .5F + random.nextFloat() * .1F)
+            level.playSound(null, x, y, z, SoundEvents.meteorImpact.get(), SoundSource.BLOCKS, 10_000F, .5F + random.nextFloat() * .1F)
 
             discard()
         }
