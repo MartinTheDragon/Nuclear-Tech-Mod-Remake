@@ -23,6 +23,7 @@ import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Explosion.BlockInteraction
 import net.minecraft.world.level.ExplosionDamageCalculator
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.block.BaseFireBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.gameevent.GameEvent
@@ -187,7 +188,7 @@ class ExplosionVNT(
                 }
 
                 if (blockMutator != null) {
-                    for (blockPos in shuffledPositions) {
+                    for (blockPos in shuffledPositions) if (level.getBlockState(blockPos).isAir) {
                         blockMutator.mutateAtPosition(explosion, blockPos)
                     }
                 }
@@ -213,6 +214,26 @@ class ExplosionVNT(
 
     fun interface BlockMutator {
         fun mutateAtPosition(explosion: ExplosionVNT, pos: BlockPos)
+
+        private object AlwaysFire : BlockMutator {
+            override fun mutateAtPosition(explosion: ExplosionVNT, pos: BlockPos) {
+                val firePos = pos.above()
+                explosion.level.setBlockAndUpdate(firePos, BaseFireBlock.getState(explosion.level, firePos))
+            }
+        }
+
+        private class RandomFire(private val randomBound: Int) : BlockMutator {
+            override fun mutateAtPosition(explosion: ExplosionVNT, pos: BlockPos) {
+                if (explosion.level.random.nextInt(randomBound) == 0) {
+                    val firePos = pos.above()
+                    explosion.level.setBlockAndUpdate(firePos, BaseFireBlock.getState(explosion.level, firePos))
+                }
+            }
+        }
+
+        companion object {
+            fun fire(randomBound: Int = 3) = if (randomBound > 0) RandomFire(randomBound) else AlwaysFire
+        }
     }
 
     fun interface EntityProcessor {

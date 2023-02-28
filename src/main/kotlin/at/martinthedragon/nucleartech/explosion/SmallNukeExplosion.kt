@@ -15,7 +15,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.FireBlock
 import net.minecraft.world.phys.Vec3
 import net.minecraftforge.network.PacketDistributor
 import net.minecraftforge.network.PacketDistributor.TargetPoint
@@ -50,12 +49,7 @@ object SmallNukeExplosion : ExplosionFactory<SmallNukeExplosionParams> {
 
     private val miniNukeAttributes: ExplosionVNT.() -> Unit = {
         blockAllocator = ExplosionVNT.BlockAllocator.Default(64)
-        blockProcessor = ExplosionVNT.BlockProcessor.Default(dropChanceMutator = ExplosionVNT.DropChanceMutator.Default(0F), blockMutator = { explosion, pos ->
-            if (level.random.nextInt(3) == 0) {
-                val firePos = pos.above()
-                explosion.level.setBlockAndUpdate(firePos, FireBlock.getState(level, firePos))
-            }
-        })
+        blockProcessor = ExplosionVNT.BlockProcessor.Default(dropChanceMutator = ExplosionVNT.DropChanceMutator.Default(0F), blockMutator = ExplosionVNT.BlockMutator.fire())
         entityProcessor = null
         syncer = null
     }
