@@ -148,6 +148,12 @@ object NTechBlockItems {
     val asbestosRoof = ITEMS.registerK("asbestos_roof") { BlockItem(NTechBlocks.asbestosRoof.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val hazmatBlock = ITEMS.registerK("hazmat_block") { BlockItem(NTechBlocks.hazmatBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 
+    val meteorite = ITEMS.registerK("meteorite") { BlockItem(NTechBlocks.meteorite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val meteoriteCobblestone = ITEMS.registerK("meteorite_cobblestone") { BlockItem(NTechBlocks.meteoriteCobblestone.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val brokenMeteorite = ITEMS.registerK("broken_meteorite") { BlockItem(NTechBlocks.brokenMeteorite.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val hotMeteoriteCobblestone = ITEMS.registerK("hot_meteorite_cobblestone") { BlockItem(NTechBlocks.hotMeteoriteCobblestone.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+    val meteoriteTreasure = ITEMS.registerK("meteorite_treasure") { BlockItem(NTechBlocks.meteoriteTreasure.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
+
     val decoRbmkBlock = ITEMS.registerK("deco_rbmk") { BlockItem(NTechBlocks.decoRbmkBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
     val decoRbmkSmoothBlock = ITEMS.registerK("deco_rbmk_smooth") { BlockItem(NTechBlocks.decoRbmkSmoothBlock.get(), Item.Properties().tab(CreativeTabs.Blocks)) }
 

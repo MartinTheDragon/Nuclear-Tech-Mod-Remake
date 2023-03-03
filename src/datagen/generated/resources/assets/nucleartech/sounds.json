@@ -32,7 +32,7 @@
     ]
   },
   "item.use.radaway": {
-    "subtitle": "subtitle.nucleartech.item.use.radaway",
+    "subtitle": "subtitle.nucleartech.radaway.use",
     "sounds": [
       "nucleartech:item/use/radaway"
     ]
@@ -74,25 +74,25 @@
     ]
   },
   "item.use.inject": {
-    "subtitle": "subtitle.nucleartech.item.use.inject",
+    "subtitle": "subtitle.nucleartech.item.inject",
     "sounds": [
       "nucleartech:item/use/inject"
     ]
   },
   "item.upgrade.install": {
-    "subtitle": "subtitle.nucleartech.item.upgrade.install",
+    "subtitle": "subtitle.nucleartech.upgrade.install",
     "sounds": [
       "nucleartech:item/install_upgrade"
     ]
   },
   "weapon.mini_nuke_explosion": {
-    "subtitle": "subtitle.nucleartech.weapon.mini_nuke_explosion",
+    "subtitle": "subtitle.nucleartech.mini_nuke.explode",
     "sounds": [
       "nucleartech:weapon/mini_nuke_explosion"
     ]
   },
   "weapon.missile_takeoff": {
-    "subtitle": "subtitle.nucleartech.weapon.missile_takeoff",
+    "subtitle": "subtitle.nucleartech.missile.takeoff",
     "sounds": [
       "nucleartech:weapon/missile_takeoff"
     ]
@@ -104,32 +104,32 @@
     ]
   },
   "random.bleep": {
-    "subtitle": "subtitle.nucleartech.random.bleep",
+    "subtitle": "subtitle.nucleartech.bleep",
     "sounds": [
       "nucleartech:random/bleep"
     ]
   },
   "random.boop": {
-    "subtitle": "subtitle.nucleartech.random.boop",
+    "subtitle": "subtitle.nucleartech.boop",
     "sounds": [
       "nucleartech:random/boop"
     ]
   },
   "random.unpack": {
-    "subtitle": "subtitle.nucleartech.random.unpack",
+    "subtitle": "subtitle.nucleartech.item.unpack",
     "sounds": [
       "nucleartech:random/unpack1",
       "nucleartech:random/unpack2"
     ]
   },
   "block.rbmk.az5_cover": {
-    "subtitle": "subtitle.nucleartech.block.rbmk.az5_cover",
+    "subtitle": "subtitle.nucleartech.rbmk.az5_cover",
     "sounds": [
       "nucleartech:block/rbmk_az5_cover"
     ]
   },
   "block.rbmk.explosion": {
-    "subtitle": "subtitle.nucleartech.block.rbmk.explosion",
+    "subtitle": "subtitle.nucleartech.rbmk.explode",
     "sounds": [
       {
         "name": "nucleartech:block/rbmk_explosion",
@@ -138,10 +138,19 @@
     ]
   },
   "block.rbmk.shutdown": {
-    "subtitle": "subtitle.nucleartech.block.rbmk.shutdown",
+    "subtitle": "subtitle.nucleartech.rbmk.shutdown",
     "sounds": [
       {
         "name": "nucleartech:block/rbmk_shutdown",
+        "stream": true
+      }
+    ]
+  },
+  "entity.meteor.impact": {
+    "subtitle": "subtitle.nucleartech.entity.meteor.impact",
+    "sounds": [
+      {
+        "name": "nucleartech:entity/meteor_impact",
         "stream": true
       }
     ]

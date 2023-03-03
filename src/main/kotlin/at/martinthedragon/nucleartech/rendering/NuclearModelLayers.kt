@@ -4,6 +4,7 @@ import at.martinthedragon.nucleartech.ntm
 import net.minecraft.client.model.geom.ModelLayerLocation
 
 object NuclearModelLayers {
+    val METEOR = createLocation("meteor")
     val RUBBLE = createLocation("rubble")
     val SHRAPNEL = createLocation("shrapnel")
     val STEAM_PRESS = createLocation("steam_press")

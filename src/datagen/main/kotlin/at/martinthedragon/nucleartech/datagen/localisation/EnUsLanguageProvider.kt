@@ -1,6 +1,9 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
-import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.CreativeTabs
+import at.martinthedragon.nucleartech.LangKeys
+import at.martinthedragon.nucleartech.Materials
+import at.martinthedragon.nucleartech.TranslationKey
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entity.EntityTypes
@@ -110,6 +113,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.berylliumDecoBlock, "Beryllium Deco Block")
         addBlock(NTechBlocks.asbestosRoof, "Asbestos Roof")
         addBlock(NTechBlocks.hazmatBlock, "Hazmat Block")
+        addBlock(NTechBlocks.meteorite, "Meteorite")
+        addBlock(NTechBlocks.meteoriteCobblestone, "Meteorite Cobblestone")
+        addBlock(NTechBlocks.brokenMeteorite, "Broken Meteorite")
+        addBlock(NTechBlocks.hotMeteoriteCobblestone, "Hot Meteorite Cobblestone")
+        addBlock(NTechBlocks.meteoriteTreasure, "Meteorite Treasure")
         addBlock(NTechBlocks.steelBeam, "Steel Beam")
         addBlock(NTechBlocks.steelScaffold, "Steel Scaffold")
         addBlock(NTechBlocks.steelGrate, "Steel Grate")
@@ -805,6 +813,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.tectonicMissile, "Tectonic Missile")
         addItemDesc(NTechItems.tectonicMissile, "Using the power of nuclear explosives, we can summon a volcano!")
 
+        addItem(NTechItems.meteorRemote, "Meteor Remote")
+        addItemDesc(NTechItems.meteorRemote, "Right click to summon a meteor!")
         addItem(NTechItems.oilDetector, "Oil Reservoir Detector")
         addItemDesc(NTechItems.oilDetector, "Right-click to scan for oil.\nDetector will only find large deposits.")
         addItem(NTechItems.rbmkLinker, "RBMK Console Linking Device")
@@ -870,31 +880,31 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.creativeNuclearExplosionSpawner, "Nuclear Explosion Spawner")
         addItemDesc(NTechItems.creativeNuclearExplosionSpawner, "Manufactured by CakeCo\nEast Spawn Rd 2, 68-419 RetroMC")
 
-        addEntityType(EntityTypes.nuclearExplosion, "Nuclear Explosion")
-        addEntityType(EntityTypes.mushroomCloud, "Mushroom Cloud")
+        addEntityType(EntityTypes.clusterFragment, "Bomblet")
         addEntityType(EntityTypes.falloutRain, "Fallout Rain")
-        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, NTechItems.nuclearCreeperSpawnEgg, "Nuclear Creeper")
-
-        addEntityType(EntityTypes.missileHE, "High Explosive Missile")
-        addEntityType(EntityTypes.missileIncendiary, "Incendiary Missile")
-        addEntityType(EntityTypes.missileCluster, "Cluster Missile")
+        addEntityType(EntityTypes.meteor, "Meteor")
         addEntityType(EntityTypes.missileBunkerBuster, "Bunker Buster")
-        addEntityType(EntityTypes.missileHEStrong, "Strong High Explosive Missile")
-        addEntityType(EntityTypes.missileIncendiaryStrong, "Strong Incendiary Missile")
-        addEntityType(EntityTypes.missileClusterStrong, "Strong Cluster Missile")
         addEntityType(EntityTypes.missileBunkerBusterStrong, "Enhanced Bunker Buster")
         addEntityType(EntityTypes.missileBurst, "Burst Missile")
-        addEntityType(EntityTypes.missileInferno, "Inferno Missile G.R.N. Mk.II")
-        addEntityType(EntityTypes.missileRain, "Bomblet Rain")
+        addEntityType(EntityTypes.missileCluster, "Cluster Missile")
+        addEntityType(EntityTypes.missileClusterStrong, "Strong Cluster Missile")
         addEntityType(EntityTypes.missileDrill, "The Concrete Cracker")
+        addEntityType(EntityTypes.missileHE, "High Explosive Missile")
+        addEntityType(EntityTypes.missileHEStrong, "Strong High Explosive Missile")
+        addEntityType(EntityTypes.missileIncendiary, "Incendiary Missile")
+        addEntityType(EntityTypes.missileIncendiaryStrong, "Strong Incendiary Missile")
+        addEntityType(EntityTypes.missileInferno, "Inferno Missile G.R.N. Mk.II")
         addEntityType(EntityTypes.missileNuclear, "Nuclear Missile")
+        addEntityType(EntityTypes.missileRain, "Bomblet Rain")
         addEntityType(EntityTypes.missileTectonic, "Tectonic Missile")
-
+        addEntityType(EntityTypes.mushroomCloud, "Mushroom Cloud")
+        addEntityType(EntityTypes.nuclearExplosion, "Nuclear Explosion")
         addEntityType(EntityTypes.oilSpill, "Oil Spill")
-
-        addEntityType(EntityTypes.clusterFragment, "Bomblet")
+        addEntityType(EntityTypes.rbmkDebris, "RBMK Debris")
         addEntityType(EntityTypes.shrapnel, "Shrapnel")
         addEntityType(EntityTypes.volcanicShrapnel, "Volcanic Shrapnel")
+
+        addEntityTypeWithSpawnEgg(EntityTypes.nuclearCreeper, NTechItems.nuclearCreeperSpawnEgg, "Nuclear Creeper")
 
         addMenuType(MenuTypes.sirenMenu, "Siren")
         addMenuType(MenuTypes.safeMenu, "Safe")
@@ -924,6 +934,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.launchPadMenu, "Missile Launch Pad")
 
         addDamageSource(DamageSources.extractBlood, "%1\$s extracted too much life essence", "%1\$s tried to leave neatly-packaged life juice for %2\$s")
+        addDamageSource(DamageSources.meteorite, "%1\$s was hit by a falling rock from outer space", "%1\$s was hit by a falling rock from outer space whilst trying to escape %2\$s")
         addDamageSource(DamageSources.murkyAnvil, "%1\$s UNDEFINED", "%1\$s UNDEFINED whilst trying to escape %2\$s")
         addDamageSource(DamageSources.nuclearBlast, "%1\$s was blown away by a nuclear explosion", "%1\$s got nuked whilst fighting %2\$s")
         addDamageSource(DamageSources.radiation, "%1\$s died from radiation poisoning", "%1\$s fell victim to acute radiation syndrome whilst fighting %2\$s")
@@ -961,6 +972,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.DETONATOR_SUCCESS, "Detonated!")
         add(LangKeys.DETONATOR_UNKNOWN_ERROR, "An unknown error occurred during the detonation")
 
+        add(LangKeys.DEVICE_METEOR_REMOTE_WATCH_OUT, "Watch your head!")
         add(LangKeys.DEVICE_OIL_DETECTOR_BELOW, "Oil deposit directly below!")
         add(LangKeys.DEVICE_OIL_DETECTOR_NEAR, "Oil deposit detected nearby")
         add(LangKeys.DEVICE_OIL_DETECTOR_NO_OIL, "No oil detected")
@@ -1133,6 +1145,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.SUBTITLE_GEIGER_CLICK, "Geiger Counter clicks")
         add(LangKeys.SUBTITLE_ITEM_INJECT, "Needle injected")
         add(LangKeys.SUBTITLE_ITEM_UNPACK, "Item unpacked")
+        add(LangKeys.SUBTITLE_METEOR_IMPACT, "Meteor strikes")
         add(LangKeys.SUBTITLE_MINI_NUKE_EXPLODE, "Mini nuke explodes")
         add(LangKeys.SUBTITLE_MISSILE_TAKEOFF, "Missile takes off")
         add(LangKeys.SUBTITLE_PRESS_OPERATE, "Press stamps")

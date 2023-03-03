@@ -27,3 +27,7 @@ Run configurations tell IntelliJ and Gradle what to do when you hit the play but
 For IntelliJ, ForgeGradle (the Gradle plugin for developing mods with Forge) has a builtin Gradle task called `genIntellijRuns`. You can run it by opening the Gradle tool window from the right sidebar (the elephant icon), then finding it under `Nuclear Tech Mod` > `Tasks` > `forgegradle runs`, and finally double-clicking `genIntellijRuns`.
 
 When the task execution finished, you should see the options `runClient`, `runData` and `runServer` in the dropdown-menu to the top-right next to the play button. You'll need those for [testing your changes](testing.md).
+
+### Troubleshooting
+
+If problems should arise concerning Gradle while you are working on the project, try looking at the [troubleshooting document](../TROUBLESHOOTING.md) before opening an issue.

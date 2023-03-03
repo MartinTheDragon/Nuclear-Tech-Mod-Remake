@@ -30,6 +30,7 @@ class NuclearParticleProvider(private val dataGenerator: DataGenerator, private 
         add(ModParticles.OIL_SPILL, "oil_spill")
         add(ModParticles.RBMK_FIRE, (0..13).map { ntm("rbmk_fire_$it") })
         add(ModParticles.RBMK_MUSH, (0..29).map { ntm("rbmk_mush_$it") })
+        add(ModParticles.ROCKET_FLAME, "smoke")
         empty(ModParticles.RUBBLE)
         add(ModParticles.SMOKE, "smoke")
         add(ModParticles.SHOCKWAVE, "shockwave")

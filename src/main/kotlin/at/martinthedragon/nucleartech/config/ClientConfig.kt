@@ -12,6 +12,8 @@ class ClientConfig : ConfigBase {
 
     val displayCustomCapes: ForgeConfigSpec.BooleanValue
 
+    val meteorTrailsPerTick: ForgeConfigSpec.IntValue
+
     init {
         ForgeConfigSpec.Builder().apply {
             comment("Client config. Only present on client, duh.").push(fileName)
@@ -19,7 +21,11 @@ class ClientConfig : ConfigBase {
             displayUpdateMessage = comment("Will show a chat message with update info if a newer version of NTM is available").define("displayUpdateMessage", true)
 
             comment("Render settings").push("rendering")
-            displayCustomCapes = comment("Disable this if there are any rendering problems with other mods. Please leave it on otherwise for respect.").define("displayCustomCapes", true)
+            displayCustomCapes = comment("Disable this if there are any rendering problems with other mods. Please leave it on otherwise for *respect*.").define("displayCustomCapes", true)
+            pop()
+
+            comment("Particle settings").push("particles")
+            meteorTrailsPerTick = comment("How many meteor trail particle emitters are spawned per tick. One emitter renders ten particles.").defineInRange("meteorTrailsPerTick", 6, 0, 20)
             pop()
 
             pop()

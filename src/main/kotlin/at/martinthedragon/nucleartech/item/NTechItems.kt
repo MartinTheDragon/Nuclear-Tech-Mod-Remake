@@ -797,6 +797,7 @@ object NTechItems {
 
     // Consumables and Gear
 
+    val meteorRemote = ITEMS.registerK("meteor_remote") { MeteorRemoteItem(Properties().durability(2).setNoRepair().tab(CreativeTabs.Consumables)) }
     val oilDetector = ITEMS.registerK("oil_detector") { OilDetectorItem(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
     val rbmkLinker = ITEMS.registerK("rbmk_linker") { RBMKLinkerItem(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
     val geigerCounter = ITEMS.registerK("handheld_geiger_counter") { GeigerCounterItem(Properties().tab(CreativeTabs.Consumables).stacksTo(1)) }
