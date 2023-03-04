@@ -3,7 +3,6 @@ package at.martinthedragon.nucleartech.datagen.localisation
 import at.martinthedragon.nucleartech.LangKeys
 import at.martinthedragon.nucleartech.Materials
 import at.martinthedragon.nucleartech.SoundEvents
-import at.martinthedragon.nucleartech.TranslationKey
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entity.EntityTypes
@@ -28,12 +27,12 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addMaterials()
 
-        addBlock(NTechBlocks.scorchedUraniumOre, "Minerale di Uranio bruciato")
+        addBlock(NTechBlocks.scorchedUraniumOre, "Minerale di Uranio scottato")
         addBlock(NTechBlocks.thoriumOre, "Minerale di Torio")
-        addBlock(NTechBlocks.oilDeposit, "Deposito di Olio")
+        addBlock(NTechBlocks.oilDeposit, "Deposito di Petrolio")
         addBlockDesc(NTechBlocks.oilDeposit, "Non avresti dovuto scavarlo.\nAndiamo, usa una torre petrolifera.")
-        addBlock(NTechBlocks.emptyOilDeposit, "Deposito di Olio vuoto")
-        addBlock(NTechBlocks.oilSand, "Sabbia Oleosa")
+        addBlock(NTechBlocks.emptyOilDeposit, "Deposito di Petrolio vuoto")
+        addBlock(NTechBlocks.oilSand, "Sabbia con Petrolio")
         addBlock(NTechBlocks.australianOre, "Minerale di Australian")
         addBlockDesc(NTechBlocks.australianOre, "Minerale di Australium")
         addBlock(NTechBlocks.weidite, "Weidite")
@@ -48,7 +47,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlockDesc(NTechBlocks.dollarGreenMineral, "Minerale di Verticio")
         addBlock(NTechBlocks.rareEarthOre, "Minerale delle Terre Rare")
         addBlock(NTechBlocks.netherUraniumOre, "Minerale di Uranio del Nether")
-        addBlock(NTechBlocks.scorchedNetherUraniumOre, "Minerale di Uranio del Nether bruciato")
+        addBlock(NTechBlocks.scorchedNetherUraniumOre, "Minerale di Uranio del Nether scottato")
         addBlock(NTechBlocks.netherPlutoniumOre, "Minerale di Plutonio del Nether")
         addBlock(NTechBlocks.netherTungstenOre, "Minerale di Tungsteno del Nether")
         addBlock(NTechBlocks.netherSulfurOre, "Minerale di Zolfo del Nether")
@@ -70,10 +69,10 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.basaltAsbestosOre, "Basalto arricchito di Amianto")
         addBlock(NTechBlocks.basaltVolcanicGemOre, "Basalto arricchito di Gemme Vulcaniche")
 
-        addBlock(NTechBlocks.scorchedDeepslateUraniumOre, "Minerale di Uranio bruciato in Ardesia Profonda")
-        addBlock(NTechBlocks.deepslateOilDeposit, "Deposito di Olio in Ardesia Profonda")
+        addBlock(NTechBlocks.scorchedDeepslateUraniumOre, "Minerale di Uranio scottato in Ardesia Profonda")
+        addBlock(NTechBlocks.deepslateOilDeposit, "Deposito di Petrolio in Ardesia Profonda")
         addBlockDesc(NTechBlocks.deepslateOilDeposit, "Così in profondita e ancora\nnon sai che fare? Come?!")
-        addBlock(NTechBlocks.emptyDeepslateOilDeposit, "Deposito di Olio vuoto in Ardesia Profonda")
+        addBlock(NTechBlocks.emptyDeepslateOilDeposit, "Deposito di Petrolio vuoto in Ardesia Profonda")
         addBlock(NTechBlocks.deepslateAustralianOre, "Minerale di Australian in Ardesia Profonda")
         addBlockDesc(NTechBlocks.deepslateAustralianOre, "Minerale di Australian")
         addBlock(NTechBlocks.deepslateRareEarthOre, "Minerale delle Terre Rare in Ardesia Profonda")
@@ -185,19 +184,19 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addBlock(NTechBlocks.genericMultiBlockPart, "Parte di Struttura Multiblocco")
         addBlock(NTechBlocks.genericMultiBlockPort, "Parte di Struttura Multiblocco")
-        addBlock(NTechBlocks.oilPipe, "Tubo per Olio")
+        addBlock(NTechBlocks.oilPipe, "Tubo Petrolifero")
 
         addBlock(NTechFluids.steam.block, "Vapore")
-        addBlock(NTechFluids.steamHot.block, "Vapore Densi")
+        addBlock(NTechFluids.steamHot.block, "Vapore Denso")
         addBlock(NTechFluids.steamSuperHot.block, "Vapore Super Denso")
         addBlock(NTechFluids.steamUltraHot.block, "Vapore Ultra Denso")
         addBlock(NTechFluids.oil.block, "Petrolio")
         addBlock(NTechFluids.gas.block, "Gas Naturale")
         addBlock(NTechFluids.uraniumHexafluoride.block, "Esafluoruro di Uranio")
-        addBlock(NTechFluids.corium.block, "Corium")
+        addBlock(NTechFluids.corium.block, "Corio")
         addBlock(NTechFluids.volcanicLava.block, "Lava Vulcanica")
 
-        addItem(NTechItems.rawThorium, "Thorium Grezzo")
+        addItem(NTechItems.rawThorium, "Torio Grezzo")
         addItem(NTechItems.rawRareEarth, "Terre Rare Grezzo")
         addItem(NTechItems.rawTrixite, "Trixite Grezza")
 
@@ -205,7 +204,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItemDesc(NTechItems.tantaliumIngot, "'Tantalum'")
         addItemDesc(NTechItems.tantaliumNugget, "'Tantalum'")
         addItemDesc(NTechItems.schraraniumIngot, "Fatto dall'uranio in un trasmutatore di schrabidio")
-        addItemDesc(NTechItems.combineSteelIngot, "*inserire relazione della Protezione Civile qui*")
+        addItemDesc(NTechItems.combineSteelIngot, "*Inserire relazione della Protezione Civile qui*")
         addItemDesc(NTechItems.ghiorsium336Ingot, "Collega di Seaborgium.")
         addItemDesc(NTechItems.ghiorsium336Nugget, "Collega di Seaborgium.")
         addItem(NTechItems.lanthanumIngot, "Lingotto di Lantanio Semi-Stabile")
@@ -220,9 +219,9 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
                     "Consumabile"
         )
 
-        addItem(NTechItems.lithiumCube, "Blocco di Litio")
-        addItem(NTechItems.solidFuelCube, "Blocco di Carburante Solido")
-        addItem(NTechItems.solidRocketFuelCube, "Blocco di Carburante Solido per Razzi")
+        addItem(NTechItems.lithiumCube, "Cubo di Litio")
+        addItem(NTechItems.solidFuelCube, "Cubo di Carburante Solido")
+        addItem(NTechItems.solidRocketFuelCube, "Cubo di Carburante Solido per Razzi")
 
         addItem(NTechItems.fiberglassSheet, "Panno di Fibra di Vetro")
         addItemDesc(NTechItems.fiberglassSheet, "Tanto di fibra, tanto di vetro. Tutto ciò che il corpo ha bisogno.")
@@ -237,7 +236,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.ligniteBriquette, "Mattonella di Lignite")
 
         addItem(NTechItems.sulfur, "Zolfo")
-        addItem(NTechItems.niter, "Niter")
+        addItem(NTechItems.niter, "Nitrati")
         addItem(NTechItems.fluorite, "Fluorite")
         addItem(NTechItems.quartzPowder, "Polvere di Quarzo")
         addItem(NTechItems.yellowcake, "Torta gialla")
@@ -510,7 +509,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.magnetron, "Magnetron")
         addItem(NTechItems.denseCoalCluster, "Ammasso di Carbone Denso")
         addItem(NTechItems.burntBark, "Corteccia Bruciata")
-        addItemDesc(NTechItems.burntBark, "Un pezzo di corteccia bruciata da un albero di quercia bruciato esploso.")
+        addItemDesc(NTechItems.burntBark, "Un pezzo di corteccia bruciata da un albero di quercia esploso.")
         addItem(NTechItems.machineUpgradeTemplate, "Modello per Potenziamento Macchine")
 
         addItem(NTechItems.blankRune, "Catalista della Matrice Vuoto")
@@ -858,7 +857,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addEntityType(EntityTypes.missileNuclear, "Missile Nucleare")
         addEntityType(EntityTypes.missileTectonic, "Missile Tettonico")
 
-        addEntityType(EntityTypes.oilSpill, "Goccia d'Olio")
+        addEntityType(EntityTypes.oilSpill, "Goccia di Petrolio")
 
         addEntityType(EntityTypes.clusterFragment, "Bombetta")
         addEntityType(EntityTypes.shrapnel, "Scheggia")
@@ -874,7 +873,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.shredderMenu, "Trituratore")
         addMenuType(MenuTypes.assemblerMenu, "Assemblatore")
         addMenuType(MenuTypes.chemPlantMenu, "Impianto Chimico")
-        addMenuType(MenuTypes.oilWellMenu, "Pozzo di Olio")
+        addMenuType(MenuTypes.oilWellMenu, "Pozzo di Petrolio")
         add(LangKeys.CONTAINER_OIL_DERRICK, "Torre Petrolifera")
         add(LangKeys.CONTAINER_PUMPJACK, "Pompa Petrolifera")
         addMenuType(MenuTypes.centrifugeMenu, "Centrifuga")
@@ -967,8 +966,8 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.DETONATOR_SUCCESS, "Detonazione!")
         add(LangKeys.DETONATOR_UNKNOWN_ERROR, "Un errore sconosciuto si è presentato durante la detonazione")
 
-        add(LangKeys.DEVICE_OIL_DETECTOR_BELOW, "Deposito di Olio rilevato sotto!")
-        add(LangKeys.DEVICE_OIL_DETECTOR_NEAR, "Deposito di Olio rilevato vicino")
+        add(LangKeys.DEVICE_OIL_DETECTOR_BELOW, "Deposito di Petrolio rilevato sotto!")
+        add(LangKeys.DEVICE_OIL_DETECTOR_NEAR, "Deposito di Petrolio rilevato vicino")
         add(LangKeys.DEVICE_OIL_DETECTOR_NO_OIL, "Nessun deposito rilevato")
         add(LangKeys.DEVICE_POSITION_SET, "Posizione impostata!")
         add(LangKeys.DEVICE_POSITION_NOT_LOADED, "La posizione non è caricata nel mondo al momento!")
@@ -1134,14 +1133,14 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.UPGRADE_INFO_CONSUMPTION, "Consumo: %s")
         add(LangKeys.UPGRADE_INFO_DELAY, "Ritardo: %s")
         add(LangKeys.UPGRADE_INFO_STACKS_TO, "Pile a Livello %s")
-        add(LangKeys.UPGRADE_NAME_AFTER_BURNER, "Postbruciatore")
+        add(LangKeys.UPGRADE_NAME_AFTER_BURNER, "Postwre")
         add(LangKeys.UPGRADE_NAME_OVERDRIVE, "Overdrive")
         add(LangKeys.UPGRADE_NAME_POWER_SAVING, "Salva Energia")
         add(LangKeys.UPGRADE_NAME_SPEED, "Velocità")
         add(LangKeys.UPGRADE_WARN_INCOMPATIBLE, "Questo potenziamento non è compatibile!")
         add(LangKeys.UPGRADE_WARN_MACHINE_NOT_UPGRADEABLE, "Questa macchine non è potenziabile!")
         add(LangKeys.UPGRADE_WARN_NOT_A_MACHINE, "Questa non è una macchina!")
-        add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "Vedi una macchina per informazioni sugli effetti")
+        add(LangKeys.UPGRADE_WARN_VIEW_MACHINE, "Vedi su una macchina per informazioni sugli effetti")
         add(LangKeys.UPGRADE_WARN_UNKNOWN_COMPATIBILITY, "La compatibilità della macchina è sconosciuta")
 
         add(LangKeys.VOLCANO_EXTINGUISHING, "SI ESTINGUE")
@@ -1206,7 +1205,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMaterial(neptunium, "Nettunio")
         addMaterial(neptuniumFuel, "Carburante di Nettunio")
         addMaterial(niobium, "Niobio")
-        addMaterial(niter, "Niter")
+        addMaterial(niter, "Nitrati")
         addMaterial(nuclearWaste, "Scarti Nucleari")
         addMaterial(osmiridium, "Osmiridio")
         addMaterial(plutonium238, "Plutonio-238")
