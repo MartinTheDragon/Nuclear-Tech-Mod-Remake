@@ -23,11 +23,11 @@ object FluidTraitHandler {
             val capability = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).getOrNull() ?: return
             val tooltip = mutableListOf<Component>()
 
-            if (event.tooltipElements.size > 1) // if there are already other tooltips, add some space
-                tooltip += TextComponent.EMPTY
-
             for (fluid in capability.getFluids())
                 collectTooltip(fluid, tooltip)
+
+            if (event.tooltipElements.size > 1 && tooltip.isNotEmpty()) // if there are already other tooltips, add some space
+                tooltip.add(0, TextComponent.EMPTY)
 
             event.tooltipElements.addAll(tooltip.map { Either.left(it) })
         } else { // if there's no item stack, try to understand whether and what fluid we have as good as we can
@@ -40,9 +40,9 @@ object FluidTraitHandler {
                 val fakeFluidStack = FluidStack(fluid, 1000)
 
                 val tooltip = mutableListOf<Component>()
-                if (!changed && event.tooltipElements.size > 1) tooltip += TextComponent.EMPTY
-
                 collectTooltip(fakeFluidStack, tooltip)
+                if (!changed && event.tooltipElements.size > 1 && tooltip.isNotEmpty())
+                    tooltip.add(0, TextComponent.EMPTY)
 
                 changed = event.tooltipElements.addAll(tooltip.map { Either.left(it) })
             }
