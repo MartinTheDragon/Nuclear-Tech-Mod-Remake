@@ -149,10 +149,7 @@
   "entity.meteor.impact": {
     "subtitle": "subtitle.nucleartech.entity.meteor.impact",
     "sounds": [
-      {
-        "name": "nucleartech:entity/meteor_impact",
-        "stream": true
-      }
+      "nucleartech:entity/meteor_impact"
     ]
   },
   "siren.ams": {

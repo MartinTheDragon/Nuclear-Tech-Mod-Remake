@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech
 
 import at.martinthedragon.nucleartech.config.NuclearConfig
 import at.martinthedragon.nucleartech.extensions.*
+import at.martinthedragon.nucleartech.fluid.trait.FluidTraitHandler
 import at.martinthedragon.nucleartech.hazard.HazardSystem
 import at.martinthedragon.nucleartech.rendering.NTechCapes
 import at.martinthedragon.nucleartech.screen.AnvilScreen
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.Entity
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.client.event.RecipesUpdatedEvent
 import net.minecraftforge.client.event.RenderPlayerEvent
+import net.minecraftforge.client.event.RenderTooltipEvent
 import net.minecraftforge.event.TagsUpdatedEvent
 import net.minecraftforge.event.entity.EntityJoinWorldEvent
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
@@ -25,6 +27,11 @@ object ClientEventSubscribers {
     @SubscribeEvent @JvmStatic
     fun onItemTooltip(event: ItemTooltipEvent) {
         HazardSystem.addHoverText(event.itemStack, event.player, event.toolTip, event.flags)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun onTooltip(event: RenderTooltipEvent.GatherComponents) {
+        FluidTraitHandler.addHoverText(event)
     }
 
     @SubscribeEvent @JvmStatic

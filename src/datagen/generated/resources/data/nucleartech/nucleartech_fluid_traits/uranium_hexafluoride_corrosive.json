@@ -1,0 +1,7 @@
+{
+  "trait": "nucleartech:corrosive",
+  "tag": "#forge:uranium_hexafluoride",
+  "data": {
+    "corrosion": 15
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "trait": "nucleartech:heatable",
+  "tag": "#minecraft:water",
+  "data": {
+    "heats_to": "nucleartech:steam",
+    "requires": 1,
+    "produces": 100,
+    "heat_energy": 200,
+    "boiler": 1.0,
+    "heat_exchanger": 0.25
+  }
+}

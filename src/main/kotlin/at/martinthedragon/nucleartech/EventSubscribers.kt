@@ -7,6 +7,7 @@ import at.martinthedragon.nucleartech.api.item.TickingArmor
 import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
 import at.martinthedragon.nucleartech.extensions.*
 import at.martinthedragon.nucleartech.fallout.FalloutTransformationManager
+import at.martinthedragon.nucleartech.fluid.trait.FluidTraitManager
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazardSystem
 import at.martinthedragon.nucleartech.hazard.HazmatValues
@@ -37,7 +38,9 @@ import kotlin.math.roundToInt
 object EventSubscribers {
     @SubscribeEvent @JvmStatic
     fun addServerResources(event: AddReloadListenerEvent) {
+        val context = event.conditionContext
         event.addListener(FalloutTransformationManager)
+        event.addListener(FluidTraitManager).also { FluidTraitManager.context = context }
     }
 
     @SubscribeEvent @JvmStatic

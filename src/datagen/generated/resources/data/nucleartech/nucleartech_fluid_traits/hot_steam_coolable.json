@@ -1,0 +1,12 @@
+{
+  "trait": "nucleartech:coolable",
+  "tag": "#nucleartech:hot_steam",
+  "data": {
+    "cools_to": "nucleartech:steam",
+    "requires": 1,
+    "produces": 10,
+    "heat_energy": 2,
+    "turbine": 1.0,
+    "heat_exchanger": 0.5
+  }
+}

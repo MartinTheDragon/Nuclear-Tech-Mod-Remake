@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.datagen.localisation
 
 import at.martinthedragon.nucleartech.*
+import at.martinthedragon.nucleartech.api.fluid.trait.FluidTrait
 import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.HashCache
@@ -156,6 +157,10 @@ abstract class NuclearLanguageProvider(
 
     protected fun addCreativeTab(tab: CreativeTabs, name: String) {
         add("itemGroup.${tab.tab.recipeFolderName}", name)
+    }
+
+    protected fun addFluidTrait(key: Supplier<out FluidTrait>, name: String) {
+        add(key.get().descriptionId, name)
     }
 
     protected abstract val spawnEggFormat: String

@@ -1,0 +1,7 @@
+{
+  "trait": "nucleartech:flammable",
+  "tag": "#forge:oil",
+  "data": {
+    "heat_energy": 25000
+  }
+}

@@ -21,6 +21,7 @@ object DataGen {
             dataGenerator.addProvider(blockTagProvider)
             dataGenerator.addProvider(ItemTagProvider(dataGenerator, blockTagProvider, existingFileHelper))
             dataGenerator.addProvider(FluidTagProvider(dataGenerator, existingFileHelper))
+            dataGenerator.addProvider(FluidTraitProvider(dataGenerator))
             dataGenerator.addProvider(HarvestabilityProvider(dataGenerator, existingFileHelper))
             dataGenerator.addProvider(NuclearRecipeProvider(dataGenerator))
             dataGenerator.addProvider(NuclearLootProvider(dataGenerator))
