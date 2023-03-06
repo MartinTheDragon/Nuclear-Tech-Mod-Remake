@@ -156,6 +156,8 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.assembler, "Assembler")
         addBlock(NTechBlocks.chemPlant, "Chemical Plant")
         addBlock(NTechBlocks.turbine, "Steam Turbine")
+        addBlock(NTechBlocks.smallCoolingTower, "Auxiliary Cooling Tower")
+        addBlock(NTechBlocks.largeCoolingTower, "Cooling Tower")
         addBlockDesc(NTechBlocks.turbine, "Efficiency: 85%%")
         addBlock(NTechBlocks.oilDerrick, "Oil Derrick")
         addBlock(NTechBlocks.pumpjack, "Pumpjack")

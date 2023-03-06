@@ -150,7 +150,7 @@ inline fun <reified T, reified P> openMultiBlockMenu(level: Level, pos: BlockPos
         val part = level.getBlockEntity(pos)
         if (part is P) {
             val blockEntity = level.getBlockEntity(part.core)
-            if (blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, part.core)
+            if (blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, part.core) // FIXME forge's implementation doesn't check for null values from MenuConstructor#createMenu
         }
     }
     return InteractionResult.sidedSuccess(level.isClientSide)

@@ -96,6 +96,7 @@ class HarvestabilityProvider(dataGenerator: DataGenerator, existingFileHelper: E
             NTechBlocks.assembler,
             NTechBlocks.chemPlant,
             NTechBlocks.turbine,
+            NTechBlocks.smallCoolingTower, NTechBlocks.largeCoolingTower,
             NTechBlocks.oilDerrick,
             NTechBlocks.pumpjack,
             NTechBlocks.centrifuge,

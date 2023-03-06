@@ -34,6 +34,8 @@ object SpecialModels : ResourceManagerReloadListener {
     val CHEM_PLANT_PISTON = registerModel(modelLoc("chem_plant/piston"), simpleModel())
     val CHEM_PLANT_SPINNER = registerModel(modelLoc("chem_plant/spinner"), simpleModel())
     val CENTRIFUGE = registerModel(modelLoc("centrifuge/centrifuge"), simpleModel())
+    val COOLING_TOWER_LARGE = registerModel(modelLoc("large_cooling_tower/large_cooling_tower"), simpleModel())
+    val COOLING_TOWER_SMALL = registerModel(modelLoc("small_cooling_tower/small_cooling_tower"), simpleModel())
     val FAT_MAN = registerModel(modelLoc("fat_man/fat_man"), simpleModel())
     val LAUNCH_PAD = registerModel(modelLoc("launch_pad/launch_pad"), simpleModel())
     val LITTLE_BOY = registerModel(modelLoc("little_boy/little_boy"), simpleModel())

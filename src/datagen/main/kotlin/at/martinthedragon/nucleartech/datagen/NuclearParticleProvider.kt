@@ -24,6 +24,7 @@ class NuclearParticleProvider(private val dataGenerator: DataGenerator, private 
 
     private fun createParticleDefinitions() {
         add(ModParticles.CONTRAIL, "contrail")
+        add(ModParticles.COOLING_TOWER_CLOUD, "smoke")
         add(ModParticles.MINI_NUKE_CLOUD, (0..24).map { ntm("mini_nuke_cloud_$it") })
         add(ModParticles.MINI_NUKE_CLOUD_BALEFIRE, (0..24).map { ntm("mini_nuke_cloud_balefire_$it") })
         add(ModParticles.MINI_NUKE_FLASH, "flare")

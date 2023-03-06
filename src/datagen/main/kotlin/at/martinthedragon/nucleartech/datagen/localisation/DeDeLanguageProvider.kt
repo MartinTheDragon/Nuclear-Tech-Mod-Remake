@@ -143,6 +143,8 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.assembler, "Fertigungsmaschine")
         addBlock(NTechBlocks.chemPlant, "Chemiewerk")
         addBlock(NTechBlocks.turbine, "Dampfturbine")
+        addBlock(NTechBlocks.smallCoolingTower, "Hilfskühlturm")
+        addBlock(NTechBlocks.largeCoolingTower, "Kühlturm")
         addBlockDesc(NTechBlocks.turbine, "Effizienz: 85%%")
         addBlock(NTechBlocks.oilDerrick, "Ölbohrturm")
         addBlock(NTechBlocks.pumpjack, "Pferdekopfpumpe")

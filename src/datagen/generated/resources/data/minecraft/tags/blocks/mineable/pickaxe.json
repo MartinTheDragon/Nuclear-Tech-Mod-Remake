@@ -181,6 +181,8 @@
     "nucleartech:assembler",
     "nucleartech:chem_plant",
     "nucleartech:turbine",
+    "nucleartech:small_cooling_tower",
+    "nucleartech:large_cooling_tower",
     "nucleartech:oil_derrick",
     "nucleartech:pumpjack",
     "nucleartech:centrifuge",

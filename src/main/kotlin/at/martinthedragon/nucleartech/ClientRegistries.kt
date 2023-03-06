@@ -138,6 +138,7 @@ object ClientRegistries {
             registerBlockEntityRenderer(BlockEntityTypes.chemPlantBlockEntityType.get(), ::ChemPlantRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.centrifugeBlockEntityType.get(), ::CentrifugeRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.fatManBlockEntityType.get(), ::FatManRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.largeCoolingTowerBlockEntityType.get(), ::LargeCoolingTowerRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.launchPadBlockEntityType.get(), ::LaunchPadRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.littleBoyBlockEntityType.get(), ::LittleBoyRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.oilDerrickBlockEntityType.get(), ::OilDerrickRenderer)
@@ -155,6 +156,7 @@ object ClientRegistries {
             registerBlockEntityRenderer(BlockEntityTypes.rbmkReaSimRodBlockEntityType.get(), ::RBMKReaSimRodRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.rbmkReflectorBlockEntityType.get(), ::RBMKReflectorRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.rbmkRodBlockEntityType.get(), ::RBMKRodRenderer)
+            registerBlockEntityRenderer(BlockEntityTypes.smallCoolingTowerBlockEntityType.get(), ::SmallCoolingTowerRenderer)
             registerBlockEntityRenderer(BlockEntityTypes.steamPressHeadBlockEntityType.get(), ::SteamPressRenderer)
         }
 
@@ -277,6 +279,7 @@ object ClientRegistries {
     fun registerParticleProviders(event: ParticleFactoryRegisterEvent) {
         with(Minecraft.getInstance().particleEngine) {
             register(ModParticles.CONTRAIL.get(), ContrailParticle::Provider)
+            register(ModParticles.COOLING_TOWER_CLOUD.get(), CoolingTowerCloudParticle::Provider)
             register(ModParticles.MINI_NUKE_CLOUD.get(), MiniNukeCloudParticle::Provider)
             register(ModParticles.MINI_NUKE_CLOUD_BALEFIRE.get(), MiniNukeCloudParticle::Provider)
             register(ModParticles.MINI_NUKE_FLASH.get(), MiniNukeFlashParticle::Provider)
