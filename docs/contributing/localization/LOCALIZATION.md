@@ -11,7 +11,8 @@ Languages are supported with data generators by default. Completion rates get up
 
 - English (US): 100%
 - German (author's translation): 100%
-- Polish: 99.5%
+- Polish: 96.5%
+- Russian (no data-gen): ~92%
 
 #### Languages I'd like to support
 
@@ -21,20 +22,19 @@ These are roughly ranked by the amount of players per country (if you are wonder
 Note that these statistics vary from time to time.
 
 1. Chinese
-2. Russian
-3. French
-4. Italian
-5. Spanish
-6. Portuguese
-7. Czech
-8. Dutch
-9. Romanian
-10. Turkish
-11. Finnish
-12. Slovak
-13. Ukrainian
-14. Indian
-15. Indonesian
+2. French
+3. Italian
+4. Spanish
+5. Portuguese
+6. Czech
+7. Dutch
+8. Romanian
+9. Turkish
+10. Finnish
+11. Slovak
+12. Ukrainian
+13. Indian
+14. Indonesian
 
 ### Getting started with translating
 
