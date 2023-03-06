@@ -77,7 +77,7 @@ object RegistriesAndLifecycle {
         NTechBlocks
         FLUIDS.register(modEventBus)
         NTechFluids
-        FLUID_TRAIT_REGISTRY = FLUID_TRAITS.makeRegistry(FluidTrait::class.java, ::RegistryBuilder)
+        FLUID_TRAIT_REGISTRY = FLUID_TRAITS.makeRegistry(FluidTrait::class.java) { RegistryBuilder<FluidTrait>().disableSaving() }
         FLUID_TRAITS.register(modEventBus)
         NTechFluidTraits
         ITEMS.register(modEventBus)
@@ -94,7 +94,7 @@ object RegistriesAndLifecycle {
         RecipeSerializers
         ATTRIBUTES.register(modEventBus)
         Attributes
-        METEORITE_PLACER_REGISTRY = METEORITE_PLACERS.makeRegistry(MeteoritePlacerType::class.java, ::RegistryBuilder)
+        METEORITE_PLACER_REGISTRY = METEORITE_PLACERS.makeRegistry(MeteoritePlacerType::class.java) { RegistryBuilder<MeteoritePlacerType<*>>().disableSaving() }
         METEORITE_PLACERS.register(modEventBus)
         MeteoritePlacerType
         FEATURES.register(modEventBus)
