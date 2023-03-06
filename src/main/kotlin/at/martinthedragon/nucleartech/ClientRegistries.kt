@@ -76,6 +76,7 @@ object ClientRegistries {
         MenuScreens.register(MenuTypes.shredderMenu.get(), ::ShredderScreen)
         MenuScreens.register(MenuTypes.sirenMenu.get(), ::SirenScreen)
         MenuScreens.register(MenuTypes.steamPressMenu.get(), ::SteamPressScreen)
+        MenuScreens.register(MenuTypes.turbineMenu.get(), ::TurbineScreen)
     }
 
     @SubscribeEvent @JvmStatic

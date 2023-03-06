@@ -9,8 +9,8 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraftforge.fluids.FluidStack
 
-public interface AttachedFluidTrait {
-    public val trait: FluidTrait
+public interface AttachedFluidTrait<out T : FluidTrait> {
+    public val trait: T
     public val target: FluidTarget
     public val tag: CompoundTag
 

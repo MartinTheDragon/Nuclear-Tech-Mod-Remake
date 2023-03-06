@@ -16,6 +16,7 @@ object MenuTypes {
     val shredderMenu = MENUS.registerK("shredder") { IForgeMenuType.create(ShredderMenu::fromNetwork) }
     val assemblerMenu = MENUS.registerK("assembler") { IForgeMenuType.create(AssemblerMenu::fromNetwork) }
     val chemPlantMenu = MENUS.registerK("chem_plant") { IForgeMenuType.create(ChemPlantMenu::fromNetwork) }
+    val turbineMenu = MENUS.registerK("turbine") { IForgeMenuType.create(TurbineMenu::fromNetwork) }
     val oilWellMenu = MENUS.registerK("oil_well") { IForgeMenuType.create(OilWellMenu::fromNetwork) }
     val centrifugeMenu = MENUS.registerK("centrifuge") { IForgeMenuType.create(CentrifugeMenu::fromNetwork) }
     val rbmkRodMenu = MENUS.registerK("rbmk_rod") { IForgeMenuType.create(RBMKRodMenu::fromNetwork) }

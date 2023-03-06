@@ -19,10 +19,10 @@ import net.minecraftforge.fluids.FluidStack
 object FluidTraitManager : SimpleJsonResourceReloadListener(GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(), "${NuclearTech.MODID}_fluid_traits"), FluidTraitManager {
     @JvmStatic private val LOGGER = LogUtils.getLogger()
     internal var context: IContext = IContext.EMPTY
-    private var byTarget = emptyMap<AttachedFluidTrait.FluidTarget, List<AttachedFluidTrait>>()
+    private var byTarget = emptyMap<AttachedFluidTrait.FluidTarget, List<AttachedFluidTrait<*>>>()
 
     override fun apply(definitions: MutableMap<ResourceLocation, JsonElement>, resourceManager: ResourceManager, profiler: ProfilerFiller) {
-        byTarget = buildMap<_, MutableList<AttachedFluidTrait>> {
+        byTarget = buildMap<_, MutableList<AttachedFluidTrait<*>>> {
             for ((id, json) in definitions) {
                 if (id.path.startsWith('_')) continue
 

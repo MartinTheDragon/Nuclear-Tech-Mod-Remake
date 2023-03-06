@@ -13,13 +13,13 @@ import net.minecraft.world.level.material.Fluid
 import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.registries.ForgeRegistries
 
-class AttachedFluidTraitImpl private constructor(
-    override val trait: FluidTrait,
+class AttachedFluidTraitImpl<out T : FluidTrait> private constructor(
+    override val trait: T,
     override val target: AttachedFluidTrait.FluidTarget,
     override val tag: CompoundTag
-) : AttachedFluidTrait {
+) : AttachedFluidTrait<T> {
     companion object {
-        @JvmStatic fun fromJson(id: ResourceLocation, json: JsonObject): AttachedFluidTrait {
+        @JvmStatic fun fromJson(id: ResourceLocation, json: JsonObject): AttachedFluidTrait<*> {
             val trait = GsonHelper.getAsString(json, "trait", null) ?: throw JsonParseException("Fluid trait attachment $id doesn't define a fluid trait to attach")
             val parsedTrait = RegistriesAndLifecycle.FLUID_TRAIT_REGISTRY.get().getValue(ResourceLocation(trait)) ?: throw JsonParseException("Couldn't find fluid trait with id $trait")
 

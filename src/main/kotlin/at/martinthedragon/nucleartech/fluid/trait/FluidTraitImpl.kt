@@ -19,5 +19,5 @@ open class FluidTraitImpl(protected val styleModifier: Style) : ForgeRegistryEnt
             return _descriptionId!!
         }
 
-    override fun getName(data: AttachedFluidTrait): MutableComponent = TranslatableComponent(descriptionId).withStyle(styleModifier)
+    override fun getName(data: AttachedFluidTrait<*>): MutableComponent = TranslatableComponent(descriptionId).withStyle(styleModifier)
 }

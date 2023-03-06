@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech.menu.slots.data
 
+import at.martinthedragon.nucleartech.extensions.isRawFluidStackIdentical
 import at.martinthedragon.nucleartech.extensions.writeRawFluidStack
 import at.martinthedragon.nucleartech.fluid.MutableFluidTank
 import at.martinthedragon.nucleartech.menu.NTechContainerMenu
@@ -13,7 +14,7 @@ abstract class FluidStackDataSlot private constructor() : NTechDataSlot {
 
     override fun isDirty(): Boolean {
         val new = get()
-        val dirty = !new.isFluidEqual(value) || new.amount != value.amount
+        val dirty = !value.isRawFluidStackIdentical(new)
         if (dirty) value = new.copy()
         return dirty
     }

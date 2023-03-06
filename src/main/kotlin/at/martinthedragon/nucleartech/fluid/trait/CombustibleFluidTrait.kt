@@ -18,12 +18,12 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraftforge.fluids.FluidStack
 
 class CombustibleFluidTrait(styleModifier: Style) : FluidTraitImpl(styleModifier) {
-    fun getCombustionEnergy(data: AttachedFluidTrait) = data.tag.getInt("Energy")
-    fun getFuelGrade(data: AttachedFluidTrait) = FuelGrade.values().find { it.serializedName == data.tag.getString("FuelGrade") } ?: FuelGrade.Low
+    fun getCombustionEnergy(data: AttachedFluidTrait<*>) = data.tag.getInt("Energy")
+    fun getFuelGrade(data: AttachedFluidTrait<*>) = FuelGrade.values().find { it.serializedName == data.tag.getString("FuelGrade") } ?: FuelGrade.Low
 
     override val isTooltipFlagReactive = true
 
-    override fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait, tooltip: MutableList<Component>, flag: TooltipFlag) {
+    override fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait<*>, tooltip: MutableList<Component>, flag: TooltipFlag) {
         super.appendHoverText(level, fluid, data, tooltip, flag)
         if (flag.isAdvanced) {
             val energy = getCombustionEnergy(data)

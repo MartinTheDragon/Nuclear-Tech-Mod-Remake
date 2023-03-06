@@ -13,14 +13,14 @@ import net.minecraftforge.registries.IForgeRegistryEntry
 
 public interface FluidTrait : IForgeRegistryEntry<FluidTrait> {
     public val descriptionId: String
-    public fun getName(data: AttachedFluidTrait): MutableComponent
+    public fun getName(data: AttachedFluidTrait<*>): MutableComponent
 
     public val isTooltipFlagReactive: Boolean get() = false
-    public fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait, tooltip: MutableList<Component>, flag: TooltipFlag) {
+    public fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait<*>, tooltip: MutableList<Component>, flag: TooltipFlag) {
         tooltip += data.getDisplayName()
     }
 
-    public fun releaseFluidInWorld(level: Level, pos: BlockPos, fluid: FluidStack, data: AttachedFluidTrait) {}
+    public fun releaseFluidInWorld(level: Level, pos: BlockPos, fluid: FluidStack, data: AttachedFluidTrait<*>) {}
 
     public fun loadAdditionalData(json: JsonObject): CompoundTag = CompoundTag()
 }

@@ -16,11 +16,11 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraftforge.fluids.FluidStack
 
 class FlammableFluidTrait(styleModifier: Style) : FluidTraitImpl(styleModifier) {
-    fun getHeatEnergy(data: AttachedFluidTrait) = data.tag.getInt("HeatEnergy")
+    fun getHeatEnergy(data: AttachedFluidTrait<*>) = data.tag.getInt("HeatEnergy")
 
     override val isTooltipFlagReactive = true
 
-    override fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait, tooltip: MutableList<Component>, flag: TooltipFlag) {
+    override fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait<*>, tooltip: MutableList<Component>, flag: TooltipFlag) {
         super.appendHoverText(level, fluid, data, tooltip, flag)
         if (flag.isAdvanced) {
             val energy = getHeatEnergy(data)

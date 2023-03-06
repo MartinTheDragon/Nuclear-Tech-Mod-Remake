@@ -18,22 +18,22 @@ import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.registries.ForgeRegistries
 
 class HeatableFluidTrait(styleModifier: Style) : FluidTraitImpl(styleModifier) {
-    fun getEfficiency(data: AttachedFluidTrait, heatingType: HeatingType) = data.tag.getFloat(heatingType.serializedName)
-    fun getFluidAmountRequired(data: AttachedFluidTrait) = data.tag.getInt("Requires")
-    fun getFluidAmountProduced(data: AttachedFluidTrait) = data.tag.getInt("Produces")
+    fun getEfficiency(data: AttachedFluidTrait<*>, heatingType: HeatingType) = data.tag.getFloat(heatingType.serializedName)
+    fun getFluidAmountRequired(data: AttachedFluidTrait<*>) = data.tag.getInt("Requires")
+    fun getFluidAmountProduced(data: AttachedFluidTrait<*>) = data.tag.getInt("Produces")
 
-    fun getFluidHeatingTo(data: AttachedFluidTrait): Fluid? {
+    fun getFluidHeatingTo(data: AttachedFluidTrait<*>): Fluid? {
         val fluidString = data.tag.getString("HeatsTo")
         if (!ResourceLocation.isValidResourceLocation(fluidString)) return null
         val fluidLocation = ResourceLocation(fluidString)
         return if (ForgeRegistries.FLUIDS.containsKey(fluidLocation)) ForgeRegistries.FLUIDS.getValue(fluidLocation) else null
     }
 
-    fun getHeatEnergy(data: AttachedFluidTrait) = data.tag.getInt("HeatEnergy")
+    fun getHeatEnergy(data: AttachedFluidTrait<*>) = data.tag.getInt("HeatEnergy")
 
     override val isTooltipFlagReactive = true
 
-    override fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait, tooltip: MutableList<Component>, flag: TooltipFlag) {
+    override fun appendHoverText(level: BlockGetter?, fluid: FluidStack, data: AttachedFluidTrait<*>, tooltip: MutableList<Component>, flag: TooltipFlag) {
         for (heatingType in HeatingType.values()) {
             val efficiency = getEfficiency(data, heatingType)
             if (efficiency > 0F) {

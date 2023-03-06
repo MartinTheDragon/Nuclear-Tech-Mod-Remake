@@ -10,9 +10,9 @@ import net.minecraft.world.level.Level
 import net.minecraftforge.fluids.FluidStack
 
 class RadioactiveFluidTrait(styleModifier: Style) : FluidTraitImpl(styleModifier) {
-    fun getRadiation(data: AttachedFluidTrait) = data.tag.getFloat("Radiation")
+    fun getRadiation(data: AttachedFluidTrait<*>) = data.tag.getFloat("Radiation")
 
-    override fun releaseFluidInWorld(level: Level, pos: BlockPos, fluid: FluidStack, data: AttachedFluidTrait) {
+    override fun releaseFluidInWorld(level: Level, pos: BlockPos, fluid: FluidStack, data: AttachedFluidTrait<*>) {
         super.releaseFluidInWorld(level, pos, fluid, data)
         ChunkRadiation.incrementRadiation(level, pos, fluid.amount * getRadiation(data))
     }

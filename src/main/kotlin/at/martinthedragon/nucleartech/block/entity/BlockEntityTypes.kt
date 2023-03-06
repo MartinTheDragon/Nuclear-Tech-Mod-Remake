@@ -26,6 +26,7 @@ object BlockEntityTypes {
     val shredderBlockEntityType = BLOCK_ENTITIES.registerK("shredder") { createType(::ShredderBlockEntity, NTechBlocks.shredder.get()) }
     val assemblerBlockEntityType = BLOCK_ENTITIES.registerK("assembler") { createType(::AssemblerBlockEntity, NTechBlocks.assembler.get()) }
     val chemPlantBlockEntityType = BLOCK_ENTITIES.registerK("chem_plant") { createType(::ChemPlantBlockEntity, NTechBlocks.chemPlant.get()) }
+    val turbineBlockEntityType = BLOCK_ENTITIES.registerK("turbine") { createType(::TurbineBlockEntity, NTechBlocks.turbine.get()) }
     val oilDerrickBlockEntityType = BLOCK_ENTITIES.registerK("oil_derrick") { createType(::OilDerrickBlockEntity, NTechBlocks.oilDerrick.get()) }
     val pumpjackBlockEntityType = BLOCK_ENTITIES.registerK("pumpjack") { createType(::PumpjackBlockEntity, NTechBlocks.pumpjack.get()) }
     val centrifugeBlockEntityType = BLOCK_ENTITIES.registerK("centrifuge") { createType(::CentrifugeBlockEntity, NTechBlocks.centrifuge.get()) }

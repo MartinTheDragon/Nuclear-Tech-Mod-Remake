@@ -73,6 +73,7 @@ object LangKeys {
     val CONTAINER_SHREDDER = of(CAT_CONTAINER, "shredder")
     val CONTAINER_SIREN = of(CAT_CONTAINER, "siren")
     val CONTAINER_STEAM_PRESS = of(CAT_CONTAINER, "steam_press")
+    val CONTAINER_TURBINE = of(CAT_CONTAINER, "turbine")
 
     val DETONATOR_INVALID_BLOCK_ENTITY = of(CAT_DETONATOR, "invalid_block_entity")
     val DETONATOR_MISSING_COMPONENTS = of(CAT_DETONATOR, "missing_components")

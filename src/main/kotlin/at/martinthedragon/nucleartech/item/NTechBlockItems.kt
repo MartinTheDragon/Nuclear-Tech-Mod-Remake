@@ -195,6 +195,7 @@ object NTechBlockItems {
     val shredder = ITEMS.registerK("shredder") { BlockItem(NTechBlocks.shredder.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val assemblerPlacer = ITEMS.registerK("assembler") { SpecialModelMultiBlockPlacerItem(NTechBlocks.assembler.get(), ::AssemblerBlockEntity, AssemblerBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
     val chemPlantPlacer = ITEMS.registerK("chem_plant") { SpecialModelMultiBlockPlacerItem(NTechBlocks.chemPlant.get(), ::ChemPlantBlockEntity, ChemPlantBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
+    val turbine = ITEMS.registerK("turbine") { AutoTooltippedBlockItem(NTechBlocks.turbine.get(), Item.Properties().tab(CreativeTabs.Machines)) }
     val oilDerrickPlacer = ITEMS.registerK("oil_derrick") { SpecialModelMultiBlockPlacerItem(NTechBlocks.oilDerrick.get(), ::OilDerrickBlockEntity, OilDerrickBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
     val pumpjackPlacer = ITEMS.registerK("pumpjack") { PumpjackPlacerItem(NTechBlocks.pumpjack.get(), ::PumpjackBlockEntity, PumpjackBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }
     val centrifugePlacer = ITEMS.registerK("centrifuge") { SpecialModelMultiBlockPlacerItem(NTechBlocks.centrifuge.get(), ::CentrifugeBlockEntity, CentrifugeBlock::placeMultiBlock, Item.Properties().tab(CreativeTabs.Machines)) }

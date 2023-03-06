@@ -257,6 +257,7 @@ class BlockLoots : BlockLoot() {
         dropSelf(NTechBlocks.coatedUniversalFluidDuct.get())
         dropSelf(NTechBlocks.assembler.get())
         dropSelf(NTechBlocks.chemPlant.get())
+        dropSelf(NTechBlocks.turbine.get())
         dropSelf(NTechBlocks.oilDerrick.get())
         dropSelf(NTechBlocks.pumpjack.get())
         dropSelf(NTechBlocks.centrifuge.get())
