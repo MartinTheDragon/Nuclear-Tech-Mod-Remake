@@ -24,12 +24,15 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.IFluidHandler
 import kotlin.math.min
 
-abstract class AbstractCondenserBlockEntity(type: BlockEntityType<out AbstractCondenserBlockEntity>, pos: BlockPos, state: BlockState, inputCapacity: Int, outputCapacity: Int) : BaseMachineBlockEntity(type, pos, state), TickingServerBlockEntity {
+abstract class AbstractCondenserBlockEntity(type: BlockEntityType<out AbstractCondenserBlockEntity>, pos: BlockPos, state: BlockState, inputCapacity: Int, outputCapacity: Int) : BaseMachineBlockEntity(type, pos, state),
+    TickingServerBlockEntity, ExtendedMultiBlockInfo
+{
     override val shouldPlaySoundLoop = false
     override val soundLoopEvent get() = throw IllegalStateException("No sound loop for turbine")
     @Suppress("LeakingThis")
     override val soundLoopStateMachine = SoundLoopBlockEntity.NoopStateMachine(this)
 
+    override fun providesMenu(level: Level, pos: BlockPos, player: Player) = false
     override fun canOpen(player: Player) = false
     override fun createMenu(windowID: Int, inventory: Inventory) =
         throw UnsupportedOperationException("Condensers have no menu")
