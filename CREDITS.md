@@ -24,6 +24,11 @@ However, textures, models, sounds and other assets, or some algorithms, have mos
 - JulekJulas - Began translating
 - cakedon - Proofreading
 
+###### Russian
+
+- Freon - Began translating
+- SoBinary - Proofreading
+
 ### Contributors on the original project
 
 - rodolphito (explosion algorithms)
