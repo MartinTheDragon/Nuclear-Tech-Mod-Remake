@@ -1133,7 +1133,7 @@ class ItItLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.UPGRADE_INFO_CONSUMPTION, "Consumo: %s")
         add(LangKeys.UPGRADE_INFO_DELAY, "Ritardo: %s")
         add(LangKeys.UPGRADE_INFO_STACKS_TO, "Pile a Livello %s")
-        add(LangKeys.UPGRADE_NAME_AFTER_BURNER, "Postwre")
+        add(LangKeys.UPGRADE_NAME_AFTER_BURNER, "Postbruciatore")
         add(LangKeys.UPGRADE_NAME_OVERDRIVE, "Overdrive")
         add(LangKeys.UPGRADE_NAME_POWER_SAVING, "Salva Energia")
         add(LangKeys.UPGRADE_NAME_SPEED, "Velocità")
