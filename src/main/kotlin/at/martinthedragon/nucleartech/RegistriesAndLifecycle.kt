@@ -1,5 +1,6 @@
 package at.martinthedragon.nucleartech
 
+import at.martinthedragon.nucleartech.api.fluid.trait.FluidTrait
 import at.martinthedragon.nucleartech.block.NTechBlocks
 import at.martinthedragon.nucleartech.block.entity.BlockEntityTypes
 import at.martinthedragon.nucleartech.capability.contamination.ContaminationHandler
@@ -7,6 +8,7 @@ import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.NuclearCreeper
 import at.martinthedragon.nucleartech.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.fluid.NTechFluids
+import at.martinthedragon.nucleartech.fluid.trait.NTechFluidTraits
 import at.martinthedragon.nucleartech.hazard.HazardRegistry
 import at.martinthedragon.nucleartech.item.NTechBlockItems
 import at.martinthedragon.nucleartech.item.NTechItems
@@ -66,12 +68,18 @@ object RegistriesAndLifecycle {
     val METEORITE_PLACERS: DeferredRegister<MeteoritePlacerType<*>> = DeferredRegister.create(ntm("meteorite_placers"), NuclearTech.MODID)
     val METEORITE_PLACER_REGISTRY: Supplier<IForgeRegistry<MeteoritePlacerType<*>>>
 
+    val FLUID_TRAITS: DeferredRegister<FluidTrait> = DeferredRegister.create(ntm("fluid_traits"), NuclearTech.MODID)
+    val FLUID_TRAIT_REGISTRY: Supplier<IForgeRegistry<FluidTrait>>
+
     init {
         val modEventBus = FMLJavaModLoadingContext.get().modEventBus
         BLOCKS.register(modEventBus)
         NTechBlocks
         FLUIDS.register(modEventBus)
         NTechFluids
+        FLUID_TRAIT_REGISTRY = FLUID_TRAITS.makeRegistry(FluidTrait::class.java) { RegistryBuilder<FluidTrait>().disableSaving() }
+        FLUID_TRAITS.register(modEventBus)
+        NTechFluidTraits
         ITEMS.register(modEventBus)
         NTechBlockItems
         NTechItems
@@ -86,7 +94,7 @@ object RegistriesAndLifecycle {
         RecipeSerializers
         ATTRIBUTES.register(modEventBus)
         Attributes
-        METEORITE_PLACER_REGISTRY = METEORITE_PLACERS.makeRegistry(MeteoritePlacerType::class.java, ::RegistryBuilder)
+        METEORITE_PLACER_REGISTRY = METEORITE_PLACERS.makeRegistry(MeteoritePlacerType::class.java) { RegistryBuilder<MeteoritePlacerType<*>>().disableSaving() }
         METEORITE_PLACERS.register(modEventBus)
         MeteoritePlacerType
         FEATURES.register(modEventBus)

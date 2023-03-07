@@ -13,6 +13,7 @@ object LangKeys {
     const val CAT_DEVICE = "device"
     const val CAT_ENERGY = "energy"
     const val CAT_EXPLOSION_SPAWNER = "explosion_spawner"
+    const val CAT_FLUID_TRAIT = "fluid_trait"
     const val CAT_GEIGER = "geiger"
     const val CAT_HAZARD = "hazard"
     const val CAT_INFO = "info"
@@ -72,6 +73,7 @@ object LangKeys {
     val CONTAINER_SHREDDER = of(CAT_CONTAINER, "shredder")
     val CONTAINER_SIREN = of(CAT_CONTAINER, "siren")
     val CONTAINER_STEAM_PRESS = of(CAT_CONTAINER, "steam_press")
+    val CONTAINER_TURBINE = of(CAT_CONTAINER, "turbine")
 
     val DETONATOR_INVALID_BLOCK_ENTITY = of(CAT_DETONATOR, "invalid_block_entity")
     val DETONATOR_MISSING_COMPONENTS = of(CAT_DETONATOR, "missing_components")
@@ -102,6 +104,20 @@ object LangKeys {
     val EXPLOSION_SPAWNER_POSITION = of(CAT_EXPLOSION_SPAWNER, "position")
     val EXPLOSION_SPAWNER_STRENGTH = of(CAT_EXPLOSION_SPAWNER, "strength")
 
+    val FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE = of(CAT_FLUID_TRAIT, "combustible.fuel_grade") // 1 string
+    val FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_AERO = of(CAT_FLUID_TRAIT, "combustible.fuel_grade.aero")
+    val FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_GAS = of(CAT_FLUID_TRAIT, "combustible.fuel_grade.gas")
+    val FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_HIGH = of(CAT_FLUID_TRAIT, "combustible.fuel_grade.high")
+    val FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_LOW = of(CAT_FLUID_TRAIT, "combustible.fuel_grade.low")
+    val FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_MEDIUM = of(CAT_FLUID_TRAIT, "combustible.fuel_grade.medium")
+    val FLUID_TRAIT_COOLABLE_HEAT_EXCHANGER = of(CAT_FLUID_TRAIT, "coolable.heat_exchanger")
+    val FLUID_TRAIT_COOLABLE_TURBINE = of(CAT_FLUID_TRAIT, "coolable.turbine")
+    val FLUID_TRAIT_CORROSIVE_STRONG = of(CAT_FLUID_TRAIT, "corrosive.strong")
+    val FLUID_TRAIT_EFFICIENCY = of(CAT_FLUID_TRAIT, "coolable.efficiency") // 1 float
+    val FLUID_TRAIT_ENERGY_INFO = of(CAT_FLUID_TRAIT, "combustible.energy_info") // 1 string
+    val FLUID_TRAIT_HEATABLE_BOILER = of(CAT_FLUID_TRAIT, "heatable.boiler")
+    val FLUID_TRAIT_HEATABLE_HEAT_EXCHANGER = of(CAT_FLUID_TRAIT, "heatable.heat_exchanger")
+
     val GEIGER_CHUNK_RADIATION = of(CAT_GEIGER, "chunk_radiation")
     val GEIGER_PLAYER_IRRADIATION = of(CAT_GEIGER, "player_irradiation")
     val GEIGER_PLAYER_RESISTANCE = of(CAT_GEIGER, "player_resistance")
@@ -117,6 +133,7 @@ object LangKeys {
     val HAZARD_HYDROREACTIVE = of(CAT_HAZARD, "hydroreactive")
     val HAZARD_RADIATON = of(CAT_HAZARD, "radiation")
 
+    val INFO_HOLD_KEY_FOR_INFO = of(CAT_INFO, "hold_key_for_info") // 1 string
     val INFO_INPUT = of(CAT_INFO, "input")
     val INFO_INPUTS = of(CAT_INFO, "inputs")
     val INFO_ORE_CLUSTER = of(CAT_INFO, "ore_cluster")

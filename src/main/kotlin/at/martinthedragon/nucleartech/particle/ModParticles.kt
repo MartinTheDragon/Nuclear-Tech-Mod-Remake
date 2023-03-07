@@ -9,6 +9,7 @@ import net.minecraft.core.particles.SimpleParticleType
 
 object ModParticles {
     val CONTRAIL = PARTICLES.registerK("contrail") { createParticleType(false, ContrailParticleOptions.DESERIALIZER) { ContrailParticleOptions.CODEC }}
+    val COOLING_TOWER_CLOUD = PARTICLES.registerK("cooling_tower_cloud") { createParticleType(true, CoolingTowerCloudParticleOptions.Deserializer) { CoolingTowerCloudParticleOptions.Deserializer.CODEC }}
     val MINI_NUKE_CLOUD = PARTICLES.registerK("mini_nuke_cloud") { SimpleParticleType(true) }
     val MINI_NUKE_CLOUD_BALEFIRE = PARTICLES.registerK("mini_nuke_cloud_balefire") { SimpleParticleType(true) }
     val MINI_NUKE_FLASH = PARTICLES.registerK("mini_nuke_flash") { SimpleParticleType(true) }

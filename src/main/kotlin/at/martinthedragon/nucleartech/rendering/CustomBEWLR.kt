@@ -1,6 +1,7 @@
 package at.martinthedragon.nucleartech.rendering
 
 import at.martinthedragon.nucleartech.extensions.prependToPath
+import at.martinthedragon.nucleartech.extensions.removePrefixFromPath
 import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
 import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.item.NTechItems
@@ -54,7 +55,7 @@ object CustomBEWLR : BlockEntityWithoutLevelRenderer(Minecraft.getInstance().blo
             val level = Minecraft.getInstance().level
             if (level != null) {
                 val recipe = ChemPlantTemplateItem.getRecipeIDFromStack(stack)
-                val modelLocation = recipe?.prependToPath("chemistry_icons/") ?: NTechItems.chemTemplate.id
+                val modelLocation = recipe?.removePrefixFromPath("chem/")?.prependToPath("chemistry_icons/") ?: NTechItems.chemTemplate.id
                 val model = Minecraft.getInstance().modelManager.getModel(modelLocation)
                 val itemRenderer = Minecraft.getInstance().itemRenderer
                 matrix.translate(.5, .5, .5)

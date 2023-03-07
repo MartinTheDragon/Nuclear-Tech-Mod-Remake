@@ -28,6 +28,7 @@ object NTechFluids {
 
     private const val ABSOLUTE_ZERO = -273
 
+    val spentSteam = registerFluid("spent_steam", FluidAttributes.builder(ntm("fluid/spent_steam"), ntm("fluid/spent_steam")).gaseous().sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
     val steam = registerFluid("steam", FluidAttributes.builder(ntm("fluid/steam"), ntm("fluid/steam")).density(-100).gaseous().temperature(100 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
     val steamHot = registerFluid("hot_steam", FluidAttributes.builder(ntm("fluid/hot_steam"), ntm("fluid/hot_steam")).density(-10).gaseous().temperature(300 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)
     val steamSuperHot = registerFluid("super_hot_steam", FluidAttributes.builder(ntm("fluid/super_hot_steam"), ntm("fluid/super_hot_steam")).density(0).gaseous().temperature(450 - ABSOLUTE_ZERO).sound(null), GaseousFluid::Source, GaseousFluid::Flowing, ::BucketItem)

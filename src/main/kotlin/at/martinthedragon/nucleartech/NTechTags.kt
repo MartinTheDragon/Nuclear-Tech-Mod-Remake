@@ -544,9 +544,13 @@ object NTechTags {
         val CORIUM = forgeTag("corium")
         val CRUDE_OIL = forgeTag("crude_oil")
         val GAS = forgeTag("gas")
+        val HOT_STEAM = tag("hot_steam")
         val NATURAL_GAS = forgeTag("natural_gas")
         val OIL = forgeTag("oil")
+        val SPENT_STEAM = forgeTag("spent_steam")
         val STEAM = forgeTag("steam")
+        val SUPER_HOT_STEAM = tag("super_hot_steam")
+        val ULTRA_HOT_STEAM = tag("ultra_hot_steam")
         val URANIUM_HEXAFLUORIDE = forgeTag("uranium_hexafluoride")
         val VOLCANIC_LAVA = forgeTag("volcanic_lava")
     }

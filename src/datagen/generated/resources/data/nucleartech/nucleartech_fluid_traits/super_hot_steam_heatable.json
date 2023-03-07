@@ -1,0 +1,12 @@
+{
+  "trait": "nucleartech:heatable",
+  "tag": "#nucleartech:super_hot_steam",
+  "data": {
+    "heats_to": "nucleartech:ultra_hot_steam",
+    "requires": 10,
+    "produces": 1,
+    "heat_energy": 120,
+    "boiler": 1.0,
+    "heat_exchanger": 0.25
+  }
+}

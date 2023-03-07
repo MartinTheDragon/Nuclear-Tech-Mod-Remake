@@ -7,9 +7,11 @@ import at.martinthedragon.nucleartech.api.item.TickingArmor
 import at.martinthedragon.nucleartech.capability.contamination.EntityContaminationHandler
 import at.martinthedragon.nucleartech.extensions.*
 import at.martinthedragon.nucleartech.fallout.FalloutTransformationManager
+import at.martinthedragon.nucleartech.fluid.trait.FluidTraitManager
 import at.martinthedragon.nucleartech.hazard.EntityContaminationEffects
 import at.martinthedragon.nucleartech.hazard.HazardSystem
 import at.martinthedragon.nucleartech.hazard.HazmatValues
+import at.martinthedragon.nucleartech.item.IncreasedRangeItem
 import at.martinthedragon.nucleartech.world.ChunkRadiation
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
@@ -26,6 +28,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent
 import net.minecraftforge.event.entity.EntityLeaveWorldEvent
 import net.minecraftforge.event.entity.living.*
 import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent
+import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import net.minecraftforge.eventbus.api.Event
 import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -37,7 +40,9 @@ import kotlin.math.roundToInt
 object EventSubscribers {
     @SubscribeEvent @JvmStatic
     fun addServerResources(event: AddReloadListenerEvent) {
+        val context = event.conditionContext
         event.addListener(FalloutTransformationManager)
+        event.addListener(FluidTraitManager).also { FluidTraitManager.context = context }
     }
 
     @SubscribeEvent @JvmStatic
@@ -107,5 +112,11 @@ object EventSubscribers {
     @SubscribeEvent @JvmStatic
     fun modifyItemAttributes(event: ItemAttributeModifierEvent) {
         HazmatValues.addItemStackAttributes(event)
+        IncreasedRangeItem.addItemStackAttributes(event)
+    }
+
+    @SubscribeEvent @JvmStatic
+    fun onPlayerLeftClick(event: PlayerInteractEvent.LeftClickBlock) {
+        event.isCanceled = event.isCanceled || !IncreasedRangeItem.checkCanBreakWithItem(event.itemStack, event.hand)
     }
 }

@@ -1,0 +1,7 @@
+{
+  "trait": "nucleartech:radioactive",
+  "tag": "#forge:uranium_hexafluoride",
+  "data": {
+    "radiation": 0.2
+  }
+}

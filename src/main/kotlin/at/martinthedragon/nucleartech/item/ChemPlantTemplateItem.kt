@@ -32,7 +32,7 @@ import java.util.function.Consumer
 import kotlin.math.floor
 
 class ChemPlantTemplateItem(properties: Properties) : Item(properties) {
-    override fun getName(stack: ItemStack): Component = TranslatableComponent(getDescriptionId(stack), Minecraft.getInstance().level?.use { getRecipeFromStack(stack, it.recipeManager)?.recipeID }?.let { TranslatableComponent("${LangKeys.CAT_CHEMISTRY}.${it.namespace}.${it.path}") } ?: "N/A")
+    override fun getName(stack: ItemStack): Component = TranslatableComponent(getDescriptionId(stack), Minecraft.getInstance().level?.use { getRecipeFromStack(stack, it.recipeManager)?.recipeID }?.let { TranslatableComponent("${LangKeys.CAT_CHEMISTRY}.${it.namespace}.${it.path.removePrefix("chem/")}") } ?: "N/A")
 
     override fun fillItemCategory(tab: CreativeModeTab, items: NonNullList<ItemStack>) {
         val recipeManager = DistExecutor.safeRunForDist({ SafeSupplier(::getRecipeManagerClient) }) { SafeSupplier(::getRecipeManagerServer) } ?: return

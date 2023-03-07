@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 
-open class SpecialModelMultiBlockPlacerItem(block: Block, blockEntityFunc: (BlockPos, BlockState) -> BlockEntity, val placerFunc: (MultiBlockPlacer) -> Unit, properties: Properties) : SpecialModelBlockItem(block, blockEntityFunc, properties) {
+open class SpecialModelMultiBlockPlacerItem(block: Block, blockEntityFunc: (BlockPos, BlockState) -> BlockEntity, val placerFunc: (MultiBlockPlacer) -> Unit, properties: Properties, override val additionalRange: Float = 0F) : SpecialModelBlockItem(block, blockEntityFunc, properties), IncreasedRangeItem {
     override fun canPlace(context: BlockPlaceContext, state: BlockState): Boolean {
         return super.canPlace(context, state) && RotatedMultiBlockPlacer(context.horizontalDirection.opposite).apply(placerFunc).canPlaceAt(context.level, context.clickedPos)
     }

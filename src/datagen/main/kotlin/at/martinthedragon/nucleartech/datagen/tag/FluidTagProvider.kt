@@ -17,9 +17,13 @@ class FluidTagProvider(dataGenerator: DataGenerator, existingFileHelper: Existin
         tag(CORIUM).add(NTechFluids.corium.source, NTechFluids.corium.flowing)
         tag(CRUDE_OIL).add(NTechFluids.oil.source, NTechFluids.oil.flowing)
         tag(GAS).addTag(NATURAL_GAS)
+        tag(HOT_STEAM).add(NTechFluids.steamHot.source, NTechFluids.steamHot.flowing)
         tag(NATURAL_GAS).add(NTechFluids.gas.source, NTechFluids.gas.flowing)
         tag(OIL).addTag(CRUDE_OIL)
+        tag(SPENT_STEAM).add(NTechFluids.spentSteam.source, NTechFluids.spentSteam.flowing)
         tag(STEAM).add(NTechFluids.steam.source, NTechFluids.steam.flowing)
+        tag(SUPER_HOT_STEAM).add(NTechFluids.steamSuperHot.source, NTechFluids.steamSuperHot.flowing)
+        tag(ULTRA_HOT_STEAM).add(NTechFluids.steamUltraHot.source, NTechFluids.steamUltraHot.flowing)
         tag(URANIUM_HEXAFLUORIDE).add(NTechFluids.uraniumHexafluoride.source, NTechFluids.uraniumHexafluoride.flowing)
         tag(VOLCANIC_LAVA).add(NTechFluids.volcanicLava.source, NTechFluids.volcanicLava.flowing)
     }

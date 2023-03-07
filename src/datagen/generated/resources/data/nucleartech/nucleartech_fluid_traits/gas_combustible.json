@@ -1,0 +1,8 @@
+{
+  "trait": "nucleartech:combustible",
+  "tag": "#forge:gas",
+  "data": {
+    "energy": 62500,
+    "grade": "gas"
+  }
+}

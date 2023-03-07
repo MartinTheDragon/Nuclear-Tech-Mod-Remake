@@ -2,6 +2,7 @@ package at.martinthedragon.nucleartech.block
 
 import at.martinthedragon.nucleartech.api.block.multi.MultiBlockPlacer
 import at.martinthedragon.nucleartech.block.entity.BaseMachineBlockEntity
+import at.martinthedragon.nucleartech.block.entity.ExtendedMultiBlockInfo
 import at.martinthedragon.nucleartech.block.multi.MultiBlockPart
 import at.martinthedragon.nucleartech.block.multi.RotatedMultiBlockPlacer
 import at.martinthedragon.nucleartech.extensions.ifPresentInline
@@ -146,12 +147,11 @@ inline fun <reified T, reified P> openMultiBlockMenu(level: Level, pos: BlockPos
     where T : MenuProvider,
           P : MultiBlockPart.MultiBlockPartBlockEntity
 {
-    if (!level.isClientSide) {
-        val part = level.getBlockEntity(pos)
-        if (part is P) {
-            val blockEntity = level.getBlockEntity(part.core)
-            if (blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, part.core)
-        }
+    val part = level.getBlockEntity(pos)
+    if (part is P) {
+        val blockEntity = level.getBlockEntity(part.core)
+        if (blockEntity is ExtendedMultiBlockInfo && !blockEntity.providesMenu(level, pos, player)) return InteractionResult.PASS
+        if (!level.isClientSide && blockEntity is T) NetworkHooks.openGui(player as ServerPlayer, blockEntity, part.core)
     }
     return InteractionResult.sidedSuccess(level.isClientSide)
 }

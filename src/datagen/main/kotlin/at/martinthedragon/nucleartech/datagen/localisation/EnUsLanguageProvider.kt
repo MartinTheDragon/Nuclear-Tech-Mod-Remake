@@ -9,6 +9,7 @@ import at.martinthedragon.nucleartech.datagen.NuclearLanguageProviders
 import at.martinthedragon.nucleartech.entity.EntityTypes
 import at.martinthedragon.nucleartech.entity.attribute.Attributes
 import at.martinthedragon.nucleartech.fluid.NTechFluids
+import at.martinthedragon.nucleartech.fluid.trait.NTechFluidTraits
 import at.martinthedragon.nucleartech.item.NTechItems
 import at.martinthedragon.nucleartech.menu.MenuTypes
 import at.martinthedragon.nucleartech.world.DamageSources
@@ -154,6 +155,10 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.shredder, "Shredder")
         addBlock(NTechBlocks.assembler, "Assembler")
         addBlock(NTechBlocks.chemPlant, "Chemical Plant")
+        addBlock(NTechBlocks.turbine, "Steam Turbine")
+        addBlock(NTechBlocks.smallCoolingTower, "Auxiliary Cooling Tower")
+        addBlock(NTechBlocks.largeCoolingTower, "Cooling Tower")
+        addBlockDesc(NTechBlocks.turbine, "Efficiency: 85%%")
         addBlock(NTechBlocks.oilDerrick, "Oil Derrick")
         addBlock(NTechBlocks.pumpjack, "Pumpjack")
         addBlockDesc11(NTechBlocks.pumpjack, "The real mosquito")
@@ -208,6 +213,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addBlock(NTechBlocks.genericMultiBlockPort, "Multi Block Structure Port")
         addBlock(NTechBlocks.oilPipe, "Oil Pipe")
 
+        addBlock(NTechFluids.spentSteam.block, "Low-Pressure Steam")
         addBlock(NTechFluids.steam.block, "Steam")
         addBlock(NTechFluids.steamHot.block, "Dense Steam")
         addBlock(NTechFluids.steamSuperHot.block, "Super Dense Steam")
@@ -867,6 +873,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addItem(NTechItems.polaroid, "The Polaroid")
 
+        addItem(NTechFluids.spentSteam.bucket, "Low-Pressure Steam Bucket")
         addItem(NTechFluids.steam.bucket, "Steam Bucket")
         addItem(NTechFluids.steamHot.bucket, "Dense Steam Bucket")
         addItem(NTechFluids.steamSuperHot.bucket, "Super Dense Steam Bucket")
@@ -916,6 +923,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addMenuType(MenuTypes.shredderMenu, "Shredder")
         addMenuType(MenuTypes.assemblerMenu, "Assembler")
         addMenuType(MenuTypes.chemPlantMenu, "Chemical Plant")
+        addMenuType(MenuTypes.turbineMenu, "Steam Turbine")
         addMenuType(MenuTypes.oilWellMenu, "Oil Well")
         add(LangKeys.CONTAINER_OIL_DERRICK, "Oil Derrick")
         add(LangKeys.CONTAINER_PUMPJACK, "Pumpjack")
@@ -941,6 +949,20 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addDamageSource(DamageSources.shrapnel, "%1\$s was ragged by a shrapnel", "%1\$s was ragged by a shrapnel whilst fighting %2\$s")
 
         addAttribute(Attributes.RADIATION_RESISTANCE, "Radiation Resistance")
+
+        addFluidTrait(NTechFluidTraits.liquid, "Liquid")
+        addFluidTrait(NTechFluidTraits.gaseous, "Gaseous")
+        addFluidTrait(NTechFluidTraits.gaseousRoomTemp, "Gasoues at Room Temperature")
+        addFluidTrait(NTechFluidTraits.plasma, "Plasma")
+        addFluidTrait(NTechFluidTraits.antimatter, "Antimatter")
+        addFluidTrait(NTechFluidTraits.delicious, "Delicious")
+        addFluidTrait(NTechFluidTraits.combustible, "Combustible")
+        addFluidTrait(NTechFluidTraits.coolable, "Coolable")
+        addFluidTrait(NTechFluidTraits.corrosive, "Corrosive")
+        addFluidTrait(NTechFluidTraits.flammable, "Flammable")
+        addFluidTrait(NTechFluidTraits.heatable, "Heatable")
+        addFluidTrait(NTechFluidTraits.radioactive, "Radioactive")
+        addFluidTrait(NTechFluidTraits.toxic, "Toxic Fumes")
 
         add(LangKeys.ARMOR_BLAST_PROTECTION, "Damage modifier of %s against explosions")
         add(LangKeys.ARMOR_CUSTOM_GEIGER, "Built-In Geiger Counter HUD")
@@ -994,6 +1016,20 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.EXPLOSION_SPAWNER_POSITION, "Position")
         add(LangKeys.EXPLOSION_SPAWNER_STRENGTH, "Strength")
 
+        add(LangKeys.FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE, "Fuel grade: %s")
+        add(LangKeys.FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_AERO, "Aviation")
+        add(LangKeys.FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_GAS, "Gaseous")
+        add(LangKeys.FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_HIGH, "High")
+        add(LangKeys.FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_LOW, "Low")
+        add(LangKeys.FLUID_TRAIT_COMBUSTIBLE_FUEL_GRADE_MEDIUM, "Medium")
+        add(LangKeys.FLUID_TRAIT_COOLABLE_HEAT_EXCHANGER, "Coolable")
+        add(LangKeys.FLUID_TRAIT_COOLABLE_TURBINE, "Turbine Steam")
+        add(LangKeys.FLUID_TRAIT_CORROSIVE_STRONG, "Strongly Corrosive")
+        add(LangKeys.FLUID_TRAIT_EFFICIENCY, "Efficiency: %s%%")
+        add(LangKeys.FLUID_TRAIT_ENERGY_INFO, "Provides %s per bucket")
+        add(LangKeys.FLUID_TRAIT_HEATABLE_BOILER, "Boilable")
+        add(LangKeys.FLUID_TRAIT_HEATABLE_HEAT_EXCHANGER, "Heatable")
+
         add(LangKeys.GEIGER_CHUNK_RADIATION, "Current chunk radiation:")
         add(LangKeys.GEIGER_PLAYER_IRRADIATION, "Player irradiation:")
         add(LangKeys.GEIGER_PLAYER_RESISTANCE, "Player resistance:")
@@ -1009,6 +1045,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.HAZARD_HYDROREACTIVE, "[Hydroreactive]")
         add(LangKeys.HAZARD_RADIATON, "[Radioactive]")
 
+        add(LangKeys.INFO_HOLD_KEY_FOR_INFO, "Hold %s to display more info")
         add(LangKeys.INFO_INPUT, "Input:")
         add(LangKeys.INFO_INPUTS, "Inputs:")
         add(LangKeys.INFO_ORE_CLUSTER, "Drops only when broken by a player")

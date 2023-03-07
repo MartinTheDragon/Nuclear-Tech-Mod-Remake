@@ -1,0 +1,12 @@
+{
+  "trait": "nucleartech:coolable",
+  "tag": "#forge:steam",
+  "data": {
+    "cools_to": "nucleartech:spent_steam",
+    "requires": 100,
+    "produces": 1,
+    "heat_energy": 200,
+    "turbine": 1.0,
+    "heat_exchanger": 0.5
+  }
+}
