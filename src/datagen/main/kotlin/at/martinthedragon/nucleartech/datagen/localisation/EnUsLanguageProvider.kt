@@ -952,7 +952,7 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addFluidTrait(NTechFluidTraits.liquid, "Liquid")
         addFluidTrait(NTechFluidTraits.gaseous, "Gaseous")
-        addFluidTrait(NTechFluidTraits.gaseousRoomTemp, "Gasoues at Room Temperature")
+        addFluidTrait(NTechFluidTraits.gaseousRoomTemp, "Gaseous at Room Temperature")
         addFluidTrait(NTechFluidTraits.plasma, "Plasma")
         addFluidTrait(NTechFluidTraits.antimatter, "Antimatter")
         addFluidTrait(NTechFluidTraits.delicious, "Delicious")
