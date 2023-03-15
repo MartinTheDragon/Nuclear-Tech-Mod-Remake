@@ -3,12 +3,10 @@ package at.martinthedragon.nucleartech.menu
 import at.martinthedragon.nucleartech.api.menu.slot.ResultSlot
 import at.martinthedragon.nucleartech.block.entity.AssemblerBlockEntity
 import at.martinthedragon.nucleartech.item.AssemblyTemplateItem
-import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
@@ -28,34 +26,11 @@ class AssemblerMenu(
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
     }
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index == 17) {
-                if (!moveItemStackTo(itemStack, 18, slots.size, true)) return ItemStack.EMPTY
-                slot.onQuickCraft(itemStack, returnStack)
-            } else if (index !in 0..16) {
-                var successful = false
-                when {
-                    itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
-                    itemStack.item is AssemblyTemplateItem && moveItemStackTo(itemStack, 4, 5, false) -> successful = true
-                    MachineUpgradeItem.isValidFor(blockEntity, itemStack) && moveItemStackTo(itemStack, 1, 4, false) -> successful = true
-                    moveItemStackTo(itemStack, 5, 17, false) -> successful = true
-                }
-                if (!successful && !tryMoveInPlayerInventory(index, 18, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 18, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack = quickMoveStackBoilerplate(player, index, 18, intArrayOf(17)) {
+        0 check supportsEnergyCondition()
+        4 check itemIsInstanceCondition<AssemblyTemplateItem>()
+        1..3 check compatibleMachineUpgradeCondition(blockEntity)
+        5..16
     }
 
     companion object {

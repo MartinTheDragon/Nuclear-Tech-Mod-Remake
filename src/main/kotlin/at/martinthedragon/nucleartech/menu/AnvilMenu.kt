@@ -84,28 +84,9 @@ class AnvilMenu(windowID: Int, val playerInventory: Inventory, val access: Conta
         if (!level.getBlockState(pos).`is`(NTechTags.Blocks.ANVIL)) false else player.distanceToSqr(pos.toVec3Middle()) <= 64
     }, true)
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index == 2) {
-                if (!moveItemStackTo(itemStack, 3, slots.size, true)) return ItemStack.EMPTY
-                slot.onQuickCraft(itemStack, returnStack)
-            } else if (index != 0 && index != 1) {
-                val quickMoveSlot = quickMoveToWhichSlot(itemStack, slots.first().hasItem())
-                if (!moveItemStackTo(itemStack, quickMoveSlot, 2, false) && !tryMoveInPlayerInventory(index, 3, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 3, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack = quickMoveStackBoilerplate(player, index, 3, intArrayOf(2)) {
+        val slot = quickMoveToWhichSlot(itemStack, slots.first().hasItem())
+        slot..slot
     }
 
     private fun quickMoveToWhichSlot(stack: ItemStack, firstSlotHasItem: Boolean): Int {

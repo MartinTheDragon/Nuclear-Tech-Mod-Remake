@@ -24,25 +24,8 @@ class LittleBoyMenu(
         addDataSlots(data)
     }
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index !in 0..4) {
-                if (!moveItemStackTo(itemStack, 0, 5, false) && !tryMoveInPlayerInventory(index, 5, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 5, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack = quickMoveStackBoilerplate(player, index, 5, intArrayOf()) {
+        0..4
     }
 
     fun getBombCompletion() = data[0]

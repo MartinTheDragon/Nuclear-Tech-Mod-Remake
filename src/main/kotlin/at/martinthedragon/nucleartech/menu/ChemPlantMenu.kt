@@ -3,17 +3,11 @@ package at.martinthedragon.nucleartech.menu
 import at.martinthedragon.nucleartech.api.menu.slot.OutputSlot
 import at.martinthedragon.nucleartech.api.menu.slot.ResultSlot
 import at.martinthedragon.nucleartech.block.entity.ChemPlantBlockEntity
-import at.martinthedragon.nucleartech.extensions.ifPresentInline
 import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
-import at.martinthedragon.nucleartech.item.upgrades.MachineUpgradeItem
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraftforge.energy.CapabilityEnergy
-import net.minecraftforge.fluids.FluidStack
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler
-import net.minecraftforge.fluids.capability.IFluidHandler
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
@@ -57,46 +51,15 @@ class ChemPlantMenu(
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
     }
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index in 5..8 || index == 10 || index == 12 || index == 18 || index == 20) {
-                if (!moveItemStackTo(itemStack, 21, slots.size, true)) return ItemStack.EMPTY
-                slot.onQuickCraft(itemStack, returnStack)
-            } else if (index !in 0..19) {
-                var successful = false
-                when {
-                    itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 0, 1, false) -> successful = true
-                    itemStack.item is ChemPlantTemplateItem && moveItemStackTo(itemStack, 4, 5, false) -> successful = true
-                    itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent -> itemStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).ifPresentInline {
-                        when { // TODO maybe extract?
-                            !it.drain(FluidStack(blockEntity.inputTank1.fluid.rawFluid, 1), IFluidHandler.FluidAction.SIMULATE).isEmpty && moveItemStackTo(itemStack, 17, 18, false) -> successful = true
-                            !it.drain(FluidStack(blockEntity.inputTank2.fluid.rawFluid, 1), IFluidHandler.FluidAction.SIMULATE).isEmpty && moveItemStackTo(itemStack, 18, 19, false) -> successful = true
-                            it.fill(FluidStack(blockEntity.outputTank1.fluid.rawFluid, 1), IFluidHandler.FluidAction.SIMULATE) > 0 && moveItemStackTo(itemStack, 9, 10, false) -> successful = true
-                            it.fill(FluidStack(blockEntity.outputTank2.fluid.rawFluid, 1), IFluidHandler.FluidAction.SIMULATE) > 0 && moveItemStackTo(itemStack, 10, 11, false) -> successful = true
-                            !it.drain(FluidStack(blockEntity.inputTank1.fluid.rawFluid, blockEntity.inputTank1.capacity), IFluidHandler.FluidAction.SIMULATE).isEmpty && moveItemStackTo(itemStack, 17, 18, false) -> successful = true
-                            !it.drain(FluidStack(blockEntity.inputTank2.fluid.rawFluid, blockEntity.inputTank2.capacity), IFluidHandler.FluidAction.SIMULATE).isEmpty && moveItemStackTo(itemStack, 18, 19, false) -> successful = true
-                            it.fill(FluidStack(blockEntity.outputTank1.fluid.rawFluid, blockEntity.outputTank1.capacity), IFluidHandler.FluidAction.SIMULATE) > 0 && moveItemStackTo(itemStack, 9, 10, false) -> successful = true
-                            it.fill(FluidStack(blockEntity.outputTank2.fluid.rawFluid, blockEntity.outputTank2.capacity), IFluidHandler.FluidAction.SIMULATE) > 0 && moveItemStackTo(itemStack, 10, 11, false) -> successful = true
-                        }
-                    }
-                    MachineUpgradeItem.isValidFor(blockEntity, itemStack) && moveItemStackTo(itemStack, 1, 4, false) -> successful = true
-                    moveItemStackTo(itemStack, 13, 17, false) -> successful = true
-                }
-                if (!successful && !tryMoveInPlayerInventory(index, 21, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 21, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack = quickMoveStackBoilerplate(player, index, 21, intArrayOf(5, 6, 7, 8, 11, 12, 19, 20)) {
+        0 check supportsEnergyCondition()
+        4 check itemIsInstanceCondition<ChemPlantTemplateItem>()
+        1..3 check compatibleMachineUpgradeCondition(blockEntity)
+        9 check canDrainTankCondition(blockEntity.outputTank1)
+        10 check canDrainTankCondition(blockEntity.outputTank2)
+        17 check canFillTankCondition(blockEntity.inputTank1)
+        18 check canFillTankCondition(blockEntity.inputTank2)
+        13..16
     }
 
     companion object {

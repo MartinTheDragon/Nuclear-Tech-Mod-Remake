@@ -7,7 +7,6 @@ import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
-import net.minecraftforge.energy.CapabilityEnergy
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
@@ -31,33 +30,10 @@ class ShredderMenu(
         addPlayerInventory(this::addSlot, playerInventory, 8, 140)
     }
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index in 12..29) {
-                if (!moveItemStackTo(itemStack, 30, slots.size, true)) return ItemStack.EMPTY
-                slot.onQuickCraft(itemStack, returnStack)
-            } else if (index !in 0..11) {
-                var successful = false
-                when {
-                    itemStack.getCapability(CapabilityEnergy.ENERGY).isPresent && moveItemStackTo(itemStack, 9, 10, false) -> successful = true
-                    itemStack.item is ShredderBladeItem && moveItemStackTo(itemStack, 10, 12, false) -> successful = true
-                    moveItemStackTo(itemStack, 0, 9, false) -> successful = true
-                }
-                if (!successful && !tryMoveInPlayerInventory(index, 30, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 30, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack  = quickMoveStackBoilerplate(player, index, 30, (12..29).toSet().toIntArray()) {
+        9 check supportsEnergyCondition()
+        10..11 check itemIsInstanceCondition<ShredderBladeItem>()
+        0..8
     }
 
     fun getLeftBladeState(): Int = computeBladeState(10)
