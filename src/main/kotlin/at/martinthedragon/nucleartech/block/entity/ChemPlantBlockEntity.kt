@@ -9,6 +9,7 @@ import at.martinthedragon.nucleartech.energy.transferEnergy
 import at.martinthedragon.nucleartech.extensions.acceptFluids
 import at.martinthedragon.nucleartech.extensions.subView
 import at.martinthedragon.nucleartech.extensions.subViewWithFluids
+import at.martinthedragon.nucleartech.extensions.writeToNBTRaw
 import at.martinthedragon.nucleartech.fluid.*
 import at.martinthedragon.nucleartech.item.ChemPlantTemplateItem
 import at.martinthedragon.nucleartech.item.insertAllItemsStacked
@@ -67,7 +68,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
     override fun inventoryChanged(slot: Int) {
         super.inventoryChanged(slot)
         checkChangedUpgradeSlot(slot)
-        if (slot == 4) {
+        if (!isClientSide() && slot == 4) {
             checkCanProgress()
             setupTanks()
         }
@@ -131,6 +132,7 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
         if (inputTank2.isEmpty) inputTank2.fluid = FluidStack(recipe.inputFluid2.fluid, 0)
         if (outputTank1.isEmpty) outputTank1.fluid = FluidStack(recipe.outputFluid1.fluid, 0)
         if (outputTank2.isEmpty) outputTank2.fluid = FluidStack(recipe.outputFluid2.fluid, 0)
+        sendContinuousUpdatePacket()
     }
 
     override fun createMenu(windowID: Int, inventory: Inventory) = ChemPlantMenu(windowID, inventory, this)
@@ -251,8 +253,8 @@ class ChemPlantBlockEntity(pos: BlockPos, state: BlockState) : RecipeMachineBloc
     }
 
     override fun getContinuousUpdateTag() = super.getContinuousUpdateTag().apply {
-        put("Tank1", inputTank1.writeToNBT(CompoundTag()))
-        put("Tank2", inputTank2.writeToNBT(CompoundTag()))
+        put("Tank1", inputTank1.writeToNBTRaw(CompoundTag()))
+        put("Tank2", inputTank2.writeToNBTRaw(CompoundTag()))
     }
 
     override fun handleContinuousUpdatePacket(tag: CompoundTag) {
