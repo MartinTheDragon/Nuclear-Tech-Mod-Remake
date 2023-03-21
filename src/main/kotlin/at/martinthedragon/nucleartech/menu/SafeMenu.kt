@@ -20,24 +20,8 @@ class SafeMenu(windowId: Int, playerInventory: Inventory, blockEntity: SafeBlock
         addPlayerInventory(this::addSlot, playerInventory, 8, 86)
     }
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index !in 0..14) {
-                if (!moveItemStackTo(itemStack, 0, 15, false) && !tryMoveInPlayerInventory(index, 15, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 15, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack = quickMoveStackBoilerplate(player, index, 15, intArrayOf()) {
+        0..14
     }
 
     override fun removed(player: Player) {

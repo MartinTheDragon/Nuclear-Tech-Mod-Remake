@@ -18,26 +18,9 @@ class SirenMenu(windowId: Int, playerInventory: Inventory, blockEntity: SirenBlo
         addPlayerInventory(this::addSlot, playerInventory, 8, 84)
     }
 
-    override fun quickMoveStack(player: Player, index: Int): ItemStack {
-        var returnStack = ItemStack.EMPTY
-        val slot = slots[index]
-        if (slot.hasItem()) {
-            val itemStack = slot.item
-            returnStack = itemStack.copy()
-            if (index != 0) {
-                var successful = false
-                if (itemStack.item is SirenTrackItem && moveItemStackTo(itemStack, 0, 1, false)) successful = true
-                if (!successful && !tryMoveInPlayerInventory(index, 1, itemStack)) return ItemStack.EMPTY
-            } else if (!moveItemStackTo(itemStack, 1, slots.size, false)) return ItemStack.EMPTY
-
-            if (itemStack.isEmpty) slot.set(ItemStack.EMPTY)
-            else slot.setChanged()
-
-            if (itemStack.count == returnStack.count) return ItemStack.EMPTY
-
-            slot.onTake(player, itemStack)
-        }
-        return returnStack
+    override fun quickMoveStack(player: Player, index: Int): ItemStack = quickMoveStackBoilerplate(player, index, 1, intArrayOf()) {
+        0 check itemIsInstanceCondition<SirenTrackItem>()
+        null
     }
 
     override fun removed(player: Player) {
