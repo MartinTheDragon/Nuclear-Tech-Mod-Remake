@@ -580,9 +580,11 @@ class EnUsLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.tinyNuclearWaste, "Tiny Nuclear Waste")
 
         addItem(NTechItems.crystalHorn, "Crystal Horn")
-        addItemDesc(NTechItems.crystalHorn, "An actual horn.")
+        addItemDesc(NTechItems.crystalHorn, "Not an actual horn.")
+        addItemDesc11(NTechItems.crystalHorn, "An actual horn.")
         addItem(NTechItems.charredCrystal, "Charred Crystal")
-        addItemDesc(NTechItems.charredCrystal, "Also a real horn. Weird, right?")
+        addItemDesc(NTechItems.charredCrystal, "High quality silicate, slightly burned.")
+        addItemDesc11(NTechItems.charredCrystal, "Also a real horn. Weird, right?")
 
         addItem(NTechItems.battery, "Battery")
         addItem(NTechItems.redstonePowerCell, "Redstone Power Cell")

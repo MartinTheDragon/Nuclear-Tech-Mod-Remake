@@ -559,10 +559,12 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         addItem(NTechItems.nuclearWaste, "Odpady Nuklearne")
         addItem(NTechItems.tinyNuclearWaste, "Mała Ilość Odpadów Nuklearnych")
 
-        addItem(NTechItems.crystalHorn, "Kryształowy róg")
+        addItem(NTechItems.crystalHorn, "Kryształowy Róg")
         addItemDesc(NTechItems.crystalHorn, "Tak naprawdę nie prawdziwy róg")
+        addItemDesc11(NTechItems.crystalHorn, "Właściwie prawdziwy róg")
         addItem(NTechItems.charredCrystal, "Zwęglony Kryształ")
-        addItemDesc(NTechItems.charredCrystal, "Też nie prawdziwy. Dziwnę prawda?")
+        addItemDesc(NTechItems.charredCrystal, "Krzemian wysokiej jakości, lekko przypalony.")
+        addItemDesc11(NTechItems.charredCrystal, "Też prawdziwy. Dziwnę prawda?")
 
         addItem(NTechItems.battery, "Bateria")
         addItem(NTechItems.redstonePowerCell, "Ogniwo Zasilające z Redstone")
@@ -1162,7 +1164,7 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.SUBTITLE_GEIGER_CLICK, "Kliknięcia licznika Geigera")
         add(LangKeys.SUBTITLE_ITEM_INJECT, "Strzykawka wstrzykiwana")
         add(LangKeys.SUBTITLE_ITEM_UNPACK, "Przedmiot rozpakowany")
-        add(LangKeys.SUBTITLE_METEOR_IMPACT, "Meteor Uderza")
+        add(LangKeys.SUBTITLE_METEOR_IMPACT, "Meteor uderza w ziemie")
         add(LangKeys.SUBTITLE_MINI_NUKE_EXPLODE, "Mini nuke eksploduje")
         add(LangKeys.SUBTITLE_MISSILE_TAKEOFF, "Rakieta odlatuje")
         add(LangKeys.SUBTITLE_PRESS_OPERATE, "Prasa tłoczy")
@@ -1222,7 +1224,6 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
         add(LangKeys.WORD_SECONDS, "Sekundy")
 
         addItem(NTechItems.goldPlate, "Płytka ze Złota")
-        addItem(NTechItems.goldCrystals, "Kryształ ze Złota")
         addItem(NTechItems.goldWire, "Drut ze Złota")
         addItem(NTechItems.rawUranium, "Surowy Uran")
         addItem(NTechItems.rawPlutonium, "Surowy Pluton")
@@ -1342,8 +1343,8 @@ class PlPlLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
     override val rawFormat = "Surowe %s"
     override val ingotFormat = "Sztabka %s"
     override val billetFormat = "Pastylka %s"
-    override val nuggetFormat = "Bryłka z %s"
-    override val crystalsFormat = "Kryształ z %s"
+    override val nuggetFormat = "Bryłka %s"
+    override val crystalsFormat = "Kryształ %s"
     override val powderFormat = "Pył %s"
     override val plateFormat = "Płytka z %s"
     override val wireFormat = "Drut z %s"
