@@ -1,1 +1,11 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+}
+
 rootProject.name = "Nuclear Tech Mod"
+
+include(':core', ':sorcery', ':mc18', ':mc12')

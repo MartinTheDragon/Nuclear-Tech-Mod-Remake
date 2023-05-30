@@ -1,0 +1,14 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'com.google.devtools.ksp'
+}
+
+dependencies {
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation project(':sorcery')
+    ksp project(':sorcery')
+}
+
+kotlin {
+    jvmToolchain(8)
+}

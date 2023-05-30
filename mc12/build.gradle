@@ -1,0 +1,150 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'com.google.devtools.ksp'
+    id 'net.minecraftforge.gradle'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+apply plugin: 'idea'
+apply from: '../.scripts/properties-reader.gradle'
+
+version = "$minecraft_version-$mod_version" as Object
+archivesBaseName = "$modid"
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+minecraft {
+    mappings channel: 'snapshot', version: "$mappings_version"
+
+    runs {
+        client {
+            workingDirectory file('run')
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                nucleartech {
+                    sources((SourceSet[]) [sourceSets.main])
+                }
+            }
+        }
+    }
+}
+
+configurations {
+    library
+    implementation.extendsFrom library
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':sorcery')
+    ksp project(':sorcery')
+    minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
+    library "io.insert-koin:koin-core:$koin_version"
+    library("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version") {
+        exclude group: 'org.jetbrains', module: 'annotations'
+    }
+}
+
+ksp {
+    // hack because KSP doesn't allow reading annotations from compiled modules
+    arg("kspCorePath", project(':core').buildDir.toPath().resolve("generated/ksp/main/resources").toString())
+    arg("mcVersion", "$minecraft_version")
+}
+
+jar {
+    dependsOn(classes)
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE) // is this bad? i dunno
+
+    from([/*sourceSets.api.output, */sourceSets.main.output])
+
+//    configurations {shaded.extendsFrom library}
+//    from { configurations.shaded.collect() { it.isDirectory() ? it : zipTree(it) }}
+
+    archiveClassifier.set("slim")
+
+    manifest.attributes(manifestAttributes())
+    afterEvaluate { finalizedBy reobfJar }
+}
+
+shadowJar {
+    archiveClassifier.set("")
+    configurations = [project.configurations.library]
+
+    from([/*sourceSets.api.output, */sourceSets.main.output])
+
+    def relocation = "${project.group}.relocated"
+
+    relocate "kotlin", "${relocation}.kotlin"
+    relocate "org.intellij", "${relocation}.intellij"
+    relocate "org.jetbrains", "${relocation}.jetbrains"
+
+    afterEvaluate { finalizedBy reobfShadowJar }
+}
+
+assemble.dependsOn shadowJar
+
+task sourcesJar(type: Jar, dependsOn: [classes/*, apiClasses*/]) {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    archiveClassifier.set("sources")
+    from([/*sourceSets.api.kotlin, */sourceSets.main.kotlin])
+    manifest.attributes(manifestAttributes())
+}
+
+reobf {
+    jar { classpath.from(sourceSets.main.compileClasspath) }
+    shadowJar {}
+}
+
+def manifestAttributes() {
+    return [
+        "Specification-Title": "Nuclear Tech Mod",
+        "Specification-Vendor": "MartinTheDragon",
+        "Specification-Version": project.mod_version,
+        "Implementation-Title": project.name,
+        "Implementation-Version": project.mod_version,
+        "Implementation-Vendor" :"MartinTheDragon",
+        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ]
+}
+
+minecraft.runs.all {
+    lazyToken("minecraft_classpath") {
+        configurations.library.copyRecursive().resolve()
+            .collect { it.absolutePath }
+            .findAll { !it.contains("org.jetbrains\\annotations\\13.0") && !it.contains("org.jetbrains/annotations/13.0") } // somewhat inelegantly remove duplicate
+            .join(File.pathSeparator)
+    }
+}
+
+/*
+opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
+jvm-default=all - Generates defaults in interfaces for Java users
+lambdas=indy - Uses invokedynamic for lambdas instead of generating explicit classes
+no-call-assertions - Disables not-null assertions on Platform types (when calling Java code)
+no-param-assertions - Disables not-null assertions on method parameters given by Java code
+use-fast-jar-file-system - Uses an experimental implementation for faster compilation
+
+extended-compiler-checks - Gives some more information about things
+*/
+def kotlinCompilerArgs = ["-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xlambdas=indy", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
+
+compileKotlin {
+    source(project(':core').sourceSets.main.allSource)
+    kotlinOptions {
+        freeCompilerArgs += kotlinCompilerArgs
+    }
+}
+
+idea {
+    module {
+        excludeDirs += file('run')
+    }
+}

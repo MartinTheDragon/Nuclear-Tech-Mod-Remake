@@ -1,0 +1,399 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'com.google.devtools.ksp'
+    id 'net.minecraftforge.gradle'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id "maven-publish"
+}
+
+// apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply from: '../.scripts/properties-reader.gradle'
+
+version = "$minecraft_version-$mod_version" as Object
+archivesBaseName = "$modid"
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+sourceSets {
+    api {
+        resources.srcDirs = []
+    }
+    main {
+        resources {
+            include '**/**'
+            srcDirs += 'src/datagen/generated/resources'
+            exclude '.cache'
+        }
+        compileClasspath += api.output
+        runtimeClasspath += api.output
+    }
+    datagen {
+        java.srcDirs = ['src/datagen/main/java'] // so java doesn't create a new folder outside
+        kotlin.srcDirs = ['src/datagen/main/kotlin']
+        resources.srcDirs = ['src/datagen/main/resources']
+        compileClasspath += api.output + main.output
+    }
+}
+
+minecraft {
+    mappings channel: 'official', version: "$minecraft_version"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // "SCAN": For mods scan.
+    // "REGISTRIES": For firing of registry events.
+    // "REGISTRYDUMP": For getting the contents of all registries.
+    runs {
+        client {
+            workingDirectory file('run')
+
+            // for getting tokens, see https://gist.github.com/50ap5ud5/beebcf056cbdd3c922cc8993689428f4#approach-1---use-minecraft-instance
+            if (project.localProperties != null &&
+                project.localProperties.containsKey('dev.auth.uuid') &&
+                project.localProperties.containsKey('dev.auth.token') &&
+                project.localProperties.containsKey('dev.auth.username') &&
+                project.localProperties.containsKey('dev.auth.type')
+            ) {
+                println("Setting Minecraft authentication for " + project.localProperties.get('dev.auth.username'))
+                args('--uuid', project.localProperties.get('dev.auth.uuid'), '--accessToken', project.localProperties.get('dev.auth.token'), '--username', project.localProperties.get('dev.auth.username'), '--userType', project.localProperties.get('dev.auth.type'))
+            }
+
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            // you'll have to use JetBrains Runtime to get anything out of this
+            // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
+            // for use with hotswap agent, use the following arguments: -XX:+AllowEnhancedClassRedefinition,-XX:HotswapAgent=fatjar,-Xlog:redefine+class*=info
+            // don't forget to regenerate run configs when changing arguments
+            if (project.localProperties != null && project.localProperties.containsKey('jvm.args')) {
+                jvmArgs(project.localProperties.get('jvm.args').split(','))
+            }
+
+            mods {
+                nucleartech {
+                    sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                }
+            }
+        }
+
+        server {
+            workingDirectory file("run")
+
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            // you'll have to use JetBrains Runtime to get anything out of this
+            // see http://hotswapagent.org/mydoc_quickstart-jdk17.html
+            // for use with hotswap agent, use the following arguments: -XX:+AllowEnhancedClassRedefinition,-XX:HotswapAgent=fatjar,-Xlog:redefine+class*=info
+            // don't forget to regenerate run configs when changing arguments
+            if (project.localProperties != null && project.localProperties.containsKey('jvm.args')) {
+                jvmArgs(project.localProperties.get('jvm.args').split(','))
+            }
+
+            mods {
+                nucleartech {
+                    sources((SourceSet[]) [sourceSets.main, sourceSets.api])
+                }
+            }
+        }
+
+        data {
+            workingDirectory file("run")
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            args '--mod', "$modid", '--all', '--output', file('src/datagen/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                nucleartech {
+                    sources((SourceSet[]) [sourceSets.main, sourceSets.api, sourceSets.datagen])
+                }
+            }
+        }
+    }
+}
+
+minecraft.runs.all {
+    lazyToken("minecraft_classpath") {
+        configurations.library.copyRecursive().resolve()
+            .collect { it.absolutePath }
+            .findAll { !it.contains("org.jetbrains\\annotations\\13.0") && !it.contains("org.jetbrains/annotations/13.0") } // somewhat inelegantly remove duplicate
+            .join(File.pathSeparator)
+    }
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+    maven { url 'https://modmaven.dev/' }
+    maven { url "https://maven.shedaniel.me" }
+}
+
+configurations {
+    library // workaround for IDE runtime
+    implementation.extendsFrom library
+
+    apiImplementation.extendsFrom(implementation)
+    datagenImplementation.extendsFrom(implementation)
+    datagenCompileOnly.extendsFrom(compileOnly)
+    datagenRuntimeOnly.extendsFrom(runtimeOnly)
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':sorcery')
+    ksp project(':sorcery')
+    minecraft "net.minecraftforge:forge:$minecraft_version-$forge_version"
+    library "io.insert-koin:koin-core:$koin_version"
+    library("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version") {
+        exclude group: 'org.jetbrains', module: 'annotations'
+    }
+
+    // reload gradle and run genIntellijRuns (or eclipse) after changing
+    def devModeREI = project.localProperties != null && project.localProperties.containsKey('dev.mode.rei') && Boolean.valueOf(project.localProperties.get("dev.mode.rei"))
+    println("Currently running integration for ${devModeREI ? "REI" : "JEI"}")
+
+    compileOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version:api")
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-api-forge:$rei_version")
+    compileOnly fg.deobf("me.shedaniel:RoughlyEnoughItems-default-plugin-forge:$rei_version")
+
+    if (devModeREI) {
+        implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:$rei_version")
+        implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:$cloth_config_version")
+        implementation fg.deobf("dev.architectury:architectury-forge:$architectury_version")
+    } else {
+        runtimeOnly fg.deobf("mezz.jei:jei-$minecraft_version:$jei_version")
+    }
+
+    // for testing compatibility
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:additions")
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:generators")
+    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:tools")
+
+    datagenCompileOnly sourceSets.main.output
+}
+
+ksp {
+    arg("kspCorePath", project(':core').buildDir.toPath().resolve("generated/ksp/main/resources").toString()) // TODO specify in core module
+    arg("mcVersion", "$minecraft_version")
+}
+
+def manifestAttributes() {
+    return [
+        "Specification-Title": "Nuclear Tech Mod",
+        "Specification-Vendor": "MartinTheDragon",
+        "Specification-Version": project.mod_version,
+        "Implementation-Title": project.name,
+        "Implementation-Version": project.mod_version,
+        "Implementation-Vendor" :"MartinTheDragon",
+        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ]
+}
+
+jar {
+    dependsOn(classes)
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE) // is this bad? i dunno
+
+    from([sourceSets.api.output, sourceSets.main.output])
+
+//    configurations {shaded.extendsFrom library}
+//    from { configurations.shaded.collect() { it.isDirectory() ? it : zipTree(it) }}
+
+    archiveClassifier.set("slim")
+
+    manifest.attributes(manifestAttributes())
+    afterEvaluate { finalizedBy reobfJar }
+}
+
+shadowJar {
+    archiveClassifier.set("")
+    configurations = [project.configurations.library]
+
+    from([sourceSets.api.output, sourceSets.main.output])
+
+    def relocation = "${project.group}.relocated"
+
+    relocate "kotlin", "${relocation}.kotlin"
+    relocate "org.intellij", "${relocation}.intellij"
+    relocate "org.jetbrains", "${relocation}.jetbrains"
+
+    afterEvaluate { finalizedBy reobfShadowJar }
+}
+
+assemble.dependsOn shadowJar
+
+// you have no idea how much pain and headaches getting this to work caused me
+task sourcesJar(type: Jar, dependsOn: [classes, apiClasses]) {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    archiveClassifier.set("sources")
+    from([sourceSets.api.kotlin, sourceSets.main.kotlin])
+    manifest.attributes(manifestAttributes())
+}
+
+task apiJar(type: Jar) {
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+    archiveClassifier.set("api")
+    from sourceSets.api.output
+    manifest.attributes(manifestAttributes())
+    afterEvaluate { finalizedBy reobfApiJar }
+}
+
+artifacts {
+    archives apiJar
+    archives jar
+}
+
+reobf {
+    apiJar { classpath.from(sourceSets.api.compileClasspath) }
+    jar { classpath.from(sourceSets.main.compileClasspath) }
+    shadowJar {}
+}
+
+/*
+opt-in=kotlin.RequiresOptIn - Enables usage of experimental APIs
+jvm-default=all - Generates defaults in interfaces for Java users
+lambdas=indy - Uses invokedynamic for lambdas instead of generating explicit classes
+no-call-assertions - Disables not-null assertions on Platform types (when calling Java code)
+no-param-assertions - Disables not-null assertions on method parameters given by Java code
+use-fast-jar-file-system - Uses an experimental implementation for faster compilation
+
+extended-compiler-checks - Gives some more information about things
+*/
+def kotlinCompilerArgs = ["-opt-in=kotlin.RequiresOptIn", "-Xjvm-default=all", "-Xlambdas=indy", "-Xno-call-assertions", "-Xno-param-assertions", "-Xuse-fast-jar-file-system"]
+
+compileKotlin {
+    source(project(':core').sourceSets.main.allSource)
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += kotlinCompilerArgs
+    }
+}
+
+compileApiKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += kotlinCompilerArgs + ["-Xexplicit-api=strict"]
+    }
+}
+
+compileDatagenKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs += kotlinCompilerArgs
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '17'
+        freeCompilerArgs += kotlinCompilerArgs
+    }
+}
+
+idea {
+    module {
+        excludeDirs += file('run')
+    }
+}
+
+// how shitty of an IDE plugin can you make for a language?
+// i hate this
+// i'm slowly becoming insane
+publishing {
+    publications {
+        //noinspection GroovyAssignabilityCheck
+        maven(MavenPublication) {
+            //noinspection GroovyAssignabilityCheck
+            from components.java
+            //noinspection GroovyAssignabilityCheck
+            artifacts = [apiJar, jar, sourcesJar]
+            //noinspection GroovyAssignabilityCheck
+            artifactId = project.archivesBaseName
+            pom {
+                //noinspection GroovyAssignabilityCheck
+                name = "NuclearTechMod"
+                //noinspection GroovyAssignabilityCheck
+                packaging = "jar"
+                //noinspection GroovyAssignabilityCheck
+                description = "A Minecraft mod about nuclear machinery, bombs and other random things"
+                //noinspection GroovyAssignabilityCheck
+                url = "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake"
+                issueManagement {
+                    //noinspection GroovyAssignabilityCheck
+                    system = "github"
+                    //noinspection GroovyAssignabilityCheck
+                    url = "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake/issues"
+                }
+                licenses {
+                    license {
+                        //noinspection GroovyAssignabilityCheck
+                        name = "LGPLv3"
+                        //noinspection GroovyAssignabilityCheck
+                        distribution = "repo"
+                        //noinspection GroovyAssignabilityCheck
+                        url = "https://www.gnu.org/licenses/lgpl-3.0"
+                    }
+                }
+                developers {
+                    developer {
+                        //noinspection GroovyAssignabilityCheck
+                        id = "MartinTheDragon"
+                        //noinspection GroovyAssignabilityCheck
+                        name = "Martin Alexander Prommegger"
+                    }
+                }
+                scm {
+                    //noinspection GroovyAssignabilityCheck
+                    connection = "scm:git:git://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake.git"
+                    //noinspection GroovyAssignabilityCheck
+                    url = "https://github.com/MartinTheDragon/Nuclear-Tech-Mod-Remake"
+                }
+                // hacky way of modifying the dependencies, because the Gradle developers thought their bad and complicated solution was good enough: https://github.com/gradle/gradle/issues/10861
+                withXml {
+                    def allDependencies = it.asNode().dependencies.'*'
+
+                    // forge is always present
+                    allDependencies.findAll {
+                        it.artifactId.text() == "forge" && it.groupId.text() == "net.minecraftforge"
+                    }.forEach() { it.parent().remove(it) }
+
+                    // if the dependency is mapped, it means in our case that it's a mod we have integration for, which is optional
+                    allDependencies.findAll {
+                        it.version.text().contains("_mapped_")
+                    }.each {
+                        it.version.each { version ->
+                            def versionString = version.text()
+                            version.setValue(versionString.substring(0, versionString.indexOf("_mapped_")))
+                        }
+                        it.appendNode("optional", true)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// boo hoo, the class cannot be "applied" to withType, even though IT HAS A CLASS AS A PARAMETER
+// WHY ARE INTELLIJ GROOVY INSPECTIONS SO EXTREMELY BAD
+//noinspection GroovyAssignabilityCheck
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false // disable this, it causes more trouble than it's worth, because gradle apparently cannot follow the xml modifications we made for publishing
+}
