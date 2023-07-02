@@ -16,19 +16,6 @@ import at.martinthedragon.nucleartech.world.DamageSources
 import net.minecraft.data.DataGenerator
 
 class KoKrLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvider(dataGenerator, NuclearLanguageProviders.KO_KR) {
-    override fun validate() {
-        val additionalLangKeys = LangKeys.javaClass.declaredFields.mapNotNull { it.trySetAccessible(); it.get(LangKeys) as? String }.filter(TranslationKey::isValidKey)
-        if (!translations.keys.containsAll(additionalLangKeys)) {
-            val missingLangKeys = additionalLangKeys subtract translations.keys
-            val errorMessage = StringBuilder().appendLine("다음 LangKeys의 추가 번역 키가 번역 정의에 포함되지 않았습니다:")
-            for (missing in missingLangKeys) errorMessage.appendLine(missing.prependIndent())
-            throw IllegalStateException(errorMessage.toString())
-        }
-
-        NuclearLanguageProviders.keys = translations.keys.toSet()
-        NuclearLanguageProviders.materialTranslations = materialTranslations.toMap()
-    }
-
     override fun translate() {
         addCreativeTab(CreativeTabs.Parts, "NTM 자원과 부품들")
         addCreativeTab(CreativeTabs.Items, "NTM 기계 아이템과 연료")
