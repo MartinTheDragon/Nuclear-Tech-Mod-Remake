@@ -9,11 +9,11 @@ For the time being, you may still report issues here if you really prefer, but t
 GitHub always came with a bit of a bitter taste after being acquired by Microsoft, a company historically the worst opponent of open source software (see <https://en.wikipedia.org/wiki/Halloween_documents>).
 While Microsoft has made great investments into open source and portrayed themselves as "lovers of open source" over the past two decades, they likely have ulterior motives, as they have recently shown with
 their AI invention "GitHub Copilot", which fed off of the work of several thousands of people without any license or notice, generating millions of DMCA violations in the process and fighting them off
-in court "for you" (<https://blogs.microsoft.com/on-the-issues/2023/09/07/copilot-copyright-commitment-ai-legal-concerns/>). Lucky for them, with their license helper site <https://choosealicense.com/>, they
-managed to convince many open source projects to be licensed under the MIT license, which they describe as "simple and permissive". "Simple and permissive" sounds kinda catchy when you don't really care about
-licensing, don't you think? Well, now you've given everyone (including companies) the right to (ab)use your software in any way they want, even distribute it closed source, as long as they just mention you
-once somewhere, hidden away. There is also no protection against [patent infringement](https://docs.codeberg.org/getting-started/licensing/#patent-usage).
-This really just misses [the point of free software](https://www.gnu.org/philosophy/).
+in court "for you" (<https://blogs.microsoft.com/on-the-issues/2023/09/07/copilot-copyright-commitment-ai-legal-concerns/>). This devestated the free software landscape, since you're now gonna have an army of
+lawyers after you as soon as you even dare to protect your copyright. Lucky for them, with their license helper site <https://choosealicense.com/>, they managed to convince many open source projects to be
+licensed under the MIT license, which they describe as "simple and permissive". "Simple and permissive" sounds kinda catchy when you don't really care about licensing, don't you think? Well, now you've given
+everyone (including companies) the right to (ab)use your software in any way they want, even distribute it closed source, as long as they just mention you once somewhere, hidden away. There is also no protection
+against [patent infringement](https://docs.codeberg.org/getting-started/licensing/#patent-usage). This really just misses [the point of free software](https://www.gnu.org/philosophy/).
 
 If all this license stuff and free (libre) software is a bit hard to understand, Codeberg has actually written [great documentation on how licensing software works](https://docs.codeberg.org/getting-started/licensing).
 
@@ -90,8 +90,6 @@ Make sure usages and modifications comply with the license, and with the [Minecr
 ### Privacy
 
 The mod won't spy on you or collect any personal data. That would be unethical (yes I'm looking at you, Microsoft).
-However, it uses the Forge version checker, which fetches a JSON file with update information from <https://nucleartech.martinthedragon.at/raw/update.json>.
-Any requests made to this domain and its subdomains will increment a country-specific counter, depending on the IP-address.
-The IP-address isn't logged for me to see (which doesn't legally count as personally-identifying information anyway), and only the counter is kept for (very) rough statistics on how many people play the mod each day.
-It is just a side effect of providing an update-checker service.
-If you wish to not use that service for the sake of your privacy, you are free to modify the mod as per license by removing the line beginning with `updateJSONURL` in the [mods.toml](src/main/resources/META-INF/mods.toml) file and compiling your own version (Forge also uses that version checker system by the way).
+However, it uses the Forge version checker, which fetches a JSON file with update information from <https://www.ntmr.dev/raw/update.json>.
+Currently, this file is hosted on <https://codeberg.org>, which imposes no tracking other than storing your IP address for seven days in log files (see their [Privacy Policy](https://codeberg.org/Codeberg/org/src/branch/main/PrivacyPolicy.md)).
+If you still wish to not use that service for the sake of your privacy, you are free to modify the mod as per license by removing the line beginning with `updateJSONURL` in the [mods.toml](src/main/resources/META-INF/mods.toml) file and compiling your own version (Forge also uses that version checker system by the way).
