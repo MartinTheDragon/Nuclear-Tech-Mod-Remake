@@ -638,8 +638,10 @@ class DeDeLanguageProvider(dataGenerator: DataGenerator) : NuclearLanguageProvid
 
         addItem(NTechItems.crystalHorn, "Kristallhorn")
         addItemDesc(NTechItems.crystalHorn, "Ein echtes Horn.")
+        addItemDesc11(NTechItems.crystalHorn, "Kein echtes Horn.")
         addItem(NTechItems.charredCrystal, "Verkohlter Kristall")
-        addItemDesc(NTechItems.charredCrystal, "Auch ein echtes Horn. Komisch, nicht?")
+        addItemDesc(NTechItems.charredCrystal, "Hoch-qualitatives Silikat, leicht verbrannt.")
+        addItemDesc11(NTechItems.charredCrystal, "Auch ein echtes Horn. Komisch, nicht?")
 
         addItem(NTechItems.battery, "Batterie")
         addItem(NTechItems.redstonePowerCell, "Redstone-Energiezelle")
