@@ -1,8 +1,7 @@
-# Migration
+# ====Migration====
 
-This project is migrating to [Codeberg.org](https://codeberg.org/MartinTheDragon/Nuclear-Tech-Mod-Remake) and will eventually be archived on GitHub.
-[Releases](https://codeberg.org/MartinTheDragon/Nuclear-Tech-Mod-Remake/releases) will also be on Codeberg.
-For the time being, you may still report issues here if you really prefer, but they will be tracked on Codeberg instead.
+This project has moved to [Codeberg.org](https://codeberg.org/MartinTheDragon/Nuclear-Tech-Mod-Remake) and is therefore archived on GitHub.
+Future updates and releases can be found over there.
 
 ## Why?
 
@@ -19,6 +18,8 @@ If all this license stuff and free (libre) software is a bit hard to understand,
 
 But besides ideological reasons, GitHub Free comes with less features than Codeberg, and a paid plan doesn't really have anything I'd want. Codeberg itself is also entirely free software, meaning you could even
 set up an instance yourself if you wanted or contribute to the site. Also comes without tracking.
+
+**That said, everything else you can find in this repository from this point on is archived and will no longer be updated.**
 
 # Nuclear Tech Mod
 **This is a full rewrite of the Nuclear Tech Mod [originally created by HbmMods](https://github.com/HbmMods/Hbm-s-Nuclear-Tech-GIT).**
